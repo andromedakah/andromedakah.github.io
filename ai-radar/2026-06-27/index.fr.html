@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Tech IA — 27 juin 2026</title>
+<meta name="description" content="Brief quotidien sur l'IA en entreprise : synthèse pour dirigeants, allégorie stratégique, questions par secteur, décryptage technique et citations.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Lecteur audio */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ Radar Tech IA · Brief quotidien</div>
+  <h1>Le modèle opérationnel dévore le modèle</h1>
+  <div class="meta">Samedi 27 juin 2026 · Édition multisectorielle · Public : dirigeants (C-level) + ingénierie</div>
+  <p class="lede">Ce qui a changé cette semaine, pourquoi cela compte en comité de direction, quelles questions poser, et comment cela impacte les technologies historiques (legacy).</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse pour dirigeants <span class="pill">lecture 90 s</span></h2>
+<div class="card">
+<p>Le centre de gravité de l'IA en entreprise s'est déplacé de <strong>« quel modèle ? »</strong> vers <strong>« quel modèle opérationnel ? »</strong>. La course aux modèles de pointe se poursuit (GPT-5.5, Gemini&nbsp;3.x, Claude&nbsp;Opus, la gamme MAI de Microsoft), mais l'enjeu stratégique porte désormais sur <strong>les agents qui agissent</strong>, <strong>la tuyauterie qui les gouverne</strong>, et les <strong>données propriétaires</strong> qui les différencient.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Les agents ont franchi le seuil de l'« intégration ».</strong> Gartner prévoit que <strong>40 % des applications d'entreprise embarqueront des agents spécialisés d'ici fin 2026</strong> (contre moins de 5 %), or seules <strong>17 % en ont déployé</strong> et <strong>plus de 40 % des projets d'agents seront abandonnés d'ici 2027</strong>. La discipline d'exécution est désormais le facteur différenciant.</div></div>
+<div class="num"><div class="b">2</div><div><strong>L'économie a été rebaptisée.</strong> Nadella a introduit le <strong>« capital de tokens » (token capital)</strong> : la valeur provient des modèles propriétaires et localisés, des réseaux d'agents auto-hébergés et des pipelines cognitifs sécurisés — pas des API louées. La question du directeur financier en 2026 : « quel capital IA accumulons-nous ? »</div></div>
+<div class="num"><div class="b">3</div><div><strong>Le balancier coût/souveraineté s'inverse.</strong> Microsoft a lancé <strong>MAI-Code-1-Flash</strong> explicitement pour réduire sa dépendance à OpenAI et abaisser les coûts. Voir les hyperscalers fuir la dépendance fournisseur est un signal — la même logique vaut pour votre stratégie multi-fournisseurs.</div></div>
+<div class="num"><div class="b">4</div><div><strong>La gouvernance a une échéance.</strong> Le règlement européen sur l'IA (<strong>EU AI Act</strong>) devient pleinement applicable le <strong>2 août 2026</strong> — avec des sanctions allant jusqu'à <strong>35 M€ ou 7 % du chiffre d'affaires mondial</strong>. Pendant ce temps, <strong>55 % des salariés utilisent une IA non autorisée (shadow AI)</strong> ; seules 37 % des entreprises ont une politique.</div></div>
+<div class="num"><div class="b">5</div><div><strong>La standardisation est arrivée sous le capot.</strong> Le <strong>Model Context Protocol (MCP)</strong> — l'« USB-C des outils d'IA » — est désormais le tissu conjonctif entre le Claude Agent SDK, LangGraph et d'autres. La nouvelle la plus importante, et la plus discrète, du trimestre.</div></div>
+<div class="card"><strong>En résumé :</strong> les gagnants des 18 prochains mois ne seront pas ceux qui auront acheté le plus d'IA, mais ceux qui auront bâti des <strong>systèmes d'agents gouvernés et différenciés par la donnée</strong>, par-dessus ce qu'ils possèdent déjà.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · L'allégorie du jour</h2>
+<div class="card allegory">
+<h3>🎭 « Le réservoir et le réseau »</h3>
+<p><em>Sujet : le capital de tokens face à l'intelligence louée.</em></p>
+<p>Deux villes voisines ont été électrifiées la même année. La <strong>ville A</strong> s'est branchée au réseau national et a payé au kilowatt — moderne du jour au lendemain, mais l'opérateur fixait les règles et elle n'a jamais rien possédé. La <strong>ville B</strong> s'est elle aussi branchée au réseau, mais a discrètement construit un <strong>réservoir</strong> derrière son propre barrage. Quand les prix flambaient, elle revendait ; quand le réseau défaillait, ses hôpitaux restaient éclairés. Au fil d'une décennie, le réservoir — et non le raccordement — est devenu sa véritable richesse.</p>
+<p><strong>La morale :</strong> Huang dit que l'IA est la nouvelle électricité — c'est vrai, pour le réseau. Le <strong>« capital de tokens »</strong> de Nadella, c'est le réservoir. Louer des modèles de pointe achète la parité ; vos données propriétaires, vos modèles affinés et vos flux de travail détenus sont la seule chose que vos concurrents ne pourront pas louer demain.</p>
+<p><strong>La question qu'elle impose :</strong> <em>quelle part de notre budget construit le réservoir plutôt que de payer le compteur ?</em> Si la réponse est « 95 % à payer le compteur », vous avez une dépense d'IA — pas une stratégie d'IA.</p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Engagement des dirigeants — Questions par secteur</h2>
+<div class="sector"><div class="t">🌐 Tous secteurs (en comité de direction)</div><ul>
+  <li>Quel pourcentage de notre IA déployée est <strong>gouvernée</strong> — inventoriée, maîtrisée, couverte par une politique — par opposition au shadow AI ?</li>
+  <li>Construisons-nous un <strong>capital de tokens</strong> ou louons-nous de l'intelligence ? Montrez-moi la ligne budgétaire des modèles/données propriétaires.</li>
+  <li>Cinq semaines avant l'application de l'EU AI Act — quels systèmes sont « à haut risque », et qui les valide ?</li>
+  <li>40 % des projets d'agents sont abandonnés. Quels sont nos <strong>critères d'arrêt</strong> avant le prochain pilote ?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Où se situe la frontière entre un agent qui <strong>recommande</strong> et un agent qui <strong>agit</strong> sur une transaction — et qui est responsable quand il se trompe ?</li>
+  <li>Comment préserver l'auditabilité quand une couche de mémoire « se souvient » d'un client d'une session à l'autre ?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Où un agent de recherche auto-évolutif (ex. NVIDIA BioNeMo) pourrait-il raccourcir notre cycle de R&amp;D — et quel est le point de validation ?</li>
+  <li>Les règles « haut risque » de l'UE s'appliquent à l'IA de santé à partir de décembre 2027. On l'architecture maintenant ou on rénove plus tard ?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacturing</div><ul>
+  <li>Huang présente l'IA comme limitée par <strong>l'énergie, le calcul et la capacité industrielle</strong> — notre ambition est-elle bridée par une énergie que nous n'avons pas budgétée ?</li>
+  <li>Où des agents de bureau au long cours remplacent-ils le travail de va-et-vient entre le MES et l'ERP ?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Les agents résoudront 80 % des demandes de service courantes d'ici 2029. Quel est notre jalon 2026 sur cette courbe ?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Réglementé</div><ul>
+  <li>La souveraineté de l'IA est désormais une politique nationale. Nos choix de cloud et de modèles maintiennent-ils données et inférence dans nos juridictions ?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Décryptage technique — La pile agentique sur le legacy</h2>
+<p>Le schéma marquant de 2026 : les agents ne <em>remplacent</em> pas le legacy — ils se posent <strong>par-dessus</strong>, en quatre couches.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pile agentique en quatre couches sur les systèmes existants" style="max-width:640px;width:100%;height:auto">
+  <!-- Penser -->
+  <rect x="50" y="14" width="460" height="70" rx="10" fill="#221f3d" stroke="#7f77dd"/>
+  <text x="280" y="44" text-anchor="middle" font-size="15" font-weight="600" fill="#cfc9f7" font-family="sans-serif">Modèles de raisonnement — « Penser »</text>
+  <text x="280" y="66" text-anchor="middle" font-size="12" fill="#a79fe6" font-family="sans-serif">GPT-5.5 · Gemini 3.x · Claude Opus · MAI-Code</text>
+  <line x1="280" y1="84" x2="280" y2="118" stroke="#5f5e5a" stroke-width="2"/><path d="M274 112 L280 122 L286 112 Z" fill="#5f5e5a"/>
+  <!-- Savoir -->
+  <rect x="50" y="126" width="460" height="70" rx="10" fill="#10261f" stroke="#1d9e75"/>
+  <text x="280" y="156" text-anchor="middle" font-size="15" font-weight="600" fill="#8fe2c6" font-family="sans-serif">Ingénierie de contexte — « Savoir »</text>
+  <text x="280" y="178" text-anchor="middle" font-size="12" fill="#5dcaa5" font-family="sans-serif">Mémoire persistante + récupération RAG + état</text>
+  <line x1="280" y1="196" x2="280" y2="230" stroke="#5f5e5a" stroke-width="2"/><path d="M274 224 L280 234 L286 224 Z" fill="#5f5e5a"/>
+  <!-- Agir -->
+  <rect x="50" y="238" width="460" height="70" rx="10" fill="#2c160d" stroke="#d85a30"/>
+  <text x="280" y="268" text-anchor="middle" font-size="15" font-weight="600" fill="#f0a98c" font-family="sans-serif">Couche d'action MCP — « Agir »</text>
+  <text x="280" y="290" text-anchor="middle" font-size="12" fill="#e08a63" font-family="sans-serif">Lecture/écriture gouvernées · outils · sous-agents</text>
+  <line x1="280" y1="308" x2="280" y2="342" stroke="#5f5e5a" stroke-width="2"/><path d="M274 336 L280 346 L286 336 Z" fill="#5f5e5a"/>
+  <!-- Référentiels -->
+  <rect x="50" y="350" width="460" height="70" rx="10" fill="#1c2330" stroke="#888780"/>
+  <text x="280" y="380" text-anchor="middle" font-size="15" font-weight="600" fill="#e8edf3" font-family="sans-serif">Systèmes existants (legacy) de référence</text>
+  <text x="280" y="402" text-anchor="middle" font-size="12" fill="#9aa7b6" font-family="sans-serif">ERP · CRM · Mainframe · Data lake</text>
+  <!-- flux retour -->
+  <line x1="105" y1="420" x2="105" y2="84" stroke="#4a4f57" stroke-width="2" stroke-dasharray="5 4"/><path d="M99 90 L105 80 L111 90 Z" fill="#4a4f57"/>
+  <text x="122" y="252" font-size="11" transform="rotate(-90 122 252)" text-anchor="middle" fill="#7a828d" font-family="sans-serif">les données et observations remontent</text>
+  <!-- notes latérales -->
+  <text x="528" y="55" font-size="11" fill="#7a828d" font-family="sans-serif">pointe</text>
+  <text x="528" y="166" font-size="11" fill="#7a828d" font-family="sans-serif">RAG = savoir</text>
+  <text x="528" y="278" font-size="11" fill="#7a828d" font-family="sans-serif">MCP = agir</text>
+  <text x="528" y="390" font-size="11" fill="#7a828d" font-family="sans-serif">vérité</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#7f77dd"></i>Penser</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Savoir</span>
+  <span><i class="dot" style="background:#d85a30"></i>Agir</span>
+  <span><i class="dot" style="background:#888780"></i>Référentiels</span>
+</div>
+</div>
+
+<h3>Pourquoi cela compte pour le parc legacy</h3>
+<div class="card">
+<p><strong>RAG = « savoir », MCP = « agir », et les deux coexistent.</strong> Le RAG permet à un agent de <em>lire</em> votre savoir (documents, tickets, politiques) ; le MCP lui permet d'<em>agir</em> sur vos systèmes via une interface standardisée et gouvernée.</p>
+<p><strong>L'intégration devient « écrire une fois, réutiliser partout ».</strong> Historiquement, chaque cas d'usage imposait une nouvelle intégration point à point. Avec le MCP, un système legacy est encapsulé <strong>une seule fois</strong> et devient adressable par n'importe quel agent ou modèle.</p>
+<p><strong>Le plus dur n'est pas le modèle — c'est l'accessibilité et la qualité des données du legacy.</strong> Si un système existant n'expose ni API ni données propres, c'est le premier (et le plus coûteux) chantier. Le modèle, ce sont les 20 % faciles.</p>
+</div>
+
+<h3>Comment fonctionne réellement la mémoire d'un agent</h3>
+<div class="card">
+<p>1 · Pendant une conversation, une <strong>couche de mémoire extrait des faits</strong> et les écrit dans une <strong>base vectorielle</strong>, indexée par utilisateur / session / agent.<br>
+2 · À une nouvelle session, les souvenirs pertinents sont récupérés par <strong>similarité sémantique + mots-clés + correspondance d'entités</strong>.<br>
+3 · Seuls les <strong>faits les plus pertinents</strong> sont injectés dans la fenêtre de contexte — faible coût en tokens, forte précision.</p>
+<p>C'est pourquoi l'<strong>« ingénierie de contexte »</strong> remplace l'« ingénierie de prompt » : on architecture tout l'environnement informationnel, pas seulement la formulation.</p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>Hugging Face <code>smolagents</code></strong> — logique de routage compressée à ~1 000 lignes ; les modèles écrivent et exécutent du Python brut dans un bac à sable plutôt que des schémas JSON.</li>
+  <li><strong>TencentDB Agent Memory</strong> (open source) — industrialisation de la mémoire pour les agents au long cours.</li>
+  <li><strong>AWS</strong> a livré des outils pour rendre les agents d'entreprise plus fiables et mieux gouvernés.</li>
+  <li><strong>AI-BOM</strong> (nomenclature des actifs d'IA) — inventaire des modèles, jeux de données, agents et prompts pour lutter contre le shadow AI. Cela devrait devenir une exigence d'audit.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui marquent</h2>
+<blockquote><div class="q">« L'IA risque de devenir une bulle économique si les gains restent concentrés dans les entreprises technologiques au lieu de transformer les flux de travail de l'économie au sens large. »</div><div class="a">— Satya Nadella, PDG de Microsoft</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">« Chaque pays devrait traiter l'IA comme l'électricité ou les routes — comme une infrastructure. »</div><div class="a">— Jensen Huang, PDG de NVIDIA · croissance bridée par l'énergie, le calcul, la main-d'œuvre et la capacité industrielle</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">« Les puces d'IA avancées devraient être traitées comme des actifs nationaux stratégiques. »</div><div class="a">— Dario Amodei, PDG d'Anthropic</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">« Le meilleur agent est celui qui sait quand s'arrêter. »</div><div class="a">— d'après des recommandations sur l'IA de conseil · l'autonomie sans retenue est un risque, pas une capacité</div></blockquote>
+<blockquote><div class="q">« Le RAG pour <em>savoir</em>, le MCP pour <em>agir</em>. »</div><div class="a">— le modèle mental le plus clair de la pile agentique moderne</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Applications d'entreprise avec agents intégrés (fin 2026)</td><td><span class="v">40 %</span> (contre &lt;5 %)</td><td>Gartner</td></tr>
+<tr><td>Organisations ayant réellement déployé des agents</td><td><span class="v">17 %</span></td><td>Enquête CIO Gartner</td></tr>
+<tr><td>Organisations prévoyant un déploiement sous 2 ans</td><td><span class="v">&gt;60 %</span></td><td>Gartner</td></tr>
+<tr><td>Projets d'agents qui seront abandonnés d'ici 2027</td><td><span class="v">&gt;40 %</span></td><td>Gartner</td></tr>
+<tr><td>Valeur annuelle que les agents pourraient ajouter</td><td><span class="v">2 600–4 400 Md$</span></td><td>McKinsey</td></tr>
+<tr><td>Organisations passant l'IA agentique à l'échelle dans ≥1 fonction</td><td><span class="v">23 %</span> (+39 % en test)</td><td>McKinsey</td></tr>
+<tr><td>Salariés utilisant le shadow AI</td><td><span class="v">55 %</span></td><td>Salesforce</td></tr>
+<tr><td>Entreprises dotées d'une politique shadow AI</td><td><span class="v">37 %</span></td><td>Enquête</td></tr>
+<tr><td>Application pleine de l'EU AI Act</td><td><span class="v">2 août 2026</span></td><td>Commission UE</td></tr>
+<tr><td>Sanction maximale EU AI Act</td><td><span class="v">35 M€ / 7 %</span></td><td>EU AI Act</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois actions pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Lancez un inventaire AI-BOM.</strong> Impossible de gouverner (ou de se mettre en conformité d'ici le 2 août) ce qu'on ne voit pas — incluez le shadow AI.</li>
+  <li><strong>Encapsulez un système legacy dans le MCP.</strong> Démontrez le « écrire une fois, réutiliser partout » sur un vrai système de référence — cela bâtit du capital de tokens, pas une démo jetable.</li>
+  <li><strong>Définissez des critères d'arrêt avant le prochain pilote.</strong> Avec plus de 40 % des projets d'agents voués à l'abandon, des seuils fixés à l'avance gaspillent le moins de capital.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> Gartner · McKinsey · IBM · Microsoft/CNBC · NVIDIA · AWS · Commission européenne / EU AI Act · Salesforce · The New Stack · mem0.ai · vectorize.io · Hugging Face · VentureBeat. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>Radar Tech IA · généré le 27 juin 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture audio non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+  var L = { listen:'Écouter', playing:'Lecture', paused:'En pause' };
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /amelie|amélie|thomas|audrey|google français/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ')
+            .replace(/%/g,' pour cent').replace(/€/g,' euros').replace(/\$/g,' dollars').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = L.playing;
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = L.paused; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = L.playing; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = L.listen; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
