@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 29 June 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, technical deep-dive on tabular foundation models, and quotes.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>Structure Beats Scale</h1>
+  <div class="meta">Monday, 29 June 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week's frontier story isn't a bigger model — it's the substrate underneath: your structured data, your power, and your access to compute.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>This week the frontier headline was <strong>not</strong> a bigger general model. Three moves, read together, say the value is migrating <strong>away from raw scale</strong> and toward the <strong>specialized substrate</strong> underneath it — your structured data, your power, and your access to compute.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The frontier shipped behind a gate.</strong> OpenAI previewed <strong>GPT-5.6</strong> (Sol / Terra / Luna) on 26 June — and the <strong>US government requested a restricted preview, which OpenAI granted</strong>, warning it "is not the norm." Frontier access is now something a state can throttle. Sol holds GPT-5.5's price ($5/$30 per 1M tokens); the real enterprise news is a revamped prompt cache (90%-off reads, 30-min guaranteed lifetime) to tame agentic cost curves.</div></div>
+<div class="num"><div class="b">2</div><div><strong>SAP bet €1B+ that LLMs are the wrong tool for business data.</strong> Its acquisition of <strong>Prior Labs</strong> (the <strong>TabPFN</strong> team, pioneers of <strong>Tabular Foundation Models</strong>) bets that the data that actually runs companies — rows and columns in ERP, claims, ledgers — is best predicted by models built <em>for tables</em>, not LLMs that have "only a rudimentary understanding of numbers and statistics."</div></div>
+<div class="num"><div class="b">3</div><div><strong>The ceiling is now energy, not algorithms.</strong> The four largest clouds committed <strong>&gt;$710B</strong> of AI capex for 2026; Morgan Stanley sees US data-center demand at <strong>74 GW by 2028</strong> against a <strong>~49 GW shortfall</strong>. Huang's framing: AI is <strong>intelligence infrastructure</strong> needing "~1,000× more energy." The data-center SMR-nuclear pipeline nearly <strong>doubled to 45 GW</strong>.</div></div>
+<div class="card"><strong>Bottom line:</strong> the differentiator is shifting from <em>who rents the biggest model</em> to <em>who owns the right substrate</em> — the structured data only you have, the power you've actually budgeted, and a multi-vendor access plan that survives a gated frontier.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🎭 "The Poet and the Actuary"</h3>
+<p><em>Topic: tabular foundation models vs. LLMs for the data that runs the business.</em></p>
+<p>A firm hired a dazzling <strong>poet</strong>. He could speak on any subject, charm the board, and draft a beautiful memo before lunch. Everyone agreed he was the smartest hire in years. Then they handed him the <strong>ledger</strong> — rows of claims, prices, churn, defaults — and asked, <em>"what happens next quarter?"</em> He answered fluently, confidently… and wrong. He had never really read a table; he had only ever read <em>about</em> tables.</p>
+<p>Down the hall sat a quiet <strong>actuary</strong>. She had never written a poem and never would. But she read the ledger cold — saw the distribution, weighed the tails, priced the risk — and she was <em>right</em>, again and again, because columns and probabilities were her native language.</p>
+<p><strong>The moral:</strong> for the data that actually runs your business, you don't need a bigger poet — you need a better statistician. LLMs are the poets of this era; magnificent with language, clumsy with your P&amp;L. <strong>SAP just paid more than a billion euros to hire the actuary.</strong></p>
+<p><strong>The question it forces:</strong> <em>Am I paying poet prices for actuarial work?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Of our AI use cases, which are <strong>prediction-on-structured-data</strong> problems we're solving with an LLM — and would a <strong>tabular model</strong> be more accurate <em>and</em> cheaper?</li>
+  <li>GPT-5.6 shipped <strong>government-gated</strong>. Does our strategy assume open access to a single frontier vendor — and what's our fallback if access is throttled?</li>
+  <li>Is there a <strong>power/compute line</strong> in our AI business case, or are we assuming energy is free and infinite?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Churn, credit, fraud, and pricing are <strong>tabular, actuarial</strong> problems. Are we paying LLM token prices for work a tabular foundation model does better — with cleaner auditability?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Risk scoring and readmission prediction live in <strong>structured EHR tables</strong> — TFM territory. What's our validation gate before a tabular model touches a clinical decision? (High-risk EU rules land Dec 2027.)</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>With a national <strong>~49 GW power shortfall</strong>, is our AI roadmap budgeted against an actual energy plan — or is ambition outrunning the grid?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Demand forecasting and assortment are tabular. If our moat is "we use the same frontier API as our competitor," <strong>what exactly is the moat?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>A frontier lab just complied with a government's request to restrict a launch. Does our <strong>sovereignty plan</strong> depend on model-access assumptions a single policy decision could break?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Tabular Foundation Models vs. LLMs</h2>
+<p>The defining technical contrast of the week: <strong>two completely different ways to predict from a table.</strong> The <strong>LLM path</strong> serializes a table to text, tokenizes it, and asks the model to "reason" about numbers it sees as strings — eloquent, costly, weak on the tails. The <strong>TFM path</strong> (TabPFN-style) is pre-trained on millions of synthetic tables and does <strong>in-context learning</strong>: hand it your labeled rows and it predicts in a <strong>single forward pass, with no per-task training</strong>.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tabular Foundation Model vs LLM prediction paths" style="max-width:640px;width:100%;height:auto">
+  <!-- source -->
+  <rect x="170" y="14" width="340" height="58" rx="10" fill="#1c2330" stroke="#888780"/>
+  <text x="340" y="40" text-anchor="middle" font-size="14" font-weight="600" fill="#e8edf3" font-family="sans-serif">Structured Data (your tables)</text>
+  <text x="340" y="60" text-anchor="middle" font-size="12" fill="#9aa7b6" font-family="sans-serif">ERP · claims · ledger · EHR · sensor logs</text>
+  <!-- split arrows -->
+  <line x1="300" y1="72" x2="180" y2="116" stroke="#5f5e5a" stroke-width="2"/><path d="M178 108 L176 120 L188 116 Z" fill="#5f5e5a"/>
+  <line x1="380" y1="72" x2="500" y2="116" stroke="#5f5e5a" stroke-width="2"/><path d="M492 116 L504 120 L502 108 Z" fill="#5f5e5a"/>
+  <!-- LLM path -->
+  <rect x="40" y="120" width="280" height="170" rx="10" fill="#2c160d" stroke="#d85a30"/>
+  <text x="180" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#f0a98c" font-family="sans-serif">LLM Path</text>
+  <text x="180" y="174" text-anchor="middle" font-size="12.5" fill="#e08a63" font-family="sans-serif">table → text → tokens</text>
+  <text x="180" y="198" text-anchor="middle" font-size="12.5" fill="#e08a63" font-family="sans-serif">"reason" over strings</text>
+  <text x="180" y="222" text-anchor="middle" font-size="12.5" fill="#e08a63" font-family="sans-serif">→ eloquent guess</text>
+  <text x="180" y="258" text-anchor="middle" font-size="11.5" fill="#b9774f" font-family="sans-serif">costly per token ·</text>
+  <text x="180" y="276" text-anchor="middle" font-size="11.5" fill="#b9774f" font-family="sans-serif">weak on numbers &amp; tails</text>
+  <!-- TFM path -->
+  <rect x="360" y="120" width="280" height="170" rx="10" fill="#10261f" stroke="#1d9e75"/>
+  <text x="500" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#8fe2c6" font-family="sans-serif">TFM Path (TabPFN)</text>
+  <text x="500" y="174" text-anchor="middle" font-size="12.5" fill="#5dcaa5" font-family="sans-serif">rows in-context</text>
+  <text x="500" y="198" text-anchor="middle" font-size="12.5" fill="#5dcaa5" font-family="sans-serif">one forward pass</text>
+  <text x="500" y="222" text-anchor="middle" font-size="12.5" fill="#5dcaa5" font-family="sans-serif">→ calibrated prediction</text>
+  <text x="500" y="258" text-anchor="middle" font-size="11.5" fill="#49a583" font-family="sans-serif">no per-task training ·</text>
+  <text x="500" y="276" text-anchor="middle" font-size="11.5" fill="#49a583" font-family="sans-serif">accurate on tabular data</text>
+  <!-- converge -->
+  <line x1="180" y1="290" x2="320" y2="340" stroke="#5f5e5a" stroke-width="2"/><path d="M312 340 L324 344 L322 332 Z" fill="#5f5e5a"/>
+  <line x1="500" y1="290" x2="360" y2="340" stroke="#5f5e5a" stroke-width="2"/><path d="M368 340 L356 344 L358 332 Z" fill="#5f5e5a"/>
+  <rect x="190" y="346" width="300" height="64" rx="10" fill="#221f3d" stroke="#7f77dd"/>
+  <text x="340" y="372" text-anchor="middle" font-size="14" font-weight="600" fill="#cfc9f7" font-family="sans-serif">Decision / prediction</text>
+  <text x="340" y="394" text-anchor="middle" font-size="11.5" fill="#a79fe6" font-family="sans-serif">route the table to the actuary, not the poet</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#888780"></i>Your tables</span>
+  <span><i class="dot" style="background:#d85a30"></i>LLM (poet)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>TFM (actuary)</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Decision</span>
+</div>
+</div>
+
+<h3>Why it matters for legacy estates</h3>
+<div class="card">
+<p><strong>Your most valuable, most owned data already lives in tables</strong> — the data warehouse, the ERP, the mainframe export, the spreadsheet that runs a department. Until now, a prediction from it meant a <strong>bespoke ML project per use case</strong>: feature engineering, training, tuning, MLOps.</p>
+<p><strong>A tabular foundation model flips that to write-once, predict-many.</strong> Point it at a clean table and get a calibrated prediction without building a new model each time. The legacy bottleneck is the same as with agents: <strong>data accessibility and quality</strong>, not the model. The clean table is the asset; the model is the easy 20%.</p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>TabPFN-style models</strong> (Prior Labs / SAP) — foundation models pre-trained on synthetic tables; in-context prediction, no per-task training.</li>
+  <li><strong>SAP-RPT-1 + knowledge graph + agent hub</strong> — structured-data AI woven into the system of record.</li>
+  <li><strong>"Small specialized beats giant general"</strong> on narrow structured tasks — the quiet counter-trend to the scale race.</li>
+  <li><strong>The full stack:</strong> agents <em>do</em>, RAG lets them <em>know</em> text, TFMs let them <em>predict</em> over tables.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote><div class="q">"The greatest untapped opportunity in enterprise AI wasn't large language models — it was AI built for the <em>structured data</em> that runs the world's businesses."</div><div class="a">— SAP CTO, on the Prior Labs acquisition</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"We need roughly 1,000× more energy for AI compute."</div><div class="a">— Jensen Huang, NVIDIA CEO · AI as intelligence infrastructure</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">"[The restricted preview] is not the norm for future launches."</div><div class="a">— OpenAI, after the US government requested a gated GPT-5.6 release</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">"LLMs are the poets of this era — brilliant with language, clumsy with your P&amp;L. Your ledger needs an actuary."</div><div class="a">— the radar's framing of the TFM shift</div></blockquote>
+<blockquote><div class="q">"RAG for <em>knowing</em>, MCP for <em>doing</em>, TFMs for <em>predicting</em>."</div><div class="a">— the cleanest mental model for the 2026 enterprise stack</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>GPT-5.6 Sol price (input / output, per 1M tok)</td><td><span class="v">$5 / $30</span></td><td>OpenAI / aipricing.guru</td></tr>
+<tr><td>GPT-5.6 Terra · Luna</td><td><span class="v">$2.50/$15 · $1/$6</span></td><td>OpenAI / VentureBeat</td></tr>
+<tr><td>GPT-5.6 cache-read discount / min lifetime</td><td><span class="v">90% off · 30 min</span></td><td>OpenAI API</td></tr>
+<tr><td>SAP investment in Prior Labs (TabPFN)</td><td><span class="v">&gt;€1B / 4 yrs</span></td><td>SAP News</td></tr>
+<tr><td>2026 hyperscaler AI capex (4 clouds)</td><td><span class="v">&gt;$710B</span></td><td>Morgan Stanley</td></tr>
+<tr><td>US data-center demand 2028 / shortfall</td><td><span class="v">74 GW / ~49 GW</span></td><td>Morgan Stanley</td></tr>
+<tr><td>Data-center SMR-nuclear pipeline</td><td><span class="v">25 → 45 GW</span></td><td>IEA</td></tr>
+<tr><td>AI initiatives delivering expected ROI</td><td><span class="v">25%</span></td><td>IBM CEO Study</td></tr>
+<tr><td>Agent deployments with negative ROI @12mo</td><td><span class="v">22%</span></td><td>Forrester 2026</td></tr>
+<tr><td>Orgs with an agent in production</td><td><span class="v">31%</span></td><td>S&amp;P Global</td></tr>
+<tr><td>EU AI Act high-risk obligations</td><td><span class="v">2 Aug 2026</span></td><td>EU Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Sort your AI portfolio by data type.</strong> Route prediction-on-tables (churn, fraud, pricing, demand, risk) to <strong>tabular models</strong>; reserve LLMs for language and reasoning. Stop paying poet prices for actuarial work.</li>
+  <li><strong>Put energy in the business case.</strong> The 2026 ceiling is <strong>power, not algorithms</strong> — every serious AI roadmap needs a compute/energy line and a "what if we can't get the megawatts?" answer.</li>
+  <li><strong>Stress-test your frontier-access assumption.</strong> GPT-5.6's government-gated launch proves access can be throttled overnight. Keep a <strong>multi-vendor + open-weight fallback.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> OpenAI / VentureBeat · SAP News · CX Today · Morgan Stanley · NVIDIA / Columbia CGEP · IEA · Gartner · Forrester · S&amp;P Global · IBM · EU Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 29 June 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
