@@ -6,6 +6,28 @@ Paste it into a new scheduled routine that has this repo connected with push acc
 
 > Suggested schedule: daily, ~07:47 Europe/Paris (`47 7 * * *`).
 
+## How to install it as a cloud routine (one-time, ~2 min)
+
+The cloud-routine backend is **not reachable from the local Claude Code CLI**
+(`list_environments` / `create_trigger` return 404 there). Set it up from the web app:
+
+1. Open **claude.ai/code** and select (or create) a **cloud environment** that has
+   this repo — `andromedakah/andromedakah.github.io` — connected.
+2. **Critical prerequisite — push auth.** The cloud env needs the **GitHub connector /
+   app installed with write (push) access** to that repo. The local sandbox's cached
+   HTTPS credentials do NOT carry over to the cloud; without GitHub auth the routine
+   will build the edition but fail to `git push`.
+3. Open the **Routines / Schedule** panel (clock icon) → **New routine**.
+4. **Schedule:** `47 7 * * *` (≈ 07:47, set the timezone to Europe/Paris). Avoid `0`
+   minute marks so the run doesn't collide with everyone else's 7am jobs.
+5. **Prompt:** paste everything below the `---` line of this file.
+6. Save. Optionally trigger a manual run once to confirm it researches, builds EN/FR +
+   email, and pushes live to `https://andromedakah.github.io/ai-radar/`.
+
+> Once the cloud routine is confirmed working, **disable the local scheduled task**
+> `ai-radar-news` (`~/.claude/scheduled-tasks/ai-radar-news/`, cron `0 9 * * *`) so the
+> brief isn't generated twice a day and two runs don't race on `git push`.
+
 ---
 
 Generate today's edition of the **AI Tech Radar** — a daily enterprise-AI
