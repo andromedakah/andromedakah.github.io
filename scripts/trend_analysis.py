@@ -8,16 +8,27 @@ edition) and regenerates a static trends page at ai-radar/trends/index.html:
   1. Tag frequency per edition + a stacked bar chart (SVG, hand-computed).
   2. Week-over-week velocity per tag: (count_this_week - count_last_week) / count_last_week.
   3. A tag co-occurrence matrix (which topics get covered together).
-  4. A fact spot-check: regex-extracts numeric claims from each edition's
-     ai-radar.md and checks them against ai-radar/verified_facts.json, a
-     small hand-curated allowlist of facts with a real source URL. Anything
-     not in the allowlist is reported as UNCONFIRMED (not false) -- this is
-     a spot-check against a finite local list, not exhaustive fact-checking,
-     and it makes zero network or LLM calls.
+  4. Claim corroboration: regex-extracts numeric claims from every edition's
+     ai-radar.md, clusters claims that share a numeric token (e.g. "88%")
+     and at least one significant context word (e.g. "enterprises") across
+     *different* editions, then scores each cluster statistically:
+
+        DF(c)    = number of distinct editions independently stating claim c
+        N        = total number of editions analyzed
+        Score(c) = DF(c) / N
+
+     A claim is CORROBORATED when DF(c) >= 2 -- i.e. it was independently
+     restated by more than one day's research run, not just typed into a
+     list once. DF(c) == 1 is SINGLE-MENTION: real, but not yet corroborated
+     by a second independent edition. There is no hand-maintained allowlist
+     gating this -- the score is a plain frequency count over the corpus
+     that already lives in this repo. ai-radar/verified_facts.json is kept
+     only as an optional enrichment: if a corroborated cluster happens to
+     match an entry there, its source link is surfaced alongside the score.
 
 No LLM calls, no network calls, no generative summaries. Everything here is
-computed directly from tags.json / verified_facts.json / the edition
-markdown files already committed to this repo.
+computed directly from tags.json / the edition markdown files already
+committed to this repo.
 """
 
 import datetime as dt
@@ -43,6 +54,12 @@ NUMERIC_CLAIM_RE = re.compile(
     r"[^.\n]{0,60}(?:\$?\d[\d,.]*\s?(?:%|percent|x|×|B|M|K|billion|million))[^.\n]{0,60}",
     re.IGNORECASE,
 )
+NUMERIC_TOKEN_RE = re.compile(
+    r"[\$€]?\d[\d,.]*\s?(?:%|percent|x|×|B|M|K|billion|million)",
+    re.IGNORECASE,
+)
+KEYWORD_RE = re.compile(r"[a-zA-Z][a-zA-Z\-]{5,}")
+MIN_DF_FOR_CORROBORATION = 2
 
 
 def load_json(path, default):
@@ -106,7 +123,7 @@ def compute_cooccurrence(editions, all_tags):
 
 
 # --------------------------------------------------------------------------- #
-# 3. Fact spot-check                                                          #
+# 3. Claim corroboration: DF(c) = distinct editions stating c; Score = DF/N   #
 # --------------------------------------------------------------------------- #
 
 def load_edition_text(date):
@@ -117,27 +134,86 @@ def load_edition_text(date):
         return f.read()
 
 
-def spot_check_facts(editions, facts):
-    results = []
+def normalize_token(tok: str) -> str:
+    return tok.strip().lower().replace(",", "").replace("×", "x").replace(" ", "")
+
+
+def extract_claims(date, text):
+    claims = []
+    for m in NUMERIC_CLAIM_RE.finditer(text):
+        snippet = m.group(0).strip()
+        tok_match = NUMERIC_TOKEN_RE.search(snippet)
+        if not tok_match:
+            continue
+        keywords = {w.lower() for w in KEYWORD_RE.findall(snippet)}
+        claims.append({
+            "date": date,
+            "snippet": snippet,
+            "token": normalize_token(tok_match.group(0)),
+            "keywords": keywords,
+        })
+    return claims
+
+
+def cluster_claims(all_claims):
+    """Greedy clustering: same numeric token + >=1 shared context keyword."""
+    clusters = []
+    for claim in all_claims:
+        target = None
+        for cluster in clusters:
+            if claim["token"] == cluster["token"] and (claim["keywords"] & cluster["keywords"]):
+                target = cluster
+                break
+        if target is None:
+            clusters.append({
+                "token": claim["token"],
+                "keywords": set(claim["keywords"]),
+                "members": [claim],
+            })
+        else:
+            target["keywords"] |= claim["keywords"]
+            target["members"].append(claim)
+    return clusters
+
+
+def score_clusters(clusters, n_editions):
+    scored = []
+    for c in clusters:
+        dates = sorted({m["date"] for m in c["members"]})
+        df = len(dates)
+        representative = max(c["members"], key=lambda m: len(m["snippet"]))
+        scored.append({
+            "token": c["token"],
+            "snippet": representative["snippet"],
+            "dates": dates,
+            "df": df,
+            "n": n_editions,
+            "score": round(df / n_editions, 2) if n_editions else 0.0,
+            "status": "corroborated" if df >= MIN_DF_FOR_CORROBORATION else "single-mention",
+        })
+    scored.sort(key=lambda r: (-r["df"], r["token"]))
+    return scored
+
+
+def enrich_with_sources(scored, facts):
+    for r in scored:
+        r["source"] = None
+        for fact in facts:
+            if any(p.lower() in r["snippet"].lower() for p in fact.get("match_patterns", [])):
+                r["source"] = fact
+                break
+    return scored
+
+
+def compute_corroboration(editions, facts):
+    all_claims = []
     for e in editions:
         text = load_edition_text(e["date"])
-        if not text:
-            continue
-        claims = {m.group(0).strip() for m in NUMERIC_CLAIM_RE.finditer(text)}
-        for claim_snippet in claims:
-            snippet_lower = claim_snippet.lower()
-            matched = None
-            for fact in facts:
-                if any(p.lower() in snippet_lower for p in fact["match_patterns"]):
-                    matched = fact
-                    break
-            results.append({
-                "date": e["date"],
-                "snippet": claim_snippet,
-                "status": "confirmed" if matched else "unconfirmed",
-                "fact": matched,
-            })
-    return results
+        if text:
+            all_claims.extend(extract_claims(e["date"], text))
+    clusters = cluster_claims(all_claims)
+    scored = score_clusters(clusters, len(editions))
+    return enrich_with_sources(scored, facts)
 
 
 # --------------------------------------------------------------------------- #
@@ -170,8 +246,10 @@ CSS = """
   .matrix td, .matrix th{text-align:center;padding:6px}
   .matrix .rowlabel{text-align:left;color:var(--soft)}
   .cell0{background:transparent}
-  .status-confirmed{color:var(--teal);font-weight:600}
-  .status-unconfirmed{color:#ef9f27;font-weight:600}
+  .status-corroborated{color:var(--teal);font-weight:600}
+  .status-single{color:#ef9f27;font-weight:600}
+  .eq{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--panel2);
+    border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:inline-block;margin:6px 0}
   .note{color:var(--muted);font-size:13px}
   footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
 """
@@ -252,26 +330,31 @@ def render_matrix(matrix, all_tags):
     return f"""<div style="overflow-x:auto"><table class="matrix"><tr><th></th>{header}</tr>{''.join(rows)}</table></div>"""
 
 
-def render_facts(facts_checked):
-    if not facts_checked:
-        return '<p class="note">No edition markdown found to spot-check yet.</p>'
+def render_corroboration(scored):
+    if not scored:
+        return '<p class="note">No edition markdown found to analyze yet.</p>'
     rows = []
-    for r in facts_checked:
-        if r["status"] == "confirmed":
-            f = r["fact"]
-            detail = f'<a href="{html.escape(f["source_url"])}">{html.escape(f["source_title"])}</a>'
-            status = '<span class="status-confirmed">CONFIRMED</span>'
+    for r in scored:
+        if r["status"] == "corroborated":
+            status = '<span class="status-corroborated">CORROBORATED</span>'
         else:
-            detail = '<span class="note">not in local allowlist</span>'
-            status = '<span class="status-unconfirmed">UNCONFIRMED</span>'
-        rows.append(
-            f'<tr><td>{html.escape(r["date"])}</td><td>{html.escape(r["snippet"])}</td>'
-            f'<td>{status}</td><td>{detail}</td></tr>'
+            status = '<span class="status-single">SINGLE-MENTION</span>'
+        source = (
+            f'<a href="{html.escape(r["source"]["source_url"])}">{html.escape(r["source"]["source_title"])}</a>'
+            if r["source"] else '<span class="note">—</span>'
         )
-    return f"""<table><tr><th>Edition</th><th>Claim (extracted)</th><th>Status</th><th>Source</th></tr>{''.join(rows)}</table>"""
+        dates = ", ".join(r["dates"])
+        rows.append(
+            f'<tr><td>{html.escape(r["snippet"])}</td><td>{r["df"]}/{r["n"]}</td>'
+            f'<td>{r["score"]}</td><td>{status}</td><td>{html.escape(dates)}</td><td>{source}</td></tr>'
+        )
+    return (
+        '<table><tr><th>Claim (extracted)</th><th>DF / N</th><th>Score</th>'
+        '<th>Status</th><th>Editions</th><th>Source</th></tr>{}</table>'
+    ).format("".join(rows))
 
 
-def render_page(all_tags, per_edition_counts, velocity, matrix, facts_checked, generated_at):
+def render_page(all_tags, per_edition_counts, velocity, matrix, scored_claims, n_editions, generated_at):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -309,12 +392,17 @@ def render_page(all_tags, per_edition_counts, velocity, matrix, facts_checked, g
 </section>
 
 <section id="factcheck">
-<h2>Fact spot-check</h2>
-<p class="note">Numeric claims extracted from each edition via regex, checked against a small
-hand-curated allowlist in <code>ai-radar/verified_facts.json</code>. This is a spot-check against
-a finite local list, not exhaustive fact-checking — UNCONFIRMED means "not in the allowlist yet",
-not "false".</p>
-<div class="card">{render_facts(facts_checked)}</div>
+<h2>Claim corroboration</h2>
+<p class="note">Numeric claims are extracted from every edition via regex and clustered when they
+share a numeric token (e.g. "88%") and at least one significant context word (e.g. "enterprises")
+<em>across different editions</em>. Each cluster c is scored statistically, no allowlist involved:</p>
+<div class="eq">DF(c) = editions independently stating c &nbsp;·&nbsp; N = {n_editions} editions analyzed &nbsp;·&nbsp; Score(c) = DF(c) / N</div>
+<p class="note">CORROBORATED means DF(c) ≥ {MIN_DF_FOR_CORROBORATION}: the claim was independently
+restated by more than one day's research run. SINGLE-MENTION (DF = 1) is not false — it just hasn't
+been corroborated by a second edition yet. The Source column is an optional enrichment from
+<code>ai-radar/verified_facts.json</code> when a corroborated claim happens to match an entry there;
+it is not what decides the status.</p>
+<div class="card">{render_corroboration(scored_claims)}</div>
 </section>
 
 <footer>
@@ -337,16 +425,18 @@ def main():
 
     all_tags, per_edition_counts, week_counts, velocity = compute_tag_stats(editions)
     matrix = compute_cooccurrence(editions, all_tags)
-    facts_checked = spot_check_facts(editions, facts)
+    scored_claims = compute_corroboration(editions, facts)
 
     os.makedirs(OUT_DIR, exist_ok=True)
     generated_at = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    page = render_page(all_tags, per_edition_counts, velocity, matrix, facts_checked, generated_at)
+    page = render_page(all_tags, per_edition_counts, velocity, matrix, scored_claims, len(editions), generated_at)
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(page)
 
+    corroborated = sum(1 for r in scored_claims if r["status"] == "corroborated")
     print(f"Wrote {os.path.join(OUT_DIR, 'index.html')} "
-          f"({len(editions)} editions, {len(all_tags)} tags, {len(facts_checked)} claims checked).")
+          f"({len(editions)} editions, {len(all_tags)} tags, "
+          f"{len(scored_claims)} claim clusters, {corroborated} corroborated).")
 
 
 if __name__ == "__main__":
