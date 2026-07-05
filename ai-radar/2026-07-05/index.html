@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 5 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on the deployment gap, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Model Was the Easy Part</h1>
+  <div class="meta">Sunday, 5 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">In one week, the two biggest names in AI stopped selling you a model and started selling you a way to make it pay. When the toolmakers stand up multi-billion-dollar deployment arms, they're telling you the hard part was never the intelligence — it's the last mile to P&amp;L.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For three years the enterprise AI question was <em>which model?</em> This week the industry's biggest players answered a different one — <strong>who will actually make it work inside your business?</strong> — and they answered it with their balance sheets. The frontier just moved <strong>downstream</strong>: from the lab to the last mile.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The model makers just became consultants.</strong> On <strong>2 July 2026</strong>, Microsoft formalized <strong>Microsoft Frontier Company — $2.5B and ~6,000 engineers</strong> — an "outcome-driven" deployment org that will embed inside customers and wire AI (Microsoft's, OpenAI's, Anthropic's, Google's, or open-source) into their actual workflows. In the same window, <strong>OpenAI's Frontier</strong> platform and <strong>Frontier Alliances</strong> partner program (BCG, McKinsey, Accenture, Capgemini) went to market to build and manage enterprise "AI coworkers." When the people who make the model start selling the <em>deployment</em>, the model race is no longer where the money is.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reason is a brutal ROI reckoning.</strong> <strong>MIT's Project NANDA found 95% of enterprise generative-AI pilots deliver zero measurable P&amp;L impact;</strong> <strong>PwC's 2026 CEO Survey found 56% of CEOs saw neither more revenue nor lower cost from AI in the last 12 months;</strong> and <strong>McKinsey put the ROI-failure rate at 73%.</strong> Only <strong>29% see significant ROI from generative AI and 23% from agents</strong> (WRITER). The gap isn't intelligence — models are abundant and cheap. The gap is the <strong>deployment layer</strong>: data, workflow, governance, and measurement.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The counter-move is "own it, don't rent it."</strong> As the big labs sell deployment <em>as a service</em>, <strong>Palantir and Nvidia</strong> pushed the opposite: a <strong>sovereign, air-gapped AI reference architecture</strong> (Nemotron open models on Blackwell Ultra, inside classified/on-prem networks) that lets organizations own their models and data outright. Palantir's Alex Karp called consumption-based token billing a <strong>"wealth tax"</strong> — pay forever, capture little, and hand your proprietary "alpha" to the lab charging you. The question shifts from <em>which model to call</em> to <strong>which model to own — and who captures the value.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the competitive edge is no longer the biggest model — everyone can rent one. It now accrues to whoever can <em>embed intelligence into real workflows, govern it, and prove the P&amp;L.</em> The vendors just told you where the hard part is by charging billions to do it for you. Build that deployment muscle in-house — or buy it with your eyes open about who captures the value — and you win the next cycle.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏋️ "The Gym That Started Selling Trainers"</h3>
+<p><em>Topic: frontier models are commoditized; the returns live in deployment (forward-deployed engineering) — and in who owns the means of production.</em></p>
+<p>A town got a magnificent new <strong>gym</strong>. The equipment was the best money could buy — every machine gleaming, more horsepower than anyone could use in a lifetime. Memberships sold out in a week. Everyone swiped in, took a selfie by the squat rack, and told the board they were "investing in fitness."</p>
+<p>A year later, almost no one was any stronger. <strong>Ninety-five out of a hundred members</strong> had bought the membership, walked the floor once or twice, and quietly drifted off — the equipment idle, the P&amp;L of their bodies unchanged. The problem was never the machines; the machines were extraordinary. The problem was that <strong>owning a barbell has never made anyone strong.</strong> Strength lives in the boring part: the program, the reps, the form, the showing-up, the measuring.</p>
+<p>So the gym's owner did something clever. He stopped bragging about the equipment and started <strong>selling trainers</strong> — people who would stand next to you, wire the machines into a real program built around <em>your</em> body, hold you to it, and put a number on your progress. Overnight the trainer became the product; the equipment became the loss-leader. He'd figured out what the members hadn't: <strong>the value was never in the iron — it was in the disciplined use of it.</strong></p>
+<p>But a few members read the fine print. The trainer weighed you, logged your every lift, and kept the data — and that knowledge, not the barbell, was the real asset. Some decided they'd rather <strong>hire their own trainer and keep their own records</strong> than rent the gym's and hand over the one thing that was truly theirs.</p>
+<p><strong>The moral:</strong> nobody ever got strong by owning a barbell. Intelligence on the shelf changes nothing; intelligence embedded in a disciplined workflow, governed and measured, is the whole game. And when the equipment-seller becomes your trainer, ask whose gains he's really optimizing — and who keeps the logbook.</p>
+<p><strong>The question it forces:</strong> <em>Are we still buying gleaming equipment, or have we built the trainer — the deployment muscle that turns a model into a measured business outcome — and do we still own the logbook when we're done?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>We can quote our AI <strong>spend</strong> and our number of <strong>pilots</strong>. What is our <strong>P&amp;L number</strong> — how many pilots moved a real revenue or cost line? If "few," we're in the <strong>95% (NANDA) / 73% (McKinsey)</strong> the frontier labs just built billion-dollar businesses to fix.</li>
+  <li>Do we treat AI as a <strong>model-buying decision or a deployment capability</strong>? Are we building forward-deployed engineering muscle in-house, or renting it — and if renting, from the same vendor that sells us the model?</li>
+  <li>On every flagship use case, who owns the <strong>data, the fine-tuned weights, and the evaluation logbook</strong> when the engagement ends? Are we compounding our own advantage, or paying a <strong>"wealth tax"</strong> to a lab that keeps our alpha?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Consumption-based token billing on high-volume workflows is both a <strong>cost and a data-leakage question</strong>. For our most valuable models (pricing, risk, fraud), does <strong>rent-vs-own</strong> favor a sovereign/owned deployment that keeps proprietary signal in-house?</li>
+  <li>Can we show a supervisor a <strong>measured outcome</strong> — not a pilot — for each production AI system, with the governance and audit trail an exam would demand?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and payer workflows are exactly where pilots stall between <strong>demo and P&amp;L</strong>. Is the blocker the model, or the <strong>deployment layer</strong> — EHR integration, clinician workflow, safety governance? A bigger model won't close a deployment gap.</li>
+  <li>For PHI-touching systems, does an <strong>air-gapped / sovereign</strong> posture (own weights, no data egress) reduce both regulatory and vendor-lock-in risk versus a metered API?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Our edge is proprietary process, sensor, and supply-chain data. If we run it through a <strong>metered third-party model</strong>, are we handing our "alpha" to the vendor? Does an <strong>owned/on-prem stack</strong> (à la Palantir–Nvidia) protect the moat while still delivering the AI?</li>
+  <li>Where have pilots died on the plant floor — and was it ever the model, or the <strong>forward-deployed engineering</strong> to wire it into MES/SCADA and prove throughput gains?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Personalization and merchandising agents are ROI-rich but <strong>deployment-heavy</strong>. Do we have the engineering to embed them into pricing, inventory, and loyalty systems and <em>measure</em> lift — or just another impressive demo?</li>
+  <li>Are our token bills scaling faster than the margin the agents create? If consumption ≠ outcome, we're funding the vendor's growth, not ours.</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>The <strong>sovereign / air-gapped</strong> model (own weights, data never leaves) is now a shipping product — and the <strong>EU AI Act's GPAI enforcement powers are in force from 2 Aug 2026.</strong> Should procurement now weight <strong>data sovereignty, ownership, and outcome-measurement</strong> as heavily as raw model capability?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Deployment Gap</h2>
+<p>The defining technical fact of mid-2026 is that <strong>frontier intelligence is no longer the scarce input.</strong> Capable models are abundant, interchangeable, and falling in price; you can rent a near-state-of-the-art model by the token this afternoon. Yet <strong>95% of generative-AI pilots never move the P&amp;L</strong> (MIT Project NANDA). That's not a model-quality problem — it's a <strong>deployment problem.</strong> The value was never in the weights; it's in everything wrapped around them. Which is why Palantir's <strong>forward-deployed engineering</strong> model — embed engineers <em>inside</em> the customer to wire the model into real data and workflows and drive an outcome — was suddenly copied by the two biggest labs in the same week.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A commodity frontier model on the left connects to a measured P&amp;L outcome on the right only by crossing the deployment gap — five last-mile layers: context/data, workflow, governance, evaluation, cost/metering — where 95% of pilots die." style="max-width:660px;width:100%;height:auto">
+  <!-- top: model -> outcome, the "easy" ends -->
+  <rect x="24" y="30" width="150" height="60" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="99" y="55" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">FRONTIER MODEL</text>
+  <text x="99" y="74" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">abundant · rentable · commodity</text>
+
+  <rect x="506" y="30" width="150" height="60" rx="10" fill="#11251c" stroke="#1d6e56"/>
+  <text x="581" y="55" font-size="13" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">MEASURED P&amp;L</text>
+  <text x="581" y="74" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a revenue / cost number</text>
+
+  <!-- arrow model -> gap -->
+  <path d="M99 90 L99 120" stroke="#7f77dd" stroke-width="2.5" fill="none"/>
+  <path d="M94 114 L99 122 L104 114 Z" fill="#7f77dd"/>
+  <text x="99" y="108" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the easy part</text>
+
+  <!-- the gap band -->
+  <rect x="24" y="128" width="632" height="196" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="340" y="150" font-size="13" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">THE DEPLOYMENT GAP — where 95% of pilots die between demo and P&amp;L</text>
+
+  <!-- 5 layers -->
+  <g font-family="sans-serif">
+    <rect x="44" y="164" width="592" height="26" rx="6" fill="#1c2330" stroke="#3a4250"/><text x="56" y="181" font-size="11.5" fill="#e8edf3"><tspan fill="#9d96f0" font-weight="700">1 · CONTEXT / DATA</tspan>  — wire the model to your systems of record &amp; knowledge</text>
+    <rect x="44" y="196" width="592" height="26" rx="6" fill="#1c2330" stroke="#3a4250"/><text x="56" y="213" font-size="11.5" fill="#e8edf3"><tspan fill="#9d96f0" font-weight="700">2 · WORKFLOW</tspan>  — embed it in the real process, not a chatbot on the side</text>
+    <rect x="44" y="228" width="592" height="26" rx="6" fill="#1c2330" stroke="#3a4250"/><text x="56" y="245" font-size="11.5" fill="#e8edf3"><tspan fill="#9d96f0" font-weight="700">3 · GOVERNANCE</tspan>  — identity, least-privilege, audit: trust it in production</text>
+    <rect x="44" y="260" width="592" height="26" rx="6" fill="#1c2330" stroke="#3a4250"/><text x="56" y="277" font-size="11.5" fill="#e8edf3"><tspan fill="#9d96f0" font-weight="700">4 · EVALUATION</tspan>  — measure outcomes, not demos: a P&amp;L number, not a vibe</text>
+    <rect x="44" y="292" width="592" height="26" rx="6" fill="#1c2330" stroke="#3a4250"/><text x="56" y="309" font-size="11.5" fill="#e8edf3"><tspan fill="#9d96f0" font-weight="700">5 · COST / METER</tspan>  — attribute spend to value; kill the "wealth tax"</text>
+  </g>
+
+  <!-- arrow gap -> outcome -->
+  <path d="M581 128 L581 96" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M576 104 L581 96 L586 104 Z" fill="#1d9e75"/>
+  <text x="581" y="120" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the hard part</text>
+
+  <!-- footer principle -->
+  <text x="340" y="356" font-size="12" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">The model is the easy part precisely because the plumbing is the work.</text>
+  <text x="340" y="384" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You can rent world-class intelligence by the hour. You cannot rent the discipline</text>
+  <text x="340" y="402" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">of wiring it into your business, governing it, and proving it paid.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#7f77dd"></i>Model &amp; outcome — the easy ends</span>
+  <span><i class="dot" style="background:#d85a30"></i>The deployment gap — where pilots die</span>
+  <span><i class="dot" style="background:#1d9e75"></i>A measured P&amp;L result</span>
+</div>
+</div>
+
+<h3>Why pilots skip the last mile — and die</h3>
+<div class="card">
+<p>A pilot demos in a week because it <strong>skips all five layers:</strong> it calls a hosted model over a slice of hand-picked data, in a sandbox, with no governance, no evaluation harness, and no cost accounting. It looks like magic. Then it meets the enterprise: the data is messy and access-controlled, the process has twelve exceptions, security won't let it near production, no one agreed what "success" means in dollars, and the token bill scales faster than the benefit. <strong>Each skipped layer is a wall the pilot hits on the way to production</strong> — and the model, the one part that worked, gets the blame.</p>
+</div>
+
+<h3>Why it matters for legacy estates</h3>
+<div class="card">
+<p>The last mile is disproportionately a <strong>legacy-integration</strong> problem. The model is new; the systems it must create value inside are decades old, poorly documented, and never designed to be driven by an autonomous, promptable actor. Forward-deployed engineering is, in practice, <strong>the discipline of retrofitting</strong> — connecting a modern model to a legacy estate through the same governance-and-plumbing layers this radar keeps returning to: last week's <strong>identity fabric</strong> (layer 3), the week before's <strong>cost-metering gateway</strong> (layer 5), and the RAG/MCP <strong>context and tool plumbing</strong> (layers 1–2). The model is the easy part precisely because the plumbing is the work.</p>
+<p><strong>The clean mental model:</strong> <em>you can rent world-class intelligence by the hour. You cannot rent the discipline of wiring it into your business, governing it, and proving it paid. That discipline — not the model — is the durable asset. Build it, and be sure you still own it when the consultants go home.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Microsoft Frontier Company</strong> ($2.5B, ~6,000 engineers) &amp; <strong>OpenAI Frontier / Frontier Alliances</strong> — the labs industrializing deployment/forward-deployed engineering.</li>
+  <li><strong>Palantir × Nvidia sovereign AI</strong> — air-gapped, own-your-weights architecture; the "rent-vs-own" fork and Karp's "wealth tax" critique.</li>
+  <li><strong>MCP final spec (release candidate 28 Jul 2026)</strong> — the tool/context plumbing (layers 1–2) becoming a stable enterprise standard under the Agentic AI Foundation.</li>
+  <li><strong>ROI-as-a-board-metric</strong> — P&amp;L impact, not pilot count, becoming the number executives are asked for.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">"This goes beyond what has been labeled as Forward-Deployed Engineering, and will be the largest, most capable, outcome-driven engineering organization in the industry."</div><div class="a">— Judson Althoff, CEO of Microsoft's commercial business, announcing Frontier Company</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">"It's an application problem, not a training problem."</div><div class="a">— Sam Altman, OpenAI, on where enterprise value now lives</div></blockquote>
+<blockquote><div class="q">"[Token billing is] a wealth tax."</div><div class="a">— Alex Karp, CEO, Palantir, on consumption-based AI pricing (CNBC, 1 July 2026)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"Nobody ever got strong by owning a barbell."</div><div class="a">— the radar, on the gym that started selling trainers</div></blockquote>
+<blockquote><div class="q">"You can rent the model. You cannot rent the discipline of making it pay."</div><div class="a">— the radar's framing of the deployment gap</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Enterprise GenAI pilots with zero measurable P&amp;L impact</td><td><span class="v">95%</span></td><td>MIT, Project NANDA</td></tr>
+<tr><td>CEOs seeing no revenue/cost benefit from AI (past 12 mo)</td><td><span class="v">56%</span></td><td>PwC 2026 CEO Survey</td></tr>
+<tr><td>AI deployments failing to hit projected ROI</td><td><span class="v">73%</span></td><td>McKinsey Global AI Survey 2026</td></tr>
+<tr><td>Orgs seeing significant ROI from generative AI</td><td><span class="v">29%</span></td><td>WRITER 2026</td></tr>
+<tr><td>Orgs seeing significant ROI from AI agents</td><td><span class="v">23%</span></td><td>WRITER 2026</td></tr>
+<tr><td>Orgs wanting AI to grow revenue / that actually have</td><td><span class="v">74% / 20%</span></td><td>Deloitte 2026</td></tr>
+<tr><td>Finance leaders confident of AI enterprise impact</td><td><span class="v">36%</span></td><td>Gartner</td></tr>
+<tr><td>Microsoft Frontier Company — investment / headcount</td><td><span class="v">$2.5B / ~6,000</span></td><td>Microsoft (Althoff)</td></tr>
+<tr><td>Microsoft Frontier Company formalized</td><td><span class="v">2 Jul 2026</span></td><td>Microsoft / CNBC</td></tr>
+<tr><td>MCP final specification (release candidate)</td><td><span class="v">28 Jul 2026</span></td><td>MCP / AAIF</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Report a P&amp;L number, not a pilot count.</strong> Pick your top five AI initiatives and put a revenue-or-cost figure next to each. The ones that can't produce one are your version of the 95% — first candidates for either a real deployment investment or a shutdown. Adoption isn't the metric; measured outcome is.</li>
+  <li><strong>Decide, per use case, whether you're buying a capability or renting a dependency.</strong> For your highest-value, most data-sensitive workflows, run the <strong>rent-vs-own</strong> analysis Palantir just made explicit: does a sovereign/owned deployment protect your proprietary "alpha" and unit economics better than a metered API? Where you buy deployment help (Frontier Company, Frontier Alliances, an SI), write the contract so you keep the <strong>reusable capability, the weights, and the logbook.</strong></li>
+  <li><strong>Build the last-mile muscle, not just the model access.</strong> Stand up a small forward-deployed engineering function whose job is the five layers — context, workflow, governance, evaluation, cost — reusing the identity and cost-metering plumbing you already need. The durable advantage of the next cycle isn't access to intelligence; it's the in-house discipline to wire it in, govern it, and prove it paid.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> CNBC · TechCrunch · GeekWire · The Decoder · MarketScale · OpenAI · Constellation Research · Forbes/PwC · WRITER · Deloitte · Gartner · MIT Project NANDA · TechTimes · The New Stack · Model Context Protocol · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 5 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
