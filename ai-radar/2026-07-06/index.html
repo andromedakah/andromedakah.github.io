@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 6 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on the cap vs. the meter, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Cap Is Not the Cure</h1>
+  <div class="meta">Monday, 6 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a year, the biggest names in tech paid their people to burn AI tokens — leaderboards, badges, a title called "Token Legend." This week the same firms started rationing. But a flat spend cap is a tourniquet: it stops the bleeding and the value in the same cut. The question was never how much AI costs — it's which spend earns its keep.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>The enterprise-AI pendulum just swung hard — from <em>maximize adoption</em> to <em>cap the spend</em> — and it swung this week. <strong>Effective today, 6 July 2026, Tesla caps each employee's third-party AI spend at $200/week</strong> (with a carve-out for its own xAI tools), after engineers were burning "thousands of dollars' worth of tokens each week." The irony is sharp: Tesla had spent roughly six months <em>gamifying</em> token consumption, ranking engineers on internal leaderboards to push adoption. The leaderboard just became a speed limit.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The rationing is now industry-wide.</strong> Tesla joins <strong>Uber</strong> (which blew its <em>entire</em> 2026 AI budget by April — four months — then capped staff at <strong>$1,500/month</strong> per tool), <strong>Meta</strong> (whose internal "Claudeonomics" leaderboard ranked 85,000+ employees and logged <strong>~60 trillion tokens in a single 30-day window</strong>, with internal AI costs approaching billions), <strong>Walmart</strong> (token caps after its "Code Puppy" coding agent surged), <strong>Amazon</strong> (which told staff to stop gaming leaderboards), and <strong>Cisco</strong>. The common trigger: <strong>usage-based/token billing makes the cost of every prompt visible</strong> — and at scale, unlimited access is an unlimited liability.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The caps expose the real problem: consumption was never the outcome.</strong> Uber's president and COO <strong>Andrew Macdonald</strong> said the quiet part out loud — that he can't draw a line from all those tokens to value shipped: <em>"That link is not there yet… it's very hard to draw a line between one of those stats and, 'Okay, now we're actually producing 25 percent more useful consumer features.'"</em> Firms measured <strong>adoption and tokens burned</strong> — vanity metrics — and are now discovering they never instrumented <strong>outcome per dollar.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>But a blunt cap is a tourniquet, not a cure.</strong> A flat per-seat limit throttles the engineer closing real work at the same rate as the one gaming a leaderboard. It caps the waste <em>and</em> the value. The mature move is the opposite of a cap: a <strong>metering-and-attribution layer</strong> that ties every dollar of spend to a business outcome — the same "cost/meter" plumbing this radar keeps returning to (yesterday's deployment-gap layer 5; the FinOps-for-tokens gateway of 30 June). You don't fix an unmanaged budget by making it smaller; you fix it by making it <em>legible.</em></div></div>
+<div class="card"><strong>Bottom line:</strong> the story of the first half of 2026 was <em>get everyone using AI.</em> The story of the second half is <em>make every token pay.</em> The firms that win won't be the ones that rationed hardest — they'll be the ones that replaced the leaderboard with a <strong>P&amp;L line</strong>, and the flat cap with a <strong>meter that funds value and starves waste.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>💳 "The Unlimited Corporate Card"</h3>
+<p><em>Topic: token consumption is a vanity metric; a blunt spend cap throttles value and waste alike — the real fix is metered attribution of spend to outcome.</em></p>
+<p>A company decided its people weren't ambitious enough, so it handed every employee an <strong>unlimited corporate card</strong> and told them to "invest in the business." To make sure they used it, leadership put up a <strong>leaderboard</strong> ranking everyone by how much they spent, handed out badges — <em>Big Spender, Deal Machine</em> — and threw a party for the top of the board each month. Spending, naturally, exploded. Everyone agreed the company had never been so <em>ambitious.</em></p>
+<p>Then the CFO opened the books in the spring and found the <strong>annual budget was gone by April.</strong> Panic. So leadership did the obvious thing: a <strong>flat $200-a-week limit</strong> on every card, no exceptions. The bleeding stopped overnight — and so did something else. The salesperson who'd been expensing client dinners that closed seven-figure deals hit the same wall as the intern buying office lunch to climb the leaderboard. The cap couldn't tell them apart, because it was blind to the one thing that mattered: <strong>what came back for what went out.</strong></p>
+<p>The problem was never the card, and it was never the spending. It was that nobody had built the boring thing — <strong>the statement that shows, per person and per purchase, the dollar that came back for the dollar that went out.</strong> With that, you don't need a flat cap: you fund the dinners that close deals and kill the lunches that don't. Without it, your only tool is a tourniquet, and a tourniquet stops the healing along with the bleeding.</p>
+<p><strong>The moral:</strong> you cannot manage what you turned into a game, and you cannot fix a runaway budget by making it smaller — only by making it <em>legible.</em> A spending cap treats the symptom; a meter treats the cause. Rewarding consumption was the first mistake; rationing it blindly is the second.</p>
+<p><strong>The question it forces:</strong> <em>Are we rationing AI with a flat cap that throttles our best users alongside the waste — or have we built the meter that tells us which spend earns its keep, and lets us fund it?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Do we reward <strong>AI adoption and token consumption</strong> — a vanity metric — or <strong>outcome per dollar</strong>? If there's a leaderboard ranking people by usage anywhere in the building, we're funding the wrong number. What replaces it?</li>
+  <li>If our AI bill doubled tomorrow, could we say <strong>which half created value</strong>? If not, we're one budget review away from Tesla's tourniquet — a <strong>flat cap that throttles our best users alongside the waste.</strong></li>
+  <li>Who <strong>owns the AI budget as a P&amp;L line</strong>, with a named accountable executive, the way we'd own any other cost center? Or is it an uncapped, unowned liability discovered only when the money runs out?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Coding and research agents are our heaviest token consumers. Do we <strong>meter and attribute</strong> that spend to desks and outcomes — or will we end up capping the quant who's shipping alongside the one who isn't?</li>
+  <li>Usage-based AI billing turns every prompt into a variable cost on the P&amp;L. Does our <strong>FinOps discipline</strong> already cover tokens — chargeback, forecasting, anomaly alerts — or is AI the one line item finance can't predict?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Where clinician and research AI use is scaling, are we measuring <strong>tokens or patient/throughput outcomes</strong>? A cap set to control cost could throttle exactly the high-value clinical workflows we most want to scale.</li>
+  <li>Do our vendor contracts let us <strong>attribute spend to a measured outcome</strong>, or only to raw consumption? The difference decides whether the CFO reaches for a meter or a tourniquet.</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Engineering and design copilots can burn tokens fast. Do we have <strong>per-team metering</strong> that ties spend to cycle-time or defect-rate gains — or only a bill that arrives after the budget is spent?</li>
+  <li>If we had to cap AI spend tomorrow, would we cap by <strong>headcount (blind) or by outcome (targeted)</strong>? Only the second protects the plant-floor use cases that actually move throughput.</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Merchandising, support, and coding agents are ROI-rich but token-hungry. Are our <strong>agent costs scaling faster than the margin they create</strong>, and do we measure that per use case — or in one undifferentiated bill?</li>
+  <li>Uber's COO couldn't connect token spend to features shipped. Can <em>we</em> connect our AI spend to a <strong>conversion, margin, or CSAT number</strong> — or are we also funding a leaderboard?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public budgets can't "run out by April." Do we have <strong>hard, per-program metering and forecasting</strong> on AI spend before we scale — not a cap applied in a panic?</li>
+  <li>With <strong>EU AI Act GPAI enforcement powers in force from 2 Aug 2026</strong>, cost governance and usage auditability are converging with regulatory auditability. Is our <strong>metering layer</strong> also our compliance evidence — one system, not two?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Cap vs. The Meter</h2>
+<p>The defining operational fact of mid-2026 is that <strong>token/usage-based billing turned AI from a fixed subscription into a variable cost</strong> — one that scales with every prompt, every agent loop, every retry. Agentic workflows amplify it: a single task can fan out into hundreds of model calls. The result is the runaway bills of the last quarter — Uber's budget gone in four months, Meta's costs "approaching billions," Tesla's engineers at thousands of dollars a week. Faced with that, most firms reached for the crudest control available: a <strong>flat cap.</strong> It's the wrong tool, and understanding why is the whole technical point.</p>
+<p><strong>A flat cap is blind.</strong> It throttles spend by <em>headcount or calendar</em> — $200/week, $1,500/month — with no knowledge of what the spend produced. It cannot distinguish the engineer whose agent shipped a feature from the one climbing a leaderboard. It stops the waste and the value in the same cut, and quietly suppresses your best-but-expensive use cases first. <strong>A meter is targeted:</strong> the same cost/attribution gateway this radar keeps returning to, doing five things a cap cannot.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A runaway AI bill from uncapped consumption branches into two answers: the flat cap, a blind tourniquet that throttles value and waste equally so cost falls and value falls with it; and the meter, an attribution gateway that meters every call, attributes spend to outcome, routes tasks to right-sized models, budgets by outcome, and audits the record — so waste starves and value gets funded." style="max-width:660px;width:100%;height:auto">
+  <!-- top: uncapped consumption -->
+  <rect x="230" y="24" width="220" height="54" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="340" y="48" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">UNCAPPED CONSUMPTION</text>
+  <text x="340" y="66" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">tokens as a scoreboard · the runaway bill</text>
+
+  <!-- split arrows -->
+  <path d="M300 78 L170 108" stroke="#d85a30" stroke-width="2.5" fill="none"/>
+  <path d="M176 100 L166 110 L180 112 Z" fill="#d85a30"/>
+  <path d="M380 78 L510 108" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M500 112 L514 110 L504 100 Z" fill="#1d9e75"/>
+
+  <!-- left: the flat cap -->
+  <rect x="24" y="116" width="300" height="252" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="174" y="140" font-size="13.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">THE FLAT CAP — tourniquet</text>
+  <g font-family="sans-serif">
+    <text x="44" y="170" font-size="11.5" fill="#e8edf3">• throttles by headcount / calendar</text>
+    <text x="44" y="194" font-size="11.5" fill="#e8edf3">• blind to outcome</text>
+    <text x="44" y="218" font-size="11.5" fill="#e8edf3">• throttles value AND waste equally</text>
+    <text x="44" y="242" font-size="11.5" fill="#e8edf3">• suppresses best use cases first</text>
+    <text x="44" y="266" font-size="11.5" fill="#e8edf3">• installs in an afternoon</text>
+  </g>
+  <rect x="44" y="288" width="260" height="60" rx="8" fill="#231216" stroke="#7a3b2a"/>
+  <text x="174" y="314" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">stops the bleeding —</text>
+  <text x="174" y="333" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">and the healing.</text>
+
+  <!-- right: the meter -->
+  <rect x="356" y="116" width="300" height="252" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="506" y="140" font-size="13.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE METER — attribution gateway</text>
+  <g font-family="sans-serif">
+    <text x="376" y="170" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">1 METER</tspan>  every call · per user/team/task</text>
+    <text x="376" y="194" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">2 ATTRIBUTE</tspan>  spend → outcome</text>
+    <text x="376" y="218" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">3 ROUTE</tspan>  task → right-sized model · cache</text>
+    <text x="376" y="242" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">4 BUDGET</tspan>  by outcome, not headcount</text>
+    <text x="376" y="266" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">5 AUDIT</tspan>  the record — finance &amp; compliance</text>
+  </g>
+  <rect x="376" y="288" width="260" height="60" rx="8" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="506" y="314" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">waste starves —</text>
+  <text x="506" y="333" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">value gets funded.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">A cap asks "how much are we spending?" A meter asks "what is each dollar buying?"</text>
+  <text x="340" y="430" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You don't tame a runaway AI budget by making it smaller —</text>
+  <text x="340" y="448" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">you tame it by making it legible.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#d85a30"></i>The flat cap — blind tourniquet</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The meter — attribution gateway</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Uncapped consumption — the runaway bill</span>
+</div>
+</div>
+
+<h3>Why "tokens burned" was always the wrong metric</h3>
+<div class="card">
+<p>The leaderboards weren't just embarrassing in hindsight — they optimized the wrong variable. <strong>Token consumption is an input, not an output.</strong> Treating it as a productivity proxy is like ranking sales reps by miles driven: it rewards the appearance of work, invites gaming (Meta's top user logged <strong>281 billion tokens</strong> in 30 days), and tells you nothing about value. The moment a CFO can see the bill, a metric that measures <em>cost</em> and calls it <em>productivity</em> collapses — and the panic cap follows.</p>
+</div>
+
+<h3>Why it matters for legacy estates</h3>
+<div class="card">
+<p>The meter is, once again, a <strong>gateway retrofit</strong> — the same architectural move this radar keeps arriving at from different directions. Last quarter it was a <strong>FinOps-for-tokens gateway</strong> (30 June, "The Bill Comes Due"); ten days ago it was an <strong>identity fabric</strong> issuing per-agent credentials (4 July, "Who Goes There?"); yesterday it was <strong>layer 5 of the deployment gap</strong> (5 July). They're the same box: a policy-and-observability layer between your enterprise and the models that <strong>meters, attributes, routes, budgets, and audits</strong> every call. Build it once and cost governance, security governance, and regulatory auditability all run through the same seam. A flat cap requires no such investment — which is exactly why it's the tool of the unprepared.</p>
+<p><strong>The clean mental model:</strong> <em>a cap asks "how much are we spending?" A meter asks "what is each dollar buying?" Only the second question has a management answer. You don't tame a runaway AI budget by making it smaller — you tame it by making it legible.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Tesla $200/week cap</strong> (effective 6 Jul 2026) — the highest-profile of a wave of enterprise AI spend caps (Uber, Meta, Walmart, Amazon, Cisco).</li>
+  <li><strong>"Tokenmaxxing" → efficiency</strong> — the cultural pivot from rewarding consumption to measuring outcome; leaderboards being retired.</li>
+  <li><strong>The metering / attribution gateway</strong> — FinOps-for-tokens becoming a standing capability, not a spreadsheet after the fact.</li>
+  <li><strong>EU AI Act GPAI enforcement (2 Aug 2026)</strong> — usage auditability and regulatory auditability converging on the same layer.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">"That link is not there yet, right? … it's very hard to draw a line between one of those stats and, 'Okay, now we're actually producing 25 percent more useful consumer features.'"</div><div class="a">— Andrew Macdonald, President &amp; COO, Uber, on connecting AI token spend to value shipped (Fortune, May 2026)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Employees "will need sign-off to spend above $200 per week."</div><div class="a">— Tesla internal memo on its third-party AI spending cap, effective 6 July 2026 (reported by The Information / Electrek)</div></blockquote>
+<blockquote><div class="q">Meta's internal leaderboard "Claudeonomics" ranked 85,000+ employees by token consumption — awarding titles like "Token Legend."</div><div class="a">— reporting on the gamification that preceded the caps</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"You don't tame a runaway budget by making it smaller — you tame it by making it legible."</div><div class="a">— the radar, on the cap vs. the meter</div></blockquote>
+<blockquote><div class="q">"Ranking your people by tokens burned is ranking your sales team by miles driven."</div><div class="a">— the radar, on consumption as a vanity metric</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Tesla per-employee third-party AI spend cap (from 6 Jul 2026)</td><td><span class="v">$200 / week</span></td><td>Electrek / The Information</td></tr>
+<tr><td>Uber 2026 AI budget exhausted by</td><td><span class="v">April (≈4 mo)</span></td><td>Fortune / The Information</td></tr>
+<tr><td>Uber 2025 R&amp;D spend</td><td><span class="v">$3.4B</span></td><td>Fortune</td></tr>
+<tr><td>Uber engineers classed as "agentic coding" users (Mar 2026)</td><td><span class="v">84%</span></td><td>The Information</td></tr>
+<tr><td>Uber committed code originating from AI tools</td><td><span class="v">~70%</span></td><td>The Information</td></tr>
+<tr><td>Uber AI cost per engineer (avg / power users, monthly)</td><td><span class="v">$150–250 / $500–2,000</span></td><td>The Information</td></tr>
+<tr><td>Uber per-tool monthly spend cap</td><td><span class="v">$1,500</span></td><td>Fortune</td></tr>
+<tr><td>Meta tokens consumed in a single 30-day window</td><td><span class="v">~60 trillion</span></td><td>as reported</td></tr>
+<tr><td>Meta top individual token use (30 days)</td><td><span class="v">281 billion</span></td><td>as reported</td></tr>
+<tr><td>Enterprise apps embedding AI agents by EOY 2026</td><td><span class="v">40%</span></td><td>Gartner</td></tr>
+<tr><td>Agentic AI projects to be cancelled by 2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>Enterprise GenAI pilots with zero measurable P&amp;L impact</td><td><span class="v">95%</span></td><td>MIT Project NANDA</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Kill the leaderboard; instrument the outcome.</strong> If any team ranks people by AI usage or token consumption, retire it this week — it optimizes a cost and calls it productivity. Replace it with a single number per use case: <strong>outcome per dollar</strong> (features shipped, tickets closed, margin moved). What you measure is what you'll get; measure the output, not the input.</li>
+  <li><strong>Don't reach for the flat cap — build the meter.</strong> Before you ration by headcount, stand up the <strong>metering-and-attribution gateway</strong> (the same layer-5 / FinOps-for-tokens plumbing this radar keeps flagging): meter every call per user/team/task, attribute spend to outcome, route tasks to right-sized models, and budget by value. A cap you can install in an afternoon; a meter you can <em>manage.</em> Only the meter lets you starve waste without starving value.</li>
+  <li><strong>Put a name on the AI budget.</strong> Treat AI spend as a governed P&amp;L line with an accountable owner, a forecast, chargeback to consuming teams, and anomaly alerts — the discipline finance applies to every other variable cost. "The budget ran out by April" isn't a token problem; it's an ownership problem. Fix the ownership and the tourniquet becomes unnecessary.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Electrek · The Information · Fortune · Forbes · TechCrunch · CNBC · The Next Web · CryptoBriefing · MLQ · Gartner · MIT Project NANDA · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 6 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
