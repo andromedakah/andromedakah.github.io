@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 7 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on the welded stack vs. the container, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>Commodity Cognition</h1>
+  <div class="meta">Tuesday, 7 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week the model stopped being the prize. Claude went generally available inside Microsoft's own cloud — OpenAI's biggest backer now rents you OpenAI's biggest rival, on the same NVIDIA hardware, behind the same Azure governance. And Palantir's Alex Karp spent the week saying enterprises are "livid," paying for tokens that create no value while handing over their IP. Both point at one truth: the frontier model is becoming a commodity. The durable value — and the durable risk — is the layer you build <em>around</em> it.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>The center of gravity in enterprise AI just moved off the model. <strong>As of 29 June 2026, Anthropic's Claude models (Opus 4.8, Sonnet 5, Haiku 4.5) are generally available in Microsoft Foundry</strong> — hosted on Azure, running on NVIDIA GB300 Blackwell Ultra, reachable through the Azure account, billing, networking, and governance an enterprise already trusts. Read that again: <strong>Microsoft, OpenAI's largest investor, now serves OpenAI's chief rival as a first-class citizen of its own cloud.</strong> The model has become an interchangeable ingredient you order from a menu — and every cloud is racing to stock every brand.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>"Commodity cognition" is now the frame — and a Palantir war cry.</strong> On CNBC (1 Jul) and across the week's coverage, <strong>Alex Karp</strong> called the token-based model <strong>"completely wrong,"</strong> said enterprises are <strong>"livid"</strong> about paying for <strong>"tokens that create no value"</strong> while providers <strong>"steal"</strong> their competitive edge, and pushed <em>ontology</em> and ownership of your own data/workflow layer as the real prize. SiliconANGLE (5 Jul) named the thesis: <strong>model quality is converging; operational leverage accrues to whoever owns the deployment layer.</strong> You can disagree with the messenger and still see the market proving the point.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The proof is the plumbing.</strong> Claude-in-Foundry exists because, in Anthropic's own words, <em>"most enterprise AI projects stall because of everything around the model — procurement, governance, networking, and data."</em> The model is the easy part (last week's radar); the moat is the surround. And with <strong>MCP</strong> now the cross-vendor default — donated to the Linux Foundation's Agentic AI Foundation (Dec 2025), supported by Anthropic, OpenAI, Google, Microsoft, Salesforce and Snowflake — the <em>interface</em> to models and tools is standardizing too. Standardized interface + interchangeable models = <strong>the model is swappable cargo.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>Which makes lock-in the quiet risk of H2 2026.</strong> If your architecture is welded to one vendor's SDK, you can't arbitrage a commoditizing frontier — you're paying a premium for a component the market is racing to zero, and you can't swap when the price, the latency, or the model leadership changes next quarter. The mature posture is the opposite: <strong>abstract the model behind a standard interface, route each task to the best/cheapest one, and keep your data, ontology, and evaluation on your side of the seam.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the winning question is no longer <em>"which model is best?"</em> — that answer expires monthly. It's <em>"what do we own that doesn't commoditize when the model does?"</em> The teams that win H2 treat the model as cargo and invest in the container: the standard interface, the routing layer, and the proprietary data and workflows the frontier can't sell to your competitor.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>📦 "The Shipping Container"</h3>
+<p><em>Topic: the frontier model is commoditizing; durable value and durable risk both live in the layer around it — the standard interface you build and the proprietary data you own, not the model you rent.</em></p>
+<p>Before 1956, loading a ship was a craft. Every crate, sack, and barrel was hand-stowed by longshoremen, packed bespoke to each vessel's hold. Moving goods was slow, expensive, and <em>welded to the ship</em> — cargo built for one hull couldn't simply move to another. Then a trucking man named Malcom McLean did something almost boring: he put the goods in <strong>identical steel boxes</strong> with standard corners. Any box now fit any ship, any crane, any truck, any train. Freight costs collapsed by orders of magnitude, and world trade exploded.</p>
+<p>Here is the part the board needs. The fortunes were <strong>not</strong> made by the people who made the steel boxes — the box became a commodity, stamped out by the million, indistinguishable and cheap. The fortunes were made by whoever owned the <strong>ports, the routes, and the logistics network</strong> — the layer <em>around</em> the box — and by the shippers who never again had to care which vessel carried their goods. Standardization didn't destroy value; it <em>moved</em> it, from the container to the network and from the ship to the cargo owner who could now use <em>any</em> ship.</p>
+<p>The AI parallel writes itself. <strong>The model is the steel box</strong> — Claude, GPT, Gemini, now orderable from the same cloud, converging in quality, racing toward commodity. <strong>MCP and the model-neutral gateway are the standard corners</strong> — the interface that lets any model dock to any tool and any dataset. And <strong>your proprietary data, ontology, and workflows are the cargo</strong> — the only thing on the whole dock that your competitor can't also buy. The firm that welds its cargo to one hull, in a world where any hull will do, has taken on all the risk and captured none of the leverage.</p>
+<p><strong>The moral:</strong> don't fall in love with the box. In a standardizing market, the money and the safety are in owning the port and never welding your cargo to a single ship. Betting the business on one model is a pre-container bet in a post-container world.</p>
+<p><strong>The question it forces:</strong> <em>If the frontier model is becoming a commodity we can order from any cloud, is our architecture welded to one vendor — or have we built the container that lets us swap the model and keep the value?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>If a better or cheaper model shipped tomorrow, <strong>how many weeks of rework</strong> would it take us to switch? If the answer isn't "days," we're welded to one hull — paying a premium on a commoditizing component and unable to arbitrage the frontier.</li>
+  <li>What do we own that <strong>doesn't commoditize when the model does</strong> — proprietary data, an ontology, a workflow, an evaluation set? Karp's charge is that many enterprises own <em>nothing</em> and are leaking their edge to the provider. Is that us?</li>
+  <li>Is model choice an <strong>architecture decision or a procurement decision</strong>? If switching models means a rewrite, it's the former — and we've under-invested in the interface layer that should make it the latter.</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Our most sensitive data — positions, models, client records — is the cargo. When we call a third-party model, does our <strong>IP stay on our side of the seam</strong>, or are we, in Karp's phrase, paying to lose our competitive edge?</li>
+  <li>Multi-model is now available through a single cloud (Claude in Foundry, plus native OpenAI). Do we have a <strong>routing layer</strong> that sends each task to the right model under one governance and audit plane — or one hard-wired vendor and a single point of failure?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and research value lives in <em>our</em> data and protocols, not the base model. Have we built the <strong>ontology and data layer we own</strong>, so a swappable model is a feature — not a dependency that holds our patient data hostage?</li>
+  <li>Model leadership changes quarterly. Can we adopt a newly-approved or safer model <strong>without re-validating the entire pipeline</strong>, or does every swap trigger a fresh regulatory and clinical-validation cycle?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Our differentiator is the physics, the process data, and the plant-floor ontology — not the LLM. Are we investing there, or are we <strong>renting cognition and calling it a strategy</strong>?</li>
+  <li>If we standardize model access behind one interface (MCP + a gateway), a design copilot and a maintenance agent can share the same tools and the same governance. Do we have that <strong>container</strong>, or a different bespoke integration per use case?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Our margin edge is proprietary demand, pricing, and customer data. When that flows to a third-party model, are we <strong>enriching a provider who also serves our competitors</strong>? What stays ours?</li>
+  <li>Could we run the <strong>cheapest adequate model</strong> for routine support and reserve the frontier for high-value tasks — or is everything routed to one expensive default because switching is too hard?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty and data control are non-negotiable. Does our design keep the <strong>model as a swappable, auditable component</strong> behind our own interface — the posture Palantir/NVIDIA are selling as owning "the means of production"?</li>
+  <li><strong>EU AI Act GPAI penalty powers take effect 2 August 2026</strong> (max €15M or 3% of global turnover; Article 50 transparency also live). A model-neutral gateway that logs every call is both our switching layer <em>and</em> our compliance evidence. Is it one system — or none?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Welded Stack vs. The Container</h2>
+<p>The defining architectural fact of July 2026 is that <strong>the model is decoupling from the moat.</strong> Claude now runs inside Azure Foundry on NVIDIA GB300, reachable through the same Azure identity, networking, billing, and governance an enterprise already uses for everything else — the same way OpenAI's models are reachable there. Google, AWS Bedrock, and the sovereign stacks tell the same story from other angles. Meanwhile <strong>MCP</strong> has become the cross-vendor interface standard for connecting models to tools and data. Put those together and the model becomes an <strong>interchangeable component</strong> — cargo, not moat. The only strategic question left is whether your architecture is built to <em>exploit</em> that or to <em>suffer</em> it.</p>
+<p><strong>The welded stack suffers it.</strong> Hard-code your application to one vendor's SDK, prompt format, and tool-calling dialect, and every model swap is a rewrite. You pay a premium on a component the market is commoditizing, you can't route cheap tasks to cheap models, and — Karp's sharpest point — your proprietary data flows out to a provider who also serves your competitors. <strong>The container stack exploits it:</strong> the same gateway/abstraction layer this radar keeps arriving at, now doing model-portability and doing five things the welded stack cannot.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A commoditizing frontier model (Claude, GPT, Gemini) branches into two architectures: the welded stack, hard-coded to one vendor's SDK so a swap means a rewrite, paying a premium on a commodity and leaking IP to the provider — all risk, none of the leverage, locked in as the frontier races past; and the container, a model-neutral gateway that abstracts one interface in front of many models, routes each task to the best or cheapest, standardizes tools via MCP, governs under one policy and audit plane, and keeps data, ontology and evaluation yours — so the model commoditizes in your favor and value stays on your dock." style="max-width:660px;width:100%;height:auto">
+  <!-- top: the frontier model -->
+  <rect x="222" y="24" width="236" height="54" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="340" y="46" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE FRONTIER MODEL</text>
+  <text x="340" y="65" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">commoditizing cargo · Claude · GPT · Gemini</text>
+
+  <!-- split arrows -->
+  <path d="M300 78 L170 108" stroke="#d85a30" stroke-width="2.5" fill="none"/>
+  <path d="M176 100 L166 110 L180 112 Z" fill="#d85a30"/>
+  <path d="M380 78 L510 108" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M500 112 L514 110 L504 100 Z" fill="#1d9e75"/>
+
+  <!-- left: the welded stack -->
+  <rect x="24" y="116" width="300" height="252" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="174" y="140" font-size="13.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">THE WELDED STACK — one hull</text>
+  <g font-family="sans-serif">
+    <text x="44" y="170" font-size="11.5" fill="#e8edf3">• hard-coded to one vendor SDK</text>
+    <text x="44" y="194" font-size="11.5" fill="#e8edf3">• swap = rewrite</text>
+    <text x="44" y="218" font-size="11.5" fill="#e8edf3">• pays a premium on a commodity</text>
+    <text x="44" y="242" font-size="11.5" fill="#e8edf3">• IP leaks to the provider</text>
+    <text x="44" y="266" font-size="11.5" fill="#e8edf3">• no routing, no arbitrage</text>
+  </g>
+  <rect x="44" y="288" width="260" height="60" rx="8" fill="#231216" stroke="#7a3b2a"/>
+  <text x="174" y="314" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">all risk, none of the leverage —</text>
+  <text x="174" y="333" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">locked in as the frontier races past.</text>
+
+  <!-- right: the container -->
+  <rect x="356" y="116" width="300" height="252" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="506" y="140" font-size="13.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE CONTAINER — model-neutral gateway</text>
+  <g font-family="sans-serif">
+    <text x="376" y="170" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">1 ABSTRACT</tspan>  one interface, many models</text>
+    <text x="376" y="194" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">2 ROUTE</tspan>  task → best/cheapest · swap free</text>
+    <text x="376" y="218" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">3 STANDARDIZE</tspan>  tools via MCP</text>
+    <text x="376" y="242" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">4 GOVERN</tspan>  one policy + audit plane</text>
+    <text x="376" y="266" font-size="11.5" fill="#e8edf3"><tspan fill="#7fd7b4" font-weight="700">5 OWN</tspan>  data · ontology · eval stay yours</text>
+  </g>
+  <rect x="376" y="288" width="260" height="60" rx="8" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="506" y="314" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">model commoditizes in your favor —</text>
+  <text x="506" y="333" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">value stays on your dock.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">The model is the steel box. Your data is the cargo. MCP is the standard corners.</text>
+  <text x="340" y="430" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Don't fall in love with the box —</text>
+  <text x="340" y="448" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">own the port.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#d85a30"></i>The welded stack — one hull, locked in</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The container — model-neutral gateway</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The frontier model — commoditizing cargo</span>
+</div>
+</div>
+
+<h3>Why "which model is best?" is the wrong question</h3>
+<div class="card">
+<p>Model leadership now changes on a monthly cadence, and the top models are converging on the tasks most enterprises actually run. Optimizing your architecture around <em>today's</em> best model is like buying a ship for one shipment: the answer expires, and you've built rigidity into the one place you needed optionality. <strong>The right question is "what do we own that doesn't commoditize?"</strong> — because that answer compounds instead of expiring. Karp's "commodity cognition" is a self-serving pitch for Palantir; it is also, uncomfortably, correct about the direction of travel.</p>
+</div>
+
+<h3>Why it matters for legacy estates</h3>
+<div class="card">
+<p>The container is, once again, a <strong>gateway retrofit</strong> — the same architectural box this radar keeps arriving at from different directions. In June it metered cost ("The Bill Comes Due," 30 Jun); on 4 July it issued per-agent identity ("Who Goes There?"); on 5 July it was layer 5 of the deployment gap; on 6 July it was the spend meter. Today it is the <strong>model-neutral abstraction and routing layer.</strong> They're the same seam: a policy-and-observability layer between your enterprise and the models that <strong>abstracts, routes, standardizes, governs, and keeps your data yours.</strong> Build it once and cost, security, compliance, <em>and</em> model-portability all run through it. Weld yourself to one vendor and you've optimized away the one thing worth having: the freedom to switch.</p>
+<p><strong>The clean mental model:</strong> <em>the model is the steel box — standardized, cheap, interchangeable. Your data and workflows are the cargo. MCP and the gateway are the standard corners that let any box carry your cargo. Don't fall in love with the box; own the port.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Claude GA in Microsoft Foundry</strong> (Azure, on NVIDIA GB300) — the model becoming a first-class, swappable component of the enterprise cloud, alongside native OpenAI.</li>
+  <li><strong>"Commodity cognition"</strong> — Karp/Palantir's argument that model quality is converging and value accrues to whoever owns the data/ontology/deployment layer.</li>
+  <li><strong>MCP as the standard interface</strong> — the cross-vendor default; a stateless, enterprise-grade spec transition slated for late July shifts more security responsibility onto builders.</li>
+  <li><strong>EU AI Act GPAI enforcement (2 Aug 2026)</strong> — penalty powers and Article 50 transparency go live; a model-neutral gateway doubles as the audit log.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">"Something has gone completely wrong." Enterprises are "livid" about paying for "tokens that create no value" while model providers "steal" their competitive edge.</div><div class="a">— Alex Karp, CEO, Palantir, on the token-based enterprise-AI model (CNBC / 24-7 Wall St., 1–2 July 2026)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Model quality is converging while operational leverage accrues to whoever owns the deployment layer — "commodity cognition."</div><div class="a">— SiliconANGLE, framing the week's enterprise-AI fight (5 July 2026)</div></blockquote>
+<blockquote><div class="q">"Most enterprise AI projects stall because of everything around the model — procurement, governance, networking, and data."</div><div class="a">— Anthropic / Microsoft, on why Claude in Microsoft Foundry runs through the Azure account enterprises already trust (29 June 2026)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"Don't fall in love with the box. In a standardizing market, the money and the safety are in owning the port — and never welding your cargo to a single ship."</div><div class="a">— the radar, on model commoditization</div></blockquote>
+<blockquote><div class="q">"'Which model is best?' expires monthly. 'What do we own that doesn't commoditize?' compounds."</div><div class="a">— the radar, on where to invest in H2 2026</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Claude GA in Microsoft Foundry (Azure, on NVIDIA GB300)</td><td><span class="v">29 Jun 2026</span></td><td>Microsoft Azure / Anthropic</td></tr>
+<tr><td>Claude models available in Foundry</td><td><span class="v">Opus 4.8, Sonnet 5, Haiku 4.5</span></td><td>Microsoft / Anthropic</td></tr>
+<tr><td>Enterprise share of OpenAI revenue</td><td><span class="v">&gt;40%</span></td><td>OpenAI (as reported)</td></tr>
+<tr><td>Microsoft "Frontier Company" deployment unit</td><td><span class="v">$2.5B · ~6,000 eng</span></td><td>CNBC / Microsoft</td></tr>
+<tr><td>MCP donated to Linux Foundation Agentic AI Foundation</td><td><span class="v">Dec 2025</span></td><td>Linux Foundation (as reported)</td></tr>
+<tr><td>Enterprise AI teams with MCP-backed agents in production</td><td><span class="v">~78%</span></td><td>industry survey (as reported)</td></tr>
+<tr><td>Fortune 500 running MCP servers</td><td><span class="v">~28%</span></td><td>industry survey (as reported)</td></tr>
+<tr><td>MCP stateless / enterprise-grade spec transition</td><td><span class="v">28 Jul 2026</span></td><td>MCP spec (as reported)</td></tr>
+<tr><td>Enterprise apps embedding AI agents by EOY 2026</td><td><span class="v">40%</span></td><td>Gartner</td></tr>
+<tr><td>Agentic AI projects to be cancelled by 2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>Enterprise GenAI pilots with zero measurable P&amp;L impact</td><td><span class="v">95%</span></td><td>MIT Project NANDA</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+<tr><td>EU AI Act high-risk (Annex III) deadline (Digital Omnibus, provisional)</td><td><span class="v">→ 2 Dec 2027</span></td><td>EU / Digital Omnibus</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Measure your switching cost — then attack it.</strong> Ask engineering the blunt question: if a better or cheaper model shipped tomorrow, how many weeks to switch? If it isn't days, you're welded to one hull. Stand up a <strong>model-neutral gateway</strong> (abstract behind one interface, standardize tools via MCP, route per task) so model choice becomes an architecture setting, not a rewrite. That single layer also carries your cost meter, your agent identity, and your compliance log — the same seam this radar keeps flagging.</li>
+  <li><strong>Inventory what you own that doesn't commoditize.</strong> Karp's charge deserves an honest answer at the exec table: name the proprietary data, ontology, workflows, and evaluation sets that are <em>yours</em> and can't be sold to a competitor. If the list is thin, that — not the model — is where the next quarter's investment goes. Cognition is becoming a commodity; your edge has to live somewhere the commodity can't reach.</li>
+  <li><strong>Make model choice reversible and IP-safe by design.</strong> Before the next model contract, require two things: (a) you can swap the underlying model without touching application code, and (b) your sensitive data stays on your side of the seam, with the call logged for the 2 Aug EU AI Act GPAI regime. Reversibility and data control aren't procurement niceties — in a commoditizing market they <em>are</em> the strategy.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Microsoft Azure · Anthropic · NVIDIA · CNBC · SiliconANGLE · Forbes · Yahoo Finance · 24-7 Wall St. · OpenAI · Linux Foundation · Akamai · Gartner · MIT Project NANDA · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 7 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
