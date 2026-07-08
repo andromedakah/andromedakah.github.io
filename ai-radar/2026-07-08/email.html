@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — Behind the Wall · 8 July 2026</title>
+</head>
+<body style="margin:0;padding:0;background:#0b0f15;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0b0f15;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#0d1117;border:1px solid #2a3240;border-radius:14px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+
+  <!-- header -->
+  <tr><td style="padding:32px 30px 22px;border-bottom:1px solid #2a3240;">
+    <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7f77dd;font-weight:600;">🛰️ AI Tech Radar · Daily Brief</div>
+    <h1 style="margin:8px 0 6px;font-size:30px;line-height:1.15;color:#e8edf3;">Behind the Wall</h1>
+    <div style="color:#9aa7b6;font-size:14px;">Wednesday, 8 July 2026 · Cross-sector edition · C-level + Engineering</div>
+    <p style="color:#c3ccd8;font-size:16px;font-style:italic;border-left:3px solid #7f77dd;padding-left:14px;margin:18px 0 0;">The connector grew up. MCP's Enterprise-Managed Authorization went stable and a sweeping stateless spec lands 28 July — so agent tooling just became load-bearing enterprise infrastructure. But that maturity moves the security boundary out of the protocol and onto you. The socket got universal; the danger moved behind the wall.</p>
+  </td></tr>
+
+  <!-- exec summary -->
+  <tr><td style="padding:26px 30px 6px;">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9aa7b6;border-bottom:1px solid #2a3240;padding-bottom:8px;">1 · Executive Summary</div>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;">The plumbing this radar keeps flagging became a utility. <strong style="color:#e8edf3;">On 18 June 2026 MCP's Enterprise-Managed Authorization (EMA) extension reached "stable"</strong> — provision every connector centrally through your identity provider, one login, no per-app OAuth. Okta shipped first; Anthropic/Claude and VS Code on the client; Asana, Atlassian, Figma, Linear, Supabase and Slack on the server. Two weeks later the <strong style="color:#e8edf3;">2026-07-28 stateless spec</strong> — the biggest revision since launch — lets any server sit behind an ordinary load balancer.</p>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;"><strong style="color:#e8edf3;">1. Convenience became a control plane.</strong> EMA does for agent tools what SSO did for SaaS: access decisions move into the IdP admin console, giving <strong style="color:#e8edf3;">one auditable trail across every connector</strong> — exactly the seam behind 4 Jul (agent identity) and 7 Jul (one governance plane).</p>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;"><strong style="color:#e8edf3;">2. The stateless rewrite transfers liability.</strong> The protocol no longer remembers who is who; it hands the client tracking identifiers and state. Analysts warn it "shifts critical security responsibilities from the protocol itself to developers and platform operators." You have a <strong style="color:#e8edf3;">12-month window</strong>.</p>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;"><strong style="color:#e8edf3;">3. The gateway is the panel, not an option.</strong> Standardization you don't govern is a bigger attack surface with better docs. Route every MCP call through one policy-and-audit gateway wired to your IdP: per-agent identity, egress control, header hygiene, immutable log.</p>
+    <p style="color:#e8edf3;font-size:15px;line-height:1.65;background:#161b22;border:1px solid #2a3240;border-radius:10px;padding:14px 16px;"><strong>Bottom line:</strong> "Can our agents reach the tools?" is trivial now. "Who owns the wiring behind the socket?" is the question. Adopt EMA, put a governed gateway in front, staff the panel — before the 28 July spec and the 2 August regulator arrive.</p>
+  </td></tr>
+
+  <!-- allegory -->
+  <tr><td style="padding:14px 30px 6px;">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9aa7b6;border-bottom:1px solid #2a3240;padding-bottom:8px;">2 · Allegory — Behind the Wall</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1a1530;border:1px solid #34306a;border-radius:12px;margin-top:12px;">
+    <tr><td style="padding:18px 20px;">
+      <p style="color:#c3ccd8;font-size:15px;line-height:1.65;margin-top:0;">When electricity was young, every device was hand-wired — connecting anything was an expert act. Then the world standardized the <strong style="color:#e8edf3;">wall socket</strong>: plug in, and it works. That's the delight of EMA — one login and every tool your agent needs is simply there, "pretty magical."</p>
+      <p style="color:#c3ccd8;font-size:15px;line-height:1.65;">But the moment the socket went universal, the danger didn't vanish — it <strong style="color:#e8edf3;">moved behind the wall</strong>: the wiring, the fuse box, the load rating, and who's liable when the circuit overloads. EMA is the universal socket; the stateless spec is the day it went load-bearing; the security boundary the protocol used to hold now lives in identifiers and headers <strong style="color:#e8edf3;">you own</strong>.</p>
+      <p style="color:#b9b2f5;font-size:15px;line-height:1.6;margin-bottom:0;"><strong>The question it forces:</strong> We're plugging every agent into a universal socket. Who owns the wiring behind it — the identity, the audit log, the load rating — or did we standardize connection and leave the fuse box unbuilt?</p>
+    </td></tr></table>
+  </td></tr>
+
+  <!-- tech -->
+  <tr><td style="padding:22px 30px 6px;">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9aa7b6;border-bottom:1px solid #2a3240;padding-bottom:8px;">3 · Technical — When the Adapter Becomes the Foundation</div>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;">EMA stable (18 Jun) centralizes authorization in your IdP with one audit trail; the 2026-07-28 spec removes the session handshake so any instance serves any request behind a load balancer. The old world held the boundary for you; the new world hands you the wiring:</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;color:#c3ccd8;">
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;width:34%;">Socket (the win)</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Login once via IdP; every connector wired; one policy + audit trail.</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">State</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Client-held identifiers → predictable = hijack / cross-tenant risk.</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">Headers</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Mcp-Method / Mcp-Name → confusion + key/token/PII leakage.</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">Identity + egress</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Per-agent identity and header hygiene are now yours to issue.</td></tr>
+      <tr><td style="padding:8px 10px;color:#fff;font-weight:700;">Audit</td><td style="padding:8px 10px;">Immutable log lives with you, behind a governed gateway.</td></tr>
+    </table>
+    <p style="color:#c3ccd8;font-size:15px;line-height:1.65;"><strong style="color:#e8edf3;">On legacy:</strong> the panel is a gateway retrofit — the same box as 4 Jul's agent identity, 5 Jul's deployment layer, 6 Jul's spend meter, 7 Jul's model-neutral router. EMA is the universal socket; the stateless spec made it load-bearing. The socket is the easy part — own the panel.</p>
+  </td></tr>
+
+  <!-- numbers -->
+  <tr><td style="padding:22px 30px 6px;">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9aa7b6;border-bottom:1px solid #2a3240;padding-bottom:8px;">4 · Numbers to Quote</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;color:#c3ccd8;margin-top:6px;">
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">MCP Enterprise-Managed Authorization → stable</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">18 Jun 2026</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">MCP / Anthropic</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">MCP stateless 2026-07-28 spec in force</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">28 Jul 2026</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">MCP</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Window to adapt to new spec</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">12 months</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">SecurityWeek</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Enterprise AI teams with MCP agents in prod</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">~78%</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">as reported</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Fortune 500 running MCP servers</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">~28%</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">as reported</td></tr>
+      <tr><td style="padding:8px 10px;border-bottom:1px solid #2a3240;">Devs with agent-integration trouble</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#fff;font-weight:700;">70%</td><td style="padding:8px 10px;border-bottom:1px solid #2a3240;color:#9aa7b6;">Gartner</td></tr>
+      <tr><td style="padding:8px 10px;">EU AI Act GPAI enforcement in force</td><td style="padding:8px 10px;color:#fff;font-weight:700;">2 Aug 2026</td><td style="padding:8px 10px;color:#9aa7b6;">EU Commission</td></tr>
+    </table>
+  </td></tr>
+
+  <!-- quote -->
+  <tr><td style="padding:18px 30px 6px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#161b22;border-left:3px solid #d85a30;border-radius:0 10px 10px 0;">
+    <tr><td style="padding:14px 18px;">
+      <div style="color:#fff;font-style:italic;font-size:16px;">The enterprise-ready specification "shifts critical security responsibilities from the protocol itself to developers and platform operators."</div>
+      <div style="color:#9aa7b6;font-size:13px;margin-top:6px;">— SecurityWeek, on the stateless MCP 2026-07-28 specification (July 2026)</div>
+    </td></tr></table>
+  </td></tr>
+
+  <!-- so what -->
+  <tr><td style="padding:18px 30px 10px;">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9aa7b6;border-bottom:1px solid #2a3240;padding-bottom:8px;">5 · So What — 3 Moves for the Next 30 Days</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#11251c;border:1px solid #1d6e56;border-radius:12px;margin-top:12px;">
+    <tr><td style="padding:16px 20px;color:#c3ccd8;font-size:15px;line-height:1.6;">
+      <p style="margin:0 0 10px;"><strong style="color:#e8edf3;">1. Make your IdP the control plane — adopt EMA on purpose.</strong> The win is the single auditable trail and central policy. Require every MCP connector an agent can reach to be provisioned and revocable from the IdP console — that list is also your 2 Aug EU AI Act evidence.</p>
+      <p style="margin:0 0 10px;"><strong style="color:#e8edf3;">2. Brief engineering on the boundary shift — budget the 12 months.</strong> Client-held state identifiers and new headers are now yours. Review the stateless model against your threat model: unpredictable identifiers, header hygiene, cross-tenant isolation.</p>
+      <p style="margin:0;"><strong style="color:#e8edf3;">3. Put one governed gateway behind the socket.</strong> Route every MCP call through a policy-and-audit gateway wired to your IdP — per-agent identity, egress control, header hygiene, immutable log. Build the fuse box before you fill the building with sockets.</p>
+    </td></tr></table>
+  </td></tr>
+
+  <!-- footer -->
+  <tr><td style="padding:22px 30px 30px;border-top:1px solid #2a3240;color:#9aa7b6;font-size:13px;line-height:1.6;">
+    <p style="margin:0 0 8px;"><strong>Sources:</strong> Model Context Protocol · Anthropic · Microsoft · Okta · The New Stack · InfoQ · SecurityWeek · Akamai · Linux Foundation · Gartner · PYMNTS · EU Commission.</p>
+    <p style="margin:0;">Read online: <a href="https://andromedakah.github.io/ai-radar/2026-07-08/index.html" style="color:#9d96f0;">English</a> · <a href="https://andromedakah.github.io/ai-radar/2026-07-08/index.fr.html" style="color:#9d96f0;">Français</a> · <a href="https://andromedakah.github.io/ai-radar/" style="color:#9d96f0;">All editions</a> · <a href="https://andromedakah.github.io/ai-radar/feed.xml" style="color:#9d96f0;">RSS</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

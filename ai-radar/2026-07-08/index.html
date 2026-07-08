@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 8 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on MCP becoming enterprise infrastructure, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>Behind the Wall</h1>
+  <div class="meta">Wednesday, 8 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">The connector grew up. For two years MCP was the "USB-C of AI" — a handy way to plug a model into a tool. This week it became load-bearing enterprise infrastructure: Enterprise-Managed Authorization went stable (log in once through your IdP, every connector auto-provisioned), and the sweeping stateless 2026-07-28 spec lands in three weeks. The catch no press release leads with: a standard becomes infrastructure the day it goes load-bearing — and the new spec moves the safety boundary out of the protocol and onto you. The socket got universal. The danger moved <em>behind the wall</em>.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>The plumbing this radar keeps flagging just became a utility. <strong>On 18 June 2026 the Model Context Protocol's Enterprise-Managed Authorization (EMA) extension reached "stable,"</strong> giving enterprises a way to provision every MCP connector centrally through their existing identity provider — a user logs in once and every approved tool is wired up, with no per-app OAuth click-through. Okta shipped first (via Cross App Access); Anthropic wired it into Claude's shared MCP layer, VS Code into the client, and Asana, Atlassian, Canva, Figma, Linear, Supabase and Slack onto the server side. Two weeks later the ecosystem is staring at the <strong>2026-07-28 spec</strong> — the biggest revision since MCP launched — which rebuilds the protocol to be <strong>stateless</strong> so any server instance can sit behind an ordinary load balancer. The agent's interface layer has, quietly, become enterprise infrastructure.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Convenience became a control plane — and that's a feature.</strong> EMA does for agent tools what single sign-on did for SaaS: access decisions move into the <strong>IdP admin console</strong>, producing <em>one auditable trail across every connector</em> instead of a thousand personal OAuth grants no one can see. This is exactly the seam this radar has argued for all week — per-agent identity (4 Jul), one governance plane (7 Jul) — now shipping as a named standard with Anthropic, Microsoft and Okta behind it. If your agents authorize themselves tool-by-tool today, you have neither the policy nor the audit trail the 2 August EU AI Act regime will ask for.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The stateless rewrite is a gift to operations — and a transfer of liability.</strong> The 2026-07-28 spec kills the session handshake so agent servers scale like any stateless web tier. But statelessness means the protocol <strong>no longer remembers who is who</strong>: it hands the client tracking identifiers and state objects to pass back. Security analysts are blunt that this <em>"shifts critical security responsibilities from the protocol itself to developers and platform operators"</em> — predictable identifiers become a workflow-hijacking and cross-tenant risk, and the new <code>Mcp-Method</code> / <code>Mcp-Name</code> headers open protocol-confusion and header-leakage paths. You have a <strong>12-month window</strong>; the boundary the protocol used to hold is now yours to hold.</div></div>
+<div class="num"><div class="b">3</div><div><strong>Which makes the gateway the panel, not an option.</strong> Standardization that you don't govern is just a bigger attack surface with better documentation. The mature posture is to route every MCP call through <strong>one policy-and-audit gateway</strong> wired to your IdP: EMA for centralized authorization, the gateway for per-agent identity, egress control, header hygiene, and the immutable log. Adopt the standard <em>and</em> own the wiring behind it — because the same maturity that made connection trivial made the failure mode yours.</div></div>
+<div class="card"><strong>Bottom line:</strong> the winning question is no longer <em>"can our agents reach the tools?"</em> — the standard just made that trivial. It's <em>"who owns the wiring behind the socket?"</em> MCP growing up is genuinely good news; it also silently reassigns the security boundary from a spec you don't control to an operator you do. Adopt EMA, put a governed gateway in front of it, and staff the panel before the 28 July spec — and the 2 August regulator — arrive.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🔌 "Behind the Wall"</h3>
+<p><em>Topic: a convenient standard (MCP) is maturing into load-bearing enterprise infrastructure; the convenience is real, but maturity silently transfers the safety burden from the standard to whoever operates it.</em></p>
+<p>When electricity was young, every device shipped with its own wiring and its own way of drawing power. Connecting anything was an expert act, bespoke and slow. Then the world standardized the <strong>wall socket</strong> — identical prongs, identical voltage — and connection became magic: any appliance, any room, plug it in and it works. Nobody thinks about it. That is exactly the delight of Enterprise-Managed Authorization: one login and every tool your agent needs is simply <em>there</em>, no per-app ritual, "pretty magical," as the engineers building it put it.</p>
+<p>Here is the part the board needs. The moment the socket became universal and everyone plugged everything in, the danger didn't disappear — it <strong>moved behind the wall.</strong> The exposed, hand-wired hazard became a hidden one: the gauge of the wiring, the grounding, the fuse box, the load rating, and the question of who is liable when the circuit overloads and the wall catches fire. Standardizing the plug didn't remove the risk; it <strong>relocated it</strong> — from the visible connection, which anyone can now make safely, to the wiring behind the drywall, which only the building's owner controls and only a certified electrician can be trusted with. A universal socket in a building with no fuse box and no inspector isn't convenience. It's a fire waiting for a busy Tuesday.</p>
+<p>The AI parallel is exact. <strong>MCP's Enterprise-Managed Authorization is the universal socket</strong> — plug in once, everything connects. <strong>The stateless 2026-07-28 spec is the day the socket went load-bearing</strong> — the whole building now runs on it. And the security boundary the old protocol quietly held for you — sessions, per-connector consent, who-is-who — has <strong>moved behind the wall</strong>, into identifiers and headers and state your developers now manage and your operators now own. The convenience is real and worth having. But the firm that installs the universal socket and never builds the fuse box has not modernized; it has <strong>standardized its way to a single, invisible point of failure.</strong></p>
+<p><strong>The moral:</strong> the socket is the easy part — own the panel. When a standard becomes infrastructure, connection gets trivial and the wiring becomes your problem; adopt the plug and staff the electrician, or the first overload is on you.</p>
+<p><strong>The question it forces:</strong> <em>We're about to plug every agent into a universal socket. Who owns the wiring behind it — the identity, the audit log, the load rating — or did we standardize connection and leave the fuse box unbuilt?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>We're adopting a standard that makes connecting agents to tools trivial. <strong>Who owns the wiring behind it</strong> — the centralized authorization, the audit trail, the per-agent identity? If the answer is "each app does its own," we've installed sockets with no fuse box.</li>
+  <li>The 2026-07-28 spec <strong>moves the security boundary from the protocol onto our builders.</strong> Does our engineering leadership know that, and do we have the 12 months of runway budgeted — or will we discover it in an incident?</li>
+  <li>Can we produce, today, <strong>one auditable list of every MCP connector our agents can reach and who approved it</strong>? If not, that gap is both a security hole and the 2 August EU AI Act evidence we can't yet produce.</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Statelessness replaces sessions with client-held identifiers. If those are predictable, that's a <strong>cross-tenant and workflow-hijacking risk</strong> against systems touching positions and client records. Has security reviewed the new spec against our threat model, or are we assuming the protocol still protects us?</li>
+  <li>EMA centralizes tool authorization in our IdP. Is our <strong>identity provider actually the control plane for agents</strong> — with policy, revocation and audit — or are traders' agents still collecting personal OAuth grants no one can see or pull?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A single auditable trail across every connector is the compliance artifact we've been missing. Have we made <strong>EMA + a governed gateway the only path</strong> an agent can reach a clinical or patient-data tool — so access is centrally granted, logged, and revocable?</li>
+  <li>The new headers (<code>Mcp-Method</code>, <code>Mcp-Name</code>) can leak sensitive inputs if misused. Do we have <strong>header hygiene and egress controls</strong> on the wire before an agent carries PHI through them?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>MCP is becoming the standard socket for plant-floor and design tools. Are we adopting it <strong>behind one governed gateway</strong> so a maintenance agent and a design copilot share one auth, one audit, one identity fabric — or wiring each integration bespoke again?</li>
+  <li>70% of developers report trouble integrating agents with existing systems. Is the stateless, load-balancer-friendly spec a chance to <strong>retrofit our legacy estate once, cleanly</strong> — or another migration we'll defer until it's forced?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Every connector our support and merchandising agents touch is a door into customer and pricing data. Does <strong>first-login provisioning through our IdP</strong> mean central control — or just faster, unlogged sprawl if we skip the gateway?</li>
+  <li>Could we standardize on MCP to run <strong>cheap agents on routine tools and reserve privileged connectors behind stricter policy</strong> — or is everything getting the same blanket access because the socket made it easy?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty means the <strong>audit trail and the authorization decisions live in systems we control.</strong> Does EMA-through-our-IdP satisfy that, and does our gateway keep the log immutable and on our side of the seam?</li>
+  <li><strong>EU AI Act GPAI enforcement powers take effect 2 August 2026</strong> (max €15M or 3% of global turnover; Article 50 transparency also live). A governed MCP gateway that logs every agent-to-tool call is both our control plane <em>and</em> our compliance evidence. Is it one system — or none?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — When the Adapter Becomes the Foundation</h2>
+<p>The defining architectural fact of this week is that <strong>MCP stopped being a convenience and became infrastructure.</strong> Two moves did it. First, <strong>Enterprise-Managed Authorization went stable (18 Jun 2026)</strong>: instead of every user click-through-authorizing every server, the enterprise IdP holds a registry of approved MCP servers and their policies, and a user's connectors are provisioned on first login — with access decisions and a single audit trail living in the IdP admin console. Second, the <strong>2026-07-28 specification</strong> rebuilds the protocol to be <strong>stateless</strong>: it removes the <code>initialize</code>/<code>initialized</code> handshake and the <code>Mcp-Session-Id</code> header, so any server instance can serve any request behind a plain round-robin load balancer, with metadata riding in <code>_meta</code> on each call and new <code>Mcp-Method</code> / <code>Mcp-Name</code> headers enabling gateway-level routing. That is precisely the shape of real infrastructure — and infrastructure changes who is responsible for safety.</p>
+<p><strong>The old world held the boundary for you.</strong> Persistent sessions meant the protocol remembered who was who; per-connector OAuth meant consent was explicit, if noisy. It didn't scale and it wasn't governable — but the spec carried the state. <strong>The new world hands you the wiring.</strong> Statelessness replaces sessions with tracking identifiers and state objects the client passes back, which — as security analysts warn — <em>"shifts critical security responsibilities from the protocol itself to developers and platform operators."</em> Predictable identifiers invite workflow hijacking and cross-tenant actions; the new headers invite protocol-confusion attacks and leakage of keys, tokens or PII. The upside is real (session hijacking ends, unsolicited server prompts are barred, auth aligns with OAuth 2.0 / OIDC), but the boundary is now behind <em>your</em> wall.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCP grows up this week — Enterprise-Managed Authorization went stable and the stateless 2026-07-28 specification lands — and it splits into two things: the socket, the win, where you log in once via your identity provider, every connector is wired up, there is one policy and audit trail in the console, auth aligns with OAuth and OIDC, and it scales stateless so connection is trivial; and behind the wall, now yours, where state becomes client-held identifiers that if predictable invite hijacking, the new Mcp-Method and Mcp-Name headers invite confusion and leakage, and per-agent identity, egress and header hygiene, and the immutable audit log are all now your responsibility — the safety boundary moved. The resolution: adopt the standard rather than hand-wiring agents, and route every call through one governed gateway plus your IdP, which means own the panel." style="max-width:660px;width:100%;height:auto">
+  <!-- top: MCP grows up -->
+  <rect x="196" y="24" width="288" height="54" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="340" y="46" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">MCP GROWS UP — this week</text>
+  <text x="340" y="65" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">EMA stable · stateless 2026-07-28 spec</text>
+
+  <!-- split arrows -->
+  <path d="M300 78 L170 108" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M176 100 L166 110 L180 112 Z" fill="#1d9e75"/>
+  <path d="M380 78 L510 108" stroke="#d85a30" stroke-width="2.5" fill="none"/>
+  <path d="M500 112 L514 110 L504 100 Z" fill="#d85a30"/>
+
+  <!-- left: the socket (the win) -->
+  <rect x="24" y="116" width="300" height="252" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="174" y="140" font-size="13.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE SOCKET — the win</text>
+  <g font-family="sans-serif">
+    <text x="44" y="170" font-size="11.5" fill="#e8edf3">• log in once via your IdP</text>
+    <text x="44" y="194" font-size="11.5" fill="#e8edf3">• every connector auto-wired</text>
+    <text x="44" y="218" font-size="11.5" fill="#e8edf3">• one policy + audit trail</text>
+    <text x="44" y="242" font-size="11.5" fill="#e8edf3">• OAuth / OIDC-aligned auth</text>
+    <text x="44" y="266" font-size="11.5" fill="#e8edf3">• scales stateless</text>
+  </g>
+  <rect x="44" y="288" width="260" height="60" rx="8" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="174" y="314" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">connection is trivial —</text>
+  <text x="174" y="333" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">adopt the standard.</text>
+
+  <!-- right: behind the wall (now yours) -->
+  <rect x="356" y="116" width="300" height="252" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="506" y="140" font-size="13.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">BEHIND THE WALL — now yours</text>
+  <g font-family="sans-serif">
+    <text x="376" y="170" font-size="11.5" fill="#e8edf3"><tspan fill="#e6a07f" font-weight="700">STATE</tspan>  client-held IDs → hijack risk</text>
+    <text x="376" y="194" font-size="11.5" fill="#e8edf3"><tspan fill="#e6a07f" font-weight="700">HEADERS</tspan>  Mcp-Method/Name → leakage</text>
+    <text x="376" y="218" font-size="11.5" fill="#e8edf3"><tspan fill="#e6a07f" font-weight="700">IDENTITY</tspan>  per-agent, you issue it</text>
+    <text x="376" y="242" font-size="11.5" fill="#e8edf3"><tspan fill="#e6a07f" font-weight="700">EGRESS</tspan>  + header hygiene yours</text>
+    <text x="376" y="266" font-size="11.5" fill="#e8edf3"><tspan fill="#e6a07f" font-weight="700">AUDIT</tspan>  immutable log yours</text>
+  </g>
+  <rect x="376" y="288" width="260" height="60" rx="8" fill="#231216" stroke="#7a3b2a"/>
+  <text x="506" y="314" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">the safety boundary moved —</text>
+  <text x="506" y="333" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">the wiring is your problem.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">EMA is the universal socket. The stateless spec made it load-bearing.</text>
+  <text x="340" y="430" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Route every call through one governed gateway + your IdP —</text>
+  <text x="340" y="448" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the socket is the easy part; own the panel.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>The socket — the win, connection made trivial</span>
+  <span><i class="dot" style="background:#d85a30"></i>Behind the wall — the safety boundary, now yours</span>
+  <span><i class="dot" style="background:#7f77dd"></i>MCP grows up — EMA + the stateless spec</span>
+</div>
+</div>
+
+<h3>Why "can our agents reach the tools?" is the wrong question</h3>
+<div class="card">
+<p>The standard just made reach trivial — EMA provisions connectors on first login and the stateless spec lets them scale anywhere. Optimizing for <em>connection</em> now is like celebrating that every room has a socket while no one has checked the fuse box. <strong>The right question is "who owns the wiring behind the socket?"</strong> — the identity each agent carries, the policy that gates each connector, the hygiene on the headers, and the immutable log of every call. That answer is where safety and compliance actually live once the protocol stops holding them for you.</p>
+</div>
+
+<h3>Why it matters for legacy estates</h3>
+<div class="card">
+<p>The panel is, once again, a <strong>gateway retrofit</strong> — the same architectural seam this radar keeps arriving at from every direction. On 4 July it issued per-agent identity ("Who Goes There?"); on 5 July it was the deployment layer; on 6 July it was the spend meter; on 7 July it was the model-neutral router. Today it is the <strong>MCP control plane</strong>: EMA wires centralized authorization into your IdP, and a governed gateway in front of every MCP call carries the per-agent identity, the egress and header controls, and the audit trail the stateless spec no longer provides. Build it once and authorization, portability, cost, and now protocol-level security all run through the same seam. Adopt the standard and skip the gateway, and you've standardized your way to a bigger, better-documented attack surface.</p>
+<p><strong>The clean mental model:</strong> <em>EMA is the universal socket — plug in once, everything connects. The stateless spec is the day the socket went load-bearing. The security boundary moved behind the wall, into identifiers and headers you now own. Don't just admire the socket; build the fuse box and hire the electrician — one governed gateway, wired to your IdP.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>EMA stable (18 Jun 2026)</strong> — centralized MCP authorization via your IdP; Okta first (Cross App Access), Anthropic/Claude and VS Code on the client, Asana/Atlassian/Canva/Figma/Linear/Supabase/Slack on the server.</li>
+  <li><strong>MCP 2026-07-28 spec</strong> — stateless core, extensions framework (MCP Apps, Tasks), OAuth/OIDC-aligned auth; effective 28 July, 12-month adaptation window.</li>
+  <li><strong>New security surface</strong> — client-held state identifiers and <code>Mcp-Method</code>/<code>Mcp-Name</code> headers shift the boundary to builders; review against your threat model now.</li>
+  <li><strong>EU AI Act GPAI enforcement (2 Aug 2026)</strong> — penalty powers and Article 50 transparency go live; a governed MCP gateway doubles as the audit log.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"Logging in once and automatically having all your MCP connectors automatically setup is pretty magical."</div><div class="a">— Tom Moor, Head of Engineering, Linear, on Enterprise-Managed Authorization (Model Context Protocol blog, June 2026)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">The enterprise-ready specification "shifts critical security responsibilities from the protocol itself to developers and platform operators."</div><div class="a">— SecurityWeek, on the stateless MCP 2026-07-28 specification (July 2026)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The stateless model makes "the state visible to the model rather than hidden away" — improving transparency while handing explicit state handling to application developers.</div><div class="a">— Model Context Protocol, 2026-07-28 specification notes</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"The socket is the easy part. Own the panel."</div><div class="a">— the radar, on MCP becoming enterprise infrastructure</div></blockquote>
+<blockquote><div class="q">"A standard becomes infrastructure the day it becomes load-bearing — and infrastructure fails to whoever owns the wiring."</div><div class="a">— the radar, on adopting the standard and the responsibility that comes with it</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>MCP Enterprise-Managed Authorization reached "stable"</td><td><span class="v">18 Jun 2026</span></td><td>Model Context Protocol / Anthropic</td></tr>
+<tr><td>MCP 2026-07-28 stateless specification takes effect</td><td><span class="v">28 Jul 2026</span></td><td>Model Context Protocol</td></tr>
+<tr><td>MCP spec release candidate published (validation window)</td><td><span class="v">21 May 2026</span></td><td>Model Context Protocol</td></tr>
+<tr><td>Window to adapt to the new MCP spec</td><td><span class="v">12 months</span></td><td>SecurityWeek / Akamai (as reported)</td></tr>
+<tr><td>Enterprise AI teams with MCP-backed agents in production</td><td><span class="v">~78%</span></td><td>industry survey (as reported)</td></tr>
+<tr><td>Fortune 500 running MCP servers</td><td><span class="v">~28%</span></td><td>industry survey (as reported)</td></tr>
+<tr><td>MCP SDK monthly downloads</td><td><span class="v">~97M</span></td><td>as reported</td></tr>
+<tr><td>MCP donated to Linux Foundation Agentic AI Foundation</td><td><span class="v">Dec 2025</span></td><td>Linux Foundation (as reported)</td></tr>
+<tr><td>Developers reporting trouble integrating agents with existing systems</td><td><span class="v">70%</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Enterprise apps embedding task-specific AI agents by EOY 2026</td><td><span class="v">40%</span></td><td>Gartner</td></tr>
+<tr><td>Agentic AI projects to be cancelled by 2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>Combined Big-Three enterprise-AI deployment spend</td><td><span class="v">~$8B</span></td><td>PYMNTS (as reported)</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+<tr><td>EU AI Act max GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Make your IdP the control plane for agents — adopt EMA on purpose.</strong> Enterprise-Managed Authorization is stable and shipping; the win is not convenience, it's the <strong>single auditable trail</strong> and central policy it puts in your identity provider. Require that every MCP connector an agent can reach is provisioned and revocable from the IdP admin console — not collected as personal OAuth grants no one can see. That list is also the 2 August EU AI Act evidence you'll otherwise scramble to produce.</li>
+  <li><strong>Brief engineering on the boundary shift — and budget the 12 months.</strong> The 2026-07-28 spec moves the security boundary from the protocol onto your builders: client-held state identifiers and new headers are now <em>your</em> responsibility. Task security to review the stateless model against your threat model <strong>before</strong> it's the default — unpredictable identifiers, header hygiene (no keys/tokens/PII on the wire), and cross-tenant isolation. Treat this as a funded migration with a deadline, not a footnote in a dependency bump.</li>
+  <li><strong>Put one governed gateway behind the socket.</strong> Adopt the standard, then own the wiring: route every MCP call through a single policy-and-audit gateway wired to your IdP, carrying per-agent identity, egress control, header hygiene, and an immutable log. It's the same seam this radar keeps flagging — identity, cost, portability — now also holding the protocol-level security the stateless spec handed you. Build the fuse box before you fill the building with sockets.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Model Context Protocol · Anthropic · Microsoft · Okta · The New Stack · InfoQ · SecurityWeek · Akamai · Linux Foundation · Gartner · PYMNTS · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 8 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
