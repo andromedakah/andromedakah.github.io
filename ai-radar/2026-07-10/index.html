@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 10 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on agentic arbitrage and the vanishing SaaS interface, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Switchboard</h1>
+  <div class="meta">Friday, 10 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Two announcements this week, one story. OpenAI made GPT-5.6 generally available — a three-tier family whose cheapest rung, Luna at $1/$6, is built for exactly what an agent does all day: classification, extraction, routing, first-pass drafting. A day earlier Gartner priced the consequence: $234B of enterprise-application spend — ~20% of SaaS by 2030 — is exposed to "agentic arbitrage," where agents do the work across your systems and make the software invisible. The frontier got cheap enough to dissolve the interface you pay per seat for. When the switching goes automatic, are you still paying per operator — and do you own the exchange?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Two data points this week rhyme into a single warning for anyone who signs SaaS renewals. On <strong>9 July 2026 OpenAI made GPT-5.6 generally available</strong> as a three-tier family: <strong>Sol</strong> (flagship, $5 in / $30 out per 1M tokens), <strong>Terra</strong> (mid-range, pitched as competitive with GPT-5.5 at ~2× cheaper, $2.50 / $15), and <strong>Luna</strong> ($1 / $6), explicitly built for "high-volume, latency-sensitive work… classification, extraction, routing, and first-pass drafting." The headline isn't Sol. It's <strong>Luna</strong> — frontier-grade intelligence priced for the exact primitives an agent uses to move work across systems. The day before, <strong>Gartner</strong> put the number on what that unlocks: <strong>$234B of enterprise-application spend — roughly 20% of enterprise-application SaaS by 2030 — is exposed to "agentic arbitrage,"</strong> where AI agents complete tasks across multiple systems, bypass the interface, and make the software "invisible," severing the twenty-year link between seat growth and revenue.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>What's being disrupted is the interface, not the work.</strong> Agentic arbitrage doesn't kill the function; it dissolves the screen a human paid per seat to sit in front of. When one AI-equipped worker does the work of five, you renew fewer seats, not more — which is why the early-2026 "SaaSpocalypse" already wiped <strong>~$285B</strong> off software valuations (as reported). Luna-class pricing ($1/$6) is precisely what makes an agent cheaper than a seat. Same "the frontier is a commodity, value lives elsewhere" seam this radar has hit all week — now aimed at the application layer.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The value doesn't vanish — it migrates to the network.</strong> Gartner's own counsel is the tell: incumbents must move <em>from interface-based to outcome-based value</em>, embed agents in the process, and "preserve customer-specific knowledge," while AI-native players win by becoming <em>the orchestration layer</em> that coordinates work across apps. Translation for the board: value leaves the screen and moves to the <strong>system of record, the data, and the orchestration layer</strong> the agents route across.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The move is to own the exchange, not rent chairs at the switchboard.</strong> Re-underwrite every renewal as a seat question, push toward outcome/usage terms while you still hold the pen, and make sure the agents arbitraging your stack run on data, systems of record and an orchestration layer <em>you</em> own — because that is where the $234B is going. Gartner already says <strong>≥40% of enterprise SaaS spend shifts to usage-, agent- or outcome-based pricing by 2030</strong> (as reported); <strong>83% of AI-native SaaS firms already price on usage</strong> (Maxio, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> stop asking <em>"which SaaS seats do we renew?"</em> Start asking <em>"as agents make the interface invisible, do we own the network they run on — the data, the system of record, the orchestration — or are we still paying per operator at a switchboard no human will sit at?"</em> The switching just went automatic. Own the exchange.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>☎️ "The Switchboard Operators"</h3>
+<p><em>Topic: GPT-5.6's cheap, tiered intelligence makes agents economical enough to do work across systems directly; Gartner prices the result at $234B of "agentic arbitrage." The interface you pay per seat for is the switchboard operator — and the switching is going automatic.</em></p>
+<p>For the first half of the twentieth century, every telephone call in the world was connected by a human being. The great telephone companies employed vast halls of <strong>switchboard operators</strong>, and the whole industry priced itself accordingly: capacity scaled with operators, headcount scaled with calls, and the operator's chair was the unit everyone counted. It felt permanent, because the operator <em>was</em> the phone system — the friendly, indispensable interface between you and the network on the other side of the wall.</p>
+<p>Then automatic switching arrived, and the dial replaced the operator. Notice what did <strong>not</strong> happen: calling did not decline. Call volume exploded — cheaper, faster, at a scale no hall of operators could ever have staffed. What collapsed was not the <em>function</em> of connecting a call; it was the <strong>per-operator model</strong> and the value attached to it. The operators had never been the network — they were the human-mediated interface to it. Automatic switching made that interface invisible, and the money didn't vanish. It <strong>migrated</strong>: away from the operators' chairs, toward whoever owned the exchange, the lines, and the numbering system that everyone still had to route through.</p>
+<p>The AI parallel is exact, and it is being priced this week. <strong>Seat-based SaaS is the switchboard operator</strong> — the interface you pay per head to sit in front of. <strong>The agent is automatic switching</strong> — and GPT-5.6's Luna tier ($1/$6) is the cheap, reliable current that finally makes the automatic exchange run at scale. When an agent reads across your systems, does the work, and returns the outcome, no human opens the app — so the seat you were billed for connects nothing. Gartner just put the meter on it: <strong>$234B, ~20% of enterprise-application SaaS by 2030,</strong> "arbitraged" away as the software goes invisible. The work isn't leaving. The interface is.</p>
+<p><strong>The moral:</strong> don't confuse the operator with the network. The interface commoditizes; the exchange compounds. When the switching goes automatic, the losers keep paying per chair for a hall no one sits in, and the winners own the exchange the calls still route through — the system of record, the data, and the orchestration layer. Buy outcomes, not operators.</p>
+<p><strong>The question it forces:</strong> <em>As agents do the work across our systems, are we still paying per seat for interfaces no human will open — and do we own the exchange the work routes through, or just rent chairs in someone else's hall?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Gartner says ~20% of enterprise-application SaaS is exposed to agentic arbitrage by 2030. <strong>Which of our seat-based renewals sits directly in that path</strong> — and are we renegotiating toward outcome/usage terms now, while we still hold the pen?</li>
+  <li>When an agent does the work across our systems, <strong>the interface goes invisible but the data and the system of record don't.</strong> Do we own the exchange the agents route through — or are we renting chairs at someone else's switchboard?</li>
+  <li>Cheap tiered intelligence (GPT-5.6 Luna at $1/$6) makes it economical to put agents on our highest-volume cross-system work <em>today</em>. <strong>Are we running that arbitrage on our own cost base — or waiting for a vendor to book the savings as their margin?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Our core systems of record — ledgers, risk, KYC, client books — are exactly the "customer-specific knowledge" Gartner says survives the arbitrage. <strong>Are we protecting and owning that layer</strong>, or letting an agent orchestration vendor become the new switchboard we depend on?</li>
+  <li>If one analyst equipped with agents does the work of five, <strong>our per-seat licences fall while volume rises.</strong> Have we modelled which vendor contracts break on that math at the next renewal?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Agents that route across the EHR, LIS and claims systems make the clinical interface invisible — but concentrate access and orchestration in one layer. <strong>Do we own that orchestration layer and its audit trail</strong>, or does a vendor now sit between our clinicians and our systems of record?</li>
+  <li>Outcome-based pricing sounds attractive until the "outcome" is defined by the vendor. <strong>Who defines and measures the outcome</strong> when the software we used to pay per seat for becomes an agent we pay per result?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Our MES, ERP and PLM seats were priced for humans at screens. <strong>When agents do the cross-system work, which of those seats connect nothing</strong> — and what's the plan to convert that spend into owned orchestration on the plant floor?</li>
+  <li>~95% of GenAI pilots still move no P&amp;L. <strong>Is agentic arbitrage on our own high-volume workflows</strong> (planning, procurement, quality) the retrofit that finally lands — with the data and system of record kept inside our walls?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Merchandising, pricing and support run across a dozen SaaS interfaces today. <strong>If agents collapse those into one orchestration layer, who owns it</strong> — us, or the AI-native player Gartner says will "become the orchestration layer that coordinates work across applications"?</li>
+  <li>Our seat counts fall as agents absorb the busywork. <strong>Are we renewing multi-year, per-seat deals</strong> into a market Gartner says shifts ≥40% to usage/agent/outcome pricing by 2030?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty means owning the exchange, not renting the switchboard. <strong>When agents route across citizen-data systems, do we own the orchestration layer, the data and the audit</strong> — or has the interface's disappearance quietly moved control to a vendor?</li>
+  <li><strong>EU AI Act GPAI enforcement powers and Article 50 transparency take effect 2 August 2026</strong> (max €15M or 3% of global turnover). When an agent makes the interface invisible across regulated systems, <strong>accountability is still ours</strong> — can we demonstrate compliance for work no human interface recorded?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Interface Goes Invisible</h2>
+<p>The defining move of the week is that <strong>the frontier got cheap enough, at the right tier, to dissolve the application interface</strong> — and an analyst house immediately put a price on the consequence. GPT-5.6 shipped as a deliberate ladder: <strong>Luna ($1/$6)</strong> for high-volume classification, extraction, routing and first-pass drafting; <strong>Terra ($2.50/$15)</strong> for balanced work at ~2× cheaper than GPT-5.5; <strong>Sol ($5/$30)</strong> for the hardest steps. That ladder is not a consumer nicety — it is the cost curve that makes <strong>agentic arbitrage</strong> economical: an agent runs cheap Luna calls to read and route across systems, escalates to Terra or Sol only for the hard reasoning, and completes a task end-to-end that a human used to perform by opening three or four SaaS screens. <strong>Gartner's number — $234B, ~20% of enterprise-application SaaS by 2030 — is what happens when that becomes the default.</strong></p>
+<p><strong>Why the interface is the thing that breaks.</strong> For two decades SaaS economics rested on a single link: more users → more seats → more revenue. Agentic arbitrage severs it. When agents "deliver outcomes directly, bypassing traditional UX-heavy applications," the software becomes invisible: the work still happens, but no human opens the app, so the seat connects nothing. That's why the early-2026 "SaaSpocalypse" erased ~$285B in software market cap (as reported) and why 83% of AI-native SaaS firms already price on usage, not seats (Maxio, as reported). The value doesn't evaporate — Gartner is explicit about where it goes: to <strong>outcome-based value, embedded agents, and the orchestration layer</strong> that coordinates across applications, plus the <strong>customer-specific knowledge</strong> (your data, your system of record) that no agent can commoditize. Own that, and the arbitrage works <em>for</em> you. Rent it, and you've swapped a per-seat bill for a per-outcome dependency on whoever owns the new switchboard.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agentic arbitrage — Gartner puts two hundred thirty-four billion dollars, roughly twenty percent of enterprise-application SaaS by 2030, at risk — fuelled by GPT-5.6's cheap tiers, Luna at one dollar in and six dollars out. This splits into two paths. Renting seats at the switchboard, the trap: you pay per human seat, value equals user and seat growth, the agent makes the interface vanish, seats fall but the bill stays, and you own a screen no one opens — the operators go and you kept the chairs, a per-seat bill for a hall no one sits in. Owning the exchange, the win: buy outcomes not seats, own the system of record, own the data and ontology, own the orchestration layer, and let agents route on infrastructure you own — the interface goes and you kept the network, value that compounds where the work routes. The resolution: the interface is the operator, the network is the exchange; own the exchange, not the chairs at the switchboard." style="max-width:660px;width:100%;height:auto">
+  <!-- top: agentic arbitrage -->
+  <rect x="120" y="18" width="440" height="66" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="340" y="40" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">AGENTIC ARBITRAGE — the interface goes invisible</text>
+  <text x="340" y="58" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Gartner: $234B · ~20% of enterprise-app SaaS by 2030</text>
+  <text x="340" y="74" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">fuel: GPT-5.6 tiers — Luna $1/$6 · Terra · Sol</text>
+
+  <!-- split arrows -->
+  <path d="M300 84 L170 114" stroke="#d85a30" stroke-width="2.5" fill="none"/>
+  <path d="M176 106 L166 116 L180 118 Z" fill="#d85a30"/>
+  <path d="M380 84 L510 114" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M500 118 L514 116 L504 106 Z" fill="#1d9e75"/>
+
+  <!-- left: rent seats (the trap) -->
+  <rect x="24" y="122" width="300" height="250" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="174" y="146" font-size="13" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">RENT SEATS AT THE SWITCHBOARD</text>
+  <text x="174" y="162" font-size="11.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">— the trap</text>
+  <g font-family="sans-serif">
+    <text x="44" y="190" font-size="11.5" fill="#e8edf3">• pay per human seat</text>
+    <text x="44" y="212" font-size="11.5" fill="#e8edf3">• value = user / seat growth</text>
+    <text x="44" y="234" font-size="11.5" fill="#e8edf3">• agent makes the UI vanish</text>
+    <text x="44" y="256" font-size="11.5" fill="#e8edf3">• seats fall, the bill stays</text>
+    <text x="44" y="278" font-size="11.5" fill="#e8edf3">• a screen no one opens</text>
+  </g>
+  <rect x="44" y="296" width="260" height="58" rx="8" fill="#231216" stroke="#7a3b2a"/>
+  <text x="174" y="321" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">the operators go —</text>
+  <text x="174" y="340" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">you kept the chairs.</text>
+
+  <!-- right: own the exchange (the win) -->
+  <rect x="356" y="122" width="300" height="250" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="506" y="146" font-size="13.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">OWN THE EXCHANGE — the win</text>
+  <g font-family="sans-serif">
+    <text x="376" y="190" font-size="11.5" fill="#e8edf3">• buy outcomes, not seats</text>
+    <text x="376" y="212" font-size="11.5" fill="#e8edf3">• own the system of record</text>
+    <text x="376" y="234" font-size="11.5" fill="#e8edf3">• own the data + ontology</text>
+    <text x="376" y="256" font-size="11.5" fill="#e8edf3">• own the orchestration layer</text>
+    <text x="376" y="278" font-size="11.5" fill="#e8edf3">• agents route on infra you own</text>
+  </g>
+  <rect x="376" y="296" width="260" height="58" rx="8" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="506" y="321" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">the interface goes —</text>
+  <text x="506" y="340" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">you kept the network.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">The interface is the operator. The network is the exchange.</text>
+  <text x="340" y="430" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Own the exchange, not the chairs at the switchboard —</text>
+  <text x="340" y="448" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">buy outcomes, not operators.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#d85a30"></i>Rent seats — the trap, a bill for a hall no one sits in</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Own the exchange — the win, value where the work routes</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Agentic arbitrage — the interface goes invisible</span>
+</div>
+</div>
+
+<h3>Why "which SaaS seats do we renew?" is the wrong question</h3>
+<div class="card">
+<p>Renewing seats optimizes the switchboard while the switching goes automatic. The interface is the commodity now; the exchange is the moat. <strong>The right question is "as the interface goes invisible, do we own the network the work routes through?"</strong> — measured in systems of record you control, data and ontology you own, an orchestration layer you run, and contracts priced on outcomes rather than chairs. That is where durable value sits once the application UI is something an agent, not a human, touches.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps arriving at from every direction: <strong>own what compounds, rent what commoditizes.</strong> On 5 July it was the deployment gap; 6 July the spend meter; 7 July the model-neutral router; 8 July the MCP control plane; 9 July the deployment-labor market. Today it is the <strong>application layer itself</strong> — the interface dissolving into agents, and $234B of seat-based value migrating to the exchange. Put agentic arbitrage to work on your own highest-volume cross-system workflows first, keep the data and system of record inside your walls, and route the agents through an orchestration layer you own. Skip that, and you'll pay twice: once in falling seats you still renew, and again in a new per-outcome dependency on the vendor who became your switchboard.</p>
+<p><strong>The clean mental model:</strong> <em>The interface is the operator; the network is the exchange. Cheap tiered intelligence just automated the switching, and Gartner priced the fallout at $234B. Don't keep paying per chair for a hall no one sits in — own the exchange the work still routes through: the data, the system of record, the orchestration layer. Buy outcomes, not operators.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>OpenAI GPT-5.6 GA (9 Jul 2026)</strong> — three tiers (Sol $5/$30, Terra $2.50/$15, Luna $1/$6); Luna targets classification/extraction/routing/first-pass drafting; predictable prompt caching (30-min minimum cache life, explicit breakpoints); Sol on Cerebras at up to ~750 tokens/sec. Some coverage notes early access gated to preview/government partners (as reported).</li>
+  <li><strong>Gartner "agentic arbitrage" (1 Jul 2026)</strong> — $234B of enterprise-application spend at risk; ~20% of enterprise-app SaaS by 2030; incumbents told to move to outcome-based value; AI-native players to become the orchestration layer.</li>
+  <li><strong>The app layer going agentic</strong> — Databricks <strong>Lakeflow</strong> ("a new era of agentic data engineering," Genie Code + Genie ZeroOps agents, no-code natural-language pipelines); Anaplan's <strong>Agentic Enterprise</strong> (CFO agents by Oct 2026); Akeneo's <strong>Agentic Ziggy</strong> (8 Jul). The interface is quietly turning into an agent across category after category.</li>
+  <li><strong>Pricing follows</strong> — Gartner: ≥40% of enterprise SaaS spend shifts to usage/agent/outcome pricing by 2030; 83% of AI-native SaaS already price on usage (Maxio, as reported); ~$285B in software market cap erased in the early-2026 "SaaSpocalypse" (as reported).</li>
+  <li><strong>EU AI Act GPAI enforcement (2 Aug 2026)</strong> — accountability stays with the enterprise even when an agent makes the interface invisible; internal capability is the compliance backstop.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"Frontier intelligence that scales with your ambition."</div><div class="a">— OpenAI, positioning GPT-5.6 (Sol / Terra / Luna), 9 July 2026</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Agentic systems "deliver outcomes directly, bypassing traditional UX-heavy applications and making the software invisible" — breaking the link between user growth and revenue growth.</div><div class="a">— Gartner, on agentic arbitrage (1 July 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">"The squeeze is on raw model APIs and on generic SaaS sitting in the middle."</div><div class="a">— Shyam Sankar, CTO, Palantir (a16z American Dynamism, April 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"The interface is the operator; the network is the exchange. Buy outcomes, not operators."</div><div class="a">— the radar, on agentic arbitrage and the vanishing interface</div></blockquote>
+<blockquote><div class="q">"When the switching goes automatic, the losers keep paying per chair for a hall no one sits in."</div><div class="a">— the radar, on seat-based SaaS in the agent era</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Enterprise-application spend at risk from agentic arbitrage (by 2030)</td><td><span class="v">$234B</span></td><td>Gartner (1 Jul 2026)</td></tr>
+<tr><td>Share of enterprise-application SaaS spend exposed by 2030</td><td><span class="v">~20%</span></td><td>Gartner</td></tr>
+<tr><td>SaaS spend shifting to usage/agent/outcome pricing by 2030</td><td><span class="v">≥40%</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Software market cap erased in early-2026 "SaaSpocalypse"</td><td><span class="v">~$285B</span></td><td>as reported</td></tr>
+<tr><td>AI-native SaaS firms already pricing on usage</td><td><span class="v">83%</span></td><td>Maxio (as reported)</td></tr>
+<tr><td>GPT-5.6 Sol pricing (per 1M tokens)</td><td><span class="v">$5 in / $30 out</span></td><td>OpenAI (9 Jul 2026)</td></tr>
+<tr><td>GPT-5.6 Terra pricing (~2× cheaper than GPT-5.5)</td><td><span class="v">$2.50 in / $15 out</span></td><td>OpenAI</td></tr>
+<tr><td>GPT-5.6 Luna pricing</td><td><span class="v">$1 in / $6 out</span></td><td>OpenAI</td></tr>
+<tr><td>GPT-5.6 Sol on Cerebras throughput</td><td><span class="v">up to ~750 tok/s</span></td><td>OpenAI / Cerebras (as reported)</td></tr>
+<tr><td>GPT-5.6 prompt-cache minimum life</td><td><span class="v">30 minutes</span></td><td>OpenAI</td></tr>
+<tr><td>GenAI pilots with no measurable P&amp;L impact (context)</td><td><span class="v">~95%</span></td><td>MIT Project NANDA (as reported)</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+<tr><td>EU AI Act max GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Re-underwrite every SaaS renewal as a seat question.</strong> Before the next renewal, model where agentic arbitrage collapses seat counts — and push toward <strong>outcome/usage terms now, while you hold the pen.</strong> Gartner says ≥40% of SaaS spend moves to usage/agent/outcome pricing by 2030; don't lock into multi-year per-seat deals for a switchboard no human will sit at.</li>
+  <li><strong>Own the exchange, not the chairs.</strong> Value migrates to the <strong>system of record, the data, and the orchestration layer.</strong> Make it a written requirement that the agents routing across your stack run on data and infrastructure you own, through an orchestration layer you control — that's where the $234B goes. Renting that layer just relocates lock-in from the seat to the outcome.</li>
+  <li><strong>Turn agentic arbitrage on your own cost base.</strong> Luna-class pricing ($1/$6) makes agents on high-volume cross-system work economical <em>today</em>. Pilot <strong>one end-to-end workflow where an agent replaces the interface</strong> — measure outcome, not seats, keep the data inside your walls — before a vendor books that saving as their margin. Use the automation to compound your own capability, not someone else's.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> OpenAI · Gartner · CIO · Channel Dive · Business Standard · VentureBeat · Databricks · Anaplan · Akeneo · Maxio · a16z · MIT Project NANDA · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 10 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
