@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 12 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, a technical deep-dive on Apple v. OpenAI, trade-secret risk and the GenAI exfiltration channel, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Recipe Walks Out</h1>
+  <div class="meta">Sunday, 12 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For two weeks this radar has argued the model is commoditizing and the only thing that survives is what you own that no rival can copy — your proprietary know-how. On 10 July that thesis walked into a federal courtroom. Apple sued OpenAI, Jony Ive's io Products and two former Apple employees, alleging a coordinated scheme — "at every level" — to steal its product designs, manufacturing processes and supply-chain strategies: secret code names used in recruiting, an unreturned laptop, and 400+ ex-Apple staff now at OpenAI. The most secretive company in tech just learned its secrets don't leave through the firewall. They leave on two legs — and, in the AI era, through the browser. The board question isn't how to build the moat. It's: the one asset that doesn't commoditize has no walls — what's our plan to keep it from walking out the door?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>The commoditization thesis got its courtroom test. On <strong>10 July 2026 Apple filed suit in the U.S. District Court for the Northern District of California</strong> against <strong>OpenAI, io Products (Jony Ive's hardware venture), and two former Apple employees</strong> — ex-VP of product design Tang Yew Tan and former senior systems electrical engineer Chang Liu — alleging trade-secret theft and breach of contract. The complaint describes a "coordinated" effort to extract Apple's confidential designs, manufacturing processes and supply-chain strategies, running <strong>"at every level"</strong>: Tan allegedly used Apple's confidential project code names during OpenAI recruiting and asked candidates to bring in Apple hardware components; Liu allegedly failed to return his Apple laptop and used it to download confidential technical documents. Apple says <strong>more than 400 former Apple employees now work at OpenAI.</strong> OpenAI's response: <em>"We have no interest in other companies' trade secrets."</em> Whatever the merits, the case is a live demonstration of the enterprise-AI lesson that keeps compounding — <strong>the asset that doesn't commoditize is proprietary know-how, and it has no firewall.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Your moat lives in heads and documents, not in a vault.</strong> Apple is the most secrecy-disciplined company in tech, and its complaint reads as an admission that the discipline still leaked — through hiring, through an unreturned device, through code names spoken in interviews. This is not exotic. <strong>59% of departing employees take confidential company data with them; 70% of insider IP theft happens within 30 days of a resignation; 37% of organizations report IP loss when an employee leaves</strong> (all as reported). The AI talent war has turned ordinary attrition into a strategic exfiltration channel.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The AI era opened a second door — the browser.</strong> Even the staff who stay leak. <strong>77% of employees now paste data into GenAI tools; 26.4% of file uploads to those tools contain sensitive data; and GenAI has become the #1 channel for corporate data exfiltration, ~32% of all unauthorized data movement</strong> (LayerX, as reported). Of the technical data pasted, a majority is proprietary source code. Your most valuable, least-copyable knowledge is being handed to third-party models every day — usually with good intentions and no policy.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The move is to govern the recipe, not just guard the vault.</strong> You cannot lock a mind, but you can govern how knowledge is created, accessed and carried out: least-<em>knowledge</em> access (not just least-privilege), a real offboarding protocol with device return and access revocation, data-loss controls on the GenAI browser, provenance/watermarking on your crown-jewel IP, and clean contractual hygiene. That is also where the <strong>EU AI Act</strong> points — provenance, documentation and accountability — with GPAI enforcement live <strong>2 August 2026.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> stop asking <em>"how do we build a moat the model can't commoditize?"</em> You already have one — it's your proprietary know-how. Start asking <em>"that moat has no walls; it walks out on two legs and through the browser — do we govern how it leaves, or are we just hoping our people are loyal and our NDAs are scary?"</em> Guard the recipe, not just the vault.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🍲 "The Secret in the Cook's Head"</h3>
+<p><em>Topic: On 10 July Apple sued OpenAI, io Products and two former employees for trade-secret theft, alleging a scheme "at every level" and noting 400+ ex-Apple staff now at OpenAI. The one asset that survives commoditization — proprietary know-how — has no firewall: it leaves through hiring, through devices, and (in the AI era) through the browser. You can lock a vault; you cannot lock a mind. You govern it.</em></p>
+<p>A great restaurant's whole value was one thing: a recipe no rival could reproduce. The owner built a magnificent kitchen, a heavy safe for the written formula, cameras on every door. He was proud of his security. But the recipe was never really in the safe — it lived in the <strong>head of the cook</strong>, refined over years of doing the work. The competitors across town understood this perfectly. They did not try to crack the safe. They hired the cook. And the sous-chefs. And the supplier who knew which farm, and the manager who knew the margins. One quiet season later, the rival's menu tasted familiar, and the owner's cameras had recorded nothing at all, because nothing was ever stolen through a door.</p>
+<p>The restaurants that survived learned the lesson the hard way: <strong>you do not protect a recipe by guarding the vault — you protect it by governing the kitchen.</strong> They wrote down what could be written and owned it cleanly. They kept the truly irreplaceable knowledge distributed, so no single cook carried the whole formula out in his head. They ran a real departure ritual — return the keys, the notebooks, the phone — the day someone gave notice, not a week later. And they built a culture where people stayed because they were valued, because the one control no contract provides is a cook who doesn't want to leave.</p>
+<p>The AI parallel arrived this week in a courtroom. <strong>Apple is the owner with the beautiful safe.</strong> Its complaint alleges the rival didn't break in — it <em>hired the cooks</em>: a VP who allegedly carried the code names in his head and the playbook in his hands, an engineer who allegedly walked out with the laptop, and 400 more who simply took new jobs. And there is a second door the old restaurant never had: today the cooks who <em>stay</em> also paste the recipe into a stranger's notebook every afternoon — <strong>77% of employees feed company data into GenAI tools</strong>, which have quietly become the number-one way corporate secrets leave the building.</p>
+<p><strong>The moral:</strong> the thing that makes you un-commoditizable is the thing you can least lock up. It lives in heads and documents, and it leaves on two legs and through the browser. You do not defend it with a bigger safe — you defend it with least-knowledge access, a real offboarding ritual, controls on the AI browser, provenance on the crown jewels, and a culture worth staying for. Guard the kitchen, not just the vault.</p>
+<p><strong>The question it forces:</strong> <em>Our durable advantage is the know-how no rival can copy — and it has no firewall. Do we govern how it's created, accessed and carried out, or are we, like the proud owner, admiring the safe while the cook packs his knives?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Our real moat is proprietary know-how, and <strong>59% of departing employees take confidential data with them</strong> (as reported). <strong>Do we have an offboarding protocol</strong> — same-day access revocation, device return, exit forensics on the highest-risk leavers — or does our security stop at the firewall while the recipe walks out the door?</li>
+  <li><strong>77% of our people paste data into GenAI tools and 26.4% of uploads contain sensitive data</strong> (as reported). <strong>What stops an employee from handing our crown-jewel IP to a third-party model this afternoon</strong> — a policy no one reads, or an actual control on the browser?</li>
+  <li>Apple, the most secretive company in tech, is now <em>suing</em> to protect what leaked. <strong>If Apple can't hold its secrets by discipline alone, what exactly is our plan</strong> — and do we even know which knowledge, in which heads, is the un-copyable part?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Alpha, models, pricing logic and client relationships are pure know-how that walks with the people who hold it — and <strong>70% of insider IP theft happens within 30 days of a resignation</strong> (as reported). <strong>Do we watch data movement on the highest-privilege leavers</strong>, or discover the loss when it shows up in a competitor's book?</li>
+  <li>Traders and quants live in GenAI tools. <strong>Can we prove no proprietary strategy or client data was pasted into a public model</strong> — a question a regulator or an auditor may soon ask directly?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Research pipelines, trial designs and manufacturing processes are the moat, and a departing scientist carries years of it in their head. <strong>Is our irreplaceable IP distributed and documented</strong> so no single departure hands a rival the formula — and is every high-value dataset access-logged?</li>
+  <li>Clinicians and researchers paste into GenAI daily. <strong>Where is the control that keeps patient data and proprietary protocols out of a public model</strong>, and can we evidence it for HIPAA and IRB oversight?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Apple's complaint is literally about <strong>manufacturing processes and supply-chain strategies</strong> — the exact know-how that defines an industrial moat. <strong>Do we treat process IP as a governed asset</strong> — provenance, least-knowledge access, tight offboarding — or as tribal knowledge anyone can walk out with?</li>
+  <li>Design and process engineers use GenAI to move faster. <strong>What stops a CAD file, a tolerance spec or a supplier list from being uploaded to a third-party model</strong> and leaving our control for good?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Pricing algorithms, supplier terms and customer data are the edge, and merchandising teams churn. <strong>When someone leaves for a competitor, do we revoke access and check what they took the same day</strong> — or trust the NDA to do work it can't?</li>
+  <li>Marketing and category teams paste briefs, roadmaps and customer lists into GenAI tools constantly. <strong>Have we put a control on that browser</strong>, or is our go-to-market plan quietly training someone else's model?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data, procurement strategy and security know-how leaving with departing staff is a national-interest problem, not just a commercial one. <strong>Do we have exit controls and access revocation that actually fire on day one</strong>, and can we demonstrate them?</li>
+  <li><strong>EU AI Act GPAI enforcement takes effect 2 August 2026</strong> (max €15M or 3% of global turnover), demanding provenance, documentation and human oversight. <strong>Can we show a clean chain of custody for the data and know-how in our AI systems</strong> — including what our people fed into third-party models?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Moat With No Walls</h2>
+<p>The defining move of the week is not a product launch — it is a lawsuit that makes an abstract strategy concrete. For two weeks this radar has argued that as the model commoditizes, durable value concentrates in <strong>what you own that can't be copied</strong>: proprietary data, process know-how, customer relationships, the ontology and evals that encode your business. <strong>Apple v. OpenAI is that thesis stress-tested in court</strong> — and it exposes the uncomfortable corollary: <em>the asset that doesn't commoditize is also the asset with no firewall.</em> Trade secrets are legally the crown jewels, but they don't live behind a network boundary. They live in <strong>heads</strong> (the VP who allegedly recruited using secret code names), on <strong>devices</strong> (the engineer who allegedly kept his laptop), and — new this era — in the <strong>browser</strong>, where staff paste them into third-party models by the thousand.</p>
+<p><strong>Why this is a governance event, not a celebrity lawsuit.</strong> An IP moat leaks through three channels, and most enterprises defend only the first. <strong>(1) The network</strong> — firewalls, DLP on email, endpoint controls. Well-funded, and increasingly beside the point. <strong>(2) The people</strong> — departing employees carry knowledge out lawfully (in their heads) and sometimes unlawfully (in files and devices): 59% take confidential data, 70% of insider theft clusters around resignation, 37% of orgs report IP loss on departure (all as reported). <strong>(3) The browser</strong> — even loyal staff exfiltrate by convenience: 77% paste into GenAI tools, 26.4% of uploads carry sensitive data, and GenAI is now the #1 exfiltration channel at ~32% of unauthorized data movement (LayerX, as reported). Channel 1 is guarded; channels 2 and 3 are where the recipe actually walks.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Your real moat is proprietary know-how — designs, processes, pricing, data, IP — and the Apple v. OpenAI suit filed 10 July shows the asset that doesn't commoditize has no firewall. This splits into two paths. Guard the vault only, the trap: a firewall and an NDA on paper, no offboarding ritual, no data-loss control on the AI browser, crown jewels untagged, and when you ask who has the recipe, no one knows — the recipe walks out on two legs and through the browser. Govern the kitchen, the win: least-knowledge access rather than just least-privilege, same-day offboarding with device return and access revocation, data-loss controls on the GenAI browser, provenance on crown-jewel IP, and a culture worth staying for — you can prove what's yours, see it move, and defend it. The resolution: your moat is a recipe and it lives in the cook's head; you don't protect it with a bigger safe, you govern the kitchen." style="max-width:660px;width:100%;height:auto">
+  <!-- top: the moat -->
+  <rect x="96" y="14" width="488" height="72" rx="10" fill="#1c2330" stroke="#3a4250"/>
+  <text x="340" y="36" font-size="13" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">YOUR REAL MOAT — proprietary know-how</text>
+  <text x="340" y="54" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">designs · processes · pricing · data · IP  (Apple v. OpenAI, filed 10 Jul)</text>
+  <text x="340" y="70" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the asset that doesn't commoditize has no firewall</text>
+
+  <!-- split arrows -->
+  <path d="M300 86 L170 116" stroke="#d85a30" stroke-width="2.5" fill="none"/>
+  <path d="M176 108 L166 118 L180 120 Z" fill="#d85a30"/>
+  <path d="M380 86 L510 116" stroke="#1d9e75" stroke-width="2.5" fill="none"/>
+  <path d="M500 120 L514 118 L504 108 Z" fill="#1d9e75"/>
+
+  <!-- left: guard the vault only (the trap) -->
+  <rect x="24" y="124" width="300" height="250" rx="12" fill="#1a1116" stroke="#7a3b2a"/>
+  <text x="174" y="148" font-size="13" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">GUARD THE VAULT ONLY</text>
+  <text x="174" y="164" font-size="11.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">— the trap</text>
+  <g font-family="sans-serif">
+    <text x="44" y="192" font-size="11.5" fill="#e8edf3">• firewall + NDA on paper</text>
+    <text x="44" y="214" font-size="11.5" fill="#e8edf3">• no offboarding ritual</text>
+    <text x="44" y="236" font-size="11.5" fill="#e8edf3">• no DLP on the AI browser</text>
+    <text x="44" y="258" font-size="11.5" fill="#e8edf3">• crown jewels un-tagged</text>
+    <text x="44" y="280" font-size="11.5" fill="#e8edf3">• "who has the recipe?" — no one knows</text>
+  </g>
+  <rect x="44" y="298" width="260" height="58" rx="8" fill="#231216" stroke="#7a3b2a"/>
+  <text x="174" y="323" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">the recipe walks out on two legs</text>
+  <text x="174" y="342" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">and through the browser.</text>
+
+  <!-- right: govern the kitchen (the win) -->
+  <rect x="356" y="124" width="300" height="250" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="506" y="148" font-size="13.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">GOVERN THE KITCHEN — the win</text>
+  <g font-family="sans-serif">
+    <text x="376" y="192" font-size="11.5" fill="#e8edf3">• least-knowledge access</text>
+    <text x="376" y="214" font-size="11.5" fill="#e8edf3">• same-day offboarding + device return</text>
+    <text x="376" y="236" font-size="11.5" fill="#e8edf3">• DLP on the GenAI browser</text>
+    <text x="376" y="258" font-size="11.5" fill="#e8edf3">• provenance on crown-jewel IP</text>
+    <text x="376" y="280" font-size="11.5" fill="#e8edf3">• a culture worth staying for</text>
+  </g>
+  <rect x="376" y="298" width="260" height="58" rx="8" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="506" y="323" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">you can prove what's yours,</text>
+  <text x="506" y="342" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">see it move, and defend it.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">Your moat is a recipe — it lives in the cook's head.</text>
+  <text x="340" y="430" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You don't protect it with a bigger safe —</text>
+  <text x="340" y="448" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">you govern the kitchen.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#d85a30"></i>Guard the vault only — the trap, the recipe walks out</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Govern the kitchen — the win, prove it and defend it</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Your real moat — proprietary know-how</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — guard the vault only</th><th>The discipline — govern the kitchen</th></tr>
+<tr><td>Firewall + an NDA no one re-reads</td><td>Least-<strong>knowledge</strong> access: distribute the irreplaceable so no one head carries the whole recipe</td></tr>
+<tr><td>Offboarding that lags the resignation by a week</td><td>Same-day ritual: revoke access, recover devices, forensics on high-risk leavers</td></tr>
+<tr><td>GenAI browser wide open</td><td>DLP / guardrails on paste-and-upload to third-party models</td></tr>
+<tr><td>Crown-jewel IP untagged and untracked</td><td>Provenance / watermarking so you can prove what's yours and see it move</td></tr>
+<tr><td>"Retention is HR's problem"</td><td>A culture worth staying for — the one control no contract provides</td></tr>
+</table>
+
+<h3>Why "how do we build the moat?" is the wrong question</h3>
+<div class="card">
+<p>You already have the moat — it's the know-how a competitor can't clone. The failure mode isn't lacking a moat; it's guarding the wrong wall. Apple built the beautiful vault and still filed suit, because the value was never behind the network — it was in the people and the processes, and those move. <strong>The right question is "when knowledge leaves — with a departing employee or a pasted prompt — can we see it, prove it was ours, and slow it down?"</strong> — measured in offboarding SLAs, GenAI-browser controls, IP provenance, and retention. That is where a moat is actually kept.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps arriving at: <strong>own what doesn't commoditize.</strong> 6 Jul it was the spend meter; 7 Jul the model-neutral router; 8 Jul the MCP control plane; 9 Jul the deployment-labor market ("Hired Swords" — the knowledge walks out with the people you <em>rent</em>); 10 Jul the vanishing interface; 11 Jul the unattended night shift. Today closes the loop: the thing you own that doesn't commoditize is your proprietary know-how — and it walks out with the people you <em>lose</em>, and through the browser of the people who stay. The retrofit isn't a new tool; it's discipline wired to your IdP and your HR system: least-knowledge access, an offboarding protocol that fires on day one, DLP on the GenAI browser, and provenance on the crown jewels. Skip it, and you're Apple — admiring the safe while the cook packs his knives.</p>
+<p><strong>The clean mental model:</strong> <em>Your moat is a recipe, and it lives in the cook's head. You don't protect it with a bigger safe — you govern the kitchen. Least-knowledge access, same-day offboarding, controls on the AI browser, provenance on the crown jewels, and a culture worth staying for. The asset that doesn't commoditize has no walls; the discipline is yours to build.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Apple v. OpenAI, io Products &amp; two former employees (filed 10 Jul 2026, N.D. Cal.)</strong> — trade-secret theft and breach of contract; alleged use of confidential project code names in recruiting, requests for Apple hardware at interviews, an unreturned laptop used to download confidential docs; a scheme Apple says ran "at every level"; 400+ ex-Apple staff now at OpenAI. OpenAI: "We have no interest in other companies' trade secrets."</li>
+  <li><strong>The talent-as-exfiltration channel</strong> — 59% of departing staff take confidential data; 70% of insider IP theft within 30 days of resignation; 37% of orgs report IP loss on departure; internal actors in ~30% of breaches (Verizon 2025 DBIR). (as reported)</li>
+  <li><strong>The GenAI browser as the #1 exfiltration channel</strong> — 77% of employees paste into GenAI tools; 26.4% of uploads contain sensitive data; ~32% of all unauthorized data movement now flows through GenAI; a majority of pasted technical data is proprietary source code (LayerX, as reported).</li>
+  <li><strong>Agent scale-up continues</strong> — Gartner still expects 40% of enterprise apps to embed AI agents by end-2026 (up from &lt;5% in 2025), widening the surface across which know-how can move.</li>
+  <li><strong>EU AI Act GPAI enforcement (2 Aug 2026)</strong> — provenance, documentation and human oversight for high-risk systems; accountability for the data and know-how in your AI stack stays with the enterprise.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"We have no interest in other companies' trade secrets. We remain focused on building innovative technology that empowers people everywhere."</div><div class="a">— OpenAI, responding to Apple's lawsuit, 10 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Apple alleges OpenAI's effort to obtain its confidential designs, manufacturing processes and supply-chain strategies was "coordinated" and operated "at every level."</div><div class="a">— Apple's complaint, Apple v. OpenAI et al., N.D. Cal. (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">GenAI "has become the number-one channel for corporate data exfiltration" — accounting for roughly a third of all unauthorized data movement.</div><div class="a">— LayerX Enterprise AI &amp; SaaS Data Security Report 2025 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">"The interface is the operator; the network is the exchange. Buy outcomes, not operators."</div><div class="a">— the radar, 10 July — today the exchange's real cargo turned out to be knowledge, and it walks</div></blockquote>
+<blockquote><div class="q">"You can lock a vault. You cannot lock a mind. Your moat leaves on two legs — govern the kitchen, not just the safe."</div><div class="a">— the radar, on the moat with no walls</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Former Apple employees now at OpenAI (per Apple's complaint)</td><td><span class="v">400+</span></td><td>Apple complaint via TechCrunch / NBC / Fortune / CNBC (as reported)</td></tr>
+<tr><td>Departing employees who take confidential company data</td><td><span class="v">59%</span></td><td>Ponemon Institute (as reported)</td></tr>
+<tr><td>Insider IP theft occurring within 30 days of a resignation</td><td><span class="v">70%</span></td><td>as reported</td></tr>
+<tr><td>Organizations reporting IP loss when an employee departs</td><td><span class="v">37%</span></td><td>as reported</td></tr>
+<tr><td>Data breaches involving internal actors (2025)</td><td><span class="v">~30%</span></td><td>Verizon 2025 DBIR (as reported)</td></tr>
+<tr><td>Employees who paste data into GenAI tools</td><td><span class="v">77%</span></td><td>LayerX 2025 (as reported)</td></tr>
+<tr><td>GenAI's share of unauthorized corporate data movement (#1 channel)</td><td><span class="v">~32%</span></td><td>LayerX 2025 (as reported)</td></tr>
+<tr><td>File uploads to GenAI tools containing sensitive data</td><td><span class="v">26.4%</span></td><td>LayerX 2025 (as reported)</td></tr>
+<tr><td>Data pasted into ChatGPT that is confidential</td><td><span class="v">11%</span></td><td>Cyberhaven (as reported)</td></tr>
+<tr><td>Enterprise apps expected to embed AI agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>EU AI Act GPAI enforcement powers in force</td><td><span class="v">2 Aug 2026</span></td><td>European Commission</td></tr>
+<tr><td>EU AI Act max GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Map the recipe before you defend it.</strong> You cannot govern know-how you haven't located. Run a crown-jewel inventory: which knowledge is genuinely un-copyable (designs, processes, pricing, models, customer intimacy), <em>which heads and documents hold it</em>, and how concentrated is it? Where one departure would hand a rival the formula, distribute it — least-<em>knowledge</em> access, not just least-privilege. This is the map every other control depends on.</li>
+  <li><strong>Fix the two doors most enterprises leave open.</strong> First, make offboarding fire on day one: same-day access revocation, device return, and exit forensics on high-risk leavers — because 70% of insider IP theft clusters around resignation. Second, put a real control on the GenAI browser: DLP/guardrails on paste-and-upload to third-party models, because that channel is now the #1 way secrets leave. These two moves close the leaks that firewalls never touched.</li>
+  <li><strong>Make the moat provable — and worth staying for.</strong> Tag and add provenance to your crown-jewel IP so you can demonstrate what's yours and see it move (also your EU AI Act chain-of-custody evidence). Tighten the contractual hygiene — assignment, non-disclosure, indemnity — but don't mistake paper for protection. The one control no contract provides is people who don't want to leave: retention <em>is</em> IP security. Guard the recipe by governing the kitchen, not by admiring the safe.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Apple complaint (via TechCrunch · NBC News · Fortune · CNBC) · OpenAI · LayerX · Cyberhaven · Ponemon Institute · Verizon 2025 DBIR · Gartner · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 12 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
