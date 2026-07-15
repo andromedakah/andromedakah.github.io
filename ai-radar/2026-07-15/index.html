@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 15 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the enterprise standards war — ARD (Agentic Resource Discovery) vs Anthropic's MCP, the agent-tooling gauge war, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Gauge War</h1>
+  <div class="meta">Wednesday, 15 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar warned you to govern the goal, not the gauge — to stop mistaking the metric for the mission. Today the word "gauge" changes meaning, and the warning gets bigger. The fight this week is not over how to measure an agent; it is over the track width the whole industry runs on. On the strength of a report from The Information — "Google and Microsoft Team Up to Beat Back Anthropic and OpenAI" — the enterprise incumbents have made their move in the standards war for the agent-tooling layer. A bloc of Google, Microsoft, Salesforce, ServiceNow, Snowflake, Databricks, GitHub, Nvidia, Cisco and Hugging Face is rallying behind ARD — Agentic Resource Discovery — the phone book that decides which tools an agent can even find, and it sits directly above the connection layer that Anthropic's MCP already owns as the de facto default. Notably absent from ARD's backer list: Anthropic and OpenAI. This is the 19th-century railway gauge war with GPUs — and the board question is the one every rail baron eventually faced: if the standard our whole agent estate is laid on loses the war in twelve months, how much track do we have to relay — and do we own the interchange that would let our agents keep running regardless of who wins?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>The commoditization thesis this radar has argued for three weeks — <strong>own and govern the layer around the model, because the model is a commodity</strong> — just found its clearest battleground yet: <strong>the standard that connects agents to your tools.</strong> This week, per <em>The Information</em>, the enterprise-software incumbents stopped competing model-by-model and started fighting standards-by-standard. The vehicle is <strong>ARD (Agentic Resource Discovery)</strong>, an open specification — v0.9 draft, Apache-2.0 — for how an agent <em>discovers</em> which tools, MCP servers, skills and other agents exist on a network before it connects to them. Publishers post a machine-readable <code>ai-catalog.json</code> at <code>/.well-known/ai-catalog.json</code>; registries crawl and index those catalogs; agents query them at runtime. <strong>The backer list reads like an anti-frontier coalition: Google, Microsoft, Salesforce, ServiceNow, Snowflake, Databricks, GitHub, Nvidia, Cisco, GoDaddy, Hugging Face — and neither Anthropic nor OpenAI.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The battle moved up a layer — from the model to the plumbing.</strong> Anthropic's <strong>MCP</strong> won the <em>connection</em> layer (how an agent talks to a tool) and became the de facto default in ~18 months. The incumbents are not trying to beat MCP head-on; they are contesting the layer <em>above</em> it — <strong>discovery</strong> (how an agent finds tools in the first place) — with ARD, and the layer beside it — <strong>agent-to-agent</strong> — with Google's A2A (150 organizations in production, now under the Linux Foundation). Whoever runs the registry decides which vendors an agent can surface. That is the switchyard, not the track.</div></div>
+<div class="num"><div class="b">2</div><div><strong>This reaches you as lock-in risk, not a spec-sheet detail.</strong> Every enterprise now runs agents on <em>someone's</em> stack. GitHub has already shipped <strong>agent finder</strong> — built on ARD, live on all Copilot plans — so Copilot discovers and calls MCP servers, skills and tools at runtime from any catalog you point it at. Convenient, and quietly load-bearing: your agents' reach is now defined by a registry someone else may control. Bet the whole estate on one company's gauge and you inherit its fate in a war a bloc you're not in is deciding.</div></div>
+<div class="num"><div class="b">3</div><div><strong>Adoption is racing ahead of the standard settling.</strong> Gartner still expects <strong>40% of enterprise apps to embed task-specific agents by end-2026</strong> (from &lt;5% in 2025), and Salesforce's Agentforce alone hit <strong>$800M ARR, up 169% YoY</strong> — even as <strong>56% of CEOs report no significant financial benefit from AI yet</strong> (PwC 2026) and Gartner projects <strong>&gt;40% of agentic-AI projects cancelled by end-2027</strong> on governance and ROI. You are laying track fast, on a gauge that is still being fought over.</div></div>
+<div class="card"><strong>Bottom line:</strong> in a gauge war the prize is never the best gauge — it is the junction everyone must pass through. The move that survives it is not to pick the winner; it is to <strong>own the interchange</strong>: your own registry and allow-list, and a model- and standard-neutral abstraction, so that whoever wins ARD-vs-MCP-vs-A2A, your agents keep running. Own the interchange, not the track.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🚂 "The Gauge War"</h3>
+<p><em>Topic: This week the enterprise incumbents (Google, Microsoft, Salesforce, ServiceNow, Snowflake, Databricks, GitHub, Nvidia, Cisco, Hugging Face) rallied behind ARD — Agentic Resource Discovery, the discovery layer for AI agents — in a standards battle framed by The Information as a move to "beat back" Anthropic and OpenAI, whose MCP is the de facto connection standard. The lesson for the enterprise: standards wars are won by coalitions, not by the best design, and the safe move is not to guess the winner but to own the interchange that speaks every gauge.</em></p>
+<p>In the 19th century the railways exploded across Britain and America — and every company laid its own track width. Stephenson's lines ran on 4 feet 8½ inches; Brunel's Great Western ran on a broad 7-foot gauge that, most engineers agreed, rode faster and smoother. It did not matter. A train built for one gauge could not run on another's rails. At every <strong>break-of-gauge</strong> town, where one company's track met another's, every passenger and every crate of freight had to be unloaded from one train and reloaded onto the next — a tax in time, money and breakage paid at every boundary. The nation's commerce stalled at the seams.</p>
+<p>The fight that followed was not about which gauge was <em>best.</em> It was about which gauge everyone would <em>agree on</em> — and the companies with the most miles of track already laid banded together to make <strong>their</strong> gauge the standard. Because once the country's rails all matched their yards, every train in the land, no matter whose, terminated at <strong>their</strong> stations, bought coal at <strong>their</strong> depots, and paid tolls on <strong>their</strong> junctions. Brunel's superior broad gauge, with fewer miles behind it, was voted out of existence. The best design lost. The biggest coalition won.</p>
+<p>That is the week's news with the serial numbers filed off. The agent-tooling layer is the rail network. <strong>MCP is the gauge Anthropic laid first,</strong> and most of the track now uses it. <strong>ARD is the switchyard the incumbents have just banded together to control</strong> — the discovery layer that decides which tools a train can even find — and the coalition is precisely the set of firms with the most track already in the ground: Google, Microsoft, Salesforce, ServiceNow, Snowflake, GitHub, Nvidia, Cisco. The two firms <em>not</em> invited to set the gauge are the two whose model business the coalition would most like to route around. This is not mainly a technical disagreement. It is a fight over whose yards the tracks lead to.</p>
+<p><strong>The moral:</strong> in a gauge war, the prize is never the best gauge — it is the junction everyone must pass through, and the tolls collected there. If you relay your entire estate to one company's gauge, you have handed your fate to whoever wins a war you are not a combatant in. The rail barons who survived the gauge wars intact were the ones who <strong>owned the interchange</strong> — the break-of-gauge station that could handle any train, transfer any load, and keep freight moving no matter which standard prevailed. You cannot pick the winner of a standards war in advance. You can build the junction that doesn't care who wins.</p>
+<p><strong>The question it forces:</strong> <em>If the agent-tooling standard our estate is built on lost the gauge war within twelve months, how much of our track would we have to relay — and do we own an interchange layer (our own registry, our own allow-list, a model-neutral abstraction) that would let our agents keep running regardless of who wins?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>The incumbents just formed a bloc around <strong>ARD</strong> to "beat back" the frontier labs whose <strong>MCP</strong> we probably already depend on. <strong>Which gauge is our agent estate actually laid on today</strong> — and if it lost the standards war, what would relaying the network cost us in quarters, not weeks?</li>
+  <li>GitHub's <strong>agent finder</strong> already lets Copilot discover and call tools at runtime from a registry. <strong>Do we run our own registry and allow-list</strong> — deciding what our agents can find and invoke — or are we letting a vendor's catalog define our agents' reach?</li>
+  <li><strong>56% of CEOs report no significant financial benefit from AI yet</strong> (PwC 2026) even as we spend to keep up. <strong>Are we investing in the interchange we own</strong> — the neutral layer that survives a standards war — or in more track on a gauge someone else controls?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model risk and third-party risk management already require you to know your dependencies. <strong>Can we produce a dependency map of every agent standard, registry and connector our trading, fraud and advice agents rely on</strong> — and name the single points of failure if one loses the war?</li>
+  <li>Runtime discovery means an agent can find and call a tool no one hardcoded or vetted. <strong>Have we constrained agent discovery to an approved internal registry</strong>, so a customer-facing agent can never reach an unvetted service mid-transaction?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A patient-facing or clinical-decision agent that dynamically discovers tools at runtime is a validation and safety problem. <strong>Can we prove our clinical agents only ever discover and invoke resources from a controlled, versioned catalog</strong> — not the open web's registries?</li>
+  <li>If the standard our clinical stack is built on is deprecated by the winning coalition, <strong>do we have a validated, standard-neutral fallback</strong>, or a single regulatory-and-safety point of failure?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Operational agents on the plant floor are landing faster than anyone is cataloging them. <strong>Do we know which standard each embedded agent speaks</strong> — and could an "optimized" agent discover and call a tool outside our control envelope?</li>
+  <li>CE-marked and embedded systems carry long lifecycles. <strong>Have we avoided hard-wiring a decade-long product line to one agent gauge</strong> that may not survive the war?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Recommendation, pricing and service agents multiply weekly. <strong>Who owns the registry that decides what those agents can discover</strong>, and can we show that customer data never flows to a tool an agent found on an uncontrolled catalog?</li>
+  <li>If our commerce agents run on a vendor's discovery layer, <strong>what happens to conversion the day that vendor changes its catalog terms</strong> — and do we have an interchange that would let us switch gauges without re-platforming?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public-service agents demand auditability and sovereignty. <strong>Can we guarantee our agents discover and invoke only resources from a registry we operate and audit</strong> — not a foreign-controlled switchyard?</li>
+  <li>The EU AI Act's logging and human-oversight duties become enforceable for GPAI in <strong>18 days (2 August 2026)</strong>. <strong>Does our agent-discovery layer produce the audit trail</strong> — what was found, chosen and called, and why — that an inspector could follow end to end?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Layers of the Gauge War</h2>
+<p>The agent stack is not one standard; it is a <strong>layered rail network</strong>, and this week's news is a move on a specific layer. Read the stack from the bottom up and the strategy becomes obvious.</p>
+<div class="card"><ul>
+  <li><strong>Connection layer — MCP (Anthropic).</strong> <em>How an agent talks to a tool.</em> Open-sourced November 2024; the de facto default in ~18 months. As reported: ~97M monthly SDK downloads, MCP-backed agents in production at 78% of enterprise AI teams, ~28% of Fortune 500 running MCP servers. This is the gauge already in the ground — and it is Anthropic's.</li>
+  <li><strong>Agent-to-agent layer — A2A (Google).</strong> <em>How agents talk to each other.</em> ~150 organizations in production; governance handed to the <strong>Linux Foundation's Agentic AI Foundation (AAIF)</strong>, which also houses MCP, Block's <em>goose</em> and OpenAI's <em>AGENTS.md</em>. Neutral governance on paper; a Google-origin gauge in practice.</li>
+  <li><strong>Discovery layer — ARD (the new front).</strong> <em>How an agent finds which tools exist at all.</em> A v0.9 draft (Apache-2.0), announced 17 June 2026, backed by Google, Microsoft, GitHub, GoDaddy, Hugging Face, Nvidia, Salesforce, ServiceNow, Databricks, Snowflake and Cisco. Publishers host <code>ai-catalog.json</code> at <code>/.well-known/ai-catalog.json</code>; registries crawl and index the catalogs; agents issue a runtime search (<code>POST /search</code>) to find resources by task, then connect — typically over MCP.</li>
+</ul></div>
+<p>Here is the strategic core, and why <em>The Information</em> frames it as a move against the frontier labs: <strong>MCP won the connection layer for Anthropic, so the incumbents are not attacking it — they are wrapping it.</strong> Whoever controls the <em>discovery</em> layer controls which servers, tools and agents get surfaced to every agent at runtime — and therefore which vendors get used and which get buried. Own the switchyard and you route the traffic, whoever laid the track. That is why the coalition around ARD is exactly the roster of firms with the most enterprise "track" already down, and why the two absentees are the two whose gauge the coalition would like to route around.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The gauge war: the standards battle for the agent-tooling layer, over who sets the gauge and whose yards the tracks lead to. The agent stack is three layers. The top layer, the new front, is Discovery — ARD: how an agent finds tools, via ai-catalog.json, registries and a runtime search, backed by Google, Microsoft, Salesforce, GitHub, Nvidia and Cisco. The middle layer, the de facto default, is Connection — MCP: how an agent talks to a tool, Anthropic's, with about 97 million downloads a month. The bottom layer is Agent-to-agent — A2A: how agents talk to each other, Google's, roughly 150 organizations, governed by the Linux Foundation. Beside all three stands the interchange you own: your own registry and allow-list plus a model- and standard-neutral abstraction, which speaks every gauge, switches on demand, and is never stranded by a war a bloc you're not in is deciding. The trap is to bet the estate on one gauge and have to relay the whole network if it loses. The win is to own the interchange so your agents run whoever wins the gauge war." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE GAUGE WAR — the standards battle for the agent-tooling layer</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">who sets the gauge — and whose yards the tracks lead to</text>
+
+  <!-- layer 1: ARD (discovery) -->
+  <rect x="28" y="60" width="424" height="58" rx="10" fill="#1f1a10" stroke="#7a5a1f"/>
+  <text x="48" y="84" font-size="13" font-weight="700" fill="#efb54a" font-family="sans-serif">DISCOVERY — ARD</text>
+  <text x="300" y="84" font-size="10.5" font-weight="700" fill="#efb54a" text-anchor="end" font-family="sans-serif">the new front</text>
+  <text x="48" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">how an agent FINDS tools · ai-catalog.json · registries · POST /search</text>
+  <text x="48" y="114" font-size="9.5" fill="#9aa7b6" font-family="sans-serif">Google · Microsoft · Salesforce · GitHub · Nvidia · Cisco · Hugging Face</text>
+
+  <!-- layer 2: MCP (connection) -->
+  <rect x="28" y="126" width="424" height="58" rx="10" fill="#1a1530" stroke="#34306a"/>
+  <text x="48" y="150" font-size="13" font-weight="700" fill="#b9b2f5" font-family="sans-serif">CONNECTION — MCP</text>
+  <text x="300" y="150" font-size="10.5" font-weight="700" fill="#b9b2f5" text-anchor="end" font-family="sans-serif">de facto default</text>
+  <text x="48" y="168" font-size="10.5" fill="#e8edf3" font-family="sans-serif">how an agent TALKS to a tool</text>
+  <text x="48" y="180" font-size="9.5" fill="#9aa7b6" font-family="sans-serif">Anthropic · ~97M SDK downloads / month · in prod at 78% of AI teams</text>
+
+  <!-- layer 3: A2A (agent-to-agent) -->
+  <rect x="28" y="192" width="424" height="58" rx="10" fill="#10202f" stroke="#2f5f86"/>
+  <text x="48" y="216" font-size="13" font-weight="700" fill="#7ab6e8" font-family="sans-serif">AGENT-TO-AGENT — A2A</text>
+  <text x="300" y="216" font-size="10.5" font-weight="700" fill="#7ab6e8" text-anchor="end" font-family="sans-serif">~150 orgs</text>
+  <text x="48" y="234" font-size="10.5" fill="#e8edf3" font-family="sans-serif">how agents TALK to each other</text>
+  <text x="48" y="246" font-size="9.5" fill="#9aa7b6" font-family="sans-serif">Google · Linux Foundation (AAIF)</text>
+
+  <!-- interchange bar -->
+  <rect x="466" y="60" width="186" height="190" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="559" y="86" font-size="12.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE INTERCHANGE</text>
+  <text x="559" y="102" font-size="12.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">YOU OWN</text>
+  <g font-family="sans-serif">
+    <text x="559" y="128" font-size="10.5" fill="#e8edf3" text-anchor="middle">your own registry +</text>
+    <text x="559" y="143" font-size="10.5" fill="#e8edf3" text-anchor="middle">allow-list, and a</text>
+    <text x="559" y="158" font-size="10.5" fill="#e8edf3" text-anchor="middle">model- and standard-</text>
+    <text x="559" y="173" font-size="10.5" fill="#e8edf3" text-anchor="middle">neutral abstraction.</text>
+    <text x="559" y="196" font-size="10.5" fill="#5dcaa5" text-anchor="middle">Speaks every gauge.</text>
+    <text x="559" y="211" font-size="10.5" fill="#5dcaa5" text-anchor="middle">Switch on demand.</text>
+    <text x="559" y="226" font-size="10.5" fill="#5dcaa5" text-anchor="middle">Never stranded.</text>
+  </g>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="272" width="308" height="70" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="296" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — bet the estate on one gauge</text>
+  <text x="182" y="316" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">relay the whole network if it loses —</text>
+  <text x="182" y="332" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a bloc you're not in is deciding.</text>
+
+  <rect x="344" y="272" width="308" height="70" rx="10" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="296" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — own the interchange</text>
+  <text x="498" y="316" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">your agents run whoever wins —</text>
+  <text x="498" y="332" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">switch the gauge, keep the freight.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="380" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">In a gauge war the prize isn't the best gauge —</text>
+  <text x="340" y="402" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">it's the junction everyone must pass through.</text>
+  <text x="340" y="426" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Don't bet the estate on the winner.</text>
+  <text x="340" y="444" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Own the interchange, not the track.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#ef9f27"></i>Discovery — ARD, the new front (who finds the tools)</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Connection — MCP, the de facto default (how agents talk to tools)</span>
+  <span><i class="dot" style="background:#378add"></i>Agent-to-agent — A2A (how agents talk to each other)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The interchange you own — the junction that survives the war</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — bet the estate on one gauge</th><th>The discipline — own the interchange</th></tr>
+<tr><td>Agents wired directly to one vendor's connectors and catalog</td><td>A registry and allow-list you operate, deciding what agents can discover and call</td></tr>
+<tr><td>Discovery delegated to a vendor's registry you don't control</td><td>Runtime discovery constrained to your catalog — agents surface only what you permit</td></tr>
+<tr><td>Standard hard-coded into products with multi-year lifecycles</td><td>A model- and standard-neutral abstraction between your agents and the gauge</td></tr>
+<tr><td>"MCP won, so we're safe" / "the incumbents will win, so switch"</td><td>Assume neither — build the junction that keeps running whoever wins</td></tr>
+<tr><td>No inventory of which standard each agent speaks</td><td>A dependency map: every agent, its standard, its registry, its single points of failure</td></tr>
+</table>
+
+<h3>Why runtime discovery is also a governance event</h3>
+<div class="card">
+<p>Dynamic discovery is genuinely useful — GitHub's agent finder means you configure <em>policies</em> (which registries to trust) instead of hand-wiring every tool. But it inverts the old safety model: instead of a human vetting a fixed tool list, an agent <strong>finds and calls tools at runtime</strong> based on the task. GitHub's own framing is the right instinct — <em>"agent finder only ever surfaces what your enterprise permits."</em> That is the whole game. If discovery is constrained to a registry you run, dynamic discovery is a productivity win and an audit source. If it is delegated to an open, vendor-controlled catalog, you have agents reaching services nobody inventoried — the exact inventory-and-oversight gap the EU AI Act starts fining for GPAI in <strong>18 days (2 August 2026)</strong>.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>This is the same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the vanishing interface, 11 Jul the unattended night shift, 12 Jul the moat with no walls, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit). The standards war makes the router thesis literal: the abstraction layer you own is your <strong>interchange</strong>. On legacy estates the danger is silent lock-in — agents hard-wired to whatever gauge the vendor shipped, with no map of the dependency and no switch. The retrofit is the same discipline as the 7 July router, extended one layer up: <strong>stand up your own registry, put an allow-list in front of discovery, and route agents through a neutral abstraction</strong> so a standards outcome you don't control never strands a live workflow.</p>
+<p><strong>The clean mental model:</strong> <em>A standards war is won by the biggest coalition, not the best design — so don't bet the estate on guessing the winner. Own the interchange: your registry, your allow-list, a neutral abstraction. Then whoever wins ARD-vs-MCP-vs-A2A, your trains keep running.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>ARD (Agentic Resource Discovery)</strong> — v0.9 draft, Apache-2.0, announced 17 Jun 2026; the discovery layer above MCP. Backers: Google, Microsoft, GitHub, GoDaddy, Hugging Face, Nvidia, Salesforce, ServiceNow, Databricks, Snowflake, Cisco. Anthropic and OpenAI absent. Mechanism: <code>ai-catalog.json</code> at <code>/.well-known/</code>, crawling registries, runtime <code>POST /search</code>.</li>
+  <li><strong>The Information framing (July 2026)</strong> — "Google and Microsoft Team Up to Beat Back Anthropic and OpenAI"; incumbents using standards battles to encircle the frontier labs on the agent-tooling layer (as reported).</li>
+  <li><strong>GitHub agent finder</strong> — built on ARD, live on all Copilot plans; Copilot discovers and calls MCP servers, skills and tools at runtime from catalogs you point it at; enterprise managed settings define what agents may discover.</li>
+  <li><strong>MCP position</strong> — de facto default in ~18 months; ~97M monthly SDK downloads; MCP-backed agents in production at 78% of enterprise AI teams; ~28% of Fortune 500 running MCP servers (as reported).</li>
+  <li><strong>A2A / AAIF</strong> — Google's Agent2Agent at ~150 orgs in production, under the Linux Foundation's Agentic AI Foundation, which also houses MCP, Block's <em>goose</em> and OpenAI's <em>AGENTS.md</em>.</li>
+  <li><strong>Adoption vs. settling</strong> — Gartner: 40% of enterprise apps embed agents by end-2026 (from &lt;5%), &gt;40% of agentic projects cancelled by end-2027; Salesforce Agentforce $800M ARR, +169% YoY; 56% of CEOs report no significant AI benefit yet (PwC 2026).</li>
+  <li><strong>Secondary thread</strong> — EU AI Act GPAI enforcement becomes applicable <strong>2 Aug 2026 (18 days)</strong>; €15M or 3% of global turnover; runtime discovery is now part of your inventory-and-oversight obligation.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"Google and Microsoft Team Up to Beat Back Anthropic and OpenAI" — traditional tech giants using standards battles to encircle the frontier labs on the agent-tooling layer.</div><div class="a">— The Information, on the enterprise standards war, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">"Agent finder only ever surfaces what your enterprise permits." — GitHub Copilot's runtime discovery, built on the open ARD specification, is governed by the same managed settings that govern Copilot.</div><div class="a">— GitHub Changelog, on agent finder / ARD (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">In roughly 18 months, Anthropic's Model Context Protocol quietly became the default way agents connect to enterprise tools — ~97M monthly SDK downloads, and MCP-backed agents in production at 78% of enterprise AI teams.</div><div class="a">— Industry coverage of MCP adoption, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">56% of CEOs report no significant financial benefit from AI to date; only one in eight (12%) report both cost and revenue gains.</div><div class="a">— PwC 29th Global CEO Survey, 2026 (n=4,454 across 95 countries)</div></blockquote>
+<blockquote><div class="q">"In a gauge war the prize isn't the best gauge — it's the junction everyone must pass through. Don't bet the estate on the winner; own the interchange."</div><div class="a">— the radar, on the standards war</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>ARD (Agentic Resource Discovery) spec announced</td><td><span class="v">17 Jun 2026 (v0.9)</span></td><td>Google Developers Blog / AgenticResourceDiscovery.org</td></tr>
+<tr><td>Companies backing ARD (Anthropic &amp; OpenAI absent)</td><td><span class="v">11</span></td><td>ARD spec / coverage (as reported)</td></tr>
+<tr><td>MCP monthly SDK downloads</td><td><span class="v">~97M</span></td><td>Industry coverage (as reported)</td></tr>
+<tr><td>Enterprise AI teams with MCP-backed agents in production</td><td><span class="v">78%</span></td><td>Industry coverage (as reported)</td></tr>
+<tr><td>Fortune 500 running MCP servers</td><td><span class="v">~28%</span></td><td>Industry coverage (as reported)</td></tr>
+<tr><td>Time for MCP to become the de facto default</td><td><span class="v">~18 months</span></td><td>Industry coverage (as reported)</td></tr>
+<tr><td>Organizations running Google's A2A in production</td><td><span class="v">~150</span></td><td>Linux Foundation / coverage (as reported)</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>Salesforce Agentforce ARR (Q4 FY2026)</td><td><span class="v">$800M, +169% YoY</span></td><td>Salesforce (FY26 Q4 results)</td></tr>
+<tr><td>CEOs reporting no significant financial benefit from AI yet</td><td><span class="v">56%</span></td><td>PwC 29th Global CEO Survey 2026</td></tr>
+<tr><td>CEOs reporting both cost and revenue benefits from AI</td><td><span class="v">12% (one in eight)</span></td><td>PwC 2026</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (18 days)</span></td><td>European Commission (Art. 101)</td></tr>
+<tr><td>Maximum GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Draw the gauge map — which standard is every agent actually laid on?</strong> You cannot survive a standards war you can't see. Inventory every production and shadow agent and record, for each, the connection standard (MCP?), the discovery mechanism (a vendor registry? none?), the agent-to-agent protocol (A2A?), and the single point of failure if that gauge is deprecated. This is the same inventory the EU AI Act will demand in 18 days — one artifact, two payoffs.</li>
+  <li><strong>Own the interchange — stand up your own registry and allow-list.</strong> Do not delegate discovery to a vendor's open catalog. Run an internal registry that publishes an approved <code>ai-catalog.json</code>, and constrain runtime discovery (GitHub agent finder and its peers) so agents surface <em>only</em> what you permit — GitHub's own default posture. This turns dynamic discovery from an ungoverned reach-into-the-open into a productivity win <em>and</em> an audit source, and it is the layer that keeps running whoever wins the war.</li>
+  <li><strong>Route through a neutral abstraction — extend the 7 July router one layer up.</strong> For any workflow you can't afford to re-platform, put a model- and standard-neutral abstraction between your agents and the gauge, so switching connection or discovery standards is a config change, not a rebuild. Assume neither MCP nor ARD nor A2A is guaranteed to win; build the junction that doesn't care. In a gauge war the prize is the junction everyone must pass through — own it, don't rent it.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The Information · Google Developers Blog · AgenticResourceDiscovery.org · GitHub Changelog · Search Engine Journal · Developer-Tech · Hugging Face · Linux Foundation (AAIF) · Gartner · Salesforce FY26 Q4 results · PwC 29th Global CEO Survey · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 15 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
