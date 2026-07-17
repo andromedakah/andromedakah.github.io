@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 17 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on MCP's 28 July 2026 spec going final — the standard coupling, stateless core, Enterprise-Managed Authorization, MCP Apps, the new security surface, the EU AI Act countdown, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Standard Coupling</h1>
+  <div class="meta">Friday, 17 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar warned that a hallmark on the metal is not the safety of the spoon — keep your own scales. Today the plumbing beneath every enterprise agent quietly becomes a public standard. In 11 days — on 28 July 2026 — the biggest revision of the Model Context Protocol (MCP) since Anthropic shipped it in November 2024 goes final: a stateless core that removes the session handshake so any request can land on any server behind a plain load balancer; Enterprise-Managed Authorization already promoted to stable (18 June) so an agent logs in once through your identity provider instead of scattering API keys; and MCP Apps, which let a tool ship an interactive HTML interface a host renders in a sandboxed iframe. Beta SDKs have been out since 29 June. The connective tissue for agents is becoming boring, load-bearing infrastructure — the best thing that can happen to a technology. But the week's other headline is the fine print: security researchers at Akamai warn the same standard consolidates the attack surface — the stateless model, the rich UIs and the long-running tasks open fresh avenues for customer-data exposure, phishing through trusted AI experiences, control-bypass and background-task abuse. A firefighter's question in modern dress: when every hose finally couples to every hydrant, have we made the city safer — or just made one flaw in the coupling everybody's flaw, and forgotten that the fitting never decided where the water goes?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For three weeks this radar has argued one thesis — <strong>the model is commoditizing; own and govern the layer around it.</strong> Two days ago, the standards war for that layer (15 Jul, "the gauge war"); yesterday, who certifies the model itself (16 Jul, "the assayer's mark"). Today the connective standard beneath both stops being a moving target and gets <strong>bolted down.</strong> On <strong>28 July 2026 — 11 days away</strong> — MCP's largest revision since its November-2024 debut becomes final, and it is unmistakably an <em>enterprise</em> release: stateless, identity-governed, UI-capable. It lands <strong>five days before</strong> the EU AI Act's mandatory GPAI enforcement (2 Aug 2026, 16 days). Two countdowns, one lesson.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The agent plumbing just became enterprise-grade — and boring.</strong> The 2026-07-28 spec makes MCP <strong>stateless</strong>: it drops the <code>initialize</code> handshake and the <code>Mcp-Session-Id</code> header, carries client context in <code>_meta</code> on every request, and lets any request hit any instance behind a round-robin load balancer — no sticky sessions, no shared session store. <strong>Enterprise-Managed Authorization</strong> went <strong>stable on 18 June</strong>: one SSO login through your IdP, not personal keys pasted into local agent configs. <strong>MCP Apps</strong> let servers ship sandboxed HTML UIs whose every action runs through the same audit-and-consent path as a tool call. This is the moment a protocol turns into infrastructure.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Standardization is a win <em>and</em> a consolidation of risk.</strong> When every hose couples to every hydrant, mutual aid scales — but a defect in the shared coupling is now everyone's defect. <strong>Akamai's</strong> security readout on the new spec is blunt: the stateless state, the interactive <strong>MCP Apps</strong>, and the long-running <strong>Tasks</strong> create new avenues for <strong>unauthorized access to customer data, user-targeted phishing through trusted AI experiences, bypass of enterprise security controls, and service disruption through background-processing abuse.</strong> A formal deprecation policy (Active → Deprecated → Removed, 12-month minimums) even standardizes how features <em>leave</em> — Roots, Sampling and Logging are already on the clock.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The coupling never decides where the water goes — you do.</strong> A standard fitting lets any engine feed any hydrant; it does not decide <em>what you spray, at what pressure, or who is allowed to open the valve.</em> MCP now standardizes <strong>connection, identity and UI.</strong> It does not standardize <strong>which tools your agents may reach, what data they may touch, or what they are for</strong> — and those are exactly the deployer duties the EU AI Act makes enforceable in 16 days (inventory, access control, logging, human oversight). Gartner still expects <strong>40% of enterprise apps to embed task-specific agents by end-2026</strong> and <strong>&gt;40% of agentic projects to be cancelled by end-2027</strong> — the gap is governance, not plumbing.</div></div>
+<div class="card"><strong>Bottom line:</strong> adopt the standard — a stateless, SSO-governed, auditable MCP is a genuine gift, and refusing it is the Baltimore mistake of owning a hose that couples to nothing. But do not confuse a standard connector for a safe deployment. <strong>Own what the coupling leaves to you:</strong> the allow-list of servers and tools, the identity and least-privilege policy behind that single SSO login, the audit trail on every UI action, and the shutoff. The fitting is now universal; the water pressure is still yours to set.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🚒 "The Standard Coupling"</h3>
+<p><em>Topic: On 28 July 2026 the largest revision of the Model Context Protocol goes final — a stateless core, Enterprise-Managed Authorization already stable, and sandboxed MCP Apps — turning the agent-to-tool layer into standardized enterprise infrastructure. Security researchers warn the same standardization consolidates the attack surface. The lesson for the enterprise: a universal connector is a real gift, but it standardizes the fitting, never the fire — where the water goes, at what pressure, and who may open the valve remain yours to govern.</em></p>
+<p>On a February morning in 1904, a fire broke out in the heart of Baltimore. It should have been containable. It was not — it burned for some thirty hours and took roughly 1,500 buildings across seventy-odd city blocks. What turned a fire into <em>the</em> fire was a detail no one thinks about until the day it kills you: <strong>the couplings didn't fit.</strong> Engine companies raced in from Washington, Philadelphia, New York, even further — and when their crews ran hose to Baltimore's hydrants, the threads wouldn't mate. There were dozens of incompatible coupling standards across American cities. Willing help, working pumps, plenty of water — and firefighters standing in the street unable to connect, watching a city burn for want of a common thread.</p>
+<p>Baltimore is why your fire hydrants are standardized today. The disaster forced the trade to do what it had resisted for decades: agree on a <strong>national standard thread</strong>, so that any engine could couple to any hydrant in any city. It was a triumph of the unglamorous — a boring specification that turned a patchwork of local fittings into a network where mutual aid finally <em>worked at scale.</em> That is precisely what MCP's 28 July spec does for agents: it makes the connector stateless, identity-aware and universal, so any compliant agent can couple to any compliant tool behind ordinary infrastructure. The right people banded together — the Agentic AI Foundation under the Linux Foundation, with OpenAI, Google, Microsoft, AWS and Block among the founders — and bolted the thread down. Welcome it. An estate whose agents couple to nothing is the 1904 mistake.</p>
+<p>But the firefighters who came after Baltimore learned the second half of the lesson, and it is the whole point for your board. <strong>A standard coupling standardizes the <em>fitting</em> — never the <em>fire.</em></strong> Once every hose mates to every hydrant, three things become permanently your job, and no thread will do them for you. <strong>Where the water goes:</strong> the coupling doesn't decide which building to save, or which tool an agent may reach, or which data it may touch. <strong>The pressure:</strong> open the same universal fitting carelessly and you don't fight the fire, you blow out the windows — least privilege behind that one convenient SSO login. And <strong>who may open the valve:</strong> a universal connector is a universal connector <em>for an attacker too</em>, which is exactly why the researchers warn that the richer the standardized surface — stateless state, interactive apps, background tasks — the more a single flaw in the common coupling becomes everyone's flaw at once.</p>
+<p><strong>The moral:</strong> the cities that survived the next fire were not the ones with the fanciest engines. They were the ones that adopted the common thread <em>and</em> kept drilling on where the water goes, at what pressure, and who holds the hydrant key. Adopt the standard — it is the best thing to happen to enterprise agents this year. But own the fireground: the allow-list, the least-privilege identity, the audit trail on every action, and the shutoff. The coupling is now universal. The fire is still yours to fight.</p>
+<p><strong>The question it forces:</strong> <em>When our agents run on a universal, stateless, SSO-governed connector, do we still own the three things the standard will never do for us — which tools and data each agent may reach, the least-privilege identity behind that single login, and the audit-and-shutoff on every action — or have we mistaken a standard fitting for a safe deployment?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>MCP's largest revision goes final in <strong>11 days (28 July)</strong> and makes the agent connector stateless, SSO-governed and UI-capable. <strong>Do we know how many MCP servers and tools our agents can already reach today</strong> — and do we have an allow-list, or are we about to standardize the plumbing on top of an unmapped estate?</li>
+  <li>The same standard <strong>consolidates the attack surface</strong> (Akamai: data exposure, phishing through trusted AI UIs, control-bypass, background-task abuse). <strong>Who owns the security review of every MCP server and MCP App we connect</strong> — before the universal coupling makes one flaw everyone's flaw?</li>
+  <li>The connector standardizes <em>connection, identity and UI</em> — never <em>which data an agent may touch or what it is for.</em> Those are <strong>EU AI Act deployer duties, enforceable in 16 days (2 Aug).</strong> Is our access control, logging and human-oversight evidence ready, independent of the protocol?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Enterprise-Managed Authorization replaces scattered API keys with <strong>one SSO login through your IdP.</strong> Convenient — and a single, high-value valve. <strong>Have we applied least privilege and step-up controls behind that login</strong>, or does one identity now open every tool an agent can reach?</li>
+  <li>MCP Apps render <strong>interactive third-party UIs inside a trusted AI surface</strong> — a textbook phishing vector for a bank. <strong>Do we treat an MCP App like any other third-party integration</strong> (review, sandbox, monitor), or does "it came through the agent" wave it past our controls?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A universal connector makes it trivially easy to wire an agent to a new data source. <strong>Can we prove PHI can't traverse an MCP coupling we didn't explicitly approve</strong> — the "where the water goes" the standard will never decide for us?</li>
+  <li>Background <strong>Tasks</strong> run long, asynchronous work out of sight. <strong>Do we have logging and human oversight on unattended clinical-adjacent tasks</strong>, or does "the task completed" substitute for "the task was safe"?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Stateless MCP lets agent tooling scale on ordinary infrastructure — real operational leverage. <strong>Have we mapped which OT and MES systems an agent could reach once the coupling is universal</strong>, and fenced the ones that must never be one connector away?</li>
+  <li>Standards outlive the systems that adopt them, but a <strong>deprecation policy</strong> now puts features on a 12-month clock (Roots, Sampling, Logging). <strong>Are our integrations built to survive a deprecation cycle</strong>, or hard-wired to a feature that's already flagged for removal?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>MCP Apps can put a branded, interactive UI in front of a customer through an agent. <strong>Can we show a customer-facing MCP App can't be spoofed or repurposed for phishing</strong> by our own review — not the vendor's assurance?</li>
+  <li>A universal connector makes swapping tools easy — including swapping <em>us</em> out. <strong>Does our value sit in a tool an agent can trivially replace</strong>, or in the data, workflow and trust the coupling can't copy?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>The standard is stewarded by a <strong>US-anchored foundation</strong> (OpenAI, Google, Microsoft, AWS, Block among founders). <strong>Is depending on it a sovereignty question</strong> for our services — and do we have a governance seat, a mirror, or an exit if the standard moves against our interest?</li>
+  <li>The EU AI Act's deployer obligations land in <strong>16 days</strong> and are <em>not</em> discharged by adopting a good protocol. <strong>Is our AI inventory, access control and audit trail ready for inspection</strong> regardless of how mature the plumbing becomes?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — What the Standard Couples, and What It Leaves to You</h2>
+<p>Strip the excitement away and the 28 July spec is an infrastructure question: <strong>which parts of the agent-to-tool problem does the standard now solve for everyone, and which parts does it deliberately hand back to you?</strong> Read it as three couplings the standard makes — and three fires it does not fight.</p>
+<div class="card"><ul>
+  <li><strong>The thread (stateless core).</strong> The spec removes the <code>initialize</code>/<code>initialized</code> handshake and the <code>Mcp-Session-Id</code> header; client context now rides in <code>_meta</code> on every request. Any request can land on <strong>any</strong> server instance behind a plain round-robin load balancer — no sticky sessions, no shared session store. This is the <em>universal thread</em>: MCP tooling now scales on ordinary cloud infrastructure.</li>
+  <li><strong>The hydrant key (Enterprise-Managed Authorization).</strong> Promoted to <strong>stable on 18 June</strong>, EMA makes your identity provider the authority for MCP access: the client obtains an Identity Assertion JWT grant (ID-JAG) during SSO and exchanges it for a server token — no per-server consent screen, no personal API keys in local configs. One key, centrally governed. Convenient, and a single high-value valve.</li>
+  <li><strong>The standard hose (MCP Apps).</strong> Servers can ship interactive HTML that the host renders in a <strong>sandboxed iframe</strong>; UI templates are declared ahead of time so hosts can prefetch, cache and security-review them, and every UI-initiated action travels the <strong>same JSON-RPC audit-and-consent path</strong> as a direct tool call. Rich, and a new surface.</li>
+</ul></div>
+<p>The strategic core: <strong>the standard couples connection, identity and interface — it does not fight the fire.</strong> Three things stay yours no matter how mature the protocol gets. <strong>Where the water goes:</strong> which servers, tools and data each agent may reach — the allow-list. <strong>The pressure:</strong> least privilege behind that single SSO login, so one convenient key does not open every valve. <strong>Who may open the hydrant:</strong> the security review and monitoring of every server and App you couple to, because — as Akamai warns — a universal connector is universal for an attacker too, and the richer the standardized surface, the more a single coupling flaw becomes everyone's flaw.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The standard coupling: what the 28 July MCP spec couples, and what it leaves to you — a standard fitting standardizes the connector, never where the water goes. The spec makes three couplings. First, the thread: a stateless core removes the handshake and the Mcp-Session-Id header, carries context in meta, and lets any request land on any instance behind a plain load balancer. Second, the hydrant key: Enterprise-Managed Authorization, stable since 18 June, means one SSO login through your identity provider instead of scattered keys — one key, one high-value valve. Third, the standard hose: MCP Apps ship sandboxed HTML UIs on the same audit and consent path as a tool call — a rich surface, and a phishing and control-bypass risk. The shared flaw: one common coupling means one defect is everyone's risk, and the stateless state, apps and tasks are new abuse paths. Beside all of it stands the fireground, the part that stays yours: where the water goes — which servers, tools and data each agent reaches; the pressure — least privilege behind the one SSO login; and the valve — review and monitor every server and app, with audit and shutoff. The trap is to bolt on the standard and assume it secures you, because then one coupling flaw is everyone's. The win is to adopt the thread and own the fireground: a universal connector with governed water." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE STANDARD COUPLING — what the 28 July MCP spec couples, and what it leaves you</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a standard fitting standardizes the connector, never where the water goes</text>
+
+  <!-- layer 1: the thread -->
+  <rect x="28" y="60" width="424" height="52" rx="10" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="48" y="82" font-size="13" font-weight="700" fill="#5fb2df" font-family="sans-serif">THE THREAD — stateless core</text>
+  <text x="404" y="82" font-size="10.5" font-weight="700" fill="#5fb2df" text-anchor="end" font-family="sans-serif">any request → any instance</text>
+  <text x="48" y="100" font-size="10" fill="#9aa7b6" font-family="sans-serif">no handshake, no Mcp-Session-Id; context in _meta; plain load balancer</text>
+
+  <!-- layer 2: the hydrant key -->
+  <rect x="28" y="120" width="424" height="52" rx="10" fill="#1a1530" stroke="#34306a"/>
+  <text x="48" y="142" font-size="13" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE HYDRANT KEY — Enterprise-Managed Auth</text>
+  <text x="404" y="142" font-size="10.5" font-weight="700" fill="#b9b2f5" text-anchor="end" font-family="sans-serif">stable 18 Jun</text>
+  <text x="48" y="160" font-size="10" fill="#9aa7b6" font-family="sans-serif">SSO via your IdP (ID-JAG); no scattered keys → one high-value valve</text>
+
+  <!-- layer 3: the standard hose -->
+  <rect x="28" y="180" width="424" height="52" rx="10" fill="#1f1a10" stroke="#7a5a1f"/>
+  <text x="48" y="202" font-size="13" font-weight="700" fill="#efb54a" font-family="sans-serif">THE STANDARD HOSE — MCP Apps</text>
+  <text x="404" y="202" font-size="10.5" font-weight="700" fill="#efb54a" text-anchor="end" font-family="sans-serif">rich surface</text>
+  <text x="48" y="220" font-size="10" fill="#9aa7b6" font-family="sans-serif">sandboxed HTML UI, same audit/consent path → phishing / bypass risk</text>
+
+  <!-- layer 4: the shared flaw -->
+  <rect x="28" y="240" width="424" height="52" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="48" y="262" font-size="13" font-weight="700" fill="#e08a63" font-family="sans-serif">THE SHARED FLAW — one coupling, everyone's risk</text>
+  <text x="48" y="280" font-size="10" fill="#9aa7b6" font-family="sans-serif">stateless state · Apps · Tasks = new avenues for abuse (Akamai)</text>
+
+  <!-- fireground bar -->
+  <rect x="466" y="60" width="186" height="232" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="559" y="86" font-size="12.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE FIREGROUND</text>
+  <text x="559" y="102" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">(what stays yours)</text>
+  <g font-family="sans-serif">
+    <text x="559" y="128" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">Where the water goes:</text>
+    <text x="559" y="143" font-size="10" fill="#c3ccd8" text-anchor="middle">which servers, tools</text>
+    <text x="559" y="156" font-size="10" fill="#c3ccd8" text-anchor="middle">&amp; data each reaches.</text>
+    <text x="559" y="182" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">The pressure:</text>
+    <text x="559" y="197" font-size="10" fill="#c3ccd8" text-anchor="middle">least privilege behind</text>
+    <text x="559" y="210" font-size="10" fill="#c3ccd8" text-anchor="middle">the one SSO login.</text>
+    <text x="559" y="236" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">The valve:</text>
+    <text x="559" y="251" font-size="10" fill="#c3ccd8" text-anchor="middle">review + monitor every</text>
+    <text x="559" y="264" font-size="10" fill="#c3ccd8" text-anchor="middle">server &amp; App;</text>
+    <text x="559" y="277" font-size="10" fill="#5dcaa5" text-anchor="middle">audit + shutoff.</text>
+  </g>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="308" width="308" height="66" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="331" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — bolt on the standard</text>
+  <text x="182" y="350" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">assume it secures you —</text>
+  <text x="182" y="365" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">one coupling flaw is everyone's.</text>
+
+  <rect x="344" y="308" width="308" height="66" rx="10" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="331" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — adopt the thread</text>
+  <text x="498" y="350" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">own the fireground —</text>
+  <text x="498" y="365" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">universal connector, governed water.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">A standard coupling standardizes the fitting —</text>
+  <text x="340" y="424" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">not the fire.</text>
+  <text x="340" y="446" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Adopt the thread. Own where the water goes.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#378add"></i>The thread — stateless core (the universal fitting)</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The hydrant key — Enterprise-Managed Auth (one SSO valve)</span>
+  <span><i class="dot" style="background:#ef9f27"></i>The standard hose — MCP Apps (rich surface, new risk)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The fireground — what stays yours to govern</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — a standard fitting is a safe deployment</th><th>The discipline — adopt the standard, own the fireground</th></tr>
+<tr><td>"It connects, so it's governed"</td><td>An explicit allow-list of servers, tools and data each agent may reach</td></tr>
+<tr><td>One convenient SSO login treated as one convenient permission</td><td>Least privilege and step-up behind EMA — the key isn't the policy</td></tr>
+<tr><td>An MCP App waved through because "it came via the agent"</td><td>Every App reviewed and monitored like any third-party integration</td></tr>
+<tr><td>Trusting the sandbox to make interactive UIs safe</td><td>Audit trail on every UI action; treat rich surfaces as phishing-capable</td></tr>
+<tr><td>Assuming a mature protocol discharges compliance</td><td>Inventory, access control, logging, oversight — your EU AI Act evidence</td></tr>
+</table>
+
+<h3>Why a universal connector can't carry your governance</h3>
+<div class="card">
+<p>A standard thread is a networking win, not a policy. It guarantees that any compliant agent <em>can</em> couple to any compliant tool; it says nothing about whether it <em>should.</em> The stateless core scales your tooling and, by design, means any request can hit any instance — which is why identity and least-privilege move up in importance, not down. EMA centralizes the login but not the decision of what that login may do. MCP Apps standardize the audit <em>path</em> but not your review of what rides it. Every one of these is the "where the water goes / at what pressure / who holds the key" the coupling was never meant to answer — and every one of them is a named EU AI Act deployer duty that becomes enforceable in <strong>16 days.</strong> The protocol is the vendor's gift; the fireground is yours.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>This is the same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe that walks out, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark). Today it names the plumbing: <strong>the coupling standardizes.</strong> On legacy estates the danger is <em>coupling-trust</em> — the universal thread makes it a two-minute job to wire a decades-old core to an agent, and the very ease is the risk. The retrofit is the same control plane this radar has urged all fortnight, now aimed at the connector: an allow-list of approved servers and tools, least-privilege identity behind EMA, a security review gate for every MCP App, and an audit-and-shutoff on every action — the plumbing standardized, the fireground owned.</p>
+<p><strong>The clean mental model:</strong> <em>A standard coupling standardizes the fitting, not the fire. Adopt the universal thread — an estate whose agents couple to nothing is the 1904 mistake — but own where the water goes, the pressure, and who holds the key.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>MCP 2026-07-28 spec (final in 11 days)</strong> — largest revision since MCP's Nov-2024 debut; <strong>stateless core</strong> (no handshake, no <code>Mcp-Session-Id</code>, context in <code>_meta</code>, any request → any instance); Extensions framework; Tasks graduated core → extension; <strong>MCP Apps</strong> (sandboxed HTML UI); authorization hardening (OAuth 2.0 / OIDC, RFC 9207 <code>iss</code> validation); formal deprecation policy.</li>
+  <li><strong>Enterprise-Managed Authorization</strong> — went <strong>stable 18 June</strong>; SSO via your IdP (ID-JAG grant), no per-server consent, no scattered keys; supported by an initial set of MCP servers; Okta / Anthropic / VS Code support.</li>
+  <li><strong>Beta SDKs</strong> — Python, TypeScript, Go and C# betas shipped <strong>29 June</strong> so teams can test the revision now; Tier-1 SDKs expected to ship support within the RC window.</li>
+  <li><strong>The security readout</strong> — Akamai flags the stateless model, MCP Apps and Tasks as new abuse avenues: <strong>customer-data exposure, phishing through trusted AI experiences, control-bypass, background-task abuse</strong>; SecurityWeek: "new enterprise-ready MCP spec brings new security challenges."</li>
+  <li><strong>Deprecation on the clock</strong> — Active → Deprecated → Removed with 12-month minimums; Roots, Sampling and Logging deprecated under the new policy.</li>
+  <li><strong>Stewardship</strong> — MCP donated to the <strong>Agentic AI Foundation</strong> (Linux Foundation) in Dec 2025; OpenAI, Google, Microsoft, AWS and Block among founders; 10,000+ MCP servers published as of early 2026 (as reported).</li>
+  <li><strong>The mandatory counterweight</strong> — EU AI Act <strong>GPAI enforcement applicable 2 Aug 2026 (16 days)</strong>; €15M or 3% of global turnover (Art. 101); reaches deployers. Governance gap persists — ~8% of organizations report a comprehensive AI-governance framework while ~88% use AI (as reported).</li>
+  <li><strong>Adoption cadence</strong> — Gartner: 40% of enterprise apps embed task-specific agents by end-2026 (from &lt;5% in 2025); &gt;40% of agentic projects cancelled by end-2027.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">The specification eliminates the initialize/initialized handshake and the Mcp-Session-Id header — client information now travels in _meta on every request — so any MCP request can "land on any server instance" without sticky routing or shared session stores.</div><div class="a">— Model Context Protocol blog, on the 2026-07-28 stateless release candidate (final ships 28 July 2026)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">The introduction of application-managed state, rich interactive AI interfaces, and long-running asynchronous tasks creates new avenues for abuse — unauthorized access to customer data, user-targeted phishing through trusted AI experiences, the bypass of enterprise security controls, and service disruption.</div><div class="a">— Akamai security research, on the new enterprise-ready MCP specification (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Enterprise-Managed Authorization lets organizations govern which MCP servers their developers can connect to through the same identity provider they already use for SSO — instead of asking every engineer to paste personal API keys into local agent configs.</div><div class="a">— Coverage of MCP EMA going stable, 18 June 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">More than 40% of agentic-AI projects will be cancelled by end-2027 — the constraints are governance, risk and unclear business value, not the plumbing.</div><div class="a">— Gartner, on agentic-AI adoption (as reported)</div></blockquote>
+<blockquote><div class="q">"A standard coupling standardizes the fitting, not the fire. Adopt the universal thread — but own where the water goes, the pressure, and who holds the key."</div><div class="a">— the radar, on the agent connector</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (11 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>Biggest revision since MCP's debut</td><td><span class="v">Nov 2024</span></td><td>MCP / coverage</td></tr>
+<tr><td>Stateless core removes</td><td><span class="v">Handshake + Mcp-Session-Id</span></td><td>MCP blog</td></tr>
+<tr><td>Enterprise-Managed Authorization stable</td><td><span class="v">18 Jun 2026</span></td><td>InfoQ / coverage (as reported)</td></tr>
+<tr><td>Beta SDKs shipped (Python/TS/Go/C#)</td><td><span class="v">29 Jun 2026</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>New standardized surfaces flagged by Akamai</td><td><span class="v">Stateless state · Apps · Tasks</span></td><td>Akamai / SecurityWeek (as reported)</td></tr>
+<tr><td>Deprecation window (Active→Deprecated→Removed)</td><td><span class="v">≥ 12 months</span></td><td>MCP blog</td></tr>
+<tr><td>MCP servers published (early 2026)</td><td><span class="v">10,000+</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Stewarding foundation</td><td><span class="v">Agentic AI Foundation (Linux Foundation)</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (16 days)</span></td><td>European Commission (Art. 101)</td></tr>
+<tr><td>Maximum GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+<tr><td>Orgs with a comprehensive AI-governance framework</td><td><span class="v">~8% (vs ~88% using AI)</span></td><td>Industry surveys (as reported)</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Adopt the standard — then map the fireground before you couple.</strong> Say yes to the 28 July spec: a stateless, SSO-governed, auditable MCP is a genuine upgrade, and an estate whose agents couple to nothing is the 1904 mistake. But before the universal thread makes wiring trivial, produce the one artifact the protocol won't: an <strong>allow-list of which MCP servers, tools and data each agent may reach.</strong> Where the water goes is your decision, not the coupling's — and it is your EU AI Act inventory evidence in 16 days.</li>
+  <li><strong>Set the pressure behind the one SSO login.</strong> Enterprise-Managed Authorization is convenient precisely because it centralizes the key — which is why least privilege matters <em>more</em>, not less. Put <strong>step-up controls and scoped, least-privilege permissions</strong> behind that single login so one convenient valve doesn't open every tool. And treat <strong>every MCP App like any third-party integration</strong>: review it, sandbox it, monitor it, and keep an audit trail on every UI action — the researchers' phishing-through-trusted-AI warning is about exactly this surface.</li>
+  <li><strong>Write the coupling's shutoff and deprecation plan now.</strong> A universal connector is universal for an attacker too, and a shared standard puts features on a 12-month deprecation clock (Roots, Sampling, Logging already flagged). For every agent in production, document the <strong>kill switch</strong> (who can pull a server or App, how fast) and the <strong>migration path</strong> off deprecated features, and keep a <strong>model- and tool-neutral abstraction</strong> (7 Jul) so no single coupling becomes load-bearing lock-in. Own the thread, own the shutoff.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Model Context Protocol blog · InfoQ · SecurityWeek · Akamai · TechTimes · Web Developer · The New Stack · Agentic AI Foundation · European Commission · Gartner. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 17 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
