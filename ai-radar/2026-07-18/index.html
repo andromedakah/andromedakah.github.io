@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 18 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on Kimi K3 — Moonshot AI's 2.8-trillion-parameter open-weight frontier model — the commoditization of the model layer, the aluminum age, open weights, pricing, the MCP and EU AI Act countdowns, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Aluminum Age</h1>
+  <div class="meta">Saturday, 18 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar bolted down the plumbing — a universal connector for agents — and warned that a standard fitting is not a safe deployment. Today the thing the plumbing carries, the model itself, has its Hall-Héroult moment. On Thursday 16 July, Beijing's Moonshot AI shipped Kimi K3 — a 2.8-trillion-parameter mixture-of-experts model (~50B active), a 1-million-token context window, live on API at Sonnet-5 pricing and, by independent evaluators, Opus-4.8-class: it took the #1 spot in the Frontend Code Arena, beating Claude Fable 5 and GPT-5.6 Sol on front-end coding, and finished ahead of Opus 4.8 in broad text ranking while costing ~40% less. It is the largest open-weight model ever released — and Moonshot will publish the full weights on 27 July under a Modified MIT license, so any company or government can run it on its own hardware. Axios' verdict was blunt: "China just erased America's AI lead." This is the radar's three-week thesis arriving as a headline: the model is the metal, and the metal just went from precious to commodity. When the ingot everyone built their valuation around can suddenly be smelted cheaply — or simply downloaded — where did the value go, and are we still holding the metal or building the airframe?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For three weeks this radar has argued one thesis — <strong>the model is commoditizing; own and govern the layer around it.</strong> Yesterday the connector standardized (17 Jul, "the standard coupling"); the day before, who certifies the model (16 Jul, "the assayer's mark"). Today the thesis stops being a forecast and becomes a <strong>price tag.</strong> On <strong>16 July</strong> Moonshot AI released <strong>Kimi K3</strong> — frontier-class capability, open weights, mid-tier price — and the model layer had, visibly and in one day, its <strong>aluminum moment:</strong> the metal everyone treated as precious became a commodity. It lands amid the same two enforceable countdowns this radar has tracked all fortnight: <strong>MCP's final spec on 28 July (10 days)</strong> and the <strong>EU AI Act's GPAI enforcement on 2 Aug (15 days).</strong> One release, one lesson.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Frontier capability is now open-weight, self-hostable, and priced like a commodity.</strong> Kimi K3 is a <strong>2.8T-parameter</strong> MoE (~<strong>50B active</strong>, 896 experts, 16 per token), <strong>1M-token</strong> context, multimodal input. It is <strong>#1 on the Frontend Code Arena</strong> (1,679, ahead of Fable 5 at 1,631 and GPT-5.6 Sol at 1,618), tops <strong>Program Bench</strong> (77.8) and <strong>SWE Marathon</strong> (42.0), and lands <strong>3rd–4th overall</strong> on independent indices — beating <strong>Opus 4.8</strong>, trailing only Fable 5 and GPT-5.6 Sol. API price is <strong>$3 / $15 per million tokens</strong> ("Opus-class at Sonnet pricing"), and the <strong>full weights ship open on 27 July (9 days).</strong> Achieved despite three years of US semiconductor export controls.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The value just migrated off the ingot — by the labs' own admission.</strong> Axios: K3's <em>"very existence puts pressure on the pricing power of U.S. labs, the enormous valuations built around their technological edge, and the case for spending hundreds of billions on ever-larger data centers."</em> One analyst read the convergence as <em>"directionally negative for AI model lab terminal margins."</em> The plainest reading came from the coverage itself: K3 signals <em>"a hyper-competitive future where software intelligence becomes highly accessible, shifting financial power over to the platforms that distribute it and the enterprises that deploy it."</em> That last clause is the whole radar in one sentence.</div></div>
+<div class="num"><div class="b">3</div><div><strong>A commodity metal is a gift to the builder and a trap for the hoarder.</strong> Cheap, abundant, open-weight intelligence is <em>good news</em> for the enterprise — it collapses your input cost and hands you a sovereign, self-hostable option no vendor can revoke. The trap is mistaking the metal for the moat. The model does not decide <strong>what you build with it</strong> — the proprietary data, the workflow, the distribution, and the governance the EU AI Act makes enforceable in <strong>15 days</strong> (inventory, access control, logging, human oversight). Gartner still expects <strong>40% of enterprise apps to embed task-specific agents by end-2026</strong> and <strong>&gt;40% of agentic projects cancelled by end-2027</strong> — the gap is what you build, not what you smelt.</div></div>
+<div class="card"><strong>Bottom line:</strong> welcome the aluminum age — a frontier-class, open-weight, self-hostable model at a third of yesterday's price is a genuine windfall, and refusing to touch it because it's cheap or Chinese is the ingot-hoarder's mistake. But do not confuse a cheap metal for a durable business. <strong>Own the airframe, not the ingot:</strong> the proprietary data K3 can't see, the workflow it can't own, the governance it can't discharge, and the model-neutral abstraction (7 Jul) that lets you swap today's precious metal for next week's commodity without re-tooling the plant. The metal is cheap now. What you build with it is still yours to make valuable.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>⚗️ "The Aluminum Age"</h3>
+<p><em>Topic: On 16 July 2026 Moonshot AI released Kimi K3, the largest open-weight model ever — frontier-class capability (Opus-4.8-class, #1 in the Frontend Code Arena), open weights on 27 July, at mid-tier "Sonnet" pricing. Independent coverage read it as evidence that top-tier model intelligence is commoditizing and that financial power is shifting to those who distribute and deploy, not those who own the weights. The lesson for the enterprise: when a precious metal becomes a commodity, the value does not vanish — it migrates from the ingot to what you build with it.</em></p>
+<p>For most of the 19th century, aluminum was one of the most precious metals on Earth — and that is the strange part, because it is the <em>most abundant metal in the planet's crust.</em> The scarcity was never the element; it was the <em>unlocking.</em> Isolating pure aluminum was so difficult that a bar of it outshone silver in a display case, and the legends of its prestige are famous: Napoleon III is said to have reserved aluminum cutlery for his most honored guests and let the rest make do with gold. When the United States finished the <strong>Washington Monument in 1884</strong>, it capped the apex with a small pyramid of aluminum — around six pounds of it — chosen deliberately as a show of wealth, and briefly displayed at Tiffany's like a jewel. That was the last moment aluminum was treasure.</p>
+<p>Two years later, in <strong>1886</strong>, a young American named Charles Martin Hall and a Frenchman named Paul Héroult, working independently, cracked the same electrolytic process for smelting aluminum cheaply from its ore. The price did not drift down — it <strong>fell off a cliff</strong>, dropping something like 99% in a decade, from a metal dearer than silver to one you would eventually wrap a sandwich in. Everyone who had built their position on <em>owning aluminum ingots</em> — on the scarcity itself — watched their treasure turn to tin in a few short years. The metal that capped a national monument as a jewel became foil, cans, window frames, and, within a generation, the <strong>airframe of every aircraft that mattered.</strong> The abundance the earth had always held was finally let out.</p>
+<p>Here is the part the board must sit with: <strong>the value did not disappear when the price collapsed — it migrated.</strong> It moved off the ingot and into what people <em>built</em> with the suddenly-cheap metal. The fortunes of the aluminum age were not made by the smelters hoarding bars; they were made by aerospace, packaging, construction, and electrification — the industries that treated cheap aluminum as <em>feedstock</em> and built airframes, grids and supply chains on top of it. Kimi K3 is the Hall-Héroult process for frontier intelligence: a 2.8-trillion-parameter, open-weight model that any firm or nation can soon smelt on its own hardware, at a third of yesterday's token price, doing work that a year ago only a closed, premium ingot could do. The precious-metal era of the model — the era of scarcity-priced weights and valuations built on the technological edge — is ending in real time, exactly as the labs' own coverage now admits.</p>
+<p><strong>The moral:</strong> the firms that won the aluminum age were the ones who stopped mourning the price of the ingot and started building the airframe. Welcome the cheap metal — a frontier-class, open-weight, self-hostable model is a windfall, and refusing it because it's cheap is the smelter's nostalgia for scarcity. But your moat was never the metal. It is the <strong>airframe</strong> you build with it: the proprietary data no open weight can see, the workflow and distribution the model can't own, the governance the regulator makes you prove, and the plant flexible enough to run tomorrow's commodity in place of today's. When the ingot is cheap, the engineering is the business.</p>
+<p><strong>The question it forces:</strong> <em>If a frontier-class model is now a commodity metal — open-weight, self-hostable, priced like a mid-tier tool — is our moat still the ingot we license, which anyone can now smelt or download, or the airframe we build with it: the data, the workflow, the distribution and the governance the cheap metal can never copy?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>An open-weight model just landed at <strong>Opus-4.8-class capability and Sonnet-5 price,</strong> with <strong>full weights free on 27 July (9 days).</strong> <strong>Does any part of our strategy — or our vendor's valuation — depend on frontier model capability staying scarce and expensive?</strong> If so, that assumption expired on Thursday.</li>
+  <li>The coverage is explicit that financial power is <strong>"shifting to the platforms that distribute and the enterprises that deploy."</strong> <strong>What, specifically, is our airframe</strong> — the proprietary data, workflow, distribution and trust a commodity model can't replicate — and are we investing there, or still paying a premium for the ingot?</li>
+  <li>Kimi K3 is a <strong>sovereign, self-hostable</strong> option no vendor can revoke or price-gouge. <strong>Have we evaluated an open-weight model as a governed fallback</strong> for cost, continuity and data-residency — and is our stack <strong>model-neutral (7 Jul)</strong> enough to adopt one without re-tooling?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>A cheap, self-hostable frontier model is tempting for cost — but it is a <strong>Chinese open-weight</strong> model, and the weights land 27 July. <strong>Do we have a security-and-provenance review gate</strong> (weights integrity, supply-chain, data-egress) before any open model touches a regulated workload, or does "it's cheaper" wave it through?</li>
+  <li>If our differentiation was "we have access to the best model," that edge just <strong>commoditized.</strong> <strong>Does our moat sit in proprietary data, execution and client trust</strong> — the things a downloadable model can't copy — or in a model advantage a competitor can now match for $3 per million tokens?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An open-weight, self-hostable model can keep <strong>PHI entirely on-premise</strong> — a genuine data-residency win. <strong>Have we assessed K3 as a governed on-prem option,</strong> with the same validation, human-oversight and logging evidence the EU AI Act demands in <strong>15 days?</strong></li>
+  <li>Commodity intelligence lowers the cost of building — and of building <em>badly.</em> <strong>When the model is nearly free, is our bottleneck now clinical validation and governance</strong> rather than model access, and are we resourced for <em>that</em> work rather than another model contract?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Self-hostable frontier weights are the aluminum-as-feedstock moment for the shop floor: <strong>cheap intelligence you can run at the edge, air-gapped from the internet.</strong> <strong>Have we mapped where an on-prem open model unlocks OT/MES use cases</strong> a cloud-only, per-token vendor made uneconomic?</li>
+  <li>The ingot is cheap; the <strong>airframe is your process knowledge.</strong> <strong>Is our advantage the model, or the proprietary data and workflow of how we actually build</strong> — and are we digitizing the latter while the former commoditizes?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Per-token cost just dropped toward commodity, and an <strong>open-weight floor lands 27 July.</strong> <strong>Are we still on a pricing plan that assumes premium model scarcity,</strong> and have we re-run the unit economics of every AI feature at commodity input cost?</li>
+  <li>A competitor can now rent the same frontier capability for <strong>$3 per million tokens.</strong> <strong>Does our differentiation live in the model, or in proprietary customer data, catalog, and experience</strong> the cheap metal can't reproduce?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>A <strong>top-tier open-weight model any nation can self-host</strong> reframes AI sovereignty: capability no longer requires a US hyperscaler contract. <strong>Is an on-prem open model part of our sovereign-AI and continuity plan</strong> — and have we weighed the provenance and security trade-offs of a Chinese-origin model deliberately, not by default?</li>
+  <li>The EU AI Act's deployer duties land in <strong>15 days</strong> and apply <em>however cheap or open the model is.</em> <strong>Is our inventory, access control and oversight evidence ready</strong> for an estate that may now run open weights on its own metal, outside any vendor's audit trail?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Metal, the Process, and What You Build With It</h2>
+<p>Strip the geopolitics away and Kimi K3 is a supply-shock in one input to your stack: <strong>the model.</strong> Read it as the aluminum story in three parts — the metal that was precious, the process that made it cheap, and the airframe that is where the value actually goes.</p>
+<div class="card"><ul>
+  <li><strong>The metal (frontier capability).</strong> K3 is a <strong>2.8-trillion-parameter</strong> mixture-of-experts model — the largest open-weight model ever released — with a reported <strong>~50B active</strong> parameters (896 experts, 16 routed per token), a <strong>1M-token</strong> context window, and text/image/video input. On independent evaluation it is <strong>frontier-class:</strong> <strong>#1 in the Frontend Code Arena</strong> (1,679, ahead of Fable 5 and GPT-5.6 Sol), top of <strong>Program Bench</strong> (77.8) and <strong>SWE Marathon</strong> (42.0), ~1,668 Elo on GDPval v2 (2nd), and <strong>3rd–4th overall</strong> — beating Opus 4.8, trailing only Fable 5 and GPT-5.6 Sol.</li>
+  <li><strong>The process (open weights + commodity price).</strong> This is the Hall-Héroult step. API is live now at <strong>$3 / $15 per million tokens</strong> (with a $0.30 cache-hit input rate) — <em>"Opus-class at Sonnet pricing,"</em> roughly <strong>40% under Opus 4.8</strong> and about <strong>one-third of Fable-tier</strong> token cost. The <strong>full weights publish on 27 July under a Modified MIT license,</strong> so any firm or government can <strong>self-host</strong> it — a floor no per-token vendor can undercut, achieved despite three years of US export controls.</li>
+  <li><strong>The airframe (what stays yours).</strong> The model is now feedstock. What it does <strong>not</strong> commoditize is the airframe you build on it: <strong>proprietary data</strong> the open weights have never seen; the <strong>workflow and distribution</strong> that turn a capable model into a product; the <strong>governance</strong> the EU AI Act makes enforceable in 15 days; and the <strong>model-neutral abstraction (7 Jul)</strong> that lets you pour this week's commodity metal into the same mold you used for last week's premium ingot.</li>
+</ul></div>
+<p>The strategic core: <strong>a commodity metal is a windfall for the builder and a reckoning for the hoarder.</strong> If your advantage — or your vendor's valuation — rested on <em>owning scarce, premium model capability,</em> that scarcity just broke. If your advantage rests on what you <em>build</em> with cheap capability, this is the best week of the year: your dominant input cost fell, and you gained a sovereign, self-hostable option no vendor can revoke or reprice.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The aluminum age: when the precious metal — the model — becomes a commodity. Kimi K3 is the Hall-Héroult moment for frontier intelligence. On the left, four stacked layers trace the price collapse. First, the precious metal: closed, premium model weights, capability priced on scarcity and valuations built on the technological edge. Second, the process: Kimi K3, with open weights arriving 27 July, a 2.8-trillion-parameter model with about 50 billion active parameters and a one-million-token context, Opus-4.8-class, number one in the Frontend Code Arena, beating Opus 4.8. Third, the price collapse: three dollars input and fifteen dollars output per million tokens, described as Opus-class at Sonnet pricing, about forty percent under Opus 4.8. Fourth, abundance: self-hostable, sovereign, everywhere — a price floor no per-token vendor can undercut. Beside all of it stands the airframe, where the value migrates: proprietary data the open weights can't see, the workflow and distribution the model can't own, and the governance the regulator makes you prove in fifteen days, plus a model-neutral plant. The trap is to hoard the ingot and bet the moat on the model, because the metal just went commodity. The win is to build the airframe — own the data, workflow and governance — so the value migrates to you." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE ALUMINUM AGE — when the precious metal (the model) becomes a commodity</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Kimi K3 is the Hall-Héroult moment for frontier intelligence</text>
+
+  <!-- layer 1: the precious metal -->
+  <rect x="28" y="60" width="424" height="52" rx="10" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="48" y="82" font-size="13" font-weight="700" fill="#5fb2df" font-family="sans-serif">THE PRECIOUS METAL — closed, premium weights</text>
+  <text x="404" y="82" font-size="10.5" font-weight="700" fill="#5fb2df" text-anchor="end" font-family="sans-serif">scarcity-priced</text>
+  <text x="48" y="100" font-size="10" fill="#9aa7b6" font-family="sans-serif">capability priced on scarcity; valuations built on the technological edge</text>
+
+  <!-- layer 2: the process -->
+  <rect x="28" y="120" width="424" height="52" rx="10" fill="#1a1530" stroke="#34306a"/>
+  <text x="48" y="142" font-size="13" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE PROCESS — Kimi K3, open weights 27 Jul</text>
+  <text x="404" y="142" font-size="10.5" font-weight="700" fill="#b9b2f5" text-anchor="end" font-family="sans-serif">Opus-class</text>
+  <text x="48" y="160" font-size="10" fill="#9aa7b6" font-family="sans-serif">2.8T (~50B active) · 1M ctx · #1 Frontend Code Arena · beats Opus 4.8</text>
+
+  <!-- layer 3: the price collapse -->
+  <rect x="28" y="180" width="424" height="52" rx="10" fill="#1f1a10" stroke="#7a5a1f"/>
+  <text x="48" y="202" font-size="13" font-weight="700" fill="#efb54a" font-family="sans-serif">THE PRICE COLLAPSE — $3 / $15 per 1M tokens</text>
+  <text x="404" y="202" font-size="10.5" font-weight="700" fill="#efb54a" text-anchor="end" font-family="sans-serif">~40% under Opus</text>
+  <text x="48" y="220" font-size="10" fill="#9aa7b6" font-family="sans-serif">"Opus-class at Sonnet pricing" · ~one-third of Fable-tier token cost</text>
+
+  <!-- layer 4: abundance -->
+  <rect x="28" y="240" width="424" height="52" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="48" y="262" font-size="13" font-weight="700" fill="#e08a63" font-family="sans-serif">ABUNDANCE — self-hostable, sovereign, everywhere</text>
+  <text x="48" y="280" font-size="10" fill="#9aa7b6" font-family="sans-serif">a price floor no per-token vendor can undercut (weights 27 Jul)</text>
+
+  <!-- airframe bar -->
+  <rect x="466" y="60" width="186" height="232" rx="12" fill="#11251c" stroke="#1d6e56"/>
+  <text x="559" y="86" font-size="12.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">THE AIRFRAME</text>
+  <text x="559" y="102" font-size="10.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">(where value migrates)</text>
+  <g font-family="sans-serif">
+    <text x="559" y="128" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">Proprietary data</text>
+    <text x="559" y="143" font-size="10" fill="#c3ccd8" text-anchor="middle">the open weights</text>
+    <text x="559" y="156" font-size="10" fill="#c3ccd8" text-anchor="middle">can't see.</text>
+    <text x="559" y="182" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">Workflow &amp; reach</text>
+    <text x="559" y="197" font-size="10" fill="#c3ccd8" text-anchor="middle">the model can't own.</text>
+    <text x="559" y="210" font-size="10" fill="#c3ccd8" text-anchor="middle">Distribution + trust.</text>
+    <text x="559" y="236" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-weight="700">Governance</text>
+    <text x="559" y="251" font-size="10" fill="#c3ccd8" text-anchor="middle">you must prove (15d)</text>
+    <text x="559" y="264" font-size="10" fill="#c3ccd8" text-anchor="middle">+ a model-neutral</text>
+    <text x="559" y="277" font-size="10" fill="#5dcaa5" text-anchor="middle">plant.</text>
+  </g>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="308" width="308" height="66" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="331" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — hoard the ingot</text>
+  <text x="182" y="350" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">bet the moat on the model —</text>
+  <text x="182" y="365" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">the metal just went commodity.</text>
+
+  <rect x="344" y="308" width="308" height="66" rx="10" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="331" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — build the airframe</text>
+  <text x="498" y="350" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">own data, workflow, governance —</text>
+  <text x="498" y="365" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">value migrates to you.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="404" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">When the metal is cheap, the value is in</text>
+  <text x="340" y="424" font-size="12.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">what you build.</text>
+  <text x="340" y="446" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Adopt the cheap metal. Own the airframe, not the ingot.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#378add"></i>The precious metal — closed, premium weights</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The process — Kimi K3, open weights 27 Jul</span>
+  <span><i class="dot" style="background:#ef9f27"></i>The price collapse — commodity token cost</span>
+  <span><i class="dot" style="background:#d85a30"></i>Abundance — self-hostable, sovereign</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The airframe — what stays yours to build</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — the model is the moat</th><th>The discipline — the model is feedstock, the airframe is the moat</th></tr>
+<tr><td>"We have access to the best model"</td><td>Proprietary data and workflow a downloadable model can't copy</td></tr>
+<tr><td>Paying a scarcity premium for capability</td><td>Commodity input cost + a sovereign, self-hostable fallback</td></tr>
+<tr><td>One vendor's model hard-wired into the product</td><td>A model-neutral abstraction (7 Jul) that swaps metals without re-tooling</td></tr>
+<tr><td>"It's cheap, ship it" — open weights waved through</td><td>Provenance, weights-integrity and data-egress review before production</td></tr>
+<tr><td>Assuming a cheaper model discharges compliance</td><td>Inventory, access control, logging, oversight — your EU AI Act evidence</td></tr>
+</table>
+
+<h3>Why a cheaper model doesn't shrink your governance — it grows your estate</h3>
+<div class="card">
+<p>A commodity metal does not reduce the work; it <em>moves</em> it. When frontier capability was scarce and expensive, cost was the natural governor on how many models ran where. Remove that governor — free weights, $3 tokens, self-hosting — and the number of places a capable model can run <em>explodes,</em> much of it outside any vendor's audit trail. Every one of those places is a named EU AI Act deployer duty that becomes enforceable in <strong>15 days.</strong> The abundance is real and welcome; so is the fact that it multiplies exactly the surface the regulator will inspect. Cheap aluminum did not make aircraft <em>simpler</em> to certify — it made there be far more aircraft.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>This is the same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe that walks out, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling). Today it names the metal: <strong>the model commoditized.</strong> On legacy estates the danger is <em>ingot-nostalgia</em> — a multi-year contract or an architecture hard-wired to one premium model, built when capability was scarce and now overpriced against a downloadable equal. The retrofit is the same control plane this radar has urged all fortnight, now aimed at the metal: a <strong>model-neutral router (7 Jul)</strong> so you can pour K3 or Fable 5 or the next release into the same mold, a <strong>spend meter (6 Jul)</strong> to prove the commodity price through to the P&amp;L, and a <strong>provenance-and-governance gate</strong> so cheap, open weights don't slip into production unreviewed.</p>
+<p><strong>The clean mental model:</strong> <em>When the precious metal becomes a commodity, the value migrates from the ingot to the airframe. Adopt the cheap, open metal — refusing it is the smelter's nostalgia — but build your moat in the data, workflow and governance the metal can't copy.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Kimi K3 (Moonshot AI)</strong> — released <strong>16 July</strong>; <strong>2.8T</strong> parameters (largest open-weight model ever), <strong>~50B active</strong> (896 experts, 16/token), <strong>1M</strong> context, multimodal input; <strong>#1 Frontend Code Arena</strong> (1,679); tops Program Bench (77.8) and SWE Marathon (42.0); <strong>3rd–4th overall</strong>, beats Opus 4.8, trails Fable 5 &amp; GPT-5.6 Sol.</li>
+  <li><strong>The price and the weights</strong> — API live at <strong>$3 / $15 per 1M tokens</strong> ($0.30 cache-hit input), <em>"Opus-class at Sonnet pricing,"</em> ~40% under Opus 4.8; <strong>full weights open on 27 July</strong> under a <strong>Modified MIT</strong> license — self-hostable, sovereign floor.</li>
+  <li><strong>The market read</strong> — Axios: <strong>"China just erased America's AI lead"</strong>; K3's existence <em>"puts pressure on the pricing power of U.S. labs, the enormous valuations built around their technological edge, and the case for spending hundreds of billions on ever-larger data centers"</em>; analyst: <em>"directionally negative for AI model lab terminal margins."</em></li>
+  <li><strong>The caveats</strong> — at launch there was <strong>no public model card, license file, or downloadable weights</strong> (Simon Willison), and the model can be <strong>token-hungry</strong> (one SVG test burned 16,000+ output tokens); the-decoder reads the $3/$15 price as <em>"the end of super-cheap Chinese AI"</em> — cheaper than US frontier, pricier than prior Chinese discounts.</li>
+  <li><strong>The connector counterpart</strong> — <strong>MCP 2026-07-28 spec</strong> goes <strong>final in 10 days</strong> (stateless core, Enterprise-Managed Authorization stable 18 Jun, MCP Apps); the plumbing standardizes as the metal commoditizes.</li>
+  <li><strong>The mandatory counterweight</strong> — EU AI Act <strong>GPAI enforcement applicable 2 Aug 2026 (15 days)</strong>; €15M or 3% of global turnover (Art. 101); reaches deployers — and applies however cheap or open the model is.</li>
+  <li><strong>Adoption cadence</strong> — Gartner: 40% of enterprise apps embed task-specific agents by end-2026 (from &lt;5% in 2025); &gt;40% of agentic projects cancelled by end-2027 — governance and value, not model access, are the constraint.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Its very existence puts pressure on the pricing power of U.S. labs, the enormous valuations built around their technological edge, and the case for spending hundreds of billions of dollars on ever-larger data centers.</div><div class="a">— Axios, on Kimi K3, 16–17 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">China just erased America's AI lead.</div><div class="a">— Axios headline, 17 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">K3 signals a hyper-competitive future where software intelligence becomes highly accessible, shifting financial power over to the platforms that distribute it and the enterprises that deploy it.</div><div class="a">— Coverage of the Kimi K3 release, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">The convergence of reasoning capabilities at the frontier is directionally negative for AI model lab terminal margins.</div><div class="a">— Wall Street analyst, on Kimi K3 and model-lab economics, July 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"When the precious metal becomes a commodity, the value migrates from the ingot to the airframe. Adopt the cheap, open metal — but build your moat in the data, workflow and governance it can't copy."</div><div class="a">— the radar, on the commoditizing model</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Kimi K3 released</td><td><span class="v">16 Jul 2026</span></td><td>Moonshot AI / coverage</td></tr>
+<tr><td>Total parameters (largest open-weight model ever)</td><td><span class="v">2.8 trillion</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Active parameters (MoE, 896 experts, 16/token)</td><td><span class="v">~50 billion</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Context window</td><td><span class="v">1,000,000 tokens</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Frontend Code Arena rank</td><td><span class="v">#1 (1,679)</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Overall independent ranking</td><td><span class="v">3rd–4th (beats Opus 4.8)</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>API price (input / output per 1M)</td><td><span class="v">$3 / $15 ($0.30 cache-hit)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Price vs Claude Opus 4.8</td><td><span class="v">~40% cheaper</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Full open weights (Modified MIT) publish</td><td><span class="v">27 Jul 2026 (9 days)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Achieved despite US export controls of</td><td><span class="v">~3 years</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (10 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (15 days)</span></td><td>European Commission (Art. 101)</td></tr>
+<tr><td>Maximum GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Re-price your stack at commodity metal — and add the open model as a governed fallback.</strong> Kimi K3 proves frontier-class capability now costs ~$3 per million tokens and will be free to self-host on 27 July. Re-run the unit economics of every AI feature at commodity input cost, and — through your <strong>model-neutral router (7 Jul)</strong> — qualify an open-weight model as a <strong>sovereign fallback</strong> for cost, continuity and data-residency. An estate hard-wired to one premium ingot is paying a scarcity premium that no longer exists.</li>
+  <li><strong>Name your airframe and invest there, not in the ingot.</strong> The coverage says it plainly: value is shifting to those who <strong>distribute and deploy.</strong> Write down, in one page, the assets a downloadable model can't copy — your <strong>proprietary data, workflow, distribution and customer trust</strong> — and move budget from renting model capability toward compounding <em>those.</em> If you can't name your airframe, the aluminum age is coming for your margin, not your competitor's.</li>
+  <li><strong>Gate the cheap metal before it reaches production.</strong> Abundance multiplies the estate: free weights and $3 tokens mean a capable model can now run in far more places, much of it outside a vendor's audit trail — exactly the surface the EU AI Act inspects in <strong>15 days.</strong> Stand up a <strong>provenance-and-governance gate</strong> for any open model (weights integrity, supply-chain and data-egress review, plus the inventory, access-control, logging and human-oversight evidence you'll need on 2 Aug), so the windfall doesn't arrive as an ungoverned sprawl.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Axios · TechCrunch · VentureBeat · Tom's Hardware · Simon Willison · latent.space · the-decoder · Constellation Research · Model Context Protocol blog · European Commission · Gartner. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 18 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
