@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 19 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on Microsoft's Project Perception — the multi-model orchestration layer positioned against Anthropic's Claude Mythos — the day after Kimi K3 commoditized the model. Value migrates to the routing/triage layer: the triage tent, model-neutral routing, governance, the MCP and EU AI Act countdowns, quotes, and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Triage Tent</h1>
+  <div class="meta">Sunday, 19 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar watched the model itself have its aluminum moment — Kimi K3 made frontier capability cheap, open, and self-hostable, and the metal everyone treated as precious became a commodity. The thesis was that value migrates off the ingot and onto the airframe you build with it. Today that airframe shipped as a product. Reporting this weekend describes Microsoft's "Project Perception" — an AI cybersecurity platform, positioned against Anthropic's Claude Mythos — whose entire competitive edge is not a model at all. It is an orchestration layer that routes each security task to the cheapest model that can do it — Microsoft, OpenAI or Anthropic — and calls a frontier model only for the few steps that truly need one, aiming to make automated vulnerability fixing "cheap enough to run nonstop." The day after intelligence became a commodity, the first flagship built on that commodity competes on the dispatch logic, not the metal. When every rival can buy the same intelligence for a few dollars a million tokens, is our advantage the model — or the triage layer that decides which model touches which job, and reserves the expensive one for where it actually earns its keep?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For three weeks this radar has argued one thesis — <strong>the model is commoditizing; own and govern the layer around it.</strong> Yesterday the model itself commoditized in public (18 Jul, "the aluminum age" — Kimi K3). Today the thesis gets its first <strong>shipping proof point.</strong> Reporting over the weekend describes <strong>Microsoft's Project Perception,</strong> an AI security platform whose defining feature is an <strong>orchestration layer</strong> — it dispatches each vulnerability-hunting task to the best-fit, cheapest-adequate model and escalates to a frontier model only for the genuinely hard steps. It is the <strong>model-neutral router (7 Jul) turned into a product,</strong> aimed straight at <strong>Anthropic's Claude Mythos.</strong> It lands amid the same enforceable countdowns this radar has tracked all fortnight: <strong>Kimi K3's open weights on 27 July (8 days), MCP's final spec on 28 July (9 days),</strong> and the <strong>EU AI Act's GPAI enforcement on 2 Aug (14 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The first flagship built on commodity intelligence competes on routing, not the model.</strong> Project Perception reportedly combines models from <strong>Microsoft, OpenAI and Anthropic</strong> behind an <strong>orchestration layer that "chooses which AI model handles each step, rather than sending every job through the most powerful — and most expensive — system."</strong> A low-cost model handles triage, log parsing and inventory; a <strong>frontier model is reserved</strong> for complex exploit chains, authentication flows, and remediation plans that touch production. The goal is to make vulnerability fixing <strong>cheap enough to run continuously,</strong> not just on high-severity incidents — undercutting <strong>Anthropic's Mythos 5</strong> (listed at <strong>$10 / $50 per million tokens,</strong> access limited to vetted partners).</div></div>
+<div class="num"><div class="b">2</div><div><strong>This is the "airframe" from yesterday, made concrete.</strong> The value in Perception is not any single model — every rival can buy the same intelligence, and after Kimi K3 can nearly download it. The value is the <strong>dispatch logic:</strong> the layer that knows which task is worth a frontier call and which is not, and can swap a cheaper or open model in without re-tooling. Independent commentators have been converging on the same point for weeks — as frontier capability converges, <em>"enterprise AI wins or loses at the orchestration layer."</em> Perception is that thesis shipped.</div></div>
+<div class="num"><div class="b">3</div><div><strong>A routing layer is also a governance layer — or it isn't, and that's the trap.</strong> The same orchestration point that picks the cheapest model is the natural place to enforce policy: which model may see which data, what gets logged, where a human must sign off. Build it as a pure cost-router and you've optimized spend while multiplying an <strong>ungoverned</strong> surface — exactly the surface the <strong>EU AI Act inspects in 14 days</strong> (inventory, access control, logging, human oversight). Gartner still expects <strong>40% of enterprise apps to embed task-specific agents by end-2026</strong> and <strong>&gt;40% of agentic projects cancelled by end-2027</strong> — the ones that survive will be the ones whose orchestration layer governs as deliberately as it routes.</div></div>
+<div class="card"><strong>Bottom line:</strong> yesterday the metal went cheap; today the first product proved where the value went — <strong>the triage tent, not the surgeon.</strong> When every competitor can buy or download the same frontier intelligence, your moat is the layer that decides <em>which</em> intelligence touches <em>which</em> job, reserves the expensive one for where it earns its keep, and enforces the governance the regulator will demand on 2 August. <strong>Own the routing; make it govern as well as it saves.</strong> The model is a commodity you rent by the token. The triage is yours to build — and it is where the margin, and the compliance, now live.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>⚕️ "The Triage Tent"</h3>
+<p><em>Topic: Reporting over the weekend of 18–19 July 2026 describes Microsoft's "Project Perception," an AI cybersecurity platform positioned against Anthropic's Claude Mythos, whose defining feature is not a proprietary model but an orchestration layer that routes each task to the cheapest capable model and reserves a frontier model for the few hardest steps — the day after Kimi K3 made frontier intelligence itself a commodity. The lesson for the enterprise: when the scarce resource becomes abundant, the value moves to the system that decides where the still-costly capacity is spent.</em></p>
+<p>On the battlefields of the Napoleonic wars, a wounded soldier's fate was decided less by the skill of any one surgeon than by a colder and more radical idea: <strong>who gets seen, and in what order.</strong> Before <strong>Dominique-Jean Larrey,</strong> surgeon-in-chief of the Grande Armée, the wounded were treated by rank, by chance, or by whoever shouted loudest — and the scarce, exhausting hours of a skilled surgeon were spent almost at random. Larrey's innovation was not a sharper scalpel. It was a <strong>system of sorting</strong> — from the French <em>trier,</em> to sort — that assessed every casualty by the <em>severity and urgency of the wound,</em> and by that alone. The lightly hurt were patched and sent back. The hopeless were made comfortable. And the surgeon's irreplaceable hands were reserved for the cases where they would actually change the outcome — friend or enemy, general or private, it made no difference to the sorting.</p>
+<p>Larrey paired it with the <strong>"flying ambulance,"</strong> light carts that reached the wounded fast and moved them to the right level of care. At <strong>Borodino in 1812,</strong> amid a scale of carnage that would have swamped any surgical tent run first-come-first-served, the system let a handful of surgeons do the work of many — because the scarce resource, the surgeon's time, was <strong>spent only where it was worth spending.</strong> Every case that a dresser or an orderly could handle was routed away from the surgeon, so that the surgeon's hours went to the exploit chains, so to speak, and not the log parsing.</p>
+<p>Here is the part the board must sit with. Larrey's triage did not make the surgeon less skilled or less necessary — it made the surgeon's scarce time <strong>enormously more valuable,</strong> by ensuring none of it was wasted. The genius, and the thing that got copied into every army and every emergency room on Earth, <strong>was the sorting system, not the surgery.</strong> Microsoft's Project Perception is a triage tent for machine intelligence. Frontier capability, after Kimi K3, is no longer the scarce surgeon it was a year ago — but the <em>best</em> capability, called on the <em>right</em> step, still costs real money and still matters. The value Perception competes on is the <strong>triage:</strong> the layer that reads each incoming job, sends the routine mass to a cheap model, and reserves the frontier model for the wound that will actually kill the patient.</p>
+<p><strong>The moral:</strong> when the scarce resource becomes abundant, the fortune moves to whoever decides <em>where the still-costly capacity is spent.</em> Do not build your moat on owning the surgeon — everyone can hire one now, or download one next week. Build it on the <strong>triage tent:</strong> the orchestration layer that routes every task to the cheapest capability that suffices, escalates only where it pays, and — this is the half most people skip — <strong>governs the sorting itself,</strong> so that which model sees which data, what is logged, and where a human must sign off are decisions the tent makes on purpose, not by accident. Larrey's list of who-gets-the-surgeon was also, quietly, a <strong>record of every decision made</strong> — which is exactly what the regulator will ask you for.</p>
+<p><strong>The question it forces:</strong> <em>If every competitor can now buy or download the same frontier intelligence, is our advantage the model we license — which is a commodity — or the triage tent we build around it: the orchestration layer that decides which model touches which job, reserves the expensive one for where it earns its keep, and keeps the auditable record of every routing decision the regulator will demand on 2 August?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>The first flagship product built on newly-commoditized intelligence (Project Perception) competes on its <strong>orchestration layer, not its model.</strong> <strong>Where in our stack does the value actually sit</strong> — in the model we license, or in a routing/triage layer we own that reserves expensive capability for where it pays? If we can't point to the layer, we're paying surgeon rates for log-parsing.</li>
+  <li>Perception routes each task to the <strong>cheapest-adequate model and escalates only when needed.</strong> <strong>Have we instrumented our own AI workloads</strong> to know which calls genuinely need a frontier model and which are burning premium tokens on routine work — and could we cut cost 50%+ by triaging, as Microsoft is betting?</li>
+  <li>A routing layer is the natural <strong>governance choke-point.</strong> <strong>Is our orchestration layer enforcing policy</strong> — which model may see which data, what is logged, where a human signs off — or is it a pure cost-router that optimizes spend while multiplying an ungoverned surface the EU AI Act inspects in <strong>14 days?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model-routing across <strong>three vendors</strong> (as Perception reportedly does) is a cost and continuity win — but it means <strong>regulated data can flow to whichever model the router picks.</strong> <strong>Does our orchestration layer pin data-residency and model-eligibility per task,</strong> or does "cheapest model wins" quietly send a sensitive workload somewhere it shouldn't go?</li>
+  <li>If a competitor can run AI security or analysis <strong>"nonstop" at a fraction of our cost</strong> by triaging models, our per-incident economics just changed. <strong>Have we re-run the unit cost of every always-on AI workload</strong> — fraud, AML, monitoring — under a route-to-cheapest-adequate model, and is that the source of edge rather than the model itself?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A triage-style router lets you keep <strong>PHI on a cheap on-prem or open model</strong> for routine steps and reserve a frontier call only for the hard ones. <strong>Have we designed our orchestration to minimize where sensitive data touches a third-party frontier model,</strong> and can we prove that routing to an auditor?</li>
+  <li>Cheap, continuous AI analysis is a genuine safety win — and a validation burden. <strong>When a router escalates a case to a frontier model, is there a logged, human-oversight checkpoint</strong> for anything clinical, or does the sorting happen silently — the exact evidence the EU AI Act demands in <strong>14 days?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>The Perception logic — cheap model for the mass, frontier model for the exploit chain — maps directly onto the shop floor: <strong>a cheap/edge model for routine OT triage, a frontier call only for the rare complex fault.</strong> <strong>Have we mapped which industrial AI tasks are "log-parsing" and which are "exploit chains,"</strong> and are we routing accordingly instead of paying frontier rates for everything?</li>
+  <li>Your moat is <strong>process knowledge, not the model.</strong> <strong>Is our orchestration layer encoding how we actually triage and escalate</strong> — the proprietary judgment of which fault needs the expert — or have we outsourced that judgment to a single vendor's model?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Model-routing can collapse the cost of always-on AI (support, personalization, fraud) by reserving frontier calls for the few high-value moments. <strong>Have we re-priced every AI feature under a triage model</strong> — cheap model by default, frontier only where it lifts conversion or catches real fraud — rather than a flat premium-model bill?</li>
+  <li>A router that picks the cheapest model per task is only as good as <strong>the data and rules that steer it.</strong> <strong>Does our differentiation live in that steering logic and our proprietary customer data</strong> — which a competitor can't copy — or in a model everyone can now rent for a few dollars a million tokens?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>An orchestration layer that spans <strong>multiple vendors' models</strong> is attractive for cost and continuity — but for a public body it is also a <strong>data-governance and sovereignty decision made per task.</strong> <strong>Does our router enforce which models (and which jurisdictions) may handle citizen data,</strong> or does cost alone decide?</li>
+  <li>The EU's own <strong>Action Plan on Cybersecurity and AI (7 Jul)</strong> points at exactly this class of tool — advanced models evaluated before market, structured access for defenders. <strong>Is our orchestration layer keeping the auditable record</strong> of which model handled which task, ready for the GPAI enforcement powers that become applicable in <strong>14 days?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Surgeon, the Sorting, and the Ledger</h2>
+<p>Strip the branding away and Project Perception is a bet on a single architectural claim: <strong>once intelligence is abundant, the value is in the routing, not the model.</strong> Read it as Larrey's triage tent in three parts — the surgeon whose time is still costly, the sorting that decides where it's spent, and the ledger that records the decision.</p>
+<div class="card"><ul>
+  <li><strong>The surgeon (frontier capability, still costly per call).</strong> Even after Kimi K3, the <em>best</em> model on the <em>hardest</em> step still costs real money — Anthropic's Mythos 5 is listed at <strong>$10 / $50 per million tokens,</strong> access restricted to vetted partners. Perception doesn't pretend that capability is free; it treats it as a <strong>scarce surgeon</strong> to be rationed. The frontier model is called for the steps that genuinely need it: a complex exploit chain, an authentication flow, a remediation plan that touches production.</li>
+  <li><strong>The sorting (the orchestration layer — the actual product).</strong> This is the value. Perception reportedly runs an <strong>orchestration layer across Microsoft, OpenAI and Anthropic models</strong> that "chooses which AI model handles each step, rather than sending every job through the most powerful — and most expensive — system." Routine triage, log parsing and inventory go to a <strong>low-cost model;</strong> only the hard steps escalate. The payoff is economic and strategic: it makes vulnerability fixing <strong>cheap enough to run nonstop</strong> rather than only on high-severity incidents — and it makes the <em>model</em> interchangeable, so a cheaper or open one can be swapped in without re-tooling.</li>
+  <li><strong>The ledger (governance, the half most skip).</strong> Larrey's triage was also a <em>record</em> of every decision. The orchestration layer is the one place that sees every task, every model choice, and every escalation — which makes it the natural place to enforce and log policy: which model may see which data, what is retained, where a human must approve. Built that way, the router <em>is</em> your EU AI Act evidence. Built as a pure cost-optimizer, it's an ungoverned sprawl that happens to be cheap.</li>
+</ul></div>
+<p>The strategic core: <strong>a routing layer is a windfall if it governs and a liability if it only saves.</strong> If Perception (and its inevitable imitators) is right, the enterprise edge is no longer "we have the best model" — everyone does, cheaply — but <em>"we spend the expensive model only where it earns its keep, and we can prove every place it ran."</em></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The triage tent: when intelligence is abundant, the value is in the sorting. Project Perception routes each task to the cheapest capable model and calls a frontier model only when it pays. On the left, a flood of tasks — vulnerability scans, log parsing, triage, inventory, remediation drafts. These flow into the sorting layer in the centre: the orchestration or triage layer, which decides which model handles which step, choosing the cheapest that works. Most tasks are routed down to cheap or open models — the low-cost triage lane that runs nonstop. Only the hard steps — complex exploit chains, authentication flows, production remediation — are escalated to the frontier surgeon on the right, which is rare, costly and rationed. Beneath the sorting layer sits the ledger, the governance layer: every routing decision is logged and auditable — which model saw which data, what is logged, who signs off — which is your EU AI Act evidence in fourteen days. The trap is to build a pure cost-router: cheap and fast, but an ungoverned surface the regulator inspects. The win is to build a triage tent that governs: reserve the surgeon, route the mass, and log every call." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE TRIAGE TENT — when intelligence is abundant, value is in the sorting</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Project Perception routes each task to the cheapest capable model; frontier only when it pays</text>
+
+  <!-- flood of tasks -->
+  <rect x="20" y="66" width="180" height="120" rx="10" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="110" y="90" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">THE FLOOD OF TASKS</text>
+  <text x="110" y="112" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">vuln scans · log parsing</text>
+  <text x="110" y="128" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">triage · inventory</text>
+  <text x="110" y="144" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">remediation drafts</text>
+  <text x="110" y="168" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the routine mass</text>
+
+  <!-- arrow to sorting -->
+  <line x1="200" y1="126" x2="248" y2="126" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="248,120 260,126 248,132" fill="#9aa7b6"/>
+
+  <!-- the sorting layer -->
+  <rect x="262" y="66" width="196" height="120" rx="10" fill="#1a1530" stroke="#34306a"/>
+  <text x="360" y="90" font-size="12" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE SORTING</text>
+  <text x="360" y="106" font-size="10" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif">orchestration / triage layer</text>
+  <text x="360" y="128" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">"which model handles</text>
+  <text x="360" y="143" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">which step" — cheapest</text>
+  <text x="360" y="158" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">that works</text>
+  <text x="360" y="178" font-size="9.5" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE PRODUCT · the value</text>
+
+  <!-- arrow to frontier -->
+  <line x1="458" y1="126" x2="506" y2="126" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="506,120 518,126 506,132" fill="#9aa7b6"/>
+
+  <!-- frontier surgeon -->
+  <rect x="520" y="66" width="150" height="120" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="595" y="90" font-size="12" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">FRONTIER SURGEON</text>
+  <text x="595" y="112" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">exploit chains ·</text>
+  <text x="595" y="127" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">auth flows ·</text>
+  <text x="595" y="142" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">prod remediation</text>
+  <text x="595" y="168" font-size="10" fill="#e08a63" text-anchor="middle" font-family="sans-serif">rare · costly · rationed</text>
+
+  <!-- down arrow to cheap models -->
+  <line x1="360" y1="186" x2="360" y2="212" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="354,212 360,224 366,212" fill="#5dcaa5"/>
+  <text x="390" y="204" font-size="9.5" fill="#5dcaa5" font-family="sans-serif">most tasks →</text>
+
+  <!-- cheap / open models -->
+  <rect x="230" y="226" width="260" height="52" rx="10" fill="#11251c" stroke="#1d6e56"/>
+  <text x="360" y="248" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">CHEAP / OPEN MODELS — low-cost lane</text>
+  <text x="360" y="266" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">the mass of work, run nonstop (Kimi K3 open weights 27 Jul)</text>
+
+  <!-- down arrow to ledger -->
+  <line x1="360" y1="278" x2="360" y2="304" stroke="#efb54a" stroke-width="2"/>
+  <polygon points="354,304 360,316 366,304" fill="#efb54a"/>
+
+  <!-- the ledger -->
+  <rect x="180" y="318" width="360" height="66" rx="10" fill="#1f1a10" stroke="#7a5a1f"/>
+  <text x="360" y="340" font-size="12" font-weight="700" fill="#efb54a" text-anchor="middle" font-family="sans-serif">THE LEDGER — governance layer</text>
+  <text x="360" y="358" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">every routing decision logged &amp; auditable: which model saw which data,</text>
+  <text x="360" y="373" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">what's logged, who signs off → your EU AI Act evidence (14 days)</text>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="402" width="308" height="66" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="425" font-size="11.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — a pure cost-router</text>
+  <text x="182" y="444" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">cheap and fast — but an</text>
+  <text x="182" y="459" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">ungoverned surface the regulator inspects.</text>
+
+  <rect x="344" y="402" width="308" height="66" rx="10" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="425" font-size="11.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — a triage tent that governs</text>
+  <text x="498" y="444" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">reserve the surgeon, route the mass,</text>
+  <text x="498" y="459" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">log every call.</text>
+
+  <!-- footer principle -->
+  <text x="340" y="492" font-size="12" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Own the sorting. Reserve the surgeon. Make the tent govern as well as it saves.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#378add"></i>The flood — every AI task</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The sorting — orchestration layer (the product)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Cheap / open models — the low-cost lane</span>
+  <span><i class="dot" style="background:#d85a30"></i>The frontier surgeon — rationed</span>
+  <span><i class="dot" style="background:#ef9f27"></i>The ledger — governance &amp; audit</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — the model is the product</th><th>The discipline — the routing is the product, and it governs</th></tr>
+<tr><td>"We have access to the best model"</td><td>We spend the best model only where it earns its keep</td></tr>
+<tr><td>Every task through one premium model</td><td>Cheapest-adequate model per task; frontier reserved and rationed</td></tr>
+<tr><td>One vendor's model hard-wired in</td><td>A model-neutral router (7 Jul) that swaps cheap/open models in freely</td></tr>
+<tr><td>Router optimizes cost only</td><td>Router enforces data-eligibility, logging and human sign-off</td></tr>
+<tr><td>Escalations happen silently</td><td>Every routing decision logged — your EU AI Act ledger</td></tr>
+</table>
+
+<h3>Why cheaper-per-task doesn't shrink your governance — it grows the surface</h3>
+<div class="card">
+<p>Perception's whole promise is to make AI security <strong>cheap enough to run nonstop.</strong> But "nonstop" is the governance problem in three words. When each task was expensive, cost was the natural governor on how often and how widely a capable model ran. Route to the cheapest-adequate model and run continuously, and the number of places a model touches your data <strong>explodes</strong> — much of it automated, much of it invisible. Every one of those is a named EU AI Act deployer duty that becomes enforceable in <strong>14 days.</strong> The routing layer is the only vantage point that sees all of it, which is precisely why it must be the governance layer too, and not just the cost layer. Larrey's tent worked because the sorting <em>and the record</em> lived in the same place.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>This is the same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe that walks out, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age). Today names the layer where the value settles once the metal is cheap: <strong>the triage tent.</strong> On legacy estates the danger is a stack wired to send <em>every</em> AI task through one premium model — surgeon rates for log-parsing — with no vantage point that sees, prices, or governs the whole flow. The retrofit is the control plane this radar has urged all fortnight, now aimed at the routing: a <strong>model-neutral router (7 Jul)</strong> so any cheap or open model can serve the mass; a <strong>spend meter (6 Jul)</strong> to prove the triage through to the P&amp;L; and a <strong>governance ledger</strong> so every escalation to the frontier model is logged, eligible, and overseen.</p>
+<p><strong>The clean mental model:</strong> <em>When the scarce resource becomes abundant, the value moves to the system that decides where the still-costly capacity is spent. Build the triage tent — route the mass to cheap models, reserve the frontier model for where it pays — and make the tent govern as deliberately as it saves.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Project Perception (Microsoft)</strong> — reported this weekend (16–19 July, <strong>not officially announced</strong>): an AI cybersecurity platform to find and fix software vulnerabilities, positioned against <strong>Anthropic's Claude Mythos.</strong> Its defining feature is an <strong>orchestration layer</strong> across <strong>Microsoft, OpenAI and Anthropic</strong> models that routes each step to the cheapest-adequate model and reserves a frontier model for the hardest steps — to make vulnerability fixing <strong>cheap enough to run nonstop.</strong> Pricing, availability and eligibility <strong>not yet finalized or officially confirmed.</strong></li>
+  <li><strong>The target — Anthropic Claude Mythos</strong> — the frontier security model Anthropic chose not to release publicly (announced 7 Apr 2026), which autonomously surfaced thousands of vulnerabilities (e.g. <strong>271 in Firefox,</strong> exploits for 181; a <strong>27-year-old</strong> OpenBSD flaw). Access is via <strong>Project Glasswing</strong> (scoped defensive access, ~<strong>$100M</strong> in credits, partners incl. AWS, Apple, Google, Microsoft, NVIDIA, CrowdStrike, Linux Foundation). <strong>Mythos 5</strong> is listed at <strong>$10 / $50 per 1M tokens,</strong> vetted partners only — the premium ceiling Perception's routing aims to undercut.</li>
+  <li><strong>The regulatory tailwind</strong> — the EU's <strong>Action Plan on Cybersecurity and AI</strong> (presented <strong>7 July 2026</strong>) calls for advanced models to be evaluated before the EU market and for structured, governed access for defenders — pointing straight at this class of orchestrated security tool.</li>
+  <li><strong>The commodity underneath</strong> — <strong>Kimi K3's open weights publish on 27 July (8 days),</strong> the self-hostable floor that makes "route to a cheap/open model" a permanent option no vendor can revoke.</li>
+  <li><strong>The connector counterpart</strong> — <strong>MCP 2026-07-28 spec</strong> goes <strong>final in 9 days</strong> (stateless core, Enterprise-Managed Authorization stable, MCP Apps); the plumbing standardizes as routing becomes the battleground.</li>
+  <li><strong>The mandatory counterweight</strong> — EU AI Act <strong>GPAI enforcement applicable 2 Aug 2026 (14 days)</strong>; €15M or 3% of global turnover (Art. 101); the AI Office can compel documentation (Art. 91), require mitigations (Art. 93) and demand model access (Art. 92).</li>
+  <li><strong>Adoption cadence</strong> — Gartner: 40% of enterprise apps embed task-specific agents by end-2026 (from &lt;5% in 2025); &gt;40% of agentic projects cancelled by end-2027 — governance and value, not model access, remain the constraint.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">What sets the design apart is an orchestration layer that chooses which AI model handles each step, rather than sending every job through the most powerful — and most expensive — system.</div><div class="a">— Coverage of Microsoft's Project Perception, 17–18 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">The ability to mix models gives Microsoft a credible lever for controlling expense as usage scales — the difference between a tool reserved for high-severity incidents and one that hums along in the background, day after day.</div><div class="a">— Coverage of Project Perception, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">As frontier AI model capabilities converge, enterprise AI wins or loses at the orchestration layer.</div><div class="a">— Enterprise-AI commentary, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">[Kimi K3 signals] a hyper-competitive future where software intelligence becomes highly accessible, shifting financial power over to the platforms that distribute it and the enterprises that deploy it.</div><div class="a">— Coverage of the Kimi K3 release, July 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"When the scarce resource becomes abundant, the value moves to the triage that decides where the still-costly capacity is spent. Own the sorting — and make it govern as well as it saves."</div><div class="a">— the radar, on the orchestration layer</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Project Perception reported (not officially announced)</td><td><span class="v">16–19 Jul 2026</span></td><td>Press coverage (as reported)</td></tr>
+<tr><td>Model vendors orchestrated (MS / OpenAI / Anthropic)</td><td><span class="v">3</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Anthropic Mythos 5 price (input / output per 1M)</td><td><span class="v">$10 / $50</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Mythos vulnerabilities found in Firefox (exploits for 181)</td><td><span class="v">271</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Oldest flaw Mythos surfaced (OpenBSD)</td><td><span class="v">27 years</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>Project Glasswing defensive access credits</td><td><span class="v">~$100M</span></td><td>Coverage (as reported)</td></tr>
+<tr><td>EU Action Plan on Cybersecurity &amp; AI presented</td><td><span class="v">7 Jul 2026</span></td><td>European Commission</td></tr>
+<tr><td>Kimi K3 full open weights (Modified MIT) publish</td><td><span class="v">27 Jul 2026 (8 days)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (9 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (14 days)</span></td><td>European Commission (Art. 101)</td></tr>
+<tr><td>Maximum GPAI penalty</td><td><span class="v">€15M or 3% turnover</span></td><td>European Commission</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Instrument your AI workloads, then triage them.</strong> Project Perception's whole bet is that most tasks don't need your most expensive model. Before the next model-contract renewal, <strong>tag every AI call by whether it genuinely needs frontier capability</strong> — and route the routine mass (triage, parsing, drafting) to a cheap or, after 27 July, self-hostable open model through your <strong>model-neutral router (7 Jul).</strong> The cost cut is real; the strategic point is that the <em>triage logic</em> becomes the asset, not the model.</li>
+  <li><strong>Make your router govern, not just save.</strong> The orchestration layer is the one place that sees every task and every model choice — so make it enforce policy, not only price. <strong>Wire data-eligibility, logging and human-sign-off checkpoints into the routing itself</strong> (which model may see which data, what's retained, where a human approves), so that the same layer that saves money produces your <strong>EU AI Act evidence.</strong> A cost-only router optimizes spend while building an ungoverned surface the regulator inspects on <strong>2 August.</strong></li>
+  <li><strong>Name the layer where your value lives — and defend it.</strong> After Kimi K3 and Project Perception, "we have the best model" is not a moat; the orchestration and the proprietary data and rules that steer it are. <strong>Write down, in one page, your triage tent</strong> — the routing logic, the escalation rules, the data that makes them smart, the audit ledger — and move budget from renting model capability toward compounding <em>that.</em> If you can't point to the layer, you're paying surgeon rates for log-parsing and calling it strategy.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> TechRepublic · Windows News · Neowin · Newsbytes · Inshorts · CNBC · Rest of World · Cloud Security Alliance · European Commission · Model Context Protocol blog · Gartner. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 19 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
