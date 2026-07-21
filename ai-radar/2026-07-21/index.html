@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 21 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the identity layer — the week Google's Gemini Enterprise made agent identity a cryptographically attested infrastructure primitive (SPIFFE, mTLS, Agent Gateway) below the application tier, as non-human identities outnumber humans 45-to-1. Value migrates to the passport: attested, sponsored, expiring, seizable identity — checked at the border, not the front desk. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Passport</h1>
+  <div class="meta">Tuesday, 21 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar watched the value settle onto the signet ring — the graduated, logged grant of authority under which a machine may act in your name. Today the question moves one step earlier: not how much authority the seal carries, but whose hand wears the ring — and where you check. This week Google's new Gemini Enterprise Agent Platform answered it in architecture: every agent gets a unique, cryptographically attested identity (built on the open SPIFFE standard), enforced with mutual-TLS through a unified Agent Gateway, placed below the application tier as an infrastructure primitive. The reported contrast is the whole story: rivals position agent governance at the application tier — the front desk — where the agent is already inside the walls. And the population you must identify has inverted: non-human identities now outnumber humans by roughly 45-to-1, up to 109-to-1. Every agent in our estate is a traveler acting under someone's name — do we issue it a verifiable, expiring, revocable passport, and do we check it at the border, or only at the front desk after it's already inside?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For three weeks this radar has argued one thesis — <strong>the model is commoditizing; own and govern the layer around it.</strong> Yesterday the value settled on <strong>authorization</strong> — the signet ring, the graduated grant of decision-authority (19 Jul was routing; 20 Jul was authority). Today it moves one link earlier: <strong>identity.</strong> A grant of authority is meaningless if you cannot prove <em>who is holding it,</em> and this week the identity layer became a shipping architecture. Google's <strong>Gemini Enterprise Agent Platform</strong> assigns every agent a <strong>unique, cryptographically attested identity</strong> on the <strong>SPIFFE</strong> standard, signs and logs <strong>every</strong> API call, data access and file operation to that identity, and enforces it with <strong>mTLS</strong> through an <strong>Agent Gateway</strong> — placed <strong>below the application tier as an infrastructure primitive.</strong> The reported architectural break with rivals: Anthropic and OpenAI position agent-governance controls <strong>at the application tier.</strong> The stakes: <strong>non-human identities (NHIs) now outnumber humans ~45:1, and 109:1 in the average enterprise, up from 82:1 a year ago</strong> — while <strong>78%</strong> of organizations have no documented policy even to create or retire them. The standing countdowns run beneath: <strong>Kimi K3's open weights on 27 July (6 days),</strong> <strong>MCP's final spec on 28 July (7 days),</strong> and the <strong>EU AI Act's GPAI enforcement on 2 August (12 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>A grant of authority is only as good as the identity that holds it.</strong> Yesterday's signet ring decided <em>how much</em> an agent may do in your name; today's question is <em>whose name, provably.</em> The industry answer is now explicit: <strong>an agent is a first-class non-human identity</strong> — its own principal, <strong>cryptographically attested, short-lived at runtime, with the human preserved as the delegating subject via token exchange.</strong> Google, Microsoft and AWS all shipped a version of this in the last two quarters; Gemini Enterprise is the sharpest statement of it because it puts the check <strong>below the application tier.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>The border, not the front desk.</strong> The whole architectural argument reduces to <em>where</em> identity is verified. Enforce it at the <strong>application tier</strong> — the front desk, the dashboard — and the agent is already inside your walls before anyone asks who it is; a swipe-away control, easy to route around. Enforce it <strong>below the application tier</strong> — the border — with cryptographic identity and mTLS on <strong>every</strong> call, <strong>regardless of how the agent was built or by whom,</strong> and an unidentified or expired traveler never crosses. Same lesson as yesterday's roll, one layer down: value and liability both live in the layer you own, and identity is the layer under authority.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The population already inverted — and it is ungoverned.</strong> NHIs outnumber humans by <strong>45:1 to 109:1</strong> (up to <strong>144:1</strong> in cloud-native estates), <strong>78%</strong> of organizations have no documented policy to create or remove them, and about <strong>two-thirds</strong> have already suffered a breach through a compromised non-human identity. Adoption confirms the gap: <strong>96%</strong> of enterprises run AI agents, but only <strong>12%</strong> have a centralized platform to govern them and <strong>94%</strong> say sprawl is compounding security risk (OutSystems, 1,879 IT leaders).</div></div>
+<div class="card"><strong>Bottom line:</strong> yesterday the value settled on the signet ring — the grant of authority. Today it moves to the <strong>passport</strong> — the verifiable, expiring, revocable <em>identity</em> that carries the seal, and the <strong>border</strong> where you check it. When agents outnumber your people 45-to-1 and every one acts under some name, "how capable is the model" is a commodity question; <strong>"can we prove whose identity took this action, and did we verify it at the border or the front desk"</strong> is the one that decides whether your roll is evidence or fiction. <strong>Issue every agent a passport. Name its human sponsor. Check it at the border. Keep the manifest — and be able to seize the passport.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🛂 "The Passport"</h3>
+<p><em>Topic: This week Google's Gemini Enterprise Agent Platform made agent identity an infrastructure primitive — every agent gets a unique, cryptographically attested identity on the SPIFFE standard, every action is signed and logged to it, and it is enforced with mutual-TLS through an Agent Gateway placed below the application tier, so governance holds regardless of how the agent was built. Coverage frames this as a deliberate break from rivals, who position agent-governance controls at the application tier. It lands as non-human identities outnumber humans by 45-to-1 (and up to 109-to-1 in the average enterprise), while most organizations lack any documented policy to issue or revoke them. The lesson for the enterprise: when the machines acting in your name outnumber your people many times over, the value and the liability live in the identity you can verify — and in where you verify it.</em></p>
+<p>For most of history you could cross a frontier on your face and your word. Then realms grew crowded, and the crowd made the word worthless — too many travelers, too many claiming to be someone they were not. So the sovereign issued a <strong>passport:</strong> a document that did two things a spoken claim could not. It <strong>named</strong> the bearer and <strong>vouched</strong> for them — <em>let this person pass; they travel under our protection</em> — and it was <strong>verifiable,</strong> sealed and later stamped and photographed, so that a guard could <em>authenticate</em> it rather than simply believe it. A passport was never a mere convenience. It was the difference between a realm that knew who was inside it and one that merely hoped.</p>
+<p>Four disciplines made the passport trustworthy, and they are exactly the parts a modern estate forgets. First, it was <strong>issued by an authority,</strong> not self-declared — you did not write your own. Second, it <strong>named a sponsor</strong> — the state, or the noble, whose protection you carried, so that authority was always traceable back to a responsible party. Third, it <strong>expired</strong> — a safe-conduct was good for a season and a route, not forever, because a credential that never lapses is a key that never stops opening the door. And fourth — the one everyone skips — it was checked <strong>at the border.</strong> The guard at the gate, whose only job was to verify identity, decided who entered the realm. The innkeeper, deep inside the walls, merely wrote your name in his ledger <em>after</em> you had already arrived. A realm that checked papers only at the front desk of each inn had no border at all: anyone who slipped the gate roamed free, and a forged or expired paper was caught, if ever, by a clerk with no power to turn anyone away.</p>
+<p>Here is the part the board must sit with. An autonomous agent is a traveler you have let loose in your realm — and there are now forty-five of them for every one of your people, in some estates more than a hundred. Yesterday you decided how much authority each traveler's seal could carry. But a seal is worthless if you cannot verify <em>whose hand wears the ring,</em> and you cannot verify it at the front desk — by then the traveler is already inside, already acting in your name. Gemini Enterprise is, almost literally, the passport-and-border system rebuilt for software: a <strong>cryptographically attested identity</strong> issued to every agent by the infrastructure (not self-asserted), naming its <strong>human sponsor</strong> through token exchange, <strong>short-lived</strong> by design, and checked <strong>at the border</strong> — below the application tier, on every call, with mutual-TLS — rather than at the front desk of each app.</p>
+<p><strong>The moral:</strong> when the machines acting in your name outnumber your people many times over, do not ask first <em>how capable</em> each one is — capability is the cheap metal now. Ask <em>can I prove who it is, and where do I check?</em> Issue every agent a <strong>passport:</strong> an identity that is attested rather than claimed, that names a human sponsor, that <strong>expires,</strong> and that you can <strong>seize.</strong> Then — the half most will skip — check it <strong>at the border, not the front desk:</strong> make identity an infrastructure primitive below the application tier, so an unidentified or expired traveler never crosses, no matter which app or vendor built it. And <strong>keep the manifest</strong> — the record of who crossed — because that manifest is the roll from yesterday, and it is only as trustworthy as the identities written on it.</p>
+<p><strong>The question it forces:</strong> <em>Every agent in our estate acts under some identity — is that identity issued and attested by our infrastructure, does it name a human sponsor, does it expire, and can we seize it? And do we verify it at the border — below the application tier, on every call — or only at the front desk, after the traveler is already inside our walls and acting in our name?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Non-human identities now outnumber our people <strong>45-to-1, and up to 109-to-1,</strong> yet <strong>78%</strong> of organizations have no documented policy even to create or retire them. <strong>Can we produce, today, an inventory of every agent and service identity acting in our name — who sponsors it, when it expires, and how we revoke it</strong> — or are we running an unbordered realm full of unidentified travelers?</li>
+  <li>The architectural question of the week is <em>where</em> identity is verified — <strong>at the border (below the application tier, on every call) or at the front desk (the app, the dashboard).</strong> <strong>Where do we check?</strong> If governance lives only in each application, an agent is already inside our walls before anyone asks who it is.</li>
+  <li><strong>96%</strong> of us run agents but only <strong>12%</strong> have a centralized platform to govern them. <strong>Is agent identity something we own as infrastructure</strong> — attested, short-lived, revocable, uniform across every agent however it was built — <strong>or a setting inside each vendor's console</strong> that stops at that vendor's edge?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>A payments, trading or credit agent acting under a shared, long-lived, over-scoped credential is the classic non-human-identity breach — and <strong>two-thirds of enterprises have already had one.</strong> <strong>Does every such agent carry its own attested, short-lived passport that names a human sponsor,</strong> so the auditor (and the EU AI Act, in 12 days) can trace each transaction to a provable identity rather than a shared service account?</li>
+  <li>Regulators will ask <em>who</em> moved the money, not <em>which model.</em> <strong>Can we tie every consequential financial action to a unique agent identity on the manifest</strong> — or would the trail dead-end at a machine credential a dozen agents share?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A clinical or diagnostic agent touching patient data must be as identifiable as any clinician with badge access. <strong>Does each agent hold a distinct, attested identity with a named human sponsor and an expiry,</strong> so an action on a patient record is never anonymous and never open-ended?</li>
+  <li>China's agent rules name <strong>healthcare</strong> a high-risk sector requiring filing; the record you file is only as good as the identities in it. <strong>Are our agent passports issued and verified by infrastructure</strong> — or self-asserted at the app layer, where a compromised app forges the traveler?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>On the plant floor, an OT agent adjusting a setpoint should be as strongly identified as a badged operator. <strong>Is agent identity enforced at the network border with mutual authentication</strong> — the equivalent of the guard at the gate — <strong>rather than trusted because it reached the control application?</strong></li>
+  <li>Your moat is process authority, exercised by identifiable actors. <strong>Can we name and revoke the specific agent behind any physical action,</strong> or do agents share inherited machine credentials that no manifest can tell apart?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer-facing agents issue refunds and make promises in your brand's name. <strong>Does each carry a passport that names its human sponsor and expires,</strong> so a compromised or manipulated agent can be identified and stopped at the border rather than discovered later through a chargeback?</li>
+  <li>Peak season multiplies agents faster than governance. <strong>Can we issue and revoke agent identities centrally</strong> — or does every new storefront tool mint its own untracked travelers?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>For any agent touching citizen data, identity is accountability. <strong>Is every such agent a first-class identity — attested, sponsored, expiring, revocable — verified below the application tier,</strong> the way a public body must know who acted on a citizen's record?</li>
+  <li>The EU AI Act's AI Office can compel documentation and evaluations in <strong>12 days.</strong> <strong>Is our manifest built on identities we issue and can prove,</strong> or on self-declared app-tier credentials a regulator would rightly distrust?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Passport, the Sponsor, and the Border</h2>
+<p>Strip the week's news down and the claim is architectural: <strong>when machines acting in your name outnumber your people 45-to-1, the governed object is not the model and not even the grant of authority — it is the identity that carries it, and the layer at which you verify that identity.</strong> Read it as the passport-and-border system in three parts — the passport itself (an attested identity, not a claim), the sponsor (a human, named through delegation), and the border (the layer where you check).</p>
+<div class="card"><ul>
+  <li><strong>The passport (attested identity — the actual object).</strong> Gemini Enterprise gives every agent a <strong>unique, cryptographically attested identity</strong> built on <strong>SPIFFE</strong> (Secure Production Identity Framework for Everyone), and signs and logs <strong>every</strong> API call, data access and file operation to it. The engineering point is <em>attested, not asserted:</em> the identity is issued and cryptographically verifiable by the infrastructure, so an agent cannot simply <em>claim</em> to be trusted the way an app-tier token or a shared service account lets it. This is the industry consensus written into a product: an agent is <strong>its own principal, cryptographically attested, short-lived at runtime.</strong></li>
+  <li><strong>The sponsor (the human, preserved through delegation).</strong> A passport names who vouches for the bearer. The equivalent is <strong>the human preserved as the delegating subject via token exchange:</strong> the agent acts with its own identity, but that identity carries a traceable line back to the person (or system) that authorized it. This is what keeps yesterday's roll meaningful — an act on the manifest names <em>both</em> the agent and its sponsor, so authority is always traceable to a responsible party, not to an anonymous machine credential.</li>
+  <li><strong>The border (where you verify — the half most skip).</strong> The whole difference between Gemini's approach and the app-tier approach is <em>location.</em> Placing <strong>Agent Identity and the Agent Gateway below the application tier as infrastructure primitives</strong> means identity is checked with <strong>mTLS on every call, regardless of how an agent was built or by whom</strong> — the guard at the gate. Positioning governance <strong>at the application tier</strong> means the check happens at the front desk, after the agent is already inside, and only for agents that pass through that particular app. Same seam as every edition this fortnight: own the layer under the commodity, and enforce there.</li>
+</ul></div>
+<p>The strategic core: <strong>an identity layer is a moat if it is attested, sponsored, short-lived, revocable and verified at the border, and a liability if identity is claimed, shared, long-lived and checked (if at all) at the front desk.</strong> After Kimi K3 and the signet ring, "we route to the best model, under a graduated grant" is not a defense; <em>"we can prove which identity took this action, whose human sponsored it, and that we verified it at the border"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The passport: verify identity at the border, not the front desk. Google's Gemini Enterprise gives every agent a cryptographically attested identity on the SPIFFE standard, enforced with mutual-TLS through an Agent Gateway placed below the application tier. On the left, a crowd of travelers — agents, service accounts, workloads and bots — where non-human identities outnumber humans forty-five to one, up to a hundred and nine to one, and seventy-eight percent of organizations have no policy to issue or revoke them. The question in the centre is: where do you check? The front desk, at the application tier, checks identity after the agent is already inside — per app, self-asserted, easy to bypass; this is the trap. The border, below the application tier, uses attested identity on the SPIFFE standard, mutual-TLS and a gateway, on every call, however the agent was built; this is the win. The passport itself has four properties: attested, issued by infrastructure not self-claimed; sponsored, naming a human via token exchange as the delegating subject; expiring, short-lived at runtime; and seizable, revoked instantly. Every crossing flows to the manifest — yesterday's roll — where every act is logged to an identity, only as good as the passports, forming your audit evidence in twelve days. The trap is shared, long-lived, self-asserted credentials checked at the front desk, leaving travelers you cannot name. The win is an attested, sponsored, expiring, seizable passport checked at the border, a realm that knows who is inside." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE PASSPORT — verify identity at the BORDER, not the front desk</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Gemini Enterprise: attested agent identity (SPIFFE) + mTLS gateway, BELOW the application tier</text>
+
+  <!-- crowd of travelers -->
+  <rect x="20" y="70" width="176" height="164" rx="10" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="108" y="94" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">THE CROWD OF</text>
+  <text x="108" y="110" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">TRAVELERS</text>
+  <text x="108" y="134" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">agents · service accounts</text>
+  <text x="108" y="150" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">workloads · bots</text>
+  <text x="108" y="174" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">NHIs outnumber humans</text>
+  <text x="108" y="190" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">45:1 — up to 109:1</text>
+  <text x="108" y="214" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">78% have no issue /</text>
+  <text x="108" y="228" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">revoke policy</text>
+
+  <!-- arrow to checkpoint -->
+  <line x1="196" y1="150" x2="244" y2="150" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="244,144 256,150 244,156" fill="#9aa7b6"/>
+
+  <!-- checkpoint heading -->
+  <text x="461" y="62" font-size="11" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">WHERE DO YOU CHECK?</text>
+
+  <!-- front desk (trap) -->
+  <rect x="262" y="70" width="398" height="52" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="278" y="90" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">FRONT DESK — the application tier</text>
+  <text x="278" y="106" font-size="10" fill="#c3ccd8" font-family="sans-serif">checked after the agent is inside · per-app · self-asserted</text>
+  <text x="640" y="106" font-size="12" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">✗</text>
+
+  <!-- border (win) -->
+  <rect x="262" y="128" width="398" height="52" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="278" y="148" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE BORDER — below the application tier</text>
+  <text x="278" y="164" font-size="10" fill="#c3ccd8" font-family="sans-serif">attested identity (SPIFFE) · mTLS · gateway · every call, however built</text>
+  <text x="640" y="164" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">✓</text>
+
+  <!-- down arrow to passport -->
+  <line x1="461" y1="180" x2="461" y2="204" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="455,204 461,216 467,204" fill="#5dcaa5"/>
+
+  <!-- the passport -->
+  <rect x="238" y="220" width="404" height="98" rx="10" fill="#1a1530" stroke="#34306a"/>
+  <text x="440" y="240" font-size="12" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE PASSPORT</text>
+  <text x="258" y="260" font-size="10.5" fill="#c3ccd8" font-family="sans-serif">① ATTESTED — issued by infra, not self-claimed</text>
+  <text x="258" y="277" font-size="10.5" fill="#c3ccd8" font-family="sans-serif">② SPONSORED — names a human (token exchange)</text>
+  <text x="258" y="294" font-size="10.5" fill="#c3ccd8" font-family="sans-serif">③ EXPIRING — short-lived at runtime</text>
+  <text x="258" y="311" font-size="10.5" fill="#c3ccd8" font-family="sans-serif">④ SEIZABLE — revoke instantly</text>
+
+  <!-- down arrow to manifest -->
+  <line x1="440" y1="318" x2="440" y2="344" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="434,344 440,356 446,344" fill="#b9b2f5"/>
+  <text x="478" y="336" font-size="9.5" fill="#b9b2f5" font-family="sans-serif">every crossing →</text>
+
+  <!-- the manifest -->
+  <rect x="230" y="358" width="420" height="66" rx="10" fill="#161b22" stroke="#2a3240"/>
+  <text x="440" y="380" font-size="12" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE MANIFEST — yesterday's roll</text>
+  <text x="440" y="398" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">every act logged to an identity: which identity, whose sponsor, when</text>
+  <text x="440" y="414" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">only as good as the passports → your EU AI Act evidence (12 days)</text>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="446" width="308" height="74" rx="10" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="469" font-size="11.5" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — checked at the front desk</text>
+  <text x="182" y="488" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">shared, long-lived, self-asserted —</text>
+  <text x="182" y="503" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">travelers you can't name.</text>
+
+  <rect x="344" y="446" width="308" height="74" rx="10" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="469" font-size="11.5" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — checked at the border</text>
+  <text x="498" y="488" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">attested, sponsored, expiring, seizable —</text>
+  <text x="498" y="503" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a realm that knows who's inside.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#378add"></i>The crowd — every non-human identity</span>
+  <span><i class="dot" style="background:#d85a30"></i>Front desk — the app tier (trap)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The border — below the app tier (win)</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Passport &amp; manifest — identity &amp; record</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — identity is a claim, checked late</th><th>The discipline — identity is attested, checked at the border</th></tr>
+<tr><td>"It reached the app, so it must be trusted"</td><td>Attested by infrastructure (SPIFFE), verified with mTLS on every call</td></tr>
+<tr><td>Shared, long-lived machine credentials</td><td>Each agent its own principal, short-lived at runtime</td></tr>
+<tr><td>The agent acts anonymously</td><td>Every action names both the agent and its human sponsor</td></tr>
+<tr><td>Governance is a setting inside each app</td><td>Identity is an infrastructure primitive below the application tier</td></tr>
+<tr><td>No way to know — or revoke — who's inside</td><td>Seize the passport: instant, central revocation</td></tr>
+</table>
+
+<h3>Why more, cheaper agents make identity the binding constraint</h3>
+<div class="card">
+<p>The forces this radar has tracked all fortnight — commodity models (Kimi K3, 6 days), standard plumbing (MCP, 7 days), cheap routing, graduated authority (yesterday) — all point one way: <strong>more agents, acting more autonomously, minted faster than anyone is tracking.</strong> That is precisely why the identity population has inverted: NHIs at <strong>45:1 to 109:1,</strong> and <strong>144:1</strong> in cloud-native estates. Each new agent is a new traveler in your realm. When agents were few and expensive, you could half-know them by hand. Make them cheap and continuous and the only way to know who is inside is to <strong>issue every one a passport and check it at the border</strong> — which is why the identity layer, not the model, is now the binding constraint on safe scale.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe that walks out, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring). Today names the layer under authority: <strong>the passport</strong> — provable identity. On legacy estates the danger is an agent wired in with an <strong>inherited, shared, never-expiring service credential</strong> — indistinguishable from every other process using it, checked (if at all) at the application it happens to hit. The retrofit is the border this radar has urged all fortnight, now aimed at identity: <strong>attested identities</strong> issued by infrastructure (SPIFFE-style), the <strong>human sponsor</strong> carried through token exchange, <strong>short-lived</strong> credentials by default, an <strong>Agent Gateway / mTLS</strong> check below the application tier, and a <strong>seize-the-passport</strong> revocation path — feeding the same manifest that is your EU AI Act evidence in 12 days.</p>
+<p><strong>The clean mental model:</strong> <em>An autonomous agent is a traveler in your realm. Issue it a passport that is attested, sponsored, expiring and seizable — and check it at the border, below the application tier, not at the front desk after it's already inside.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Google — Gemini Enterprise Agent Platform (agent identity as infrastructure).</strong> Assigns every agent a <strong>unique, cryptographically attested identity</strong> on the <strong>SPIFFE</strong> standard; signs and logs <strong>every API call, data access and file operation</strong> to that identity; enforces with <strong>mTLS / Context-Aware Access</strong> through an <strong>Agent Gateway</strong>; places <strong>Agent Identity and the Gateway below the application tier as infrastructure primitives.</strong> Reported as a deliberate architectural break from rivals (Anthropic, OpenAI) who position agent governance at the application tier.</li>
+  <li><strong>The population inversion — NHIs vs humans.</strong> <strong>45:1</strong> (Rubrik Zero Labs), <strong>109:1</strong> average enterprise, up from <strong>82:1</strong> a year ago (Palo Alto Networks 2026 Identity Security Landscape), <strong>144:1</strong> cloud-native/DevOps (Entro). <strong>78%</strong> of organizations lack a documented policy to create or remove NHIs; <strong>~two-thirds</strong> have suffered a breach via a compromised NHI (industry data, as reported).</li>
+  <li><strong>The governance gap — OutSystems (1,879 IT leaders, Apr 2026).</strong> <strong>96%</strong> run AI agents; only <strong>12%</strong> have a centralized platform to manage them; <strong>36%</strong> have a centralized governance approach; <strong>94%</strong> say sprawl is compounding complexity, technical debt and security risk.</li>
+  <li><strong>The commodity underneath — Kimi K3's open weights publish 27 July (6 days),</strong> the self-hostable floor that makes more, cheaper, more autonomous agents — and more travelers — inevitable.</li>
+  <li><strong>The connector counterpart — MCP 2026-07-28 spec goes final in 7 days,</strong> aligning MCP authorization with OAuth 2.1 / OpenID Connect (servers as formal OAuth 2.1 resource servers) — the plumbing every agent authenticates through as identity becomes the battleground.</li>
+  <li><strong>The mandatory counterweight — EU AI Act GPAI enforcement applicable 2 Aug 2026 (12 days).</strong> €15M or 3% of global turnover (Art. 101); powers to compel documentation (Art. 91), run evaluations (Art. 92) and require mitigations (Art. 93); reaching deployers. Your manifest is only evidence if its identities are provable.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Using the SPIFFE standard, each agent is granted a unique, cryptographically attested identity. Every API call, every data access request, every file operation the agent performs is signed, logged, and traceable to that identity.</div><div class="a">— Coverage of Google's Gemini Enterprise Agent Platform, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">[Gemini Enterprise places Agent Identity and Agent Gateway] below the application tier as infrastructure primitives, so governance is enforced regardless of how an agent was built or by whom.</div><div class="a">— Coverage of Gemini Enterprise vs. app-tier rivals, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">An agent is a first-class non-human identity — its own principal, cryptographically attested, short-lived at runtime, with the human preserved as the delegating subject via token exchange.</div><div class="a">— Industry best-practice framing on agent identity, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Machine identities now outnumber human identities by 109 to 1 in the average enterprise, up from 82 to 1 just a year earlier.</div><div class="a">— Palo Alto Networks, 2026 Identity Security Landscape (as reported)</div></blockquote>
+<blockquote><div class="q">"A seal is worthless if anyone can wear the ring. Yesterday we decided how much authority the seal carries; today we prove whose hand wears it — and we check at the border, not the front desk."</div><div class="a">— the radar, on the identity layer</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Non-human identities vs. humans (average enterprise)</td><td><span class="v">109:1 (from 82:1)</span></td><td>Palo Alto Networks 2026 (as reported)</td></tr>
+<tr><td>Non-human identities vs. humans (broad estimate)</td><td><span class="v">~45:1</span></td><td>Rubrik Zero Labs (as reported)</td></tr>
+<tr><td>Non-human identities vs. humans (cloud-native)</td><td><span class="v">144:1</span></td><td>Entro Labs (as reported)</td></tr>
+<tr><td>Orgs with NO policy to create/remove NHIs</td><td><span class="v">78%</span></td><td>Industry data (as reported)</td></tr>
+<tr><td>Enterprises breached via a compromised NHI</td><td><span class="v">~two-thirds</span></td><td>Industry data (as reported)</td></tr>
+<tr><td>Enterprises running AI agents in production</td><td><span class="v">96%</span></td><td>OutSystems (1,879 IT leaders)</td></tr>
+<tr><td>Enterprises with a centralized platform to govern agents</td><td><span class="v">12%</span></td><td>OutSystems</td></tr>
+<tr><td>Enterprises with a centralized governance approach</td><td><span class="v">36%</span></td><td>OutSystems</td></tr>
+<tr><td>Concern that AI sprawl raises security risk</td><td><span class="v">94%</span></td><td>OutSystems</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>Kimi K3 full open weights (Modified MIT) publish</td><td><span class="v">27 Jul 2026 (6 days)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (7 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (12 days)</span></td><td>European Commission (Art. 101)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Take the census — inventory every traveler before you fortify anything.</strong> You cannot issue passports to a crowd you can't count. Pull a list of every agent and non-human identity acting in your name — human sponsor, scope, credential type, expiry — and rank them by blast radius. Expect the count to shock: NHIs outnumber people <strong>45:1 to 109:1,</strong> and <strong>78%</strong> of organizations start from no policy at all. The census is the prerequisite for everything below, and it doubles as the opening page of your EU AI Act manifest, due-diligence-ready in <strong>12 days.</strong></li>
+  <li><strong>Issue real passports — attested, sponsored, expiring, seizable.</strong> Make every agent a <strong>first-class identity:</strong> issued and cryptographically attested by your infrastructure (SPIFFE-style), <strong>not</strong> a shared or self-asserted app-tier token; carrying its <strong>human sponsor</strong> through token exchange; <strong>short-lived</strong> by default so a credential can't outlive its purpose; and <strong>revocable in minutes</strong> — a seize-the-passport path, tested, with a named owner. Kill the long-lived shared service accounts that make two-thirds of NHI breaches possible.</li>
+  <li><strong>Move the checkpoint to the border.</strong> Decide, deliberately, <em>where</em> identity is verified — and move it <strong>below the application tier.</strong> Enforce agent identity with mutual authentication at an <strong>Agent Gateway / mesh,</strong> on <strong>every</strong> call, <strong>regardless of which app or vendor built the agent</strong> — the guard at the gate, not the clerk at the front desk. That single architectural choice is what makes your manifest trustworthy: every act on the roll names a provable identity and its sponsor, verified at the perimeter, rather than a claim you accepted after the traveler was already inside your walls.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Google Cloud documentation · Tech Times · Infosecurity Magazine · Okta · Cloud Security Alliance · Palo Alto Networks · Rubrik Zero Labs · The Hacker News · OutSystems · Gartner · Model Context Protocol blog · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 21 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
