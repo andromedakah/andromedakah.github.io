@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 22 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the value layer — the week enterprise AI's centre of gravity shifted from models to ROI clarity as CFOs froze budgets. The reckoning in data: 95% of GenAI pilots show no P&L (MIT), 89% of agent pilots never reach production (Gartner), 26% report meaningful financial value (BCG), only 4% report AI value to the board (Deloitte). When the seed is free (Kimi K3 open weights in 5 days), the estate is judged by bushels weighed, not acres planted. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Harvest</h1>
+  <div class="meta">Wednesday, 22 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a month this radar has built, one layer a day, the stack that lets a machine act safely in your name — the spend meter, the model-neutral router, the MCP control plane, the signet ring of authority, the passport of identity. Today the boardroom asks the question that ends every argument: does any of it pay? This week's coverage says enterprise AI's centre of gravity has shifted from models to ROI clarity — CFOs are freezing budgets, and Forrester says firms are postponing ~25% of planned AI spend to 2027. The newest data says the harvest is not coming in: 95% of GenAI pilots show zero measurable P&L (MIT), 89% of agent pilots never reach production (Gartner), only 26% of firms report meaningful financial value (BCG), and just 4% report AI value to the board (Deloitte). The seed is about to be free (Kimi K3 open weights in 5 days). We have planted a whole field of pilots — but can we name, for each agent, the P&L outcome it was sown for, who owns it, and the bushels it delivered — or are we counting acres planted and calling it a crop?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For four weeks this radar has argued one thesis — <strong>the model is commoditizing; own and govern the layer around it</strong> — and built the stack that proves it, one layer a day: metering, routing, the MCP plane, the authorization ladder (the signet ring), the identity passport. Today the argument reaches its only possible verdict: <strong>value.</strong> Current July-2026 coverage frames the shift bluntly — enterprise AI's <strong>centre of gravity is moving from models to orchestration, governance and ROI clarity</strong> — and the CFO has arrived with a budget freeze. The reckoning is now data, not vibes: <strong>MIT's</strong> GenAI-Divide study finds <strong>95%</strong> of generative-AI pilots deliver <strong>no measurable P&amp;L</strong>; <strong>Gartner</strong> finds <strong>89%</strong> of agent pilots never reach production and predicts <strong>&gt;40%</strong> of agentic-AI projects will be <strong>cancelled by end-2027</strong>; <strong>BCG</strong> (1,800 execs) finds only <strong>26%</strong> have generated meaningful financial value; <strong>PwC's</strong> Davos CEO survey finds <strong>56%</strong> saw neither more revenue nor less cost from AI last year (only <strong>12%</strong> got both); <strong>S&amp;P Global</strong> finds <strong>42%</strong> have abandoned most AI projects; <strong>Deloitte</strong> finds only <strong>4%</strong> report AI value to the board. The standing countdowns run beneath, one day closer: <strong>Kimi K3's open weights on 27 July (5 days),</strong> <strong>MCP's final spec on 28 July (6 days),</strong> and the <strong>EU AI Act's GPAI enforcement on 2 August (11 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The centre of gravity moved from the model to the return.</strong> A month ago the debate was which model, at what price. Now it is <em>did the money come back.</em> Coverage this week calls it a shift "from models to orchestration, governance and ROI clarity," and CFOs are enforcing it — <strong>Forrester</strong> says enterprises are <strong>postponing ~25% of planned AI spend to 2027</strong> until returns are shown. The seed is nearly free (Kimi K3, 5 days); nobody is paying for seed anymore — they are asking for grain.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Pilots are not a harvest — and most sown seed never becomes sold grain.</strong> <strong>95%</strong> of GenAI pilots produce no measurable P&amp;L (MIT); <strong>89%</strong> of agent pilots never reach production (Gartner); <strong>42%</strong> of firms have already abandoned most of their AI work (S&amp;P Global). MIT's diagnosis is not about the model: <em>"pilots lie — they run on clean data, isolated systems and goodwill; production introduces ownership, security, integration, edge cases and accountability."</em> That production layer is exactly the stack this radar spent a month building — but it only pays if it is pointed at a named outcome.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The few that reach the scale pay handsomely — and almost no one is weighing the crop.</strong> The minority of pilots that reach production reportedly return on the order of <strong>171% ROI</strong> (industry coverage, as reported), and banking/insurance already run agents in production at <strong>47%</strong> vs <strong>14–18%</strong> for government/healthcare (S&amp;P Global/McKinsey). Yet only <strong>4%</strong> of organizations report AI value to the board (Deloitte) and <strong>fewer than one-third</strong> of decision-makers can name a specific financial outcome from their AI spend (Gartner). You cannot manage a harvest you never weigh.</div></div>
+<div class="card"><strong>Bottom line:</strong> the seed (the model) is commoditizing to free; what you own is the <strong>land, the irrigation, the market access and the ledger</strong> — but none of it is worth anything until grain reaches the scale. Stop funding <strong>acres planted</strong> (pilots launched) and start demanding <strong>bushels delivered</strong> (outcomes booked to the P&amp;L). <strong>Plant every agent against a named P&amp;L outcome and owner. Kill the dry rows early. Irrigate the few that yield. Weigh the crop on the board's scale — and enter it in the book.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🌾 "The Harvest"</h3>
+<p><em>Topic: This week's coverage says enterprise AI's centre of gravity has shifted from models to ROI clarity, and CFOs are imposing budget controls — with Forrester reporting that firms are postponing about a quarter of planned AI spend to 2027 until returns are demonstrated. The underpinning data is a reckoning: MIT finds 95% of generative-AI pilots deliver no measurable P&amp;L; Gartner finds 89% of agent pilots never reach production and expects more than 40% of agentic-AI projects to be cancelled by end-2027; BCG finds only 26% of firms have generated meaningful financial value; PwC finds 56% of CEOs saw neither higher revenue nor lower cost from AI last year; and Deloitte finds only 4% report AI value to the board. Meanwhile the model itself keeps commoditizing — Kimi K3's open weights publish in five days. The lesson for the enterprise: when the seed is free, the estate is judged not by how much it plants but by how much it harvests, weighs, and brings to market.</em></p>
+<p>Every spring the same temptation visits the estate: seed is cheap, the ground is soft, and it costs almost nothing to <em>plant.</em> So an anxious lord plants everything — every field, every margin, every strip of poor soil — and stands back to admire the green. Planting feels like progress. It photographs well. It fills the estate with the appearance of a coming abundance. And it is almost entirely worthless, because a field of green is not a harvest. The only number that ever mattered was the one taken months later, at the scale by the granary door: <strong>bushels weighed, and entered in the book.</strong> A wise steward knew the cruelest fact of farming — that most sown seed never becomes sold grain. Drought, blight, poor soil, and the plain arithmetic of the market take the rest. The green field is a promise; the weighed bushel is a return.</p>
+<p>Four disciplines separated the estate that ate all winter from the one that starved among its own green fields. First, it <strong>planted for the market, not for the plot</strong> — every field was sown against a buyer and a price known in advance, not simply because there was seed and soil. Second, it <strong>tended and thinned</strong> — the steward walked the rows in midsummer and pulled up the dry ones without sentiment, because water and labor spent on a field that would never yield is water and labor stolen from one that would. Third, it <strong>irrigated the few that yielded</strong> — scarce resources were concentrated on the acres already setting grain, not spread thin across every hopeful sprout. And fourth — the one every anxious lord skips — it <strong>weighed the crop at the scale and wrote the number in the book.</strong> An estate that never weighed its harvest could not tell a good year from a ruinous one, could not learn which fields to plant again, and could not answer the only question the creditors ever asked at the door: <em>what did the land return?</em></p>
+<p>Here is the part the board must sit with. For a month you have built the finest agricultural estate in the county — you metered the water, sorted the fields, walled the boundary, tagged every hand who works the land. But this season you planted a thousand pilots and weighed almost nothing. The green is spectacular: agents in every department, demos in every board pack. And the numbers at the granary door are brutal — <strong>ninety-five rows in a hundred set no grain at all</strong> (MIT), <strong>eighty-nine seedlings in a hundred never reach the harvest</strong> (Gartner), and only <strong>four estates in a hundred even bring a scale to the board</strong> (Deloitte). The seed you fretted over is about to be given away for nothing (Kimi K3, 5 days). It was never the seed. It was always the harvest — the outcome you plant each agent against, the dry rows you have the discipline to pull, the few yielding acres you pour the water onto, and the weighed bushel you carry to the board's scale.</p>
+<p><strong>The moral:</strong> when the seed is free, do not measure the estate by how much it plants — planting is the cheap part now, and a field of pilots is not a crop. Measure it by what reaches the scale. <strong>Plant every agent against a named P&amp;L outcome and a named owner.</strong> <strong>Tend and thin</strong> — kill the dry pilots early, before they drink another season's budget. <strong>Irrigate the few that yield</strong> — concentrate resources on the minority already reaching production, where the return is real. And <strong>weigh the crop and write it in the book</strong> — carry a P&amp;L number, not a demo, to the board, because an estate that never weighs its harvest cannot tell abundance from ruin.</p>
+<p><strong>The question it forces:</strong> <em>We have planted a whole field of pilots — but can we name, for every agent, the P&amp;L outcome it was sown against and who owns that outcome? Have we pulled the dry rows, or are we still watering them? And when the board asks what the land returned, do we carry a weighed bushel to the scale — or a photograph of a green field?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Coverage this week says enterprise AI's centre of gravity has moved <strong>from models to ROI clarity,</strong> and CFOs are freezing budgets — <strong>Forrester</strong> says ~<strong>25%</strong> of planned AI spend is being <strong>postponed to 2027.</strong> <strong>For every agent we run, can we name the P&amp;L outcome it was planted against, the owner of that outcome, and the bushels it delivered</strong> — or are we counting pilots and calling it a crop?</li>
+  <li><strong>95%</strong> of GenAI pilots return nothing measurable (MIT) and <strong>89%</strong> of agent pilots never reach production (Gartner), yet only <strong>4%</strong> of organizations report AI value to the board (Deloitte). <strong>Do we bring a weighed bushel — a P&amp;L number — to the board, or a photograph of a green field?</strong></li>
+  <li>The model — the seed — is nearly free (<strong>Kimi K3 open weights in 5 days</strong>). <strong>Have we stopped paying for seed and started managing the harvest</strong> — the outcomes, the workflow redesign, the ownership and the ledger that the open weights can never give us?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Banking and insurance already run agents in production at <strong>~47%</strong> — the highest of any sector (S&amp;P Global/McKinsey). <strong>Which of ours have crossed from pilot to a weighed P&amp;L outcome — a booked cost take-out or revenue line — and which are dry rows we are still watering</strong> out of sunk-cost sentiment?</li>
+  <li>Regulators and auditors will ask what each agent <em>returned</em> and what it <em>risked.</em> <strong>Can we tie every consequential agent to both a P&amp;L number and an owner</strong> — the harvest and the hand that tends it — ahead of the EU AI Act's enforcement in 11 days?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Healthcare runs agents in production at just <strong>~18%</strong> (S&amp;P Global/McKinsey) — a late, cautious field. <strong>Are our few plantings sown against a named clinical or operational outcome we can weigh,</strong> or are they green demos that will never reach the granary?</li>
+  <li>MIT's finding is that pilots fail on <em>production</em> realities — ownership, integration, edge cases, accountability — not on model quality. <strong>Have we built the production stack for the handful of agents that matter,</strong> rather than spreading thin across a hundred that never will?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>On the plant floor the harvest is measurable in yield, downtime and scrap. <strong>For each OT or planning agent, what bushel has it delivered to the scale</strong> — units, hours, defects avoided — and who signed for that number?</li>
+  <li>Beware <strong>agent washing:</strong> Gartner says only ~<strong>130</strong> of thousands of vendors claiming "agentic AI" truly deliver it. <strong>Have we bought seed that will actually set grain, or a repainted RPA bag</strong> sold as a new crop?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Peak season tempts you to plant every field — a storefront agent for everything. <strong>Which plantings are sown against a real basket-size, conversion or cost-to-serve outcome,</strong> and which are green for the board pack? <strong>42%</strong> of firms have already had to abandon most of their AI work (S&amp;P Global).</li>
+  <li>Customer-facing agents can return fast — customer-service payback reportedly lands around <strong>~4 months</strong> (Bain). <strong>Are we irrigating the fast-yielding rows,</strong> or starving them to keep a dozen photogenic pilots alive?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Government runs agents in production at just <strong>~14%</strong> — the lowest field (S&amp;P Global/McKinsey), and public money demands a weighed return. <strong>For each agent, what public-value outcome was it planted against, and can we show the bushel to the auditor</strong> — not the demo?</li>
+  <li>The EU AI Act's AI Office can compel documentation and evaluations in <strong>11 days.</strong> <strong>Is our record built on outcomes we can weigh and owners we can name,</strong> or on a field of unmeasured pilots a regulator would rightly distrust?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Seed, the Yield Gap, and the Scale</h2>
+<p>Strip the week's coverage down and the claim is financial, not technical: <strong>when the seed is free, the governed object is no longer the model — it is the harvest, and the scale you weigh it on.</strong> Read the reckoning as a farm in three parts — the seed (the model, commoditizing to nothing), the yield gap (why sown pilots don't become sold grain), and the scale (the outcome ledger you carry to the board).</p>
+<div class="card"><ul>
+  <li><strong>The seed (the model — commoditizing to free).</strong> Kimi K3's full open weights publish in <strong>5 days</strong>, self-hostable by any firm or government; the frontier that cost a fortune a year ago is becoming a giveaway. A free seed is not a harvest — it lowers the cost of <em>planting</em> to almost zero, which is precisely why estates are now drowning in green pilots and starving for weighed bushels. When the input commoditizes, the value migrates entirely to what you do with it.</li>
+  <li><strong>The yield gap (why pilots don't scale — and it isn't the model).</strong> MIT's diagnosis is the whole engineering story: <em>"pilots lie — they run on clean data, isolated systems and goodwill; production introduces ownership, security, integration, edge cases and accountability."</em> That is why <strong>95%</strong> show no P&amp;L and <strong>89%</strong> never reach production. The gap between a green field and sold grain is exactly the production layer this radar spent a month building — metering, routing, the MCP plane, the authorization ladder, the identity passport. Those layers are the irrigation and fencing that carry a planting to harvest. But irrigation on a field sown for no market is just expensive mud: the stack only pays when each agent is planted against a <strong>named P&amp;L outcome with a named owner.</strong></li>
+  <li><strong>The scale (measurement — the discipline every anxious lord skips).</strong> Only <strong>4%</strong> of organizations report AI value to the board (Deloitte); <strong>fewer than one-third</strong> of decision-makers can name a specific financial outcome from AI (Gartner). This is an estate that never weighs its crop — it cannot tell a good year from a ruinous one, cannot learn which fields to plant again, and cannot answer the creditor at the door. The fix is an <strong>outcome ledger:</strong> every agent tied to a P&amp;L line (cost taken out or revenue added), an owner, a baseline and a weighed result — the financial counterpart to the audit manifest this radar built last week.</li>
+</ul></div>
+<p>The strategic core: <strong>a harvest is a moat if every planting is sown against a market, thinned without sentiment, irrigated where it yields, and weighed on the board's scale — and a money pit if you plant everything, water everything, and weigh nothing.</strong> After Kimi K3, "we have agents in every department" is not a defense; <em>"here is the P&amp;L each agent returned, the dry rows we pulled, and the number we carried to the board"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The harvest: measure the estate by bushels weighed, not acres planted. The seed — the model — is commoditizing to free, with Kimi K3's open weights publishing in five days. At the top, a field of pilots: agents in every department, demos in every board pack, look how green it is; planting is cheap now, so everyone sows everything. The season passes to the granary door and hits the yield gap — why sown seed never becomes sold grain: ninety-five percent of pilots set no grain, zero profit and loss, per MIT; eighty-nine percent of seedlings never reach the harvest, per Gartner; forty-two percent of estates abandon most of the field, per S and P Global; MIT's diagnosis is that pilots lie because they run on clean data, isolated systems and goodwill, while production brings ownership, integration and accountability; these are the dry rows. The few that set grain reach the scale — weigh the crop and enter it in the book: the roughly eleven percent that reach production return about a hundred and seventy-one percent ROI as reported; banking and insurance run forty-seven percent in production versus government and health at fourteen to eighteen percent per S and P Global; but only four percent carry a scale to the board per Deloitte, and fewer than one in three can name a financial outcome per Gartner; this is the sold grain. The number then flows to the outcome ledger — each agent tied to a profit-and-loss line, an owner, a baseline and a weighed result, which is your board and audit evidence in eleven days. The trap is to plant everything, water everything and weigh nothing, yielding a green field and a budget freeze. The win is to plant for the market, thin the dry rows, irrigate the yield and weigh the crop, yielding grain in the book." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE HARVEST — measure by BUSHELS WEIGHED, not acres planted</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The seed (the model) is commoditizing to free — Kimi K3 open weights, 5 days</text>
+
+  <!-- field of pilots -->
+  <rect x="150" y="60" width="380" height="58" rx="9" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="340" y="82" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">THE FIELD OF PILOTS</text>
+  <text x="340" y="100" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">agents in every dept · demos in every board pack · "look how green it is"</text>
+  <text x="340" y="113" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">planting is cheap now — everyone sows everything</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="118" x2="340" y2="140" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,140 340,152 346,140" fill="#9aa7b6"/>
+  <text x="410" y="135" font-size="9" fill="#9aa7b6" font-family="sans-serif">the granary door →</text>
+
+  <!-- yield gap (trap) -->
+  <rect x="70" y="156" width="540" height="104" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="90" y="177" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">THE YIELD GAP — why sown seed never becomes sold grain</text>
+  <text x="90" y="196" font-size="10.5" fill="#e8edf3" font-family="sans-serif">95% of pilots set NO grain — zero P&amp;L (MIT)</text>
+  <text x="90" y="212" font-size="10.5" fill="#e8edf3" font-family="sans-serif">89% of seedlings never reach the harvest (Gartner)</text>
+  <text x="90" y="228" font-size="10.5" fill="#e8edf3" font-family="sans-serif">42% of estates abandon most of the field (S&amp;P Global)</text>
+  <text x="90" y="246" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">"pilots lie: clean data, isolated systems, goodwill; production brings accountability"</text>
+  <text x="590" y="177" font-size="12" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">✗ DRY ROWS</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="260" x2="340" y2="282" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="334,282 340,294 346,282" fill="#5dcaa5"/>
+  <text x="410" y="277" font-size="9" fill="#5dcaa5" font-family="sans-serif">the few that set grain →</text>
+
+  <!-- the scale (win) -->
+  <rect x="70" y="298" width="540" height="104" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="90" y="319" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE SCALE — weigh the crop, enter it in the book</text>
+  <text x="90" y="338" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the ~11% that reach production ≈ 171% ROI (as reported)</text>
+  <text x="90" y="354" font-size="10.5" fill="#e8edf3" font-family="sans-serif">banking/insurance 47% in prod · gov/health 14–18% (S&amp;P Global)</text>
+  <text x="90" y="370" font-size="10.5" fill="#e8edf3" font-family="sans-serif">BUT only 4% carry a scale to the board (Deloitte)</text>
+  <text x="90" y="388" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">&lt;1 in 3 can name a financial outcome at all (Gartner)</text>
+  <text x="590" y="319" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">✓ SOLD GRAIN</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="402" x2="340" y2="424" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,424 340,436 346,424" fill="#b9b2f5"/>
+  <text x="412" y="419" font-size="9" fill="#b9b2f5" font-family="sans-serif">the number → the board</text>
+
+  <!-- outcome ledger -->
+  <rect x="150" y="440" width="380" height="58" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="462" font-size="12" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE OUTCOME LEDGER</text>
+  <text x="340" y="480" font-size="10" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">each agent → a P&amp;L line, an owner, a baseline, a weighed result</text>
+  <text x="340" y="493" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">your board &amp; audit evidence (11 days)</text>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="516" width="308" height="36" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="182" y="533" font-size="10" font-weight="700" fill="#e08a63" text-anchor="middle" font-family="sans-serif">TRAP — plant all, water all, weigh nothing</text>
+  <text x="182" y="546" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a green field and a budget freeze.</text>
+
+  <rect x="344" y="516" width="308" height="36" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="533" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — plant for market, thin, irrigate, weigh</text>
+  <text x="498" y="546" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">grain in the book.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#378add"></i>The field — every pilot planted</span>
+  <span><i class="dot" style="background:#d85a30"></i>The yield gap — dry rows (trap)</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The scale — weighed grain (win)</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The outcome ledger — the board's book</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — count acres planted</th><th>The discipline — count bushels weighed</th></tr>
+<tr><td>"We have agents in every department"</td><td>Every agent tied to a named P&amp;L outcome and owner</td></tr>
+<tr><td>Fund and water every pilot equally</td><td>Thin without sentiment — kill dry rows early</td></tr>
+<tr><td>Spread scarce resources across all sprouts</td><td>Irrigate the few already reaching production</td></tr>
+<tr><td>Report activity (demos, pilots launched)</td><td>Report a weighed P&amp;L number to the board</td></tr>
+<tr><td>Pay for the seed (the model)</td><td>Own the land, irrigation, market access and ledger</td></tr>
+</table>
+
+<h3>Why a free seed makes the harvest the binding constraint</h3>
+<div class="card">
+<p>The forces this radar has tracked all month — commodity models (Kimi K3, 5 days), standard plumbing (MCP, 6 days), cheap routing, graduated authority, attested identity — all lower the cost of <em>planting</em> toward zero. That is exactly why the field is now choked with green pilots: when sowing is nearly free, everyone over-plants, and the scarce discipline becomes <strong>harvesting</strong> — thinning, irrigating the yield, and weighing the crop. A cheaper seed does not shrink your governance problem; it multiplies your unweighed fields. The binding constraint on value is no longer model access — it is the estate's ability to tie each planting to a market, pull the dry rows, and carry a weighed bushel to the board.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the spend meter, 7 Jul the model-neutral router, 8 Jul the MCP control plane, 9 Jul the deployment-labor market, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe that walks out, 13 Jul govern the goal not the gauge, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport). Today names the reason the whole stack exists: <strong>the harvest</strong> — a weighed return. On legacy estates the danger is a hundred green pilots wired into production-shaped demos, each drinking budget, none tied to a P&amp;L line or an owner, none weighed. The retrofit is the granary discipline: <strong>plant for the market</strong> (every agent gets a named outcome and owner before it is sown), <strong>tend and thin</strong> (a quarterly cull of dry rows — 42% have already been forced to abandon; do it deliberately, not in a panic), <strong>irrigate the yield</strong> (concentrate spend on the ~11% reaching production), and <strong>weigh the crop</strong> (an outcome ledger feeding the board — the 4% who do it are the ones who keep their budgets), all riding the production stack — metering, routing, identity — you already built.</p>
+<p><strong>The clean mental model:</strong> <em>A pilot is a green field, not a harvest. Plant every agent against a market, pull the dry rows, irrigate the yield, and weigh the crop on the board's scale — because when the seed is free, the estate is judged by bushels delivered, not acres planted.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The ROI reckoning — the centre of gravity shifts from models to returns.</strong> July-2026 coverage frames enterprise AI moving "from models to orchestration, governance and ROI clarity," with CFOs imposing budget controls; <strong>Forrester</strong> reports ~<strong>25%</strong> of planned AI spend <strong>postponed to 2027</strong> pending demonstrated returns.</li>
+  <li><strong>The pilot-to-production gap.</strong> <strong>MIT</strong> (GenAI Divide): <strong>95%</strong> of GenAI pilots deliver no measurable P&amp;L; <strong>Gartner:</strong> <strong>89%</strong> of agent pilots never reach production and <strong>&gt;40%</strong> of agentic-AI projects cancelled by end-2027; <strong>S&amp;P Global:</strong> <strong>42%</strong> have abandoned most AI projects.</li>
+  <li><strong>The value that is showing up.</strong> The minority reaching production reportedly returns ~<strong>171% ROI</strong> (industry coverage, as reported); <strong>BCG:</strong> <strong>26%</strong> of firms report meaningful financial value; <strong>S&amp;P Global/McKinsey:</strong> <strong>31%</strong> run at least one agent in production (banking/insurance <strong>47%</strong>, healthcare <strong>18%</strong>, government <strong>14%</strong>); <strong>Bain:</strong> customer-service payback ~<strong>4.1 months.</strong></li>
+  <li><strong>Agent washing.</strong> <strong>Gartner</strong> estimates only ~<strong>130</strong> of thousands of vendors claiming agentic AI truly deliver it — seed that will never set grain.</li>
+  <li><strong>The commodity seed — Kimi K3's open weights publish 27 July (5 days),</strong> the self-hostable floor that drives the cost of planting toward zero and makes harvest discipline the binding constraint.</li>
+  <li><strong>The connector counterpart — MCP 2026-07-28 spec goes final in 6 days,</strong> the plumbing that carries a planting to production.</li>
+  <li><strong>The mandatory counterweight — EU AI Act GPAI enforcement applicable 2 Aug 2026 (11 days).</strong> €15M or 3% of global turnover (Art. 101); powers to compel documentation (Art. 91), run evaluations (Art. 92) and require mitigations (Art. 93); reaching deployers. The board's outcome ledger is also your compliance evidence.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Just 5% of integrated AI pilots are extracting millions in value, while the vast majority remain stuck with no measurable P&amp;L impact.</div><div class="a">— MIT Project NANDA, "The GenAI Divide: State of AI in Business" (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Most agentic AI projects right now are early stage experiments or proof of concepts that are mostly driven by hype and are often misapplied.</div><div class="a">— Anushree Verma, Senior Director Analyst, Gartner (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Pilots lie — they run on clean data, isolated systems and goodwill. Production introduces ownership, security, integration, edge cases and accountability.</div><div class="a">— Coverage of the MIT GenAI-Divide findings, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Enterprise AI spending is hitting a wall of financial scrutiny in 2026 — CFOs are moving aggressively to impose budget controls, replacing open-ended experimentation with a firm demand for measurable returns.</div><div class="a">— Coverage of the 2026 enterprise-AI ROI reckoning (as reported)</div></blockquote>
+<blockquote><div class="q">"A field of pilots is not a harvest. When the seed is free, count the bushels you carry to the board's scale — not the acres you planted."</div><div class="a">— the radar, on the value layer</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>GenAI pilots with NO measurable P&amp;L impact</td><td><span class="v">95%</span></td><td>MIT Project NANDA, GenAI Divide (as reported)</td></tr>
+<tr><td>AI agent pilots that never reach production</td><td><span class="v">89%</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>ROI reportedly delivered by the minority reaching production</td><td><span class="v">~171%</span></td><td>Industry coverage (as reported)</td></tr>
+<tr><td>Firms reporting meaningful financial value from AI</td><td><span class="v">26%</span></td><td>BCG, AI at Scale 2026 (as reported)</td></tr>
+<tr><td>CEOs seeing neither more revenue nor less cost from AI</td><td><span class="v">56% (12% both)</span></td><td>PwC 29th Global CEO Survey (as reported)</td></tr>
+<tr><td>Firms that have abandoned most of their AI projects</td><td><span class="v">42%</span></td><td>S&amp;P Global (as reported)</td></tr>
+<tr><td>Enterprises running ≥1 agent in production</td><td><span class="v">31% (bank/ins 47%)</span></td><td>S&amp;P Global Mkt Intelligence / McKinsey (as reported)</td></tr>
+<tr><td>Organizations reporting AI value to the board</td><td><span class="v">4%</span></td><td>Deloitte (as reported)</td></tr>
+<tr><td>Decision-makers who can name a financial outcome from AI</td><td><span class="v">&lt;1 in 3</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Planned AI spend being postponed to 2027</td><td><span class="v">~25%</span></td><td>Forrester (as reported)</td></tr>
+<tr><td>Customer-service agent median payback</td><td><span class="v">~4.1 months</span></td><td>Bain Agentic AI Benchmark 2026 (as reported)</td></tr>
+<tr><td>Vendors truly delivering agentic AI (of thousands)</td><td><span class="v">~130</span></td><td>Gartner ("agent washing", as reported)</td></tr>
+<tr><td>Enterprise apps embedding task-specific agents by end-2026</td><td><span class="v">40% (from &lt;5%)</span></td><td>Gartner</td></tr>
+<tr><td>Kimi K3 full open weights (Modified MIT) publish</td><td><span class="v">27 Jul 2026 (5 days)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (6 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (11 days)</span></td><td>European Commission (Art. 101)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Plant for the market — tie every agent to a P&amp;L outcome and an owner before you sow.</strong> No new agent enters production without a named financial line (cost taken out or revenue added), a baseline, and a single accountable owner. This is the discipline that separates the <strong>5%</strong> extracting real value from the <strong>95%</strong> stuck in green. It doubles as your EU AI Act evidence and your board report — the <strong>4%</strong> who report AI value to the board are the ones who keep their budgets when the CFO's freeze (Forrester: ~25% of spend) reaches your estate in the next quarter.</li>
+  <li><strong>Tend and thin — run a deliberate cull of the dry rows now, not in a panic later.</strong> Walk every pilot this month and pull the ones with no path to a weighed outcome, without sunk-cost sentiment. <strong>42%</strong> of firms have already been <em>forced</em> to abandon most of their AI work; do it on your terms and reclaim the water — the budget and engineering time — for the fields that are actually setting grain. Beware <strong>agent washing</strong> on the buy side: of thousands of "agentic" vendors, Gartner counts ~<strong>130</strong> that truly deliver, so audit new seed before you plant it.</li>
+  <li><strong>Irrigate the yield and weigh the crop.</strong> Concentrate spend on the ~<strong>11%</strong> already reaching production, where the return is real (~171% ROI, as reported; ~4-month payback in customer service). Then build the <strong>outcome ledger</strong> — every agent to a P&amp;L line, an owner, a baseline and a weighed result — and carry that number, not a demo, to the board. When the seed is free, the estate is judged by bushels delivered to the scale, not acres of green; the granary discipline is the whole point of the stack you spent a month building.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> MarketScale · AI Business Weekly · MIT Project NANDA · Gartner · BCG · PwC · S&amp;P Global · S&amp;P Global Market Intelligence / McKinsey · Deloitte · Forrester · Bain · Moonshot / coverage · Model Context Protocol blog · European Commission. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 22 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
