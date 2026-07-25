@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 25 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the provenance of the open-weight fallback — the week the White House (Kratsios) and Treasury (Bessent) accused Moonshot AI of distilling Anthropic's Fable to build Kimi K3 and floated sanctions and Entity List designations, while independent researchers called the claim thin. Treat model provenance as a governed attribute: demand the chain of custody, price the title risk, and hold more than one open-weight option of different origin. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Provenance</h1>
+  <div class="meta">Saturday, 25 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the radar told you to keep a village green — an open-weight model you can self-host, the commons no landlord can revoke — and named the nearest one: Kimi K3, whose full open weights publish in two days (27 July). Today a cloud settles over the deed to that green. On 22 July, White House OSTP Director Michael Kratsios posted that the US has "information that Moonshot AI distilled Anthropic's Fable" to build Kimi K3, via a platform built to "avoid detection," and alleged Moonshot accessed export-restricted Nvidia GB300 chips in Thailand. Treasury Secretary Scott Bessent raised the stakes: "Open source is not open season on American IP," with "sanctions and Entity List designations… on the table." Then the counter-current: independent researchers called the claim thin — Fable went public 1 July, K3 launched ~15 July; model outputs aren't copyrighted; distillation is common practice. Anthropic itself hasn't tied K3 to Fable. The fallback we were told to keep is a masterwork of contested provenance. Do we hang it on faith, refuse it on a headline, or do what a serious collector does — demand the chain of custody, price the title risk, and never bet the gallery on a single canvas whose deed we can't defend?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thesis — <strong>the model commoditizes; own and govern the layer around it</strong> — and yesterday it named the safety valve: keep a <strong>village green,</strong> an open-weight model you can self-host so no single vendor sets all your terms, with <strong>Kimi K3</strong> (open weights <strong>27 July, 2 days</strong>) and <strong>DeepSeek V4</strong> as the nearest greens. Today the deed to the nearest green is contested. On <strong>22 July</strong> the <strong>White House</strong> and <strong>Treasury</strong> turned the long-running "distillation" dispute into a live sanctions threat aimed squarely at <strong>Moonshot AI,</strong> maker of Kimi K3. OSTP Director <strong>Michael Kratsios</strong> posted that the US has information Moonshot <strong>distilled Anthropic's Fable</strong> to build K3 via a purpose-built platform designed to <strong>evade detection,</strong> and that Moonshot <strong>accessed export-restricted Nvidia GB300s in Thailand.</strong> Treasury Secretary <strong>Scott Bessent</strong> framed the doctrine — <em>"Open source is not open season on American IP"</em> — and put <strong>sanctions and Entity List designations</strong> on the table. The evidence base is public and thin, and the pushback was immediate and expert: the release window is brutally tight (<strong>Fable 1 July → K3 ~15 July</strong>), a model's <em>outputs</em> are not copyrighted, distillation is <strong>routine</strong> (Musk testified xAI distilled OpenAI for Grok), and Anthropic — which in <strong>February</strong> said DeepSeek, Moonshot and MiniMax used <strong>~24,000 fabricated accounts</strong> to run <strong>&gt;16 million</strong> Claude interactions — has <strong>not</strong> publicly connected K3 to Fable. The point for the enterprise is not who is right; it is that <strong>the provenance of your open-weight fallback is now a first-class risk</strong> — legal (sanctions, IP, indemnity) and reputational — the week before its weights hit your servers. The standing countdowns run beneath, one day closer: <strong>MCP's final spec (28 July, 3 days)</strong> and the <strong>EU AI Act's GPAI enforcement (2 August, 8 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The "village green" now comes with a title dispute — provenance is a risk you must price, not assume.</strong> The open-weight fallback this radar told you to keep is real, cheap and capable — and, in the case of the flashiest one, under a <strong>US government distillation accusation</strong> with <strong>sanctions and Entity List</strong> threats attached (Kratsios &amp; Bessent, 22 July). Whether or not the claim survives scrutiny, a self-hosted model you cannot walk back from is exactly where <strong>contested provenance</strong> becomes <em>your</em> exposure: export-control, sanctions, IP-indemnity and procurement-trust risk that lands on the deployer, not the lab. You inherit the chain of custody of every model you run.</div></div>
+<div class="num"><div class="b">2</div><div><strong>A contested provenance cuts both ways — don't refuse a masterwork on a headline, and don't hang it on faith.</strong> The expert pushback is substantive, not partisan cheerleading: the <strong>Fable-1-July → K3-15-July</strong> window makes "strictly distillation" implausible (researcher <strong>Braden Hancock:</strong> <em>"I don't think you get a model this strong and this quickly… doing strictly distillation"</em>), model outputs aren't copyrighted, and distillation is standard practice. The discipline is neither reflex — it is to <strong>demand the paper trail:</strong> license clarity, training-data provenance, an indemnification posture, and a documented reason you can defend to a regulator or an auditor for every weight you deploy.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer is portfolio, not purity — keep more than one green, and never bet the gallery on one canvas.</strong> A collector never lets one disputed attribution sink the collection. Provision <strong>at least two</strong> self-hostable open-weight options of <strong>different provenance</strong> (e.g. an MIT-licensed <strong>DeepSeek V4</strong> alongside any Kimi K3 you qualify), keep your <strong>context, prompts and eval gate portable</strong> across them, and make swapping a model a <em>switch,</em> not a migration. Then a sanctions designation, a license fight or a broken chain of custody is a bad week, not a shuttered gallery.</div></div>
+<div class="card"><strong>Bottom line:</strong> yesterday's lesson stands — keep a village green — but today adds the fine print a serious owner already knows: <strong>a green with a contested deed is still a liability.</strong> Treat model provenance as a governed attribute: demand the chain of custody, price the title risk, hold <strong>more than one</strong> open-weight option of different origin, and keep your context and eval gate portable — so no single disputed masterwork can take the whole gallery down with it.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖼️ "The Provenance"</h3>
+<p><em>Topic: On 22 July 2026 the White House and Treasury escalated a long-running dispute over AI "distillation" into a live sanctions threat against Moonshot AI, maker of the open-weight Kimi K3. OSTP Director Michael Kratsios said the US has information that Moonshot distilled Anthropic's Fable to build K3 using a purpose-built, detection-evading platform, and that Moonshot accessed export-restricted Nvidia GB300 chips in Thailand; Treasury Secretary Scott Bessent said "open source is not open season on American IP," with sanctions and Entity List designations "on the table." Independent researchers pushed back hard: the release window (Fable public 1 July, K3 ~15 July) makes large-scale distillation implausible, model outputs are not copyrighted, and distillation is common practice (Musk testified xAI distilled OpenAI for Grok); Anthropic has not publicly tied K3 to Fable, though in February it accused three Chinese labs of using ~24,000 fake accounts for &gt;16M Claude interactions. Kimi K3's full open weights publish 27 July. The lesson for the enterprise: the open-weight fallback you were told to keep is a masterwork of contested provenance — welcome the brilliance, but govern the chain of custody.</em></p>
+<p>In the world of great paintings, connoisseurs learned a hard lesson the market keeps re-teaching: <strong>the value of a masterwork lives as much in its paper trail as in its paint.</strong> A canvas can be dazzling — the brushwork unmistakable, the pigment right for the period, every expert agreeing it is a work of the first rank — and still be nearly <strong>unhangable,</strong> because no one can prove where it has been. <strong>Provenance</strong> is that proof: the unbroken <strong>chain of custody</strong> from the artist's studio to your wall — every owner, every sale, every export stamp, every catalogue it appeared in. When the chain is whole, a museum hangs the work, an insurer covers it, a buyer pays in full. When the chain is broken — a gap in the record, a disputed attribution, a whisper that the thing was <strong>looted or copied</strong> — the painting does not lose its beauty. It loses its <strong>title.</strong> And a masterpiece you cannot prove you may lawfully own is a masterpiece you cannot safely hang.</p>
+<p>Here is the cruelty of it, and the discipline it forces. <strong>The accusation need not be proven to do its damage.</strong> The moment a credible authority questions a work's provenance, the price falls, the sale freezes, the insurer hesitates — the cloud itself is the cost, whether or not it ever resolves into a verdict. And provenance disputes are treacherous precisely because they <strong>cut both ways:</strong> some are open-and-shut theft, and some are political, thin, or mistaken — a rival's insinuation, an attribution that collapses the moment a scholar checks the dates and finds the timeline impossible. A serious collector treats both with the same cold method: not faith, not reflex, but <strong>the file</strong> — the documented history you can lay on a regulator's desk. They demand the export papers, they check the catalogue, they read the dates, they buy title insurance, and — the part the amateur skips — <strong>they never let one contested canvas anchor the whole collection.</strong> The great houses survive not by owning only spotless works, but by owning <strong>many,</strong> so that the day one attribution is challenged, the gallery still opens.</p>
+<p>This week the enterprise was handed exactly this problem in software. The open-weight model you were told to keep as your fallback — the brilliant, cheap, self-hostable one — arrived with a <strong>cloud over its deed:</strong> a government authority alleging the masterwork was <strong>copied</strong> from another's, a threat of <strong>sanctions and an Entity List</strong> that would freeze the sale, and a chorus of scholars insisting the dates don't fit and the charge is thin. You cannot resolve the dispute; you are not the court. But you are the collector, and the collector's disciplines are wholly in your hands. <strong>Demand the file</strong> (license, training-data provenance, an indemnity you can point to). <strong>Price the title risk</strong> (what does a sanctions designation or an IP claim cost a model you've wired into production and cannot instantly un-hang?). And above all, <strong>do not anchor the gallery on one canvas</strong> — hold more than one open-weight work, of different provenance, so a disputed deed is a removed painting, not a shuttered museum.</p>
+<p><strong>The moral:</strong> welcome the masterwork — refusing a brilliant, cheap, self-hostable model on a headline is its own kind of poverty, and the accusation against it may well not hold. But hang nothing you cannot prove you may lawfully hang. Keep the <strong>file</strong> (provenance, license, indemnity you can show an auditor), keep the <strong>portfolio</strong> (more than one green, of different origin), and keep your <strong>context and eval gate portable</strong> so any single canvas can come down without closing the gallery. A collection built on one disputed masterpiece is one accusation away from dark walls; a collection built on documented, diversified works keeps its doors open no matter which attribution is challenged next.</p>
+<p><strong>The question it forces:</strong> <em>The fallback we were told to keep is a masterwork with a contested deed — and the accusation, true or not, is already a cloud. Do we hang it on faith, refuse it on a headline, or do what the great houses do — demand the chain of custody, price the title risk, insure what we can, and hold enough works of enough origins that no single disputed canvas can ever take the whole gallery down?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>The open-weight fallback we were told to keep now carries a <strong>US distillation accusation</strong> with <strong>sanctions and Entity List</strong> threats attached (Kratsios, Bessent, 22 July). <strong>Do we treat model provenance as a governed attribute</strong> — chain of custody, license, training-data origin, indemnity — for every model we deploy, or do we hang masterworks on faith?</li>
+  <li>The expert pushback is substantive (the <strong>1 July → 15 July</strong> window makes strict distillation implausible; outputs aren't copyrighted). <strong>Can we tell the difference between a real title defect and a political cloud</strong> — and have we written down the reason we can defend for each model we run, rather than reacting to whichever headline is loudest?</li>
+  <li>A self-hosted model is one we <strong>cannot instantly un-hang.</strong> <strong>Have we provisioned more than one open-weight option of different provenance</strong> (an MIT-licensed alternative alongside any contested one), with context and eval gate portable across them — so a sanctions designation is a switch, not a shutdown?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Sanctions and Entity List exposure is a <strong>compliance event,</strong> not just a tech choice. <strong>If a model we self-host were designated tomorrow, could we name every workflow it touches and cut over cleanly</strong> — or is it wired so deep that a designation becomes an operational and regulatory incident?</li>
+  <li>Vendor and model <strong>due diligence</strong> now includes AI provenance. <strong>Do our third-party-risk and procurement checks capture a model's chain of custody, license and IP-indemnity posture</strong> the way they capture a counterparty's — before it reaches production, not after an accusation?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Provenance discipline is the same instinct as <strong>chain of custody</strong> for a specimen or a data set. <strong>Do we hold documented provenance for the open-weight models in our clinical or research stack</strong> — origin, license, training-data claims — to the standard our regulators already expect for everything else?</li>
+  <li>The masterwork may be brilliant <em>and</em> contested. <strong>If our best-performing open model fell under a sanctions cloud, do we have a qualified, differently-sourced fallback</strong> that keeps the service running without a scramble?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>The accusation bundles <strong>distillation with export-controlled GB300 chips in Thailand</strong> (Kratsios). <strong>Is our AI supply chain — models and the hardware they were trained on — mapped well enough</strong> that we would not be blindsided by a sanctions action against a component we depend on?</li>
+  <li>Open weights are still the strongest hedge against lock-in. <strong>Have we qualified at least two self-hostable open models of different provenance</strong> (e.g. DeepSeek V4 under MIT alongside any Kimi K3 we vet) for the lines we cannot afford to have fenced <em>or</em> frozen?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>A contested-provenance model in a <strong>customer-facing</strong> agent is a brand and legal exposure, not just a benchmark line. <strong>Have we checked the license and provenance of the open model behind our storefront agent</strong> — and could we swap it without rebuilding the experience?</li>
+  <li>Provenance is now a buying criterion. <strong>Do our model-selection rules weigh chain of custody and IP-indemnity,</strong> so we are not one accusation away from pulling a live customer feature?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Governments are treating AI provenance as <strong>national-security and IP policy</strong> ("open source is not open season on American IP" — Bessent). <strong>For any citizen-facing or sovereign deployment, do we require documented provenance and a defensible license posture</strong> for every model, including open weights?</li>
+  <li>The EU AI Act's GPAI enforcement lands in <strong>8 days,</strong> and provenance is exactly the kind of evidence it expects. <strong>Is our model inventory — origin, license, evaluation, audit log — built on infrastructure we own,</strong> so we can answer a regulator about <em>where our models came from,</em> not only what they do?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Masterwork, the Cloud, and the File</h2>
+<p>Read this week's story as a single lesson about <strong>provenance as a governed attribute of a model,</strong> in three parts — the masterwork (a capable open-weight model you would genuinely want), the cloud (a government accusation, contested, that threatens its title), and the file (the chain-of-custody discipline that lets you deploy brilliance without inheriting someone else's fight).</p>
+<div class="card"><ul>
+  <li><strong>The masterwork (why this is a real temptation, not a curiosity).</strong> Moonshot AI's <strong>Kimi K3</strong> is a <strong>2.8-trillion-parameter open-weight</strong> model whose full weights publish <strong>27 July</strong> under a <strong>Modified MIT</strong> license — self-hostable, frontier-class, cheap. It is exactly the "village green" yesterday's edition prescribed, and <strong>DeepSeek V4</strong> (open MoE, <strong>MIT,</strong> <strong>~80.6% SWE-bench Verified,</strong> ~<strong>$0.87/1M output,</strong> ~<strong>29× cheaper</strong> than Opus 4.8) sits beside it as a second. The pull toward self-hosting an open frontier model is real and, in most respects, correct.</li>
+  <li><strong>The cloud (the accusation, and why it is contested).</strong> On <strong>22 July</strong> OSTP Director <strong>Michael Kratsios</strong> posted that the US has "information that <strong>Moonshot AI distilled Anthropic's Fable</strong> for the development of its K3 model," via "a sophisticated internal platform to conduct <strong>large scale distillation</strong> against U.S. models, allowing them to quickly switch between multiple methods of access to <strong>avoid detection,</strong>" and that Moonshot "<strong>accessed GB300s in Thailand</strong>" despite export controls. Treasury's <strong>Scott Bessent</strong> attached the policy — <em>"Open source is not open season on American IP"</em> — and floated <strong>sanctions and Entity List designations.</strong> But the technical case, on what has been made public, is <strong>thin:</strong> the release window is brutal (<strong>Fable public 1 July, K3 ~15 July</strong>), a model's <em>outputs</em> are not copyrighted, distillation is <strong>common</strong> (Musk testified xAI distilled OpenAI to build Grok), and researcher <strong>Braden Hancock</strong> put it plainly — <em>"I don't think you get a model this strong and this quickly on the heels of Fable doing strictly distillation."</em> Anthropic, which in <strong>February</strong> accused DeepSeek, Moonshot and MiniMax of using <strong>~24,000 fabricated accounts</strong> for <strong>&gt;16 million</strong> Claude interactions, has <strong>not</strong> publicly tied K3 to Fable. A cloud, in other words — real enough to freeze a sale, unresolved enough that betting either way is a gamble.</li>
+  <li><strong>The file (the discipline that makes this manageable).</strong> You are not the court, and you do not need to be. You need the collector's file for every model you deploy: <strong>provenance</strong> (who trained it, on what, under what claims), <strong>license clarity</strong> (Modified MIT is not MIT — read it), an <strong>indemnity posture</strong> (does anyone stand behind the IP, and what happens to <em>you</em> if a claim lands), and a <strong>portability guarantee</strong> (context, prompts and eval gate that move across models, so any one canvas can come down). With the file in hand, a government accusation against one model is a risk you can <strong>price and route around,</strong> not a surprise that strands a production system you cannot un-wire.</li>
+</ul></div>
+<p>The strategic core: <strong>provenance is now a first-class attribute of a model, alongside cost and capability.</strong> After this week, "we self-host the best open model we found" is not a complete answer; <em>"we self-host models whose chain of custody, license and indemnity we have documented, we hold more than one of different origin, and our stack can swap them in a day"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The provenance: hang the masterwork, but keep the file. An open-weight fallback is only as safe as its chain of custody. At the top, the masterwork: a real, capable open-weight model worth wanting — Kimi K3, 2.8 trillion open weights publishing 27 July in two days under a Modified MIT license, and DeepSeek V4, an open mixture-of-experts model under MIT, 80.6 percent SWE-bench, about 29 times cheaper; both self-hostable, frontier-class, the village green. Below, the cloud: a government accusation, thin and contested — the US says Moonshot distilled Anthropic's Fable to build K3; Treasury Secretary Bessent puts sanctions and the Entity List on the table; the pushback notes Fable went public 1 July and K3 launched around 15 July, that model outputs are not copyrighted, that distillation is common, and that Anthropic has not tied K3 to Fable. This is a title dispute. Then the response: you are the collector, not the court — keep the file and the portfolio: chain of custody, license read in full, indemnity posture, at least two greens of different origin, and a portable eval gate, so provenance becomes a governed attribute; demand the paper trail, price the title risk, and hold more than one green so one disputed canvas is not a dark gallery. The trap is to hang one contested masterwork you cannot un-hang, so one accusation darkens the gallery; the win is to keep the file and a diversified portfolio, so it is a removed painting, not a shuttered museum." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE PROVENANCE — hang the masterwork, but keep the file</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">An open-weight fallback is only as safe as its chain of custody</text>
+
+  <!-- the masterwork -->
+  <rect x="70" y="58" width="540" height="100" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE MASTERWORK — a real, capable open-weight model</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3: 2.8T open weights (27 Jul, 2d), Modified MIT</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">DeepSeek V4: open MoE, MIT, 80.6% SWE-bench, ~29× cheaper</text>
+  <text x="90" y="130" font-size="10.5" fill="#e8edf3" font-family="sans-serif">self-hostable · frontier-class · the "village green"</text>
+  <text x="90" y="147" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">the fallback yesterday's edition told you to keep</text>
+  <text x="590" y="79" font-size="11" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">🖼️ WORTH WANTING</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="158" x2="340" y2="180" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,180 340,192 346,180" fill="#9aa7b6"/>
+  <text x="405" y="175" font-size="9" fill="#9aa7b6" font-family="sans-serif">but the deed is contested →</text>
+
+  <!-- the cloud -->
+  <rect x="70" y="196" width="540" height="104" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="90" y="217" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">THE CLOUD — a govt accusation, thin &amp; contested</text>
+  <text x="90" y="236" font-size="10.5" fill="#e8edf3" font-family="sans-serif">US: Moonshot "distilled Anthropic's Fable" to build K3</text>
+  <text x="90" y="252" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Bessent: sanctions &amp; Entity List "on the table"</text>
+  <text x="90" y="268" font-size="10.5" fill="#e8edf3" font-family="sans-serif">pushback: Fable 1 Jul → K3 15 Jul · outputs not ©</text>
+  <text x="90" y="285" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">distillation is common · Anthropic hasn't tied K3 to Fable</text>
+  <text x="590" y="217" font-size="11" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">⚠ TITLE DISPUTE</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="300" x2="340" y2="322" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="334,322 340,334 346,322" fill="#5dcaa5"/>
+  <text x="405" y="317" font-size="9" fill="#5dcaa5" font-family="sans-serif">you are the collector, not the court →</text>
+
+  <!-- keep the file + portfolio -->
+  <rect x="110" y="338" width="460" height="86" rx="9" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="340" y="360" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">KEEP THE FILE + THE PORTFOLIO</text>
+  <text x="340" y="379" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">chain of custody · license read in full · indemnity posture</text>
+  <text x="340" y="395" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">≥2 greens of different origin · portable context &amp; eval gate</text>
+  <text x="340" y="413" font-size="9.5" fill="#c3ccd8" text-anchor="middle" font-family="sans-serif">provenance = a governed attribute, next to cost &amp; capability</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="424" x2="340" y2="446" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,446 340,458 346,446" fill="#9aa7b6"/>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="470" width="308" height="58" rx="9" fill="#2a1020" stroke="#8a2f52"/>
+  <text x="182" y="490" font-size="10" font-weight="700" fill="#e06b9a" text-anchor="middle" font-family="sans-serif">TRAP — hang one contested masterwork</text>
+  <text x="182" y="506" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">you can't un-hang →</text>
+  <text x="182" y="520" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">one accusation darkens the gallery.</text>
+
+  <rect x="344" y="470" width="308" height="58" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="490" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — keep the file &amp; a diversified portfolio</text>
+  <text x="498" y="506" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a removed painting,</text>
+  <text x="498" y="520" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">not a shuttered museum.</text>
+
+  <text x="340" y="556" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">provenance is now a first-class attribute of a model — alongside cost and capability</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>The masterwork — worth wanting</span>
+  <span><i class="dot" style="background:#d85a30"></i>The cloud — a contested title dispute</span>
+  <span><i class="dot" style="background:#378add"></i>Keep the file + portfolio — the win</span>
+  <span><i class="dot" style="background:#e06b9a"></i>Hang one contested canvas — the trap</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — hang one contested masterwork</th><th>The discipline — keep the file and the portfolio</th></tr>
+<tr><td>Self-host the best open model you found, no questions</td><td>Document provenance, license and training-data claims first</td></tr>
+<tr><td>Treat "open weights" as if origin doesn't matter</td><td>Treat provenance as a governed attribute, like cost or capability</td></tr>
+<tr><td>One open model wired deep into production</td><td>≥2 self-hostable models of <strong>different</strong> origin, ready to swap</td></tr>
+<tr><td>Context and eval gate coupled to one model</td><td>Portable context and eval gate — a switch, not a migration</td></tr>
+<tr><td>React to whichever accusation is loudest</td><td>A defensible, written reason for every model you deploy</td></tr>
+</table>
+
+<h3>Why provenance became a survival attribute, not a compliance footnote</h3>
+<div class="card">
+<p>Every force this radar tracked all month — commodity models, open weights as the fallback (yesterday), cheap routing — pushes enterprises toward <strong>self-hosting open models,</strong> which is right. But self-hosting inverts one thing: you can walk away from an API in an afternoon, while a model <strong>wired into your own infrastructure</strong> is one you must actively un-wire. That is precisely where a <strong>contested provenance</strong> stops being the lab's problem and becomes the deployer's — sanctions, IP claims and procurement-trust questions land on whoever is <em>running</em> the weights. Provenance discipline is what converts that from an existential surprise into a priced, routed-around risk. That a government is threatening sanctions over a model's origins in the same week its weights hit the shelf is the signal that "where did this model come from?" now sits next to "what does it cost?" on the selection checklist.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure). Today adds the collector's discipline to yesterday's village green: an open-weight fallback is only as safe as its <strong>chain of custody.</strong> On legacy estates the danger is grabbing the flashiest open model because it tops a benchmark, wiring it deep, and discovering only when an accusation lands that you cannot prove its origin, cannot cite its license cleanly, and cannot swap it out in a week. The retrofit is the collector's file: <strong>document provenance,</strong> read the license, note the indemnity, provision a <strong>second green of different origin,</strong> and keep your context and eval gate portable — all riding the production stack you already built.</p>
+<p><strong>The clean mental model:</strong> <em>An open-weight model is a masterwork, and a masterwork is only as hangable as its provenance. Welcome the brilliance, demand the chain of custody, price the title risk, and never anchor the gallery on a single canvas whose deed you can't defend.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The distillation accusation (22 July).</strong> OSTP Director <strong>Michael Kratsios</strong> alleged Moonshot <strong>distilled Anthropic's Fable</strong> to build <strong>Kimi K3</strong> via a detection-evading platform, and <strong>accessed export-restricted Nvidia GB300s in Thailand;</strong> Treasury's <strong>Scott Bessent</strong> put <strong>sanctions and Entity List designations</strong> on the table (<em>"open source is not open season on American IP"</em>). The technical case, as made public, is thin.</li>
+  <li><strong>The expert pushback.</strong> Researchers called the claim thin and, in some cases, <em>"political"</em> and <em>"reckless"</em>: the <strong>Fable-1-July → K3-15-July</strong> window makes strict distillation implausible (<strong>Braden Hancock:</strong> <em>"I don't think you get a model this strong and this quickly… doing strictly distillation"</em>), model outputs aren't copyrighted, and distillation is common practice (Musk testified xAI distilled OpenAI for Grok). A Moonshot engineer: <em>"We trained a brand new frontier model in JUST 15 DAYS."</em></li>
+  <li><strong>The February backdrop.</strong> Anthropic in <strong>February 2026</strong> accused <strong>DeepSeek, Moonshot and MiniMax</strong> of using <strong>~24,000 fabricated accounts</strong> to run <strong>&gt;16 million</strong> Claude interactions in violation of its terms — but has <strong>not</strong> publicly tied <strong>Kimi K3</strong> specifically to Fable distillation.</li>
+  <li><strong>The masterworks themselves.</strong> <strong>Kimi K3</strong> — 2.8T-param open weights publish <strong>27 July (2 days),</strong> Modified MIT. <strong>DeepSeek V4</strong> — open MoE, <strong>MIT,</strong> ~<strong>80.6% SWE-bench,</strong> ~<strong>$0.87/1M output,</strong> ~<strong>29× cheaper</strong> than Opus 4.8 — the differently-sourced second green.</li>
+  <li><strong>The standing countdowns — MCP final spec 28 July (3 days)</strong> (the vendor-neutral interoperability layer) and <strong>EU AI Act GPAI enforcement applicable 2 Aug (8 days)</strong> (€15M or 3% of global turnover; powers to compel documentation, run independent evaluations and require mitigations — provenance is exactly the evidence it will expect).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">We have information that Moonshot AI distilled Anthropic's Fable for the development of its K3 model. To do this they developed a sophisticated internal platform to conduct large scale distillation against U.S. models, allowing them to quickly switch between multiple methods of access to avoid detection.</div><div class="a">— Michael Kratsios, Director, White House Office of Science and Technology Policy, on X, 22 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Open source is not open season on American IP. When [Chinese] firms conduct covert, industrial-scale distillation attacks that cross the line into IP theft, sanctions and Entity List designations will be on the table.</div><div class="a">— Scott Bessent, U.S. Treasury Secretary, on X, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">I don't think you get a model this strong and this quickly on the heels of Fable doing strictly distillation.</div><div class="a">— Braden Hancock, AI researcher, on the claim that Kimi K3 was built primarily by distilling Anthropic's Fable, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">Fable went public on July 1 and K3 launched on July 15. We trained a brand new frontier model in JUST 15 DAYS.</div><div class="a">— A Moonshot AI engineer (Randy Xian), disputing the distillation timeline, July 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"An open-weight model is a masterwork, and a masterwork is only as hangable as its provenance. Welcome the brilliance, demand the chain of custody, and never anchor the gallery on a single canvas whose deed you can't defend."</div><div class="a">— the radar, on the provenance</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Date the US alleged Moonshot distilled Anthropic's Fable to build K3</td><td><span class="v">22 Jul 2026</span></td><td>Kratsios (White House OSTP), via coverage (as reported)</td></tr>
+<tr><td>US response floated for confirmed "IP theft" distillation</td><td><span class="v">Sanctions + Entity List</span></td><td>Bessent (US Treasury), via coverage (as reported)</td></tr>
+<tr><td>Fabricated accounts Anthropic attributed to 3 Chinese labs (Feb 2026)</td><td><span class="v">~24,000</span></td><td>Anthropic, via coverage (as reported)</td></tr>
+<tr><td>Claude interactions those accounts generated</td><td><span class="v">&gt;16 million</span></td><td>Anthropic, via coverage (as reported)</td></tr>
+<tr><td>Fable 5 public release → Kimi K3 launch window</td><td><span class="v">1 Jul → ~15 Jul (~15 days)</span></td><td>coverage (as reported)</td></tr>
+<tr><td>Kimi K3 parameters / license</td><td><span class="v">2.8T / Modified MIT</span></td><td>Moonshot / coverage (as reported)</td></tr>
+<tr><td>Kimi K3 full open weights publish</td><td><span class="v">27 Jul 2026 (2 days)</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>DeepSeek V4-Pro on SWE-bench Verified (top open-weights)</td><td><span class="v">80.6%</span></td><td>DeepSeek / coverage (as reported)</td></tr>
+<tr><td>DeepSeek V4-Pro output price / vs Opus 4.8</td><td><span class="v">$0.87/1M / ~29× cheaper</span></td><td>coverage (as reported)</td></tr>
+<tr><td>DeepSeek V4-Pro architecture / license</td><td><span class="v">1.6T MoE (49B active) / MIT</span></td><td>DeepSeek / coverage</td></tr>
+<tr><td>Enterprises that can actually govern their AI agents</td><td><span class="v">12%</span></td><td>OutSystems, ~1,900 IT leaders (as reported)</td></tr>
+<tr><td>Agentic-AI projects projected cancelled by end-2027</td><td><span class="v">&gt;40%</span></td><td>Gartner</td></tr>
+<tr><td>MCP's largest revision goes final</td><td><span class="v">28 Jul 2026 (3 days)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>EU AI Act GPAI enforcement becomes applicable</td><td><span class="v">2 Aug 2026 (8 days)</span></td><td>European Commission (Art. 101)</td></tr>
+<tr><td>Maximum GPAI penalty</td><td><span class="v">€15M or 3% of turnover</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Open the file — make provenance a governed attribute of every model you run.</strong> Before any open-weight model reaches production, document its <strong>chain of custody:</strong> who trained it, the <strong>license read in full</strong> (Modified MIT ≠ MIT), the training-data claims, and the <strong>indemnity posture</strong> (who, if anyone, stands behind the IP — and what a claim would cost <em>you</em> as the deployer). Add "model provenance" to your third-party-risk and procurement checklist next to cost and capability. A masterwork you can't document is a masterwork you shouldn't hang.</li>
+  <li><strong>Diversify the gallery — hold at least two greens of different origin.</strong> Don't anchor a critical workflow on a single open model, least of all one under a live sanctions cloud. This quarter, <strong>qualify two self-hostable open-weight models of different provenance</strong> (e.g. MIT-licensed <strong>DeepSeek V4</strong> alongside any <strong>Kimi K3</strong> you vet), and keep your <strong>context, prompts and eval gate portable</strong> across them, so swapping one out is a switch, not a migration. Then an Entity List designation or an IP fight is a removed canvas, not a dark gallery.</li>
+  <li><strong>Price the title risk — and rehearse the un-hang.</strong> Run the tabletop: <em>if a model we self-host were sanctioned or IP-challenged tomorrow, could we name every workflow it touches and cut over to the alternative in a week?</em> Write down the blast radius, the fallback, and the cutover steps now — and fold model origin and license into the <strong>EU AI Act evidence</strong> you owe before enforcement lands in 8 days. Provenance discipline is cheapest to build before the accusation, not after.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> White House OSTP (Kratsios) · U.S. Treasury (Bessent) · TechCrunch · CyberScoop · Cryptopolitan · Cryptobriefing · SiliconANGLE · Seeking Alpha · The Hill · SCMP · CNBC · Gizmodo · Quartz · AI Weekly · Bitcoin World · PetaPixel · Fortune · Moonshot / coverage · DeepSeek · morphllm · DataCamp · Codersera · OpenRouter · Model Context Protocol blog · OutSystems · Gartner · European Commission. This is a developing, disputed story — the US allegations and the researchers' rebuttals are both relayed "as reported." Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 25 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
