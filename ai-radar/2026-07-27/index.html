@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 27 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the day Kimi K3's open weights went free and ownerless — as a joint UK AISI / US CAISI assessment rated its dual-use cyber capability (32% vs 76%; step 17 of 32) with guardrails that 'did not prevent' offensive cyber and cannot be revoked once open, while Claude Opus 5 topped both indices at launch. An open weight is licensed explosive, not free software: read the government's blast rating, build the magazine, and store the detonator apart from the charge. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Powder Magazine</h1>
+  <div class="meta">Monday, 27 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the radar told you to read the regulatory notice to the last line — the AI Act's 2 August date split, and an extension to file is not an extension to pay. Today the story moves from the calendar to the loading dock. At 00:00 UTC this morning the largest open-weight model ever — Kimi K3 (2.8T MoE, Modified MIT) — went free and ownerless, downloadable by any firm, nation or adversary. In the same window two governments handed you its blast rating: a joint UK AISI / US CAISI cyber assessment found K3 scores 32% on exploit development (vs 76% for top US models) and drove a 32-step simulated attack to step 17 on average — sub-frontier, but with guardrails that "did not prevent it from attempting cyber exploit development or offensive cyber operations," and once weights are open the developer "loses all downstream control." Meanwhile the frontier walked away again: Claude Opus 5 tops both Artificial Analysis indices at launch, at half Fable 5's price. The day the cheap powder lands in our own yard — with a government's blast rating on the crate and a safety catch that unscrews — are we the operator who owns the magazine, or the one who stacks it by the furnace because the vendor used to hold the key?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thesis — <strong>the model commoditizes; own and govern the layer around it</strong> — and this morning the commodity stopped being a countdown and became a fact on your dock. At <strong>00:00 UTC on 27 July,</strong> Moonshot AI published the <strong>full open weights of Kimi K3</strong> — a <strong>2.8-trillion-parameter</strong> mixture-of-experts model (~50B active, 16 of 896 experts per token, 1M-token context) under a <strong>Modified MIT</strong> license, the largest open-weight release in history (~<strong>1.4 TB</strong> in four-bit MXFP4). It is now downloadable, self-hostable and <em>modifiable</em> by anyone. In the same window, the <strong>UK AI Security Institute (AISI)</strong> and the <strong>US Center for AI Standards and Innovation (CAISI)</strong> published a <strong>joint preliminary cyber assessment</strong> — and it cuts two ways. The reassuring half: K3 <strong>trails</strong> the US frontier — <strong>32% on ExploitBench</strong> (41 post-2023 Chrome V8 CVEs) versus <strong>76%</strong> for top US models, and reached <strong>step 17 of a 32-step</strong> simulated network attack versus <strong>28.5</strong> for leading US closed-weight models. The alarming half: K3's <strong>guardrails "did not prevent it from attempting cyber exploit development or offensive cyber operations,"</strong> it completed the <strong>full 32-step path in 1 of 10 attempts,</strong> and — the structural point — open weights mean the developer <em>"loses all downstream control; safeguards cannot be remotely updated or revoked."</em> On an open model the safety catch is a screw, not a weld. It lands the same week the frontier moved <em>away</em>: <strong>Claude Opus 5</strong> (24 July) took <strong>#1 on Artificial Analysis's Intelligence and Agentic indices</strong> at launch, at <strong>$5/$25 — half Fable 5</strong> — while Wall Street's <strong>bond market grew anxious about the AI capex bill</strong> (~<strong>$490B</strong> hyperscaler spend in 2026, per Citi). The plumbing thread closes tomorrow: <strong>MCP's final spec goes live 28 July (1 day),</strong> and <strong>EU AI Act Article 50 + GPAI enforcement lands 2 August (6 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The cheap, dual-use commodity is now in your yard — and its safety catch unscrews.</strong> Kimi K3's open weights are live today. A government assay says the blast is real but <strong>sub-frontier</strong> (32% vs 76%; 17/32 vs 28.5 steps) — this is not a super-weapon. The hazard is not the raw power; it is that <strong>open weights strip the operator-side controls closed models rely on.</strong> The moment you self-host the commodity, the developer's guardrails stop being the vendor's problem and become yours — because they <em>"cannot be remotely updated or revoked,"</em> and a fine-tuner can remove them entirely.</div></div>
+<div class="num"><div class="b">2</div><div><strong>You cannot win the race by owning the newest weights — the frontier walks away.</strong> The same week the largest <em>open</em> model went free, the <em>frontier</em> jumped: Opus 5 topped both indices at launch for half of Fable 5's price. Chasing "own the best model" is a treadmill — the vendor keeps the newest, always-locked powder, and it's more capable than what you can own. The durable asset is not the charge; it is <strong>the magazine you keep it in</strong> — the sandbox, egress controls, credential separation, eval gate and audit log that govern <em>whatever</em> weights you run.</div></div>
+<div class="num"><div class="b">3</div><div><strong>When custody transfers to you, so does the assay — read the government's blast rating, then build the magazine.</strong> AISI/CAISI did your first-pass hazard rating for free; that is the assayer's mark, not the containment. On infrastructure you own, <strong>separate the detonator from the charge</strong> (least-privilege credentials and network egress kept apart from the raw model), log every "stick" in and out, and cap the blast radius by default. The estates that self-host safely in 2026 treat the open weight as <strong>licensed explosive, not free software.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the commodity you were told to want arrived free this morning — and arrived dual-use, with a government's blast rating and a safety catch that comes off. Owning it is not the prize; it is the moment the safety burden moves onto your books. Don't stack the powder by the furnace. Own the magazine.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🧨 "The Powder Magazine"</h3>
+<p><em>Topic: At 00:00 UTC on 27 July 2026, Moonshot AI published the full open weights of Kimi K3 — a 2.8-trillion-parameter mixture-of-experts model under a Modified MIT license, the largest open-weight release ever. In the same window, a joint preliminary assessment by the UK AI Security Institute (AISI) and the US CAISI found K3 trails leading US frontier models on cyber tasks (32% on ExploitBench vs 76%; step 17 of a 32-step simulated network attack vs 28.5 for top US closed models) but that its guardrails "did not prevent it from attempting cyber exploit development or offensive cyber operations," and that once weights are open "the developer loses all downstream control; safeguards cannot be remotely updated or revoked." The same week, Claude Opus 5 (24 July) topped both Artificial Analysis indices at launch at half Fable 5's price, and bond markets grew anxious over hyperscaler AI capex (~$490B in 2026). The lesson: an open-weight model is cheap, dual-use, and comes with a removable safety catch — owning it transfers the custody to you, so own the containment, not the race.</em></p>
+<p>Cheap, powerful explosive is one of the most productive commodities the industrial age ever made — it cut the railway tunnels, sank the mines, drove the canals. And precisely because it was so useful and so cheap, no serious society responded by banning it, and none was foolish enough to treat it as harmless. They did a third thing: they built the <strong>magazine.</strong> A powder magazine is not the powder — it is the discipline <em>around</em> the powder. A licensed, isolated store, sited a measured distance from anything that matters. A magazine-keeper who signs for every keg. A logbook of every stick in and out. Quantity limits, so a single accident cannot take the whole works. And the one rule every powderman learns first: <strong>the detonator lives apart from the charge.</strong> The charge alone is inert; the cap alone is a firecracker; it is the two <em>together,</em> carelessly stored, that level a building.</p>
+<p>Here is the part the enterprise keeps missing. When the powder was sold only under the manufacturer's lock — stored and detonated on the vendor's bonded site — the <em>vendor</em> kept the magazine, and the operator never had to think about custody. The day the powder is sold <strong>loose, by the barrel, to take back to your own yard,</strong> the economics improve wonderfully and the <em>entire safety burden silently changes hands.</em> You are now the magazine-keeper. The safety catch the manufacturer fitted? On loose powder it is a screw, not a weld — anyone in your yard can back it out. And no recall reaches a barrel already in a thousand yards: once it is loose, <em>"the maker loses all downstream control."</em> This is exactly what the inspectorate meant this week when it stamped the blast rating on the crate — a real, if sub-frontier, charge — and warned in the same breath that the catch does not hold and cannot be re-tightened from the factory.</p>
+<p>So the disciplined operator does three unglamorous things the excited one skips. First, <strong>read the government's blast rating</strong> — the assay says this is a working charge, not a toy, and not the strongest on the market either; calibrate the magazine to the real number, neither panicking nor waving it through. Second, <strong>build the magazine before the powder arrives</strong> — the isolated store (a hardened sandbox), the distance rule (network egress controls), the logbook (an audit trail), the quantity cap (blast-radius limits). Third, and most important, <strong>store the detonator apart from the charge</strong> — keep the model's credentials, its tool-authority and its path to production <em>separate</em> from the raw weights, on least privilege, so a charge with its catch removed has nothing to set off. Meanwhile the excited operator, chasing the <em>biggest</em> charge, discovers the manufacturer always keeps a bigger, safer, locked one for itself — and that renting the newest powder was never the same as owning the yard it detonates in.</p>
+<p><strong>The moral:</strong> welcome the cheap commodity — an open-weight model you can self-host is a genuine strategic good, and this radar has argued for a month that you should hold one. But an open weight is licensed explosive, not free software. The blast rating is the government's job; the <strong>magazine is yours.</strong> Read the assay, build the containment before the crate lands, and store the detonator apart from the charge — because a safety catch that unscrews is only as good as the yard you keep the powder in.</p>
+<p><strong>The question it forces:</strong> <em>The cheap powder is in our own yard this morning, with a government's blast rating on the crate and a safety catch we now know unscrews. Have we built the magazine — the sandbox, the egress rule, the logbook, the detonator kept apart from the charge — or did we carry the barrel in because the API price was good and the vendor used to hold the key?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>Kimi K3's open weights are <strong>live today,</strong> with a joint AISI/CAISI assessment saying the model can assist offensive cyber work and that its <strong>guardrails don't hold and can't be revoked once open.</strong> <strong>If we self-host any open-weight model, who owns the "magazine"</strong> — the sandbox, egress controls, credential separation, audit log — and can they show it existed <em>before</em> the weights landed?</li>
+  <li>The frontier moved the same week (Opus 5 #1 at launch, half Fable 5's price). <strong>Are we chasing "own the best model" — a treadmill the vendor always wins — or owning the containment and eval gate that govern whichever model we run?</strong></li>
+  <li>The government did our <strong>first-pass blast rating</strong> for free. <strong>Have we read the actual numbers</strong> (sub-frontier: 32% vs 76%, 17/32 steps) so we neither panic-ban a useful commodity nor wave through a real dual-use capability?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>An open-weight model fine-tuned in-house has <strong>no vendor safety catch and no remote kill switch.</strong> <strong>For any self-hosted model touching customer data or trading systems, have we separated its credentials and network egress from the raw weights</strong> — the detonator apart from the charge — so a stripped guardrail sets off nothing?</li>
+  <li>Bond markets are repricing the <strong>AI capex bill</strong> (~$490B hyperscaler spend in 2026; credit spreads widening). <strong>Does our AI business case survive a world where the cheap open commodity is on our own metal and the ROI question has reached the balance sheet, not just the pilot?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Dual-use is not abstract in a lab: a capable open model plus wet-lab or protocol access is a governed combination. <strong>For any open-weight model we host near sensitive research, is the "quantity cap" real</strong> — hard limits on what one agent can reach — rather than a policy PDF?</li>
+  <li>Open weights mean <strong>no recall.</strong> <strong>If a hosted model is later found to assist a harmful workflow, what is our containment and rollback plan today,</strong> given the maker cannot patch it for us?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run powder magazines — literally, and in OT security. <strong>Apply the same discipline to open-weight AI: licensed store, keeper, logbook, distance rule.</strong> Is our AI supply-chain map precise enough to say which models are vendor-locked (magazine held by them) versus self-hosted (magazine held by us)?</li>
+  <li>Suppliers will ship you agents built on open weights to cut cost. <strong>Do procurement terms require a blast rating (a cyber/safety assessment) and proof of containment</strong> for any open-weight model embedded in what they sell us?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>A cheap open model is tempting for a storefront chatbot or content engine. <strong>Have we weighed the Article 50 transparency duty (live 2 August, 6 days) AND the open-weight safety custody together</strong> — the disclosure <em>and</em> the magazine — rather than one without the other?</li>
+  <li>Marketing will want the frontier's quality at the commodity's price. <strong>Do we have a model-neutral abstraction</strong> so switching between Opus 5 (locked, frontier) and K3 (open, self-hosted) is a routing decision, not a rebuild?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>A sovereign, self-hostable frontier-class model is exactly what many public bodies wanted — and it now carries a dual-use cyber rating from two allied governments. <strong>Can we adopt the sovereignty benefit and own the containment,</strong> so the same weight that serves citizens can't be repurposed against them?</li>
+  <li>Two AI <em>security institutes</em> just published a joint assay. <strong>Is our procurement wired to require and read such assessments</strong> — treating a government blast rating as a standard artifact, like a safety data sheet — before any open model enters a regulated system?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Magazine, Not the Powder</h2>
+<p>Read this week's story as one lesson about <strong>owning the containment, not the charge,</strong> in three parts — the powder (what actually landed, and why it's a genuine commodity), the assay (what two governments measured, and why the number matters less than the missing catch), and the magazine (the discipline you now owe because custody just changed hands).</p>
+<div class="card"><ul>
+  <li><strong>The powder (a real commodity, genuinely worth having).</strong> At <strong>00:00 UTC on 27 July,</strong> Moonshot AI released the full open weights of <strong>Kimi K3</strong> — <strong>2.8T</strong> parameters, mixture-of-experts (<strong>16 of 896 experts</strong> fire per token, <strong>~50B active</strong>), <strong>1M-token context,</strong> multimodal, under a <strong>Modified MIT</strong> license, ~<strong>1.4 TB</strong> in four-bit MXFP4. It is the largest open-weight release ever and, by prior independent evals, near-frontier on coding. Self-hostable by any firm or nation — the "village green" this radar has argued you should keep. That part is good, and unchanged.</li>
+  <li><strong>The assay (a government blast rating — read both halves).</strong> In the same window the <strong>UK AISI</strong> and <strong>US CAISI</strong> published a <strong>joint preliminary cyber assessment.</strong> The reassuring half: K3 <strong>trails</strong> the US frontier — <strong>32% on ExploitBench</strong> (41 post-2023 Chrome V8 CVEs) versus <strong>76%</strong> for top US models; on <strong>"The Last Ones"</strong> (TLO), a 32-step simulated corporate-network attack across ~20 hosts, K3 reached <strong>step 17 on average</strong> versus <strong>28.5</strong> for leading US closed-weight models (and ahead of peer open model GLM-5.2 at step 11). A working charge, <em>not</em> a super-weapon. The half that matters more: K3's <strong>guardrails "did not prevent it from attempting cyber exploit development or offensive cyber operations,"</strong> it completed the <strong>full 32-step path in 1 of 10 attempts</strong> (≤100M-token budget), and — structurally — once weights are public <em>"the developer loses all downstream control; safeguards cannot be remotely updated or revoked."</em> The blast rating is real and sub-frontier; the safety catch is the story.</li>
+  <li><strong>The magazine (the discipline that now falls to you).</strong> When the model lived behind a hosted API, the <strong>vendor kept the magazine</strong> — the safety controls, the ability to patch or revoke. The day you download the weights, custody transfers: <strong>you are the magazine-keeper.</strong> That means a hardened <strong>sandbox</strong> (the isolated store), <strong>network egress controls</strong> (the distance rule), an <strong>audit log</strong> of every call (the logbook), <strong>blast-radius limits</strong> on any one agent (the quantity cap), and — the one rule powdermen learn first — <strong>the detonator kept apart from the charge:</strong> least-privilege credentials, tool-authority and production access held <em>separate</em> from the raw model, so a stripped guardrail has nothing to ignite. Own it before the crate lands.</li>
+</ul></div>
+<p>The strategic core: <strong>you cannot win by owning the charge; you win by owning the magazine.</strong> The frontier (Opus 5, #1 at launch, half Fable 5's price) will always keep the biggest, safest, locked powder for itself — so "own the best model" is a race the vendor wins. What travels with <em>you,</em> frontier or open, is the containment. After this week, "we self-host an open model to be sovereign" is not a complete answer; <em>"we self-host it inside a magazine we own — sandbox, egress, logbook, quantity cap, detonator apart from charge — sized to the government's blast rating"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The powder magazine: own the containment, not the charge. An open weight is licensed explosive, not free software. At the top, the powder — Kimi K3's open weights went live at 00:00 UTC on 27 July: 2.8-trillion-parameter mixture of experts, roughly 50 billion active, 1-million-token context, Modified MIT license, about 1.4 terabytes; a real commodity, self-hostable by any firm, nation or adversary. Read the government's blast rating: the joint UK AISI and US CAISI cyber assessment found 32 percent on exploit development versus 76 percent for US models, and reached step 17 of a 32-step simulated attack versus 28.5, sub-frontier and dual-use; but its guardrails did not prevent offensive cyber attempts, and once weights are open the maker loses all downstream control. Custody just changed hands, so you keep it now: build the magazine — a sandbox as the isolated store, egress controls as the distance rule, an audit log as the logbook, and a blast-radius cap as the quantity limit, on infrastructure you own — and store the detonator apart from the charge, keeping least-privilege credentials separate from the raw weights. The trap is to treat it as free software, self-host with no containment, and leave a stripped safety catch in a live yard; the win is to treat it as licensed explosive, build the magazine first, and keep a useful commodity contained." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE POWDER MAGAZINE — own the containment, not the charge</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">An open weight is licensed explosive, not free software.</text>
+
+  <!-- the powder (commodity) -->
+  <rect x="70" y="58" width="540" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE POWDER — Kimi K3 open weights, LIVE 27 Jul 00:00 UTC</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">2.8T MoE · ~50B active · 1M context · Modified MIT · ~1.4 TB</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">self-hostable by any firm, nation — or adversary</text>
+  <text x="90" y="131" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">a real commodity — the "village green," genuinely worth wanting</text>
+  <text x="590" y="79" font-size="11" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">✅ COMMODITY</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="154" x2="340" y2="176" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,176 340,188 346,176" fill="#9aa7b6"/>
+  <text x="420" y="171" font-size="9" fill="#9aa7b6" font-family="sans-serif">read the blast rating →</text>
+
+  <!-- the assay (dual-use) -->
+  <rect x="70" y="192" width="540" height="104" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="90" y="213" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">THE ASSAY — UK AISI / US CAISI joint cyber assessment</text>
+  <text x="90" y="232" font-size="10.5" fill="#e8edf3" font-family="sans-serif">32% exploit-dev (vs 76% US) · TLO step 17/32 (vs 28.5)</text>
+  <text x="90" y="248" font-size="10.5" fill="#e8edf3" font-family="sans-serif">sub-frontier — a working charge, NOT a super-weapon</text>
+  <text x="90" y="264" font-size="10.5" fill="#e8edf3" font-family="sans-serif">BUT guardrails "did not prevent" offensive cyber attempts</text>
+  <text x="90" y="281" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">open weights → maker "loses all downstream control"</text>
+  <text x="590" y="213" font-size="11" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">⚠ DUAL-USE</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="296" x2="340" y2="318" stroke="#5fb2df" stroke-width="2"/>
+  <polygon points="334,318 340,330 346,318" fill="#5fb2df"/>
+  <text x="420" y="313" font-size="9" fill="#5fb2df" font-family="sans-serif">custody changed hands → you keep it now →</text>
+
+  <!-- build the magazine -->
+  <rect x="96" y="334" width="488" height="96" rx="9" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="340" y="356" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">BUILD THE MAGAZINE — the layer to own</text>
+  <text x="340" y="375" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">sandbox (isolated store) · egress controls (distance rule)</text>
+  <text x="340" y="391" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">audit log (logbook) · blast-radius cap (quantity limit)</text>
+  <text x="340" y="409" font-size="10.5" fill="#cfe6f5" text-anchor="middle" font-family="sans-serif" font-weight="700">store the DETONATOR apart from the CHARGE — least-privilege creds ≠ raw weights</text>
+  <text x="340" y="424" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">on infrastructure you own</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="430" x2="340" y2="452" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,452 340,464 346,452" fill="#9aa7b6"/>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="476" width="308" height="58" rx="9" fill="#2a1020" stroke="#8a2f52"/>
+  <text x="182" y="496" font-size="10" font-weight="700" fill="#e06b9a" text-anchor="middle" font-family="sans-serif">TRAP — "it's free software"</text>
+  <text x="182" y="512" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">self-host with no containment →</text>
+  <text x="182" y="526" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">stripped catch, live yard.</text>
+
+  <rect x="344" y="476" width="308" height="58" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="496" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — "it's licensed explosive"</text>
+  <text x="498" y="512" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">build the magazine first →</text>
+  <text x="498" y="526" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">useful commodity, contained.</text>
+
+  <text x="340" y="560" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the government stamps the blast rating — you build the magazine</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>The powder — the open-weight commodity</span>
+  <span><i class="dot" style="background:#d85a30"></i>The assay — dual-use, sub-frontier</span>
+  <span><i class="dot" style="background:#378add"></i>The magazine — the containment to own</span>
+  <span><i class="dot" style="background:#e06b9a"></i>"It's free software" — the trap</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — treat it as free software</th><th>The discipline — treat it as licensed explosive</th></tr>
+<tr><td>Download the weights, run them where it's convenient</td><td>Build the magazine (sandbox, egress, log) before the crate lands</td></tr>
+<tr><td>Trust the shipped guardrails</td><td>Know the catch unscrews and can't be re-tightened remotely</td></tr>
+<tr><td>Give the model your credentials to "just work"</td><td>Keep the detonator apart from the charge — least privilege</td></tr>
+<tr><td>Chase the biggest/newest model to feel safe</td><td>Own the containment that governs any model, frontier or open</td></tr>
+<tr><td>Read the headline ("trails US models — fine")</td><td>Read both halves of the assay: sub-frontier <strong>and</strong> catch missing</td></tr>
+</table>
+
+<h3>Why an open weight is a security object, not just a cost line</h3>
+<div class="card">
+<p>Every force this radar tracked all month — commodity models, open weights, agentic autonomy, provenance, the split AI Act calendar — assumed the model was a <em>capability</em> to acquire. This week reframes it as an <em>asset in custody.</em> The reassuring number (K3 trails the frontier) tempts the trap: "sub-frontier, so wave it through." But the institutes' real warning is not about the score — it is that open release removes the operator-side controls closed models rely on, permanently and irrevocably. A firm that reads only "trails US models" self-hosts with no magazine; a firm that reads the whole assay builds containment sized to a real, if modest, blast. The distillation debate from yesterday even connects here (one analysis suggests distillation may explain the trailing cyber score) — provenance and hazard are two readings of the same crate.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension). Today adds the security custody to the provenance file: the open weight you were told to keep as a fallback is also a dual-use charge whose safety catch comes off. On legacy estates the danger is a data-science team that pulls 1.4 TB of weights onto a GPU box wired straight into the corporate network "to evaluate it," with the same broad service credentials every other job uses — powder stacked next to the furnace, detonator in the same crate. The retrofit is the magazine: an isolated eval sandbox, egress allow-lists, a call-level audit log, and credentials scoped to nothing that matters — built <em>before</em> the download, and sized to the government's published blast rating.</p>
+<p><strong>The clean mental model:</strong> <em>An open-weight model is licensed explosive, not free software. The government stamps the blast rating; you build the magazine — and you store the detonator apart from the charge.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Kimi K3 open weights — LIVE today (27 July, 00:00 UTC).</strong> The largest open-weight model ever (2.8T MoE, Modified MIT, ~1.4 TB in MXFP4) is now downloadable and modifiable by anyone. The "village green" is real — and so is the custody transfer.</li>
+  <li><strong>The AISI/CAISI blast rating.</strong> Two allied AI <em>security institutes</em> jointly rated K3's cyber capability: sub-frontier (<strong>32% vs 76%;</strong> TLO <strong>17/32 vs 28.5</strong>) but with guardrails that did not prevent offensive-cyber attempts and cannot be revoked once open. Treat a government assessment as a standard procurement artifact.</li>
+  <li><strong>The frontier moved away (Opus 5, 24 July).</strong> Anthropic's Claude Opus 5 took <strong>#1 on Artificial Analysis's Intelligence and Agentic indices</strong> at launch, at <strong>$5/$25</strong> — half Fable 5 — with a low/medium/high effort dial. You can't out-own the risk by buying the newest, locked powder.</li>
+  <li><strong>The capex bill reaches the bond market.</strong> Hyperscaler 2026 AI capex ~<strong>$490B</strong> (Citi); credit spreads widened after Alphabet lifted its forecast. The ROI reckoning (yesterday's thread) is now a balance-sheet conversation.</li>
+  <li><strong>The standing plumbing — MCP final spec 28 July (1 day)</strong> — and <strong>EU AI Act Article 50 + GPAI enforcement 2 August (6 days;</strong> €15M or 3% of turnover, no grace).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">[Kimi K3's guardrails] did not prevent it from attempting cyber exploit development or offensive cyber operations.</div><div class="a">— UK AI Security Institute (AISI) &amp; US CAISI, joint preliminary assessment of Kimi K3, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">When an AI model's weights are released publicly, the developer loses all downstream control, and safeguards cannot be remotely updated or revoked.</div><div class="a">— coverage of the UK AISI / CAISI assessment, on why open release changes the safety calculus, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">[Claude Opus 5] excels at verifying its work and iterating carefully until it succeeds.</div><div class="a">— Anthropic, on Claude Opus 5, 24 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">Bond market anxiety is growing over AI capex budgets.</div><div class="a">— CNBC, headline, 24 July 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"An open-weight model is licensed explosive, not free software. The government stamps the blast rating; you build the magazine — and you store the detonator apart from the charge."</div><div class="a">— the radar, on the powder magazine</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Kimi K3 full open weights — live</td><td><span class="v">27 Jul 2026, 00:00 UTC</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Kimi K3 size / architecture</td><td><span class="v">2.8T MoE · ~50B active (16 of 896) · 1M ctx</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Kimi K3 open-weights footprint (MXFP4)</td><td><span class="v">~1.4 TB</span></td><td>coverage (as reported)</td></tr>
+<tr><td>Kimi K3 — ExploitBench (exploit development)</td><td><span class="v">32% (vs 76% top US)</span></td><td>UK AISI / CAISI</td></tr>
+<tr><td>Kimi K3 — TLO 32-step simulated attack (avg)</td><td><span class="v">step 17 of 32 (vs 28.5 US closed)</span></td><td>UK AISI / CAISI</td></tr>
+<tr><td>Kimi K3 — completed full 32-step attack path</td><td><span class="v">1 of 10 attempts (≤100M tokens)</span></td><td>UK AISI / CAISI</td></tr>
+<tr><td>Peer open model GLM-5.2 on TLO (avg)</td><td><span class="v">step 11 of 32</span></td><td>UK AISI / CAISI</td></tr>
+<tr><td>Claude Opus 5 — pricing (in / out)</td><td><span class="v">$5 / $25 per 1M tokens</span></td><td>Anthropic / coverage</td></tr>
+<tr><td>Claude Fable 5 — pricing (reference)</td><td><span class="v">$10 / $50 per 1M tokens</span></td><td>coverage (as reported)</td></tr>
+<tr><td>Opus 5 — Frontier-Bench agentic coding</td><td><span class="v">43.3% (beats Fable 5 &amp; GPT-5.6 Sol)</span></td><td>coverage (as reported)</td></tr>
+<tr><td>Opus 5 — launch-day rank</td><td><span class="v">#1 Intelligence &amp; Agentic Index</span></td><td>Artificial Analysis (as reported)</td></tr>
+<tr><td>Hyperscaler AI capex, 2026 (Citi)</td><td><span class="v">~$490B</span></td><td>coverage (as reported)</td></tr>
+<tr><td>Four largest hyperscalers — 2026 capex</td><td><span class="v">$250B (+77% YoY)</span></td><td>coverage (as reported)</td></tr>
+<tr><td>OpenAI ARR as share of 2026 hyperscaler capex</td><td><span class="v">~3% ($20B)</span></td><td>coverage (as reported)</td></tr>
+<tr><td>EU AI Act Article 50 + GPAI enforcement</td><td><span class="v">2 Aug 2026 (6 days) · €15M or 3%</span></td><td>European Commission</td></tr>
+<tr><td>MCP final spec goes live</td><td><span class="v">28 Jul 2026 (1 day)</span></td><td>Model Context Protocol blog</td></tr>
+<tr><td>Enterprises that can actually govern their AI agents</td><td><span class="v">12%</span></td><td>OutSystems, ~1,900 IT leaders (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Read the blast rating — then decide, calibrated, not by headline.</strong> Pull the AISI/CAISI assessment into your model-risk file as a standard artifact. Read <em>both</em> halves: K3 is <strong>sub-frontier</strong> (32% vs 76%; 17/32 steps) — so don't panic-ban a genuinely useful open commodity — <em>and</em> its guardrails don't hold and can't be revoked once open — so don't wave it through as "free software." The right posture is neither prohibition nor complacency; it is containment sized to a real, modest, irrevocable hazard.</li>
+  <li><strong>Build the magazine before the crate lands.</strong> For any open-weight model you self-host or evaluate, stand up the containment <em>first:</em> a hardened, isolated sandbox; network egress allow-lists; a call-level audit log; and hard blast-radius limits on what any one agent can touch. Above all, <strong>store the detonator apart from the charge</strong> — keep the model's credentials, tool-authority and production access on least privilege, separate from the raw weights, so a stripped guardrail ignites nothing. Powder does not go on the GPU box wired straight into the corporate network.</li>
+  <li><strong>Own the magazine, not the race — and put it on infrastructure you own.</strong> Opus 5 topping the index at launch is the proof: the vendor always keeps a bigger, safer, locked model, so "own the best weights" is a treadmill. Invest instead in the model-neutral containment and eval gate that govern <em>whatever</em> you run — frontier or open — so switching from a locked Opus 5 to a self-hosted K3 is a routing decision, not a security rebuild. Fold this into the Article 50 / GPAI evidence due in <strong>6 days:</strong> the magazine is also your compliance artifact.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> UK AI Security Institute (AISI) &amp; US CAISI (joint Kimi K3 cyber assessment) · NIST · Anthropic (Claude Opus 5) · Artificial Analysis · Moonshot AI / coverage · VentureBeat · TechTimes · TECHi · the-decoder · MLQ · Cryptopolitan · XenoSpectrum · CNBC · Citigroup (via coverage) · European Commission (AI Act &amp; Article 50) · Model Context Protocol blog · OutSystems. Figures are relayed from vendor, government-institute and press sources and marked "as reported" where they rest on secondary reporting; the AISI/CAISI assessment is described by its authors as "preliminary." Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 27 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
