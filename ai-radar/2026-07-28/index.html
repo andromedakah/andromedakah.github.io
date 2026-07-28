@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 28 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the day the Model Context Protocol (MCP) 2026-07-28 spec went final — a stateless, universal, OAuth-aligned connector that relocates the security boundary from the wire onto the enterprise. A universal standard standardizes the envelope, not the safety of what's inside: adopt the protocol, but own the mailroom — the ID desk, the scanner, the locked boxes, and the logbook. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Mailroom</h1>
+  <div class="meta">Tuesday, 28 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a month this radar carried a countdown at the foot of every brief — "MCP's final spec goes live 28 July." Today it lands. At the top of the day the Model Context Protocol 2026-07-28 specification went final — the largest revision since MCP's 2024 debut. It rips out the thing that made the old protocol feel safe by accident: state. Sessions are gone, the handshake is gone, and any request can now land on any server behind a plain load balancer. The standard is now boring, universal, load-bearing infrastructure — ~97M monthly SDK downloads, 10,000+ live servers, Linux-Foundation-governed. But the same change that makes it scale hands you a bill: as Akamai's threat-research lead put it, going stateless means "critical security boundaries are now entirely dependent on how developers implement them." The universal connector just moved the security boundary from the wire into our own building — have we built the mailroom to receive it, or are we still trusting a postmaster who no longer remembers our name?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thesis — <strong>the model commoditizes; own and govern the layer around it</strong> — and today the most load-bearing layer of all stopped being a countdown and became a standard. At the top of <strong>28 July,</strong> the <strong>Model Context Protocol (MCP) 2026-07-28 specification went final:</strong> the biggest revision since the protocol's debut, delivered as enterprise plumbing. Its headline is <strong>statelessness</strong> — six coordinated proposals remove the <code>Mcp-Session-Id</code> header and the <code>initialize</code> handshake, so <strong>"any MCP request can land on any server instance,"</strong> and the sticky routing and shared session stores horizontal deployments once needed are gone at the protocol layer. Three legacy features (Roots, Sampling, Logging) are <strong>deprecated on a 12-month clock;</strong> authorization is rewritten to align with <strong>OAuth 2.1 and OpenID Connect;</strong> and two extensions — <strong>MCP Apps</strong> (sandboxed HTML UIs) and <strong>Tasks</strong> (long-running work) — ship on the same audit path as a tool call. This is not fringe: <strong>~97M monthly SDK downloads,</strong> <strong>10,000+ active servers,</strong> stewarded since December 2025 by the <strong>Agentic AI Foundation</strong> under the Linux Foundation. The catch is the whole story. Akamai's <strong>Maxim Zavodchik</strong> warned the move to a stateless model with rich UI apps and async tasks means <strong>"critical security boundaries are now entirely dependent on how developers implement them"</strong> — the update <em>"eliminat[es] older protocol-level risks,"</em> but <em>"implementation choices will now dictate the overall security posture,"</em> opening workflow hijacking, cross-tenant access, privilege escalation, secrets leakage, header-based control bypass, hit-and-run DoS against long-running tasks, and phishing through insecure UI panels. The standard standardized the envelope; it did not secure what's inside — and it just handed you the boundary. Meanwhile <strong>Gartner</strong> puts the layer at <strong>$64B (+63.4%) in 2026,</strong> with the biggest long-run winners being <em>"vendors that help enterprises manage where and how AI is used,"</em> while <strong>Arctera</strong> finds <strong>78%</strong> expect AI communications risk to rise but only <strong>19%</strong> can <em>prove</em> what their AI did. The regulatory clock stays loud: <strong>EU AI Act Article 50 + GPAI enforcement lands 2 August (5 days).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The universal connector went stateless — and the security boundary moved into your building.</strong> MCP is now the default way agents reach tools (~97M downloads, 10,000+ servers), and the 2026-07-28 spec makes it scale like ordinary web infrastructure. But statelessness plus MCP Apps plus async Tasks means the protocol no longer holds the guardrail: <strong>"critical security boundaries are now entirely dependent on how developers implement them."</strong> Adopt the standard — you have no real choice — but the receiving end is now yours to secure.</div></div>
+<div class="num"><div class="b">2</div><div><strong>A standard standardizes the envelope, not the contents.</strong> The spec hardens <em>authorization</em> (OAuth 2.1 / OIDC), which is real progress — but Akamai's list of what implementation now governs is a mailroom threat model: forged headers that bypass controls, cross-tenant delivery, secrets leakage, DoS against long-running tasks, and phishing through the new UI panels. The connector is safer at the wire and more dangerous at the endpoint. <strong>You own the endpoint.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>The market is paying for exactly this layer — govern it or rent it.</strong> Gartner's $64B / +63.4% forecast names the winners as the vendors that help you <em>manage where and how AI is used.</em> Arctera says almost no one can yet <em>prove</em> what their AI did (19%). The MCP audit path (MCP Apps and Tasks on the same consent-and-log rail as a tool call) is the raw material for that proof — <strong>if you own the gateway, the allow-list, and the log,</strong> not the vendor's default.</div></div>
+<div class="card"><strong>Bottom line:</strong> the countdown ended and the plumbing went public. A universal standard makes the connection boring and cheap — and quietly relocates the security boundary from the protocol onto you. Don't just plug in because everyone else has. Build the mailroom — the ID desk, the scanner, the locked boxes, the logbook — before the first stateless letter arrives.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>📬 "The Mailroom"</h3>
+<p><em>Topic: On 28 July 2026 the MCP 2026-07-28 specification went final — the largest revision since the protocol's 2024 debut. It makes MCP stateless (the <code>Mcp-Session-Id</code> header and the initialize handshake are removed, so "any MCP request can land on any server instance"), deprecates three legacy features on a 12-month clock, rewrites authorization to align with OAuth 2.1 / OpenID Connect, and adds MCP Apps (sandboxed HTML UIs) and a Tasks extension. MCP is now the de facto connector — ~97M monthly SDK downloads, 10,000+ active servers, Linux-Foundation-governed. Akamai's Maxim Zavodchik warned that going stateless with rich UI apps and async tasks means "critical security boundaries are now entirely dependent on how developers implement them." The lesson: a universal standard standardizes the connection, not the safety of what flows through it — adopt the protocol, but own the mailroom.</em></p>
+<p>Once the world agreed on how to address a letter, mail stopped being a favor and became a utility. A standardized envelope, a standard address block, a stamp that means the same at every counter — that boring agreement is what lets a note leave a village desk and arrive on another continent, handled by clerks who never met the sender. The genius of a universal postal standard is precisely that <strong>no clerk has to remember you.</strong> Each letter carries everything it needs on its own face; any window can process it; the line moves; the system scales to a planet. This is what "stateless" means, said in ink: the counter keeps no memory of your last visit, so <strong>any counter will do</strong> — and if you need continuity, <em>you</em> carry the claim ticket. The post holds nothing on your behalf between letters.</p>
+<p>That universality is a genuine good, and no serious enterprise should refuse it — refusing the standard envelope in 2026 is refusing to receive mail. But here is the part the excited adopter misses. In the old world of the small local post, a postmaster who knew your face provided security <em>by accident:</em> he'd notice a stranger asking for your mail, hold a suspicious parcel, recognize a forged hand. The moment the system goes universal and stateless — any clerk, any window, no memory — <strong>that accidental security evaporates,</strong> and it does not come back for free. The standard guarantees the envelope will move; it guarantees <strong>nothing</strong> about whether the return address is real, whether the parcel is a bomb dressed as a gift from a brand you trust, whether the box at your end is locked, or whether anyone wrote down what arrived. The universal post moves letters; it does not run your mailroom.</p>
+<p>So the disciplined operator, on the day the universal standard arrives, does the unglamorous thing the excited one skips: <strong>builds the mailroom before the first letter lands.</strong> An ID desk that verifies the sender rather than trusting the letterhead — because a forged return address (a spoofed header, a mismatched body) is the oldest trick, and the spec's authors moved authorization to OAuth precisely so you'd check the issuer. An inbound scanner that opens the suspicious parcel — because the new "rich panels" (MCP Apps) can carry a phishing payload behind a trusted-looking face, and an async "please hold this" slip (a Task) can be a hit-and-run flood aimed at jamming the dock. Locked boxes, one per recipient, so a letter meant for one tenant never lands in another's tray. And above all a <strong>logbook</strong> — every delivery signed for — because when the regulator asks in five days <em>what your AI did and who reviewed it,</em> the answer lives in that book, and today only about one enterprise in five can even open one.</p>
+<p><strong>The moral:</strong> welcome the universal standard — a stateless, load-bearing MCP is a real strategic good, and this radar has argued for a month that the connective layer is exactly what to build on. But a standard standardizes the <em>envelope,</em> not the safety of what's inside, and the day it went stateless it moved the security boundary out of the wire and into your building. Plug in — and build the mailroom: the ID desk, the scanner, the locked boxes, and the logbook. The post will move the letter; only you can keep the mailroom.</p>
+<p><strong>The question it forces:</strong> <em>The universal connector we standardized on went stateless today — no counter remembers us, any request lands anywhere, and the protocol's authors say the security boundary is now ours to implement. Have we built the mailroom — verified senders, scanned the new panels, locked the per-tenant boxes, signed the logbook — or did we plug in because everyone else did and assume the post office still knew our name?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li>MCP's stateless spec went final today, and its own security researchers say <strong>"critical security boundaries are now entirely dependent on how developers implement them."</strong> <strong>Who owns our "mailroom"</strong> — the MCP gateway, the sender-verification (OAuth issuer checks), the per-tenant isolation, and the audit log — and can they show it exists, not just that we've "adopted MCP"?</li>
+  <li>Gartner says the biggest winners are <strong>vendors that help you manage where and how AI is used,</strong> and the market for that layer is <strong>$64B (+63.4%)</strong> this year. <strong>Are we building that management layer as an owned asset — gateway, allow-list, eval gate, log — or renting it from the vendor whose model we're meant to stay neutral about?</strong></li>
+  <li>Only <strong>19%</strong> of organizations can <em>prove</em> what their AI produced and who reviewed it. In 5 days the EU AI Act's transparency and GPAI enforcement lands. <strong>Is our MCP audit path wired to produce that evidence, or is "we're compliant" a claim we cannot open a logbook to support?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Stateless MCP means the risks are cross-tenant access, privilege escalation and secrets leakage at the <em>implementation</em> layer. <strong>For any agent touching customer accounts or trading systems, are our MCP servers behind an owned gateway that verifies the issuer, scopes credentials per tenant, and logs every call</strong> — or behind a vendor default we've never read?</li>
+  <li>The connector is now OAuth 2.1 / OIDC-aligned. <strong>Does our identity team treat every agent-to-tool call as an authenticated, least-privilege transaction</strong> — the same discipline we apply to payments — rather than a trusted internal hop?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>MCP Apps introduce sandboxed UI panels that can carry phishing or malicious scripts if implemented loosely. <strong>For any clinical or research agent that renders a panel to a human, have we scanned and consent-gated those UIs</strong> — the inbound scanner on the mailroom — rather than trusting them because they look official?</li>
+  <li>Async Tasks can be flooded (hit-and-run DoS). <strong>For long-running agent jobs on sensitive pipelines, do we rate-limit and monitor the task queue,</strong> so a jammed dock can't take down a workflow patients depend on?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You standardized on universal couplings and fittings on the plant floor so any part interoperates — and you still run the safety inspection. <strong>Apply the same to MCP: adopt the universal standard, but own the inspection point</strong> — the gateway where you enforce which tool sees which data, what's logged, and who signs off.</li>
+  <li>Suppliers will ship you agents that "just speak MCP." <strong>Do procurement terms require proof of a secured MCP implementation</strong> — issuer verification, tenant isolation, audit logging — for any agent embedded in what they sell you, given the protocol no longer enforces it for them?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>A storefront agent on stateless MCP is cheap to scale behind a plain load balancer — and exposed at the endpoint. <strong>Have we weighed the Article 50 transparency duty (live in 5 days) AND the MCP mailroom together</strong> — the disclosure <em>and</em> the secured connector — rather than one without the other?</li>
+  <li>Marketing will want agents wired to every tool overnight. <strong>Do we have an owned MCP gateway and allow-list</strong> so adding a connector is a governed decision with a log, not a silent new door into the building?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>MCP is now stewarded by a Linux Foundation body and is genuinely open — the sovereign, non-proprietary plumbing many public bodies wanted. <strong>Can we adopt that openness and own the security boundary,</strong> so the same universal connector that serves citizens can't be turned into an unlogged side door?</li>
+  <li>The evidence regulators will ask for — what the AI did, who reviewed it, where it went — is exactly the <strong>19%</strong> capability most lack. <strong>Is our MCP audit log a standard, retained, queryable artifact</strong> before enforcement lands, or a feature we assume the vendor keeps?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Mailroom, Not the Post</h2>
+<p>Read today's release as one lesson about <strong>owning the endpoint, not just adopting the standard,</strong> in three parts — the standard (what shipped, and why statelessness is a genuine win), the boundary (what moved onto you the moment the protocol forgot your name), and the mailroom (the discipline you now owe on infrastructure you own).</p>
+<div class="card"><ul>
+  <li><strong>The standard (a real, universal good).</strong> At the top of <strong>28 July,</strong> the <strong>MCP 2026-07-28 specification</strong> went final — the largest revision since the protocol's 2024 debut. <strong>Six coordinated SEPs</strong> make the core <strong>stateless:</strong> the <code>initialize</code>/<code>initialized</code> handshake is removed (SEP-2575), the <code>Mcp-Session-Id</code> header and protocol-level sessions are gone (SEP-2567), and routing headers (<code>Mcp-Method</code>, <code>Mcp-Name</code>) let <strong>"any MCP request land on any server instance,"</strong> so a remote server that once needed sticky sessions and a shared session store now runs behind a <strong>plain round-robin load balancer.</strong> Three legacy features — <strong>Roots, Sampling, Logging</strong> — are deprecated with <strong>at least a 12-month window.</strong> Authorization is rewritten to align with <strong>OAuth 2.1 and OpenID Connect</strong> (validate the <code>iss</code> per RFC 9207; declare OIDC <code>application_type</code>). Two extensions ride the same audit-and-consent path as a tool call: <strong>MCP Apps</strong> (sandboxed HTML UIs, SEP-1865) and <strong>Tasks</strong> (long-running work, SEP-2663). Load-bearing: <strong>~97M monthly SDK downloads,</strong> <strong>10,000+ active servers,</strong> stewarded since December 2025 by the <strong>Agentic AI Foundation</strong> under the Linux Foundation. That part is good — and it is why you adopt it.</li>
+  <li><strong>The boundary (what moved onto you).</strong> Statelessness is the right architecture — and it removes the accidental security the old session layer provided. Akamai's <strong>Maxim Zavodchik</strong> is blunt: going stateless <em>"and introducing rich UI apps and asynchronous tasks"</em> means <strong>"critical security boundaries are now entirely dependent on how developers implement them,"</strong> and while the update <em>"eliminat[es] older protocol-level risks, implementation choices will now dictate the overall security posture."</em> The concrete failure modes are a mailroom threat model: <strong>workflow hijacking and cross-tenant access; privilege escalation and secrets leakage; header/body inconsistencies that bypass security controls; hit-and-run DoS against long-running tasks; and malicious script execution and phishing through insecure UI panels.</strong> The wire got safer; the endpoint got more dangerous — and the endpoint is yours.</li>
+  <li><strong>The mailroom (the discipline that now falls to you).</strong> When state lived in the protocol, some safety came for free. Stateless, it doesn't. So build the receiving end on infrastructure you own: an <strong>ID desk</strong> (verify the OAuth issuer, don't trust the letterhead), an <strong>inbound scanner</strong> (review and consent-gate MCP Apps panels), <strong>locked per-tenant boxes</strong> (isolation and least-privilege credentials so one letter can't open the whole wall), <strong>rate limits at the dock</strong> (protect long-running Tasks from hit-and-run floods), and a <strong>logbook</strong> (an audit record of every call — the same rail MCP Apps and Tasks already ride). The spec hands you the audit path; the mailroom is where you use it.</li>
+</ul></div>
+<p>The strategic core: <strong>you don't win by adopting the standard; you win by owning the endpoint the standard now exposes.</strong> Everyone will speak MCP — that's what "universal" means, and it's why the connector is finally boring. What differentiates you is the mailroom: the gateway, the issuer checks, the tenant isolation, the scanner and the log, sized to a protocol that no longer remembers anyone's name. After today, "we're MCP-native" is not a security posture; <em>"we run MCP behind a mailroom we own — verified senders, scanned panels, locked boxes, a signed logbook"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The mailroom: own the endpoint, not just the standard. A universal standard standardizes the envelope, not the safety of what's inside. At the top, the standard — the MCP 2026-07-28 specification went final today: a stateless core with sessions and the handshake removed, so any request can land on any server; OAuth 2.1 and OpenID Connect authorization; MCP Apps and Tasks extensions; roughly 97 million monthly downloads and more than 10,000 active servers, a universal good. The moment the protocol forgot your name, the security boundary moved from the wire into your building and is now yours: Akamai warns that security boundaries are entirely dependent on how developers implement them, with risks of forged headers, cross-tenant access, secrets leakage, task denial-of-service, and phishing through insecure UI panels. So build the mailroom on infrastructure you own: an ID desk that verifies the OAuth issuer, an inbound scanner that reviews MCP Apps panels, locked per-tenant boxes for least privilege, dock rate limits against task floods, and a logbook auditing every call — and use the audit rail the spec already gives you, since MCP Apps and Tasks ride the same consent-and-log path as a tool call. The trap is to treat 'we're MCP-native' as a security claim and plug in on vendor defaults, leaving a stateless front door with no mailroom; the win is to own the endpoint with a gateway, issuer checks, a scanner, locked boxes, and a log." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE MAILROOM — own the endpoint, not just the standard</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A universal standard standardizes the envelope, not the safety inside.</text>
+
+  <!-- the standard -->
+  <rect x="70" y="58" width="540" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE STANDARD — MCP 2026-07-28 spec, FINAL today</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">stateless core · sessions &amp; handshake removed · any request → any server</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OAuth 2.1 / OIDC auth · MCP Apps + Tasks extensions</text>
+  <text x="90" y="131" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">~97M monthly downloads · 10,000+ servers — a universal good</text>
+  <text x="590" y="79" font-size="11" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">✅ UNIVERSAL</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="154" x2="340" y2="176" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,176 340,188 346,176" fill="#9aa7b6"/>
+  <text x="430" y="171" font-size="9" fill="#9aa7b6" font-family="sans-serif">the protocol forgot your name →</text>
+
+  <!-- the boundary -->
+  <rect x="70" y="192" width="540" height="104" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="90" y="213" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">THE BOUNDARY — moved from the wire into your building</text>
+  <text x="90" y="232" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"security boundaries entirely dependent on how</text>
+  <text x="90" y="248" font-size="10.5" fill="#e8edf3" font-family="sans-serif">developers implement them" — Akamai</text>
+  <text x="90" y="264" font-size="10.5" fill="#e8edf3" font-family="sans-serif">forged headers · cross-tenant · secrets leak · task DoS</text>
+  <text x="90" y="281" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">phishing through insecure UI panels</text>
+  <text x="590" y="213" font-size="11" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">⚠ NOW YOURS</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="296" x2="340" y2="318" stroke="#5fb2df" stroke-width="2"/>
+  <polygon points="334,318 340,330 346,318" fill="#5fb2df"/>
+  <text x="430" y="313" font-size="9" fill="#5fb2df" font-family="sans-serif">build the receiving end → on infra you own →</text>
+
+  <!-- build the mailroom -->
+  <rect x="96" y="334" width="488" height="96" rx="9" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="340" y="356" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">BUILD THE MAILROOM — the layer to own</text>
+  <text x="340" y="375" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">ID desk (verify issuer / OAuth) · scanner (review MCP Apps panels)</text>
+  <text x="340" y="391" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">locked boxes (per-tenant, least-priv) · dock rate limits (task DoS)</text>
+  <text x="340" y="409" font-size="10.5" fill="#cfe6f5" text-anchor="middle" font-family="sans-serif" font-weight="700">logbook — audit every call · use the audit rail the spec already gives you</text>
+  <text x="340" y="424" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">MCP Apps + Tasks ride the same consent + log path as a tool call</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="430" x2="340" y2="452" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,452 340,464 346,452" fill="#9aa7b6"/>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="476" width="308" height="58" rx="9" fill="#2a1020" stroke="#8a2f52"/>
+  <text x="182" y="496" font-size="10" font-weight="700" fill="#e06b9a" text-anchor="middle" font-family="sans-serif">TRAP — "we're MCP-native"</text>
+  <text x="182" y="512" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">plug in on vendor defaults →</text>
+  <text x="182" y="526" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">stateless door, no mailroom.</text>
+
+  <rect x="344" y="476" width="308" height="58" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="496" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — "we own the endpoint"</text>
+  <text x="498" y="512" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">gateway, issuer checks, scanner →</text>
+  <text x="498" y="526" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">locked boxes, a log.</text>
+
+  <text x="340" y="560" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the standard moves the envelope — you keep the mailroom</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>The standard — the universal connector</span>
+  <span><i class="dot" style="background:#d85a30"></i>The boundary — now yours to secure</span>
+  <span><i class="dot" style="background:#378add"></i>The mailroom — the endpoint to own</span>
+  <span><i class="dot" style="background:#e06b9a"></i>"We're MCP-native" — the trap</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — adopt the standard, stop there</th><th>The discipline — own the endpoint the standard exposes</th></tr>
+<tr><td>"We're MCP-native" as a security claim</td><td>MCP behind an owned gateway you actually control</td></tr>
+<tr><td>Trust the sender's letterhead (headers)</td><td>Verify the OAuth issuer — check the <code>iss</code>, not the label</td></tr>
+<tr><td>Render MCP Apps panels because they look official</td><td>Scan and consent-gate every UI panel before it runs</td></tr>
+<tr><td>One shared credential, one shared box</td><td>Locked per-tenant boxes — isolation and least privilege</td></tr>
+<tr><td>Assume the vendor keeps the log</td><td>Own the audit log — it's your Article 50 evidence in 5 days</td></tr>
+</table>
+
+<h3>Why a universal standard is a security event, not just an integration win</h3>
+<div class="card">
+<p>Every force this radar tracked all month — commodity models, open weights, agentic autonomy, provenance, the split AI Act calendar — assumed the <em>model</em> was the thing to govern. Today reframes the <em>connector</em> as the thing to secure. The reassuring reading tempts the trap: "MCP is now OAuth-aligned and Linux-Foundation-governed, so it's safe." But the spec's own security reviewers say the opposite of "safe by default": the move to stateless with rich UIs and async tasks means the protocol has <em>stopped</em> holding the boundary, and handed it to whoever runs the server. A firm that hears only "enterprise-ready" plugs in on defaults; a firm that reads the threat model builds a mailroom sized to it. The connector didn't get less important by going universal — it got more, because now everything flows through it and nothing in it remembers you.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine). Today the standing MCP thread — flagged as "behind the wall" (8 Jul) and "the standard coupling" (17 Jul) — reaches its enforcement date and confirms the warning: the connector went universal, and the security boundary moved onto you. On legacy estates the danger is a platform team that upgrades to the 2026-07-28 SDK "because it's the standard," points every agent at a fleet of MCP servers behind a load balancer, and inherits the vendor's defaults — no issuer verification, one shared credential across tenants, UI panels rendered unscanned, and no retained log — a universal front door with no mailroom behind it. The retrofit is the mailroom: an owned gateway that verifies senders, isolates tenants, scans panels, rate-limits tasks and logs every call — stood up <em>before</em> the SDK upgrade, and wired to produce the Article 50 evidence due in 5 days.</p>
+<p><strong>The clean mental model:</strong> <em>A universal standard standardizes the envelope, not the safety of what's inside. Adopt the protocol — and own the mailroom: the ID desk, the scanner, the locked boxes, and the logbook.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>MCP 2026-07-28 spec — FINAL today.</strong> Stateless core (sessions and handshake removed; any request → any server), OAuth 2.1 / OIDC authorization, MCP Apps and Tasks extensions, three features deprecated on a 12-month clock. ~97M monthly downloads, 10,000+ servers, Linux-Foundation-governed. The connector is now boring, universal — and its security boundary is yours.</li>
+  <li><strong>The security shift (Akamai / SecurityWeek).</strong> Going stateless means "critical security boundaries are now entirely dependent on how developers implement them." Failure modes: cross-tenant access, privilege escalation, secrets leakage, header-based control bypass, task DoS, and phishing through UI panels. Treat the endpoint as the new attack surface.</li>
+  <li><strong>The market prices the layer (Gartner, 20 July).</strong> AI platforms and models spend grows <strong>63.4% to $64B in 2026</strong> (GenAI models +117%; specialized models +210%); the biggest winners are "vendors that help enterprises manage where and how AI is used."</li>
+  <li><strong>The readiness gap (Arctera, 21 July).</strong> 78% expect AI communications risk to rise; only 19% can <em>prove</em> what their AI produced and who reviewed it — the exact evidence Article 50 and GPAI enforcement will ask for.</li>
+  <li><strong>The standing plumbing — EU AI Act Article 50 + GPAI enforcement 2 August (5 days;</strong> €15M or 3% of turnover) — with <strong>Kimi K3</strong> open weights (live 27 July) and <strong>Claude Opus 5</strong> (#1 at launch, $5/$25) as the powder that now flows through the pipe.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">Since the protocol is transitioning to a stateless model and introducing rich UI apps and asynchronous tasks, critical security boundaries are now entirely dependent on how developers implement them.</div><div class="a">— Maxim Zavodchik, Senior Director of Threat Research, Akamai, on the MCP 2026-07-28 spec, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">While the update improves the foundation by eliminating older protocol-level risks, implementation choices will now dictate the overall security posture.</div><div class="a">— Maxim Zavodchik, Akamai, on where MCP security now lives, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Any MCP request can land on any server instance, and the sticky routing and shared session stores that horizontal deployments needed before are no longer required at the protocol layer.</div><div class="a">— MCP 2026-07-28 specification, on the stateless core, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">Over the long-term, the biggest winners will be vendors that help enterprises manage where and how AI is used across the business.</div><div class="a">— Arunasree Cheparthi, Senior Principal Research Analyst, Gartner, 20 July 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"A universal standard standardizes the envelope, not the safety of what's inside. Adopt the protocol — and own the mailroom."</div><div class="a">— the radar, on the stateless MCP spec</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>MCP 2026-07-28 final spec — live</td><td><span class="v">28 Jul 2026 (today)</span></td><td>MCP blog / coverage</td></tr>
+<tr><td>MCP — stateless core</td><td><span class="v">6 SEPs · sessions &amp; handshake removed · any request → any server</span></td><td>MCP blog</td></tr>
+<tr><td>MCP — deprecated legacy features</td><td><span class="v">Roots, Sampling, Logging (≥12-month window)</span></td><td>MCP blog</td></tr>
+<tr><td>MCP — authorization model</td><td><span class="v">OAuth 2.1 / OpenID Connect–aligned</span></td><td>MCP blog</td></tr>
+<tr><td>MCP adoption</td><td><span class="v">~97M monthly SDK downloads · 10,000+ servers</span></td><td>coverage (as reported)</td></tr>
+<tr><td>MCP governance</td><td><span class="v">Agentic AI Foundation (Linux Foundation), since Dec 2025</span></td><td>coverage (as reported)</td></tr>
+<tr><td>AI platforms &amp; models market, 2026</td><td><span class="v">$64B (+63.4%, from $39B)</span></td><td>Gartner</td></tr>
+<tr><td>GenAI models spend growth, 2026</td><td><span class="v">+117%</span></td><td>Gartner</td></tr>
+<tr><td>Domain-specific / specialized models growth, 2026</td><td><span class="v">+210%</span></td><td>Gartner</td></tr>
+<tr><td>Orgs expecting AI communications risk to rise</td><td><span class="v">78%</span></td><td>Arctera / Hanover Research (as reported)</td></tr>
+<tr><td>Orgs able to <em>prove</em> what their AI produced</td><td><span class="v">19%</span></td><td>Arctera / Hanover Research (as reported)</td></tr>
+<tr><td>Orgs with core AI policies in place</td><td><span class="v">55%</span></td><td>Arctera / Hanover Research (as reported)</td></tr>
+<tr><td>Claude Opus 5 — launch rank / pricing</td><td><span class="v">#1 · $5 / $25 per 1M tokens</span></td><td>Anthropic / Artificial Analysis (as reported)</td></tr>
+<tr><td>Kimi K3 full open weights — live</td><td><span class="v">27 Jul 2026</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>Fireworks AI — Series D raise</td><td><span class="v">$1.5B</span></td><td>coverage (as reported)</td></tr>
+<tr><td>EU AI Act Article 50 + GPAI enforcement</td><td><span class="v">2 Aug 2026 (5 days) · €15M or 3%</span></td><td>European Commission</td></tr>
+<tr><td>Enterprises that can centrally govern their AI agents</td><td><span class="v">12%</span></td><td>OutSystems (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Stand up the mailroom before you upgrade the SDK.</strong> Before pointing agents at the 2026-07-28 stateless servers, put an <strong>owned MCP gateway</strong> in front of them: verify the OAuth issuer on every call (don't trust the header), isolate credentials per tenant, scan and consent-gate MCP Apps UI panels, rate-limit long-running Tasks, and log every call. The protocol no longer holds the boundary — build the receiving end first, on infrastructure you own.</li>
+  <li><strong>Turn the audit rail into Article 50 evidence — you have 5 days.</strong> MCP Apps and Tasks ride the same consent-and-log path as a tool call; that is the raw material for proving <em>what your AI did and who reviewed it</em> — the capability only 19% of organizations currently have. Make the MCP log a <strong>standard, retained, queryable artifact</strong> now, and fold it into the transparency and GPAI evidence due 2 August. Don't assume the vendor keeps it.</li>
+  <li><strong>Own the management layer the market is paying for — don't rent it.</strong> Gartner's $64B / +63.4% forecast names the winners as those who help you <em>manage where and how AI is used.</em> Build that as an owned asset — the MCP gateway, the connector allow-list, the eval gate and the log — so switching models (Opus 5, Kimi K3, whatever ships next) or connectors is a routing decision through <em>your</em> mailroom, not a vendor rebuild. Adopt the universal standard; own the endpoint it exposes.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Model Context Protocol blog (2026-07-28 spec) · SecurityWeek · Akamai (Maxim Zavodchik) · The Register · WorkOS · Gartner (AI platforms &amp; models forecast) · Arctera / Hanover Research (State of AI Governance 2026) · Anthropic (Claude Opus 5) · Artificial Analysis · Moonshot AI / coverage · Fireworks AI / coverage · European Commission (AI Act &amp; Article 50) · OutSystems. Figures are relayed from project, vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 28 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
