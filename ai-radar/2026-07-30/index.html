@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 30 July 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the day agent memory became an enterprise category — MinIO's AIStor Memory, Oracle AI Agent Memory 26.6, DevRev and HubSpot shared memory — against Stanford's 362-incident AI Index and Gravitee's agent-security data. The model is a rented, forgetful reader; the commonplace book — curated, sourced, indexed, governed memory you own — is the asset that compounds. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Commonplace Book</h1>
+  <div class="meta">Thursday, 30 July 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the data said 88% of pilots die in scale-up and told you to build the pilot plant. Today the market names the single most valuable brick in that plant — and it isn't the model. On 29 July, MinIO launched AIStor Memory, an "enterprise memory foundation for agentic AI" that makes memory a native data type — long-term memory, workspaces and secrets stored on infrastructure you own — the same week Oracle shipped AI Agent Memory 26.6 and DevRev and HubSpot raced to give agents shared, persistent memory. The thesis underneath is this radar's month-long refrain in someone else's words: the model is stateless and forgets; the value that compounds is the memory your agents accumulate about your business — and if the vendor holds it, so do they. The model forgets by design — do we own and govern the commonplace book where our agents' knowledge accumulates, or is our institutional memory quietly accruing inside a vendor we're meant to stay neutral about, with the 2 August audit due in three days?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thesis — <strong>the model commoditizes; own and govern the layer around it</strong> — and yesterday the production-gap data named the layer as a whole: the pilot plant. Today the market names its single most valuable, most overlooked brick — <strong>memory</strong> — and a cluster of launches turned it into an enterprise category overnight. On <strong>29 July, MinIO launched AIStor Memory,</strong> billed as "the Enterprise Memory Foundation for Agentic AI": it makes <strong>memory a native data type alongside objects and tables,</strong> gives agents <strong>a durable environment for long-term memory, workspaces and secrets in one system,</strong> lets them <strong>resume work without rebuilding state,</strong> delivers <strong>only the most relevant context</strong> to the model (cutting latency and token cost), and keeps the knowledge <em>"secure, governed, and under the organization's control."</em> MinIO CEO <strong>AB Periasamy</strong> put the point in one line: <strong>"Knowledge generated by AI agents becomes organizational memory, and organizational memory belongs on enterprise-controlled infrastructure"</strong> — or, as one write-up framed it, agent memory, workspaces and secrets <strong>"on storage you own."</strong> It is not a solo move: <strong>Oracle</strong> shipped <strong>AI Agent Memory 26.6</strong> (live on PyPI as <code>oracleagentmemory</code>) around an explicit <em>enterprise context strategy</em> — which context matters, which sources are authoritative; <strong>DevRev</strong> (23 Jul) extended shared organizational memory across agents into live calls; <strong>HubSpot</strong> opened Agent Hub/Agent Builder so agents share customer context; and <strong>mem0's State of AI Agent Memory 2026</strong> made memory a benchmarked discipline. The through-line: the model is <strong>stateless and forgetful by design</strong> — the rented, interchangeable part — and the asset that <em>compounds</em> is the organizational memory your agents build. That memory is at once your <strong>moat</strong> (proprietary, accumulating), your <strong>lock-in risk</strong> (if the vendor holds it, switching means amnesia), and your <strong>governance surface</strong> (a wrong fact stored and trusted becomes a confident error repeated forever). The risk data is loud: <strong>Stanford's 2026 AI Index</strong> logs <strong>362 documented AI incidents in 2025 (+55% on 233 in 2024),</strong> adoption at 88% but model transparency <em>falling</em> (its Foundation Model Transparency Index dropped 58→40); <strong>Gravitee's State of AI Agent Security 2026</strong> finds <strong>88%</strong> hit an agent incident, <strong>80% deploying but only 10% feel in control,</strong> only <strong>22%</strong> treat agents as distinct identities, and <strong>35% could not shut down a rogue agent.</strong> All of it sits atop yesterday's production gap (<strong>IDC 88%; Gartner 40%+ cancelled by end-2027</strong>) and this week's cheap, forgetful reactions (<strong>Claude Opus 5</strong> #1 at $5/$25; <strong>Kimi K3</strong> open weights; <strong>MCP 2026-07-28</strong> stateless-by-design). And the clock is three days out — <strong>EU AI Act Article 50 + GPAI enforcement lands 2 August,</strong> and the evidence it wants — what your agents knew, did, and were allowed to touch — <em>is the memory layer.</em></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The model forgets on purpose — the memory is the part that compounds.</strong> A frontier model is stateless: it starts every session blank, and it is rented and swappable. What accumulates is what your agents <em>learn about your business.</em> That store is proprietary, it grows, and it is exactly the layer this radar has told you to own — <strong>MinIO, Oracle, DevRev and HubSpot just turned it into a product category in a single week.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>Whoever holds the memory holds the moat — and the lock-in.</strong> If your agents' organizational memory lives inside a vendor's platform, your institutional knowledge and your switching cost are the same number. "Own the model" was always a treadmill; <strong>own the memory</strong> is the durable position — portable, on infrastructure you control, so swapping Opus 5 for Kimi K3 is a change of reader, not a case of amnesia.</div></div>
+<div class="num"><div class="b">3</div><div><strong>Ungoverned memory is the confident-error engine and the audit gap.</strong> Stanford counts incidents up 55% while transparency falls; Gravitee finds only 10% of deployers feel in control and 35% can't stop a rogue agent. A memory store that isn't curated, sourced and access-controlled will faithfully repeat a wrong fact with the authority of your own records — and it is precisely the evidence <strong>2 August</strong> asks for.</div></div>
+<div class="card"><strong>Bottom line:</strong> yesterday you were told to build the pilot plant; today the market names its keystone. The model is a brilliant, forgetful reader you rent by the hour. The <em>commonplace book</em> — the curated, sourced, indexed, access-controlled store of what your agents have learned — is the asset that compounds, the moat that can't be copied, and the audit trail due in three days. Own it and govern it, or rent your own memory back from the vendor.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>📖 "The Commonplace Book"</h3>
+<p><em>Topic: On 29 July 2026 MinIO launched AIStor Memory, "the Enterprise Memory Foundation for Agentic AI," making memory a native data type (long-term memory, workspaces and secrets) stored on enterprise-controlled infrastructure, with CEO AB Periasamy's framing that "knowledge generated by AI agents becomes organizational memory, and organizational memory belongs on enterprise-controlled infrastructure." The same week Oracle shipped AI Agent Memory 26.6 around an explicit enterprise context strategy, and DevRev, HubSpot and mem0 pushed persistent, shared agent memory as a category. Against this, Stanford's 2026 AI Index logged 362 documented AI incidents in 2025 (up 55%) with transparency falling, and Gravitee's State of AI Agent Security 2026 found 88% of firms hit an agent incident, only 10% feel in control, and 35% could not shut down a rogue agent. The lesson: the model is stateless and forgets; the durable, proprietary, governable asset is the memory your agents accumulate — own and govern the commonplace book, or rent your own institutional memory back from a vendor.</em></p>
+<p>For four centuries, the most valuable thing a scholar, physician, lawyer or statesman owned was not their mind — it was their <strong>commonplace book.</strong> The practice was universal in the Renaissance and Enlightenment: as you read and worked, you copied the passages that mattered, your observations, your recipes and precedents into a bound notebook, and — this was the craft — you <em>indexed</em> it, under headings (Latin <em>loci communes,</em> "common places"), so that years of accumulated knowledge could be found and reused on demand. Bacon kept one, Milton kept one, Locke published a formal <em>method</em> for indexing them, Jefferson kept several. The reason it mattered is the reason it maps so cleanly onto this week: <strong>raw intellect was relatively common, and it was famously forgetful.</strong> Many people could read a book; the mind that read it would forget most of it within a year. What made one scholar's judgment <em>compound</em> over a lifetime was not a better brain but a better book — a durable, curated, indexed store that turned a thousand fleeting readings into a permanent, searchable asset the scholar owned and carried from one project to the next.</p>
+<p>Notice what the commonplace book actually was. It was <strong>not the reading</strong> — the books were on every shelf, and the act of reading was a commodity anyone with an afternoon could perform. It was the <em>accumulation and curation:</em> the deliberate choice of what was worth writing down, the discipline of noting <em>where</em> each extract came from so a claim could be trusted or checked, the index that made ten years of entries usable in ten seconds, and the plain fact of <strong>ownership</strong> — the book was yours, it left with you, and its value grew every year you kept it. A scholar who kept none started every project from a blank mind. A scholar who kept a sloppy one carried a different danger: a mis-copied recipe, an unattributed rumor entered as fact — because it was in <em>your own hand,</em> indexed under your own heading, you would trust it and repeat it for the rest of your life, and so would anyone who inherited the book. The commonplace book was, at once, the greatest asset a mind could own and the most efficient possible machine for propagating a confident error.</p>
+<p>So read this week honestly. The <strong>reading is a commodity and increasingly free:</strong> a frontier model at #1 for five dollars, an open-weight colossus you can download, a universal connector that plugs any of them in — brilliant readers, all of them, and all <strong>stateless by design.</strong> A model begins every session with a blank mind; it forgets everything the moment the context window closes; it is the rented reader, not the book. This week the market finally said so and built the book: <strong>MinIO's AIStor Memory makes memory a first-class thing you keep on your own storage</strong> — the agent's long-term memory, its workspace, its secrets — so it can "resume work without rebuilding state" and act "under the organization's control"; Oracle shipped the indexing discipline (which sources are authoritative); DevRev and HubSpot wired one shared book across many agents. Periasamy's line is the whole allegory in a sentence: <em>the knowledge your agents generate is organizational memory, and it belongs on infrastructure you own.</em> And the danger is the old danger, mechanized: an ungoverned memory store is a sloppy commonplace book at machine scale — Stanford's 362 incidents (up 55%) and Gravitee's finding that only one firm in ten feels in control and a third can't stop a rogue agent are what it looks like when the book copies a wrong fact in your own hand and every agent trusts it.</p>
+<p><strong>The moral:</strong> the reader is rented and forgetful; the book is owned and it compounds. The model has commoditized — this radar has said so for a month — and the value migrates to what you build and keep around it. Today it names the keystone precisely: the <strong>commonplace book,</strong> the curated, sourced, indexed, access-controlled store of what your agents have learned about your business. Keep it well and it becomes a moat no competitor can copy and an audit trail the regulator can read. Keep it badly — or let the vendor keep it for you — and you have rented back your own institutional memory, inherited a machine for repeating confident errors, and handed your switching cost to the one party you were meant to keep neutral about.</p>
+<p><strong>The question it forces:</strong> <em>Our agents are learning things about our business every day — which customers, which processes, which exceptions, which secrets. Where is that memory being written, who owns the book, who curates what goes in it and cites where it came from, who can read it, and could we carry it to a different model tomorrow? Have we built and governed the commonplace book — on infrastructure we own, indexed and access-controlled, ready for the 2 August audit — or is our institutional memory accruing, ungoverned, inside a vendor's platform we don't control?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>The model is stateless; the memory is the moat.</strong> Where, physically, is the organizational memory our agents generate being stored today — on infrastructure we own, or inside a vendor's platform? If we swapped model providers next quarter, would our agents keep everything they've learned, or start from a blank mind?</li>
+  <li>MinIO's CEO: <em>"organizational memory belongs on enterprise-controlled infrastructure."</em> <strong>Can we name the owner of our agents' "commonplace book"</strong> — the person accountable for what gets written into agent memory, how sources are cited, and who is allowed to read it — or is that store growing with no curator and no index?</li>
+  <li>Stanford logs <strong>362 AI incidents in 2025 (+55%)</strong> while transparency falls, and Gravitee finds only <strong>10%</strong> of deployers feel in control and <strong>35%</strong> couldn't stop a rogue agent. <strong>Is our agent memory a governed asset (curated, sourced, access-controlled, auditable) or an ungoverned liability</strong> — the machine that will repeat a wrong fact in our own hand, at machine scale?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>An agent's memory can hold customer records, positions, secrets and prior decisions. <strong>For any agent near ledgers or accounts, is its memory encrypted, access-controlled and logged — and can we produce, on demand, what a given agent knew and acted on</strong> — the exact evidence 2 August enforcement will ask for in three days?</li>
+  <li>The confident-error risk is a regulated risk here: a mis-stored fact in agent memory becomes a mis-sold product or a wrong disclosure, repeated automatically. <strong>Before we scale, have we curated what agents may write to memory and required a source for what they trust</strong> — or are we compounding an unverified entry across every customer?</li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>You already treat records and provenance as regulated artifacts. <strong>Apply the same discipline to agent memory: where is the audit trail showing which source a clinical agent drew on, and the control that stops a stale or wrong entry being reused on the next patient?</strong></li>
+  <li>Only <strong>10%</strong> of deployers feel in control of their agents (Gravitee). <strong>For agents touching patient data or research pipelines, who governs the memory store — retention, access, right-to-be-forgotten, and the ability to purge a bad entry</strong> — before it becomes an incident in someone's chart?</li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Your institutional memory — how a line is tuned, why an exception exists, what a technician learned at 3 a.m. — is your real moat. <strong>Are we capturing that into an owned, governed agent memory (the commonplace book), or letting it evaporate at the end of each session</strong> because the model is stateless and nobody kept the book?</li>
+  <li>MinIO's pitch is "resume work without rebuilding state" and cut token cost by sending only the relevant context. <strong>Do we own a memory layer that makes agents cheaper and more consistent shift-to-shift,</strong> or are we paying to rebuild the same context every run and getting a different answer each time?</li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>A storefront agent that "remembers" a customer is powerful and dangerous: the memory is a personalization asset <em>and</em> a privacy/consent liability. <strong>Is our customer-facing agent memory governed for consent, retention and access — and disclosed</strong> — with Article 50 transparency live in three days?</li>
+  <li>If a vendor holds the memory of every customer interaction, they hold your CRM's future. <strong>Do we keep the shared customer-context "book" on infrastructure we own,</strong> so switching a model or a platform doesn't mean forgetting our customers?</li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>For citizen-facing services, an agent's memory is a public record. <strong>Can we account for every agent's memory store — what's in it, where it lives, who can read it, and how a citizen's data is retained or erased</strong> — the precise accountability 2 August enforcement expects?</li>
+  <li>Transparency is <em>falling</em> even as adoption rises (Stanford: index 58→40). <strong>Are we standing up governed, auditable agent memory (curated, sourced, access-controlled) before we scale,</strong> or racing a pilot to a headline and inheriting an ungoverned record of everything it did?</li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Own the Book, Not Just the Reader</h2>
+<p>Read this week as one lesson about <strong>memory being the layer that compounds,</strong> in three parts — the reader (the model, stateless and rented, not where value accrues), the forgetting (why statelessness leaks value and safety), and the commonplace book (the owned, governed memory layer the market just productized).</p>
+<div class="card"><ul>
+  <li><strong>The reader (commodity, and stateless by design).</strong> The model keeps getting better and cheaper and still starts every session blank: <strong>Claude Opus 5</strong> #1 at <strong>$5/$25</strong> (24 Jul); <strong>Kimi K3</strong> open weights (27 Jul); the <strong>MCP 2026-07-28</strong> spec final and <em>deliberately stateless</em> at its core (28 Jul). A frontier model is a brilliant reader you rent by the token — interchangeable, forgetful, and not the thing that accumulates. The reading is spectacular. It is also gone the moment the context window closes.</li>
+  <li><strong>The forgetting (where value and safety leak).</strong> Statelessness has three costs the market is now pricing. <strong>Cost</strong> — without persistent memory, every session rebuilds context from scratch, paying tokens and latency to re-learn what the agent already knew (MinIO's explicit pitch: deliver "only the most relevant context," cut latency and token cost, "resume work without rebuilding state"). <strong>Lock-in</strong> — if the memory lives in a vendor's platform, your institutional knowledge and your switching cost are the same number. <strong>Governance</strong> — an ungoverned memory store is a confident-error engine: <strong>Stanford's 2026 AI Index</strong> counts <strong>362 documented incidents in 2025 (+55% on 233 in 2024),</strong> adoption at 88% but the <strong>Foundation Model Transparency Index falling 58→40,</strong> and firms reporting 3–5 incidents rising 30%→50%; <strong>Gravitee's State of AI Agent Security 2026</strong> finds <strong>88%</strong> hit an agent incident, <strong>80% deploying but only 10% in control,</strong> only <strong>22%</strong> treating agents as distinct identities, and <strong>35% unable to shut down a rogue agent.</strong></li>
+  <li><strong>The commonplace book (the layer to build and own).</strong> The market productized it this week. <strong>MinIO AIStor Memory</strong> makes <strong>memory a native data type</strong> alongside objects and tables — long-term memory, workspaces and secrets in one durable, governed store <strong>on infrastructure you own,</strong> discoverable and reusable across authorized agents. <strong>Oracle AI Agent Memory 26.6</strong> ships the <em>indexing and curation</em> discipline — an enterprise context strategy defining which context matters and which sources are authoritative (custom extraction, hybrid search), live on PyPI. <strong>DevRev</strong> and <strong>HubSpot</strong> wire one shared book across many agents. The pattern is the four crafts of the commonplace book: <strong>curate</strong> (what may be written), <strong>cite</strong> (a source for what's trusted), <strong>index</strong> (findable and reusable), <strong>own and govern</strong> (encrypted, access-controlled, auditable, portable).</li>
+</ul></div>
+<p>The strategic core: <strong>you don't win by renting a smarter reader; you win by owning a better book.</strong> Everyone rents the same frontier readers now — that's what "commodity" means. What compounds, what can't be copied, and what the regulator can read is the memory: the curated, sourced, indexed, access-controlled record of what your agents learned about your business. After this week, "we use the best model" is not a strategy; <em>"we own and govern our agents' memory — on our storage, curated and cited, indexed for reuse, access-controlled and auditable"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The commonplace book: own the book, not just the reader. The reader is rented and forgetful; the book is owned and compounds. At the top, the reader — the model — is a commodity and stateless by design: Claude Opus 5 at number one for five and twenty-five dollars, Kimi K3 open weights, the MCP spec stateless at its core; brilliant, interchangeable and blank every session. Because it forgets by design you hit the forgetting, where value and safety leak: cost, because context is rebuilt every session paying tokens and latency; lock-in, because whoever holds the memory holds the moat; and governance, because ungoverned memory produces confident errors — Stanford counts 362 documented incidents in 2025, up 55 percent, with model transparency falling from 58 to 40, and Gravitee finds only 10 percent of deployers feel in control and 35 percent could not shut down a rogue agent. You cross by keeping the book on infrastructure you own, building the commonplace book: curate what is written, cite a source for what is trusted, index it so it is findable and reusable across agents, and own and govern it — encrypted, access-controlled, auditable and portable — the MinIO AIStor Memory move that makes memory a native data type on storage you own, and Oracle 26.6 that defines which sources are authoritative. The trap is to rent the reader and the memory, inheriting lock-in, confident errors and no audit trail; the win is to rent the reader but own the book — a moat that compounds, governed and portable." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE COMMONPLACE BOOK — own the book, not just the reader</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The reader is rented and forgetful; the book is owned and compounds.</text>
+
+  <!-- the reader -->
+  <rect x="70" y="58" width="540" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE READER — the model (commodity, stateless by design)</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 #1 $5/$25 · Kimi K3 open weights · MCP stateless core</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">brilliant, interchangeable — and blank every session</text>
+  <text x="90" y="131" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">the reading is a commodity — it is not what accumulates</text>
+  <text x="590" y="79" font-size="11" font-weight="700" fill="#5dcaa5" text-anchor="end" font-family="sans-serif">✅ RENTABLE</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="154" x2="340" y2="176" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,176 340,188 346,176" fill="#9aa7b6"/>
+  <text x="418" y="171" font-size="9" fill="#9aa7b6" font-family="sans-serif">it forgets by design ↓</text>
+
+  <!-- the forgetting -->
+  <rect x="70" y="192" width="540" height="112" rx="9" fill="#231216" stroke="#7a3b2a"/>
+  <text x="90" y="213" font-size="11.5" font-weight="700" fill="#e08a63" font-family="sans-serif">THE FORGETTING — where value &amp; safety leak</text>
+  <text x="90" y="232" font-size="10.5" fill="#e8edf3" font-family="sans-serif">COST: rebuild context every session (tokens, latency)</text>
+  <text x="90" y="248" font-size="10.5" fill="#e8edf3" font-family="sans-serif">LOCK-IN: vendor holds the memory = holds the moat</text>
+  <text x="90" y="264" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GOVERNANCE: ungoverned memory = confident errors</text>
+  <text x="90" y="281" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">Stanford: 362 incidents +55% · transparency 58→40</text>
+  <text x="90" y="296" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">Gravitee: 10% feel in control · 35% can't stop a rogue</text>
+  <text x="590" y="213" font-size="11" font-weight="700" fill="#e08a63" text-anchor="end" font-family="sans-serif">⚠ THE REAL GAP</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="304" x2="340" y2="326" stroke="#5fb2df" stroke-width="2"/>
+  <polygon points="334,326 340,338 346,326" fill="#5fb2df"/>
+  <text x="404" y="321" font-size="9" fill="#5fb2df" font-family="sans-serif">keep the book on storage you own →</text>
+
+  <!-- build the commonplace book -->
+  <rect x="96" y="342" width="488" height="98" rx="9" fill="#0f2233" stroke="#2f6a8a"/>
+  <text x="340" y="364" font-size="12" font-weight="700" fill="#5fb2df" text-anchor="middle" font-family="sans-serif">BUILD THE COMMONPLACE BOOK — the layer to own</text>
+  <text x="340" y="383" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">curate (what's written) · cite (a source for what's trusted)</text>
+  <text x="340" y="399" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">index (findable, reusable across agents)</text>
+  <text x="340" y="417" font-size="10.5" fill="#cfe6f5" text-anchor="middle" font-family="sans-serif" font-weight="700">own &amp; govern — encrypted, access-controlled, auditable, portable</text>
+  <text x="340" y="432" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">MinIO: memory as a native data type, on storage you own · Oracle 26.6: authoritative sources</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="440" x2="340" y2="462" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,462 340,474 346,462" fill="#9aa7b6"/>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="486" width="308" height="58" rx="9" fill="#2a1020" stroke="#8a2f52"/>
+  <text x="182" y="506" font-size="10" font-weight="700" fill="#e06b9a" text-anchor="middle" font-family="sans-serif">TRAP — rent the reader AND the memory</text>
+  <text x="182" y="522" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">lock-in, confident errors,</text>
+  <text x="182" y="536" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">no audit trail.</text>
+
+  <rect x="344" y="486" width="308" height="58" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="506" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — rent the reader, OWN the book</text>
+  <text x="498" y="522" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a moat that compounds —</text>
+  <text x="498" y="536" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">governed, portable.</text>
+
+  <text x="340" y="570" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the reader is cheap and forgetful — the book is the durable asset</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>The reader — the model, stateless</span>
+  <span><i class="dot" style="background:#d85a30"></i>The forgetting — where value leaks</span>
+  <span><i class="dot" style="background:#378add"></i>The commonplace book — the layer to own</span>
+  <span><i class="dot" style="background:#e06b9a"></i>Rent the memory too — the trap</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — rent the memory too</th><th>The discipline — own the commonplace book</th></tr>
+<tr><td>Institutional knowledge accrues inside a vendor's platform</td><td>Memory on infrastructure you own — portable across models</td></tr>
+<tr><td>Rebuild context every session (pay tokens to re-learn)</td><td>Persistent memory: resume without rebuilding state</td></tr>
+<tr><td>Anything the agent writes is trusted, unsourced</td><td>Curate what's written; require a source for what's trusted</td></tr>
+<tr><td>Memory is a black box nobody can read</td><td>Indexed, access-controlled, auditable — your 2 Aug evidence</td></tr>
+<tr><td>Switching models means amnesia</td><td>Swap the reader; keep the book</td></tr>
+</table>
+
+<h3>Why memory is a scale-up problem, not a model problem</h3>
+<div class="card">
+<p>Every force this radar tracked all month assumed the leverage was in the <em>reader</em> — a better model, an open weight, a universal connector. This week reframes it one layer deeper than yesterday's pilot plant: the reader is solved, cheap and <em>deliberately forgetful,</em> and the durable asset is the book it writes in. The reassuring reading tempts the trap — "our model is great, memory is just a cache" — exactly backwards. The model is the interchangeable part; the memory is the proprietary, compounding, governable one. A firm that hears "the model is smart enough now" rents a reader and lets the vendor keep the book; a firm that reads the risk data builds and governs its own. The model didn't become less important; it became the <em>rented</em> part — necessary reader, not the owned record.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant). Yesterday's pilot plant named the scale-up layer; today names its keystone — the memory. On legacy estates the danger is a team that points a stateless model at a system-of-record, lets it accumulate memory wherever the vendor defaults, and never curates, cites, indexes or access-controls it — so the agent both forgets what it should keep (paying to rebuild context) and keeps what it should never trust (a wrong fact, repeated in your own hand). The retrofit is the commonplace book: stand up an owned memory store, decide what may be written and require a source for what's trusted, index it for reuse across agents, access-control and log every read and write, and wire the whole thing to produce the Article 50 evidence due in three days — <em>before</em> the scale-up, not after the incident.</p>
+<p><strong>The clean mental model:</strong> <em>The reader is rented and forgetful; the book is owned and compounds. The model has commoditized — build and own the commonplace book (curate, cite, index, govern), because that is the moat competitors can't copy and the audit the regulator will read.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>Memory becomes a category (MinIO, 29 Jul).</strong> AIStor Memory makes memory a native data type — long-term memory, workspaces, secrets — on storage you own; "resume work without rebuilding state," deliver only the relevant context (lower latency/token cost), keep it "secure, governed, and under the organization's control." Partner: Trace3.</li>
+  <li><strong>The indexing discipline (Oracle AI Agent Memory 26.6).</strong> Live on PyPI (<code>oracleagentmemory</code>); an explicit enterprise context strategy — which context matters, which sources are authoritative, custom extraction, hybrid search, more control.</li>
+  <li><strong>One book, many agents (DevRev 23 Jul; HubSpot).</strong> Shared organizational memory extended across agents and into live conversations; Agent Hub/Agent Builder for shared customer context — memory as a team asset, not a per-agent scratchpad.</li>
+  <li><strong>The risk that makes governance non-optional (Stanford 2026 AI Index; Gravitee).</strong> 362 documented incidents in 2025 (+55%), transparency falling 58→40; 88% hit an agent incident, 10% feel in control, 35% can't stop a rogue agent.</li>
+  <li><strong>The standing plumbing — EU AI Act Article 50 + GPAI enforcement 2 August (3 days;</strong> €15M or 3% of turnover) — atop this week's forgetful, cheap readers (<strong>Claude Opus 5</strong> #1 $5/$25; <strong>Kimi K3</strong> open weights; <strong>MCP 2026-07-28</strong> stateless-by-design) and yesterday's production gap (<strong>IDC 88%; Gartner 40%+ cancelled by 2027</strong>).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">Knowledge generated by AI agents becomes organizational memory, and organizational memory belongs on enterprise-controlled infrastructure.</div><div class="a">— AB Periasamy, co-founder &amp; CEO, MinIO, on the launch of AIStor Memory, 29 July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[AIStor Memory puts] long-term agent memory, workspaces, and secrets on storage you own.</div><div class="a">— Coverage of MinIO's AIStor Memory launch, July 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Organizational AI adoption reached 88%, even as documented AI incidents rose 55% to 362 in 2025 and model transparency fell.</div><div class="a">— Stanford HAI 2026 AI Index, on the widening governance gap (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">80% of organizations are deploying AI agents, but only 10% feel they have control — and 35% could not shut down a rogue agent.</div><div class="a">— Gravitee, State of AI Agent Security 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"The reader is rented and forgetful; the book is owned and it compounds. Own the commonplace book."</div><div class="a">— the radar, on the memory layer</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>MinIO AIStor Memory — launched</td><td><span class="v">29 Jul 2026</span></td><td>MinIO / GlobeNewswire (as reported)</td></tr>
+<tr><td>AIStor Memory — what it stores</td><td><span class="v">Long-term memory, workspaces &amp; secrets (memory as a native data type)</span></td><td>MinIO (as reported)</td></tr>
+<tr><td>AIStor Memory — where</td><td><span class="v">On enterprise-controlled infrastructure ("storage you own")</span></td><td>MinIO (as reported)</td></tr>
+<tr><td>Oracle AI Agent Memory 26.6 — availability</td><td><span class="v">Live on PyPI (oracleagentmemory)</span></td><td>Oracle (as reported)</td></tr>
+<tr><td>Documented AI incidents, 2025</td><td><span class="v">362 (+55% on 233 in 2024)</span></td><td>Stanford HAI 2026 AI Index</td></tr>
+<tr><td>Foundation Model Transparency Index</td><td><span class="v">Fell 58 → 40</span></td><td>Stanford HAI 2026 AI Index</td></tr>
+<tr><td>Firms reporting 3–5 AI incidents (share of incident-hit firms)</td><td><span class="v">Rose 30% → 50%</span></td><td>Stanford HAI 2026 AI Index</td></tr>
+<tr><td>Orgs hit by a confirmed/suspected AI-agent security incident last year</td><td><span class="v">88%</span></td><td>Gravitee State of AI Agent Security 2026 (as reported)</td></tr>
+<tr><td>Orgs deploying agents that feel "in control"</td><td><span class="v">10%</span></td><td>Gravitee (as reported)</td></tr>
+<tr><td>Orgs that could <em>not</em> shut down a rogue agent</td><td><span class="v">35%</span></td><td>Gravitee (as reported)</td></tr>
+<tr><td>Teams treating agents as independent identities (rest use shared keys)</td><td><span class="v">22%</span></td><td>Gravitee (as reported)</td></tr>
+<tr><td>Enterprises with agents in production</td><td><span class="v">~51%</span></td><td>Gartner / coverage (as reported)</td></tr>
+<tr><td>Agentic-AI projects to be cancelled by end-2027</td><td><span class="v">40%+</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>AI-agent PoCs that never reach broad production</td><td><span class="v">88% (33 in → 4 out)</span></td><td>IDC via Cognizant (as reported)</td></tr>
+<tr><td>Claude Opus 5 — launch rank / pricing</td><td><span class="v">#1 · $5 / $25 per 1M tokens</span></td><td>Anthropic / Artificial Analysis (as reported)</td></tr>
+<tr><td>Kimi K3 full open weights — live</td><td><span class="v">27 Jul 2026</span></td><td>Moonshot / coverage</td></tr>
+<tr><td>MCP 2026-07-28 final spec — live</td><td><span class="v">28 Jul 2026</span></td><td>MCP blog / coverage</td></tr>
+<tr><td>EU AI Act Article 50 + GPAI enforcement</td><td><span class="v">2 Aug 2026 (3 days) · €15M or 3%</span></td><td>European Commission</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Locate your memory — find out who actually holds the book.</strong> Map, per agent, <em>where</em> its memory is written today (your storage or a vendor's), what's in it, who can read and write it, and whether you could carry it to a different model tomorrow. If your institutional knowledge is accruing inside a platform you don't control, that is your lock-in and your biggest ungoverned asset — MinIO's launch and Oracle's 26.6 exist precisely because the answer for most firms is "we don't know."</li>
+  <li><strong>Govern the book: curate, cite, index, access-control — that is your 2 August evidence.</strong> Decide what agents may write to memory and require a source for what they're allowed to trust (kills the confident-error engine); index it so it's reusable across authorized agents (kills the pay-to-rebuild-context tax); and encrypt, access-control and log every read and write (produces the Article 50 / GPAI audit trail due in three days). Stanford's +55% incidents and Gravitee's 10%-in-control are what the ungoverned version costs.</li>
+  <li><strong>Own the memory layer as a portable, model-neutral asset — rent the reader, keep the book.</strong> Stand up agent memory on infrastructure you own (MinIO/Oracle-style), so the model is a swappable reader and the memory is the compounding moat. Then adopting Opus 5, Kimi K3 or whatever ships next is a change of reader, not a bout of amnesia — and the knowledge your agents accumulate about your business stays yours, governed, and auditable.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> MinIO (AIStor Memory launch, 29 Jul) / GlobeNewswire · Oracle (AI Agent Memory 26.6) · DevRev · HubSpot · mem0 (State of AI Agent Memory 2026) · Stanford HAI (2026 AI Index) · Gravitee (State of AI Agent Security 2026) · Gartner · IDC (via Cognizant) · Anthropic (Claude Opus 5) · Moonshot AI / coverage · Model Context Protocol blog (2026-07-28 spec) · European Commission (AI Act &amp; Article 50). Figures are relayed from vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 30 July 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
