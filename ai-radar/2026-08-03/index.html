@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 3 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the first working day of EU AI Act enforcement — enforcement is now daily administration, and the customs house stands at the action layer, plumbed by MCP (80%+ of enterprise cloud, servers pooling credentials into a single point of failure). Where an agent takes a high-risk action through MCP, the Act's logging (≥6 months), human-oversight, data-governance and cybersecurity duties apply. The cargo keeps getting cheaper (DeepSeek V4-Flash-0731, MIT open weights). Own the customs house: log, scope, disclose+oversee, inspect. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:#fff;margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:#fff;font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:#fff;font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Daily Brief</div>
+  <h1>The Customs House</h1>
+  <div class="meta">Monday, 3 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">The wall you crossed yesterday does not fall behind you — it becomes a building you now report to every morning. Today, Monday 3 August 2026, is the first working day of the EU AI Act enforcement era, and the lesson is that enforcement was never a deadline; it is daily administration — a customs house that opened and will not close (ceiling €15M or 3% of turnover; €7.5M or 1.5% for incorrect information). This week names where that customs house stands in your stack: at the action layer — the moment an agent stops answering and reaches through a tool into a real system — plumbed by MCP, now in 80%+ of enterprise cloud, its servers pooling credentials into a single point of failure. Where an agent takes a high-risk action through MCP, the Act's logging (≥6 months), human-oversight, data-governance and cybersecurity duties apply — to every agent in the chain. Meanwhile the cargo keeps getting cheaper (DeepSeek V4-Flash-0731, MIT open weights, now beating its own flagship on nine benchmarks) and its value faces a weigh-in as Palantir reports Q2 today. The board's question on the first Monday: the model is the cargo — rented, swappable, nearly free — but do we own the gate? The officer does not grade our cargo; he checks our manifest at the gate.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thesis — <strong>the model commoditizes; own and govern the layer around it</strong> — and the first working morning after enforcement makes it operational. <strong>Enforcement is not a wall you crossed on Sunday; it is a customs house that opened and will not close.</strong> Coverage of the first days frames it exactly this way: the Act "moves from preparation to daily administration," and "compliance must increasingly be demonstrated in practice" — across all 27 member states, with regulators themselves now under scrutiny to enforce consistently. The transparency duties (a person must be told they are dealing with an AI; AI-generated content machine-readable-marked; deepfakes labeled) and the AI Office's GPAI powers (request documentation, evaluate models, order corrections, restrict availability, fine) are live and permanent. Ceiling: the higher of <strong>€15M or 3%</strong> of global annual turnover (Article 99); <strong>€7.5M or 1.5%</strong> for supplying incorrect information. A four-month grace on the Article 50(2) marking duty runs to <strong>2 December 2026</strong>; high-risk Annex III paperwork sits at <strong>2 December 2027</strong> (Digital Omnibus) — but the transparency and GPAI teeth bite today and every day.</p>
+<p>This week names <em>where</em> the customs house stands in your stack: at the <strong>action layer</strong> — the instant an agent stops answering and reaches through a tool into a real system. Its plumbing is the <strong>Model Context Protocol (MCP)</strong>, now in <strong>80%+ of enterprise cloud environments</strong>, whose largest-ever revision (MCP 2026-07-28) went final one week ago and, by design, moves security from the protocol to the developer and operator. The catch is structural: an MCP server <strong>aggregates credentials for many enterprise services</strong>, so one breached server "gives attackers access to every integrated database, file system and cloud service" — a single point of failure — and OWASP's MCP Top 10 now formalizes the contraband (tool poisoning, schema poisoning, tool shadowing, command injection, shadow MCP servers, context over-sharing). The legal seam is exact: <strong>where an AI agent uses an MCP server to take a high-risk action, that action falls inside the Act's cybersecurity, logging, data-governance and human-oversight obligations, enforceable from 2 August</strong> — and in a chain of agents, the compliance boundary "extends to every agent performing a high-risk function, not just the model that started the chain." Deployers of high-risk systems must keep the automatically-generated logs <strong>at least six months.</strong> In one sentence the industry is repeating this week: <strong>EU AI Act compliance lives at the action layer.</strong></p>
+<p>And the cargo keeps getting cheaper and more capable — reinforcing, not softening, the thesis. On <strong>31 July</strong>, DeepSeek shipped <strong>V4-Flash-0731</strong> (284B total / ~13B active, <strong>MIT license</strong>, weights on Hugging Face): same architecture, re-done post-training, now scoring <strong>82.7 on Terminal Bench 2.1</strong> (up from 61.8, and above the far larger V4-Pro preview at 72.1) and jumping <strong>7.3 → 54.4 on DeepSWE</strong>, lifting its Artificial Analysis Intelligence Index from 40 to 50 — third in the open-weight field, at no price change. It joins the standing menu (Opus 5 #1 at $5/$25; Gemini in Oracle Fusion/NetSuite; GPT-5.6 Sol; Kimi K3 open weights). The value that cargo is meant to produce faces a public weigh-in <strong>today</strong>: <strong>Palantir reports Q2 2026 after the US close</strong> (consensus ~$1.81B revenue, $0.34 EPS; eight straight beats; shares ~$123, ~40% off their high), the market's clearest read yet on whether enterprise AIP demand is real — with <strong>Ai4 2026</strong> (12,000+ attendees) opening in Las Vegas on 4 August.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Enforcement is daily administration now, not a deadline that passed.</strong> The customs house opened Sunday and stays open: transparency duties and GPAI powers are live across 27 states, the penalties are real (€15M or 3%; €7.5M or 1.5%), and "compliance must increasingly be demonstrated in practice" — every day, not once.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The customs house stands at the action layer, and its gate is MCP.</strong> 80%+ of enterprise cloud runs MCP; its servers pool credentials into a single point of failure; the 2026-07-28 spec pushes security onto you. Where an agent takes a high-risk action through MCP, the Act's logging (≥6 months), human-oversight, data-governance and cybersecurity duties apply — to every agent in the chain.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The cargo is cheaper than ever — which is the point, not the comfort.</strong> DeepSeek V4-Flash-0731 (MIT, open weights) now beats its own flagship on nine agent/coding benchmarks; the model menu is a commodity you rent or self-host. The customs officer doesn't grade the cargo; they inspect the gate — and today Palantir's Q2 tests whether the cargo is producing value at all.</div></div>
+<div class="card"><strong>Bottom line:</strong> the deadline didn't end anything — it began the permanent thing. The auditor now stands, every day, at the action layer where your agents cross into real systems, and the gate they cross through is the MCP plane. Own the customs house: log every crossing (≥6 months), scope every credential, disclose and human-oversee every high-risk action, and inspect for contraband — because the cargo is a commodity and the gate is the asset the regulator measures.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏛️ "The Customs House"</h3>
+<p><em>Topic: Monday 3 August 2026 is the first working day of the EU AI Act enforcement era. The transparency duties that bound across all 27 member states on 2 August, and the AI Office's powers over general-purpose AI (documentation requests, model evaluations, corrections, availability restrictions, fines; ceiling the higher of €15M or 3% of turnover, €7.5M or 1.5% for incorrect information), are not a one-time deadline but permanent daily administration — coverage frames the Act as moving "from preparation to daily administration," with compliance that "must increasingly be demonstrated in practice." This week names where the customs house stands: at the action layer, the moment an agent reaches through a tool into a real system, plumbed by MCP — now in 80%+ of enterprise cloud, its 2026-07-28 spec shifting security to operators, its servers aggregating credentials into a single point of failure (OWASP MCP Top 10: tool poisoning, schema poisoning, tool shadowing, command injection, shadow servers, context over-sharing). Where an agent uses an MCP server to take a high-risk action, that action falls inside the Act's logging (deployers keep logs ≥6 months), human-oversight, data-governance and cybersecurity duties, and the boundary extends to every agent in a chain. The cargo keeps getting cheaper (DeepSeek V4-Flash-0731, MIT open weights, 31 Jul) and its value faces a weigh-in as Palantir reports Q2 today. The lesson: the model is the cargo — rented, swappable, nearly free — but the customs house is the single audited gate where every agent action crosses into your systems; own and man that gate, every day, because the officer inspects the gate, not the cargo.</em></p>
+<p>Walk into any old trading port and the grandest building on the waterfront is not a warehouse or a bank. It is the <strong>customs house.</strong> There is a reason it was built in stone while the merchants' sheds were timber: the customs house was where the state's authority met the merchant's cargo, and whoever controlled that gate controlled the trade. Before a port had one, goods flowed in unrecorded — no manifest, no declaration, no inspection. The day the customs house opened, two things changed forever. First, it never closed again: from that morning on, clearing customs was not an event you survived once but a <strong>daily condition of doing business</strong> — every ship, every tide, every cargo, forever. Second, everything now funneled through <strong>one gate.</strong> The whole river of trade was made to pass a single point where an officer checked your <strong>manifest</strong> against your hold, made you <strong>declare</strong> what you carried, could <strong>inspect</strong> for contraband, and could hold or seize the lot. The customs officer had a peculiar indifference that merchants never quite got used to: he did not care how fine your silk was or how rich your cargo. He asked for your <strong>papers,</strong> and he checked them against the gate.</p>
+<p>Notice <em>why</em> the single gate was the whole design, because it is the part a landsman misses. A port could not inspect the open sea; it could only inspect the <strong>chokepoint</strong> where the sea met the shore. So the customs house was deliberately built at the narrows — the one place every cargo had to cross — and its power and its peril both lived there. Its power: control the gate and you controlled, recorded and taxed all trade. Its peril: <strong>a chokepoint concentrates everything, including failure.</strong> An unmanned gate let every smuggler through at once; a corrupt or compromised gate exposed the entire port, because everything of value flowed through that one door. The customs house was never safe <em>because</em> it was a single point — it was powerful and dangerous for the very same reason. The discipline of a great port was therefore not "build more warehouses" but "man the gate, check every manifest, and never let the one door go unwatched" — because the trade's whole integrity was decided at the narrows, every single day.</p>
+<p>So read the first Monday honestly. Yesterday the enterprise crossed a wall — enforcement began. But a wall you cross once is the wrong picture; what actually opened on Sunday is a <strong>customs house,</strong> and today is simply the first morning it is open for regular business. It will be open tomorrow, and the Monday after, forever: coverage says so plainly — the Act has moved "from preparation to daily administration," and compliance "must increasingly be demonstrated in practice." And this week the industry pointed to exactly where the customs house stands in your stack. It is not at the model, and not in a policy binder at headquarters. It is at the <strong>action layer</strong> — the instant an agent stops answering and reaches through a tool into a real system — and the single gate every one of those crossings passes through is the <strong>MCP plane.</strong> Eighty percent of enterprise cloud already funnels its agent actions through it; its servers pool the keys to every connected database and service into one door; and the Act's duties — log every crossing (and keep the log six months), let a human oversee the consequential ones, govern the data, secure the boundary — bite precisely there, on <strong>every agent in the chain,</strong> not just the model that gave the order. The customs officer will not ask the caliber of your model. He will ask for the manifest of what your agents <em>did,</em> and check it against the gate.</p>
+<p><strong>The moral:</strong> the model is the cargo — rented, swappable, and this very week made cheaper again (DeepSeek just handed everyone another free hull). Cargo is not where a port's integrity is decided; the <strong>gate</strong> is. The customs house — the single, audited action layer where every agent crosses into your real systems, plumbed by MCP — is the layer you own and man, and it is now open every day. Leave it unwatched while you admire your cargo and you are the port with a magnificent hold and an empty gatehouse, exposed at the one narrows through which everything flows. Man it — log every crossing, check every manifest, scope every credential, disclose and oversee every high-risk action, inspect for contraband — and the gate is your strength, your record, and your proof.</p>
+<p><strong>The question it forces:</strong> <em>For every autonomous agent we run, can we name the single gate its actions pass through — the MCP servers, the action layer — and prove, today and every day the customs house is open, that every crossing is logged and kept, every credential scoped to one lane, every high-risk action disclosed and human-overseen, and every contraband path (tool poisoning, a shadow server, an over-broad token) inspected for? Or is our gate standing unmanned while we admire cargo that just got cheaper — a port with a full hold and a single, unwatched door?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Enforcement is daily now, not a date that passed.</strong> The customs house opened Sunday and stays open — "compliance must increasingly be demonstrated in practice." <strong>For every autonomous agent, can we name the single gate its actions cross (the MCP servers / action layer) and produce, on any given day, the log of what it did?</strong></li>
+  <li>The Act's duties bite at the action layer: log (kept ≥6 months), human-oversee, govern data, secure the boundary — for <em>every agent in a chain</em>, not just the first model. <strong>Do we know which of our agent actions are "high-risk," and can we prove each one is logged, scoped and overseen — or do we only have a policy that says it should be?</strong></li>
+  <li>One breached MCP server can expose every connected database and service, because it pools the credentials. <strong>Where are our credential chokepoints, who mans them, and would we detect a shadow MCP server or an over-broad token before an auditor did?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>You run the most agents in production (banking/insurance lead, ~47% as reported) with production credentials against money and customer data — the most cargo through the busiest gate. <strong>For every agent that can move money or read a customer record, is its MCP access scoped to one lane, its every action logged and retained six months, and a human on the consequential crossings?</strong></li>
+  <li>The compliance boundary "extends to every agent performing a high-risk function." <strong>In our multi-agent flows (a chain that reads, decides, then executes a payment), have we mapped which link is the high-risk action — and is the manifest complete at that link, not just at the front door?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent reaching through a tool into a clinical or patient system is a cargo crossing a gate that now must be inspected. <strong>For every AI touching patient data, is the action layer logged, the data governance documented, and human oversight assigned — the exact Article 8–15 duties now live for high-risk systems?</strong></li>
+  <li>High-risk Annex III paperwork slipped to Dec 2027, which tempts delay. <strong>Have we separated what binds today (transparency, GPAI oversight, and the logging/oversight duties at the action layer) from the high-risk timeline that moved — so we don't leave the gate unmanned because the full inspection feels far off?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Your agents increasingly act on machines, orders and suppliers through tool calls — physical cargo through the gate. <strong>Do we hold a complete inventory of the MCP servers and tools our agents can reach on the floor and in the back office, each with an owner and a log — or are there shadow gates no one is manning?</strong></li>
+  <li>Vendors keep dropping cheaper, more capable models into the suites you run (DeepSeek V4-Flash-0731 is the latest free hull). <strong>When the cargo gets swapped, does anyone re-check the gate — the credential scope, the audit trail, the human-oversight step — or does a new engine quietly arrive behind an unwatched door?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>A storefront agent that answers beautifully but can reach payment, identity or fulfillment through a tool is cargo crossing an uninspected gate. <strong>Is every consumer-facing agent both disclosed ("you're dealing with an AI," per Article 50) and scoped at the action layer — unable to touch systems outside its lane, with every crossing logged?</strong></li>
+  <li>The cargo keeps getting cheaper and faster. <strong>Are we adding models faster than we're manning gates — shipping a quicker agent while its MCP scoping, logging and disclosure lag behind the capability?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>For citizen services, an agent action that crosses into a public system unlogged is a breach with a citizen's data at the end of it. <strong>Can we account, from today and every day, for every agent action against public data — logged, retained, scoped, disclosed and human-overseen — the exact accountability the AI Office can now enforce across 27 states?</strong></li>
+  <li>The Act's enforcement now runs on regulators proving they can supervise consistently. <strong>Have we moved from an AI policy to a demonstrable manifest at the action layer — a record of what each agent did — before the market-surveillance authority asks, rather than after?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Own the Customs House: the Action Layer Is Where the Act Bites</h2>
+<p>Read the first Monday as one lesson about a <strong>permanent gate at the action layer,</strong> in three parts — the cargo (the commodity models the market keeps making cheaper), the gate (the MCP plane every agent action crosses through, now the enterprise's single narrows), and the manifest (the logging, disclosure, oversight and inspection the auditor can now measure and fine, every day).</p>
+<div class="card"><ul>
+  <li><strong>The cargo (commodity models, cheaper each week).</strong> The model is a menu you rent or self-host and swap at will: <strong>Claude Opus 5</strong> (#1, $5/$25), Google <strong>Gemini</strong> in Oracle Fusion/NetSuite, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong> open weights — and, as of <strong>31 July</strong>, <strong>DeepSeek V4-Flash-0731</strong> (284B total / ~13B active, <strong>MIT license</strong>, weights on Hugging Face). It is the same model, re-post-trained, and it now <strong>beats its own far-larger flagship on nine agent and coding benchmarks</strong>: Terminal Bench 2.1 <strong>82.7</strong> (from 61.8; V4-Pro preview 72.1), DeepSWE <strong>7.3 → 54.4</strong>, Artificial Analysis Intelligence Index <strong>40 → 50</strong> (third open-weight), at no price change. That is what "commodity" means — the cargo keeps getting better and cheaper, and it is not where your port's integrity is decided.</li>
+  <li><strong>The gate (the action layer, plumbed by MCP).</strong> The moment an agent stops answering and <em>acts</em> — reaches through a tool into a real system — is the action layer, and its universal plumbing is the <strong>Model Context Protocol</strong>, now in <strong>80%+ of enterprise cloud environments.</strong> Its largest-ever revision (<strong>MCP 2026-07-28</strong>, final one week ago) is enterprise-grade and cloud-native — and it explicitly <strong>shifts security from the protocol to developers and operators.</strong> The structural risk is the chokepoint itself: an MCP server <strong>aggregates credentials for many services</strong>, so one breach "gives attackers access to every integrated database, file system and cloud service" — a single point of failure — and OWASP's <strong>MCP Top 10</strong> now names the contraband (tool poisoning, schema poisoning, tool shadowing, command injection, shadow MCP servers, context over-sharing). The gate is powerful and perilous for the same reason: everything of value flows through it.</li>
+  <li><strong>The manifest (what the auditor now measures, every day).</strong> The Act meets the gate exactly here. <strong>Where an AI agent uses an MCP server to take a high-risk action, that action falls inside the Act's cybersecurity, logging, data-governance and human-oversight obligations, enforceable from 2 August</strong> — and in a chain of agents the boundary "extends to every agent performing a high-risk function, not just the model that started the chain." Deployers of high-risk systems must keep the automatically-generated <strong>logs at least six months,</strong> assign human oversight, and use the system within the provider's documented instructions (Articles 8–15, 26). The four crafts of manning the gate: <strong>LOG</strong> (a per-action record of every crossing, retained), <strong>SCOPE</strong> (credentials confined to one lane; no over-broad token, no shadow server), <strong>DISCLOSE &amp; OVERSEE</strong> (Article 50 disclosure on AI-human touchpoints; a human on the consequential actions), <strong>INSPECT</strong> (verify the OAuth issuer, isolate tenants, scan for the OWASP contraband). None of it is supplied by a cheaper model.</li>
+</ul></div>
+<p>The strategic core: <strong>you do not make an agent estate compliant by renting a better model; you make it compliant by manning the gate its actions cross.</strong> Everyone rents the same cargo — and this week it got cheaper again — but the action layer, the MCP plane, is the single narrows where the regulator now stands, every day. The reassuring reading tempts the trap ("we run the best, cheapest models, so we're modern"), which is exactly backwards: the modern estate is the one that admired its cargo and left the gate unmanned. After the first Monday, "we have the most capable, cheapest models" is not readiness; <em>"we log, scope, disclose, oversee and inspect every action our agents take"</em> is.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The customs house: the gate is open every day now. The officer does not grade your cargo; he checks your manifest at the gate. At the top, the cargo — commodity models, cheaper each week — is rented and swappable: Opus 5 at five and twenty-five dollars, Gemini in Fusion and NetSuite, GPT-5.6, Kimi K3, and DeepSeek V4-Flash-0731, MIT-licensed, which beats its own flagship on nine benchmarks as of 31 July. Cargo is not where the port's integrity is decided. Next, the gate — the action layer, plumbed by MCP — is the single narrows: more than 80 percent of enterprise cloud runs MCP, the 2026-07-28 spec shifts security to you, and its servers pool credentials into a single point of failure, with the OWASP MCP Top 10 naming the contraband. The officer, open every day, asks for the manifest. So you man the gate, the layer to own: LOG every crossing, kept at least six months; SCOPE credentials to one lane, no shadow server; DISCLOSE and OVERSEE, Article 50 plus a human; INSPECT, verify the issuer, isolate tenants, scan — what the auditor now measures and fines every day, fifteen million euros or three percent, seven and a half million or one and a half percent. The trap is to admire cheaper cargo and leave the gate unmanned, a full hold and an open door; the win is to man the gate so the gate becomes your proof." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE CUSTOMS HOUSE — the gate is open every day now</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The officer does not grade your cargo; he checks your manifest at the gate.</text>
+
+  <!-- the cargo -->
+  <rect x="70" y="58" width="540" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE CARGO — commodity models, cheaper each week</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 ($5/$25) · Gemini in Fusion/NetSuite · GPT-5.6</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash-0731 (MIT, beats its own</text>
+  <text x="90" y="130" font-size="10.5" fill="#e8edf3" font-family="sans-serif">flagship on 9 benchmarks, 31 Jul) — a menu, swapped</text>
+  <text x="590" y="79" font-size="11" font-weight="700" fill="#e0b45f" text-anchor="end" font-family="sans-serif">📦 RENTED &amp; SWAPPABLE</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="154" x2="340" y2="176" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,176 340,188 346,176" fill="#9aa7b6"/>
+  <text x="404" y="171" font-size="9" fill="#9aa7b6" font-family="sans-serif">not where the port's integrity is decided ↓</text>
+
+  <!-- the gate -->
+  <rect x="70" y="192" width="540" height="118" rx="9" fill="#12202b" stroke="#2f6a8a"/>
+  <text x="90" y="213" font-size="11.5" font-weight="700" fill="#63b6e0" font-family="sans-serif">THE GATE — the action layer, plumbed by MCP</text>
+  <text x="90" y="232" font-size="10.5" fill="#e8edf3" font-family="sans-serif">80%+ of enterprise cloud runs MCP · the 2026-07-28</text>
+  <text x="90" y="248" font-size="10.5" fill="#e8edf3" font-family="sans-serif">spec shifts security to YOU (developers/operators)</text>
+  <text x="90" y="264" font-size="10.5" fill="#e8edf3" font-family="sans-serif">servers pool credentials = single point of failure</text>
+  <text x="90" y="280" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OWASP MCP Top 10 names the contraband</text>
+  <text x="90" y="299" font-size="9.5" fill="#c3ccd8" font-family="sans-serif">the single narrows — everything of value flows through it</text>
+  <text x="590" y="213" font-size="11" font-weight="700" fill="#63b6e0" text-anchor="end" font-family="sans-serif">🚪 THE SINGLE NARROWS</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="310" x2="340" y2="332" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="334,332 340,344 346,332" fill="#5dcaa5"/>
+  <text x="404" y="327" font-size="9" fill="#5dcaa5" font-family="sans-serif">the officer (open every day) asks for the manifest →</text>
+
+  <!-- man the gate -->
+  <rect x="96" y="348" width="488" height="102" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="340" y="370" font-size="12" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">MAN THE GATE — the layer to own</text>
+  <text x="340" y="389" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LOG (every crossing, kept ≥6 months) · SCOPE (creds to one lane, no shadow)</text>
+  <text x="340" y="405" font-size="10" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">DISCLOSE &amp; OVERSEE (Article 50 + a human on the consequential moves)</text>
+  <text x="340" y="423" font-size="10.5" fill="#cfe6f5" text-anchor="middle" font-family="sans-serif" font-weight="700">INSPECT — verify the issuer, isolate tenants, scan for contraband</text>
+  <text x="340" y="440" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">what the auditor now measures and FINES, every day: €15M or 3% (€7.5M / 1.5%)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="450" x2="340" y2="470" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,470 340,482 346,470" fill="#9aa7b6"/>
+
+  <!-- bottom: trap vs win -->
+  <rect x="28" y="492" width="308" height="60" rx="9" fill="#2a1020" stroke="#8a2f52"/>
+  <text x="182" y="512" font-size="10" font-weight="700" fill="#e06b9a" text-anchor="middle" font-family="sans-serif">TRAP — admire cheaper cargo, leave the gate unmanned</text>
+  <text x="182" y="528" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">a full hold and</text>
+  <text x="182" y="542" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">an open door.</text>
+
+  <rect x="344" y="492" width="308" height="60" rx="9" fill="#0f2b1f" stroke="#1d6e56"/>
+  <text x="498" y="512" font-size="10" font-weight="700" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif">WIN — man the gate at the action layer</text>
+  <text x="498" y="528" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">the gate becomes</text>
+  <text x="498" y="542" font-size="9.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">your record and proof.</text>
+
+  <text x="340" y="578" font-size="10" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the cargo is rented and swappable — the customs house is the durable asset</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#ef9f27"></i>The cargo — commodity models</span>
+  <span><i class="dot" style="background:#378add"></i>The gate — the action layer / MCP</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Man the gate — the layer to own</span>
+  <span><i class="dot" style="background:#e06b9a"></i>Leave it unmanned — the trap</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — buy cheaper cargo</th><th>The discipline — man the gate</th></tr>
+<tr><td>Treat a cheaper, better model as readiness</td><td>Treat the action layer as the thing to govern</td></tr>
+<tr><td>A policy PDF that says "agents stay in scope"</td><td>A per-action log of every crossing, kept ≥6 months</td></tr>
+<tr><td>One MCP server holding the keys to everything</td><td>Credentials scoped to one lane; tenants isolated</td></tr>
+<tr><td>Trust the tool the agent calls is the tool it named</td><td>Inspect for the OWASP contraband (poisoning, shadow servers)</td></tr>
+<tr><td>Govern only the model that started the chain</td><td>Govern every agent performing a high-risk action</td></tr>
+</table>
+
+<h3>Why the first Monday is an action-layer problem, not a model problem</h3>
+<div class="card">
+<p>Every force this radar tracked all month assumed leverage lived in acquiring capability — a better model, a cheaper token, an open weight. The first working day of enforcement names the plainest operational fact: <strong>the regulator does not stand at your model; it stands at your action layer,</strong> the gate where an agent's decision becomes an effect in a real system. The model is the interchangeable, ever-cheaper cargo the market hands you (DeepSeek proved it again on Friday); the customs house is the single narrows — the MCP plane, the action layer — where you must check the manifest, scope the credential, disclose the interaction, oversee the consequential move, and inspect for contraband. A firm that hears "we run the best, cheapest models" ships more cargo to an unwatched gate; a firm that hears "the customs house is open every day" mans the narrows. The model didn't become less important; it became the <em>cargo</em> — and cargo is not where a port's integrity is decided.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon). The tide came in on schedule; the guns broke loose; and now — the first Monday — the customs house is simply open for regular business, and will be tomorrow. The 8 Jul MCP plane and 28 Jul mailroom named the gate; today the auditor stands at it. On legacy estates the danger is a team that spends the first Monday shopping for cheaper cargo — a vendor dropped a free, more capable model (DeepSeek V4-Flash-0731) into the suite, the demo is faster, everyone feels modern — while no one can produce the manifest for what their agents actually <em>did</em> through MCP last week, or name which server holds which keys. That is a full hold and an unmanned gate. The retrofit is to man the narrows: inventory the MCP servers and tools every agent can reach, log every action and keep it six months, scope each credential to one lane, disclose on every AI-human touchpoint, put a human on the high-risk crossings, and inspect for the OWASP contraband — <em>because the gate is open every day now,</em> not just on the day the wall came down.</p>
+<p><strong>The clean mental model:</strong> <em>A customs house is the port's integrity and its single point of exposure for the same reason — everything flows through the one gate, and it is open every day. The model has commoditized into cargo anyone can buy cheaply; man the gate (log, scope, disclose+oversee, inspect) at the action layer where MCP carries your agents into real systems, because that is what enforcement measures now — every day — not the caliber of the cargo.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>First working day of enforcement — today, Monday 3 August.</strong> The EU AI Act enforcement era is now daily administration: transparency duties and GPAI powers live across 27 states; the AI Office can audit, correct, restrict and fine (€15M or 3%; €7.5M or 1.5% for incorrect information); "compliance must increasingly be demonstrated in practice," with regulators under scrutiny to enforce consistently. Article 50(2) marking grace to 2 Dec 2026; high-risk Annex III to 2 Dec 2027 (Digital Omnibus).</li>
+  <li><strong>MCP is the action-layer gate.</strong> ~80%+ of enterprise cloud runs MCP; the 2026-07-28 spec (final 28 Jul) shifts security to developers/operators; servers aggregate credentials into a single point of failure; OWASP MCP Top 10 names the contraband. Where an agent uses MCP to take a high-risk action, the Act's logging (≥6 months), human-oversight, data-governance and cybersecurity duties apply — to every agent in the chain. <em>"Compliance lives at the action layer."</em></li>
+  <li><strong>The cargo got cheaper again (context).</strong> DeepSeek V4-Flash-0731 (31 Jul; MIT, open weights; 284B/~13B active) beats its own flagship on nine agent/coding benchmarks — Terminal Bench 2.1 82.7, DeepSWE 7.3→54.4, AA Intelligence Index 40→50 (third open-weight), no price change. Joins Opus 5 ($5/$25), Gemini, GPT-5.6 Sol, Kimi K3.</li>
+  <li><strong>The value weigh-in — today.</strong> Palantir reports Q2 2026 after the US close (consensus ~$1.81B revenue, $0.34 EPS; eight straight beats; shares ~$123, ~40% off high) — the clearest read on real enterprise AIP demand; Ai4 2026 (12,000+) opens in Las Vegas 4 Aug.</li>
+  <li><strong>The production and control gap still frames it.</strong> Vision Compliance: 78% took no meaningful compliance steps, 83% keep no AI inventory, 74% have no owner, 61% have no process for the required technical documentation. MIT: 95% of gen-AI pilots deliver no measurable impact. IDC: 88% of agent PoCs never scale. Gartner: 40%+ of agentic projects cancelled by end-2027; ~31% run ≥1 agent in production (banking/insurance ~47%). Gravitee: 88% hit an agent incident; only 10% feel in control; 35% could not shut down a rogue agent — the unwatched gate.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">The enforcement represents a challenge that moves from preparation to daily administration.</div><div class="a">— On the EU AI Act's main application phase, as coverage framed the first days of enforcement, August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Where an AI agent uses an MCP server to take a high-risk action, that action falls inside the Act's cybersecurity, logging, data governance, and human-oversight obligations, enforceable from 2 August 2026 — and in a sequence of agents, the compliance boundary extends to every agent performing a high-risk function.</div><div class="a">— On EU AI Act compliance at the action layer, MCP/AI-Act analysis, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">MCP servers aggregate credentials for multiple enterprise services, creating a single point of failure that exposes your entire organization when compromised — a single breached MCP server gives attackers access to every integrated database, file system, and cloud service.</div><div class="a">— On enterprise MCP security, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">[Our Q1 2026 results demonstrate strength that] dwarfs the performance of essentially every software company in history at this scale.</div><div class="a">— Alex Karp, CEO, Palantir, on the company's enterprise/AIP momentum ahead of its Q2 2026 report due today, 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the cargo — rented, swappable, and cheaper every week. The customs house is the gate. The officer does not grade your cargo; he checks your manifest at the gate — and the gate is open every day now."</div><div class="a">— the radar, on the first working day of enforcement</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>EU AI Act enforcement — status</td><td><span class="v">Live &amp; daily (first working day 3 Aug 2026)</span></td><td>European Commission / coverage (as reported)</td></tr>
+<tr><td>Penalty ceiling (Article 99)</td><td><span class="v">€15M or 3% of global annual turnover</span></td><td>European Commission</td></tr>
+<tr><td>Penalty for supplying incorrect information</td><td><span class="v">€7.5M or 1.5% of turnover</span></td><td>European Commission / coverage (as reported)</td></tr>
+<tr><td>High-risk deployer log retention</td><td><span class="v">≥ 6 months (automatically-generated logs)</span></td><td>EU AI Act Art. 26 / coverage (as reported)</td></tr>
+<tr><td>Enterprise cloud environments running MCP</td><td><span class="v">80%+</span></td><td>MCP security coverage (as reported)</td></tr>
+<tr><td>MCP largest-ever spec revision — final</td><td><span class="v">MCP 2026-07-28 (security shifts to operators)</span></td><td>MCP / SiliconANGLE / coverage (as reported)</td></tr>
+<tr><td>MCP server credential aggregation</td><td><span class="v">single point of failure (whole estate exposed)</span></td><td>MCP security coverage (as reported)</td></tr>
+<tr><td>DeepSeek V4-Flash-0731 — release / license</td><td><span class="v">31 Jul 2026 · MIT open weights · 284B / ~13B active</span></td><td>DeepSeek / coverage (as reported)</td></tr>
+<tr><td>DeepSeek V4-Flash-0731 — Terminal Bench 2.1</td><td><span class="v">82.7 (from 61.8; V4-Pro preview 72.1)</span></td><td>DeepSeek model card / coverage (as reported)</td></tr>
+<tr><td>DeepSeek V4-Flash-0731 — AA Intelligence Index</td><td><span class="v">40 → 50 (third open-weight)</span></td><td>Artificial Analysis (as reported)</td></tr>
+<tr><td>Palantir Q2 2026 — reports today (after US close)</td><td><span class="v">~$1.81B revenue · $0.34 EPS consensus</span></td><td>TradingKey / Barchart / coverage (as reported)</td></tr>
+<tr><td>EU AI Act readiness — no steps / no inventory / no owner</td><td><span class="v">78% / 83% / 74%</span></td><td>Vision Compliance 2026 (as reported)</td></tr>
+<tr><td>EU AI Act readiness — no technical-documentation process</td><td><span class="v">61%</span></td><td>Vision Compliance 2026 (as reported)</td></tr>
+<tr><td>Enterprises with ≥1 AI agent in production</td><td><span class="v">~31% (banking/insurance ~47%)</span></td><td>Agentic adoption coverage (as reported)</td></tr>
+<tr><td>Could not shut down a rogue agent</td><td><span class="v">35%</span></td><td>Gravitee, State of AI Agent Security 2026 (as reported)</td></tr>
+<tr><td>Gen-AI pilots with no measurable impact · agent PoCs never scaling</td><td><span class="v">95% (MIT) · 88% (IDC)</span></td><td>MIT (NANDA) / IDC (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Map the gate — build the manifest for your action layer.</strong> The regulator now stands where your agents <em>act,</em> not where your models answer. Inventory every MCP server and tool each autonomous agent can reach; for each, record the credentials it holds and the systems it can touch. Then turn on the manifest: a per-action log of every crossing, retained <strong>at least six months</strong> (Article 26), with the high-risk actions flagged. This inventory-plus-log is your enforcement-day evidence — and the thing that lets you answer "what did our agents do last week?" on any day the customs house is open, which is now every day.</li>
+  <li><strong>Man the narrows — scope credentials, isolate tenants, inspect for contraband.</strong> An MCP server pooling the keys to everything is a single point of failure. Scope each credential to one lane (no over-broad tokens); isolate tenants; verify the OAuth issuer on the 2026-07-28 spec; and actively scan for the OWASP MCP contraband — tool poisoning, schema poisoning, tool shadowing, command injection, shadow servers, context over-sharing. Pair it with Article 50 disclosure on every AI-human touchpoint and a human-oversight step on the consequential crossings. Remember the boundary extends to <em>every agent in a chain,</em> so man each link that takes a high-risk action, not just the front door.</li>
+  <li><strong>Keep the gate model-neutral — rent the cargo, own the customs house.</strong> The cargo keeps getting cheaper (DeepSeek V4-Flash-0731 is the newest free hull, and Opus 5/Gemini/GPT-5.6/Kimi K3 are a swappable menu). Build your logging, credential-scoping, disclosure, oversight and inspection as infrastructure at the action layer that does not depend on any one model — so swapping the engine never leaves a crossing unlogged or a credential over-broad. The cargo will keep commoditizing; the durable, auditable asset — and the thing the regulator now measures every day — is the customs house you own.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> European Commission (AI Act enforcement &amp; Article 50) · digital-strategy.ec.europa.eu · The European Times · artificialintelligenceact.eu (Art. 26) · SecurityWeek · Security Boulevard · SentinelOne · SiliconANGLE · The Agentics (MCP) · StackOne (action layer) · Help Net Security · Salt Security · DeepSeek · MarkTechPost · TechTimes · Fello AI (V4-Flash-0731) · TradingKey · Barchart · StockTitan · Fast Company (Palantir) · Ai4 · Vision Compliance · MIT (NANDA) · IDC · Gartner · Gravitee. Figures are relayed from official, vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 3 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>

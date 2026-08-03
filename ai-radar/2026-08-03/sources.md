@@ -1,0 +1,67 @@
+# Sources — AI Tech Radar, 3 August 2026 ("The Customs House")
+
+Every claim in this edition traces to a public source below. Figures are attributed to the organization or official that published them. Lines explicitly marked as "the radar's framing" are editorial and are not attributed to any third party. Where a figure or characterization is reported via secondary coverage, it is marked "as reported."
+
+## The story — the first working day of enforcement, and the gate is the action layer
+
+### EU AI Act enforcement — now daily administration (first working day 3 August 2026)
+
+- European Commission (Press corner), "Commission starts enforcing AI Act rules and new transparency requirements on 2 August" — https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1714
+- European Commission, "Commission starts enforcing AI Act rules and new transparency requirements on 2 August" (Shaping Europe's digital future) — https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august
+- The European Times, "EU AI Act Enters Its Main Phase" — https://europeantimes.news/2026/08/eu-ai-act-enters-its-main-phase/
+- European Commission, "Transparency obligations under Article 50 of the AI Act" (FAQ) — https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act
+- Technology.org, "EU AI Act: What Actually Applies on 2 August 2026" — https://www.technology.org/2026/07/17/eu-ai-act-what-actually-applies-on-2-august-2026/
+- ProgressiveRobot, "AI Disclosure: Europe's Critical August 2 Reality Check" — https://www.progressiverobot.com/2026/08/02/ai-disclosure-europe/
+- Olakai, "EU AI Act Enforcement: What Aug 2, 2026 Means" — https://olakai.ai/blog/eu-ai-act-enforcement-august-2026/
+
+Claims sourced here (as reported): From 2 August 2026 the European Commission's AI Office, together with national market-surveillance authorities, began enforcing the AI Act; the first working days of that regime are the subject of this edition. Article 50 transparency obligations are enforceable across all 27 member states — disclosure that a person is interacting with an AI; machine-readable marking of AI-generated content; deepfake labeling — regardless of whether the underlying system is "high-risk." The AI Office can request documentation, evaluate general-purpose AI (GPAI) models, order corrections, restrict a model's availability in the EU, and fine. Non-compliance can attract fines of up to the higher of €15 million or 3% of worldwide annual turnover (Article 99); supplying incorrect, incomplete or misleading information can draw up to €7.5 million or 1.5% of turnover. Coverage frames the transition as one that "moves from preparation to daily administration," with compliance that "must increasingly be demonstrated in practice," and with regulators themselves under scrutiny to enforce consistently across 27 member states. Systems placed on the market before 2 August 2026 benefit from a four-month grace period (to 2 December 2026) on the Article 50(2) machine-readable-marking obligation; the high-risk (Annex III) standalone-system obligations were deferred to 2 December 2027 under the Digital Omnibus package.
+
+### The action layer and MCP — where the Act bites
+
+- SecurityWeek, "New Enterprise-Ready MCP Specification Brings New Security Challenges" — https://www.securityweek.com/new-enterprise-ready-mcp-specification-brings-new-security-challenges/
+- Security Boulevard, "Model Context Protocol Security: A Comprehensive Guide to Strengthening MCP Deployments" — https://securityboulevard.com/2026/08/model-context-protocol-security-a-comprehensive-guide-to-strengthening-mcp-deployments/
+- SentinelOne, "Model Context Protocol (MCP) Security: Complete Guide" — https://www.sentinelone.com/cybersecurity-101/cybersecurity/mcp-security/
+- SiliconANGLE, "Biggest ever MCP update brings metadata, cybersecurity enhancements" — https://siliconangle.com/2026/07/28/biggest-ever-mcp-update-brings-metadata-cybersecurity-enhancements/
+- Open Source For You, "Biggest Open Source MCP Update Eliminates Handshake Architecture" — https://www.opensourceforu.com/2026/07/biggest-open-source-mcp-update-eliminates-handshake-architecture/
+- The Agentics, "The Enterprise MCP Guide 2026" — https://theagentics.co/insights/the-enterprise-mcp-guide-2026
+- StackOne, "EU AI Act: Compliance Lives at the Action Layer" — https://www.stackone.com/blog/eu-ai-act-action-layer-logs/
+- Help Net Security, "What the EU AI Act requires for AI agent logging" — https://www.helpnetsecurity.com/2026/04/16/eu-ai-act-logging-requirements/
+- Salt Security, "EU AI Act Compliance 2026: What High-risk AI Systems Must Do Now" — https://salt.security/eu-ai-act-compliance
+- EU Artificial Intelligence Act, "Article 26: Obligations of Deployers of High-Risk AI Systems" — https://artificialintelligenceact.eu/article/26/
+
+Claims sourced here (as reported): The Model Context Protocol (MCP) runs in more than 80% of enterprise cloud environments. Its largest-ever revision, the MCP 2026-07-28 specification (final on 28 July 2026), is built for enterprise-scale, cloud-native deployment and explicitly shifts critical security responsibilities from the protocol itself to developers and platform operators (with a 12-month deprecation window for legacy versions). MCP servers aggregate credentials for multiple enterprise services, creating a single point of failure such that one breached MCP server "gives attackers access to every integrated database, file system, and cloud service." OWASP's MCP Top 10 formalizes threat categories including tool poisoning, schema poisoning, tool shadowing, command injection, shadow MCP servers, and context over-sharing. Where an AI agent uses an MCP server to take a high-risk action, that action falls inside the EU AI Act's cybersecurity, logging, data-governance and human-oversight obligations, enforceable from 2 August 2026 for high-risk systems; in a sequence of AI agents, the compliance boundary extends to every agent performing a high-risk function, not just the model that started the chain. Deployers of high-risk AI systems must keep the automatically-generated logs their system produces for at least six months, assign human oversight, and use the system within the provider's documented instructions (Articles 8–15, 26). The characterization that "EU AI Act compliance lives at the action layer" is relayed from the StackOne analysis as reported.
+
+## The cargo — commodity models, cheaper each week (context)
+
+- DeepSeek, "DeepSeek-V4-Flash Goes Official: Agent Benchmarks Beat V4-Pro-Preview" — https://deepseek.ai/blog/deepseek-v4-flash-ga-agent-benchmarks
+- MarkTechPost, "DeepSeek Upgrades DeepSeek-V4-Flash-0731 with Major Agentic and Coding Gains" — https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/
+- TechTimes, "DeepSeek Retrained V4-Flash Beats Its Flagship Pro on Nine Agent Benchmarks" — https://www.techtimes.com/articles/322513/20260731/deepseek-retrained-v4-flash-beats-its-flagship-pro-nine-agent-benchmarks.htm
+- Fello AI, "DeepSeek V4: Specs, Benchmarks and the 0731 Release" — https://felloai.com/deepseek-v4/
+- MorphLLM, "DeepSeek V4: 1.6T MoE, 1M Context — Architecture, Benchmarks, Pricing (2026)" — https://www.morphllm.com/deepseek-v4
+- LLM-Stats, "AI Updates Today (August 2026) – Latest AI Model Releases" — https://llm-stats.com/llm-updates
+
+Claims sourced here (as reported): On 31 July 2026 DeepSeek shipped DeepSeek-V4-Flash-0731, the official release of V4-Flash superseding the April preview — 284 billion total parameters with ~13 billion activated, published on Hugging Face under the MIT License, with the same architecture and size as the preview but re-done post-training and no price change. On DeepSeek's published benchmarks the build outscores the company's own (far larger) V4-Pro-Preview across all nine agent and coding benchmarks, including Terminal Bench 2.1 at 82.7 (up from 61.8 for the preview, and above V4-Pro-Preview's 72.1) and a jump from 7.3 to 54.4 on DeepSWE; Artificial Analysis moved it from 40 to 50 on its Intelligence Index, third in the open-weight field. Claude Opus 5 (#1 at launch at $5/$25 per million tokens), Google Gemini (into Oracle Fusion and NetSuite), GPT-5.6 Sol, and Kimi K3 open weights are carried forward from July 2026 coverage as reported.
+
+## The value weigh-in and adoption (context)
+
+- TradingKey, "Palantir (PLTR) Earnings Preview: 8 Straight Beats" — https://www.tradingkey.com/analysis/stocks/us-stocks/262068882-palantir-pltr-earnings-preview-august-3-2026-options-swing-triangle-tradingkey
+- Barchart, "Palantir Reports Earnings August 3" — https://www.barchart.com/story/news/3486229/palantir-reports-earnings-august-3-trade-the-volatility-with-leveraged-and-inverse-etfs
+- StockTitan, "Palantir sets Aug. 3, 2026 date for Q2 earnings" — https://www.stocktitan.net/news/PLTR/palantir-announces-date-of-second-quarter-2026-earnings-release-and-pb0p9gl5pf2d.html
+- Blockonomi, "Palantir (PLTR) Q2 2026 Earnings Preview" — https://blockonomi.com/palantir-pltr-q2-2026-earnings-preview-can-the-rally-continue-past-august-3/
+- Fast Company, "Palantir earnings will test the real shape of enterprise AI" — https://www.fastcompany.com/91582633/palantir-earnings-will-test-the-real-shape-of-enterprise-ai
+- Ai4 2026 conference — https://ai4.io/vegas/
+
+Claims sourced here (as reported): Palantir Technologies reports Q2 2026 results on 3 August 2026, after the US market close (webcast 5:00 p.m. ET), with consensus estimates near $1.81 billion revenue and $0.34 EPS; the company has beaten EPS estimates for eight consecutive quarters; shares trade near $123, roughly 40% off their high; investor focus is on AIP deployment momentum and enterprise production-stage growth. The Alex Karp quotation ("dwarfs the performance of essentially every software company in history at this scale") is relayed from Q1 2026 commentary as reported. Ai4 2026 runs 4–6 August 2026 at The Venetian in Las Vegas, described as the largest applied-AI conference with 12,000+ attendees and multiple enterprise agent tracks.
+
+## Readiness and the production/control gap (context, carried forward)
+
+- Vision Compliance, "2026 EU AI Act Readiness Report, Finds 78% of Enterprises Unprepared for Obligations" (National Law Review) — https://natlawreview.com/press-releases/vision-compliance-releases-2026-eu-ai-act-readiness-report-finds-78
+- Vision Compliance (EIN Presswire) — https://www.einnews.com/pr_news/903074846/vision-compliance-releases-2026-eu-ai-act-readiness-report-finds-78-of-enterprises-unprepared-for-obligations
+- Gartner, "Gartner Predicts 40% of Enterprise Apps Will Feature Task-Specific AI Agents by 2026" — https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025
+- Accelirate, "Agentic AI Statistics 2026: Global Enterprise Adoption and Market Insights" — https://www.accelirate.com/agentic-ai-statistics-2026/
+
+Claims sourced here (as reported): Vision Compliance's 2026 EU AI Act Readiness analysis finds 78% of organizations took no meaningful steps toward compliance, 83% keep no formal inventory of the AI systems they run, 74% lack a designated internal owner or governance body, and 61% have no process for generating the technical documentation required for high-risk systems. MIT (NANDA) research that 95% of generative-AI pilots deliver no measurable business impact; IDC's finding that 88% of AI-agent proofs-of-concept never reach broad production; Gartner's finding that more than 40% of agentic-AI projects will be cancelled by the end of 2027; approximately 31% of enterprises have at least one AI agent in production, with banking and insurance leading (~47%); Gravitee's State of AI Agent Security 2026 finding that 88% hit an agent incident, only 10% feel in control, and 35% could not shut down a rogue agent — all relayed from July–August 2026 coverage as reported.
+
+---
+
+*Editorial lines marked as the radar's own (e.g. "The model is the cargo — rented, swappable, and cheaper every week. The customs house is the gate. The officer does not grade your cargo; he checks your manifest at the gate — and the gate is open every day now.") are the AI Tech Radar's framing and are not third-party quotes. The customs-house allegory — the historical reality that a trading port's customs house was a permanent, stone-built chokepoint at the waterfront where every cargo had to clear a single audited gate against a manifest, and was powerful and exposed for the same reason (everything of value flowed through the one door) — is a common illustration used allegorically, told approximately, and is not a sourced claim about any specific port. The "first working day" framing is a simple statement of this edition's date (Monday, 3 August 2026). Where a quotation or figure is attributed via secondary coverage rather than a primary release, it is marked "as reported." Product, firm, official and institution names (the European Commission, the EU AI Office, OpenAI, Anthropic, Hugging Face, the Model Context Protocol, OWASP, DeepSeek, Palantir, Alex Karp, Oracle, Google Cloud, Gemini, Moonshot AI, Kimi K3, MIT NANDA, IDC, Gartner, Gravitee, Vision Compliance) reflect the sources as described in the cited 2026 material.*
