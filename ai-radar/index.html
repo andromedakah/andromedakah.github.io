@@ -19,6 +19,15 @@
   .reveal.in { opacity: 1; transform: none; }
   .tease-hidden { display: none; }
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none} .card-hover{transition:none} }
+  /* feed month / week dividers */
+  .feed-divider { grid-column: 1 / -1; }
+  .feed-divider.month { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:10px 2px 0; padding-bottom:8px; border-bottom:1px solid #e7e7e3; }
+  .feed-divider.month .m-t { font-size:15px; font-weight:800; letter-spacing:-.01em; color:#1a1a1e; }
+  .feed-divider.month .m-c { font-size:12px; font-weight:600; color:#6b6e76; white-space:nowrap; }
+  .feed-divider.week { display:flex; align-items:center; gap:9px; margin:2px 2px 0; }
+  .feed-divider.week .w-dot { width:7px; height:7px; border-radius:50%; background:#059669; flex:none; }
+  .feed-divider.week .w-t { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.07em; color:#059669; }
+  .feed-divider.week .w-r { font-size:12px; font-weight:500; color:#6b6e76; }
 </style>
 </head>
 <body class="bg-paper text-ink font-sans antialiased">
@@ -91,7 +100,7 @@
 
   <section id="feed" class="mt-12 pb-4">
     <div class="mb-5 flex items-end justify-between">
-      <h2 class="text-xl font-extrabold tracking-tight text-ink">All editions — newest first</h2>
+      <h2 class="text-xl font-extrabold tracking-tight text-ink">All editions — by month</h2>
       <span class="text-sm text-faint">Keep scrolling</span>
     </div>
     <!-- DAILY BRIEF UPDATE: to publish today's edition, prepend ONE new <a class="item card-hover reveal group ..."> card
@@ -387,13 +396,61 @@
   function onScroll(){ var h=document.documentElement, max=h.scrollHeight-h.clientHeight; var pct=max>0?(h.scrollTop||document.body.scrollTop)/max:0, shown=Math.max(6,Math.round(pct*100)); bar.style.width=shown+'%'; if(pill) pill.textContent=shown+'% read'; }
   document.addEventListener('scroll', onScroll, {passive:true}); window.addEventListener('resize', onScroll); onScroll();
 
-  /* infinite-scroll style reveal over static cards */
+  /* group the feed by month — and the current month by week — via dividers
+     derived from each card's dated href, so the daily prepend needs no change
+     and "current month / this week" track today's date automatically. */
+  var container=document.getElementById('cards');
   var sentinel=document.getElementById('sentinel'), endEl=document.getElementById('feed-end');
-  [].slice.call(document.querySelectorAll('#cards > a.item')).forEach(function(c,idx){ if(idx>=8) c.classList.add('tease-hidden'); });
-  function reveal(){ document.querySelectorAll('#cards > a.item:not(.tease-hidden):not(.in)').forEach(function(el){ if(el.getBoundingClientRect().top < window.innerHeight - 40) el.classList.add('in'); }); }
-  function loadMore(){ var hid=document.querySelectorAll('#cards > a.item.tease-hidden'); if(!hid.length){ endEl.classList.remove('hidden'); io.disconnect(); return; } for(var n=0;n<6 && hid[n];n++) hid[n].classList.remove('tease-hidden'); requestAnimationFrame(reveal); }
+  (function group(){
+    if(!container) return;
+    var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var SH=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function monday(dt){ var x=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()); var s=(x.getDay()+6)%7; x.setDate(x.getDate()-s); return x; }
+    var now=new Date(), curY=now.getFullYear(), curM=now.getMonth()+1, todayMon=monday(now);
+    var items=[].slice.call(container.querySelectorAll('a.item')).map(function(a){
+      var m=a.getAttribute('href').match(/(\d{4})-(\d{2})-(\d{2})/);
+      return m?{a:a,y:+m[1],mo:+m[2],date:new Date(+m[1],+m[2]-1,+m[3])}:null;
+    }).filter(Boolean);
+    var mc={}; items.forEach(function(it){ var k=it.y+'-'+it.mo; mc[k]=(mc[k]||0)+1; });
+    function mkDiv(cls,html){ var d=document.createElement('div'); d.className='feed-divider reveal '+cls; d.innerHTML=html; return d; }
+    var lastMK=null,lastWK=null;
+    items.forEach(function(it){
+      var mk=it.y+'-'+it.mo;
+      if(mk!==lastMK){
+        var n=mc[mk];
+        container.insertBefore(mkDiv('month','<span class="m-t">'+MONTHS[it.mo-1]+' '+it.y+'</span><span class="m-c">'+n+' brief'+(n>1?'s':'')+'</span>'), it.a);
+        lastMK=mk; lastWK=null;
+      }
+      if(it.y===curY && it.mo===curM){
+        var wm=monday(it.date), wk=wm.getTime();
+        if(wk!==lastWK){
+          var diff=Math.round((todayMon-wm)/6048e5);
+          var t=diff===0?'This week':diff===1?'Last week':'Week of '+wm.getDate()+' '+SH[wm.getMonth()];
+          var sun=new Date(wm); sun.setDate(sun.getDate()+6);
+          var r=wm.getDate()+' '+SH[wm.getMonth()]+' – '+sun.getDate()+' '+SH[sun.getMonth()];
+          container.insertBefore(mkDiv('week','<span class="w-dot"></span><span class="w-t">'+t+'</span><span class="w-r">'+r+'</span>'), it.a);
+          lastWK=wk;
+        }
+      }
+    });
+  })();
+
+  /* infinite-scroll style reveal, group-aware (dividers show with their cards) */
+  [].slice.call(container.querySelectorAll('a.item')).forEach(function(c,idx){ if(idx>=8) c.classList.add('tease-hidden'); });
+  function syncDividers(){
+    /* hide every divider, then reveal the contiguous run of dividers that sits
+       directly above each visible card (so a month header shown right before a
+       week header both light up with the week's first card). */
+    container.querySelectorAll('.feed-divider').forEach(function(d){ d.classList.add('tease-hidden'); });
+    container.querySelectorAll('a.item:not(.tease-hidden)').forEach(function(c){
+      var p=c.previousElementSibling;
+      while(p && p.classList.contains('feed-divider')){ p.classList.remove('tease-hidden'); p=p.previousElementSibling; }
+    });
+  }
+  function reveal(){ container.querySelectorAll('.reveal:not(.tease-hidden):not(.in)').forEach(function(el){ if(el.getBoundingClientRect().top < window.innerHeight - 40) el.classList.add('in'); }); }
+  function loadMore(){ var hid=container.querySelectorAll('a.item.tease-hidden'); if(!hid.length){ endEl.classList.remove('hidden'); io.disconnect(); return; } for(var n=0;n<6 && hid[n];n++) hid[n].classList.remove('tease-hidden'); syncDividers(); requestAnimationFrame(reveal); }
   var io=new IntersectionObserver(function(e){ e.forEach(function(x){ if(x.isIntersecting) loadMore(); }); }, {rootMargin:'260px'});
-  io.observe(sentinel); document.addEventListener('scroll', reveal, {passive:true}); reveal();
+  syncDividers(); io.observe(sentinel); document.addEventListener('scroll', reveal, {passive:true}); reveal();
 
   /* subscribe by email */
   (function(){

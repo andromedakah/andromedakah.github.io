@@ -97,6 +97,16 @@ REQUIRED SECTIONS in every brief, in this order:
   Do not touch the inlined `<style>` blocks or the reveal/progress `<script>`. Keep the
   card classes exactly (`item card-hover reveal group`) so the reveal/infinite-scroll JS
   still works. The hero, audience cards and "What's inside" list stay unchanged.
+- The landing feed is **grouped by month, with the current month split into weeks**
+  (This week / Last week / Week of …). This is done client-side by a script that derives
+  each card's date from its `YYYY-MM-DD/index.html` href, so you do NOT add any month/week
+  header yourself — just prepend the dated card as above and the divider appears
+  automatically. The only requirement is that the new card's `href` starts with the date.
+- **Archive + topic mind map.** Also add the new edition to `/ai-radar/archive/index.html`
+  (top row of the current month's `ul.list`) and add its entry to `ai-radar/tags.json`
+  (date, headline, tags from the controlled vocabulary). Then regenerate the archive topic
+  mind map: `python3 scripts/archive_mindmap.py` (deterministic, rewrites the section
+  between the `MINDMAP:START/END` markers). Commit the regenerated archive with the edition.
 
 ## Monthly wrap-up (end of each month)
 On (or just after) the last edition of a month, build/refresh the monthly wrap-up at
