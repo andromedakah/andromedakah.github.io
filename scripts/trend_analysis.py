@@ -1,34 +1,20 @@
 #!/usr/bin/env python3
 """
-AI Tech Radar — deterministic trend analysis (zero-LLM).
+AI Tech Radar — plain-language trends (zero-LLM, deterministic).
 
-Reads ai-radar/tags.json (hand-maintained tag index, one entry per published
-edition) and regenerates a static trends page at ai-radar/trends/index.html:
+Reads ai-radar/tags.json (a hand-kept list of each edition's topics) and every
+edition's ai-radar.md, then writes a friendly, non-technical trends page at
+ai-radar/trends/index.html:
 
-  1. Tag frequency per edition + a stacked bar chart (SVG, hand-computed).
-  2. Week-over-week velocity per tag: (count_this_week - count_last_week) / count_last_week.
-  3. A tag co-occurrence matrix (which topics get covered together).
-  4. Claim corroboration: regex-extracts numeric claims from every edition's
-     ai-radar.md, clusters claims that share a numeric token (e.g. "88%")
-     and at least one significant context word (e.g. "enterprises") across
-     *different* editions, then scores each cluster statistically:
+  1. The big picture   — a plain one-line summary + a few headline counts.
+  2. Most-covered topics — a simple ranked bar (how many editions mention each).
+  3. Heating up / cooling down — which topics rose or faded lately, in plain words.
+  4. Topics that come up together — the topic pairs that appear side by side most.
+  5. How solid are the numbers — figures checked against a named source, plus the
+     figures repeated across the most editions.
 
-        DF(c)    = number of distinct editions independently stating claim c
-        N        = total number of editions analyzed
-        Score(c) = DF(c) / N
-
-     A claim is CORROBORATED when DF(c) >= 2 -- i.e. it was independently
-     restated by more than one day's research run, not just typed into a
-     list once. DF(c) == 1 is SINGLE-MENTION: real, but not yet corroborated
-     by a second independent edition. There is no hand-maintained allowlist
-     gating this -- the score is a plain frequency count over the corpus
-     that already lives in this repo. ai-radar/verified_facts.json is kept
-     only as an optional enrichment: if a corroborated cluster happens to
-     match an entry there, its source link is surfaced alongside the score.
-
-No LLM calls, no network calls, no generative summaries. Everything here is
-computed directly from tags.json / the edition markdown files already
-committed to this repo.
+Everything is counted directly from files already in this repo. No AI writes any
+of it, and there are no live data feeds — it is arithmetic over a hand-kept list.
 """
 
 import datetime as dt
@@ -37,7 +23,7 @@ import json
 import os
 import re
 import sys
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RADAR_DIR = os.path.join(REPO_ROOT, "ai-radar")
@@ -45,21 +31,8 @@ TAGS_PATH = os.path.join(RADAR_DIR, "tags.json")
 FACTS_PATH = os.path.join(RADAR_DIR, "verified_facts.json")
 OUT_DIR = os.path.join(RADAR_DIR, "trends")
 
-TAG_COLORS = [
-    "#7f77dd", "#1d9e75", "#d85a30", "#ef9f27", "#378add",
-    "#c3577a", "#5aa7a0", "#a08b5c", "#8f7fe0", "#4fa3d1",
-]
-
-NUMERIC_CLAIM_RE = re.compile(
-    r"[^.\n]{0,60}(?:\$?\d[\d,.]*\s?(?:%|percent|x|×|B|M|K|billion|million))[^.\n]{0,60}",
-    re.IGNORECASE,
-)
-NUMERIC_TOKEN_RE = re.compile(
-    r"[\$€]?\d[\d,.]*\s?(?:%|percent|x|×|B|M|K|billion|million)",
-    re.IGNORECASE,
-)
-KEYWORD_RE = re.compile(r"[a-zA-Z][a-zA-Z\-]{5,}")
-MIN_DF_FOR_CORROBORATION = 2
+BAR = "#7f77dd"           # single hue for magnitude (most-covered topics)
+RECENT_WINDOW = 12        # "lately" = the most recent N editions
 
 
 def load_json(path, default):
@@ -69,61 +42,61 @@ def load_json(path, default):
         return json.load(f)
 
 
-def iso_week(date_str):
-    d = dt.date.fromisoformat(date_str)
-    y, w, _ = d.isocalendar()
-    return f"{y}-W{w:02d}"
+def esc(s):
+    return html.escape(str(s), quote=True)
 
 
 # --------------------------------------------------------------------------- #
-# 1-2. Tag frequency + velocity                                               #
+# Counting                                                                     #
 # --------------------------------------------------------------------------- #
 
-def compute_tag_stats(editions):
-    all_tags = []
-    seen = set()
+def topic_totals(editions):
+    c = Counter()
     for e in editions:
-        for tag in e["tags"]:
-            if tag not in seen:
-                seen.add(tag)
-                all_tags.append(tag)
+        for t in set(e["tags"]):
+            c[t] += 1
+    return c
 
-    per_edition_counts = [
-        {"date": e["date"], "headline": e.get("headline", ""), "tags": e["tags"]}
-        for e in editions
-    ]
 
-    week_counts = defaultdict(lambda: defaultdict(int))
+def heating(editions):
+    """Compare each topic's rate in the most recent editions vs. the earlier ones."""
+    ordered = sorted(editions, key=lambda e: e["date"])
+    if len(ordered) < RECENT_WINDOW + 4:
+        return None
+    recent = ordered[-RECENT_WINDOW:]
+    earlier = ordered[:-RECENT_WINDOW]
+    rc, ec = Counter(), Counter()
+    for e in recent:
+        for t in set(e["tags"]):
+            rc[t] += 1
+    for e in earlier:
+        for t in set(e["tags"]):
+            ec[t] += 1
+    rows = []
+    for t in set(list(rc) + list(ec)):
+        r_rate = rc[t] / len(recent)
+        e_rate = ec[t] / len(earlier)
+        rows.append({
+            "tag": t, "recent": rc[t], "recent_n": len(recent),
+            "earlier": ec[t], "earlier_n": len(earlier),
+            "delta": r_rate - e_rate,
+        })
+    rows.sort(key=lambda x: x["delta"], reverse=True)
+    return rows
+
+
+def top_pairs(editions, k=6):
+    pair = Counter()
     for e in editions:
-        wk = iso_week(e["date"])
-        for tag in e["tags"]:
-            week_counts[tag][wk] += 1
-
-    velocity = {}
-    for tag, weeks in week_counts.items():
-        ordered_weeks = sorted(weeks.keys())
-        if len(ordered_weeks) < 2:
-            velocity[tag] = None
-            continue
-        prev, last = weeks[ordered_weeks[-2]], weeks[ordered_weeks[-1]]
-        velocity[tag] = None if prev == 0 else round((last - prev) / prev * 100, 1)
-
-    return all_tags, per_edition_counts, week_counts, velocity
-
-
-def compute_cooccurrence(editions, all_tags):
-    matrix = {a: {b: 0 for b in all_tags} for a in all_tags}
-    for e in editions:
-        tags = e["tags"]
+        tags = sorted(set(e["tags"]))
         for i, a in enumerate(tags):
             for b in tags[i + 1:]:
-                matrix[a][b] += 1
-                matrix[b][a] += 1
-    return matrix
+                pair[(a, b)] += 1
+    return [(a, b, n) for (a, b), n in pair.most_common(k) if n >= 2]
 
 
 # --------------------------------------------------------------------------- #
-# 3. Claim corroboration: DF(c) = distinct editions stating c; Score = DF/N   #
+# The numbers we quote: check each verified figure against the editions        #
 # --------------------------------------------------------------------------- #
 
 def load_edition_text(date):
@@ -134,279 +107,239 @@ def load_edition_text(date):
         return f.read()
 
 
-def normalize_token(tok: str) -> str:
-    return tok.strip().lower().replace(",", "").replace("×", "x").replace(" ", "")
+def verified_with_counts(editions, facts):
+    """For each hand-verified figure, count how many editions repeat it.
 
-
-def extract_claims(date, text):
-    claims = []
-    for m in NUMERIC_CLAIM_RE.finditer(text):
-        snippet = m.group(0).strip()
-        tok_match = NUMERIC_TOKEN_RE.search(snippet)
-        if not tok_match:
-            continue
-        keywords = {w.lower() for w in KEYWORD_RE.findall(snippet)}
-        claims.append({
-            "date": date,
-            "snippet": snippet,
-            "token": normalize_token(tok_match.group(0)),
-            "keywords": keywords,
-        })
-    return claims
-
-
-def cluster_claims(all_claims):
-    """Greedy clustering: same numeric token + >=1 shared context keyword."""
-    clusters = []
-    for claim in all_claims:
-        target = None
-        for cluster in clusters:
-            if claim["token"] == cluster["token"] and (claim["keywords"] & cluster["keywords"]):
-                target = cluster
-                break
-        if target is None:
-            clusters.append({
-                "token": claim["token"],
-                "keywords": set(claim["keywords"]),
-                "members": [claim],
-            })
-        else:
-            target["keywords"] |= claim["keywords"]
-            target["members"].append(claim)
-    return clusters
-
-
-def score_clusters(clusters, n_editions):
-    scored = []
-    for c in clusters:
-        dates = sorted({m["date"] for m in c["members"]})
-        df = len(dates)
-        representative = max(c["members"], key=lambda m: len(m["snippet"]))
-        scored.append({
-            "token": c["token"],
-            "snippet": representative["snippet"],
-            "dates": dates,
-            "df": df,
-            "n": n_editions,
-            "score": round(df / n_editions, 2) if n_editions else 0.0,
-            "status": "corroborated" if df >= MIN_DF_FOR_CORROBORATION else "single-mention",
-        })
-    scored.sort(key=lambda r: (-r["df"], r["token"]))
-    return scored
-
-
-def enrich_with_sources(scored, facts):
-    for r in scored:
-        r["source"] = None
-        for fact in facts:
-            if any(p.lower() in r["snippet"].lower() for p in fact.get("match_patterns", [])):
-                r["source"] = fact
-                break
-    return scored
-
-
-def compute_corroboration(editions, facts):
-    all_claims = []
-    for e in editions:
-        text = load_edition_text(e["date"])
-        if text:
-            all_claims.extend(extract_claims(e["date"], text))
-    clusters = cluster_claims(all_claims)
-    scored = score_clusters(clusters, len(editions))
-    return enrich_with_sources(scored, facts)
+    Plain-language corroboration: a figure matched to a named source AND repeated
+    across many editions is more trustworthy than one mentioned once. Matching is
+    a simple case-insensitive substring test against the fact's match_patterns.
+    """
+    texts = [load_edition_text(e["date"]).lower() for e in editions]
+    out = []
+    for f in facts:
+        pats = [p.lower() for p in f.get("match_patterns", [])]
+        n = sum(1 for t in texts if any(p in t for p in pats)) if pats else 0
+        out.append({"claim": f["claim"], "url": f["source_url"],
+                    "source": f["source_title"], "n": n})
+    out.sort(key=lambda x: -x["n"])
+    return out
 
 
 # --------------------------------------------------------------------------- #
-# 4. Render                                                                    #
+# Render                                                                       #
 # --------------------------------------------------------------------------- #
 
 CSS = """
   :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--ink:#e8edf3;
-    --muted:#9aa7b6;--soft:#c3ccd8;--accent:#7f77dd;--teal:#1d9e75;--max:860px;--radius:14px;}
+    --muted:#9aa7b6;--soft:#c3ccd8;--accent:#7f77dd;--teal:#1d9e75;--coral:#d85a30;--max:820px;--radius:14px}
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
-    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
-  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
-  h1{font-size:32px;line-height:1.15;margin:.35em 0 .15em}
-  .sub{color:var(--soft);max-width:70ch}
-  section{margin:42px 0}
-  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
-  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
-  .up{color:var(--teal);font-weight:700} .down{color:#d85a30;font-weight:700} .flat{color:var(--muted)}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
-  .legend span{display:inline-flex;align-items:center;gap:6px}
-  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
-  .matrix td, .matrix th{text-align:center;padding:6px}
-  .matrix .rowlabel{text-align:left;color:var(--soft)}
-  .cell0{background:transparent}
-  .status-corroborated{color:var(--teal);font-weight:600}
-  .status-single{color:#ef9f27;font-weight:600}
-  .eq{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--panel2);
-    border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:inline-block;margin:6px 0}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  nav.toc .here{color:#fff;font-weight:600}
+  header.top{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:24px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.12;margin:.3em 0 .12em}
+  .sub{color:var(--soft);max-width:66ch;font-size:17px}
+  section{margin:40px 0}
+  h2{font-size:19px;margin:0 0 6px}
+  .lead{color:var(--soft);font-size:15px;margin:0 0 14px;max-width:70ch}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:14px 0}
+  /* stat tiles */
+  .stat{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 6px}
+  .kpi{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .n{font-size:26px;font-weight:800;color:#fff;line-height:1.1}
+  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:4px}
+  /* ranked bars */
+  .bars{margin:6px 0}
+  .bar{display:grid;grid-template-columns:190px 1fr auto;align-items:center;gap:12px;padding:7px 0}
+  .bar .lab{color:var(--soft);font-size:14px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar .track{background:var(--panel2);border-radius:7px;height:20px;overflow:hidden}
+  .bar .fill{height:100%;background:var(--accent);border-radius:7px}
+  .bar .val{color:#fff;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right}
+  @media(max-width:560px){.bar{grid-template-columns:130px 1fr auto}.bar .lab{font-size:12.5px}}
+  /* heating up */
+  .move{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
+  .move:last-child{border-bottom:0}
+  .move .ar{font-weight:800;font-size:15px;width:1.4em;flex:none}
+  .move .up{color:var(--teal)} .move .dn{color:var(--coral)}
+  .move .t{color:#fff;font-weight:600;min-width:170px}
+  .move .d{color:var(--muted);font-size:14px}
+  /* pairs */
+  .pairs{display:flex;flex-direction:column;gap:0}
+  .pairrow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .pairrow:last-child{border-bottom:0}
+  .pairrow .p{color:#fff}
+  .pairrow .p b{color:var(--soft);font-weight:600}
+  .pairrow .c{color:var(--muted);font-size:14px;white-space:nowrap}
+  /* numbers */
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.06em}
+  .chk{color:var(--teal);font-weight:700;white-space:nowrap}
+  .seen{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
   .note{color:var(--muted);font-size:13px}
-  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  footer{border-top:1px solid var(--line);margin-top:44px;padding:24px 0 50px;color:var(--muted);font-size:13px}
 """
 
 
-def render_bar_chart(per_edition_counts, all_tags):
-    color_of = {tag: TAG_COLORS[i % len(TAG_COLORS)] for i, tag in enumerate(all_tags)}
-    n = len(per_edition_counts)
-    bar_w, gap, chart_h, top_pad = 70, 30, 220, 10
-    width = max(n * (bar_w + gap) + gap, 300)
-
-    bars = []
-    for i, e in enumerate(per_edition_counts):
-        x = gap + i * (bar_w + gap)
-        tags = e["tags"]
-        unit_h = (chart_h - top_pad) / max(len(tags), 1)
-        y = chart_h
-        for tag in tags:
-            y -= unit_h
-            bars.append(
-                f'<rect x="{x}" y="{y:.1f}" width="{bar_w}" height="{unit_h:.1f}" '
-                f'fill="{color_of[tag]}" stroke="#0d1117" stroke-width="1">'
-                f'<title>{html.escape(tag)} — {html.escape(e["date"])}</title></rect>'
-            )
-        bars.append(
-            f'<text x="{x + bar_w / 2}" y="{chart_h + 18}" text-anchor="middle" '
-            f'font-size="11" fill="#9aa7b6" font-family="sans-serif">{html.escape(e["date"][5:])}</text>'
-        )
-
-    legend = "".join(
-        f'<span><i class="dot" style="background:{color_of[tag]}"></i>{html.escape(tag)}</span>'
-        for tag in all_tags
-    )
-    return f"""<div class="card">
-<svg viewBox="0 0 {width} {chart_h + 30}" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Tag frequency per edition" style="max-width:100%;height:auto">
-{''.join(bars)}
-</svg>
-<div class="legend">{legend}</div>
-</div>"""
-
-
-def render_velocity_table(velocity):
+def render_bars(totals, n_editions):
+    if not totals:
+        return '<p class="note">No topics tracked yet.</p>'
+    top = totals.most_common()
+    mx = top[0][1]
     rows = []
-    for tag in sorted(velocity, key=lambda t: (velocity[t] is None, -(velocity[t] or 0))):
-        v = velocity[tag]
-        if v is None:
-            cell = '<span class="flat">— (only one week of data so far)</span>'
-        elif v > 0:
-            cell = f'<span class="up">▲ +{v}%</span>'
-        elif v < 0:
-            cell = f'<span class="down">▼ {v}%</span>'
-        else:
-            cell = '<span class="flat">flat</span>'
-        rows.append(f"<tr><td>{html.escape(tag)}</td><td>{cell}</td></tr>")
-    return f"""<table><tr><th>Tag</th><th>Week-over-week velocity</th></tr>{''.join(rows)}</table>"""
-
-
-def render_matrix(matrix, all_tags):
-    if len(all_tags) < 2:
-        return '<p class="note">Not enough distinct tags yet to compute co-occurrence.</p>'
-    max_v = max((matrix[a][b] for a in all_tags for b in all_tags if a != b), default=0)
-    header = "".join(f'<th>{html.escape(t)}</th>' for t in all_tags)
-    rows = []
-    for a in all_tags:
-        cells = []
-        for b in all_tags:
-            if a == b:
-                cells.append('<td class="cell0">·</td>')
-                continue
-            v = matrix[a][b]
-            if v == 0 or max_v == 0:
-                cells.append('<td class="cell0">0</td>')
-            else:
-                alpha = 0.15 + 0.65 * (v / max_v)
-                cells.append(f'<td style="background:rgba(127,119,221,{alpha:.2f})">{v}</td>')
-        rows.append(f'<tr><td class="rowlabel">{html.escape(a)}</td>{"".join(cells)}</tr>')
-    return f"""<div style="overflow-x:auto"><table class="matrix"><tr><th></th>{header}</tr>{''.join(rows)}</table></div>"""
-
-
-def render_corroboration(scored):
-    if not scored:
-        return '<p class="note">No edition markdown found to analyze yet.</p>'
-    rows = []
-    for r in scored:
-        if r["status"] == "corroborated":
-            status = '<span class="status-corroborated">CORROBORATED</span>'
-        else:
-            status = '<span class="status-single">SINGLE-MENTION</span>'
-        source = (
-            f'<a href="{html.escape(r["source"]["source_url"])}">{html.escape(r["source"]["source_title"])}</a>'
-            if r["source"] else '<span class="note">—</span>'
-        )
-        dates = ", ".join(r["dates"])
+    for tag, cnt in top:
+        pct = round(cnt / mx * 100)
+        share = round(cnt / n_editions * 100)
         rows.append(
-            f'<tr><td>{html.escape(r["snippet"])}</td><td>{r["df"]}/{r["n"]}</td>'
-            f'<td>{r["score"]}</td><td>{status}</td><td>{html.escape(dates)}</td><td>{source}</td></tr>'
+            f'<div class="bar"><div class="lab" title="{esc(tag)}">{esc(tag)}</div>'
+            f'<div class="track"><div class="fill" style="width:{pct}%"></div></div>'
+            f'<div class="val" title="in {cnt} of {n_editions} editions ({share}%)">{cnt}</div></div>'
+        )
+    return f'<div class="bars">{"".join(rows)}</div>'
+
+
+def render_heating(rows):
+    if not rows:
+        return '<p class="note">Not enough editions yet to compare recent vs. earlier coverage.</p>'
+    risers = [r for r in rows if r["delta"] > 0.001][:3]
+    coolers = [r for r in rows if r["delta"] < -0.001][-3:][::-1]
+    out = []
+    for r in risers:
+        out.append(
+            f'<div class="move"><span class="ar up">▲</span>'
+            f'<span class="t">{esc(r["tag"])}</span>'
+            f'<span class="d">in {r["recent"]} of the last {r["recent_n"]} editions '
+            f'(was {r["earlier"]} of the earlier {r["earlier_n"]})</span></div>'
+        )
+    for r in coolers:
+        out.append(
+            f'<div class="move"><span class="ar dn">▼</span>'
+            f'<span class="t">{esc(r["tag"])}</span>'
+            f'<span class="d">in {r["recent"]} of the last {r["recent_n"]} editions '
+            f'(was {r["earlier"]} of the earlier {r["earlier_n"]})</span></div>'
+        )
+    return "".join(out)
+
+
+def render_pairs(pairs):
+    if not pairs:
+        return '<p class="note">No repeated topic pairings yet.</p>'
+    rows = []
+    for a, b, n in pairs:
+        rows.append(
+            f'<div class="pairrow"><span class="p"><b>{esc(a)}</b> + <b>{esc(b)}</b></span>'
+            f'<span class="c">together in {n} editions</span></div>'
+        )
+    return f'<div class="pairs">{"".join(rows)}</div>'
+
+
+def render_numbers(rows):
+    if not rows:
+        return '<p class="note">No verified figures yet.</p>'
+    def label(nn):
+        return f'{nn} edition' + ("s" if nn != 1 else "")
+    trs = []
+    for r in rows:
+        seen = (f'<span class="chk">{label(r["n"])}</span>' if r["n"] >= 3
+                else (f'<span class="seen">{label(r["n"])}</span>' if r["n"] > 0
+                      else '<span class="note">—</span>'))
+        trs.append(
+            f'<tr><td>{esc(r["claim"])}</td>'
+            f'<td><a href="{esc(r["url"])}">{esc(r["source"])}</a></td>'
+            f'<td>{seen}</td></tr>'
         )
     return (
-        '<table><tr><th>Claim (extracted)</th><th>DF / N</th><th>Score</th>'
-        '<th>Status</th><th>Editions</th><th>Source</th></tr>{}</table>'
-    ).format("".join(rows))
+        '<table><tr><th>Figure we\'ve checked</th><th>Source</th><th>Repeated in</th></tr>'
+        + "".join(trs) + "</table>"
+    )
 
 
-def render_page(all_tags, per_edition_counts, velocity, matrix, scored_claims, n_editions, generated_at):
+def render_page(editions, totals, heat, pairs, numbers, generated_at):
+    n = len(editions)
+    dates = sorted(e["date"] for e in editions)
+    span = f"{dates[0]} to {dates[-1]}"
+    top_tag, top_cnt = totals.most_common(1)[0]
+    top_share = round(top_cnt / n * 100)
+    top_number = numbers[0]["claim"] if numbers and numbers[0]["n"] > 0 else None
+    summary = (
+        f"Across <strong>{n} editions</strong> ({esc(span)}), the topic that came up most was "
+        f"<strong>{esc(top_tag)}</strong> — in {top_cnt} of them ({top_share}%)."
+    )
+    if top_number:
+        summary += f" The figure repeated across the most editions: <strong>{esc(top_number)}</strong>."
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Tech Radar — Trends</title>
-<meta name="description" content="Deterministic trend analysis of the AI Tech Radar: tag frequency, week-over-week velocity, topic co-occurrence, and a fact spot-check. No LLM, no generative summaries.">
+<meta name="description" content="What the AI Tech Radar is tracking, in plain language: the topics that come up most, what's heating up or cooling down, which topics show up together, and how well-checked the numbers we quote are. Counted by hand from every edition — no AI, no live data feeds.">
 <style>{CSS}</style>
 </head>
 <body>
+<nav class="toc"><div class="wrap">
+  <a href="../index.html">← Feed</a>
+  <a href="../archive/index.html">Archive</a>
+  <a href="../wrap-ups/2026-07/index.html">July wrap-up</a>
+  <a class="here">Trends</a>
+  <a href="../feed.xml">RSS</a>
+</div></nav>
+
 <div class="wrap">
 <header class="top">
   <div class="kicker">📈 AI Tech Radar · Trends</div>
-  <h1>Trend Analysis</h1>
-  <p class="sub">Computed directly from <code>ai-radar/tags.json</code> and each edition's <code>ai-radar.md</code> —
-  no LLM calls, no generative summaries. Regenerated by <code>scripts/trend_analysis.py</code>
-  as part of the daily build.</p>
+  <h1>What the radar keeps talking about</h1>
+  <p class="sub">The themes that show up most across every edition, what's rising or fading, and how well-checked the numbers we quote are. It's all simple counting from a hand-kept list — no AI writes this page, and nothing here is a live data feed.</p>
 </header>
 
-<section id="frequency">
-<h2>Tag frequency per edition</h2>
-{render_bar_chart(per_edition_counts, all_tags)}
+<section id="bigpicture">
+<h2>The big picture</h2>
+<p class="lead">{summary}</p>
+<div class="stat">
+  <div class="kpi"><div class="n">{n}</div><div class="l">editions tracked</div></div>
+  <div class="kpi"><div class="n">{len(totals)}</div><div class="l">topics followed</div></div>
+  <div class="kpi"><div class="n">{esc(top_tag)}</div><div class="l">most-covered topic ({top_cnt}×)</div></div>
+</div>
 </section>
 
-<section id="velocity">
-<h2>Week-over-week velocity</h2>
-<p class="note">Velocity = (count this ISO week − count previous week the tag appeared) / previous week's count.</p>
-<div class="card">{render_velocity_table(velocity)}</div>
+<section id="topics">
+<h2>Most-covered topics</h2>
+<p class="lead">How many editions mention each topic. Longer bar = the radar returns to it more often.</p>
+<div class="card">{render_bars(totals, n)}</div>
 </section>
 
-<section id="cooccurrence">
-<h2>Topic co-occurrence</h2>
-<p class="note">How many editions mentioned both tags together. Darker = more frequent pairing.</p>
-<div class="card">{render_matrix(matrix, all_tags)}</div>
+<section id="heating">
+<h2>Heating up &amp; cooling down</h2>
+<p class="lead">Comparing the last {RECENT_WINDOW} editions with the ones before them — where the conversation is moving.</p>
+<div class="card">{render_heating(heat)}</div>
 </section>
 
-<section id="factcheck">
-<h2>Claim corroboration</h2>
-<p class="note">Numeric claims are extracted from every edition via regex and clustered when they
-share a numeric token (e.g. "88%") and at least one significant context word (e.g. "enterprises")
-<em>across different editions</em>. Each cluster c is scored statistically, no allowlist involved:</p>
-<div class="eq">DF(c) = editions independently stating c &nbsp;·&nbsp; N = {n_editions} editions analyzed &nbsp;·&nbsp; Score(c) = DF(c) / N</div>
-<p class="note">CORROBORATED means DF(c) ≥ {MIN_DF_FOR_CORROBORATION}: the claim was independently
-restated by more than one day's research run. SINGLE-MENTION (DF = 1) is not false — it just hasn't
-been corroborated by a second edition yet. The Source column is an optional enrichment from
-<code>ai-radar/verified_facts.json</code> when a corroborated claim happens to match an entry there;
-it is not what decides the status.</p>
-<div class="card">{render_corroboration(scored_claims)}</div>
+<section id="together">
+<h2>Topics that come up together</h2>
+<p class="lead">The pairs of themes that most often show up in the same edition — usually because they're really one story.</p>
+<div class="card">{render_pairs(pairs)}</div>
+</section>
+
+<section id="numbers">
+<h2>How solid are the numbers?</h2>
+<p class="lead">Every figure below was matched by hand to a real, published source. The last column shows how many editions repeat it — a number quoted across many days of independent research is more trustworthy than one mentioned once.</p>
+<div class="card">
+{render_numbers(numbers)}
+</div>
 </section>
 
 <footer>
-<p>Generated {html.escape(generated_at)} · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS</a></p>
+<p>Counted by hand from <a href="../tags.json">a simple list of each edition's topics</a> and each edition's brief — no AI writing this page, no live data feeds. Last updated {esc(generated_at)}.</p>
+<p><a href="../index.html">← Full feed</a> · <a href="../archive/index.html">Archive</a> · <a href="../wrap-ups/2026-07/index.html">July wrap-up</a> · <a href="../feed.xml">RSS</a></p>
 </footer>
 </div>
 </body>
@@ -418,25 +351,25 @@ def main():
     editions = load_json(TAGS_PATH, {"editions": []})["editions"]
     editions = sorted(editions, key=lambda e: e["date"])
     facts = load_json(FACTS_PATH, {"facts": []})["facts"]
-
     if not editions:
         print("No editions in tags.json yet; nothing to analyze.")
         return
 
-    all_tags, per_edition_counts, week_counts, velocity = compute_tag_stats(editions)
-    matrix = compute_cooccurrence(editions, all_tags)
-    scored_claims = compute_corroboration(editions, facts)
+    totals = topic_totals(editions)
+    heat = heating(editions)
+    pairs = top_pairs(editions)
+    numbers = verified_with_counts(editions, facts)
 
     os.makedirs(OUT_DIR, exist_ok=True)
-    generated_at = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    page = render_page(all_tags, per_edition_counts, velocity, matrix, scored_claims, len(editions), generated_at)
+    generated_at = dt.datetime.utcnow().strftime("%Y-%m-%d")
+    page = render_page(editions, totals, heat, pairs, numbers, generated_at)
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(page)
 
-    corroborated = sum(1 for r in scored_claims if r["status"] == "corroborated")
+    repeated = sum(1 for x in numbers if x["n"] > 0)
     print(f"Wrote {os.path.join(OUT_DIR, 'index.html')} "
-          f"({len(editions)} editions, {len(all_tags)} tags, "
-          f"{len(scored_claims)} claim clusters, {corroborated} corroborated).")
+          f"({len(editions)} editions, {len(totals)} topics, "
+          f"{len(pairs)} pairs, {len(numbers)} verified figures, {repeated} repeated).")
 
 
 if __name__ == "__main__":
