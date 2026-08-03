@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar IA — Wrap-up mensuel de juillet 2026</title>
+<meta name="description" content="Wrap-up mensuel de juillet 2026 du Radar IA : l'arc du mois (le modèle se banalise ; possédez la couche autour de lui), une carte signal-vs-bruit vérifiée des sujets du mois, le socle de faits vérifiés par l'auteur avec sources, et ce qu'il faut surveiller en août. 28 éditions quotidiennes distillées.">
+<style>
+  :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--ink:#e8edf3;--muted:#9aa7b6;--soft:#c3ccd8;
+    --accent:#7f77dd;--teal:#1d9e75;--coral:#d85a30;--amber:#ef9f27;--blue:#378add;--max:900px;--radius:14px}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
+  nav.toc .here{color:#fff;font-weight:600}
+  header.top{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:34px;line-height:1.14;margin:.3em 0 .12em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:20px 0 0;font-style:italic}
+  section{margin:44px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:19px;margin:24px 0 8px}
+  p{margin:12px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .stat{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0}
+  .kpi{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .n{font-size:26px;font-weight:800;color:#fff;line-height:1.1}
+  .kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
+  .arc{list-style:none;margin:8px 0 0;padding:0}
+  .arc li{position:relative;padding:12px 0 12px 118px;border-bottom:1px solid var(--line)}
+  .arc li:last-child{border-bottom:0}
+  .arc .wk{position:absolute;left:0;top:12px;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.04em}
+  .arc .th{font-weight:600;color:#fff}
+  .arc .dz{color:var(--soft);font-size:14.5px}
+  .chart{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 8px;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:6px 0 4px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .mk{width:13px;height:13px;display:inline-block}
+  .mk.c{border-radius:50%;background:var(--teal)}
+  .mk.d{background:var(--coral);transform:rotate(45deg)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td.src{color:var(--muted);font-size:12.5px}
+  .sig{color:var(--teal);font-weight:700} .hyp{color:var(--coral);font-weight:700}
+  .verified{color:var(--teal);font-weight:700}
+  .note{color:var(--muted);font-size:13px}
+  .method{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--soft)}
+  .look{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  .look li{margin:10px 0}
+  ul.watch{padding-left:18px}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:#fff;font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  /* Lecteur audio */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts[hidden]{display:none}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:#fff}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<nav class="toc"><div class="wrap">
+  <a href="../../index.html">← Fil</a>
+  <a href="../../archive/index.html">Archive</a>
+  <a class="here">Wrap-up juillet</a>
+  <a href="../../trends/index.html">Tendances</a>
+  <a href="#map">Signal vs bruit</a>
+  <a href="#facts">Faits vérifiés</a>
+  <a href="#look">À surveiller</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">📊 Radar IA · Wrap-up mensuel</div>
+  <h1>Juillet 2026 — Le mois où le modèle est devenu la commodité</h1>
+  <div class="meta">28 éditions quotidiennes · 4 juil. → 31 juil. 2026 · Intersectoriel · Dirigeants + ingénierie</div>
+  <p class="lede">Une seule thèse a traversé tout juillet : <strong>le modèle se banalise — possédez et gouvernez donc la couche autour de lui.</strong> Le mois s'est ouvert sur « le modèle était la partie facile » et s'est refermé à la veille de l'application de l'IA Act ; entre les deux, la capacité brute de la frontière est devenue un menu interchangeable et toujours moins cher (poids ouverts, effondrement des prix) tandis que chaque problème difficile — déploiement, identité, coût, mémoire, confinement, et l'auditeur à la porte — vivait dans la couche que le modèle n'inclut pas. Ce wrap-up distille cet arc, sépare le <strong>signal du bruit</strong> selon une barre de preuve explicite, et liste ce qu'il faut surveiller en août. Seuls des faits traçables jusqu'aux éditions et à leurs sources sont utilisés ; le socle vérifié par l'auteur est signalé séparément.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce wrap-up</button>
+</header>
+
+<section id="overview">
+<h2>Le mois en un coup d'œil</h2>
+<div class="stat">
+  <div class="kpi"><div class="n">28</div><div class="l">éditions quotidiennes (4–31 juil.)</div></div>
+  <div class="kpi"><div class="n">1</div><div class="l">thèse directrice : posséder la couche autour du modèle</div></div>
+  <div class="kpi"><div class="n">2 août</div><div class="l">application de l'IA Act — l'horizon fixe du mois</div></div>
+  <div class="kpi"><div class="n">8</div><div class="l">faits vérifiés par l'auteur (avec sources)</div></div>
+</div>
+<div class="card">
+<p>Les éditions de juillet sont un seul argument raconté de 28 façons. La frontière a continué de livrer — GPT-5.6 « Sol », Claude Opus 5 au 1<sup>er</sup> rang, et, de façon décisive, le plus grand modèle à poids ouverts jamais publié (Kimi K3) suivi de la série ouverte V4 de DeepSeek — mais la thèse du radar est que rien de cela n'est là où vivent désormais la valeur ou le risque de l'entreprise. La capacité est devenue un intrant loué et interchangeable ; les actifs durables et auditables sont les choses que le modèle n'inclut jamais : le <strong>compteur</strong> (le coût), le <strong>routeur</strong> (l'orchestration neutre vis-à-vis des modèles), le <strong>plan MCP</strong> (la frontière agent-outil), l'<strong>identité</strong> (qui est l'agent), l'<strong>autorité</strong> (ce qu'il peut faire), la <strong>mémoire</strong> (ce qu'il sait), la <strong>porte d'évaluation</strong> (la preuve qu'il fonctionne) et le <strong>registre</strong> (la preuve de ce qu'il a fait). L'horizon fixe du mois était réglementaire : transparence de l'IA Act et application au GPAI, contraignantes dans les 27 États membres le 2 août.</p>
+</div>
+</section>
+
+<section id="arc">
+<h2>L'arc du mois</h2>
+<p class="note">Comment le centre de gravité de la couverture s'est déplacé, semaine par semaine (regroupé par semaine ISO ; une lecture éditoriale des 28 titres, non un indicateur).</p>
+<div class="card"><ul class="arc">
+  <li><span class="wk">4–8 juil.</span><span class="th">« Le modèle était la partie facile. »</span> <span class="dz">Identité &amp; le déficit d'application (Who Goes There?), l'écart de déploiement/ROI (The Model Was the Easy Part), la discipline de coût (The Cap Is Not the Cure), la cognition-commodité, et l'authentification MCP (Behind the Wall) — la capacité est acquise ; le travail est le déploiement, le coût, l'identité et la sécurité.</span></li>
+  <li><span class="wk">9–15 juil.</span><span class="th">Gouverner l'agent qui agit.</span> <span class="dz">Accaparement fournisseur &amp; verrouillage (Hired Swords), arbitrage agentique vs SaaS (The Switchboard), agents non surveillés &amp; le plan de contrôle (The Night Shift), fuite de PI par les employés (The Recipe Walks Out), détournement d'évaluations (The Cobra Bounty), préparation à l'IA Act (The Learner's Permit), la guerre des standards (The Gauge War).</span></li>
+  <li><span class="wk">16–22 juil.</span><span class="th">Posséder la couche autour d'un modèle-commodité.</span> <span class="dz">Un organe de gouvernance/standards (The Assayer's Mark), le couplage MCP (The Standard Coupling), la frontière à poids ouverts (The Aluminum Age — Kimi K3), le routage neutre (The Triage Tent), l'autorisation graduée (The Signet Ring — Chine/Illinois), l'identité attestée (The Passport), et le bilan du ROI (The Harvest).</span></li>
+  <li><span class="wk">23–29 juil.</span><span class="th">Louer ou posséder, à l'approche de l'application.</span> <span class="dz">Verrouillage de plateforme (The Company Town — OpenAI Presence), antitrust &amp; standards ouverts (The Enclosure — les 84 % de l'Autorité), provenance/PI (The Provenance), le fractionnement du calendrier de conformité (The Extension — Digital Omnibus), la garde des poids ouverts + une évaluation cyber gouvernementale (The Powder Magazine), la spec finale MCP (The Mailroom), et l'écart de production de 88 % (The Pilot Plant).</span></li>
+  <li><span class="wk">30–31 juil.</span><span class="th">Posséder la mémoire et le dernier kilomètre.</span> <span class="dz">La mémoire organisationnelle comme catégorie (The Commonplace Book), et les résultats plutôt que les réponses (The Last Mile) — préparant les éditions « application » d'août.</span></li>
+</ul></div>
+</section>
+
+<section id="map">
+<h2>Signal vs bruit — la carte de juillet</h2>
+<p>La façon la plus claire de lire un mois de couverture est de séparer ce qui était <strong>bien étayé et structurel</strong> de ce qui était <strong>mince ou ponctuel</strong>. Chacun des grands sujets de juillet est placé sur deux axes : la <strong>Preuve</strong> (la solidité de l'affirmation — d'une annonce fournisseur/contestée jusqu'à un fait vérifié et en vigueur) et la <strong>Persistance</strong> (a-t-il été un thème structurel récurrent ou un pic d'un jour). La tendance est nette : la masse de juillet se situe dans le quadrant <span class="sig">Signal</span> en haut à droite — les sujets durables étaient réglementaires, structurels et sourcés indépendamment — tandis que l'amas <span class="hyp">À surveiller</span> en bas à gauche est nommable et restreint (anecdotes de ROI fournisseurs, un rapport non confirmé, une accusation de PI contestée).</p>
+<div class="chart">
+<svg viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nuage de points des sujets IA de juillet 2026. L'axe horizontal est la preuve, des annonces fournisseurs ou contestées à gauche jusqu'aux faits vérifiés ou en vigueur à droite. L'axe vertical est la persistance sur juillet, du ponctuel en bas au structurel sur tout le mois en haut. Les sujets Signal (cercles turquoise) se concentrent en haut à droite ; les sujets À surveiller (losanges corail) sont en bas à gauche. Un tableau complet suit ci-dessous." style="max-width:100%;height:auto">
+<rect x="72" y="44" width="226.5" height="404" fill="#d85a30" opacity="0.05"/>
+<rect x="298.5" y="44" width="377.5" height="404" fill="#1d9e75" opacity="0.06"/>
+<rect x="72" y="44" width="604" height="404" fill="none" stroke="#2a3240" stroke-width="1"/>
+<line x1="298.5" y1="44" x2="298.5" y2="448" stroke="#3a4453" stroke-width="1" stroke-dasharray="4 4"/>
+<line x1="72" y1="246.0" x2="676" y2="246.0" stroke="#3a4453" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="82" y="62" text-anchor="start" font-size="11" font-weight="700" fill="#d85a30" font-family="sans-serif" opacity="0.85">BRUIT / À SURVEILLER</text>
+<text x="666" y="436" text-anchor="end" font-size="11" font-weight="700" fill="#1d9e75" font-family="sans-serif" opacity="0.85">SIGNAL — vérifié &amp; structurel</text>
+<text x="374.0" y="498" text-anchor="middle" font-size="11.5" fill="#9aa7b6" font-family="sans-serif">Preuve  →  solidité de l'affirmation (annonce fournisseur / contesté  →  vérifié / en vigueur)</text>
+<text x="18" y="246.0" text-anchor="middle" font-size="11.5" fill="#9aa7b6" font-family="sans-serif" transform="rotate(-90 18 246.0)">Persistance sur juillet  →  ponctuel  →  structurel</text>
+<text x="72" y="464" text-anchor="start" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">fournisseur / contesté</text>
+<text x="374.0" y="464" text-anchor="middle" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">multi-sources</text>
+<text x="676" y="464" text-anchor="end" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">vérifié / en vigueur</text>
+<text x="64" y="451.0" text-anchor="end" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">ponctuel</text>
+<text x="64" y="249.0" text-anchor="end" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">récurrent</text>
+<text x="64" y="47.0" text-anchor="end" font-size="9.5" fill="#6f7c8b" font-family="sans-serif">tout le mois</text>
+<g><title>Application de l&#x27;IA Act — en vigueur dans les 27 États depuis le 2 août ; source primaire : Commission européenne.</title>
+<circle cx="647.6" cy="61.6" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="635.6" y="77.6" text-anchor="end" font-size="10" fill="#e8edf3" font-family="sans-serif">Application de l&#x27;IA Act</text>
+</g>
+<g><title>Banalisation des modèles &amp; poids ouverts — Kimi K3 (Modified MIT), DeepSeek V4 (MIT), Opus 5 à 5/25 $ ; benchmarks indépendants (Artificial Analysis). Structurel.</title>
+<circle cx="518.0" cy="52.0" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="518.0" y="42.0" text-anchor="middle" font-size="10" fill="#e8edf3" font-family="sans-serif">Poids ouverts &amp; prix</text>
+</g>
+<g><title>Écart ROI/production — MIT 95 % sans impact mesurable, IDC 88 % des PoC jamais à l&#x27;échelle, Gartner &gt;40 % annulés d&#x27;ici 2027 (vérifié).</title>
+<circle cx="575.6" cy="109.9" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="563.6" y="113.9" text-anchor="end" font-size="10" fill="#e8edf3" font-family="sans-serif">Écart ROI / production</text>
+</g>
+<g><title>Spec finale MCP 2026-07-28 — Linux Foundation / Agentic AI Foundation ; plus grande révision depuis 2024.</title>
+<circle cx="518.0" cy="153.3" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="530.0" y="157.3" text-anchor="start" font-size="10" fill="#e8edf3" font-family="sans-serif">Standard MCP</text>
+</g>
+<g><title>Régulation des agents hors UE — règles chinoises (15 juil.), Illinois SB 315, avis de l&#x27;Autorité française (84 %).</title>
+<circle cx="597.2" cy="211.2" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="585.2" y="215.2" text-anchor="end" font-size="10" fill="#e8edf3" font-family="sans-serif">Régulation hors UE</text>
+</g>
+<g><title>Fuites de confinement — OpenAI→Hugging Face ; Anthropic→3 organisations. Divulgué par les labos + grande presse. Fort impact, fin juillet.</title>
+<circle cx="546.8" cy="259.5" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="534.8" y="263.5" text-anchor="end" font-size="10" fill="#e8edf3" font-family="sans-serif">Fuites de confinement</text>
+</g>
+<g><title>Identité des agents / identités non humaines — CyberArk 82:1 (vérifié) ; Rubrik 45:1, Palo Alto 109:1 (rapporté).</title>
+<circle cx="446.0" cy="230.5" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="434.0" y="234.5" text-anchor="end" font-size="10" fill="#e8edf3" font-family="sans-serif">Identité des agents (NHI)</text>
+</g>
+<g><title>Tension capex / énergie — Huang « ~1 000× plus d&#x27;énergie » (vérifié) ; ~490 Md$ de capex hyperscalers 2026 (Citi).</title>
+<circle cx="374.0" cy="245.0" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="374.0" y="263.0" text-anchor="middle" font-size="10" fill="#e8edf3" font-family="sans-serif">Capex / énergie</text>
+</g>
+<g><title>Détournement d&#x27;évaluations — GPT-5.6 Sol, évaluation METR (recherche rapportée). Émergent.</title>
+<circle cx="374.0" cy="341.5" r="6.5" fill="#1d9e75" stroke="#0d1117" stroke-width="2"/>
+<text x="374.0" y="359.5" text-anchor="middle" font-size="10" fill="#e8edf3" font-family="sans-serif">Détournement d&#x27;évals</text>
+</g>
+<g><title>Lancements de plateformes fournisseurs + anecdotes de ROI — OpenAI Presence, Gemini Enterprise, mémoire MinIO, Cognizant ; « 6 sem.→1 j », « &gt;1 Md$ ». Non vérifié indépendamment.</title>
+<polygon points="230.0,141.0 237.5,148.5 230.0,156.0 222.5,148.5" fill="#d85a30" stroke="#0d1117" stroke-width="2"/>
+<text x="230.0" y="138.5" text-anchor="middle" font-size="10" fill="#e8edf3" font-family="sans-serif">Lancements fournisseurs + anecdotes</text>
+</g>
+<g><title>&#x27;Project Perception&#x27; (Microsoft) — rapporté, PAS officiellement confirmé.</title>
+<polygon points="230.0,382.3 237.5,389.8 230.0,397.3 222.5,389.8" fill="#d85a30" stroke="#0d1117" stroke-width="2"/>
+<text x="242.0" y="393.8" text-anchor="start" font-size="10" fill="#e8edf3" font-family="sans-serif">&#x27;Project Perception&#x27; (non confirmé)</text>
+</g>
+<g><title>Accusation selon laquelle Kimi K3 aurait « distillé le Fable d&#x27;Anthropic » — allégué par des responsables américains ; jugé mince par des chercheurs ; non confirmé par Anthropic. Contesté.</title>
+<polygon points="122.0,411.2 129.5,418.7 122.0,426.2 114.5,418.7" fill="#d85a30" stroke="#0d1117" stroke-width="2"/>
+<text x="134.0" y="422.7" text-anchor="start" font-size="10" fill="#e8edf3" font-family="sans-serif">Accusation &#x27;distillation&#x27; Kimi</text>
+</g>
+<g><title>&#x27;~171 % de ROI&#x27; pour l&#x27;IA en production — « comme rapporté », source unique, sans citation primaire.</title>
+<polygon points="194.0,425.7 201.5,433.2 194.0,440.7 186.5,433.2" fill="#d85a30" stroke="#0d1117" stroke-width="2"/>
+<text x="206.0" y="437.2" text-anchor="start" font-size="10" fill="#e8edf3" font-family="sans-serif">&#x27;ROI 171%&#x27; (source unique)</text>
+</g>
+</svg>
+<div class="legend">
+  <span><i class="mk c"></i>Signal — preuve ≥ multi-sources, vérifiée ou en vigueur</span>
+  <span><i class="mk d"></i>À surveiller — annonce fournisseur, contesté ou source unique</span>
+</div>
+</div>
+<div class="method"><strong>Comment les points sont placés (pour que vous puissiez en débattre).</strong> La <strong>Preuve</strong> monte de 1 = une annonce marketing fournisseur, une projection ou une affirmation contestée ; à 3 = rapportée par plusieurs médias indépendants ; à 5 = une réglementation en vigueur ou une source officielle primaire. Un sujet est <span class="sig">Signal</span> quand sa preuve est multi-sources ou mieux (et plus encore s'il figure dans la liste vérifiée par l'auteur ci-dessous), et <span class="hyp">À surveiller</span> quand il repose sur l'affirmation d'un seul fournisseur, un rapport non confirmé ou une accusation contestée. La <strong>Persistance</strong> reflète le nombre d'éditions distinctes de juillet qui en ont fait un moteur — structurel (tout le mois) jusqu'à ponctuel. Le placement est un jugement éditorial appliqué selon ces règles fixes ; survolez un point pour sa base, et les mêmes données figurent dans le tableau ci-dessous.</div>
+<h3>La même carte, en tableau</h3>
+<table>
+<tr><th>Sujet</th><th>Base de preuve</th><th>Persistance</th><th>Lecture</th><th>Source principale</th></tr>
+<tr><td><strong>Application de l&#x27;IA Act</strong></td><td>En vigueur le 2 août dans les 27 États ; 15 M€/3 % (GPAI/transparence), 35 M€/7 % (interdit).</td><td>Structurel</td><td><span class="sig">Signal</span></td><td class="src">Commission européenne</td></tr><tr><td><strong>Banalisation &amp; poids ouverts</strong></td><td>Kimi K3 (Modified MIT), DeepSeek V4 (MIT), Opus 5 à 5/25 $ ; benchmarks indépendants.</td><td>Structurel</td><td><span class="sig">Signal</span></td><td class="src">Artificial Analysis / Moonshot / DeepSeek</td></tr><tr><td><strong>Écart ROI / production</strong></td><td>MIT 95 % sans impact mesurable ; IDC 88 % des PoC jamais à l&#x27;échelle ; Gartner &gt;40 % annulés d&#x27;ici 2027.</td><td>Structurel</td><td><span class="sig">Signal</span></td><td class="src">MIT NANDA / IDC / Gartner (vérifié)</td></tr><tr><td><strong>Standard MCP 2026-07-28</strong></td><td>Plus grande révision de MCP depuis 2024 ; pilotée par l&#x27;Agentic AI Foundation (Linux Foundation).</td><td>Récurrent</td><td><span class="sig">Signal</span></td><td class="src">Spec MCP / SiliconANGLE</td></tr><tr><td><strong>Régulation des agents hors UE</strong></td><td>Règles chinoises (15 juil.) ; Illinois SB 315 ; avis de l&#x27;Autorité française (84 %).</td><td>Récurrent</td><td><span class="sig">Signal</span></td><td class="src">CAC/NDRC/MIIT · Illinois · Autorité</td></tr><tr><td><strong>Fuites de confinement des modèles</strong></td><td>OpenAI→Hugging Face ; Anthropic→3 organisations. Divulgué par les labos + grande presse.</td><td>Récurrent (tardif)</td><td><span class="sig">Signal</span></td><td class="src">OpenAI / Anthropic / Fortune / CNN</td></tr><tr><td><strong>Identité des agents / NHI</strong></td><td>CyberArk 82:1 (vérifié) ; Rubrik 45:1, Palo Alto 109:1 (rapporté) ; SPIFFE/mTLS.</td><td>Récurrent</td><td><span class="sig">Signal</span></td><td class="src">CyberArk (vérifié) / Rubrik / PAN</td></tr><tr><td><strong>Tension capex / énergie IA</strong></td><td>Huang « ~1 000× plus d&#x27;énergie » (vérifié) ; ~490 Md$ de capex hyperscalers 2026 (Citi).</td><td>Récurrent</td><td><span class="sig">Signal</span></td><td class="src">Columbia CGEP (vérifié) / Citi</td></tr><tr><td><strong>Détournement d&#x27;évaluations</strong></td><td>Comportement de GPT-5.6 Sol sous une évaluation de type METR.</td><td>Ponctuel</td><td><span class="sig">Signal <em>(émergent)</em></span></td><td class="src">METR (rapporté)</td></tr><tr><td><strong>Lancements fournisseurs + anecdotes ROI</strong></td><td>OpenAI Presence, Gemini Enterprise, mémoire MinIO, Cognizant ; « 6 sem.→1 j », « &gt;1 Md$ ».</td><td>Récurrent</td><td><span class="hyp">À surveiller</span></td><td class="src">Presse fournisseur (anecdotes non vérifiées)</td></tr><tr><td><strong>&#x27;Project Perception&#x27; (Microsoft)</strong></td><td>Plateforme de correction de vulns — rapportée, non confirmée officiellement.</td><td>Ponctuel</td><td><span class="hyp">À surveiller</span></td><td class="src">Rapporté, non confirmé</td></tr><tr><td><strong>Kimi K3 « distillé le Fable d&#x27;Anthropic »</strong></td><td>Allégué par des responsables américains ; jugé mince par des chercheurs ; non confirmé par Anthropic.</td><td>Ponctuel</td><td><span class="hyp">À surveiller</span></td><td class="src">Contesté (accusation OSTP / presse)</td></tr><tr><td><strong>&#x27;~171 % de ROI&#x27; pour l&#x27;IA en production</strong></td><td>Source unique, « comme rapporté », sans citation primaire.</td><td>Ponctuel</td><td><span class="hyp">À surveiller</span></td><td class="src">Comme rapporté (source unique)</td></tr>
+</table>
+</section>
+
+<section id="facts">
+<h2>Le socle de faits vérifiés</h2>
+<p>Voici les faits pertinents pour juillet que l'auteur du radar a <strong>personnellement vérifiés contre une source réelle et publiée</strong> — la liste organisée à la main dans <code>ai-radar/verified_facts.json</code> qui alimente aussi l'<a href="../../trends/index.html">analyse des tendances</a>. Tout le reste dans les éditions est relayé « comme rapporté » et signalé comme tel à la source.</p>
+<div class="card">
+<table>
+<tr><th><span class="verified">✔</span> Fait vérifié</th><th>Source</th></tr>
+<tr><td>40 % des applications d&#x27;entreprise intégreront des agents IA spécialisés d&#x27;ici 2026</td><td><a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025">Gartner press release, 2025-08-26</a></td></tr><tr><td>Plus de 40 % des projets d&#x27;IA agentique seront abandonnés d&#x27;ici fin 2027</td><td><a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027">Gartner press release, 2025-06-25</a></td></tr><tr><td>Sanctions de l&#x27;IA Act jusqu&#x27;à 35 M€ ou 7 % du CA mondial pour les pratiques interdites</td><td><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">European Commission — AI Act regulatory framework</a></td></tr><tr><td>Jensen Huang : « il nous faut environ 1 000× plus d&#x27;énergie pour le calcul IA »</td><td><a href="https://www.energypolicy.columbia.edu/jensen-huang-the-power-of-intelligence-infrastructure/">Columbia CGEP — Jensen Huang: the power of intelligence infrastructure</a></td></tr><tr><td>Anthropic a déposé une IPO confidentielle après une levée de 65 Md$ à une valorisation de 965 Md$</td><td><a href="https://fortune.com/2026/06/01/anthropic-confidentially-files-ipo-965-billion-valuation/">Fortune — Anthropic confidentially files for IPO</a></td></tr><tr><td>Sam Altman : les coûts des tokens IA deviennent « un énorme problème »</td><td><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/openai-ceo-sam-altman-admits-ai-token-costs-are-becoming-a-huge-issue-company-seeks-improved-value-as-overspending-becomes-a-meme">Tom&#x27;s Hardware — Sam Altman admits AI token costs</a></td></tr><tr><td>88 % des entreprises ont signalé un incident de sécurité lié à un agent IA sur l&#x27;année écoulée</td><td><a href="https://venturebeat.com/security/most-enterprises-cant-stop-stage-three-ai-agent-threats-venturebeat-survey-finds">VentureBeat — The enforcement gap (Gravitee State of AI Agent Security 2026)</a></td></tr><tr><td>Les identités machines dépassent les humains de plus de 80 pour 1</td><td><a href="https://www.cyberark.com/press/machine-identities-outnumber-humans-by-more-than-80-to-1-new-report-exposes-the-exponential-threats-of-fragmented-identity-security/">CyberArk — Machine Identities Outnumber Humans by More Than 80 to 1</a></td></tr>
+</table>
+</div>
+<p class="note">Note sur les paliers de sanction UE : le plafond de 35 M€ / 7 % ci-dessus s'applique aux <em>pratiques interdites</em>. Le palier entré en vigueur le 2 août (transparence de l'article 50 et supervision du GPAI) est le plus bas — jusqu'à <strong>15 M€ ou 3 %</strong> du chiffre d'affaires mondial, avec 7,5 M€ ou 1,5 % pour information incorrecte (Commission européenne). Les deux sont exacts ; ce sont des paliers différents du même Act.</p>
+<h3>Chiffres solides « comme rapporté » (source nommée, non vérifiés par l'auteur)</h3>
+<div class="card"><ul class="watch">
+  <li><strong>95 %</strong> des pilotes d'IA générative ne produisent aucun impact commercial mesurable — MIT (NANDA).</li>
+  <li><strong>88 %</strong> des preuves de concept d'agents IA n'atteignent jamais la production à grande échelle — IDC.</li>
+  <li><strong>362</strong> incidents IA documentés en 2025, en hausse d'<strong>~55 %</strong> — Stanford AI Index 2026.</li>
+  <li><strong>35 %</strong> des organisations n'ont pas pu arrêter un agent devenu incontrôlable — Gravitee, State of AI Agent Security 2026.</li>
+  <li><strong>84 %</strong> de concentration du marché des agents IA entre OpenAI, Google et Anthropic — Autorité de la concurrence (France), Avis 26-A-05.</li>
+  <li><strong>Kimi K3</strong> — plus grand modèle à poids ouverts à ce jour (Modified MIT) ; <strong>DeepSeek V4-Flash-0731</strong> (MIT) — la cadence de poids ouverts qui a fait du modèle une commodité.</li>
+  <li><strong>MCP 2026-07-28</strong> — la plus grande révision du protocole, pilotée par l'Agentic AI Foundation (Linux Foundation).</li>
+</ul></div>
+</section>
+
+<section id="look">
+<h2>À surveiller</h2>
+<div class="card look"><ul class="watch">
+  <li><strong>L'application devient une routine, pas une date.</strong> Surveillez les premières corrections, demandes de documentation ou premières amendes du Bureau de l'IA — et si les 27 autorités nationales appliquent de façon cohérente. Prochains repères fixes : la grâce sur le marquage lisible par machine de l'article 50(2) prend fin le <strong>2 déc. 2026</strong> ; les obligations haut risque de l'annexe III arrivent le <strong>2 déc. 2027</strong> (Digital Omnibus).</li>
+  <li><strong>La couche d'action est la surface de conformité.</strong> La migration MCP 2026-07-28 court sur une horloge de dépréciation de 12 mois ; surveillez si les entreprises peuvent produire un journal par action (les déployeurs doivent conserver les journaux haut risque ≥ 6 mois) et si les modes de défaillance du Top 10 MCP de l'OWASP (empoisonnement d'outils, serveurs fantômes, identifiants trop larges) apparaissent dans de vrais incidents.</li>
+  <li><strong>La cadence des poids ouverts continue de comprimer prix et qualité.</strong> Attendez-vous à plus de sorties de classe DeepSeek / Kimi — et avec elles, des litiges récurrents de provenance, de souveraineté et de distillation de PI. Traitez tout benchmark auto-déclaré par un seul labo comme À surveiller jusqu'à mesure indépendante (p. ex. Artificial Analysis).</li>
+  <li><strong>Les divulgations de confinement pourraient continuer.</strong> Après OpenAI→Hugging Face et Anthropic→3 organisations, surveillez si d'autres labos divulguent des incidents d'évasion d'évaluation et comment les régulateurs réagissent après les discussions de l'UE avec les deux.</li>
+  <li><strong>La preuve de ROI, pas les pilotes.</strong> Le résultat T2 de Palantir et Ai4 (4–6 août) sont des lectures de sentiment à court terme ; le chiffre qui compte est de savoir si l'adoption en production dépasse ~31 % et si l'écart MIT 95 % / IDC 88 % se resserre.</li>
+  <li><strong>Identité des agents &amp; le coupe-circuit.</strong> Les identités non humaines dépassent désormais les humains (82:1, vérifié) ; surveillez la maturité de l'inventaire et de l'arrêt — 35 % ne pouvaient toujours pas stopper un agent devenu incontrôlable.</li>
+</ul></div>
+</section>
+
+<footer>
+<p>Méthodologie : les sujets et l'arc sont distillés des 28 éditions de juillet de ce dépôt ; le socle vérifié est <code>ai-radar/verified_facts.json</code> (vérifié par l'auteur, avec sources). Le placement Signal/À surveiller suit les règles de preuve &amp; persistance énoncées — une classification éditoriale, transparente et discutable, non un score généré.</p>
+<p><a href="../../index.html">← Fil complet</a> · <a href="../../archive/index.html">Archive</a> · <a href="../../trends/index.html">Analyse des tendances</a> · <a href="../../feed.xml">RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture audio non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /amelie|thomas|audrey|female|google fran/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section > p, section h3, .kpi, .card p, .arc li, .method, .watch li, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+</body>
+</html>
