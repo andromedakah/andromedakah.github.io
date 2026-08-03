@@ -5,37 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Tech Radar — Feed</title>
 <style>
-  :root{--bg:#0d1117;--panel:#161b22;--line:#2a3240;--ink:#e8edf3;--muted:#9aa7b6;--accent:#7f77dd;--teal:#1d9e75}
+  :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--ink:#e8edf3;--muted:#9aa7b6;--soft:#c3ccd8;--accent:#7f77dd;--teal:#1d9e75;--amber:#ef9f27;--blue:#378add;--coral:#d85a30}
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
     font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 20px}
-  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
-  h1{font-size:36px;margin:.3em 0 .1em}
-  .sub{color:var(--muted);max-width:55ch}
   a{color:#9d96f0;text-decoration:none}
-  .feed{margin-top:34px}
-  .item{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:14px 0;transition:border-color .15s,transform .15s}
+  .wrap{max-width:820px;margin:0 auto;padding:44px 20px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:38px;margin:.28em 0 .1em;line-height:1.1}
+  .sub{color:var(--soft);max-width:64ch;font-size:17px}
+  .aud{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .aud .a{font-size:12.5px;font-weight:500;color:var(--soft);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 13px}
+  .aud .a b{color:#fff;font-weight:700}
+  .links{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600}
+  .links a{border:1px solid var(--line);border-radius:999px;padding:7px 15px;color:#c3ccd8}
+  .links a.primary{border-color:#1d6e56;background:#11251c;color:#cfe6f5}
+  .links a:hover{border-color:var(--accent);text-decoration:none}
+  .inside{margin:28px 0 6px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .inside .h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px}
+  .inside ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .inside li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--soft)}
+  .inside .e{font-size:17px;line-height:1.2}
+  .inside b{color:#fff;font-weight:600}
+  .flabel{margin:36px 0 4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .feed{margin-top:8px}
+  .item{display:block;position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0;transition:border-color .15s,transform .15s}
   .item:hover{border-color:var(--accent);transform:translateY(-2px)}
   .date{font-size:12px;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-  .item h2{margin:.3em 0 .35em;font-size:22px;color:#fff}
-  .item p{margin:0;color:var(--muted);font-size:14px}
-  .tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .item h2{margin:.28em 0 .4em;font-size:23px;color:#fff}
+  .item p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .tags{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
   .tag{font-size:11px;color:#c3ccd8;border:1px solid var(--line);border-radius:999px;padding:2px 10px}
-  footer{margin-top:40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
+  .item::after{content:"Read the full brief →";display:inline-block;margin-top:14px;font-size:13px;font-weight:600;color:#9d96f0}
+  .item:first-child{border-color:#34306a}
+  .item:first-child::before{content:"● Latest";position:absolute;top:16px;right:18px;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--accent)}
+  footer{margin-top:44px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="kicker">🛰️ AI Tech Radar</div>
-  <h1>The Feed</h1>
-  <p class="sub">A daily situational-awareness brief on enterprise AI — executive summary, a C-level allegory, cross-sector questions, a technical deep-dive, and quotes. Backed by sourced data, built for talking to both engineers and the boardroom.</p>
-  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600">
-    <a href="archive/index.html" style="border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:#c3ccd8">🗂️ Archive</a>
-    <a href="wrap-ups/2026-07/index.html" style="border:1px solid #1d6e56;background:#11251c;border-radius:999px;padding:6px 14px;color:#cfe6f5">📊 July 2026 wrap-up</a>
-    <a href="trends/index.html" style="border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:#c3ccd8">📈 Trends</a>
-    <a href="feed.xml" style="border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:#c3ccd8">📡 RSS</a>
+  <h1>Enterprise AI, decoded daily.</h1>
+  <p class="sub">What shipped in enterprise AI, what it means for your business, and what to do about it — plain enough for the boardroom, specific enough for engineering, and every figure sourced. One brief a day; a monthly wrap-up that ties it together.</p>
+  <div class="aud">
+    <span class="a">📈 For <b>sales &amp; GTM</b> — the narrative and the numbers to quote</span>
+    <span class="a">🛠️ For <b>engineering</b> — the deep-dive, standards &amp; risks</span>
+    <span class="a">🤝 For <b>vendors &amp; partners</b> — where the market is moving</span>
   </div>
+  <div class="links">
+    <a class="primary" href="wrap-ups/2026-07/index.html">📊 Start here: July 2026 wrap-up</a>
+    <a href="archive/index.html">🗂️ Archive</a>
+    <a href="trends/index.html">📈 Trends</a>
+    <a href="feed.xml">📡 RSS</a>
+  </div>
+  <div class="inside">
+    <div class="h">What's inside every brief — 90 seconds to boardroom-ready</div>
+    <ol>
+      <li><span class="e">📋</span><span><b>Executive summary</b> — the few things that matter, in 90 seconds</span></li>
+      <li><span class="e">⚓</span><span><b>Allegory</b> — a plain-English metaphor to explain it to anyone</span></li>
+      <li><span class="e">💬</span><span><b>C-level Q&amp;A</b> — discussion questions, by sector</span></li>
+      <li><span class="e">🔧</span><span><b>Technical deep-dive</b> — the how, with a diagram</span></li>
+      <li><span class="e">📊</span><span><b>Numbers &amp; quotes</b> — sourced figures to cite in a meeting</span></li>
+    </ol>
+  </div>
+  <div class="flabel">All editions — newest first</div>
 
   <div class="feed">
     <a class="item" href="2026-08-03/index.html">
