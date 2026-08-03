@@ -186,6 +186,17 @@ CSS = """
   .seen{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
   .note{color:var(--muted);font-size:13px}
   footer{border-top:1px solid var(--line);margin-top:44px;padding:24px 0 50px;color:var(--muted);font-size:13px}
+  @media(max-width:600px){
+    header.top{padding:28px 0 18px}
+    h1{font-size:26px} h2{font-size:18px} .sub{font-size:15.5px} .lead{font-size:14.5px}
+    .kpi .n{font-size:22px}
+    .bar{grid-template-columns:1fr auto;gap:4px 10px;padding:9px 0}
+    .bar .lab{grid-column:1 / -1;text-align:left;white-space:normal}
+    .move{flex-wrap:wrap;gap:2px 10px}
+    .move .t{min-width:0}
+    .pairrow{flex-direction:column;gap:2px}
+    table{font-size:13px} th,td{padding:8px 8px}
+  }
 """
 
 
