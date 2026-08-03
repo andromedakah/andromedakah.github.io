@@ -85,9 +85,18 @@ REQUIRED SECTIONS in every brief, in this order:
   `speechSynthesis`: "🔊 Listen to this brief" button + sticky bottom player; FR uses
   `u.lang='fr-FR'` + a French voice). Keep EN and FR structurally identical.
 - Behave as a real daily feed: PREPEND a new `<item>` to `/ai-radar/feed.xml` (newest
-  first; never remove existing items), update `<lastBuildDate>`, and add a new entry at
-  the TOP of the `/ai-radar/index.html` landing feed list. Use guid `ai-radar-YYYY-MM-DD`
-  and link `https://andromedakah.github.io/ai-radar/YYYY-MM-DD/index.html`.
+  first; never remove existing items), update `<lastBuildDate>`, and add today's card at
+  the TOP of the landing feed. Use guid `ai-radar-YYYY-MM-DD` and link
+  `https://andromedakah.github.io/ai-radar/YYYY-MM-DD/index.html`.
+- `/ai-radar/index.html` is a self-contained premium (Tailwind-compiled) landing — it is
+  NOT the same template as the editions. To add today's card, find the
+  `<div class="feed grid ... id="cards">` container (there is a `<!-- DAILY BRIEF UPDATE -->`
+  comment right above it) and PREPEND ONE new card as its FIRST child, copying the exact
+  structure of the card immediately below the comment:
+  `<a href="YYYY-MM-DD/index.html" class="item card-hover reveal group block rounded-2xl border border-line bg-card p-5"> …tag label (accent) · date · <h3> title · one-sentence teaser <p> · 3 tag chips · "Read the brief →"… </a>`.
+  Do not touch the inlined `<style>` blocks or the reveal/progress `<script>`. Keep the
+  card classes exactly (`item card-hover reveal group`) so the reveal/infinite-scroll JS
+  still works. The hero, audience cards and "What's inside" list stay unchanged.
 
 ## Finish
 Commit (end the message with `Co-Authored-By: Claude <noreply@anthropic.com>`) and
