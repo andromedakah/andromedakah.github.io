@@ -98,6 +98,26 @@ REQUIRED SECTIONS in every brief, in this order:
   card classes exactly (`item card-hover reveal group`) so the reveal/infinite-scroll JS
   still works. The hero, audience cards and "What's inside" list stay unchanged.
 
+## Monthly wrap-up (end of each month)
+On (or just after) the last edition of a month, build/refresh the monthly wrap-up at
+`/ai-radar/wrap-ups/YYYY-MM/index.html` (EN) and `index.fr.html` (FR), structurally
+identical, both with the TTS player and EN/FR toggle. Distill that month's ~28 editions
+into: overview KPIs, Allegory of the Month, the week-by-week arc, a **mindmap**, the
+Signal-vs-Noise map (inline SVG quadrant + mirror table), C-level questions by sector,
+the owner-verified fact core (`ai-radar/verified_facts.json` only), and What to look for.
+Keep it accurate and fact-checked — verified facts marked separately from "as reported".
+
+- **Mindmap (required, every month).** Include a `<section id="mindmap">` (linked from the
+  sticky nav) with a **self-contained inline-SVG radial mind map**: a centre node holding
+  the month's single thesis, and 6 branches — one per part of the story — each a rounded-rect
+  node (emoji + short title + one line of that month's best-sourced facts), connected to the
+  centre by curved `<path>` strokes, each branch a distinct palette colour
+  (`--accent`/`--teal`/`--coral`/`--amber`/`--blue` + one extra). Wrap it in a `.chart` div so
+  it keeps its dark background in light mode; give the `<svg>` a full `role="img"` + `aria-label`
+  and a `<title>` tooltip on every branch stating its source basis. Recentre the thesis and
+  rebuild the branches for the new month — do NOT reuse July's. Mirror everything into the FR
+  page (translate the aria-label, tooltips, and labels). See July 2026 as the reference.
+
 ## Finish
 Commit (end the message with `Co-Authored-By: Claude <noreply@anthropic.com>`) and
 `git push origin main`. Report live URLs: the edition page,
