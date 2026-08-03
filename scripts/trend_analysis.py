@@ -141,8 +141,8 @@ CSS = """
   nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);z-index:5;font-size:13px}
   nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
-  nav.toc a{color:var(--muted)} nav.toc a:hover{color:#fff;text-decoration:none}
-  nav.toc .here{color:#fff;font-weight:600}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  nav.toc .here{color:var(--hi);font-weight:600}
   header.top{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:24px}
   .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
   h1{font-size:34px;line-height:1.12;margin:.3em 0 .12em}
@@ -154,7 +154,7 @@ CSS = """
   /* stat tiles */
   .stat{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 6px}
   .kpi{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .kpi .n{font-size:26px;font-weight:800;color:#fff;line-height:1.1}
+  .kpi .n{font-size:26px;font-weight:800;color:var(--hi);line-height:1.1}
   .kpi .l{font-size:12.5px;color:var(--muted);margin-top:4px}
   /* ranked bars */
   .bars{margin:6px 0}
@@ -162,20 +162,20 @@ CSS = """
   .bar .lab{color:var(--soft);font-size:14px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .bar .track{background:var(--panel2);border-radius:7px;height:20px;overflow:hidden}
   .bar .fill{height:100%;background:var(--accent);border-radius:7px}
-  .bar .val{color:#fff;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right}
+  .bar .val{color:var(--hi);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right}
   @media(max-width:560px){.bar{grid-template-columns:130px 1fr auto}.bar .lab{font-size:12.5px}}
   /* heating up */
   .move{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
   .move:last-child{border-bottom:0}
   .move .ar{font-weight:800;font-size:15px;width:1.4em;flex:none}
   .move .up{color:var(--teal)} .move .dn{color:var(--coral)}
-  .move .t{color:#fff;font-weight:600;min-width:170px}
+  .move .t{color:var(--hi);font-weight:600;min-width:170px}
   .move .d{color:var(--muted);font-size:14px}
   /* pairs */
   .pairs{display:flex;flex-direction:column;gap:0}
   .pairrow{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
   .pairrow:last-child{border-bottom:0}
-  .pairrow .p{color:#fff}
+  .pairrow .p{color:var(--hi)}
   .pairrow .p b{color:var(--soft);font-weight:600}
   .pairrow .c{color:var(--muted);font-size:14px;white-space:nowrap}
   /* numbers */
@@ -197,6 +197,21 @@ CSS = """
     .pairrow{flex-direction:column;gap:2px}
     table{font-size:13px} th,td{padding:8px 8px}
   }
+
+  /*theme*/
+  :root{--hi:#fff;color-scheme:dark}
+  :root[data-theme="light"]{
+    --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+    --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+    --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;color-scheme:light;
+  }
+  :root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+  :root[data-theme="light"] a{color:#5b52c9}
+  :root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+  .theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+  .theme-toggle:hover{border-color:var(--accent)}
 """
 
 
@@ -273,6 +288,11 @@ def render_numbers(rows):
     )
 
 
+THEME_HEAD = '<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>'
+THEME_BTN = '<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">\U0001F319</button>'
+THEME_JS = '<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"\u2600\uFE0F":"\U0001F319";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>'
+
+
 def render_page(editions, totals, heat, pairs, numbers, generated_at):
     n = len(editions)
     dates = sorted(e["date"] for e in editions)
@@ -290,13 +310,13 @@ def render_page(editions, totals, heat, pairs, numbers, generated_at):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8">\n{THEME_HEAD}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Tech Radar — Trends</title>
 <meta name="description" content="What the AI Tech Radar is tracking, in plain language: the topics that come up most, what's heating up or cooling down, which topics show up together, and how well-checked the numbers we quote are. Counted by hand from every edition — no AI, no live data feeds.">
 <style>{CSS}</style>
 </head>
-<body>
+<body>\n{THEME_BTN}
 <nav class="toc"><div class="wrap">
   <a href="../index.html">← Feed</a>
   <a href="../archive/index.html">Archive</a>
@@ -353,7 +373,7 @@ def render_page(editions, totals, heat, pairs, numbers, generated_at):
 <p><a href="../index.html">← Full feed</a> · <a href="../archive/index.html">Archive</a> · <a href="../wrap-ups/2026-07/index.html">July wrap-up</a> · <a href="../feed.xml">RSS</a></p>
 </footer>
 </div>
-</body>
+{THEME_JS}\n</body>
 </html>
 """
 

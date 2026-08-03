@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Tech Radar — Feed</title>
 <style>
@@ -17,7 +18,7 @@
   .sub{color:var(--soft);max-width:64ch;font-size:17px}
   .aud{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
   .aud .a{font-size:12.5px;font-weight:500;color:var(--soft);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 13px}
-  .aud .a b{color:#fff;font-weight:700}
+  .aud .a b{color:var(--hi);font-weight:700}
   .links{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600}
   .links a{border:1px solid var(--line);border-radius:999px;padding:7px 15px;color:#c3ccd8}
   .links a.primary{border-color:#1d6e56;background:#11251c;color:#cfe6f5}
@@ -27,13 +28,13 @@
   .inside ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
   .inside li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--soft)}
   .inside .e{font-size:17px;line-height:1.2}
-  .inside b{color:#fff;font-weight:600}
+  .inside b{color:var(--hi);font-weight:600}
   .flabel{margin:36px 0 4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding-bottom:8px}
   .feed{margin-top:8px}
   .item{display:block;position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0;transition:border-color .15s,transform .15s}
   .item:hover{border-color:var(--accent);transform:translateY(-2px)}
   .date{font-size:12px;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-  .item h2{margin:.28em 0 .4em;font-size:23px;color:#fff}
+  .item h2{margin:.28em 0 .4em;font-size:23px;color:var(--hi)}
   .item p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6;
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .tags{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
@@ -53,9 +54,36 @@
     .item h2{font-size:20px}
     .item:first-child::before{top:14px;right:14px}
   }
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
 <div class="wrap">
   <div class="kicker">🛰️ AI Tech Radar</div>
   <h1>Enterprise AI, decoded daily.</h1>
@@ -294,5 +322,6 @@
     Subscribe via <a href="feed.xml">RSS</a> · New edition published daily · <a href="archive/index.html">🗂️ Archive</a> · <a href="wrap-ups/2026-07/index.html">📊 July 2026 wrap-up</a> · <a href="trends/index.html">📈 Trend analysis</a>
   </footer>
 </div>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
 </body>
 </html>
