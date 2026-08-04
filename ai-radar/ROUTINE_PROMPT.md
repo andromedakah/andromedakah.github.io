@@ -93,10 +93,16 @@ REQUIRED SECTIONS in every brief, in this order:
   `<div class="feed grid ... id="cards">` container (there is a `<!-- DAILY BRIEF UPDATE -->`
   comment right above it) and PREPEND ONE new card as its FIRST child, copying the exact
   structure of the card immediately below the comment:
-  `<a href="YYYY-MM-DD/index.html" class="item card-hover reveal group block rounded-2xl border border-line bg-card p-5"> …tag label (accent) · date · <h3> title · one-sentence teaser <p> · 3 tag chips · "Read the brief →"… </a>`.
+  `<a href="YYYY-MM-DD/index.html" class="item card-hover reveal group block rounded-2xl border border-line bg-card p-5"> …eyebrow category (accent, uppercase) · date · <h3> title · <div class="card-sub …"> concrete subtitle · one-sentence teaser <p> · 3 tag chips · "Read the brief →"… </a>`.
   Do not touch the inlined `<style>` blocks or the reveal/progress `<script>`. Keep the
   card classes exactly (`item card-hover reveal group`) so the reveal/infinite-scroll JS
   still works. The hero, audience cards and "What's inside" list stay unchanged.
+- **Dual-title / eyebrow architecture (cards).** Every card carries an accent **eyebrow**
+  (a clean operational category, e.g. "Market & regulation") ABOVE the creative title, and a
+  concrete **subtitle** (`<div class="card-sub …">`, e.g. "Palantir's Q2 earnings and CNIL's
+  first AI Act audits") directly UNDER it — so the metaphor is grounded at a glance. Add the
+  new edition to `ai-radar/cards_meta.json` (`eyebrow` + `subtitle`, grounded in the brief's
+  facts — no new claims) and run `python3 scripts/card_meta.py` to apply it (idempotent).
 - The landing feed is **grouped by month, with the current month split into weeks**
   (This week / Last week / Week of …). This is done client-side by a script that derives
   each card's date from its `YYYY-MM-DD/index.html` href, so you do NOT add any month/week
