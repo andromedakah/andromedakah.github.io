@@ -101,8 +101,12 @@ REQUIRED SECTIONS in every brief, in this order:
   (a clean operational category, e.g. "Market & regulation") ABOVE the creative title, and a
   concrete **subtitle** (`<div class="card-sub …">`, e.g. "Palantir's Q2 earnings and CNIL's
   first AI Act audits") directly UNDER it — so the metaphor is grounded at a glance. Add the
-  new edition to `ai-radar/cards_meta.json` (`eyebrow` + `subtitle`, grounded in the brief's
-  facts — no new claims) and run `python3 scripts/card_meta.py` to apply it (idempotent).
+  new edition to `ai-radar/cards_meta.json` (`eyebrow` + `subtitle`, plus `eyebrow_fr` +
+  `subtitle_fr` — careful human-quality French — all grounded in the brief's facts, no new
+  claims). Then run BOTH: `python3 scripts/card_meta.py` (landing feed card, EN) and
+  `python3 scripts/edition_hero.py` (edition pages — sets the hero kicker to
+  "brand · category" and inserts the subtitle under the `<h1>`, in EN index.html and FR
+  index.fr.html). Both are idempotent.
 - The landing feed is **grouped by month, with the current month split into weeks**
   (This week / Last week / Week of …). This is done client-side by a script that derives
   each card's date from its `YYYY-MM-DD/index.html` href, so you do NOT add any month/week
