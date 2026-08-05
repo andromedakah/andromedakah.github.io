@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 5 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the dark warehouse — three reports in one day (Snyk, SAP/Gartner, Gravitee) show the enterprise can see only about a third of its own AI. Snyk 2026: the real AI surface is ~3x the model list, blind to two-thirds, 46.9% run agentic architectures, full-stack ~2x since January. Gravitee: 88% had an agent incident while 82% of executives feel protected; 14.4% approved every agent; ~48% of production agents unsecured; estate doubled in ~4 months. SAP calls agent sprawl a board-level issue (98% deploy, <half have an inventory); Gartner: 150,000+ agents per Fortune 500 by 2028, 13% governed. You cannot govern what you cannot see: discovery before documentation. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Governance &amp; visibility</div>
+  <h1>The Dark Warehouse</h1>
+  <div class="subhead">Snyk, SAP/Gartner and Gravitee: the enterprise can see only a third of its own AI</div>
+  <div class="meta">Wednesday, 5 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the market and the regulator asked the enterprise for the same papers — the dossier of what its AI does. Today three reports in 24 hours answered the question nobody asked out loud: can the enterprise even see what it would have to document? No. Snyk's 2026 State of Agentic AI Adoption (across 3,044 environments and ~1.39M repositories) finds the real AI surface is roughly three times the model list — blind to about two-thirds — and the ratio holds in every region; 46.9% now run agentic architectures, a full-stack share that has nearly doubled since January. SAP calls agent sprawl a board-level issue (98% deploy agents, fewer than half have an inventory); Gartner projects 150,000+ agents per Fortune 500 by 2028 with 13% governed. And Gravitee's State of AI Agent Security 2026 names the gap in a line: 88% had an agent incident last year — while 82% of executives feel protected. One building: a lit shop floor, and a dark warehouse three times larger behind it. The board's question this morning: the dossier we were told to hold presumes we can see the estate — but if two-thirds of it is dark and doubling, what are we documenting?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday's edition ("The Two Windows") ended on the dossier — the provable record of what your AI does, which the market pays a premium for and the regulator now demands. Today three independent reports, all surfacing within a day, expose the precondition nobody costed: <strong>you cannot document, govern, or defend an estate you cannot see — and the enterprise can see only about a third of its own AI.</strong> The month's thesis (own and govern the layer around the commodity model) meets its hard floor: first, find the layer.</p>
+<p><strong>The blind spot is measured, and it is two-thirds.</strong> <strong>Snyk's 2026 State of Agentic AI Adoption</strong>, covered on <strong>5 August</strong> and drawn from <strong>3,044 enterprise environments and ~1.39 million code repositories,</strong> finds that the <strong>full AI surface is about three times what a model inventory shows</strong> — beyond the LLMs sit agent frameworks, <strong>MCP servers,</strong> retrieval systems, vector databases, datasets and supporting tools that no one is tracking. Most security programs, asked what AI they run, produce a <strong>list of models and miss two-thirds of the picture.</strong> The ratio "held constant across every region," so this is structural, not a local lapse. And it is accelerating: <strong>46.9% of AI-using organizations now run agentic architectures</strong> (agents, MCP servers, or both), more than half the full stack, a share that <strong>has nearly doubled since Snyk's January 2026 report.</strong></p>
+<p><strong>The sprawl is now a board problem, by the vendors' own admission.</strong> <strong>SAP</strong> published a piece this month titled, plainly, <em>"AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue,"</em> and shipped an <strong>AI Agent Hub</strong> to discover and govern agents and MCP servers — because its <strong>LeanIX Agentic AI Survey 2026</strong> finds <strong>98% of companies have deployed or plan to deploy agents, but fewer than half have any inventory of them.</strong> <strong>Gartner</strong> puts a number on where this goes: the average <strong>Fortune 500 will run more than 150,000 AI agents by 2028,</strong> while <strong>only 13% believe they have the right governance</strong> today.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The dossier presumes an inventory — and the inventory is two-thirds dark.</strong> Snyk's three-to-one ratio means the Article 11 file, the six-month log, the data-sovereignty proof all rest on a map that omits most of the territory. You cannot write the manifest of a warehouse you have not lit.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Confidence is inverted from control.</strong> Gravitee's State of AI Agent Security 2026: <strong>88% of organizations had a confirmed or suspected AI-agent incident in the past year,</strong> yet <strong>82% of executives feel confident their policies protect them;</strong> only <strong>14.4%</strong> put every agent live with full security approval, only <strong>21%</strong> have runtime visibility, and roughly <strong>48% of production agents run unsecured.</strong> The estate <strong>doubled in about four months</strong> while coverage barely moved.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The estate is growing fastest exactly where it is darkest.</strong> Agents and MCP servers — the parts no one inventories — are the parts multiplying. Snyk's full-stack share nearly doubled since January; Gravitee's agent count doubled in a quarter; SAP and Gartner both frame the next 24 months as sprawl outrunning governance.</div></div>
+<div class="card"><strong>Bottom line:</strong> the market rewards a provable, governed AI layer and the regulator demands its dossier — but both assume you can <em>see</em> the layer, and today's data says two-thirds of it is unlit and growing. Light the warehouse before you promise the manifest: run discovery across the whole AI surface — every agent, every MCP server, every dataset — assign an owner, and only then is the dossier a document rather than a hope. You cannot govern, defend, or sell what you cannot see.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏚️ "The Dark Warehouse"</h3>
+<p><em>Topic: On 5 August 2026, Snyk's 2026 State of Agentic AI Adoption (across 3,044 enterprise environments and ~1.39 million code repositories) reported that the real enterprise AI attack surface is roughly three times what a model inventory shows — organizations are blind to about two-thirds of their own AI estate, a ratio constant across every region — because beyond the models sit agent frameworks, MCP servers, retrieval systems, vector databases and datasets that go untracked; 46.9% of AI-using organizations run agentic architectures, a full-stack share that has nearly doubled since January 2026. In the same window, SAP published "AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue" and launched an AI Agent Hub, its LeanIX Agentic AI Survey 2026 finding 98% of companies have deployed or plan AI agents but fewer than half have an inventory of them, while Gartner projects the average Fortune 500 will run more than 150,000 agents by 2028 with only 13% confident in their governance. Gravitee's State of AI Agent Security 2026 found 88% of organizations had a confirmed or suspected AI-agent security incident last year while 82% of executives feel confident their policies protect them; only 14.4% put all agents live with full security approval, only 21% have runtime visibility, and about 48% of production agents run unsecured, with the agent estate doubling in roughly four months. The lesson: the dossier the market rewards and the regulator demands presumes an inventory, and the enterprise can see only about a third of its own AI, so the first move is not to document but to discover — light the warehouse before you promise the manifest.</em></p>
+<p>Picture a prosperous merchant house with a handsome shop on the square. On the counter sits a neat ledger, and in it the owner has written every bolt of cloth and cask of wine displayed on the <strong>lit shop floor.</strong> When the board of the house asks whether the stock is in order, the owner opens that ledger and says yes, with real confidence — the shelves match the book, the book matches the shelves, and everything the eye can see is accounted for. This is a truthful ledger. It is also a small one, because the shop floor was never where the house kept most of its goods.</p>
+<p>Behind the shop is a <strong>warehouse three times the size,</strong> and it is dark. Nobody planned it that way; it simply filled. Every night more crates arrive — an agent here, an MCP server there, a retrieval store, a vector database, a dataset copied for a project that shipped and was forgotten — and they are stacked in the black beyond the last lantern, because the shop floor had no more room and the back room asked no one's permission. The owner is not lying to the board; the owner <strong>cannot see the warehouse,</strong> and so reports on the only room that is lit. Ask the house what it holds and it recites the shop-floor ledger — and misses two-thirds of the building. Worse, the dark room is the one <em>growing:</em> the crates on the floor sit still, but the warehouse doubles while no one is counting.</p>
+<p>Now recall who comes calling. The <strong>thief</strong> does not rob the lit counter under the shopkeeper's eye; the thief works the <strong>unlit warehouse,</strong> where no one will notice a missing crate for months — which is why, in this house, the strongroom was breached long before anyone believed it could be (88 in a hundred such houses were robbed last year, while 82 in a hundred owners told their boards the locks were sound). And the <strong>assessor</strong> — the one who came yesterday demanding the manifest of the whole building, not just the front counter — will not accept a shop-floor ledger as an account of the house. She will walk to the warehouse door, find it dark, and note that the merchant cannot say what is inside. <strong>The lit ledger the owner was so proud of is not wrong; it is simply not an inventory of the house.</strong> It is an inventory of the part of the house that was easy to see.</p>
+<p>There is only one first move, and it is not to write a finer ledger. It is to <strong>carry a lantern into the warehouse and count</strong> — to walk every aisle, open every crate, name an owner for each, and light the room so it stays lit as new goods arrive. Only after the warehouse is lit does the ledger become a manifest, the manifest become a dossier, and the dossier become the thing the market pays for and the assessor accepts. A merchant who documents only the shop floor has not governed the house; he has governed the easy third of it, and left the thief and the assessor the other two-thirds in the dark.</p>
+<p><strong>The moral:</strong> the model list is the lit shop floor, and the board mistakes it for the business. The real estate — agents, MCP servers, retrieval stores, forgotten datasets — is the <strong>dark warehouse, three times larger and doubling</strong> where no one looks. You cannot insure, defend, sell, or <em>document</em> what you have never counted; the dossier the market rewards and the regulator demands is impossible until the room is lit. <strong>Discovery comes before documentation. Light the warehouse before you promise the manifest.</strong></p>
+<p><strong>The question it forces:</strong> <em>When our board asks whether our AI is under control, are we opening the shop-floor ledger — the model list — and mistaking it for the house? If our real AI estate is three times what we can name, and the two-thirds we can't see is the part still growing, what is our lantern: who runs discovery across every agent, every MCP server, every dataset, assigns each an owner, and keeps the room lit — before the thief and the assessor find the dark warehouse for us?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>When we tell the board our AI is under control, are we reading the shop-floor ledger?</strong> Snyk finds the real AI surface is ~3× the model list, and most security programs see only a third. <strong>What is the honest ratio here — and who owns the lantern that lights the other two-thirds?</strong></li>
+  <li>The perception gap is the danger: <strong>82% of executives feel protected while 88% of organizations were breached through an agent</strong> (Gravitee). <strong>On what evidence do we believe we're the exception — a current inventory, or a confident memory?</strong></li>
+  <li>Gartner: the average Fortune 500 will run <strong>150,000+ agents by 2028; only 13% have the right governance now.</strong> <strong>Is discovery of every agent and MCP server a named, funded program with an owner — or a slide we agreed with and never staffed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>CNIL's first move demanded the <strong>Article 11 dossier</strong> for credit-scoring systems — but a dossier is impossible for an estate you can't see. <strong>For every scoring, underwriting and fraud model, do we have the full component list (agents, MCP servers, retrieval stores, datasets), or only the model name a regulator would immediately look past?</strong></li>
+  <li>Finance runs the most agents in production and the strictest audit. <strong>Of our production agents, what share went live with full security approval — the sector-wide figure is 14.4% — and how many run today with no runtime visibility (only 21% have it) inside systems that touch customer money?</strong></li>
+  <li>The estate doubles roughly every four months. <strong>What is our re-inventory cadence — continuous discovery, or an annual spreadsheet already stale the week it's filed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and patient-facing AI is high-risk and audited, and it is exactly the kind of estate that sprawls quietly across research and care. <strong>Have we lit the warehouse — every diagnostic agent, every retrieval store over patient data, every dataset copy — or are we documenting the lit third and calling it governance?</strong></li>
+  <li>Roughly <strong>48% of production agents run unsecured</strong> (Gravitee). <strong>For agents that read or act on patient data, can we prove — not assume — logging, oversight and access limits, or would a documentation request find the room dark?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Operational AI accretes as point tools on line-side and supply-chain systems — the classic dark warehouse. <strong>Do we have one authoritative inventory of operational agents and MCP connectors, with an owner each, or a scatter of projects no one can enumerate?</strong></li>
+  <li>Cheaper, better models keep arriving (DeepSeek V4-Flash-0731 last week). <strong>When a team swaps an engine on a high-risk line, does our inventory update automatically — or does the crate go back into the dark the moment the model changes?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Storefront agents that price, recommend or decide on customers multiply fast and are disclosure-bound (Article 50). <strong>Can we list every consumer-facing agent and what data each touches — or is the customer-facing estate itself the part we can't see?</strong></li>
+  <li>The market rewards provable trust; you cannot prove what you cannot count. <strong>Are we running discovery as a standing capability, so the manifest the market pays for stays current as the warehouse fills nightly?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-facing AI carries the strictest accountability, and the AI Office can now enforce it across 27 states. <strong>Is there a single, current inventory of every agent and MCP server acting on citizen data, each with a named owner — the exact thing 98% deploy and fewer than half can list?</strong></li>
+  <li>Enforcement is case-by-case now (CNIL named 14 institutions, denied extensions). <strong>Before a supervisor asks, could we produce a complete map of our AI estate this week — or would we, like most, hand over the lit third and hope?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — You Cannot Govern What You Cannot See</h2>
+<p>Read three reports landing in one day as a single finding: <strong>the governance layer everyone is racing to build assumes a map that doesn't exist.</strong> The month's discipline — own and govern the layer around the commodity model, hold the dossier — has a precondition it never priced: <strong>discovery.</strong> The estate is three parts: the cargo (commodity models, the lit shop floor everyone can name), the dark warehouse (the two-thirds no one inventories), and the lantern (the discovery capability that must come <em>before</em> the dossier).</p>
+<div class="card"><ul>
+  <li><strong>The cargo — the lit shop floor (commodity models, cheaper each week).</strong> Still a swappable menu: <strong>Claude Opus 5</strong> (24 Jul; #1, Intelligence Index 61 / Agentic Index 55.3, $5/$25), Google <strong>Gemini 3.6 Flash</strong> (21 Jul), <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong> open weights, and — as of <strong>31 July</strong> — <strong>DeepSeek V4-Flash-0731</strong> (MIT, open weights), beating its own flagship on nine benchmarks at no price change. This is the part every board can recite, because it is lit. It is also <strong>not the estate.</strong> Snyk's point is precise: ask an enterprise what AI it runs and it names the models — the shop floor — and misses the warehouse behind.</li>
+  <li><strong>The dark warehouse — the two-thirds no one sees.</strong> Beyond the models sit <strong>agent frameworks, MCP servers, retrieval systems, vector databases, datasets and supporting tools,</strong> and Snyk's assessments across <strong>3,044 environments and ~1.39M repositories</strong> put the <strong>full surface at ~3× the model inventory</strong> — enterprises blind to about <strong>two-thirds</strong> of it, the ratio constant across every region. This is where the estate is <em>growing:</em> <strong>46.9%</strong> now run agentic architectures, full-stack share <strong>nearly doubled since January;</strong> Gravitee's agent count <strong>doubled in ~four months.</strong> And it is where the danger concentrates — <strong>88% had an agent incident</strong> while <strong>82% of executives feel safe,</strong> only <strong>14.4%</strong> approved every agent, only <strong>21%</strong> have runtime visibility, <strong>~48%</strong> of production agents run unsecured. SAP names it a <strong>board-level issue;</strong> Gartner projects <strong>150,000+ agents per Fortune 500 by 2028, 13% governed.</strong> The dark room is the real one.</li>
+  <li><strong>The lantern — discovery, the move that must come first.</strong> You cannot write an Article 11 file, retain a six-month log (Article 26), disclose under Article 50, or prove data sovereignty for a system you cannot enumerate. So the first craft is <strong>DISCOVER</strong> (scan the whole surface — models, agents, MCP servers, retrieval stores, datasets — not the model list); then <strong>OWN</strong> (a named accountable owner per item, the gap behind SAP's "fewer than half have an inventory"); then <strong>ILLUMINATE CONTINUOUSLY</strong> (re-inventory on the cadence the estate doubles — roughly quarterly, not annually); only then <strong>DOCUMENT</strong> (the dossier of yesterday's edition becomes possible). Vendors are shipping the lanterns now — SAP's <strong>AI Agent Hub,</strong> Snyk's Evo discovery — precisely because the dossier is undeliverable without them.</li>
+</ul></div>
+<p>The strategic core: <strong>discovery is the precondition of every other control, and it is the one most enterprises skipped.</strong> The comforting misread is "we have an AI policy and we know our models" — which is a ledger of the lit third. The market pays for a provable estate and the regulator demands its dossier; both are impossible while two-thirds of the estate is dark and doubling. After today's data, "we know which models we run" is not the answer to "is your AI governed"; <em>"we can produce, today, a complete and current inventory of every model, agent, MCP server and dataset we run, each with an owner"</em> is the answer — and it is the thing the dossier is written <em>from.</em></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The dark warehouse: you cannot govern what you cannot see. The model list is the lit shop floor; the real estate is three times larger and dark. At the top, the lit shop floor — the model list the board recites: Opus 5 at number one, five and twenty-five dollars, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 under MIT — is only about one third of the real estate. Ask what AI you run and you get this. Below it, the dark warehouse — about two thirds unseen and the part growing: agent frameworks, MCP servers, retrieval systems, vector databases, datasets, forgotten copies. Snyk finds the full surface is about three times the model list. 46.9 percent run agentic architectures, full-stack nearly doubled since January. 88 percent were breached while 82 percent of executives feel safe; 14.4 percent approved every agent; 21 percent have runtime visibility; about 48 percent of production agents run unsecured; the estate doubled in about four months. Gartner projects more than 150,000 agents per Fortune 500 by 2028, with 13 percent governed. Light it before you promise the manifest. At the bottom, the lantern — discovery, the move that comes first: discover the whole surface not the model list, own each item with a named owner, illuminate continuously by re-inventorying as it doubles, and then document, so the dossier becomes possible. The trap is to report the lit ledger as the whole house, leaving the thief and the assessor the dark two thirds; the win is to light the warehouse first so the dossier is a document, not a hope." style="max-width:660px;width:100%;height:auto">
+  <!-- top title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE DARK WAREHOUSE — you cannot govern what you cannot see</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The model list is the lit shop floor. The real estate is 3× larger, and dark.</text>
+
+  <!-- lit shop floor -->
+  <rect x="70" y="58" width="540" height="74" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="90" y="79" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE LIT SHOP FLOOR — the model list the board recites</text>
+  <text x="90" y="98" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 (#1, $5/$25) · Gemini 3.6 Flash · GPT-5.6 Sol ·</text>
+  <text x="90" y="114" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</text>
+  <text x="590" y="79" font-size="10.5" font-weight="700" fill="#e0b45f" text-anchor="end" font-family="sans-serif">💡 ~1/3 OF ESTATE</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="132" x2="340" y2="152" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,152 340,164 346,152" fill="#9aa7b6"/>
+  <text x="430" y="147" font-size="9" fill="#9aa7b6" font-family="sans-serif">ask "what AI do you run?" → you get this ↓</text>
+
+  <!-- dark warehouse -->
+  <rect x="40" y="170" width="600" height="180" rx="9" fill="#0a0d13" stroke="#3a4657"/>
+  <text x="60" y="192" font-size="12" font-weight="700" fill="#8fa0b5" font-family="sans-serif">THE DARK WAREHOUSE — ~2/3 unseen, and the part growing</text>
+  <text x="590" y="192" font-size="10.5" font-weight="700" fill="#8fa0b5" text-anchor="end" font-family="sans-serif">🌑 SNYK: SURFACE ≈ 3× MODEL LIST</text>
+  <text x="60" y="212" font-size="10.5" fill="#c3ccd8" font-family="sans-serif">agent frameworks · MCP servers · retrieval · vector DBs · datasets · forgotten copies</text>
+  <text x="60" y="236" font-size="10.5" fill="#e8edf3" font-family="sans-serif">46.9% run agentic architectures · full-stack ~2× since January</text>
+  <text x="60" y="258" font-size="10.5" fill="#e8b0b0" font-family="sans-serif" font-weight="700">88% breached vs 82% of execs feel safe</text>
+  <text x="60" y="278" font-size="10.5" fill="#e8edf3" font-family="sans-serif">14.4% approved every agent · 21% have runtime visibility</text>
+  <text x="60" y="298" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~48% of production agents unsecured · estate 2× in ~4 months</text>
+  <text x="60" y="320" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gartner: 150,000+ agents / Fortune 500 by 2028 · 13% governed</text>
+  <text x="60" y="340" font-size="9.5" fill="#8fa0b5" font-family="sans-serif" font-style="italic">SAP: "AI agent sprawl is now a board-level issue"</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="370" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,370 340,382 346,370" fill="#9aa7b6"/>
+  <text x="430" y="365" font-size="9" fill="#9aa7b6" font-family="sans-serif">light it before you promise the manifest ↓</text>
+
+  <!-- the lantern -->
+  <rect x="70" y="388" width="540" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="410" font-size="12" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE LANTERN — discovery, the move that comes first</text>
+  <text x="340" y="431" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">DISCOVER (the whole surface, not the model list) · OWN (a named owner each)</text>
+  <text x="340" y="449" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">ILLUMINATE CONTINUOUSLY (re-inventory as it doubles — quarterly, not annually)</text>
+  <text x="340" y="467" font-size="10.5" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">then DOCUMENT — the dossier finally becomes possible</text>
+  <text x="340" y="487" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">discovery before documentation — the dossier is written FROM the inventory</text>
+
+  <!-- bottom trap vs win -->
+  <line x1="340" y1="500" x2="340" y2="516" stroke="#9aa7b6" stroke-width="2"/>
+  <polygon points="334,516 340,528 346,516" fill="#9aa7b6"/>
+  <text x="182" y="552" font-size="9.5" fill="#e06b9a" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: report the lit ledger as the house</text>
+  <text x="182" y="568" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">thief &amp; assessor work the dark 2/3</text>
+  <text x="498" y="552" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: light the warehouse first</text>
+  <text x="498" y="568" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the dossier is a document, not a hope</text>
+  <line x1="340" y1="540" x2="340" y2="575" stroke="#2a3240" stroke-width="1"/>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#ef9f27"></i>Lit shop floor — the model list (~1/3)</span>
+  <span><i class="dot" style="background:#3a4657"></i>Dark warehouse — the unseen ~2/3</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The lantern — discovery, first</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — a lit ledger, a dark house</th><th>The discipline — light the warehouse first</th></tr>
+<tr><td>Report the model list as "our AI estate"</td><td>Discover the whole surface — agents, MCP servers, retrieval, datasets</td></tr>
+<tr><td>Feel protected because a policy exists (82% do)</td><td>Assume breached until proven seen (88% were)</td></tr>
+<tr><td>Inventory once a year in a spreadsheet</td><td>Re-inventory on the cadence it doubles (~quarterly)</td></tr>
+<tr><td>Let agents ship without an owner</td><td>Name an accountable owner per item (fewer than half do)</td></tr>
+<tr><td>Write the dossier from the model list</td><td>Write the dossier from a complete, current inventory</td></tr>
+</table>
+
+<h3>Why discovery is the precondition, not a step you can defer</h3>
+<div class="card">
+<p>Every control this month presumes visibility. The Article 11 file, the six-month log, Article 50 disclosure, the data-sovereignty proof the market pays a premium for — each is <em>written from an inventory,</em> and Snyk's three-to-one ratio says the inventory most enterprises hold covers a third of the estate. You cannot log a crossing you never knew happened, disclose an agent you cannot list, or prove sovereignty over data an untracked retrieval store is quietly reading. The dossier is not the first move; <strong>the lantern is.</strong> Skip it and every downstream control inherits the same two-thirds blind spot — a beautifully written manifest of the shop floor, and a dark warehouse behind it where the thief and the assessor both do their work.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon, 3 Aug the customs house, 4 Aug the two windows). Yesterday the two windows demanded the dossier; today three reports show the dossier is written over a warehouse that is two-thirds dark. On legacy estates the sprawl is worst, because agents and MCP servers were bolted onto systems no one has fully mapped in years. The retrofit is unglamorous and first: <strong>run discovery across the entire AI surface</strong> — not the model list, but every agent, MCP server, retrieval store, vector database and dataset — <strong>assign an owner to each,</strong> stand it up as a <strong>continuous</strong> capability (the estate doubles in a quarter, so an annual scan is a stale scan), and <em>then</em> write the Article 11 file, wire the six-month logging and Article 50 disclosure, and prove sovereignty. Do discovery before documentation, because a dossier over a dark warehouse is a confident ledger of the wrong room.</p>
+<p><strong>The clean mental model:</strong> <em>The model list is the lit shop floor, and the board mistakes it for the house. The real estate — agents, MCP servers, retrieval stores, forgotten datasets — is a dark warehouse three times larger and doubling, and it is exactly where the thief and the assessor go. You cannot govern, defend, sell, or document what you cannot see. Carry a lantern into the warehouse and count — discovery before documentation — because the dossier the market rewards and the regulator demands is impossible until the room is lit.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The measured blind spot — Snyk 2026 State of Agentic AI Adoption (5 Aug).</strong> Across <strong>3,044 environments</strong> and <strong>~1.39M repositories:</strong> real AI surface <strong>≈ 3× the model inventory</strong> (blind to ~<strong>two-thirds</strong>), ratio constant across regions; <strong>46.9%</strong> run agentic architectures; full-stack share <strong>nearly doubled since January.</strong> Quote — Gabriel Brolo Tobar, Yalo: <em>"As AI-driven development accelerates, human oversight alone simply cannot keep pace."</em></li>
+  <li><strong>The perception gap — Gravitee State of AI Agent Security 2026.</strong> <strong>88%</strong> had a confirmed/suspected agent incident last year vs <strong>82%</strong> of executives feeling protected; <strong>14.4%</strong> approved every agent; <strong>21%</strong> have runtime visibility; <strong>~48%</strong> of production agents unsecured; estate <strong>doubled in ~4 months.</strong></li>
+  <li><strong>The board-level framing — SAP + Gartner.</strong> SAP: <em>"AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue,"</em> plus an <strong>AI Agent Hub;</strong> LeanIX survey: <strong>98%</strong> deploy/plan agents, <strong>fewer than half</strong> have an inventory. Gartner: <strong>150,000+ agents per Fortune 500 by 2028; 13%</strong> governed.</li>
+  <li><strong>The regulatory backdrop — still live.</strong> EU AI Act enforcement running since <strong>2 Aug;</strong> CNIL's <strong>4 Aug</strong> action (14 banks, credit scoring, <strong>Article 11</strong> documentation, <strong>3 extensions denied</strong>); <strong>€15M or 3%;</strong> deployer logs <strong>≥6 months</strong> (Article 26). The dossier is demanded; the inventory it needs is two-thirds dark.</li>
+  <li><strong>The cargo, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 — the lit shop floor. And OpenAI now books <strong>&gt;40% of revenue from enterprise,</strong> on track to consumer parity by year-end — the demand filling the warehouse.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">As AI-driven development accelerates, human oversight alone simply cannot keep pace.</div><div class="a">— Gabriel Brolo Tobar, Senior Security Engineer, Yalo, in Snyk's 2026 State of Agentic AI Adoption, 5 August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The full AI surface is roughly three times what a model inventory shows — most security programs see only about a third of what their organization is actually running.</div><div class="a">— On Snyk's 2026 State of Agentic AI Adoption, across 3,044 environments and ~1.39M repositories, 5 August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">88% of organizations reported a confirmed or suspected AI-agent security incident in the past year — while 82% of executives feel confident their existing policies protect them.</div><div class="a">— On Gravitee's State of AI Agent Security 2026, on the gap between confidence and control, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">AI agent sprawl is why AI governance is now a board-level issue.</div><div class="a">— SAP News Center, headline of its 2026 piece accompanying the launch of the AI Agent Hub (as reported)</div></blockquote>
+<blockquote><div class="q">"The model list is the lit shop floor, and the board mistakes it for the house. The real estate is a dark warehouse three times larger — and it is exactly where the thief and the assessor go. Light the warehouse before you promise the manifest."</div><div class="a">— the radar, on discovery before documentation</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Real AI surface vs. model inventory</td><td><span class="v">≈ 3× (blind to ~two-thirds)</span></td><td>Snyk 2026 State of Agentic AI Adoption (as reported)</td></tr>
+<tr><td>Snyk study base</td><td><span class="v">3,044 environments · ~1.39M repositories</span></td><td>Snyk / Help Net Security / vmblog (as reported)</td></tr>
+<tr><td>Organizations running agentic architectures</td><td><span class="v">46.9% (full-stack ~2× since Jan)</span></td><td>Snyk 2026 (as reported)</td></tr>
+<tr><td>Orgs with an AI-agent incident last year</td><td><span class="v">88%</span></td><td>Gravitee State of AI Agent Security 2026 (as reported)</td></tr>
+<tr><td>Executives who feel their policies protect them</td><td><span class="v">82%</span></td><td>Gravitee 2026 (as reported)</td></tr>
+<tr><td>Agents put live with full security approval</td><td><span class="v">14.4%</span></td><td>Gravitee 2026 (as reported)</td></tr>
+<tr><td>Orgs with runtime visibility into agents</td><td><span class="v">21% (≈48% of prod agents unsecured)</span></td><td>Gravitee 2026 (as reported)</td></tr>
+<tr><td>Enterprise agent estate — growth</td><td><span class="v">Doubled in ~4 months</span></td><td>Gravitee 2026 (as reported)</td></tr>
+<tr><td>Companies deploying agents vs. with an inventory</td><td><span class="v">98% deploy · &lt;50% have an inventory</span></td><td>SAP LeanIX Agentic AI Survey 2026 (as reported)</td></tr>
+<tr><td>Fortune 500 agents by 2028 / with right governance</td><td><span class="v">150,000+ · 13%</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>EU AI Act enforcement — status</td><td><span class="v">Live since 2 Aug; CNIL 4 Aug: 14 banks, Art. 11, 3 extensions denied</span></td><td>European Commission / regulatory coverage (as reported)</td></tr>
+<tr><td>Penalty ceiling (Art. 99) / incorrect information</td><td><span class="v">€15M or 3% · €7.5M or 1.5%</span></td><td>European Commission</td></tr>
+<tr><td>High-risk deployer log retention</td><td><span class="v">≥ 6 months (Article 26)</span></td><td>EU AI Act Art. 26 (as reported)</td></tr>
+<tr><td>OpenAI enterprise share of revenue</td><td><span class="v">&gt;40% (parity with consumer by year-end)</span></td><td>OpenAI / Yahoo Finance (as reported)</td></tr>
+<tr><td>The cargo (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Light the warehouse — run discovery across the whole AI surface, not the model list.</strong> Today's data says your real estate is roughly three times what you can name and two-thirds of it is dark. Stand up a discovery scan that finds every model, agent, MCP server, retrieval store, vector database and dataset — the parts Snyk shows go untracked — and produce one authoritative inventory. Treat "could we hand a regulator a complete, current map of our AI this week?" as pass/fail. The dossier the market rewards and CNIL demands is written <em>from</em> this inventory; without it, you are documenting the shop floor and calling it the house.</li>
+  <li><strong>Close the confidence gap — assume breached until proven seen.</strong> 82% of executives feel protected while 88% of organizations were breached through an agent. Replace confidence with evidence: for every agent, record whether it went live with security approval (only 14.4% do), whether you have runtime visibility (only 21% do), and who owns it (fewer than half can say). Report the <em>ratio of the estate you can actually see</em> to the board as a standing metric — not the model count, which is the lit third and the reassuring lie.</li>
+  <li><strong>Make discovery continuous and model-neutral — the warehouse fills nightly.</strong> The estate doubles in roughly four months, so an annual inventory is stale before it's filed. Build discovery and ownership as a standing capability that survives an engine swap — so adding DeepSeek V4-Flash-0731 or swapping Opus 5 for Gemini never quietly returns a crate to the dark, and every new agent or MCP server lands on the inventory with an owner the day it ships. Own the lantern, keep the room lit, and <em>then</em> the whole month's discipline — the dossier, the log, the disclosure, the sovereignty proof — finally rests on ground you can see.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Snyk (2026 State of Agentic AI Adoption) · Help Net Security · vmblog · IT Pro (Snyk) · Gravitee (State of AI Agent Security 2026) · VentureBeat · TechCrunch · SAP News Center · SAP LeanIX · The New Stack · Gartner (as reported) · European Commission (AI Act enforcement) · artificialintelligenceact.eu (Art. 11, Art. 26) · regulatory coverage (CNIL) · OpenAI / Yahoo Finance · LLM-Stats / model trackers. Figures are relayed from vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 5 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
