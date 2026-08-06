@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 6 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the airlock — Anthropic's Inference hooks (beta, launched 5 August 2026) put an allow/deny checkpoint the enterprise owns between its data and the model. Every governed prompt is routed to your own AI security server for an allow-or-deny verdict before inference runs; a denied request never reaches the model. Covers claude.ai chat, Claude Code and Cowork; signed webhook, 5s default timeout, shadow mode, rollout %, role exclusions, your failure policy. Not on Bedrock/Google Cloud, no voice, allow/deny only, response-side on the roadmap. The month's thesis made concrete: own the control layer around the commodity model. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Data control &amp; governance</div>
+  <h1>The Airlock</h1>
+  <div class="subhead">Anthropic's Inference hooks put an allow/deny checkpoint you own between your data and the model</div>
+  <div class="meta">Thursday, 6 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday's edition ("The Dark Warehouse") ended on a wall: you cannot govern what you cannot see, and the enterprise can see only about a third of its own AI. Today a frontier vendor shipped the tool that answers the next question — once you can see what leaves for the model, can you stop the wrong thing from leaving? On 5 August 2026 Anthropic launched Inference hooks (beta) for Claude Enterprise: a control point that routes every governed prompt to your own AI security server for an allow-or-deny verdict before inference runs — and a denied request never reaches the model. The server sees the transcript, including tool calls and their results, and returns a verdict within a timeout you set (5s default); it can run in shadow mode, roll out to a percentage of traffic, and exclude roles. Crucially the verdict is yours — you or your DLP vendor operate the check; Anthropic merely built the socket. The month's thesis made concrete: own the control layer around the commodity model. The board's question this morning: the model is rented and swappable — but the checkpoint that decides what of ours ever reaches it, do we own that, on our ground, or have we left the one door our secrets leave through un-manned?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thing from a dozen angles: the model is becoming a commodity, so the durable advantage is the <strong>layer you own around it</strong> — the meter, the router, the MCP plane, the dossier, the discovery scan. Every edition described the layer; almost none of it existed as a product you could buy. <strong>Today one piece shipped.</strong> On <strong>5 August 2026 Anthropic launched Inference hooks (beta) for Claude Enterprise</strong> — the first vendor-native <strong>control point the enterprise itself owns and operates in the path between its data and the rented model.</strong></p>
+<p><strong>What it is, precisely.</strong> When an employee submits a prompt on a governed surface (claude.ai chat, <strong>Claude Code, Cowork</strong>), Anthropic routes the <strong>conversation transcript to your organization's own AI security server</strong> — an HTTPS service you or your security vendor run — and <strong>waits for an allow-or-deny verdict before inference runs. A denied request never reaches the model.</strong> The check runs on Anthropic's servers after the request leaves the client, so it covers <strong>every governed request uniformly with nothing installed on user devices;</strong> it is signed (Standard Webhooks) and answered within a timeout you set (5s default). Your server sees the transcript, <strong>tool calls and their results,</strong> and text extracted from attachments — but <strong>never raw file or image bytes, system prompts, or Anthropic-internal context.</strong></p>
+<p><strong>Why it matters more than a feature note.</strong> The month's problem was that governance of the model layer was a slide, not a switch. Snyk showed the estate is ~3× the model list and two-thirds dark; Gravitee showed <strong>88% of organizations had an agent incident while 82% of executives felt protected</strong> — the gap between <em>feeling</em> governed and <em>being</em> governed. Inference hooks close a slice of that gap with an actual mechanism: a <strong>checkpoint you control</strong> at the exact boundary where your data leaves your walls for a brain you don't own.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The control point is yours, not the vendor's.</strong> The novelty is not that Anthropic added a guard — it's that Anthropic built the socket so <strong>your</strong> guard stands in the path and <strong>your</strong> server holds the stamp. You decide allow/deny; you keep the failure policy (block or allow when your server is unreachable); you own the log. Model safety is the vendor's; <strong>data control is now demonstrably yours.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>It is inline, not after-the-fact.</strong> Compliance and audit tools tell you what already happened. Inference hooks stop a prompt <strong>before it reaches the model</strong> — the difference between an inventory (yesterday's dark-warehouse discovery) and an <strong>enforcement point.</strong> Seeing the estate was step one; controlling the crossing is step two.</div></div>
+<div class="num"><div class="b">3</div><div><strong>It is real, and it is early — know the gaps.</strong> It's <strong>beta,</strong> Claude Enterprise only; it does <strong>not</strong> run on Amazon Bedrock or Google Cloud; <strong>voice is not covered;</strong> verdicts are allow/deny only (<strong>no redaction or rewrite</strong>); and today's only event is the prompt — real-time <strong>response-side</strong> blocking is still on the roadmap, though your server already sees tool results in the transcript. A partial airlock is not a sealed hull.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month said <em>own the layer around the commodity model;</em> today the enterprise can buy the first bolt of it. Stand up the AI security server, put it in shadow mode this week, and make the allow/deny verdict yours — because the model is rented and swappable, but the one door your secrets leave through should be manned by your crew, on your ground, and it should exist for every model vendor you use, not just the one that shipped the socket first.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🚪 "The Airlock"</h3>
+<p><em>Topic: On 5 August 2026 Anthropic launched Inference hooks (beta) for Claude Enterprise — a control point that routes every governed prompt to the organization's own AI security server for an allow-or-deny verdict before inference runs, so that a denied request never reaches the model. The check runs on Anthropic's servers after the request leaves the client and applies uniformly with nothing installed on devices; the server sees the conversation transcript, tool calls and their results, and text extracted from attachments, but never raw file or image bytes, system prompts, or Anthropic-internal context. It is signed (Standard Webhooks), answered within a configurable timeout (5 seconds by default), and can run in shadow mode, at a rollout percentage, or with role exclusions; the organization sets the failure policy. Verdicts are allow or deny only; response-side enforcement is planned; it is Claude-Enterprise-only, not on Bedrock or Google Cloud, and voice is not covered. The lesson: the model is rented and swappable, but the checkpoint that decides what of yours ever reaches it should be owned and operated by you — the vendor built the socket; the enterprise must staff the door.</em></p>
+<p>Picture a great vessel — a ship of the deep or of space, it hardly matters — carrying something precious inside: a hold kept at <strong>one atmosphere of your own pressure,</strong> your cargo, your charts, your crew's private words. Outside the hull is a medium you do not control and cannot breathe: the open sea, the vacuum, the rented brain that lives beyond your walls. Between the two there is exactly one lawful passage, and it is not a door but a <strong>chamber with two doors that are never open at once</strong> — the airlock. Nothing crosses from your pressurized world to the void except by stepping into that chamber, having the inner door seal behind it, and waiting.</p>
+<p>For years the enterprise had no airlock. Whatever an employee typed simply <strong>left</strong> — through an open hatch, into the vacuum, to a brain the company did not own — and the only record was a logbook the harbormaster kept <em>after</em> the crossing, useful for grief and useless for prevention. You could audit what had escaped; you could not hold it at the threshold. This is the difference between a ledger and a lock, and for a month this radar has said the ledger is not enough: <strong>you can light the warehouse and still watch its goods walk out the open door.</strong></p>
+<p>What shipped this week is the fitting for a real airlock, welded into the hull at the one place your cargo leaves for the void. A message steps into the chamber; the inner door seals; and — this is the whole of it — <strong>your own inspector,</strong> not the vendor's, reads what is in the chamber and calls <em>allow</em> or <em>deny.</em> On <em>allow,</em> the outer door opens and the message goes out to the brain. On <em>deny,</em> the outer door <strong>never breaks seal;</strong> the message is returned to your pressurized interior, and nothing of yours reaches the void. You can run the chamber with the outer lock disengaged for a while, watching what <em>would</em> pass without stopping anyone (the crew calls this shadow mode); you can open it to a fraction of traffic first; you can exempt a trusted few. And you decide what happens when the inspector is asleep — hold everyone at the inner door, or let them through unread — because it is <strong>your</strong> airlock, and the failure drill is yours to write.</p>
+<p>Two truths keep the crew honest. The first: the vendor built the <strong>socket,</strong> not the guard. The remarkable thing is not that the shipwright added a safety hatch — it is that the shipwright cut a fitting into the hull so that <strong>your</strong> door, <strong>your</strong> lock, <strong>your</strong> inspector could stand in the only passage to the void, and the vendor agreed to dock its craft to your airlock rather than make you breathe its air on its terms. That is the month's thesis in iron: <strong>own the layer around the commodity model.</strong> The second truth is soberer: this airlock is <strong>new, and not yet whole.</strong> It seals the main passage but not every hatch — it does not fit the other two ships in your fleet (the ones you board through Bedrock and Google Cloud); it cannot yet inspect a sealed crate you can only see the label of (an image); it watches what comes <em>back in</em> only by reading it on the next outbound cycle; and it can bar the door but not quietly repack the cargo. A partial airlock is a real airlock and a great advance — but a captain who calls it a sealed hull will drown on the hatch he forgot.</p>
+<p><strong>The moral:</strong> the model is the vacuum outside — vast, powerful, rented, and swappable; you will change which void you open onto more than once, and it was never yours to own. The <strong>airlock is yours,</strong> or it is no one's: the single chamber where your pressurized world meets the void, where your inspector holds the stamp, where <em>deny</em> means the outer door does not open. For a month the counsel was to own the layer around the model; today it becomes a concrete drill — <strong>build the airlock, staff it with your own crew, run it in shadow first, and demand the same fitting from every vessel you rent</strong> — because a hull with an open hatch to the vacuum is not saved by a magnificent engine.</p>
+<p><strong>The question it forces:</strong> <em>When our people speak to the rented brain, is there a chamber between our pressurized world and the void — and who holds the stamp inside it, us or the vendor? If the answer is "the model provider keeps us safe," we have described their engine, not our airlock. Where is the single passage our data takes to every model we use; whose inspector calls allow or deny before it crosses; what happens when that inspector is unreachable — and have we demanded the same fitting from every vessel in the fleet, or sealed one hatch and called the hull tight?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we own the checkpoint, or does the vendor?</strong> Inference hooks put the allow/deny verdict on <strong>your</strong> server, at the boundary where data leaves for the model. <strong>Is there a single control point every prompt to every model passes through — and do we hold the stamp, or have we outsourced the one decision that keeps our data ours?</strong></li>
+  <li>Yesterday's data was the alarm: <strong>88% of organizations had an agent incident while 82% of executives felt protected</strong> (Gravitee). <strong>Would a checkpoint we run in shadow mode this month confirm we're the exception — or show us, in live traffic, exactly what is leaving that we assumed never did?</strong></li>
+  <li>The model is rented and swappable; the control layer is not. <strong>Are we building the airlock as a standing, model-neutral capability — one we can demand from Anthropic, OpenAI, Google and any vendor — or bolting a one-off to a single product and calling the hull tight?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Credit, underwriting and fraud prompts carry regulated and material non-public data straight to a rented model. <strong>Can we route every such prompt through our own DLP verdict before inference — deny the ones carrying classified material — the way Inference hooks now allow, or does that data leave un-inspected today?</strong></li>
+  <li>CNIL demanded the Article 11 dossier; a checkpoint is where the log is written <em>and</em> the leak is stopped. <strong>Do we set the failure policy to fail-closed (block when the inspector is unreachable) for the systems that touch customer money — and can we prove it?</strong></li>
+  <li>The check covers chat, Claude Code and Cowork but <strong>not</strong> Bedrock or Google Cloud today. <strong>On which surfaces does our sensitive traffic actually run — and where does the airlock not yet fit, so we know the open hatches before an auditor does?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>PHI and trial data are the classic "must never leave un-inspected" cargo. <strong>For every clinician or researcher prompt to a model, is there a chamber that reads it and can deny before it crosses — and does our scanner catch PHI in free text, not just in tagged fields?</strong></li>
+  <li>Inference hooks see extracted text but <strong>not raw image bytes</strong> — a screenshot of a record is not inspected. <strong>How much of our sensitive content moves as images, and what is our plan for the hatch the airlock cannot yet open?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Formulas, tolerances and supplier terms are trade secrets that leak in a single careless prompt. <strong>Do we have one authoritative checkpoint for AI traffic across engineering and the supply chain — with an owner — or many un-manned hatches on line-side tools?</strong></li>
+  <li>Cheaper, better engines keep arriving (DeepSeek V4-Flash-0731 last week). <strong>When a team swaps the model, does our airlock still govern the crossing — or does changing the void re-open the door?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer PII flows through storefront and support agents at volume. <strong>Can we deny, in real time, a prompt that would ship a customer's data to a model — and run the verdict at a latency our experience can absorb (a 5-second timeout is the default; what's ours)?</strong></li>
+  <li>The market rewards provable trust. <strong>Is "every prompt to every model passes our own allow/deny check" a claim we can make to a customer this quarter — or an aspiration with an open hatch behind it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data carries the strictest duty and the least tolerance for silent egress. <strong>Is there a single, owned control point where citizen data is inspected before it reaches any model — with a fail-closed policy and a per-denial record in our own log?</strong></li>
+  <li>Enforcement is live and case-by-case (CNIL, 14 banks, Article 11). <strong>Could we show a supervisor not just what our AI did, but the checkpoint that stops what it must not do — the lock, not only the ledger?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Own the Checkpoint, Rent the Model</h2>
+<p>Read this week's launch as the month's thesis crossing from slide to switch. The counsel has been constant — <strong>own and govern the layer around the commodity model</strong> — and until now that layer was mostly conceptual. Inference hooks make one piece buildable, and the architecture splits cleanly into three parts: the <strong>vacuum</strong> (the commodity model, rented and swappable), the <strong>airlock</strong> (the control point you own), and the <strong>hatches still open</strong> (the honest gaps you must not paper over).</p>
+<div class="card"><ul>
+  <li><strong>The vacuum — the commodity model (rented, swappable, cheaper each week).</strong> Still a menu you rent: <strong>Claude Opus 5</strong> (24 Jul; #1, Intelligence Index 61 / Agentic Index 55.3, $5/$25), Google <strong>Gemini 3.6 Flash</strong> (21 Jul), <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong> open weights, and — as of <strong>31 July</strong> — <strong>DeepSeek V4-Flash-0731</strong> (MIT, open weights). This is the powerful thing you do not own and will keep changing. Its safety is the provider's craft. But safety of the engine is not control of your data, and the vacuum was never where your advantage lived.</li>
+  <li><strong>The airlock — the control point you own (shipped this week).</strong> With <strong>Inference hooks,</strong> a governed prompt is sent to <strong>your</strong> AI security server for an <strong>allow/deny verdict before inference runs;</strong> a denied request <strong>never reaches the model.</strong> It runs on Anthropic's servers after the request leaves the client, so it covers <strong>every governed request</strong> (claude.ai, <strong>Claude Code, Cowork;</strong> web, desktop, CLI) uniformly, <strong>nothing installed on devices;</strong> it is <strong>signed</strong> (Standard Webhooks) and answered within a <strong>timeout you set</strong> (5s default). Your server sees the <strong>transcript, tool calls and their results,</strong> and extracted attachment text — <strong>never raw bytes, system prompts, or internal context.</strong> You choose <strong>shadow mode</strong> (observe), a <strong>rollout percentage,</strong> <strong>role exclusions,</strong> and the <strong>failure policy</strong> (block or allow when your server is unreachable). Beyond DLP it can archive transcripts, meter usage, or enforce <strong>policy engines</strong> (model allowlists, project scoping, working-hours). The point that matters: <strong>the verdict is yours,</strong> on your ground — the vendor supplied the socket, you supply the guard.</li>
+  <li><strong>The hatches still open — the honest gaps.</strong> It is <strong>beta;</strong> <strong>Claude Enterprise only;</strong> <strong>not</strong> on <strong>Bedrock or Google Cloud;</strong> <strong>voice is not covered;</strong> verdicts are <strong>allow/deny only</strong> (no redaction/rewrite); <strong>raw image/file bytes are not inspected</strong> (a screenshot slips through); and the only event today is the <strong>prompt</strong> — real-time <strong>response-side</strong> blocking is planned, though your server already sees tool results in the next transcript. A control point that governs one vendor and one modality is a real advance and a partial hull.</li>
+</ul></div>
+<p>The strategic core: <strong>model safety and data control are different jobs, and only one of them can be yours.</strong> For a month the misread has been "our model provider is safe, so our AI is governed" — which confuses the vacuum's engineering with your airlock. After this week, "the vendor keeps the model safe" is not the answer to "who controls what our data does"; <em>"every prompt to every model we use passes a checkpoint we own, which can deny before the model sees it"</em> is the answer — and Inference hooks are the first place you can actually build it.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The airlock: own the checkpoint, rent the model. The model is the vacuum outside; your data crosses to it through one chamber, and you hold the stamp. On the left, your pressurized world: employees, prompts and files, across Claude Code, Cowork and chat, holding regulated data and trade secrets. On the right, the vacuum, the model: Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4 — rented and swappable. In the middle, the airlock — Inference hooks, launched 5 August as a beta, where your server holds the stamp: the conversation transcript plus tool calls and their results go to your AI security server, which returns allow or deny before inference runs, and a denied request never reaches the model. The request is signed with Standard Webhooks, answered within a 5-second default timeout, and governed by your failure policy; you can run shadow mode to watch, roll out to a percentage, exclude roles, and keep your own log. On allow, the outer door opens to the model; on deny, it never opens. Open hatches to know: it is beta, Claude Enterprise only, not on Bedrock or Google Cloud, no voice, allow or deny only with no redaction, raw image bytes are not read, and response-side blocking is still on the roadmap. The trap is to say the model vendor keeps us safe — the engine is theirs, the leak is yours. The win is to own the airlock: deny before the model sees it, on your ground, for every vendor." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE AIRLOCK — own the checkpoint, rent the model</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The model is the vacuum outside. Your data crosses through ONE chamber — and you hold the stamp.</text>
+
+  <!-- your pressurized world -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">YOUR PRESSURIZED WORLD</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">employees · prompts · files</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude Code · Cowork · chat</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">regulated data · trade secrets</text>
+
+  <!-- the vacuum / model -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#0a0d13" stroke="#3a4657"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#8fa0b5" font-family="sans-serif">THE VACUUM — the model</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash ·</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GPT-5.6 Sol · Kimi K3 · DeepSeek V4</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">rented · swappable · not yours</text>
+
+  <!-- arrow: your world down into airlock -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#5dcaa5"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">prompt leaves client ↓</text>
+
+  <!-- arrow: airlock up to model (allow) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">allow → out ↑</text>
+
+  <!-- the airlock -->
+  <rect x="40" y="210" width="600" height="150" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE AIRLOCK — Inference hooks (beta, 5 Aug) · YOUR server holds the stamp</text>
+  <text x="340" y="256" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">transcript + tool calls / results → your AI security server</text>
+  <text x="340" y="277" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ ALLOW / DENY before inference · a deny NEVER reaches the model</text>
+  <text x="340" y="299" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">signed (Standard Webhooks) · 5s default timeout · your failure policy</text>
+  <text x="340" y="320" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">shadow mode (watch) · rollout % · role exclusions · your own log</text>
+  <text x="340" y="344" font-size="9.5" fill="#e08a8a" text-anchor="middle" font-family="sans-serif" font-weight="700">DENY → outer door never opens · nothing of yours crosses to the void</text>
+
+  <!-- open hatches -->
+  <rect x="40" y="378" width="600" height="66" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="399" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">OPEN HATCHES (know them):</text>
+  <text x="60" y="417" font-size="10" fill="#e8edf3" font-family="sans-serif">beta · Claude Enterprise only · NOT Bedrock / Google Cloud · no voice ·</text>
+  <text x="60" y="433" font-size="10" fill="#e8edf3" font-family="sans-serif">allow/deny only (no redaction) · raw image bytes not read · response-side on the roadmap</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="444" x2="340" y2="462" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="486" font-size="9.5" fill="#e06b9a" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: "the model vendor keeps us safe"</text>
+  <text x="182" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the engine is theirs · the leak is yours</text>
+  <text x="498" y="486" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: own the airlock</text>
+  <text x="498" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">deny before the model sees it · every vendor</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>Your pressurized world — data you own</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The airlock — the checkpoint you own</span>
+  <span><i class="dot" style="background:#3a4657"></i>The vacuum — the rented model</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — rent the checkpoint with the model</th><th>The discipline — own the airlock</th></tr>
+<tr><td>"Our model provider is safe, so we're governed"</td><td>Model safety is theirs; the allow/deny verdict is ours</td></tr>
+<tr><td>Audit what already left (a ledger, after the fact)</td><td>Deny before it crosses (a lock, inline)</td></tr>
+<tr><td>One control bolted to one product</td><td>One checkpoint, model-neutral, demanded of every vendor</td></tr>
+<tr><td>Fail open by default when the guard is down</td><td>Choose the failure policy — fail-closed where data is regulated</td></tr>
+<tr><td>Call a partial airlock a sealed hull</td><td>Map the open hatches (Bedrock/GCP, voice, images) before an auditor does</td></tr>
+</table>
+
+<h3>Why a checkpoint you own beats a safer model</h3>
+<div class="card">
+<p>Every control this month presumed a place to stand. Discovery (yesterday) told you what leaves; the dossier (Monday's arc) recorded what your AI did; but neither could <strong>stop a specific prompt at the threshold.</strong> Inference hooks add the missing verb: <strong>deny.</strong> And the reason it must be <em>yours</em> is that a control point owned by the model vendor moves when you swap the model — rent the checkpoint with the engine and every model change re-opens the door. Own the airlock, on your ground, with a webhook contract any vendor can implement, and the crossing stays governed whichever void you open onto. That is why the correct read of this week is not "Anthropic added DLP" but "<strong>the enterprise can now hold the stamp</strong> — so build the pattern, not the point solution."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon, 3 Aug the customs house, 4 Aug the two windows, 5 Aug the dark warehouse). Yesterday you lit the warehouse to <em>see</em> the estate; today you fit an airlock at the one door your data leaves through, and you decide what crosses. On legacy estates the hatches are everywhere — AI bolted onto systems no one has fully mapped — so the retrofit is unglamorous and specific: <strong>route the AI traffic through a single control point you own</strong> (start with the surfaces Inference hooks now cover — chat, Claude Code, Cowork), <strong>run it in shadow mode</strong> to learn what leaves before you block anything, <strong>set the failure policy deliberately</strong> (fail-closed where data is regulated), and <strong>write the contract as model-neutral</strong> so the same airlock governs the next engine you rent. Then map the open hatches — Bedrock, Google Cloud, voice, image content — honestly, and treat them as the next fittings, not as a hull already sealed.</p>
+<p><strong>The clean mental model:</strong> <em>The model is the vacuum outside — powerful, rented, swappable; you'll change which void you open onto more than once. The airlock is yours: the single chamber where your data crosses to the model, where your inspector calls allow or deny, where deny means the outer door never opens. The vendor built the socket this week; the enterprise must staff the door — in shadow first, fail-closed where it counts, and for every vessel in the fleet, not just the one that shipped the fitting.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The launch — Anthropic Inference hooks (beta), 5 Aug.</strong> Governed prompt → <strong>your AI security server</strong> → <strong>allow/deny before inference;</strong> deny <strong>never reaches the model.</strong> Covers claude.ai, <strong>Claude Code, Cowork</strong> (web/desktop/CLI); signed (Standard Webhooks); <strong>5s</strong> default timeout; <strong>shadow mode,</strong> rollout %, role exclusions; your <strong>failure policy.</strong> Server sees transcript + <strong>tool calls/results</strong> + extracted text, <strong>never raw bytes/system prompts/internal context.</strong> Integrations named: <strong>Netskope, Palo Alto Networks, Proofpoint, Zscaler,</strong> or in-house.</li>
+  <li><strong>The gaps — be honest.</strong> Beta; <strong>Claude Enterprise only; not Bedrock/GCP;</strong> <strong>no voice;</strong> allow/deny only (<strong>no redaction</strong>); <strong>raw image bytes not inspected;</strong> response-side blocking <strong>on the roadmap.</strong></li>
+  <li><strong>The demand signal — why it shipped.</strong> <strong>Gartner: 40% of enterprise apps will feature task-specific AI agents by end-2026</strong> (up from &lt;5% in 2025); <strong>Salesforce Agentforce ~$1.2B ARR, +205% Y/Y;</strong> <strong>PwC: 88% of executives plan to raise AI budgets</strong> on agentic AI. More prompts, more surfaces, more data leaving — the airlock exists because the traffic exploded.</li>
+  <li><strong>The regulatory backdrop — still live.</strong> EU AI Act enforcement running since <strong>2 Aug;</strong> AI Office GPAI powers; <strong>€15M or 3%;</strong> <strong>180+ orgs</strong> signed the GPAI Code of Practice; CNIL's <strong>4 Aug</strong> action (14 banks, Article 11). A checkpoint is where the log is written and the leak is stopped.</li>
+  <li><strong>The vacuum, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — the rented, swappable engine. Own the airlock, not the vacuum.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">Anthropic sends the conversation transcript to your AI security server and waits for an allow or deny verdict; a denied request never reaches the model.</div><div class="a">— Claude Platform Docs, "Inference hooks", describing the inline control flow, 2026 (as documented)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Claude never sees the prompt if the company's security server blocks it. The data stays inside the enterprise perimeter.</div><div class="a">— On Anthropic's Inference hooks launch, in trade coverage of the 5 August 2026 beta, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">40% of enterprise applications will feature task-specific AI agents by 2026, up from less than 5% in 2025.</div><div class="a">— Gartner, on the agent traffic now crossing the boundary the airlock governs (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the vacuum outside — rented and swappable. The airlock is yours, or it is no one's: the one chamber where your data crosses to the model, and where deny means the outer door never opens."</div><div class="a">— the radar, on owning the checkpoint</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Inference hooks — what a deny does</td><td><span class="v">Denied request never reaches the model</span></td><td>Claude Platform Docs, "Inference hooks" (as documented)</td></tr>
+<tr><td>Verdict flow</td><td><span class="v">Prompt → your AI security server → allow/deny before inference</span></td><td>Claude Platform Docs (as documented)</td></tr>
+<tr><td>Default verdict timeout</td><td><span class="v">5 seconds (configurable)</span></td><td>Claude Platform Docs (as documented)</td></tr>
+<tr><td>Surfaces covered</td><td><span class="v">claude.ai chat · Claude Code · Cowork (web/desktop/CLI)</span></td><td>Claude Platform Docs (as documented)</td></tr>
+<tr><td>Not covered (today)</td><td><span class="v">Bedrock · Google Cloud · voice · raw image bytes · response-side</span></td><td>Claude Platform Docs (as documented)</td></tr>
+<tr><td>Rollout controls</td><td><span class="v">Shadow mode · rollout % · role exclusions · block/allow on failure</span></td><td>Claude Platform Docs (as documented)</td></tr>
+<tr><td>Named DLP integrations</td><td><span class="v">Netskope · Palo Alto Networks · Proofpoint · Zscaler · in-house</span></td><td>Unite.AI / trade coverage (as reported)</td></tr>
+<tr><td>Enterprise apps with task-specific AI agents by 2026</td><td><span class="v">40% (up from &lt;5% in 2025)</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Salesforce Agentforce ARR</td><td><span class="v">~$1.2B, +205% Y/Y</span></td><td>Salesforce coverage / Salesforce Ben (as reported)</td></tr>
+<tr><td>Executives planning to raise AI budgets on agentic AI</td><td><span class="v">88%</span></td><td>PwC AI Agent Survey (as reported)</td></tr>
+<tr><td>Agent incident vs. felt protection (why you need it)</td><td><span class="v">88% had an incident · 82% feel protected</span></td><td>Gravitee State of AI Agent Security 2026 (as reported)</td></tr>
+<tr><td>EU AI Act enforcement — status</td><td><span class="v">Live since 2 Aug; 180+ signed GPAI Code; CNIL 4 Aug: 14 banks, Art. 11</span></td><td>European Commission / regulatory coverage (as reported)</td></tr>
+<tr><td>Penalty ceiling (Art. 99) / incorrect information</td><td><span class="v">€15M or 3% · €7.5M or 1.5%</span></td><td>European Commission</td></tr>
+<tr><td>The vacuum (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Build the airlock — stand up an AI security server and put it in shadow mode this week.</strong> Inference hooks give you a socket; the guard is yours to supply. Point it at the DLP infrastructure you already run (Netskope, Palo Alto, Proofpoint, Zscaler, or in-house), turn on <strong>shadow mode</strong> so it observes live traffic without blocking, and read what your people are actually sending to the model. You will learn more about your true exposure in a week of shadow-mode logs than in a quarter of policy documents — and you will have built the enforcement point, not just the inventory.</li>
+  <li><strong>Own the verdict and set the failure policy deliberately.</strong> The decision that keeps your data yours is allow/deny, and it must sit on <strong>your</strong> server, not the vendor's. Decide, per surface, what happens when your inspector is unreachable — <strong>fail-closed</strong> (block) for systems that touch regulated data or customer money, fail-open only where availability truly outweighs egress risk — and put a per-denial record in <strong>your own log,</strong> not just the vendor's. Report to the board a single metric: <em>the share of AI traffic that passes a checkpoint we control.</em></li>
+  <li><strong>Make it model-neutral and map the open hatches — don't call a partial airlock a sealed hull.</strong> The pattern is the asset, not the product: write the checkpoint as a webhook contract you can demand from <strong>every</strong> model vendor, so swapping Opus 5 for Gemini or GPT-5.6 never re-opens the door. Then list the hatches this fitting does not yet close — <strong>Bedrock and Google Cloud surfaces, voice, image content, response-side blocking</strong> — assign each an owner and a plan, and treat them as the next fittings. Own the airlock, staff it with your crew, and demand the same from every vessel you rent — because a hull with one open hatch to the vacuum is not a sealed ship.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Anthropic / Claude (Inference hooks announcement + Claude Platform Docs) · Unite.AI · The Next Web · Releasebot · Zscaler · Palo Alto Networks · Standard Webhooks · Gartner (as reported) · Salesforce / Salesforce Ben · PwC (AI Agent Survey) · Gravitee (State of AI Agent Security 2026) · European Commission (AI Act enforcement) · artificialintelligenceact.eu (Art. 11, Art. 26) · regulatory coverage (CNIL) · LLM-Stats / model trackers. Figures are relayed from vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting, and "as documented" where drawn from Anthropic's product documentation. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 6 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>

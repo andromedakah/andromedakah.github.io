@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar IA — 6 août 2026</title>
+<meta name="description" content="Radar IA quotidien : résumé exécutif, allégorie pour dirigeants, questions intersectorielles et analyse technique sur le sas — les Inference hooks d'Anthropic (bêta, lancés le 5 août 2026) placent un point de contrôle allow/deny que l'entreprise possède entre ses données et le modèle. Chaque prompt gouverné est routé vers votre propre serveur de sécurité IA pour un verdict allow ou deny avant l'inférence ; une requête refusée n'atteint jamais le modèle. Couvre le chat claude.ai, Claude Code et Cowork ; webhook signé, délai par défaut de 5 s, mode fantôme, déploiement en pourcentage, exclusions de rôles, votre politique d'échec. Pas sur Bedrock/Google Cloud, pas de voix, allow/deny uniquement, côté réponse à venir. La thèse du mois rendue concrète : posséder la couche de contrôle autour du modèle banalisé. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Lecteur audio */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Résumé</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ Radar IA · Maîtrise des données &amp; gouvernance</div>
+  <h1>Le Sas</h1>
+  <div class="subhead">Les Inference hooks d'Anthropic placent un point de contrôle allow/deny que vous possédez entre vos données et le modèle</div>
+  <div class="meta">Jeudi 6 août 2026 · Édition intersectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">L'édition d'hier (« L'Entrepôt Obscur ») s'achevait sur un mur : on ne gouverne pas ce qu'on ne voit pas, et l'entreprise ne voit qu'environ un tiers de sa propre IA. Aujourd'hui, un éditeur de frontière a livré l'outil qui répond à la question suivante — une fois qu'on voit ce qui part vers le modèle, peut-on empêcher la mauvaise chose de partir ? Le 5 août 2026, Anthropic a lancé les Inference hooks (bêta) pour Claude Enterprise : un point de contrôle qui route chaque prompt gouverné vers votre propre serveur de sécurité IA pour un verdict allow ou deny avant l'inférence — et une requête refusée n'atteint jamais le modèle. Le serveur voit la transcription, y compris les appels d'outils et leurs résultats, et rend un verdict dans un délai que vous fixez (5 s par défaut) ; il peut tourner en mode fantôme, se déployer sur un pourcentage du trafic et exclure des rôles. Fait décisif : le verdict est le vôtre — vous, ou votre fournisseur DLP, opérez le contrôle ; Anthropic n'a fourni que la prise. La thèse du mois rendue concrète : posséder la couche de contrôle autour du modèle banalisé. La question du conseil, ce matin : le modèle est loué et interchangeable — mais le point de contrôle qui décide de ce qui, chez nous, l'atteint : le possédons-nous, sur notre terrain, ou avons-nous laissé sans garde l'unique porte par laquelle nos secrets sortent ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Résumé <span class="pill">lecture en 90 s</span></h2>
+<div class="card">
+<p>Depuis un mois, ce radar défend une seule idée sous une dizaine d'angles : le modèle se banalise, donc l'avantage durable est la <strong>couche que vous possédez autour de lui</strong> — le compteur, le routeur, le plan MCP, le dossier, le balayage de découverte. Chaque édition décrivait cette couche ; presque rien n'existait comme produit achetable. <strong>Aujourd'hui, une pièce a été livrée.</strong> Le <strong>5 août 2026, Anthropic a lancé les Inference hooks (bêta) pour Claude Enterprise</strong> — le premier <strong>point de contrôle natif que l'entreprise possède et opère elle-même</strong> sur le chemin entre ses données et le modèle loué.</p>
+<p><strong>Ce que c'est, précisément.</strong> Quand un employé soumet un prompt sur une surface gouvernée (chat claude.ai, <strong>Claude Code, Cowork</strong>), Anthropic route la <strong>transcription de la conversation vers le propre serveur de sécurité IA de votre organisation</strong> — un service HTTPS que vous ou votre fournisseur exploitez — et <strong>attend un verdict allow ou deny avant que l'inférence ne s'exécute. Une requête refusée n'atteint jamais le modèle.</strong> Le contrôle s'exécute sur les serveurs d'Anthropic après que la requête a quitté le client, il couvre donc <strong>chaque requête gouvernée de façon uniforme, sans rien installer sur les appareils ;</strong> il est signé (Standard Webhooks) et répondu dans un délai que vous fixez (5 s par défaut). Votre serveur voit la transcription, <strong>les appels d'outils et leurs résultats,</strong> et le texte extrait des pièces jointes — mais <strong>jamais les octets bruts des fichiers ou images, les prompts système, ni le contexte interne d'Anthropic.</strong></p>
+<p><strong>Pourquoi c'est plus qu'une note de version.</strong> Le problème du mois était que la gouvernance de la couche modèle restait une diapositive, pas un interrupteur. Snyk a montré que le parc vaut ~3× la liste de modèles et que les deux tiers sont dans le noir ; Gravitee a montré que <strong>88 % des organisations ont eu un incident d'agent tandis que 82 % des dirigeants se croyaient protégés</strong> — l'écart entre <em>se croire</em> gouverné et <em>l'être.</em> Les Inference hooks comblent une part de cet écart par un mécanisme réel : un <strong>point de contrôle que vous maîtrisez</strong> à la frontière exacte où vos données quittent vos murs vers un cerveau qui n'est pas le vôtre.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Le point de contrôle est le vôtre, pas celui de l'éditeur.</strong> La nouveauté n'est pas qu'Anthropic ait ajouté un garde — c'est qu'Anthropic ait construit la prise pour que <strong>votre</strong> garde se tienne sur le chemin et que <strong>votre</strong> serveur détienne le tampon. Vous décidez allow/deny ; vous gardez la politique d'échec (bloquer ou laisser passer quand votre serveur est injoignable) ; vous possédez le journal. La sûreté du modèle appartient à l'éditeur ; <strong>la maîtrise des données est désormais démontrablement la vôtre.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>C'est en ligne, pas après coup.</strong> Les outils de conformité et d'audit disent ce qui s'est déjà produit. Les Inference hooks arrêtent un prompt <strong>avant qu'il n'atteigne le modèle</strong> — la différence entre un inventaire (la découverte de l'entrepôt obscur d'hier) et un <strong>point d'application.</strong> Voir le parc était l'étape un ; maîtriser le franchissement est l'étape deux.</div></div>
+<div class="num"><div class="b">3</div><div><strong>C'est réel, et c'est précoce — connaissez les lacunes.</strong> C'est de la <strong>bêta,</strong> Claude Enterprise uniquement ; ça <strong>ne</strong> tourne <strong>pas</strong> sur Amazon Bedrock ni Google Cloud ; <strong>la voix n'est pas couverte ;</strong> les verdicts sont allow/deny seulement (<strong>pas de caviardage ni de réécriture</strong>) ; et le seul événement à ce jour est le prompt — le blocage <strong>côté réponse</strong> en temps réel est encore à la feuille de route, même si votre serveur voit déjà les résultats d'outils dans la transcription. Un sas partiel n'est pas une coque scellée.</div></div>
+<div class="card"><strong>En bref :</strong> le mois disait <em>posséder la couche autour du modèle banalisé ;</em> aujourd'hui l'entreprise peut en acheter le premier boulon. Montez le serveur de sécurité IA, mettez-le en mode fantôme cette semaine, et faites du verdict allow/deny le vôtre — car le modèle est loué et interchangeable, mais l'unique porte par laquelle vos secrets sortent doit être gardée par votre équipage, sur votre terrain, et elle doit exister pour chaque éditeur de modèle que vous utilisez, pas seulement celui qui a livré la prise en premier.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🚪 « Le Sas »</h3>
+<p><em>Sujet : le 5 août 2026, Anthropic a lancé les Inference hooks (bêta) pour Claude Enterprise — un point de contrôle qui route chaque prompt gouverné vers le propre serveur de sécurité IA de l'organisation pour un verdict allow ou deny avant l'inférence, de sorte qu'une requête refusée n'atteint jamais le modèle. Le contrôle s'exécute sur les serveurs d'Anthropic après que la requête a quitté le client et s'applique uniformément, sans rien installer sur les appareils ; le serveur voit la transcription, les appels d'outils et leurs résultats, et le texte extrait des pièces jointes, mais jamais les octets bruts des fichiers ou images, les prompts système, ni le contexte interne d'Anthropic. Il est signé (Standard Webhooks), répondu dans un délai configurable (5 secondes par défaut), et peut tourner en mode fantôme, sur un pourcentage de déploiement, ou avec des exclusions de rôles ; l'organisation fixe la politique d'échec. Les verdicts sont allow ou deny seulement ; l'application côté réponse est prévue ; c'est réservé à Claude Enterprise, pas sur Bedrock ni Google Cloud, et la voix n'est pas couverte. La leçon : le modèle est loué et interchangeable, mais le point de contrôle qui décide de ce qui, chez vous, l'atteint doit être possédé et opéré par vous — l'éditeur a construit la prise ; l'entreprise doit tenir la porte.</em></p>
+<p>Imaginez un grand vaisseau — des abysses ou de l'espace, peu importe — transportant à l'intérieur quelque chose de précieux : une cale maintenue à <strong>une atmosphère de votre propre pression,</strong> votre cargaison, vos cartes, les mots privés de votre équipage. Dehors, autour de la coque, un milieu que vous ne maîtrisez pas et ne pouvez respirer : la haute mer, le vide, le cerveau loué qui vit au-delà de vos murs. Entre les deux, il n'existe qu'un seul passage licite, et ce n'est pas une porte mais une <strong>chambre à deux portes qui ne sont jamais ouvertes en même temps</strong> — le sas. Rien ne franchit votre monde sous pression vers le vide sans entrer dans cette chambre, laisser la porte intérieure se sceller derrière soi, et attendre.</p>
+<p>Pendant des années, l'entreprise n'avait pas de sas. Tout ce qu'un employé tapait <strong>partait</strong> tout simplement — par une écoutille ouverte, dans le vide, vers un cerveau que l'entreprise ne possédait pas — et le seul témoin était un registre que le capitaine du port tenait <em>après</em> le franchissement, utile au deuil et inutile à la prévention. Vous pouviez auditer ce qui s'était échappé ; vous ne pouviez pas le retenir au seuil. C'est la différence entre un registre et un verrou, et depuis un mois ce radar répète que le registre ne suffit pas : <strong>on peut éclairer l'entrepôt et voir malgré tout ses marchandises sortir par la porte ouverte.</strong></p>
+<p>Ce qui a été livré cette semaine, c'est la ferrure d'un vrai sas, soudée dans la coque à l'unique endroit où votre cargaison part vers le vide. Un message entre dans la chambre ; la porte intérieure se scelle ; et — c'est tout l'enjeu — <strong>votre propre inspecteur,</strong> pas celui de l'éditeur, lit ce qui se trouve dans la chambre et prononce <em>allow</em> ou <em>deny.</em> Sur <em>allow,</em> la porte extérieure s'ouvre et le message part vers le cerveau. Sur <em>deny,</em> la porte extérieure <strong>ne rompt jamais son sceau ;</strong> le message est renvoyé dans votre intérieur sous pression, et rien de ce qui est à vous n'atteint le vide. Vous pouvez faire tourner la chambre le verrou extérieur désengagé un temps, observant ce qui <em>passerait</em> sans arrêter personne (l'équipage appelle cela le mode fantôme) ; vous pouvez l'ouvrir d'abord à une fraction du trafic ; vous pouvez exempter quelques initiés de confiance. Et vous décidez de ce qui arrive quand l'inspecteur dort — retenir chacun à la porte intérieure, ou les laisser passer sans lecture — car c'est <strong>votre</strong> sas, et le protocole d'échec est le vôtre à écrire.</p>
+<p>Deux vérités gardent l'équipage honnête. La première : l'éditeur a construit la <strong>prise,</strong> pas le garde. Le remarquable n'est pas que le charpentier ait ajouté une écoutille de sûreté — c'est qu'il ait taillé dans la coque une ferrure pour que <strong>votre</strong> porte, <strong>votre</strong> verrou, <strong>votre</strong> inspecteur puissent se tenir dans l'unique passage vers le vide, et que l'éditeur ait accepté d'amarrer son vaisseau à votre sas plutôt que de vous faire respirer son air à ses conditions. Voilà la thèse du mois coulée dans le fer : <strong>posséder la couche autour du modèle banalisé.</strong> La seconde vérité est plus sobre : ce sas est <strong>neuf, et pas encore complet.</strong> Il scelle le passage principal mais pas toutes les écoutilles — il ne s'adapte pas aux deux autres navires de votre flotte (ceux qu'on aborde par Bedrock et Google Cloud) ; il ne peut pas encore inspecter une caisse scellée dont on ne voit que l'étiquette (une image) ; il ne surveille ce qui <em>revient</em> qu'en le lisant au cycle sortant suivant ; et il peut barrer la porte mais pas remballer discrètement la cargaison. Un sas partiel est un vrai sas et une grande avancée — mais un capitaine qui l'appelle coque scellée se noiera par l'écoutille oubliée.</p>
+<p><strong>La morale :</strong> le modèle est le vide dehors — vaste, puissant, loué, interchangeable ; vous changerez plus d'une fois de vide vers lequel vous ouvrez, et il ne fut jamais vôtre à posséder. Le <strong>sas est le vôtre,</strong> ou il n'est à personne : l'unique chambre où votre monde sous pression rencontre le vide, où votre inspecteur détient le tampon, où <em>deny</em> signifie que la porte extérieure ne s'ouvre pas. Depuis un mois, le conseil était de posséder la couche autour du modèle ; aujourd'hui il devient un exercice concret — <strong>construire le sas, l'armer de votre propre équipage, le faire tourner d'abord en fantôme, et exiger la même ferrure de chaque vaisseau que vous louez</strong> — car une coque avec une écoutille ouverte sur le vide n'est pas sauvée par un moteur magnifique.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Quand nos gens parlent au cerveau loué, y a-t-il une chambre entre notre monde sous pression et le vide — et qui y détient le tampon, nous ou l'éditeur ? Si la réponse est « le fournisseur du modèle nous protège », nous avons décrit leur moteur, pas notre sas. Où se trouve l'unique passage que prennent nos données vers chaque modèle que nous utilisons ; quel inspecteur prononce allow ou deny avant le franchissement ; qu'arrive-t-il quand cet inspecteur est injoignable — et avons-nous exigé la même ferrure de chaque vaisseau de la flotte, ou scellé une écoutille en déclarant la coque étanche ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions pour dirigeants — par secteur</h2>
+<div class="sector"><div class="t">🌐 Intersectoriel (tout conseil)</div><ul>
+  <li><strong>Possédons-nous le point de contrôle, ou est-ce l'éditeur ?</strong> Les Inference hooks placent le verdict allow/deny sur <strong>votre</strong> serveur, à la frontière où les données partent vers le modèle. <strong>Existe-t-il un point de contrôle unique par lequel passe chaque prompt vers chaque modèle — et détenons-nous le tampon, ou avons-nous externalisé la seule décision qui garde nos données à nous ?</strong></li>
+  <li>La donnée d'hier était l'alarme : <strong>88 % des organisations ont eu un incident d'agent tandis que 82 % des dirigeants se croyaient protégés</strong> (Gravitee). <strong>Un point de contrôle que nous ferions tourner en mode fantôme ce mois-ci confirmerait-il que nous sommes l'exception — ou nous montrerait-il, dans le trafic réel, exactement ce qui part et que nous supposions ne jamais partir ?</strong></li>
+  <li>Le modèle est loué et interchangeable ; la couche de contrôle ne l'est pas. <strong>Construisons-nous le sas comme une capacité permanente et neutre vis-à-vis du modèle — que nous pouvons exiger d'Anthropic, d'OpenAI, de Google et de tout éditeur — ou boulonnons-nous un ponctuel à un seul produit en déclarant la coque étanche ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Les prompts de scoring, d'octroi et de fraude emportent vers un modèle loué des données réglementées et des informations privilégiées. <strong>Pouvons-nous router chacun de ces prompts par notre propre verdict DLP avant l'inférence — refuser ceux qui portent des éléments classifiés — comme les Inference hooks le permettent désormais, ou ces données partent-elles aujourd'hui sans inspection ?</strong></li>
+  <li>La CNIL a réclamé le dossier de l'article 11 ; un point de contrôle est là où le journal s'écrit <em>et</em> la fuite s'arrête. <strong>Fixons-nous la politique d'échec sur « fermé par défaut » (bloquer quand l'inspecteur est injoignable) pour les systèmes qui touchent l'argent des clients — et pouvons-nous le prouver ?</strong></li>
+  <li>Le contrôle couvre le chat, Claude Code et Cowork mais <strong>pas</strong> Bedrock ni Google Cloud à ce jour. <strong>Sur quelles surfaces notre trafic sensible circule-t-il réellement — et où le sas ne s'adapte-t-il pas encore, pour que nous connaissions les écoutilles ouvertes avant un auditeur ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Les données de santé et d'essais sont la cargaison type « ne doit jamais partir sans inspection ». <strong>Pour chaque prompt de clinicien ou de chercheur vers un modèle, y a-t-il une chambre qui le lit et peut refuser avant le franchissement — et notre scanner attrape-t-il les données de santé en texte libre, pas seulement dans des champs balisés ?</strong></li>
+  <li>Les Inference hooks voient le texte extrait mais <strong>pas les octets bruts des images</strong> — une capture d'écran d'un dossier n'est pas inspectée. <strong>Quelle part de notre contenu sensible circule en images, et quel est notre plan pour l'écoutille que le sas ne peut pas encore ouvrir ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacture</div><ul>
+  <li>Formules, tolérances et conditions fournisseurs sont des secrets d'affaires qui fuient en un seul prompt négligent. <strong>Avons-nous un point de contrôle unique et faisant autorité pour le trafic IA à travers l'ingénierie et la chaîne d'approvisionnement — avec un responsable — ou de multiples écoutilles sans garde sur des outils de ligne ?</strong></li>
+  <li>Des moteurs moins chers et meilleurs arrivent sans cesse (DeepSeek V4-Flash-0731 la semaine dernière). <strong>Quand une équipe change de modèle, notre sas gouverne-t-il encore le franchissement — ou changer de vide rouvre-t-il la porte ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Les données personnelles des clients transitent par les agents de vente et de support à grand volume. <strong>Pouvons-nous refuser, en temps réel, un prompt qui expédierait les données d'un client à un modèle — et rendre le verdict à une latence que notre expérience absorbe (un délai de 5 secondes est le défaut ; quel est le nôtre) ?</strong></li>
+  <li>Le marché récompense la confiance prouvable. <strong>« Chaque prompt vers chaque modèle passe notre propre contrôle allow/deny » est-il une affirmation que nous pouvons faire à un client ce trimestre — ou une aspiration avec une écoutille ouverte derrière ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>Les données citoyennes portent le devoir le plus strict et la moindre tolérance à une fuite silencieuse. <strong>Y a-t-il un point de contrôle unique et possédé où les données citoyennes sont inspectées avant d'atteindre tout modèle — avec une politique fermée par défaut et un enregistrement par refus dans notre propre journal ?</strong></li>
+  <li>L'application est en vigueur et au cas par cas (CNIL, 14 banques, article 11). <strong>Pourrions-nous montrer à un superviseur non seulement ce qu'a fait notre IA, mais le point de contrôle qui arrête ce qu'elle ne doit pas faire — le verrou, pas seulement le registre ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Posséder le point de contrôle, louer le modèle</h2>
+<p>Lisez le lancement de la semaine comme la thèse du mois passant de la diapositive à l'interrupteur. Le conseil est resté constant — <strong>posséder et gouverner la couche autour du modèle banalisé</strong> — et jusqu'ici cette couche était surtout conceptuelle. Les Inference hooks en rendent une pièce constructible, et l'architecture se divise nettement en trois parties : le <strong>vide</strong> (le modèle banalisé, loué et interchangeable), le <strong>sas</strong> (le point de contrôle que vous possédez) et les <strong>écoutilles encore ouvertes</strong> (les lacunes honnêtes qu'il ne faut pas maquiller).</p>
+<div class="card"><ul>
+  <li><strong>Le vide — le modèle banalisé (loué, interchangeable, moins cher chaque semaine).</strong> Toujours un menu que vous louez : <strong>Claude Opus 5</strong> (24 juil. ; nº 1, Intelligence Index 61 / Agentic Index 55,3, 5/25 $), Google <strong>Gemini 3.6 Flash</strong> (21 juil.), <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong> à poids ouverts, et — depuis le <strong>31 juillet</strong> — <strong>DeepSeek V4-Flash-0731</strong> (MIT, poids ouverts). C'est la chose puissante que vous ne possédez pas et qui changera sans cesse. Sa sûreté est l'art du fournisseur. Mais la sûreté du moteur n'est pas la maîtrise de vos données, et le vide n'a jamais été là où vivait votre avantage.</li>
+  <li><strong>Le sas — le point de contrôle que vous possédez (livré cette semaine).</strong> Avec les <strong>Inference hooks,</strong> un prompt gouverné est envoyé à <strong>votre</strong> serveur de sécurité IA pour un <strong>verdict allow/deny avant l'inférence ;</strong> une requête refusée <strong>n'atteint jamais le modèle.</strong> Il s'exécute sur les serveurs d'Anthropic après que la requête a quitté le client, il couvre donc <strong>chaque requête gouvernée</strong> (claude.ai, <strong>Claude Code, Cowork ;</strong> web, bureau, CLI) de façon uniforme, <strong>rien à installer sur les appareils ;</strong> il est <strong>signé</strong> (Standard Webhooks) et répondu dans un <strong>délai que vous fixez</strong> (5 s par défaut). Votre serveur voit la <strong>transcription, les appels d'outils et leurs résultats,</strong> et le texte extrait des pièces jointes — <strong>jamais les octets bruts, les prompts système, ni le contexte interne.</strong> Vous choisissez le <strong>mode fantôme</strong> (observer), un <strong>pourcentage de déploiement,</strong> des <strong>exclusions de rôles,</strong> et la <strong>politique d'échec</strong> (bloquer ou laisser passer quand votre serveur est injoignable). Au-delà du DLP, il peut archiver les transcriptions, mesurer l'usage, ou appliquer des <strong>moteurs de politique</strong> (listes de modèles autorisés, cloisonnement par projet, plages horaires). Le point qui compte : <strong>le verdict est le vôtre,</strong> sur votre terrain — l'éditeur a fourni la prise, vous fournissez le garde.</li>
+  <li><strong>Les écoutilles encore ouvertes — les lacunes honnêtes.</strong> C'est de la <strong>bêta ;</strong> <strong>Claude Enterprise uniquement ;</strong> <strong>pas</strong> sur <strong>Bedrock ni Google Cloud ;</strong> <strong>la voix n'est pas couverte ;</strong> les verdicts sont <strong>allow/deny seulement</strong> (pas de caviardage/réécriture) ; <strong>les octets bruts d'image/fichier ne sont pas inspectés</strong> (une capture d'écran passe) ; et le seul événement à ce jour est le <strong>prompt</strong> — le blocage <strong>côté réponse</strong> en temps réel est prévu, même si votre serveur voit déjà les résultats d'outils dans la transcription suivante. Un point de contrôle qui gouverne un éditeur et une modalité est une vraie avancée et une coque partielle.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>la sûreté du modèle et la maîtrise des données sont deux métiers différents, et un seul peut être le vôtre.</strong> Depuis un mois, la mésinterprétation est « notre fournisseur de modèle est sûr, donc notre IA est gouvernée » — ce qui confond l'ingénierie du vide avec votre sas. Après cette semaine, « l'éditeur garde le modèle sûr » n'est pas la réponse à « qui maîtrise ce que font nos données » ; <em>« chaque prompt vers chaque modèle que nous utilisons passe par un point de contrôle que nous possédons, capable de refuser avant que le modèle ne voie »</em> est la réponse — et les Inference hooks sont le premier endroit où l'on peut vraiment la construire.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le sas : posséder le point de contrôle, louer le modèle. Le modèle est le vide dehors ; vos données le franchissent par une seule chambre, et vous détenez le tampon. À gauche, votre monde sous pression : employés, prompts et fichiers, à travers Claude Code, Cowork et le chat, portant des données réglementées et des secrets d'affaires. À droite, le vide, le modèle : Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4 — loué et interchangeable. Au milieu, le sas — les Inference hooks, lancés le 5 août en bêta, où votre serveur détient le tampon : la transcription plus les appels d'outils et leurs résultats vont à votre serveur de sécurité IA, qui renvoie allow ou deny avant l'inférence, et une requête refusée n'atteint jamais le modèle. La requête est signée avec Standard Webhooks, répondue dans un délai par défaut de 5 secondes, et régie par votre politique d'échec ; vous pouvez faire tourner un mode fantôme pour observer, déployer sur un pourcentage, exclure des rôles et tenir votre propre journal. Sur allow, la porte extérieure s'ouvre vers le modèle ; sur deny, elle ne s'ouvre jamais. Écoutilles ouvertes à connaître : c'est de la bêta, Claude Enterprise uniquement, pas sur Bedrock ni Google Cloud, pas de voix, allow ou deny seulement sans caviardage, les octets bruts d'image ne sont pas lus, et le blocage côté réponse est encore à la feuille de route. Le piège est de dire que le fournisseur du modèle nous protège — le moteur est à eux, la fuite est à vous. Le gain est de posséder le sas : refuser avant que le modèle ne voie, sur votre terrain, pour chaque éditeur." style="max-width:660px;width:100%;height:auto">
+  <!-- titre -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE SAS — posséder le point de contrôle, louer le modèle</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Le modèle est le vide dehors. Vos données franchissent UNE seule chambre — et vous détenez le tampon.</text>
+
+  <!-- votre monde sous pression -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">VOTRE MONDE SOUS PRESSION</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">employés · prompts · fichiers</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude Code · Cowork · chat</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">données réglementées · secrets</text>
+
+  <!-- le vide / modèle -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#0a0d13" stroke="#3a4657"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#8fa0b5" font-family="sans-serif">LE VIDE — le modèle</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash ·</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GPT-5.6 Sol · Kimi K3 · DeepSeek V4</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">loué · interchangeable · pas à vous</text>
+
+  <!-- flèche : monde vers sas -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#5dcaa5"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">le prompt quitte le client ↓</text>
+
+  <!-- flèche : sas vers modèle (allow) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">allow → sortie ↑</text>
+
+  <!-- le sas -->
+  <rect x="40" y="210" width="600" height="150" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">LE SAS — Inference hooks (bêta, 5 août) · VOTRE serveur détient le tampon</text>
+  <text x="340" y="256" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">transcription + appels d'outils / résultats → votre serveur de sécurité IA</text>
+  <text x="340" y="277" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ ALLOW / DENY avant l'inférence · un deny n'atteint JAMAIS le modèle</text>
+  <text x="340" y="299" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">signé (Standard Webhooks) · délai 5 s par défaut · votre politique d'échec</text>
+  <text x="340" y="320" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">mode fantôme (observer) · déploiement % · exclusions de rôles · votre journal</text>
+  <text x="340" y="344" font-size="9.5" fill="#e08a8a" text-anchor="middle" font-family="sans-serif" font-weight="700">DENY → la porte extérieure ne s'ouvre jamais · rien de vôtre ne franchit vers le vide</text>
+
+  <!-- écoutilles ouvertes -->
+  <rect x="40" y="378" width="600" height="66" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="399" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">ÉCOUTILLES OUVERTES (à connaître) :</text>
+  <text x="60" y="417" font-size="10" fill="#e8edf3" font-family="sans-serif">bêta · Claude Enterprise uniquement · PAS Bedrock / Google Cloud · pas de voix ·</text>
+  <text x="60" y="433" font-size="10" fill="#e8edf3" font-family="sans-serif">allow/deny seulement (pas de caviardage) · octets bruts d'image non lus · côté réponse à venir</text>
+
+  <!-- piège vs gain -->
+  <line x1="340" y1="444" x2="340" y2="462" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="486" font-size="9.5" fill="#e06b9a" text-anchor="middle" font-family="sans-serif" font-weight="700">PIÈGE : « le fournisseur du modèle nous protège »</text>
+  <text x="182" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">le moteur est à eux · la fuite est à vous</text>
+  <text x="498" y="486" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">GAIN : posséder le sas</text>
+  <text x="498" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">refuser avant que le modèle ne voie · chaque éditeur</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>Votre monde sous pression — les données que vous possédez</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Le sas — le point de contrôle que vous possédez</span>
+  <span><i class="dot" style="background:#3a4657"></i>Le vide — le modèle loué</span>
+</div>
+</div>
+
+<h3>Le piège vs. la discipline</h3>
+<table>
+<tr><th>Le piège — louer le point de contrôle avec le modèle</th><th>La discipline — posséder le sas</th></tr>
+<tr><td>« Notre fournisseur de modèle est sûr, donc nous sommes gouvernés »</td><td>La sûreté du modèle est à eux ; le verdict allow/deny est à nous</td></tr>
+<tr><td>Auditer ce qui est déjà parti (un registre, après coup)</td><td>Refuser avant le franchissement (un verrou, en ligne)</td></tr>
+<tr><td>Un contrôle boulonné à un seul produit</td><td>Un point de contrôle, neutre au modèle, exigé de chaque éditeur</td></tr>
+<tr><td>Laisser passer par défaut quand le garde est absent</td><td>Choisir la politique d'échec — fermé par défaut là où la donnée est réglementée</td></tr>
+<tr><td>Appeler un sas partiel une coque scellée</td><td>Cartographier les écoutilles ouvertes (Bedrock/GCP, voix, images) avant l'auditeur</td></tr>
+</table>
+
+<h3>Pourquoi un point de contrôle que vous possédez vaut mieux qu'un modèle plus sûr</h3>
+<div class="card">
+<p>Chaque contrôle de ce mois présumait un endroit où se tenir. La découverte (hier) disait ce qui part ; le dossier (l'arc de lundi) enregistrait ce qu'a fait votre IA ; mais aucun ne pouvait <strong>arrêter un prompt précis au seuil.</strong> Les Inference hooks ajoutent le verbe manquant : <strong>refuser.</strong> Et la raison pour laquelle il doit être <em>vôtre,</em> c'est qu'un point de contrôle possédé par le fournisseur du modèle se déplace quand vous changez de modèle — louez le contrôle avec le moteur, et chaque changement rouvre la porte. Possédez le sas, sur votre terrain, avec un contrat webhook que tout éditeur peut mettre en œuvre, et le franchissement reste gouverné quel que soit le vide vers lequel vous ouvrez. Voilà pourquoi la bonne lecture de la semaine n'est pas « Anthropic a ajouté du DLP » mais « <strong>l'entreprise peut désormais détenir le tampon</strong> — alors construisez le motif, pas la solution ponctuelle ».</p>
+</div>
+
+<h3>Comment cela atterrit sur les parcs hérités</h3>
+<div class="card">
+<p>La même couture que ce radar ne cesse de reprendre — <strong>posséder et gouverner ce qui ne se banalise pas</strong> (6 juil. le compteur, 7 juil. le routeur, 8 juil. le plan MCP, 9 juil. l'armée de mercenaires, 10 juil. le standard téléphonique, 11 juil. l'équipe de nuit, 12 juil. la recette, 13 juil. la prime au cobra, 14 juil. le permis d'apprenti, 15 juil. la guerre des jauges, 16 juil. la marque de l'essayeur, 17 juil. le raccord standard, 18 juil. l'âge de l'aluminium, 19 juil. la tente de triage, 20 juil. l'anneau sigillaire, 21 juil. le passeport, 22 juil. la moisson, 23 juil. la ville d'entreprise, 24 juil. l'enclosure, 25 juil. la provenance, 26 juil. l'extension, 27 juil. la poudrière, 28 juil. la salle du courrier, 29 juil. l'usine pilote, 30 juil. le cahier de lieux communs, 31 juil. le dernier kilomètre, 1er août la table des marées, 2 août le canon fou, 3 août la douane, 4 août les deux guichets, 5 août l'entrepôt obscur). Hier vous avez éclairé l'entrepôt pour <em>voir</em> le parc ; aujourd'hui vous montez un sas à l'unique porte par laquelle vos données sortent, et vous décidez ce qui franchit. Sur les parcs hérités, les écoutilles sont partout — de l'IA boulonnée sur des systèmes que personne n'a entièrement cartographiés — donc le rétrofit est ingrat et précis : <strong>router le trafic IA par un point de contrôle unique que vous possédez</strong> (commencez par les surfaces que les Inference hooks couvrent désormais — chat, Claude Code, Cowork), <strong>le faire tourner en mode fantôme</strong> pour apprendre ce qui part avant de bloquer quoi que ce soit, <strong>fixer la politique d'échec délibérément</strong> (fermé par défaut là où la donnée est réglementée), et <strong>écrire le contrat comme neutre au modèle</strong> pour que le même sas gouverne le prochain moteur que vous louez. Puis cartographiez honnêtement les écoutilles ouvertes — Bedrock, Google Cloud, voix, contenu image — et traitez-les comme les prochaines ferrures, pas comme une coque déjà scellée.</p>
+<p><strong>Le modèle mental épuré :</strong> <em>Le modèle est le vide dehors — puissant, loué, interchangeable ; vous changerez plus d'une fois de vide vers lequel vous ouvrez. Le sas est le vôtre : l'unique chambre où vos données franchissent vers le modèle, où votre inspecteur prononce allow ou deny, où deny signifie que la porte extérieure ne s'ouvre pas. L'éditeur a construit la prise cette semaine ; l'entreprise doit tenir la porte — en fantôme d'abord, fermé par défaut là où ça compte, et pour chaque vaisseau de la flotte, pas seulement celui qui a livré la ferrure.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>Le lancement — Inference hooks d'Anthropic (bêta), 5 août.</strong> Prompt gouverné → <strong>votre serveur de sécurité IA</strong> → <strong>allow/deny avant l'inférence ;</strong> un deny <strong>n'atteint jamais le modèle.</strong> Couvre claude.ai, <strong>Claude Code, Cowork</strong> (web/bureau/CLI) ; signé (Standard Webhooks) ; délai <strong>5 s</strong> par défaut ; <strong>mode fantôme,</strong> déploiement %, exclusions de rôles ; votre <strong>politique d'échec.</strong> Le serveur voit la transcription + <strong>appels d'outils/résultats</strong> + texte extrait, <strong>jamais les octets bruts/prompts système/contexte interne.</strong> Intégrations citées : <strong>Netskope, Palo Alto Networks, Proofpoint, Zscaler,</strong> ou maison.</li>
+  <li><strong>Les lacunes — soyons honnêtes.</strong> Bêta ; <strong>Claude Enterprise uniquement ; pas Bedrock/GCP ;</strong> <strong>pas de voix ;</strong> allow/deny seulement (<strong>pas de caviardage</strong>) ; <strong>octets bruts d'image non inspectés ;</strong> blocage côté réponse <strong>à la feuille de route.</strong></li>
+  <li><strong>Le signal de demande — pourquoi c'est sorti.</strong> <strong>Gartner : 40 % des applications d'entreprise intégreront des agents IA spécialisés d'ici fin 2026</strong> (contre &lt;5 % en 2025) ; <strong>Salesforce Agentforce ~1,2 Md$ d'ARR, +205 % sur un an ;</strong> <strong>PwC : 88 % des dirigeants prévoient d'augmenter les budgets IA</strong> à cause de l'IA agentique. Plus de prompts, plus de surfaces, plus de données qui partent — le sas existe parce que le trafic a explosé.</li>
+  <li><strong>Le contexte réglementaire — toujours actif.</strong> L'application de l'IA Act est en cours depuis le <strong>2 août ;</strong> pouvoirs GPAI de l'AI Office ; <strong>15 M€ ou 3 % ;</strong> <strong>180+ organisations</strong> ont signé le code de bonnes pratiques GPAI ; action de la CNIL le <strong>4 août</strong> (14 banques, article 11). Un point de contrôle est là où le journal s'écrit et la fuite s'arrête.</li>
+  <li><strong>Le vide, pour le contexte.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — le moteur loué, interchangeable. Possédez le sas, pas le vide.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui retiennent l'attention</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">Anthropic envoie la transcription de la conversation à votre serveur de sécurité IA et attend un verdict allow ou deny ; une requête refusée n'atteint jamais le modèle.</div><div class="a">— Documentation de la plateforme Claude, « Inference hooks », décrivant le flux de contrôle en ligne, 2026 (tel que documenté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Claude ne voit jamais le prompt si le serveur de sécurité de l'entreprise le bloque. La donnée reste à l'intérieur du périmètre de l'entreprise.</div><div class="a">— Sur le lancement des Inference hooks d'Anthropic, dans la couverture spécialisée de la bêta du 5 août 2026, 2026 (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">40 % des applications d'entreprise intégreront des agents IA spécialisés d'ici 2026, contre moins de 5 % en 2025.</div><div class="a">— Gartner, sur le trafic d'agents qui franchit désormais la frontière que gouverne le sas (tel que rapporté)</div></blockquote>
+<blockquote><div class="q">« Le modèle est le vide dehors — loué et interchangeable. Le sas est le vôtre, ou il n'est à personne : l'unique chambre où vos données franchissent vers le modèle, et où deny signifie que la porte extérieure ne s'ouvre jamais. »</div><div class="a">— le radar, sur la possession du point de contrôle</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Inference hooks — ce que fait un deny</td><td><span class="v">La requête refusée n'atteint jamais le modèle</span></td><td>Doc. plateforme Claude, « Inference hooks » (tel que documenté)</td></tr>
+<tr><td>Flux du verdict</td><td><span class="v">Prompt → votre serveur de sécurité IA → allow/deny avant l'inférence</span></td><td>Doc. plateforme Claude (tel que documenté)</td></tr>
+<tr><td>Délai de verdict par défaut</td><td><span class="v">5 secondes (configurable)</span></td><td>Doc. plateforme Claude (tel que documenté)</td></tr>
+<tr><td>Surfaces couvertes</td><td><span class="v">chat claude.ai · Claude Code · Cowork (web/bureau/CLI)</span></td><td>Doc. plateforme Claude (tel que documenté)</td></tr>
+<tr><td>Non couvert (à ce jour)</td><td><span class="v">Bedrock · Google Cloud · voix · octets bruts d'image · côté réponse</span></td><td>Doc. plateforme Claude (tel que documenté)</td></tr>
+<tr><td>Contrôles de déploiement</td><td><span class="v">Mode fantôme · déploiement % · exclusions de rôles · bloquer/laisser sur échec</span></td><td>Doc. plateforme Claude (tel que documenté)</td></tr>
+<tr><td>Intégrations DLP citées</td><td><span class="v">Netskope · Palo Alto Networks · Proofpoint · Zscaler · maison</span></td><td>Unite.AI / couverture spécialisée (tel que rapporté)</td></tr>
+<tr><td>Applications d'entreprise avec agents IA spécialisés d'ici 2026</td><td><span class="v">40 % (contre &lt;5 % en 2025)</span></td><td>Gartner (tel que rapporté)</td></tr>
+<tr><td>ARR de Salesforce Agentforce</td><td><span class="v">~1,2 Md$, +205 % sur un an</span></td><td>Couverture Salesforce / Salesforce Ben (tel que rapporté)</td></tr>
+<tr><td>Dirigeants prévoyant d'augmenter les budgets IA (IA agentique)</td><td><span class="v">88 %</span></td><td>PwC AI Agent Survey (tel que rapporté)</td></tr>
+<tr><td>Incident d'agent vs. sentiment de protection (pourquoi il le faut)</td><td><span class="v">88 % ont eu un incident · 82 % se croient protégés</span></td><td>Gravitee State of AI Agent Security 2026 (tel que rapporté)</td></tr>
+<tr><td>Application de l'IA Act — statut</td><td><span class="v">Active depuis le 2 août ; 180+ signataires du code GPAI ; CNIL 4 août : 14 banques, art. 11</span></td><td>Commission européenne / couverture réglementaire (tel que rapporté)</td></tr>
+<tr><td>Plafond de sanction (art. 99) / informations inexactes</td><td><span class="v">15 M€ ou 3 % · 7,5 M€ ou 1,5 %</span></td><td>Commission européenne</td></tr>
+<tr><td>Le vide (contexte)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Couverture éditeurs / trackers de modèles (tel que rapporté)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois actions pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Construire le sas — monter un serveur de sécurité IA et le mettre en mode fantôme cette semaine.</strong> Les Inference hooks vous donnent une prise ; le garde, c'est à vous de le fournir. Pointez-le vers l'infrastructure DLP que vous exploitez déjà (Netskope, Palo Alto, Proofpoint, Zscaler, ou maison), activez le <strong>mode fantôme</strong> pour qu'il observe le trafic réel sans bloquer, et lisez ce que vos gens envoient réellement au modèle. Vous en apprendrez plus sur votre exposition réelle en une semaine de journaux en mode fantôme qu'en un trimestre de documents de politique — et vous aurez bâti le point d'application, pas seulement l'inventaire.</li>
+  <li><strong>Posséder le verdict et fixer la politique d'échec délibérément.</strong> La décision qui garde vos données à vous, c'est allow/deny, et elle doit siéger sur <strong>votre</strong> serveur, pas celui de l'éditeur. Décidez, par surface, de ce qui arrive quand votre inspecteur est injoignable — <strong>fermé par défaut</strong> (bloquer) pour les systèmes qui touchent la donnée réglementée ou l'argent des clients, ouvert par défaut seulement là où la disponibilité l'emporte vraiment sur le risque de fuite — et consignez un enregistrement par refus dans <strong>votre propre journal,</strong> pas seulement celui de l'éditeur. Rapportez au conseil un indicateur unique : <em>la part du trafic IA qui passe par un point de contrôle que nous maîtrisons.</em></li>
+  <li><strong>Le rendre neutre au modèle et cartographier les écoutilles ouvertes — ne pas appeler coque scellée un sas partiel.</strong> Le motif est l'actif, pas le produit : écrivez le point de contrôle comme un contrat webhook que vous pouvez exiger de <strong>chaque</strong> éditeur de modèle, pour qu'échanger Opus 5 contre Gemini ou GPT-5.6 ne rouvre jamais la porte. Puis listez les écoutilles que cette ferrure ne ferme pas encore — <strong>surfaces Bedrock et Google Cloud, voix, contenu image, blocage côté réponse</strong> — attribuez à chacune un responsable et un plan, et traitez-les comme les prochaines ferrures. Possédez le sas, armez-le de votre équipage, et exigez la même chose de chaque vaisseau que vous louez — car une coque avec une seule écoutille ouverte sur le vide n'est pas un navire scellé.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> Anthropic / Claude (annonce Inference hooks + documentation de la plateforme Claude) · Unite.AI · The Next Web · Releasebot · Zscaler · Palo Alto Networks · Standard Webhooks · Gartner (tel que rapporté) · Salesforce / Salesforce Ben · PwC (AI Agent Survey) · Gravitee (State of AI Agent Security 2026) · Commission européenne (application de l'IA Act) · artificialintelligenceact.eu (art. 11, art. 26) · couverture réglementaire (CNIL) · LLM-Stats / trackers de modèles. Les chiffres sont relayés de sources éditeurs, analystes et presse, marqués « tel que rapporté » quand ils reposent sur une couverture secondaire, et « tel que documenté » quand ils viennent de la documentation produit d'Anthropic. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>Radar IA · généré le 6 août 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture audio non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /amelie|audrey|thomas|female|google/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
