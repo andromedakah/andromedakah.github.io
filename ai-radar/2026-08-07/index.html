@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 7 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the keyring — Okta's Cross App Access (GA for Workforce via the Okta Integration Network in August 2026), built on MCP's Enterprise-Managed Authorization (stable 18 June 2026; 7-28 spec final), puts one identity-provider-held keyring on every tool your agents can reach. An admin authorizes a connector once for the whole org; each agent gets a token scoped to the user's groups and roles; no per-app consent; revoke everywhere in one motion. Anthropic makes Okta a featured IdP for Claude, Claude Code and Cowork. Context: machine identities, incl. AI agents, now outnumber humans ~109:1. The month's thesis made concrete: own the control layer around the commodity model. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Agent access &amp; identity</div>
+  <h1>The Keyring</h1>
+  <div class="subhead">Okta's Cross App Access — built on MCP's Enterprise-Managed Authorization — puts one identity-provider-held keyring on every tool your agents can reach</div>
+  <div class="meta">Friday, 7 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday's edition ("The Airlock") fitted a control point at the one door your data leaves through. But a prompt going out is only half the crossing — the other half is what the agent may reach and act on once it is working. Today the enterprise gets the second fitting, and it is about keys, not doors. On the strength of MCP's Enterprise-Managed Authorization extension (stable since 18 June 2026) and the now-final 7-28 MCP specification, Okta's Cross App Access reaches general availability for Workforce customers through the Okta Integration Network in August 2026 — and Anthropic has made Okta a featured identity provider for Claude, Claude Code and Cowork. Instead of every tool minting its own key and every employee clicking "allow" at every door, an admin authorizes a connector once for the whole organization, and each agent is issued a token scoped to that user's identity, groups and roles — revocable centrally in one motion. The board's question this morning: our agents already outnumber our people roughly a hundred to one — so who holds the keyring to everything they can touch?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thing: the model is a commodity, so the durable advantage is the <strong>layer you own around it.</strong> Yesterday that thesis got its first bolt — Inference hooks, the airlock that decides what of yours leaves for the model. Today it gets the matching fitting on the other side of the crossing: <strong>who decides what your agents are allowed to reach and do once they are working.</strong> On the back of <strong>MCP's Enterprise-Managed Authorization (EMA) extension — stable since 18 June 2026 — and the now-final 7-28 MCP specification, Okta's Cross App Access (XAA) hits general availability for Workforce customers via the Okta Integration Network in August 2026,</strong> and <strong>Anthropic has named Okta a featured identity provider for Claude, Claude Code and Cowork.</strong></p>
+<p><strong>What it is, precisely.</strong> XAA extends OAuth so that an AI agent's access to enterprise apps is governed by the <strong>identity provider you already run,</strong> not by a jumble of per-app consent screens. An <strong>admin authorizes a connector once for the whole organization;</strong> thereafter, when an employee's agent asks for a tool, the client exchanges an identity assertion (an ID-JAG) for an access token <strong>scoped to that user's groups and roles,</strong> and the MCP server exposes <strong>only the tools and data the organization pre-approved.</strong> No per-server "allow" prompts, no standing keys handed to each app, and <strong>when someone leaves, the grant dies at the identity provider</strong> — one motion, every tool. Early doors already fitted to the standard include <strong>Asana, Atlassian, Canva, Figma, Granola, Linear and Supabase</strong> (Slack in progress); clients include <strong>Claude, Claude Code, Cowork and VS Code.</strong></p>
+<p><strong>Why it matters more than a feature note.</strong> The month's problem was that governance of the AI layer was a slide, not a switch. Yesterday's airlock stopped the wrong thing from <em>leaving.</em> But an agent is not just an egress pipe — it is a worker with a keyring, and <strong>the enterprise now runs roughly 109 machine identities for every human, of which about 79 are AI agents</strong> (Palo Alto Networks' 2026 Identity Security Landscape) — up from ~82:1 a year earlier. Every one of those agents needs keys to real systems. Hand those keys out per-app, per-click, and you have rebuilt the non-human-identity sprawl every CISO report this year has flagged. XAA + EMA put the whole keyring back on <strong>one steward you already trust.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The keyring is yours, held at the identity provider you already own.</strong> The novelty is not that agents can reach tools — it's that the decision about <strong>which</strong> tools, for <strong>which</strong> identity, at <strong>what</strong> scope, now sits in your IdP and its group/role model, not in a thousand app-by-app consents. Authorize once for the org; provision by identity; <strong>revoke everywhere in one turn of the ring.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>It is a standard, not a point integration.</strong> XAA is an OAuth extension; EMA is a stable MCP extension; the 7-28 spec is final. That means the same keyring pattern can govern <strong>any tool and any model vendor</strong> that implements it — the asset is the standard, not the one product that shipped first.</div></div>
+<div class="num"><div class="b">3</div><div><strong>It is real, and it is early — know the gaps.</strong> Okta is the <strong>first</strong> identity provider (others still to wire in); it governs only tools that expose an <strong>MCP/EMA front door</strong> (homegrown and legacy systems are still on ad-hoc locks); and it controls <strong>access, not payload</strong> — it decides which rooms an agent may enter, not what the agent does inside one, nor whether the data it carries out should have left (that is yesterday's airlock). A keyring is not a full security program.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month said <em>own the layer around the commodity model.</em> Yesterday you fitted the airlock at the door your data leaves through; today you take back the <strong>keyring</strong> to everything your agents can reach — and you hold it through the identity provider you already trust, on a standard any vendor can implement. Wire your IdP to XAA, authorize connectors at the org level, scope by group and role, and make "revoke everywhere in one motion" a drill you have actually run — because your agents outnumber your people a hundred to one, and a hundred workers with un-tracked keys is not a workforce, it is an unlocked house.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🔑 "The Keyring"</h3>
+<p><em>Topic: In August 2026 Okta's Cross App Access (XAA) reaches general availability for Workforce customers through the Okta Integration Network, built on the Model Context Protocol's Enterprise-Managed Authorization (EMA) extension, which went stable on 18 June 2026, with the 7-28 MCP specification now final; Anthropic has named Okta a featured identity provider for Claude, Claude Code and Cowork. XAA extends OAuth so that an AI agent's access to enterprise applications is governed by the organization's own identity provider rather than by per-application consent prompts: an administrator authorizes a connector once for the whole organization, and each request exchanges an identity assertion for an access token scoped to the user's groups and roles, so the tool exposes only the data and actions the organization pre-approved, and access is revoked centrally when the person leaves. The context is scale: machine identities, including AI agents, now outnumber human identities roughly 109 to 1, of which about 79 are AI agents. The lesson: your agents outnumber your people, and the durable control is not the model but the keyring — held by one steward you already trust, on a standard every vendor can implement.</em></p>
+<p>Picture a great house at the hour its staff triples overnight. Where yesterday there were a hundred people who knew the rooms and each other, today there are ten thousand new workers — tireless, quick, literal — and every one of them needs to get into rooms to do a job: the ledger room, the drawing room, the room where the plans are kept, the cellar with the good wine and the bad debts. This is not a metaphor for ambition; it is arithmetic. In the modern estate the new workers — the agents — already <strong>outnumber the people who hired them roughly a hundred to one.</strong> A house cannot run if every new worker must be walked to every door by the master.</p>
+<p>So how, until now, did a worker get into a room? Badly. Each door had <strong>its own lock, cut by whoever built the room,</strong> and the worker collected keys the only way on offer: by standing at each door and being asked, <em>"do you allow this?"</em> — and saying yes, because the work waited. The keys piled up on a hundred belts. Nobody kept the roster of who held what. A key cut for one afternoon opened the room for a year. A worker who left took a belt of live keys into the night. And because the locks were all different, there was no single turn of the hand that could call the keys back. This is the world every security report of the year has been shouting about: a house with <strong>more keys than it has doors, and no one holding the ring.</strong></p>
+<p>What comes of age this month is the oldest fix in the book, made new: <strong>one keyring, held by the house's own steward.</strong> The estate re-fits its doors to a common lock — not the master's design, not each room's whim, but a <strong>shared standard</strong> the whole trade has agreed on (the crews call it MCP's enterprise-managed authorization; the fitting that lets your steward turn it, Cross App Access). Now a worker who needs a room does not haggle at the door. It presents itself <strong>once, at the steward's office</strong> — the steward you already employ, who already keeps the roster of who is on which crew. The steward reads the roster, and cuts a key <strong>to exactly that room and no other,</strong> stamped with the hour it expires, written in the daybook. The worker goes to the door; the door accepts the steward's key because the lock is the shared standard; the worker does its task and no more. And when the worker leaves the house, the steward <strong>turns the ring once</strong> — and every key that worker ever held goes cold, at every door, in a single motion.</p>
+<p>Two truths keep the household honest. The first: the power is not that agents can open doors — they always could, badly. The power is that <strong>the keyring came home to the steward you already trust,</strong> and that the doors now speak a common lock, so one office issues, scopes, logs and revokes for the whole house. Authorize a connector once for the estate, and every worker on the right crew gets the rooms their crew is allowed — no more, governed by the identity you already run. That is the month's thesis turned to iron again: <strong>own the layer around the commodity model</strong> — and this layer is the keyring. The second truth is soberer: <strong>not every door is re-fitted yet.</strong> The common lock accepts keys only from doors that have installed it (a good first set — Asana, Atlassian, Canva, Figma, Linear, Supabase, with more arriving), while the old cellars you built yourself still wear their ad-hoc locks. Your steward is the first of several the trade will recognize, not yet the only one. And a keyring governs <em>which rooms a worker may enter</em> — it does not watch what the worker does once inside, nor decide whether what it carries out the door should leave (that is the airlock you fitted yesterday). A keyring is a great advance and not a whole security program.</p>
+<p><strong>The moral:</strong> the model is the commodity engine outside — you will change which one you rent more than once, and it was never the seat of your control. The <strong>keyring is yours,</strong> or it is a thousand loose keys on a hundred untracked belts. In a house where the workers outnumber the people a hundred to one, the question is never "can the agent reach the tool" — of course it can — but "<strong>who cut that key, to what room, for how long, and can we call it back tonight?</strong>" Bring the keyring home to the steward you already trust, fit your doors to the shared lock, issue by identity and scope, and rehearse the one motion that pulls every key at once — because a house with more keys than doors and no one holding the ring is not staffed, it is burgled at leisure.</p>
+<p><strong>The question it forces:</strong> <em>Our agents outnumber our people roughly a hundred to one — so who holds the keyring to everything they can touch? If the answer is "each app hands out its own keys and the user clicks allow," we have described the sprawl, not the control. Is there one steward — the identity provider we already run — that issues every agent's access, scoped to who the person is, logged, and revocable everywhere in a single motion? Which of our doors speak the shared lock and which are still on ad-hoc keys — and if a person left tonight, how many live keys would walk out with them?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Who holds the keyring?</strong> XAA and EMA put agent access on <strong>your</strong> identity provider, scoped to identity and revocable at the org level. <strong>Is there a single steward that decides which tools every agent may reach — or does each app hand out its own keys while our people click "allow" at every door?</strong></li>
+  <li>The scale is the alarm: <strong>machine identities, including AI agents, now outnumber humans roughly 109 to 1, and about 79 of those 109 are AI agents</strong> (Palo Alto Networks). <strong>If most of our "workforce" is now non-human and key-holding, is our identity governance built for a hundred agents per person — or still for the people?</strong></li>
+  <li>The keyring is a <strong>standard,</strong> not a product. <strong>Are we adopting the access pattern as model- and tool-neutral — one we can demand of every vendor and IdP — or bolting one integration to one product and calling it governed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Agents that touch core banking, trading and customer systems must reach <strong>only</strong> what their role allows. <strong>Can we scope every agent's access to groups and roles at the identity provider, so a support-desk agent can never open the trading room — and prove it to an examiner?</strong></li>
+  <li>The offboarding test is the acid test. <strong>When an employee or a contractor leaves, does every key their agents held go cold in one motion at the IdP — or are there standing tokens on a dozen apps we would have to chase down by hand?</strong></li>
+  <li>CNIL is already asking for the Article 11 dossier. <strong>Is the daybook of who authorized which connector, for which identity, at what scope, a record we could hand a supervisor today?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>PHI and trial systems are the rooms with the strictest guest lists. <strong>Does an agent reach a patient record only through an identity-scoped, pre-approved grant — never a broad, standing key a clinician clicked through once?</strong></li>
+  <li>Least privilege is a duty of care here. <strong>Can we cut each agent's key to exactly the data and actions its task needs — and expire it — rather than granting the whole cabinet because per-app consent offered nothing finer?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Line-side and supply-chain tools are a thicket of homegrown locks. <strong>Which of our systems expose an MCP/EMA front door the keyring can govern today — and which legacy cellars are still on ad-hoc keys that no steward can see or revoke?</strong></li>
+  <li>Cheaper, better engines keep arriving. <strong>When a team swaps the model, does our agent-access keyring stay put on our IdP — or does changing the engine scatter the keys again?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Storefront and support agents touch customer PII at volume. <strong>Is each agent's reach into customer systems scoped to its role and logged — or do a hundred agents share broad keys because wiring least privilege per app was too slow?</strong></li>
+  <li>Trust is the product. <strong>Could we tell a customer, truthfully, that every agent touching their data holds a key our own identity provider issued, scoped and revocable — not a standing grant on a third-party app?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data carries the strictest duty and the least tolerance for a key that outlives its need. <strong>Is agent access to citizen systems issued by our identity provider, scoped to duty, time-bounded, and revocable centrally — with a per-grant record in our own log?</strong></li>
+  <li>Enforcement is live and case-by-case. <strong>Could we show an auditor not just what our AI did, but the keyring that decides what it is even allowed to reach — the standard, the steward, the scope, and the revocation drill?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Own the Keyring, Rent the Model</h2>
+<p>Read this week as the second fitting on the layer you own. Yesterday's airlock (Inference hooks) governed <strong>egress</strong> — what of yours leaves for the model. Today's keyring (XAA on MCP's EMA) governs <strong>access</strong> — what your agents may reach and act on. Both answer the same board question from opposite sides of the crossing, and both put the control on ground you already hold. The architecture splits cleanly: the <strong>workers</strong> (the agents, now outnumbering people ~100:1), the <strong>keyring</strong> (identity-provider-managed access you own), and the <strong>doors not yet re-fitted</strong> (the honest gaps).</p>
+<div class="card"><ul>
+  <li><strong>The workers — agents at machine scale (rented brains, your identity).</strong> The engines are a menu you rent — <strong>Claude Opus 5</strong> (#1, Intelligence Index 61 / Agentic Index 55.3, $5/$25), <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT). But the agents built on them are <strong>workers with keyrings,</strong> and they already run at machine scale: <strong>~109 machine identities per human, ~79 of them AI agents</strong> (Palo Alto Networks 2026), up from ~82:1 a year earlier. The engine is not where your risk lives; the <strong>keys those workers hold</strong> are.</li>
+  <li><strong>The keyring — access you own (comes of age this month).</strong> With <strong>XAA</strong> (an OAuth extension, GA for Okta Workforce via the Integration Network in August 2026) on top of <strong>MCP's EMA</strong> (stable 18 Jun; 7-28 spec final), agent access to enterprise tools is governed by <strong>your identity provider.</strong> An admin <strong>authorizes a connector once for the whole org;</strong> each request exchanges an identity assertion (<strong>ID-JAG</strong>) for an access token <strong>scoped to the user's groups and roles;</strong> the MCP server exposes <strong>only pre-approved tools and data;</strong> there are <strong>no per-server consent prompts;</strong> and <strong>offboarding revokes every grant centrally.</strong> Okta is the <strong>first</strong> identity provider; <strong>Anthropic makes it a featured IdP</strong> for Claude, Claude Code and Cowork. Early servers: <strong>Asana, Atlassian, Canva, Figma, Granola, Linear, Supabase</strong> (Slack in progress). The point that matters: <strong>the keyring is on your IdP,</strong> governed by the group/role model you already run.</li>
+  <li><strong>The doors not yet re-fitted — the honest gaps.</strong> Okta is the <strong>first</strong> IdP, not the only one; the keyring reaches only tools with an <strong>MCP/EMA front door</strong> (homegrown and legacy systems stay on ad-hoc locks); and it governs <strong>access, not payload or behaviour</strong> — it decides which rooms an agent may enter, not what it does inside, nor whether what it carries out should leave (that is yesterday's airlock). New standard, tooling still rolling out. A keyring on some doors is a real advance and a partial house.</li>
+</ul></div>
+<p>The strategic core: <strong>the model is the worker's brain; the keyring is your house.</strong> For a month the misread has been "our model is capable and safe, so our agents are governed" — which confuses the engine with the access. After this week, "the model is smart" is not the answer to "what is our agent allowed to touch"; <em>"every agent's access is issued by the identity provider we own, scoped to who the person is, and revocable everywhere in one motion"</em> is the answer — and XAA on MCP's EMA is where you can finally build it.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The keyring: own the access, rent the model. Agents outnumber people roughly a hundred to one, and every one needs keys to real tools; one steward holds the ring. On the left, your workers: the agents, running on Claude, Claude Code, Cowork and VS Code as rented brains, at roughly 109 machine identities per human, about 79 of them AI agents. On the right, the doors: enterprise apps such as Asana, Atlassian, Figma, Linear, Supabase and Canva, with Slack in progress, each fitted to the shared lock, MCP Enterprise-Managed Authorization. In the middle, the keyring: Cross App Access on MCP's Enterprise-Managed Authorization, held by your identity provider. An admin authorizes a connector once for the whole organization; an identity assertion (an ID-JAG) is exchanged for an access token scoped to the user's groups and roles; the server exposes only pre-approved tools and data; there are no per-app consent prompts; and offboarding revokes every grant everywhere in one motion, recorded in your own daybook. A scoped key opens exactly one room. Doors not yet re-fitted, to know: Okta is the first identity provider with others coming; only tools with an MCP or EMA door are governed; the keyring governs access, not payload or behaviour; and the standard is new with tooling still rolling out. The trap is to let each app hand out its own keys while the user clicks allow — that is sprawl, standing keys and no recall. The win is to own the keyring: one steward, scoped by identity, revocable everywhere, for every vendor." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE KEYRING — own the access, rent the model</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Agents outnumber people ~100:1. Every one needs keys — one steward holds the ring.</text>
+
+  <!-- your workers -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#11251c" stroke="#1d6e56"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">YOUR WORKERS — the agents</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude · Claude Code · Cowork · VS Code</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~109 machine ids / human</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">~79 of them AI agents · rented brains</text>
+
+  <!-- the doors / apps -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE DOORS — enterprise apps</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Asana · Atlassian · Figma · Linear ·</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Supabase · Canva · Slack (in progress)</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">each fitted to the shared lock (MCP EMA)</text>
+
+  <!-- arrow: workers down into keyring -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#5dcaa5"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">agent asks for a tool ↓</text>
+
+  <!-- arrow: keyring up to doors (scoped key) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#e0b45f"/>
+  <text x="518" y="182" font-size="9" fill="#e0b45f" font-family="sans-serif">scoped key ↑</text>
+
+  <!-- the keyring -->
+  <rect x="40" y="210" width="600" height="150" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE KEYRING — Cross App Access on MCP EMA · YOUR identity provider</text>
+  <text x="340" y="256" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">admin authorizes a connector ONCE for the whole org</text>
+  <text x="340" y="277" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ identity assertion (ID-JAG) → token SCOPED to groups / roles</text>
+  <text x="340" y="299" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">server exposes ONLY pre-approved tools / data · no per-app consent</text>
+  <text x="340" y="320" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">issued by identity · logged in your own daybook</text>
+  <text x="340" y="344" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">OFFBOARD → REVOKE EVERYWHERE in one motion · every key goes cold</text>
+
+  <!-- doors not yet re-fitted -->
+  <rect x="40" y="378" width="600" height="66" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="399" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">DOORS NOT YET RE-FITTED (know them):</text>
+  <text x="60" y="417" font-size="10" fill="#e8edf3" font-family="sans-serif">Okta is the FIRST IdP (others coming) · only tools with an MCP/EMA door ·</text>
+  <text x="60" y="433" font-size="10" fill="#e8edf3" font-family="sans-serif">governs ACCESS, not payload or behaviour · standard new, tooling still rolling out</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="444" x2="340" y2="462" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="486" font-size="9.5" fill="#e06b9a" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: each app mints its own key, user clicks allow</text>
+  <text x="182" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">sprawl · standing keys · no recall</text>
+  <text x="498" y="486" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: own the keyring</text>
+  <text x="498" y="502" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">one steward · scoped by identity · every vendor</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d9e75"></i>Your workers — the agents you run</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The keyring — access you own (your IdP)</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The doors — enterprise apps &amp; tools</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — a thousand keys, no ring</th><th>The discipline — own the keyring</th></tr>
+<tr><td>Each app mints its own key; the user clicks "allow"</td><td>One steward (your IdP) issues every agent's access</td></tr>
+<tr><td>Standing tokens that outlive the task and the person</td><td>Scoped, time-bounded grants; revoke everywhere in one motion</td></tr>
+<tr><td>Access decided per-app, per-click, untracked</td><td>Access decided by identity, group and role, logged</td></tr>
+<tr><td>One integration bolted to one product</td><td>A standard (XAA/EMA) any tool and any model vendor can accept</td></tr>
+<tr><td>"The model is safe, so the agents are governed"</td><td>The model is the brain; the keyring is the house you own</td></tr>
+</table>
+
+<h3>Why owning the keyring beats a smarter agent</h3>
+<div class="card">
+<p>Every control this month presumed a place to stand. The meter, the router, the MCP plane, the dossier, the discovery scan, the airlock — each was a layer you own around a commodity engine. The keyring adds the missing verb on the access side: <strong>revoke.</strong> And the reason it must live on <em>your</em> identity provider is that access granted per-app moves and multiplies with every app and every model you add — a thousand keys, no ring. Put the keyring on the IdP you already run, on a standard (XAA over OAuth, EMA in MCP) any vendor can implement, and agent access stays governed whichever engine you rent and whichever tool you add. The correct read of this week is not "Okta shipped an integration" but "<strong>the enterprise can now hold the keyring</strong> — so build the pattern, not the point solution."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon, 3 Aug the customs house, 4 Aug the two windows, 5 Aug the dark warehouse, 6 Aug the airlock). Yesterday you fitted the airlock at the door your data leaves through; today you bring the keyring home to the steward you already trust. On legacy estates the locks are everywhere and none of them match — so the retrofit is unglamorous and specific: <strong>wire your identity provider to XAA</strong> and start with the tools that already expose an MCP/EMA door (Asana, Atlassian, Figma, Linear, Supabase, and the rest); <strong>authorize connectors at the org level</strong> and provision by group and role, not by per-app consent; <strong>scope and time-bound</strong> every grant; and <strong>rehearse the offboarding motion</strong> — prove that one revocation at the IdP kills every key an identity's agents hold. Then map the doors still on ad-hoc locks — homegrown systems, legacy apps, other IdPs not yet wired — honestly, as the next fittings, not as a house already secured.</p>
+<p><strong>The clean mental model:</strong> <em>The model is the worker's brain — rented, swappable; you'll change which one you hire more than once. The keyring is yours: the one ring, held by the steward you already trust, that issues each agent a key scoped to who the person is, logged, and revocable everywhere in a single motion. The trade agreed the lock this month (XAA on MCP's EMA); the enterprise must bring the keyring home — start with the doors already fitted, scope by identity, and rehearse the one turn that calls every key back.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The launch — Okta Cross App Access GA + MCP EMA.</strong> XAA reaches <strong>GA for Okta Workforce via the Integration Network in August 2026,</strong> on top of <strong>MCP's Enterprise-Managed Authorization</strong> (stable <strong>18 Jun</strong>; <strong>7-28 spec final</strong>). Admin <strong>authorizes once for the org;</strong> access token <strong>scoped to groups/roles;</strong> <strong>no per-app consent;</strong> <strong>central revocation.</strong> <strong>Anthropic makes Okta a featured IdP</strong> for Claude, Claude Code, Cowork. Servers: <strong>Asana, Atlassian, Canva, Figma, Granola, Linear, Supabase</strong> (Slack in progress); clients: Claude, Claude Code, Cowork, VS Code.</li>
+  <li><strong>The gaps — be honest.</strong> Okta is the <strong>first</strong> IdP (others coming); only tools with an <strong>MCP/EMA door;</strong> governs <strong>access, not payload/behaviour;</strong> standard new, tooling rolling out.</li>
+  <li><strong>The scale — why it shipped now.</strong> <strong>~109 machine identities per human, ~79 of them AI agents</strong> (Palo Alto Networks 2026), up from ~82:1 a year earlier. <strong>Gartner: 40% of enterprise apps will feature task-specific agents by 2026</strong> (from &lt;5% in 2025). <strong>~31% of enterprises have ≥1 agent in production</strong> (S&amp;P Global/McKinsey); <strong>IDC: 88% of AI PoCs never reach widescale deployment.</strong> More agents, more keys — the keyring exists because the sprawl exploded.</li>
+  <li><strong>The regulatory backdrop — still live.</strong> EU AI Act enforcement running since <strong>2 Aug;</strong> AI Office GPAI powers; <strong>€15M or 3%;</strong> <strong>180+ orgs</strong> signed the GPAI Code of Practice; CNIL's <strong>4 Aug</strong> action (14 banks, Article 11). Scoped, revocable, logged access is exactly what a supervisor asks to see.</li>
+  <li><strong>The engine, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — the rented, swappable brain. Own the keyring, not the engine.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"Enterprise-managed auth gives MCP the foundation it needs to scale across an enterprise, with Okta as our first identity provider partner. When an admin authorises a connector once for the whole organisation, every employee gets instant access to more of their tools through Claude, governed by the IDP they already trust."</div><div class="a">— Mayank Malhotra, Anthropic, on Enterprise-Managed Authorization and Okta (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">"Logging in once and automatically having all your MCP connectors automatically set up is pretty magical."</div><div class="a">— Tom Moor, Head of Engineering, Linear, on the Enterprise-Managed Authorization experience (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Machine identities, including AI agents, now outnumber human identities roughly 109 to 1 — and about 79 of those 109 are AI agents.</div><div class="a">— Palo Alto Networks, 2026 Identity Security Landscape (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the worker's brain — rented and swappable. The keyring is yours, or it is a thousand loose keys on a hundred untracked belts: one steward, scoped by identity, revocable everywhere in a single motion."</div><div class="a">— the radar, on owning the access layer</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Machine identities per human (incl. AI agents)</td><td><span class="v">~109 : 1 (≈79 of them AI agents)</span></td><td>Palo Alto Networks, 2026 Identity Security Landscape (as reported)</td></tr>
+<tr><td>Machine-to-human identity ratio, a year earlier</td><td><span class="v">~82 : 1 (+~33% in a year)</span></td><td>Palo Alto Networks (as reported)</td></tr>
+<tr><td>Cross App Access — availability</td><td><span class="v">GA for Okta Workforce via the Integration Network, August 2026</span></td><td>Okta / trade coverage (as reported)</td></tr>
+<tr><td>MCP Enterprise-Managed Authorization — status</td><td><span class="v">Stable since 18 Jun 2026; 7-28 MCP spec final</span></td><td>Model Context Protocol Blog (as documented)</td></tr>
+<tr><td>How access is scoped</td><td><span class="v">Token scoped to the user's groups and roles; org authorizes connector once</span></td><td>Model Context Protocol Blog (as documented)</td></tr>
+<tr><td>Offboarding</td><td><span class="v">Central revocation at the identity provider — one motion, every tool</span></td><td>Model Context Protocol Blog / Okta (as reported)</td></tr>
+<tr><td>First identity provider</td><td><span class="v">Okta (via Cross App Access); others to follow</span></td><td>Model Context Protocol Blog / Okta (as reported)</td></tr>
+<tr><td>Early servers implementing EMA</td><td><span class="v">Asana · Atlassian · Canva · Figma · Granola · Linear · Supabase (Slack in progress)</span></td><td>Model Context Protocol Blog (as documented)</td></tr>
+<tr><td>Enterprise apps with task-specific AI agents by 2026</td><td><span class="v">40% (up from &lt;5% in 2025)</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Enterprises with ≥1 AI agent in production</td><td><span class="v">~31%</span></td><td>S&amp;P Global Market Intelligence / McKinsey (as reported)</td></tr>
+<tr><td>AI proofs-of-concept never reaching widescale deployment</td><td><span class="v">88%</span></td><td>IDC (as reported)</td></tr>
+<tr><td>EU AI Act enforcement — status</td><td><span class="v">Live since 2 Aug; 180+ signed GPAI Code; CNIL 4 Aug: 14 banks, Art. 11</span></td><td>European Commission / regulatory coverage (as reported)</td></tr>
+<tr><td>Penalty ceiling (Art. 99) / incorrect information</td><td><span class="v">€15M or 3% · €7.5M or 1.5%</span></td><td>European Commission</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Bring the keyring home — wire your identity provider to Cross App Access this month.</strong> XAA is GA for Okta Workforce via the Integration Network; EMA is a stable MCP extension and the 7-28 spec is final. Start with the tools that already expose an MCP/EMA front door (Asana, Atlassian, Figma, Linear, Supabase, and the growing list), <strong>authorize connectors once at the org level,</strong> and let your IdP — not a hundred per-app consent screens — decide which agents reach which tools. You will replace consent-fatigue and un-tracked tokens with a single roster you already keep.</li>
+  <li><strong>Scope by identity and rehearse the one motion that revokes everywhere.</strong> The control that keeps your house yours is least privilege plus recall: cut each agent's access to the <strong>groups and roles</strong> the person actually holds, <strong>time-bound</strong> the grant, and — the acid test — <strong>prove that a single revocation at the identity provider kills every key that person's agents hold, at every tool.</strong> Report to the board one metric: <em>the share of agent access issued and revocable through our own IdP.</em></li>
+  <li><strong>Make it standard, not point — and map the doors still on ad-hoc locks.</strong> The asset is the pattern (XAA over OAuth, EMA in MCP), not the one product that shipped first: demand the same identity-scoped access from <strong>every</strong> tool and <strong>every</strong> model vendor, so swapping Opus 5 for Gemini or GPT-5.6 never scatters the keys. Then list the doors this fitting does not yet close — <strong>other identity providers not yet wired, homegrown and legacy systems with no MCP/EMA door, and the payload-and-behaviour questions the keyring does not answer</strong> (that is the airlock and your monitoring) — assign each an owner, and treat them as the next fittings. Own the keyring, hold it at the steward you already trust, and demand the shared lock on every door — because a house with more keys than doors and no one holding the ring is not staffed, it is unlocked.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Model Context Protocol Blog (Enterprise-Managed Authorization; 7-28 release candidate) · Okta (Cross App Access + Claude featured-IdP press) · SiliconANGLE · InfoQ · TechTimes · Web Developer · Cyber Magazine · Palo Alto Networks (2026 Identity Security Landscape) · Gartner (as reported) · S&amp;P Global / McKinsey · IDC · Forrester · European Commission (AI Act enforcement) · artificialintelligenceact.eu (Art. 11) · regulatory coverage (CNIL) · LLM-Stats / model trackers. Figures are relayed from vendor, analyst and press sources and marked "as reported" where they rest on secondary reporting, and "as documented" where drawn from the Model Context Protocol's blog/documentation. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 7 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
