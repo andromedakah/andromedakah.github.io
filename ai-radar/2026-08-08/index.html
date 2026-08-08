@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 8 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the proving ground — the EU AI Act's Article 57 regulatory-sandbox mandate came due on 2 August 2026, the same day GPAI enforcement began. A regulatory sandbox is a supervised, pre-production track where you develop and test high-risk AI before market, with legal certainty for good-faith participants, priority/free access for SMEs, and an exit report toward conformity — national, joint, or the new EU-level sandbox. Coverage is uneven: Spain is operational, most Member States lag, the Commission's implementing acts are pending. Context: Gartner expects >40% of agentic projects cancelled by 2027, mostly for weak controls; only ~11–14% of pilots scale. The month's thesis made concrete: own the control layer around the commodity model — prove the agent before you ship it. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Governance &amp; testing</div>
+  <h1>The Proving Ground</h1>
+  <div class="subhead">The EU AI Act's Article 57 came due on 2 August: every Member State was to have a regulatory sandbox — a supervised, penalty-shielded track to prove high-risk agents before you ship them</div>
+  <div class="meta">Saturday, 8 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week the radar fitted the controls for agents already at work — the airlock at the door your data leaves through (6 Aug), the keyring to everything they can reach (7 Aug). Today the story moves upstream: before an agent touches production, where do you prove it behaves? On 2 August 2026 — the same day GPAI enforcement began — a second EU AI Act clock came due: Article 57's mandate that every Member State have at least one AI regulatory sandbox operational. It is a supervised proving ground where you develop and test high-risk AI before market, with legal certainty for good-faith participants, priority (often free) access for SMEs, and an exit report toward conformity — national, joint, or the new EU-level sandbox. The honest half: Spain is running one; most Member States are behind, and the Commission's implementing acts are still pending. The board's question this morning: the regulator just built us a proving ground and made using it a right — do we run our high-risk agents hard on a supervised track before they touch the public road, or do we still launch live and hope?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thing: the model is a commodity, so the durable advantage is the <strong>layer you own around it.</strong> This week you fitted the controls for agents that are already working — the airlock that decides what leaves for the model (6 Aug), the keyring that decides what they may reach (7 Aug). Today the story moves upstream to the question that comes <em>before</em> production: <strong>where do you prove a high-risk agent is safe before you let it loose?</strong> On <strong>2 August 2026 — the same date the AI Office's GPAI enforcement powers switched on — Article 57 of the EU AI Act came due: every Member State was to have at least one AI regulatory sandbox operational,</strong> a supervised environment to develop, test and validate innovative AI <strong>before</strong> it reaches the market.</p>
+<p><strong>What it is, precisely.</strong> An AI regulatory sandbox is a <strong>fenced proving ground the regulator runs:</strong> you take a high-risk system into a controlled space, agree a testing plan with the competent authority, and run it against real-world conditions <strong>under supervision,</strong> with the regulator's guidance on the rules. Two things make it more than a lab. First, <strong>legal certainty:</strong> participants acting in good faith and following the agreed plan are shielded from administrative fines for infringements surfaced during the test — a genuine safe-to-fail space, not a trap. Second, <strong>access for the small:</strong> SMEs and start-ups get <strong>priority and, in many schemes, free</strong> entry, and every sandbox ends in an <strong>exit report</strong> you can use as evidence toward conformity. A sandbox can be run <strong>nationally, jointly with other Member States, or by joining an existing one,</strong> and the AI Act Omnibus added an <strong>EU-level sandbox</strong> for testing at European scale.</p>
+<p><strong>Why it matters more than a compliance note.</strong> The month's other numbers say plainly why a proving ground is the missing control. <strong>Gartner projects that more than 40% of agentic AI projects will be cancelled by the end of 2027</strong> — for escalating cost, unclear value, and <strong>weak risk controls;</strong> only about <strong>11–14% of agent pilots reach production at scale,</strong> and up to <strong>54% stall three to nine months after an apparently successful pilot.</strong> A pilot that costs <strong>$200k to build can cost $1–2M a year to run reliably at scale</strong> — the bill that kills projects when it finally lands. The enterprises that will keep their agents are the ones that stopped treating "the demo worked" as proof and started <strong>proving behaviour under load, under supervision, before go-live.</strong> Article 57 hands that discipline a venue — and, for high-risk systems, a legal reason to use it.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The proving ground is a right now, not a favour — and it comes with a shield.</strong> For high-risk AI you no longer have to choose between "launch live and hope" and "never ship." You can test under supervision with <strong>legal certainty for good-faith participation,</strong> priority/free access for SMEs, and an <strong>exit report</strong> that counts toward conformity. The novelty is not that you can test — it is that the <strong>regulator built the track and made using it a protected act.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>It is uneven — know exactly how thin the coverage is.</strong> The mandate is live; the fence is half-built. <strong>Spain runs an operational national sandbox;</strong> most Member States are <strong>behind,</strong> wrestling with funding, staffing and expertise, and the <strong>Commission's implementing acts</strong> detailing sandbox operation are <strong>still pending.</strong> A right you cannot yet exercise in your jurisdiction is a plan, not a control.</div></div>
+<div class="num"><div class="b">3</div><div><strong>A lap on the track is not a guarantee on the road.</strong> A sandbox proves behaviour under agreed conditions with a supervisor watching; it does not certify the system for every real-world edge, nor replace the airlock, the keyring, or your monitoring once the agent is live. It is the <strong>pre-production</strong> control in a chain — powerful, and partial.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month said <em>own the layer around the commodity model.</em> This week you built the controls for agents already at work; today you claim the control that comes first — <strong>the proving ground where you validate that your high-risk agents behave on your data before they touch the public road.</strong> For high-risk systems the EU has made that a supervised, penalty-shielded right; the U.S. is drafting its own version. Identify your high-risk agents, find the sandbox you can actually enter (national, joint, or the EU-level one), take your riskiest system onto the track before go-live, and keep the exit report as evidence — because in a year when two in five agentic projects are forecast to die of weak controls, the ones that live will be the ones you proved before you shipped.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏁 "The Proving Ground"</h3>
+<p><em>Topic: On 2 August 2026 — the same day the EU AI Office's enforcement powers over general-purpose AI switched on — a second EU AI Act clock came due: Article 57's requirement that each Member State ensure at least one AI regulatory sandbox is operational at national level. An AI regulatory sandbox is a controlled, supervised environment in which providers can develop, train, test and validate innovative AI systems (with a focus on high-risk systems) before they are placed on the market, under the guidance of the competent authority. Participation offers legal certainty — good-faith participants who follow the agreed testing plan are shielded from administrative fines for infringements identified during the sandbox — and offers priority and often free access for SMEs and start-ups, ending in an exit report that can serve as evidence toward conformity. A sandbox may be established nationally, jointly with other Member States, or by joining an existing one; the AI Act Omnibus added an EU-level sandbox; the Commission may provide technical support and is to adopt implementing acts detailing operation. Implementation is uneven: Spain runs an operational national sandbox, but most Member States are behind on funding, staffing and expertise. The lesson: the model is the commodity engine you rent, but the supervised proving ground where you validate that your agents behave before they touch the public road is a control you must own and use.</em></p>
+<p>Picture a great house that has just bought a fleet of new machines — fast, tireless, and not yet trusted. Everyone can see what they might do on the open road: carry the freight, run the errands, never sleep. And everyone half-remembers what a new machine does the first time it meets a wet corner it was never shown. The reckless house does the obvious, ruinous thing: it drives the machines straight onto the <strong>public road,</strong> among the schoolchildren and the market carts, and finds out how they handle a skid by having one. The timid house does the other ruinous thing: it never lets the machines out at all, and watches its rivals take the freight. Between recklessness and paralysis there has always been a third way, and it is old: before a new machine earns its plate, you run it hard on a <strong>proving ground</strong> — a fenced track that mimics the real road's loads and corners and worst weather, with an <strong>inspector</strong> standing at the rail, where a spin costs a scuffed tyre and a lesson, not a life.</p>
+<p>What changed this week is not that proving grounds exist — good houses always kept a yard for it. What changed is that the <strong>magistrate built one for the whole town and made using it a right.</strong> By the town's new ordinance, any house bringing a <strong>consequential</strong> machine to market may take it onto the public track under the inspector's eye, agree a course of tests, and run it — and here is the part that turns a nice-to-have into a discipline: while you are <strong>on the track in good faith, following the agreed course, the magistrate will not fine you for the faults the track reveals.</strong> The whole point of a proving ground is to make the machine fail where failing is cheap; a track that punished every skid would empty overnight. So the ordinance shields the good-faith driver, hands the <strong>small workshops the front of the queue</strong> (often waiving the fee, because the giant houses could always afford a private yard and the small ones never could), and sends every house away with a <strong>signed test report</strong> it can show the licensing clerk. A house may use its own town's track, share one with the next town over, or send its machine to the new <strong>regional track</strong> built to test at the scale of the whole province.</p>
+<p>Two truths keep the yard honest. The first is the month's thesis turned once more: the <strong>engine under the bonnet is rented</strong> — you will swap it for a cheaper, stronger one more than once — but the <strong>proving ground is yours to use,</strong> the one place you turn "the demo looked fine" into "we ran it through the skid and the load and the worst corner, with the inspector watching, and here is the report." In a season when the town clerk reckons <strong>two in five of these new ventures will be scrapped</strong> — most of them not for want of a clever engine but for <strong>want of proof that the machine was safe to run</strong> — the house that tested is the house whose machine is still on the road next year. The second truth is soberer: <strong>the track is only half-built.</strong> One province (call it the southern one) has a real, running course; most of the others are still clearing the field, short of inspectors, waiting on the magistrate's rulebook for how the track is to be run. And a clean lap is not a lifetime warranty — the proving ground shows how the machine behaves on the course the inspector set, not on every road it will ever meet; you still fit the airlock at the loading door and the keyring to the yard, and you still watch the machine once it is out. A proving ground is where trust is <em>earned,</em> not where it is <em>finished.</em></p>
+<p><strong>The moral:</strong> the reckless drive their untested machines onto the public road and learn the corners by crashing; the timid never leave the yard and lose the freight; the wise take the machine to the <strong>proving ground first</strong> — the supervised track where a failure is a scuffed tyre and a report, not a headline and a fine. This week the magistrate made that track a right, shielded the good-faith driver, and put the small workshops at the front of the line. Rent the engine; <strong>own the decision to prove the machine before it carries anyone.</strong> Because in a year when most of these ventures die of unproven risk rather than unclever engineering, the question the board should ask is never "does the demo work" — of course it does — but "<strong>has this agent been run hard on a supervised track, under the inspector's eye, before we let it onto the road with our customers on it?</strong>"</p>
+<p><strong>The question it forces:</strong> <em>We are about to put consequential agents onto the public road — our customers' data, our regulated decisions. Have we identified which of them are high-risk, and have we taken them onto a proving ground before go-live — a supervised track where a failure is cheap and the regulator is watching — or are we still learning the corners by crashing in production? The magistrate just built the track and shielded good-faith drivers; can we actually enter one in our jurisdiction today, and if not, do we send our riskiest machine to a joint or EU-level track — or do we ship untested and call the demo proof?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we prove before we ship?</strong> Article 57 gives high-risk AI a supervised proving ground with legal certainty for good-faith testing. <strong>Which of our agents are high-risk, and have any of them been through a sandbox — or do we still treat "the pilot worked" as proof and launch live?</strong></li>
+  <li>The failure economics are the alarm: <strong>Gartner expects &gt;40% of agentic projects cancelled by end-2027, most for weak controls, not weak models; only ~11–14% of pilots scale.</strong> <strong>Are we spending on proof-of-behaviour before production — or adding to the 2-in-5 that die of unproven risk?</strong></li>
+  <li>The proving ground is a <strong>pre-production</strong> control, not the whole chain. <strong>Do we treat the sandbox as one layer alongside the airlock, the keyring and live monitoring — or are we hoping one supervised lap certifies the road?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Credit scoring, fraud and underwriting agents are high-risk by name, and CNIL already came for the Article 11 dossier (4 Aug). <strong>Could we take a scoring agent onto a sandbox and hand a supervisor the exit report — or would we rather explain, after the fact, why we tuned it live on real applicants?</strong></li>
+  <li>Legal certainty is the point. <strong>Are we using the good-faith shield to test the models we are most afraid of — the ones touching lending and eligibility — in a supervised space, rather than avoiding the test because production felt faster?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical decision support and triage agents are the definition of consequential. <strong>Have we run them on a proving ground against real-world edge cases under supervision — or are the edge cases being discovered on patients?</strong></li>
+  <li>SMEs and academic spinouts get priority, often free, access. <strong>If a promising clinical model comes from a small partner, are we routing it through the sandbox lane built for exactly that — or leaving the proof to a launch we cannot undo?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Safety-critical line-side and supply-chain agents fail expensively in the real world. <strong>Do we have a supervised track to run an agent through the loads, corners and worst-weather cases before it controls a line — or do we learn its failure modes on the floor?</strong></li>
+  <li>Engines keep getting cheaper. <strong>When we swap the model under a safety-critical agent, do we re-run the proving ground — or assume last quarter's lap still holds for this quarter's brain?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Pricing, recommendation and support agents touch customers and PII at volume. <strong>Before an agent goes live to millions, has it been proven under realistic load and adversarial conditions — or does the first stress test happen on real shoppers on a peak day?</strong></li>
+  <li>Trust is the product. <strong>Could we tell a customer, truthfully, that the agent serving them was run through a supervised proving ground before it met them — not tuned live against their behaviour?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-facing decisions carry the strictest duty and the least tolerance for "we found out in production." <strong>Are we using the very sandbox our own government was mandated to stand up — testing citizen-service agents under supervision before deployment, with an exit report on file?</strong></li>
+  <li>Coverage is uneven and the rulebook is pending. <strong>Do we know whether our Member State's sandbox is actually operational today — and if not, is our plan a joint or EU-level track, or is it "wait and ship"?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Prove the Agent, Rent the Model</h2>
+<p>Read this week as a chain, not a headline. The airlock (6 Aug) governs <strong>egress</strong> — what of yours leaves for the model. The keyring (7 Aug) governs <strong>access</strong> — what your agents may reach and act on. Both are runtime controls for an agent already live. Today's fitting sits <strong>upstream of all of them:</strong> the <strong>proving ground</strong> — the supervised, pre-production space where you establish that a high-risk agent behaves <em>before</em> it is on the road at all. Article 57 turns that from an internal nicety into a regulated venue with a legal shield. The architecture splits cleanly: the <strong>engine</strong> (the rented, swappable model), the <strong>proving ground</strong> (the supervised pre-production control you own the decision to use), and the <strong>fence that is only half-built</strong> (the honest coverage gaps).</p>
+<div class="card"><ul>
+  <li><strong>The engine — the commodity brain (rented, swappable).</strong> The menu is unchanged and cheaper by the week — <strong>Claude Opus 5</strong> (#1, Intelligence Index 61 / Agentic Index 55.3, $5/$25), <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT). None of this is where your risk lives. A more capable engine does not prove your agent is safe on your data and your decisions; it only makes the untested failure faster.</li>
+  <li><strong>The proving ground — the pre-production control (regulated this week).</strong> An <strong>AI regulatory sandbox</strong> (Article 57) is a controlled environment run by a competent authority in which you develop, train, test and validate high-risk AI <strong>before market,</strong> under supervision and with the regulator's guidance on the rules. It carries <strong>legal certainty</strong> (good-faith participants following the agreed plan are shielded from administrative fines for infringements the test surfaces), <strong>priority and often free access for SMEs,</strong> and an <strong>exit report</strong> usable as evidence toward conformity. It can be <strong>national, joint across Member States, or joined,</strong> and the Omnibus added an <strong>EU-level sandbox</strong> for European-scale testing; the <strong>Commission may provide technical support.</strong> The point that matters: the venue and the shield are the regulator's gift, but <strong>the decision to prove your agent before you ship it is yours</strong> — and it is now the cheapest insurance against the year's dominant failure mode.</li>
+  <li><strong>The fence that is only half-built — the honest gaps.</strong> The mandate is live; coverage is not. <strong>Spain</strong> runs an operational national sandbox; <strong>most Member States are behind</strong> on funding, staff and expertise, and the <strong>Commission's implementing acts</strong> detailing operation are <strong>still pending.</strong> A sandbox proves behaviour on the <strong>agreed course,</strong> not every real-world edge; it is a <strong>pre-production</strong> control, not a substitute for the airlock, the keyring, or live monitoring. New venue, uneven rollout — a proving ground you can enter is a real advance; one your jurisdiction hasn't built is a plan.</li>
+</ul></div>
+<p>The strategic core: <strong>the model is the engine; the proving ground is where you earn the right to drive it in public.</strong> For a month the misread has been "the model is capable, so the agent is ready" — which confuses horsepower with roadworthiness. After this week, "the model is smart" is not the answer to "is this agent safe to put in front of customers"; <em>"we ran it hard on a supervised proving ground under the regulator's eye, and here is the exit report"</em> is the answer — and for high-risk systems Article 57 is where you can now build it.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The proving ground: prove the agent, rent the model. Two in five agentic AI projects are forecast to die by 2027, mostly of unproven risk rather than weak engines, so you test on a supervised track before the public road. On the left, the engine: the rented, swappable brain — Claude Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3 and DeepSeek V4-Flash, MIT-licensed — cheaper every week; you drop the engine into your agent. On the right, the public road: production, with customers, regulated decisions and real data, where a failure is a headline and a fine. In the middle, the proving ground: the EU AI Act Article 57 regulatory sandbox, a supervised pre-production track where you run the agent against real conditions. It offers legal certainty — good-faith testing is shielded from fines; SME priority and often free access; and it ends in an exit report that counts toward conformity. It can be national, joint across Member States, or the new EU-level sandbox, and it went live on 2 August 2026, the same day general-purpose-AI enforcement began. The agent earns its plate — the exit report — before it reaches the public road. The fence is only half-built, to know: Spain is operational, most Member States are behind, the Commission's implementing acts are pending, the sandbox proves the agreed course rather than every road, and it is a pre-production control only, so you still fit the airlock, the keyring, and live monitoring. The trap is to treat the demo as proof, launch live, and learn the corners by crashing in production. The win is to prove on the supervised track first, earn the plate, and then drive in public." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE PROVING GROUND — prove the agent, rent the model</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">2-in-5 agentic projects forecast to die by 2027 — mostly of unproven risk. Test before the road.</text>
+
+  <!-- the engine -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE ENGINE — rented brain</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash (MIT)</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheaper every week · swappable</text>
+
+  <!-- the public road -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#2a1420" stroke="#8a3a5a"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#e79ab8" font-family="sans-serif">THE PUBLIC ROAD — production</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">customers · regulated decisions ·</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">real data</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a failure here = headline + fine</text>
+
+  <!-- arrow: engine down into proving ground -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#e0b45f"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">drop engine into agent ↓</text>
+
+  <!-- arrow: proving ground up to road (earns plate) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">earns its plate ↑</text>
+
+  <!-- the proving ground -->
+  <rect x="40" y="210" width="600" height="158" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE PROVING GROUND — AI regulatory sandbox (EU AI Act, Art. 57)</text>
+  <text x="340" y="256" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">supervised pre-production track · run the agent against real conditions</text>
+  <text x="340" y="278" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ LEGAL CERTAINTY: good-faith testing shielded from fines</text>
+  <text x="340" y="300" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">SME priority / often FREE · ends in an EXIT REPORT (→ conformity)</text>
+  <text x="340" y="321" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">national · joint across states · or the new EU-LEVEL sandbox</text>
+  <text x="340" y="345" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">LIVE SINCE 2 AUG 2026 — same day GPAI enforcement began</text>
+
+  <!-- fence half-built -->
+  <rect x="40" y="386" width="600" height="66" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="407" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">FENCE ONLY HALF-BUILT (know it):</text>
+  <text x="60" y="425" font-size="10" fill="#e8edf3" font-family="sans-serif">Spain operational · most states behind · implementing acts pending ·</text>
+  <text x="60" y="441" font-size="10" fill="#e8edf3" font-family="sans-serif">proves the AGREED course, not every road · pre-production only (keep airlock + keyring)</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="452" x2="340" y2="470" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="494" font-size="9.5" fill="#e06b9a" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: "the demo worked" → launch live</text>
+  <text x="182" y="510" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">learn the corners by crashing in production</text>
+  <text x="498" y="494" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: prove on the track first</text>
+  <text x="498" y="510" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">earn the plate · then drive in public</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The engine — the rented, swappable model</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The proving ground — the pre-production control</span>
+  <span><i class="dot" style="background:#8a3a5a"></i>The public road — production &amp; real customers</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — learn the corners by crashing</th><th>The discipline — prove on the track first</th></tr>
+<tr><td>"The demo worked" treated as proof of safety</td><td>Behaviour proven under load, adversarial cases, supervision</td></tr>
+<tr><td>First real stress test happens in production, on customers</td><td>First stress test happens on a supervised proving ground</td></tr>
+<tr><td>Fear of fines keeps the riskiest models out of any test</td><td>Legal certainty shields good-faith testing — fail where it's cheap</td></tr>
+<tr><td>Only giants can afford a private test yard</td><td>SMEs get priority, often free, access to the public track</td></tr>
+<tr><td>Proof is a slide deck; nothing to show a supervisor</td><td>An exit report on file, usable as evidence toward conformity</td></tr>
+</table>
+
+<h3>Why proving the agent beats a smarter engine</h3>
+<div class="card">
+<p>Every control this month presumed a place to stand. The meter, the router, the MCP plane, the dossier, the discovery scan, the airlock, the keyring — each a layer you own around a commodity engine. The proving ground adds the missing verb on the <em>pre-production</em> side: <strong>prove.</strong> And the reason it must be a supervised, shielded venue is behavioural: teams do not stress-test the models they are most afraid of when the only place to test is production and every fault is a fineable event. Give them a track where failure is cheap and good faith is shielded, and the riskiest systems finally get tested <em>before</em> they carry anyone. A cheaper, stronger engine does nothing for this — it only accelerates the untested failure. The correct read of this week is not "Brussels added paperwork" but "<strong>the enterprise now has a regulated place to earn roadworthiness</strong> — so use it for the agents that can actually hurt someone."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon, 3 Aug the customs house, 4 Aug the two windows, 5 Aug the dark warehouse, 6 Aug the airlock, 7 Aug the keyring). This week fitted the runtime controls; today claims the pre-production one. On legacy estates the temptation is to keep "testing" in production because that is where the data is — the retrofit is specific and unglamorous: <strong>inventory your high-risk agents</strong> (the ones touching regulated decisions, safety, or vulnerable users); <strong>find the sandbox you can actually enter</strong> — your national one if it is live, a joint sandbox, or the EU-level track — and <strong>agree a testing plan</strong> with the authority; <strong>take your single riskiest system onto the track before its next go-live,</strong> using the good-faith shield to test the failure modes you most fear; and <strong>keep the exit report</strong> as evidence toward conformity and as the artefact you hand a board or a supervisor. Then be honest about the fence: if your Member State's sandbox is not yet operational, that is a gap to plan around (joint or EU-level), not a reason to call production "the test."</p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — rented, swappable, cheaper every week; horsepower was never roadworthiness. The proving ground is yours to use: the supervised, pre-production track where a high-risk agent is run hard against real conditions under the regulator's eye, where good-faith failure is cheap and shielded, and where the output is an exit report that says the machine earned its plate. The magistrate built the track this week (Article 57); the enterprise must drive its riskiest machines onto it — before, not after, they carry anyone.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The milestone — Article 57 due 2 Aug.</strong> Every Member State was to have <strong>≥1 AI regulatory sandbox operational</strong> by <strong>2 August 2026</strong> — the <strong>same day</strong> GPAI enforcement powers switched on. Sandboxes offer supervised pre-market testing of high-risk AI, <strong>legal certainty</strong> for good-faith participants, <strong>priority/free SME access,</strong> and an <strong>exit report</strong> toward conformity; can be <strong>national, joint, or joined,</strong> with an <strong>EU-level sandbox</strong> added by the Omnibus.</li>
+  <li><strong>The gaps — be honest.</strong> <strong>Spain</strong> operational; <strong>most Member States behind</strong> (funding, staffing, expertise); <strong>Commission implementing acts pending;</strong> proves the <strong>agreed course,</strong> not every road; <strong>pre-production only.</strong></li>
+  <li><strong>The failure economics — why it matters now.</strong> <strong>Gartner: &gt;40% of agentic AI projects cancelled by end-2027</strong> (cost, unclear value, weak controls). <strong>~11–14% of pilots reach production at scale;</strong> up to <strong>54% stall 3–9 months</strong> post-pilot. <strong>A $200k pilot can cost $1–2M/yr</strong> to run at scale. <strong>McKinsey: agents could add $2.6–4.4T/yr.</strong> <strong>~31% of enterprises have ≥1 agent in production</strong> (banking/insurance ~47%; healthcare ~18%; government ~14%).</li>
+  <li><strong>The global echo.</strong> The U.S. is drafting its own version — <strong>Sen. Ted Cruz's SANDBOX Act (S.2750)</strong> would have OSTP grant AI developers <strong>two-year federal waivers</strong> (renewable, up to ~10 years) in exchange for risk-mitigation agreements and reporting, with the program sunsetting in 12 years. Singapore stood up an AI-agent sandbox in 2025. The proving-ground idea is going global.</li>
+  <li><strong>The regulatory backdrop — still live.</strong> EU AI Act GPAI enforcement running since <strong>2 Aug;</strong> AI Office powers; <strong>€15M or 3%;</strong> Article 50 transparency live; CNIL's <strong>4 Aug</strong> action (14 banks, Article 11). The sandbox is the innovation-friendly other half of the same date.</li>
+  <li><strong>The engine, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — the rented, swappable brain. Prove the agent, not the engine.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">"Our businesses and citizens want two things from AI rules. They want to be able to innovate and feel safe… With simpler and innovation-friendly rules, we make it easier to innovate without lowering the bar on safety."</div><div class="a">— Henna Virkkunen, EU Executive Vice-President for Tech Sovereignty, Security and Democracy, on the AI Act's innovation measures, incl. regulatory sandboxes (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">"As enforcement begins, we are taking an important step towards AI that people and businesses can understand and trust, and whose benefits are shared widely across our society."</div><div class="a">— Henna Virkkunen, on the start of EU AI Act enforcement, 2 August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">More than 40% of agentic AI projects will be cancelled by the end of 2027, driven by escalating costs, unclear business value, or inadequate risk controls.</div><div class="a">— Gartner (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the engine — rented and swappable; horsepower was never roadworthiness. The proving ground is yours to use: run the agent hard on a supervised track before it carries anyone, where good-faith failure is cheap and the output is a report that says it earned its plate."</div><div class="a">— the radar, on the pre-production control</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>AI regulatory sandboxes — deadline</td><td><span class="v">≥1 operational per Member State by 2 Aug 2026 (Article 57)</span></td><td>EU AI Act, Article 57 / European Commission (as reported)</td></tr>
+<tr><td>What a sandbox gives you</td><td><span class="v">Supervised pre-market testing · legal certainty for good-faith participants · SME priority (often free) · exit report toward conformity</span></td><td>EU AI Act, Art. 57–58 (as documented/reported)</td></tr>
+<tr><td>How it can be run</td><td><span class="v">National · joint across Member States · joined · plus an EU-level sandbox (Omnibus)</span></td><td>European Commission / AI Act Omnibus coverage (as reported)</td></tr>
+<tr><td>Coverage reality</td><td><span class="v">Spain operational; most Member States behind; Commission implementing acts pending</span></td><td>European Parliament (EPRS) / regulatory coverage (as reported)</td></tr>
+<tr><td>Agentic AI projects cancelled by end-2027</td><td><span class="v">&gt;40% (cost, unclear value, weak controls)</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>AI agent pilots reaching production at scale</td><td><span class="v">~11–14%</span></td><td>2026 enterprise surveys / analyst coverage (as reported)</td></tr>
+<tr><td>Pilots stalling 3–9 months after a successful pilot</td><td><span class="v">up to ~54%</span></td><td>2026 enterprise surveys (as reported)</td></tr>
+<tr><td>Cost to run a pilot reliably at scale</td><td><span class="v">~$1–2M/yr (from a ~$200k build)</span></td><td>Analyst / practitioner coverage (as reported)</td></tr>
+<tr><td>Potential annual value of AI agents</td><td><span class="v">$2.6–4.4T</span></td><td>McKinsey (as reported)</td></tr>
+<tr><td>Enterprises with ≥1 AI agent in production</td><td><span class="v">~31% (banking/insurance ~47%; healthcare ~18%; gov ~14%)</span></td><td>S&amp;P Global / McKinsey (as reported)</td></tr>
+<tr><td>EU AI Act — enforcement &amp; penalties</td><td><span class="v">GPAI enforcement live 2 Aug; Art. 50 transparency live; €15M or 3% (€7.5M or 1.5% for incorrect info)</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>U.S. counterpart</td><td><span class="v">SANDBOX Act (S.2750): 2-yr federal waivers, renewable up to ~10 yrs; program sunsets in 12</span></td><td>Congress.gov / policy coverage (as reported)</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory your high-risk agents and take the riskiest onto a proving ground before its next go-live.</strong> List the agents that touch regulated decisions, safety, or vulnerable users — the ones a bad launch cannot be undone. Find the sandbox you can actually enter (your national one if operational, a joint sandbox, or the new <strong>EU-level</strong> track), agree a testing plan with the authority, and <strong>run the failure modes you most fear</strong> in the supervised space — using the good-faith legal shield that exists precisely so you test the scary ones. Report one metric to the board: <em>the share of our high-risk agents that reached production only after a supervised sandbox exit report.</em></li>
+  <li><strong>Make "prove before you ship" the gate, and budget for the real run-cost.</strong> The year's dominant failure mode is not a weak model; it is an unproven agent whose true cost lands three-to-six months after launch. Put a <strong>pre-production proof gate</strong> in front of every consequential agent — sandbox exit report where the law offers one, a rigorous internal proving ground where it does not — and model the <strong>$1–2M/yr</strong> run-cost <em>before</em> you green-light, not after. You will kill the projects that belong in the 40% early and cheaply, and keep budget for the ones that scale.</li>
+  <li><strong>Keep it model-neutral and map the fence honestly.</strong> The asset is the <em>discipline of proving,</em> not the venue: re-run the proving ground whenever you swap the engine (Opus 5 for Gemini or GPT-5.6), because last quarter's lap does not certify this quarter's brain. Then be honest about coverage — <strong>if your Member State's sandbox is not yet operational, plan around it</strong> (a joint or EU-level track), and remember the proving ground is a <strong>pre-production</strong> control that sits alongside, not instead of, the airlock, the keyring and live monitoring. Prove the agent on a supervised track, own the decision to do so, and demand the same proof of every vendor and every model you rent — because in a year when most agentic ventures are forecast to die of unproven risk, the ones that live are the ones you proved before you shipped.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> EU Artificial Intelligence Act (Article 57 — AI regulatory sandboxes; Article 58) · European Commission (AI Act enforcement; sandboxes) · European Parliament EPRS (sandbox state of play) · AI Act Omnibus coverage · Help Net Security · Wilson Sonsini · Gartner (as reported) · McKinsey · S&amp;P Global · Congress.gov (SANDBOX Act, S.2750) · policy coverage · LLM-Stats / model trackers. Figures are relayed from EU legal text, Commission and analyst and press sources, marked "as reported" where they rest on secondary reporting, and "as documented" where drawn from the EU AI Act's text. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 8 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
