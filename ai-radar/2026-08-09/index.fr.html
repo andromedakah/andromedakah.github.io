@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 9 août 2026</title>
+<meta name="description" content="Radar technologique IA quotidien : synthèse pour dirigeants, allégorie de niveau conseil d'administration, questions transsectorielles et analyse technique sur le service des eaux — 2026 est la première année où le monde consacre plus de puissance de calcul à faire tourner l'IA qu'à l'entraîner. Lisa Su (AMD) situe l'inférence à ~60 % de la capacité et ~35 quadrillions de jetons par mois (≈160× il y a deux ans) ; Deloitte place l'inférence à ~deux tiers du calcul IA ; Goldman Sachs prévoit que la demande de jetons sera multipliée par ~24 pour atteindre 120 quadrillions de jetons/mois d'ici 2030 ; OpenAI indique que l'entreprise représente désormais >40 % de son chiffre d'affaires grâce aux « équipes d'agents ». La thèse du mois démontrée à l'échelle macro : le modèle est un réservoir loué, moins cher chaque trimestre et jamais votre rempart — possédez le service des eaux (routage, mise en cache, comptage et gouvernance de l'inférence) ou soyez saigné au compteur sur celui d'un autre. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre le thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Calcul &amp; économie</div>
+  <h1>Le Service des eaux</h1>
+  <div class="subhead">2026 est la première année où le monde consacre plus de puissance de calcul à faire tourner l'IA qu'à l'entraîner — l'inférence représente ~deux tiers du calcul IA et la demande de jetons devrait être multipliée par ~24 d'ici 2030. Louez le réservoir ; possédez le service des eaux.</div>
+  <div class="meta">Dimanche 9 août 2026 · Édition transsectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">Depuis un mois, ce radar répète la même chose sous une douzaine de costumes : le modèle est une marchandise, alors possédez la couche qui l'entoure. Cette semaine a posé les contrôles — le sas (6 août), le trousseau de clés (7 août), le terrain d'essai (8 août). Aujourd'hui, le sol se dérobe sous tous ces contrôles. L'industrie vient de franchir une ligne qu'elle ne franchira pas en sens inverse : 2026 est la première année où le monde consacre plus de calcul à faire tourner l'IA qu'à l'entraîner. Lisa Su (AMD) l'a chiffré — l'industrie traite désormais ~35 quadrillions de jetons par mois, ~160× il y a deux ans, l'inférence à ~60 % de la capacité — et Deloitte situe l'inférence à ~deux tiers de tout le calcul IA. Goldman Sachs prévient que le compteur ne fait que chauffer : la demande de jetons devrait être multipliée par ~24 pour atteindre 120 quadrillions de jetons/mois d'ici 2030. L'ère du barrage — qui entraîne le plus gros modèle — s'achève ; l'ère du service des eaux — qui fait circuler le flux, à bas coût et en toute sûreté, à chaque robinet — a commencé. La question du conseil ce matin : nous avons passé deux ans à demander qui a le barrage le plus haut ; notre facture vient désormais de l'eau qui coule à nos robinets, et elle devrait être multipliée par vingt — possédons-nous notre service des eaux, ou sommes-nous sur le point d'être saignés au compteur sur celui d'un autre ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse pour dirigeants <span class="pill">lecture 90 s</span></h2>
+<div class="card">
+<p>Depuis un mois, ce radar défend une seule idée : le modèle est une marchandise, donc l'avantage durable est la <strong>couche que vous possédez autour de lui.</strong> Cette semaine l'a rendue concrète par des contrôles — le sas à la porte par laquelle vos données sortent (6 août), le trousseau de clés vers tout ce que vos agents peuvent atteindre (7 août), le terrain d'essai où vous les validez avant la mise en service (8 août). Aujourd'hui, l'argument reçoit sa preuve macro. L'économie de l'IA est passée discrètement d'un <strong>chantier</strong> à un <strong>régime de fonctionnement :</strong> <strong>2026 est la première année où le calcul mondial d'inférence dépasse le calcul d'entraînement,</strong> le moment où l'argent cesse de porter sur la <em>fabrication</em> du modèle pour porter sur son <em>fonctionnement</em> — et le faire tourner est désormais la facture qui grossit chaque trimestre où vous réussissez.</p>
+<p><strong>Le basculement, en chiffres.</strong> Lors de l'événement phare d'AMD, <strong>Lisa Su</strong> a présenté 2026 comme un jalon historique : le <strong>calcul d'inférence dépasse désormais l'entraînement</strong> pour la première fois, l'industrie fait tourner <strong>~35 quadrillions de jetons par mois (≈160× il y a deux ans),</strong> et <strong>~60 % de la capacité est de l'inférence,</strong> portée par l'IA agentique. Les prévisions TMT 2026 de Deloitte placent l'inférence à <strong>~deux tiers de tout le calcul IA</strong> (contre ~33 % en 2023 et ~50 % en 2025), avec un <strong>marché des puces optimisées pour l'inférence supérieur à 50 Md$ en 2026.</strong> Et c'est le début, presque à sec, de la courbe : <strong>Goldman Sachs prévoit une demande de jetons multipliée par ~24 pour atteindre 120 quadrillions de jetons par mois d'ici 2030</strong> — le régime actuel dépassant déjà son propre modèle de mai 2026. La demande derrière le compteur est visible dans les comptes de résultat : <strong>OpenAI indique que l'entreprise représente désormais &gt;40 % de son chiffre d'affaires,</strong> en voie d'égaler le grand public d'ici la fin de l'année, à mesure que les clients déploient des « équipes d'agents », ses API traitant <strong>&gt;15 milliards de jetons par minute.</strong></p>
+<p><strong>Pourquoi cela compte plus qu'un titre sur le calcul.</strong> Un chantier est un projet d'investissement que quelques laboratoires financent et que vous louez ; un régime de fonctionnement est une <strong>charge d'exploitation que vous portez, comptée au jeton, qui croît avec votre succès, pas contre lui.</strong> Cela inverse le lieu de l'avantage. À l'ère du barrage, la question était « qui a le plus gros modèle » ; à l'ère du service des eaux, c'est « <strong>de qui l'inférence est la moins chère, la plus rapide et la plus sûre par jeton de valeur métier.</strong> » Le modèle reste loué et interchangeable — Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731. Ce que vous possédez — ou pas — c'est le <strong>service des eaux :</strong> le routage, la mise en cache, le regroupement, la répartition petit-modèle/grand-modèle, et les contrôles sas-trousseau-terrain d'essai qui gardent le flux propre. Le rapport 2026 State of AI Agents d'Anthropic indique que <strong>80 % des organisations déclarent désormais un ROI mesurable</strong> de leurs agents ; celles qui le conservent sont celles dont l'économie unitaire survit à une hausse de débit de 24×.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>L'ère a changé, pas seulement la courbe.</strong> La valeur migre du <strong>chantier capitalistique</strong> (l'entraînement, possédé par quelques-uns, loué par tous) vers la <strong>couche opérationnelle</strong> (l'inférence, exploitée par chacun). « Qui a le meilleur modèle » est la question de l'ère passée ; « qui fait circuler le flux au moindre coût et le plus proprement par unité de valeur » est celle de cette ère. Possédez le service des eaux, louez le réservoir.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Votre coût IA vient de devenir une charge qui croît avec le succès.</strong> Un pilote est bon marché ; un pilote <em>réussi</em> à 24× le débit est la facture qui tue les projets. L'inférence pesant déjà ~deux tiers du calcul et ~55 % de la dépense cloud IA, et la demande devant être multipliée par ~24 d'ici 2030, <strong>la ligne « jetons » est désormais un poste de premier plan du compte de résultat</strong> — modélisez-la avant de passer à l'échelle, pas après.</div></div>
+<div class="num"><div class="b">3</div><div><strong>Les contrôles ne paient que si le flux est compté et gouverné.</strong> Le sas, le trousseau et le terrain d'essai présupposent un tuyau que vous pouvez voir, tarifer et fermer. À l'ère du service des eaux, <strong>l'économie unitaire et la gouvernance ne font qu'une seule discipline :</strong> un flux non compté et non gouverné est à la fois une facture qui s'emballe et un risque non contenu. Comptez chaque robinet, ou la courbe de croissance de l'ère devient votre courbe de pertes.</div></div>
+<div class="card"><strong>En bref :</strong> le mois disait <em>possédez la couche autour du modèle-marchandise.</em> Aujourd'hui, tout le marché en démontre la raison : le chantier est terminé, le régime de fonctionnement a commencé, et <strong>la facture est passée du barrage que vous louez à l'eau que vous pompez.</strong> Louez le réservoir — il est moins cher chaque trimestre et n'est jamais votre rempart. <strong>Possédez le service des eaux :</strong> le routage, la mise en cache et les répartitions petit-modèle qui rendent un jeton bon marché ; le compteur qui transforme une facture mystère en facture gérée ; et le sas, le trousseau et le terrain d'essai qui gardent le flux propre — car dans une année où le monde est passé à l'inférence d'abord et où la demande de jetons devrait être multipliée par vingt, les entreprises qui prospèrent sont celles qui comptent par conception, non par surprise.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🚰 « Le Service des eaux »</h3>
+<p><em>Sujet : 2026 est la première année où le calcul mondial d'inférence dépasse le calcul d'entraînement. Lors de l'événement phare 2026 d'AMD, la PDG Lisa Su l'a présenté comme un jalon historique : l'industrie traite désormais environ 35 quadrillions de jetons IA par mois — environ 160× le volume d'il y a deux ans — l'inférence représentant désormais environ 60 % du calcul, un basculement qu'elle attribue à l'essor de l'IA agentique. Les prévisions TMT 2026 de Deloitte estiment l'inférence à environ deux tiers de tout le calcul IA en 2026 (contre ~33 % en 2023 et ~50 % en 2025), le marché des puces optimisées pour l'inférence dépassant 50 milliards de dollars. Goldman Sachs prévoit que la demande de jetons IA sera multipliée par environ 24 pour atteindre quelque 120 quadrillions de jetons par mois entre 2026 et 2030. OpenAI indique que l'entreprise représente désormais plus de 40 % de son chiffre d'affaires, en voie d'égaler le grand public d'ici fin 2026, ses API traitant plus de 15 milliards de jetons par minute. La leçon : le chantier d'entraînement — qui possède le plus gros modèle — est un projet d'investissement que quelques laboratoires financent et que tous louent ; le régime d'inférence — qui fait circuler le flux au moindre coût, le plus vite et le plus proprement par jeton de valeur métier — est une charge d'exploitation que l'entreprise porte et doit posséder.</em></p>
+<p>Imaginez une ville qui a passé une décennie et une fortune à élever un <strong>grand barrage.</strong> C'était la merveille de l'époque : chacun mesurait la grandeur d'une ville à la hauteur de son barrage, et les journaux publiaient les chiffres chaque saison — le mur de cette ville-ci un peu plus haut que celui de celle-là, le réservoir derrière lui un peu plus profond. Et ce n'était pas de la vanité ; une ville sans réservoir n'a pas d'eau du tout. Mais un réservoir, si vaste soit-il, n'abreuve personne tant qu'il <em>reste</em> derrière le mur. Il ne compte que lorsque l'eau <strong>coule</strong> — par les conduites principales, par les tuyaux, hors des dix mille robinets, dans les cuisines, les ateliers et les salles d'hôpital. Pendant des années, la ville a pu prétendre le contraire, car si peu d'eau coulait réellement que le barrage était la seule chose dont il valait la peine de parler. Cette année, le faux-semblant a cessé. Cette année, la ville a, pour la première fois, consacré <strong>plus d'efforts à faire circuler l'eau vers les robinets qu'à élever le mur.</strong></p>
+<p>Et l'eau <em>coule</em> maintenant. Le maître des eaux de la ville — appelons-le Su, de la grande fonderie — s'est levé au grand rassemblement de l'année et a lu le compteur : les conduites transportent désormais de l'ordre de <strong>trente-cinq mille-mille barils par mois, à peu près cent soixante fois ce qu'elles portaient il y a deux ans,</strong> et <strong>trois barils sur cinq vont désormais aux robinets, non au réservoir.</strong> Les comptables de la ville l'ont confirmé : <strong>deux seaux d'effort sur trois vont désormais au flux, non au mur,</strong> là où, il y a trois ans, c'était un sur trois. Et les banquiers, payés pour voir venir de loin, ont averti que c'est le début presque à sec de la courbe : selon leur calcul, le flux sera <strong>multiplié par quelque vingt-quatre d'ici la fin de la décennie.</strong> Les grandes maisons de commerce le sentent déjà dans leurs livres : l'une d'elles rapporte que <strong>plus de deux pièces sur cinq qu'elle encaisse viennent désormais des ateliers, non des foyers</strong> — car les ateliers se sont mis à faire tourner des <em>équipes</em> de machines infatigables buveuses d'eau, et une machine ne ferme jamais le robinet.</p>
+<p>Voici le tournant que la ville sage voit et que la ville orgueilleuse manque. À l'ère du barrage, la grandeur était du <strong>capital :</strong> on élevait le mur une fois, et le mur était le rempart, et seule une poignée de villes pouvait s'en offrir un — de sorte que toutes les autres <em>louaient</em> leur eau. Louer le réservoir n'a jamais été la honte ; c'était le bon sens. Mais un réservoir loué est précisément la raison pour laquelle le <strong>service des eaux</strong> — les pompes, les conduites, les vannes, les compteurs, les filtres à chaque robinet — est la part qui est <em>vôtre,</em> et la part dont dépend désormais toute votre fortune. Parce que le flux est compté au baril, et que les barils vont être multipliés par vingt, la ville qui prospère n'est pas celle au mur loué le plus haut, mais celle dont le service des eaux <strong>ne gaspille rien :</strong> pas de fuites dans les conduites, la juste pression à chaque robinet, la source locale bon marché pour la lessive et le réservoir profond gardé pour la boisson, un <strong>compteur à chaque robinet pour qu'aucune facture d'atelier ne soit un mystère,</strong> et un <strong>filtre et une vanne d'arrêt</strong> sur la ligne pour que ce qui coule à la salle des soins soit propre et puisse être coupé en un battement de cœur. La ville orgueilleuse, admirant encore son mur, se réveille avec une facture d'eau qu'elle n'a jamais comptée et ne peut expliquer — et découvre, trop tard, que le succès fut ce qui la noya, car chaque nouvel atelier ouvert n'ouvrait que davantage de robinets.</p>
+<p><strong>La morale :</strong> pendant une décennie, le monde a demandé <em>quel barrage est le plus haut,</em> et c'était la bonne question pour une décennie — une ville sans réservoir n'a pas d'eau. Mais le réservoir est loué désormais, moins cher chaque saison, et jamais plus votre rempart ; la fortune est passée au <strong>flux.</strong> La ville sage loue le réservoir sans honte et <strong>possède son service des eaux</strong> — compte chaque robinet, répare chaque fuite, filtre et vanne chaque ligne — pour que, lorsque l'eau sera multipliée par vingt, la croissance soit une fortune et non un déluge. Louez le réservoir ; <strong>possédez les pompes, les compteurs et les vannes,</strong> car dans l'année où le monde s'est mis à dépenser plus pour faire circuler l'eau que pour élever le mur, la facture a cessé de venir de la maçonnerie et s'est mise à venir, baril après baril compté, de vos propres robinets.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Notre dépense IA est discrètement passée d'une chose que nous construisons à une chose que nous faisons tourner — comptée au jeton, croissant avec chaque agent que nous livrons, et devant être multipliée plusieurs fois. Possédons-nous vraiment notre service des eaux — connaissons-nous notre coût par jeton, routons-nous le travail bon marché vers des modèles bon marché, mettons-nous en cache et regroupons-nous ce que nous pouvons, et comptons-nous et gouvernons-nous chaque robinet — ou fixons-nous encore quel modèle est le plus gros pendant que la facture d'eau court, non comptée, vers un chiffre que notre seul succès rendra ruineux ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions pour dirigeants — par secteur</h2>
+<div class="sector"><div class="t">🌐 Transsectoriel (tout conseil d'administration)</div><ul>
+  <li><strong>Connaissons-nous notre coût par jeton — et par unité de valeur métier ?</strong> 2026 est la première année « inférence d'abord » ; l'inférence pèse ~deux tiers du calcul IA et la demande devrait être multipliée par ~24 d'ici 2030. <strong>Notre dépense IA est-elle modélisée comme une charge d'exploitation évolutive, ou toujours inscrite comme un coût de pilote ponctuel qui nous surprendra au volume ?</strong></li>
+  <li>L'avantage est passé du barrage au flux. <strong>Concourons-nous encore sur « quel modèle est le plus gros » — ou sur l'inférence la moins chère, la plus rapide et la plus propre par jeton : routage, mise en cache, regroupement et juste répartition petit-modèle/grand-modèle ?</strong></li>
+  <li>La croissance est ici le risque. <strong>Si le débit d'un pilote réussi était multiplié par 20, notre économie unitaire tiendrait-elle encore — ou notre propre succès serait-il ce qui rend le projet non rentable ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Chaque agent de scoring, de fraude et de conseil est un robinet qui coule sur du volume client réel. <strong>Tarifons-nous chaque agent au nombre de jetons par décision, et avons-nous réservé un modèle bon marché aux appels courants et le modèle de pointe aux seuls cas difficiles — ou chaque requête paie-t-elle le tarif de pointe ?</strong></li>
+  <li>L'inférence est aussi là où circulent les données réglementées. <strong>Chaque robinet compté est-il aussi un robinet gouverné — sas en sortie, trousseau en accès — pour que le compteur de coût et le compteur de conformité soient le même compteur ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences du vivant</div><ul>
+  <li>Les agents cliniques et de triage ne peuvent échanger la sûreté contre un jeton moins cher, mais ils peuvent gaspiller des jetons gravement. <strong>Avons-nous séparé le travail bon marché à fort volume (résumé, admission) du travail coûteux et méticuleux (aide à la décision) pour ne ni surpayer ni sous-vérifier ?</strong></li>
+  <li>Le débit arrive, budgété ou non. <strong>Si les agents en contact patient étaient étendus à toutes les cliniques, notre coût d'inférence par consultation est-il connu et soutenable — ou découvert sur la facture ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacturing</div><ul>
+  <li>Les agents de ligne et de chaîne d'approvisionnement tournent en continu — la définition même d'un robinet ouvert. <strong>Faisons-nous tourner l'inférence là où elle est la moins chère et la plus proche (périphérie, local, regroupée) pour le travail permanent, en réservant le réservoir profond aux exceptions ?</strong></li>
+  <li>Les moteurs deviennent moins chers. <strong>Quand nous changeons le modèle sous un agent en fonctionnement, réévaluons-nous le coût <em>et</em> la qualité par jeton — ou supposons-nous que l'économie du trimestre dernier tient encore pour le moteur de ce trimestre ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Commerce / Grand public</div><ul>
+  <li>Les agents de recommandation, de recherche et de support sont les robinets à plus fort volume du bâtiment. <strong>Au pic, connaissons-nous le coût en jetons du service d'un client — et la mise en cache et un palier petit-modèle l'empêchent-ils de croître linéairement avec le trafic ?</strong></li>
+  <li>Le succès est le test de résistance. <strong>Le jour le plus chargé de l'année, notre facture d'inférence croît-elle avec le chiffre d'affaires ou plus vite que lui — et lequel des deux avons-nous réellement mesuré ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>Les agents au service du citoyen doivent être à la fois abordables et redevables à l'échelle. <strong>Chaque jeton est-il à la fois compté (pour les deniers publics) et gouverné (pour la confiance publique) — ou étendons-nous un service dont le coût et le risque sont également non mesurés ?</strong></li>
+  <li>Les budgets sont annuels ; la demande de jetons ne l'est pas. <strong>Avons-nous modélisé un régime d'inférence pluriannuel face à un budget fixe — ou la courbe multipliée par vingt rencontrera-t-elle une ligne plate et bloquera-t-elle le service ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Louez le réservoir, possédez le service des eaux</h2>
+<p>Lisez ce mois comme un seul argument atteignant sa preuve. Le sas (6 août) gouverne la <strong>sortie ;</strong> le trousseau (7 août) gouverne l'<strong>accès ;</strong> le terrain d'essai (8 août) gouverne la <strong>validation avant production.</strong> Chacun est un contrôle que vous possédez autour d'un modèle loué. Aujourd'hui, le marché montre <em>pourquoi toute la thèse tient :</em> l'économie elle-même est passée du modèle à la couche qui l'entoure. L'économie de l'IA est passée d'un <strong>chantier</strong> (entraîner le plus gros modèle — capital, concentré, loué) à un <strong>régime de fonctionnement</strong> (servir les jetons — charge d'exploitation, distribuée, vôtre). L'architecture se scinde nettement en trois : le <strong>réservoir</strong> (le modèle loué, interchangeable), le <strong>service des eaux</strong> (la couche d'inférence que vous possédez — routage, cache, comptage, gouvernance), et le <strong>déluge à anticiper</strong> (une courbe de demande devant être multipliée par ~24).</p>
+<div class="card"><ul>
+  <li><strong>Le réservoir — le moteur-marchandise (loué, interchangeable).</strong> Le menu est inchangé et moins cher chaque semaine — <strong>Claude Opus 5</strong> (n°1, Indice d'intelligence 61 / Indice agentique 55,3, 5/25 $), <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT). Le louer n'est pas la honte ; c'est le bon sens. Mais le réservoir n'est plus là où est l'argent, et il n'a jamais été votre rempart. Dans une année « inférence d'abord », un réservoir plus grand ne réduit pas votre facture d'eau — seul un meilleur service des eaux le fait.</li>
+  <li><strong>Le service des eaux — la couche d'inférence (là où l'avantage s'est déplacé).</strong> C'est la part que vous possédez ou pas : le <strong>routage de modèle</strong> (modèle bon marché pour les appels courants, modèle de pointe pour les seuls cas difficiles), la <strong>mise en cache</strong> (ne jamais payer deux fois la même réponse), le <strong>regroupement et la quantification</strong> (plus de jetons par watt), la <strong>répartition petit-modèle/grand-modèle</strong> à la périphérie et au cœur, et — indissociable de tout cela — le <strong>compteur</strong> à chaque robinet et le <strong>sas, le trousseau et le terrain d'essai</strong> qui gardent le flux propre. Le jalon de Lisa Su (<strong>l'inférence dépasse désormais l'entraînement ; ~35 quadrillions de jetons/mois, ~160× en deux ans, ~60 % de la capacité</strong>) et les <strong>~deux tiers du calcul IA</strong> de Deloitte ne sont pas des anecdotes ; ce sont la raison pour laquelle cette couche, non le modèle, est désormais le compte de résultat.</li>
+  <li><strong>Le déluge à anticiper — la courbe de demande.</strong> Goldman Sachs prévoit une demande de jetons multipliée par <strong>~24 pour atteindre 120 quadrillions de jetons/mois d'ici 2030,</strong> avec un <strong>jalon 2028 près de 47 quadrillions</strong> et un régime actuel déjà en avance sur son modèle de mai 2026. Le chiffre d'affaires entreprise d'OpenAI dépassant <strong>&gt;40 %</strong> sur les « équipes d'agents », et <strong>&gt;15 milliards de jetons/minute</strong> à travers ses API, c'est la même vague qui déferle sur les comptes de résultat. Le point qui compte : <strong>votre facture d'inférence croît avec votre succès,</strong> donc un service des eaux qui ne gaspille rien à 1× peut vous noyer à 24×. Anticipez le déluge avant qu'il n'arrive.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>le modèle est le réservoir ; le service des eaux est là où vous gagnez — ou perdez — la marge sur chaque jeton.</strong> Depuis un mois, la mauvaise lecture était « possédez un grand modèle et vous avez gagné ». Après cette semaine, la lecture est plus nette : <strong>le modèle est loué et devient moins cher, et la fortune est passée au flux.</strong> « Nous utilisons le meilleur modèle » n'est pas la réponse à « cela passera-t-il à l'échelle de façon rentable et sûre » ; <em>« nous routons, mettons en cache et comptons chaque jeton, et nous gouvernons chaque robinet »</em> est la réponse.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le service des eaux : louez le réservoir, possédez le flux. 2026 est la première année où le monde consacre plus de calcul à faire tourner les modèles qu'à les entraîner ; l'inférence pèse environ deux tiers du calcul IA et la demande de jetons devrait être multipliée par environ 24 d'ici 2030. À gauche, le réservoir : le modèle loué, interchangeable — Claude Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3 et DeepSeek V4-Flash, sous licence MIT — moins cher chaque semaine et pas le rempart ; l'eau entre. À droite, les robinets : la production, chaque agent et chaque requête, comptés au jeton, où la facture croît avec le succès. Au milieu, le service des eaux — la couche d'inférence que vous possédez : router les modèles bon marché pour le travail courant et le modèle de pointe pour les seuls cas difficiles ; mettre en cache et regrouper pour ne jamais payer deux fois et obtenir plus de jetons par watt ; compter chaque robinet pour que le coût par jeton soit un poste de premier plan du compte de résultat ; et gouverner avec le sas en sortie, le trousseau en accès et le terrain d'essai avant la production. Le compteur de coût et le compteur de conformité sont le même compteur. Anticipez le déluge : Lisa Su d'AMD rapporte environ 35 quadrillions de jetons par mois, environ 160 fois plus en deux ans, environ 60 % d'inférence ; Deloitte place l'inférence à environ deux tiers du calcul ; Goldman Sachs prévoit une croissance d'environ 24 fois d'ici 2030 pour atteindre 120 quadrillions par mois ; OpenAI rapporte que l'entreprise dépasse 40 % du chiffre d'affaires. Le piège est d'admirer le barrage le plus haut, de livrer des agents et de découvrir un déluge de facture non compté. La victoire est de louer le réservoir, de posséder le service des eaux, de compter chaque robinet et de croître sans se noyer." style="max-width:660px;width:100%;height:auto">
+  <!-- titre -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE SERVICE DES EAUX — louez le réservoir, possédez le flux</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">2026 : première année où le monde calcule plus pour FAIRE TOURNER que pour ENTRAÎNER.</text>
+
+  <!-- le réservoir -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">LE RÉSERVOIR — modèle loué</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash (MIT)</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">moins cher chaque semaine · pas le rempart</text>
+
+  <!-- les robinets -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#122a20" stroke="#1d7a56"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">LES ROBINETS — production</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">chaque agent · chaque requête</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">comptés au jeton</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">la facture croît avec le succès</text>
+
+  <!-- flèche : réservoir vers le service des eaux -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#e0b45f"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">eau en entrée ↓</text>
+
+  <!-- flèche : service des eaux vers les robinets -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">flux propre ↑</text>
+
+  <!-- le service des eaux -->
+  <rect x="40" y="210" width="600" height="170" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">LE SERVICE DES EAUX — la couche d'inférence que vous POSSÉDEZ</text>
+  <text x="340" y="258" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ ROUTER : modèle bon marché pour le courant · pointe pour le difficile</text>
+  <text x="340" y="280" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ CACHE + REGROUPER : ne jamais payer deux fois · plus de jetons par watt</text>
+  <text x="340" y="302" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ COMPTER chaque robinet : coût par jeton = poste clé du résultat</text>
+  <text x="340" y="324" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ GOUVERNER : sas (sortie) · trousseau (accès) · terrain d'essai</text>
+  <text x="340" y="348" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">le compteur de coût et le compteur de conformité : le MÊME compteur</text>
+  <text x="340" y="368" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">« inférence d'abord » depuis 2026 — le chantier est fini, le régime a commencé</text>
+
+  <!-- anticiper le déluge -->
+  <rect x="40" y="398" width="600" height="64" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="419" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">ANTICIPER LE DÉLUGE :</text>
+  <text x="60" y="437" font-size="10" fill="#e8edf3" font-family="sans-serif">Su/AMD ~35 quadrillions de jetons/mois (~160× en 2 ans, ~60 % inférence) · Deloitte ~deux tiers du calcul ·</text>
+  <text x="60" y="453" font-size="10" fill="#e8edf3" font-family="sans-serif">Goldman ~24× d'ici 2030 (120 q/mois) · OpenAI entreprise &gt;40 % du CA · &gt;15 Md jetons/min</text>
+
+  <!-- piège vs victoire -->
+  <line x1="340" y1="462" x2="340" y2="480" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="504" font-size="9.5" fill="#e0b45f" text-anchor="middle" font-family="sans-serif" font-weight="700">PIÈGE : admirer le barrage le plus haut → livrer</text>
+  <text x="182" y="520" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">découvrir un déluge de facture non compté</text>
+  <text x="498" y="504" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">VICTOIRE : louer le réservoir · posséder les eaux</text>
+  <text x="498" y="520" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">compter chaque robinet · croître sans se noyer</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>Le réservoir — le modèle loué, interchangeable</span>
+  <span><i class="dot" style="background:#7f77dd"></i>Le service des eaux — la couche d'inférence que vous possédez</span>
+  <span><i class="dot" style="background:#1d7a56"></i>Les robinets — la production, comptée au jeton</span>
+</div>
+</div>
+
+<h3>Le piège vs. la discipline</h3>
+<table>
+<tr><th>Le piège — admirer le barrage, se noyer dans le flux</th><th>La discipline — posséder le service des eaux</th></tr>
+<tr><td>Concourir sur « quel modèle est le plus gros »</td><td>Concourir sur le coût, la vitesse et la sûreté par jeton de valeur</td></tr>
+<tr><td>Un modèle unique pour chaque appel, au tarif de pointe</td><td>Router : modèle bon marché pour le courant, pointe pour le difficile</td></tr>
+<tr><td>Payer à nouveau chaque réponse répétée</td><td>Cache et regroupement — ne jamais payer deux fois, plus de jetons par watt</td></tr>
+<tr><td>Coût IA inscrit comme dépense de pilote ponctuelle</td><td>Coût par jeton comme poste de résultat de premier plan, évolutif</td></tr>
+<tr><td>Compteur de coût et contrôles de risque séparés</td><td>Un robinet compté et gouverné — coût et conformité ensemble</td></tr>
+</table>
+
+<h3>Pourquoi posséder le flux vaut mieux qu'un réservoir plus grand</h3>
+<div class="card">
+<p>Chaque contrôle de ce mois présupposait un tuyau que vous pouvez voir, tarifer et fermer. Le basculement de l'inférence est ce qui fait de ce tuyau toute l'entreprise. Un modèle plus grand ne réduit pas votre facture de jetons ; un meilleur service des eaux le fait. Et la raison pour laquelle le compteur et la gouvernance vont ensemble est structurelle : un flux non compté est un coût qui s'emballe <em>et</em> non gouverné — le même robinet qui cache une surprise de 2 M$ cache l'invite qui n'aurait jamais dû sortir. Routez, mettez en cache et comptez, et les contrôles sas–trousseau–terrain d'essai cessent d'être une taxe de conformité pour devenir ce qui rend le flux à la fois bon marché et propre. La bonne lecture de cette semaine n'est pas « AMD a vendu plus de puces » mais « <strong>l'avantage dans l'IA vient de passer du modèle que vous louez au flux que vous faites tourner</strong> — alors possédez le flux ».</p>
+</div>
+
+<h3>Comment cela atterrit sur les systèmes hérités</h3>
+<div class="card">
+<p>Le même fil que ce radar ne cesse de reprendre — <strong>posséder et gouverner ce qui ne se banalise pas</strong> (6 juil. le compteur, 7 juil. le routeur, 8 juil. le plan MCP, 9 juil. l'armée de mercenaires, 10 juil. le standard téléphonique, 11 juil. l'équipe de nuit, 12 juil. la recette, 13 juil. la prime au cobra, 14 juil. le permis d'apprenti, 15 juil. la guerre des jauges, 16 juil. la marque de l'essayeur, 17 juil. le raccord standard, 18 juil. l'âge de l'aluminium, 19 juil. la tente de triage, 20 juil. l'anneau sigillaire, 21 juil. le passeport, 22 juil. la moisson, 23 juil. la ville-usine, 24 juil. l'enclosure, 25 juil. la provenance, 26 juil. l'extension, 27 juil. la poudrière, 28 juil. la salle du courrier, 29 juil. l'usine pilote, 30 juil. le cahier commun, 31 juil. le dernier kilomètre, 1 août la table des marées, 2 août le canon fou, 3 août la douane, 4 août les deux fenêtres, 5 août l'entrepôt obscur, 6 août le sas, 7 août le trousseau, 8 août le terrain d'essai). Cette semaine a posé les contrôles ; aujourd'hui montre l'économie qui en fait l'entreprise. Sur les systèmes hérités, la tentation est de laisser chaque appel sur un seul modèle de pointe uniforme parce que c'est le plus simple — le rétrofit est précis et sans gloire : <strong>instrumentez d'abord le compteur</strong> (coût par jeton, par agent, par unité de valeur métier — on ne gère pas un flux qu'on ne peut lire) ; <strong>routez</strong> les appels courants à fort volume vers un modèle moins cher et réservez le réservoir de pointe aux cas difficiles ; <strong>mettez en cache et regroupez</strong> sans relâche pour ne jamais payer deux fois ; <strong>placez le compteur et la gouvernance sur le même robinet</strong> pour que coût et conformité soient un seul tableau de bord, non deux ; et <strong>modélisez le déluge</strong> — rejouez votre économie unitaire à 10× et 24× le débit avant de passer à l'échelle, pas après la facture. Puis soyez honnêtes sur le mur : un modèle loué plus grand n'est pas une stratégie de coût, et « nous utilisons le meilleur modèle » n'est pas une réponse à « cela passera-t-il à l'échelle de façon rentable ».</p>
+<p><strong>Le modèle mental clair :</strong> <em>Le modèle est le réservoir — loué, interchangeable, moins cher chaque trimestre, et jamais votre rempart. Le service des eaux est vôtre à posséder : le routage, la mise en cache, le regroupement et les répartitions petit-modèle qui rendent un jeton bon marché ; le compteur qui transforme une facture mystère en ligne gérée ; et le sas, le trousseau et le terrain d'essai qui gardent le flux propre et arrêtable. Le monde est passé à l'inférence d'abord cette année, et l'eau devrait être multipliée par vingt — alors louez le réservoir et possédez le service des eaux, ou soyez saignés au compteur sur celui d'un autre.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>Le basculement — l'inférence dépasse désormais l'entraînement.</strong> <strong>Lisa Su (AMD)</strong> a présenté 2026 comme la première année où le <strong>calcul mondial d'inférence dépasse l'entraînement ;</strong> l'industrie fait tourner <strong>~35 quadrillions de jetons/mois (~160× en deux ans),</strong> avec <strong>~60 % de la capacité en inférence,</strong> portée par l'IA agentique. <strong>Deloitte TMT 2026 :</strong> inférence <strong>~deux tiers du calcul IA</strong> (contre ~33 % en 2023, ~50 % en 2025) ; marché des puces d'inférence <strong>&gt;50 Md$ en 2026.</strong></li>
+  <li><strong>Le déluge — la demande est loin d'un plateau.</strong> <strong>Goldman Sachs :</strong> demande de jetons multipliée par <strong>~24 pour atteindre 120 quadrillions de jetons/mois d'ici 2030</strong> (jalon 2028 ~47 q) ; régime actuel déjà en avance sur son estimation de mai 2026. L'inférence pèse <strong>~55 % de la dépense cloud IA en 2026.</strong></li>
+  <li><strong>Le signal du compte de résultat — l'entreprise est l'acheteur.</strong> <strong>OpenAI :</strong> l'entreprise pèse désormais <strong>&gt;40 % du chiffre d'affaires,</strong> en voie de parité grand public d'ici la fin de l'année, sur les « équipes d'agents » ; les API traitent <strong>&gt;15 milliards de jetons/minute.</strong> <strong>Anthropic 2026 State of AI Agents :</strong> <strong>80 % déclarent un ROI mesurable ;</strong> 57 % font tourner des workflows multi-étapes ; 81 % prévoient d'étendre.</li>
+  <li><strong>Les contrôles — pourquoi ils composent ici.</strong> Compter + gouverner le même robinet : sas (sortie, 6 août), trousseau (accès, 7 août), terrain d'essai (avant-prod, 8 août). Flux non compté = coût qui s'emballe <em>et</em> risque non contenu.</li>
+  <li><strong>Le contexte réglementaire — toujours actif.</strong> Application des règles GPAI de la loi européenne sur l'IA en vigueur depuis le <strong>2 août ;</strong> pouvoirs de l'Office IA ; <strong>15 M€ ou 3 %.</strong> Le robinet gouverné et le robinet compté sont de plus en plus la même exigence.</li>
+  <li><strong>Le moteur, pour contexte.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — le réservoir loué, interchangeable. Possédez le service des eaux, pas le mur.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui retiennent l'attention</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">2026 marque un jalon historique : pour la première fois, le calcul mondial d'inférence devrait dépasser le calcul d'entraînement — l'industrie fait désormais tourner de l'ordre de 35 quadrillions de jetons par mois, à peu près 160× il y a deux ans, la majorité de la capacité étant désormais de l'inférence, portée par l'IA agentique.</div><div class="a">— Lisa Su, présidente-directrice générale d'AMD, lors de l'événement phare 2026 de l'entreprise (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">La demande de jetons IA devrait être multipliée par environ 24 — pour atteindre quelque 120 quadrillions de jetons par mois — entre 2026 et 2030, à mesure que les agents passent en production.</div><div class="a">— Goldman Sachs Research (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">L'entreprise représente désormais plus de 40 % de notre chiffre d'affaires et est en voie d'égaler le grand public d'ici la fin de l'année, à mesure que les clients passent à des équipes d'agents qui se coordonnent et agissent au sein de leurs outils.</div><div class="a">— OpenAI, « The next phase of enterprise AI » (tel que rapporté)</div></blockquote>
+<blockquote><div class="q">« Le modèle est le réservoir — loué, interchangeable, moins cher chaque trimestre, jamais votre rempart. Le service des eaux est vôtre : routez, mettez en cache et comptez chaque jeton, et gouvernez chaque robinet, car dans une année "inférence d'abord" la facture vient de l'eau, non du mur. »</div><div class="a">— le radar, sur l'ère de l'inférence</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Inférence vs entraînement, 2026</td><td><span class="v">Première année où le calcul d'inférence dépasse l'entraînement</span></td><td>AMD / Lisa Su (tel que rapporté)</td></tr>
+<tr><td>Volume mensuel de jetons IA</td><td><span class="v">~35 quadrillions de jetons/mois (~160× en deux ans)</span></td><td>AMD / Lisa Su (tel que rapporté)</td></tr>
+<tr><td>Part de l'inférence dans la capacité</td><td><span class="v">~60 % (AMD) ; ~deux tiers du calcul IA (Deloitte)</span></td><td>AMD / Deloitte TMT 2026 (tel que rapporté)</td></tr>
+<tr><td>Part de l'inférence dans le calcul au fil du temps</td><td><span class="v">~33 % (2023) → ~50 % (2025) → ~66 % (2026)</span></td><td>Deloitte TMT 2026 (tel que rapporté)</td></tr>
+<tr><td>Marché des puces optimisées inférence, 2026</td><td><span class="v">&gt;50 Md$</span></td><td>Deloitte TMT 2026 (tel que rapporté)</td></tr>
+<tr><td>Prévision de demande de jetons, 2026→2030</td><td><span class="v">~24× pour atteindre ~120 quadrillions de jetons/mois (2028 ~47 q)</span></td><td>Goldman Sachs Research (tel que rapporté)</td></tr>
+<tr><td>Part de l'inférence dans la dépense cloud IA, 2026</td><td><span class="v">~55 %</span></td><td>Couverture analyste (tel que rapporté)</td></tr>
+<tr><td>Part de l'entreprise dans le CA d'OpenAI</td><td><span class="v">&gt;40 % du CA ; en voie de parité grand public d'ici fin 2026</span></td><td>OpenAI (tel que rapporté)</td></tr>
+<tr><td>Débit des API d'OpenAI</td><td><span class="v">&gt;15 milliards de jetons/minute</span></td><td>OpenAI (tel que rapporté)</td></tr>
+<tr><td>Organisations déclarant un ROI d'agent mesurable</td><td><span class="v">~80 % (57 % font tourner des workflows multi-étapes ; 81 % prévoient d'étendre)</span></td><td>Anthropic, 2026 State of AI Agents (tel que rapporté)</td></tr>
+<tr><td>Loi européenne sur l'IA — application &amp; sanctions</td><td><span class="v">Application GPAI en vigueur le 2 août ; 15 M€ ou 3 % (7,5 M€ ou 1,5 % pour informations inexactes)</span></td><td>Commission européenne (tel que rapporté)</td></tr>
+<tr><td>Le moteur (contexte)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Couverture fournisseurs / traqueurs de modèles (tel que rapporté)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois actions pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Instrumentez le compteur avant d'étendre un seul agent de plus.</strong> On ne gère pas un flux qu'on ne peut lire. Mettez en place une télémétrie du coût par jeton <strong>par agent et par unité de valeur métier,</strong> et rejouez l'économie unitaire de chaque agent en production ou proche de la production à <strong>10× et 24× le débit</strong> — la courbe sur laquelle tout le marché est désormais. Rapportez un seul chiffre au conseil : <em>notre coût d'inférence complet par unité de valeur métier, et où il atterrit si le débit de cette charge est multiplié par vingt.</em> Les projets qui appartiennent à la colonne « annulés » se révéleront ici, à bas coût, avant la facture.</li>
+  <li><strong>Construisez le service des eaux : routez, mettez en cache et répartissez le réservoir.</strong> Cessez de payer le tarif de pointe pour le travail courant. Placez un <strong>routeur</strong> devant vos agents (modèle bon marché pour les appels communs, réservoir de pointe pour les seuls cas difficiles), <strong>mettez en cache</strong> les réponses répétées pour ne jamais payer deux fois, <strong>regroupez et quantifiez</strong> le travail permanent, et poussez l'inférence à fort volume et faible enjeu là où elle peut tourner le moins cher et le plus près en toute sûreté. Le modèle reste loué et interchangeable — Opus 5 pour Gemini ou GPT-5.6 selon l'évolution prix/qualité — alors gardez le service des eaux neutre vis-à-vis du modèle et réévaluez le <strong>coût <em>et</em> la qualité par jeton</strong> à chaque changement.</li>
+  <li><strong>Placez le compteur et la gouvernance sur le même robinet.</strong> À l'ère du service des eaux, l'économie unitaire et la sûreté ne font qu'une discipline : un flux non compté est une facture qui s'emballe <em>et</em> un risque non contenu. Reliez votre compteur de coût aux mêmes points de contrôle posés cette semaine — le <strong>sas</strong> (sortie), le <strong>trousseau</strong> (accès), le <strong>terrain d'essai</strong> (avant-production) — pour qu'un seul tableau de bord montre ce que coûte chaque robinet <em>et</em> s'il est propre. Puis exigez la même chose de chaque fournisseur et de chaque modèle que vous louez : <em>montrez-moi le coût par jeton, le routage et la gouvernance</em> — car dans l'année où le monde est passé à l'inférence d'abord et où la demande devrait être multipliée par vingt, les entreprises qui prospèrent sont celles qui comptent et gouvernent par conception, non celles qui mesurent encore la hauteur d'un mur qu'elles louent.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> AMD (Advancing AI 2026 ; Lisa Su sur le basculement de l'inférence, tel que rapporté) · Deloitte TMT 2026 (part de l'inférence dans le calcul ; marché des puces d'inférence) · Goldman Sachs Research (prévision de demande de jetons) · OpenAI (« The next phase of enterprise AI ») · Anthropic (2026 State of AI Agents) · couverture analyste / presse · Commission européenne (application de la loi sur l'IA) · LLM-Stats / traqueurs de modèles. Les chiffres sont relayés d'événements fournisseurs, de recherches d'analystes et de sources de presse, marqués « tel que rapporté » lorsqu'ils reposent sur une couverture secondaire. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 9 août 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../feed.xml">flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>

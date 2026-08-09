@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 9 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the waterworks — 2026 is the first year the world spends more compute running AI than training it. AMD's Lisa Su put inference at ~60% of capacity and ~35 quadrillion tokens a month (≈160× two years ago); Deloitte puts inference at ~two-thirds of AI compute; Goldman Sachs forecasts token demand multiplying ~24× to 120 quadrillion tokens/month by 2030; OpenAI says enterprise is now >40% of revenue on 'teams of agents'. The month's thesis proven at the macro level: the model is a rented reservoir, cheaper every quarter and never your moat — own the waterworks (routing, caching, metering and governance of inference) or be metered to death on someone else's. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Compute &amp; economics</div>
+  <h1>The Waterworks</h1>
+  <div class="subhead">2026 is the first year the world spends more compute running AI than training it — inference is ~two-thirds of AI compute and token demand is forecast to multiply ~24× by 2030. Rent the reservoir; own the waterworks.</div>
+  <div class="meta">Sunday, 9 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a month this radar has said the same thing in a dozen costumes: the model is a commodity, so own the layer around it. This week fitted the controls — the airlock (6 Aug), the keyring (7 Aug), the proving ground (8 Aug). Today the ground shifts under all of them. The industry just crossed a line it will not cross back: 2026 is the first year the world spends more compute running AI than training it. AMD's Lisa Su put a number on it — the industry now runs ~35 quadrillion tokens a month, ~160× two years ago, with inference ~60% of capacity — and Deloitte puts inference at ~two-thirds of all AI compute. Goldman Sachs says the meter is only warming up: token demand is forecast to multiply ~24× to 120 quadrillion tokens a month by 2030. The dam-building era — who trains the biggest model — is ending; the waterworks era — who runs and governs the flow, cheaply and safely, at every tap — has begun. The board's question this morning: we spent two years asking who has the tallest dam; our bill now comes from the water running through our taps, and it is set to multiply twenty-fold — do we own our waterworks, or are we about to be metered to death on someone else's?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued one thing: the model is a commodity, so the durable advantage is the <strong>layer you own around it.</strong> This week made that concrete with controls — the airlock at the door your data leaves through (6 Aug), the keyring to everything your agents may reach (7 Aug), the proving ground where you validate them before go-live (8 Aug). Today the argument gets its macro proof. The AI economy has quietly flipped from a <strong>buildout</strong> to a <strong>run-rate:</strong> <strong>2026 is the first year global inference compute surpasses training compute,</strong> the moment the money stops being about <em>making</em> the model and starts being about <em>running</em> it — and running it is now the bill that grows every quarter you succeed.</p>
+<p><strong>The crossover, in numbers.</strong> At AMD's flagship event, <strong>Lisa Su</strong> framed 2026 as a historical milestone: <strong>inference compute now exceeds training</strong> for the first time, the industry runs <strong>~35 quadrillion tokens a month (≈160× two years ago),</strong> and <strong>~60% of capacity is inference,</strong> driven by agentic AI. Deloitte's 2026 TMT Predictions put inference at <strong>~two-thirds of all AI compute</strong> (up from ~33% in 2023 and ~50% in 2025), with an <strong>inference-optimized chip market above $50B in 2026.</strong> And this is the near-empty end of the curve: <strong>Goldman Sachs forecasts token demand multiplying ~24× to 120 quadrillion tokens a month by 2030</strong> — with the current run-rate already ahead of its own May-2026 model. The demand behind the meter is visible in the P&amp;Ls: <strong>OpenAI says enterprise is now &gt;40% of its revenue,</strong> on track to reach parity with consumer by year-end, as customers deploy "teams of agents," and its APIs process <strong>&gt;15 billion tokens a minute.</strong></p>
+<p><strong>Why it matters more than a compute headline.</strong> A buildout is a capital project a few labs finance and you rent; a run-rate is an <strong>operating expense you carry, metered by the token, that scales with your success, not against it.</strong> That inverts where advantage lives. In the dam-building years the question was "whose model is biggest"; in the waterworks years it is "<strong>whose inference is cheapest, fastest, and safest per token of business value.</strong>" The model stays rented and swappable — Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731. What you own — or fail to own — is the <strong>waterworks:</strong> routing, caching, batching, the small-model/large-model split, and the airlock-keyring-proving-ground controls that keep the flow clean. Anthropic's 2026 State of AI Agents report says <strong>80% of organizations now report measurable ROI</strong> from agents; the ones who keep it are the ones whose unit economics survive a 24× rise in throughput.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The era changed, not just the chart.</strong> Value is migrating from the <strong>capital-intensive buildout</strong> (training, owned by a few, rented by all) to the <strong>operational layer</strong> (inference, run by everyone). "Who has the best model" is last era's question; "who runs the flow cheapest and cleanest per unit of value" is this era's. Own the waterworks, rent the reservoir.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Your AI cost just became opex that grows with success.</strong> A pilot is cheap; a <em>successful</em> pilot at 24× throughput is the bill that kills projects. With inference already ~two-thirds of compute and ~55% of cloud AI spend, and demand forecast to multiply ~24× by 2030, <strong>the token line is now a first-class P&amp;L item</strong> — model it before you scale, not after.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The controls only pay off if the flow is metered and governed.</strong> The airlock, keyring and proving ground presume a pipe you can see, price and shut. In the waterworks era, <strong>unit economics and governance are the same discipline:</strong> an unmetered, ungoverned flow is both a runaway bill and an uncontained risk. Meter every tap, or the era's growth curve becomes your loss curve.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month said <em>own the layer around the commodity model.</em> Today the whole market proved why: the buildout is over, the run-rate has begun, and <strong>the bill has moved from the dam you rent to the water you pump.</strong> Rent the reservoir — it is cheaper every quarter and never your moat. <strong>Own the waterworks:</strong> the routing, caching and small-model splits that make a token cheap; the meter that turns a mystery bill into a managed one; and the airlock, keyring and proving ground that keep the flow clean — because in a year the world crossed into inference-first and token demand is set to rise twenty-fold, the enterprises that thrive are the ones metered by design, not by surprise.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🚰 "The Waterworks"</h3>
+<p><em>Topic: 2026 is the first year global inference compute surpasses training compute. At AMD's flagship 2026 event, CEO Lisa Su framed it as a historical milestone: the industry now processes roughly 35 quadrillion AI tokens a month — about 160× the volume of two years ago — with inference now accounting for around 60% of compute, a shift she attributed to the rise of agentic AI. Deloitte's 2026 TMT Predictions estimate inference at about two-thirds of all AI compute in 2026 (up from ~33% in 2023 and ~50% in 2025), with the inference-optimized chip market exceeding $50 billion. Goldman Sachs forecasts AI token demand multiplying roughly 24× to about 120 quadrillion tokens a month between 2026 and 2030. OpenAI says enterprise is now more than 40% of its revenue, on track to reach parity with consumer by end-2026, with its APIs processing more than 15 billion tokens a minute. The lesson: the training buildout — who owns the biggest model — is a capital project a few labs finance and everyone rents; the inference run-rate — who runs the flow cheapest, fastest and cleanest per token of business value — is an operating expense the enterprise carries and must own.</em></p>
+<p>Picture a city that spent a decade and a fortune raising a <strong>great dam.</strong> It was the wonder of the age: everyone measured a city's greatness by the height of its dam, and the newspapers ran the numbers every season — this city's wall a little taller than that one's, the reservoir behind it a little deeper. And it was not vanity; a city with no reservoir has no water at all. But a reservoir, however vast, waters no one while it merely <em>sits</em> behind the wall. It matters only when the water <strong>runs</strong> — through the mains, down the pipes, out of ten thousand taps into kitchens and workshops and hospital wards. For years the city could pretend otherwise, because so little water was actually flowing that the dam was the only thing worth talking about. This is the year the pretence ended. This is the year the city, for the first time, spent <strong>more of its effort moving water through the taps than raising the wall.</strong></p>
+<p>And the water is <em>running</em> now. The city waterman — call him Su of the great foundry — stood up at the year's great gathering and read out the meter: the mains now carry something on the order of <strong>thirty-five thousand-thousand barrels a month, near enough a hundred-and-sixty times what they carried two years ago,</strong> and <strong>three barrels in five now go to the taps, not the reservoir.</strong> The city's own accountants confirmed it: <strong>two of every three buckets of effort now go to the flow, not the wall,</strong> where three years back it was one in three. And the bankers, who are paid to see around corners, warned that this is the near-dry end of the curve: on their reckoning the flow will <strong>multiply some twenty-four-fold by the decade's end.</strong> The great trading houses already feel it in their ledgers: one of them reports that <strong>more than two of every five coins it now takes come from the workshops, not the households</strong> — because the workshops have started running <em>teams</em> of tireless water-drinking machines, and a machine never closes the tap.</p>
+<p>Here is the turn the wise city sees and the proud one misses. In the dam-building years, greatness was <strong>capital:</strong> you raised the wall once, and the wall was the moat, and only a handful of cities could afford one — so everyone else <em>rented</em> their water. Renting the reservoir was never the shame; it was the sense. But a rented reservoir is exactly why the <strong>waterworks</strong> — the pumps, the mains, the valves, the meters, the filters at every tap — is the part that is <em>yours,</em> and the part on which your whole fortune now turns. Because the flow is metered by the barrel, and the barrels are about to multiply twenty-fold, the city that thrives is not the one with the tallest rented wall but the one whose waterworks <strong>wastes nothing:</strong> no leaks in the mains, the right pressure at each tap, the cheap local spring used for the washing and the deep reservoir kept for the drinking, a <strong>meter on every tap so no workshop's bill is a mystery,</strong> and a <strong>filter and a shut-off valve</strong> on the line so that what runs to the ward is clean and can be stopped in a heartbeat. The proud city, still admiring its wall, wakes to a water bill it never metered and cannot explain — and discovers, too late, that success was the thing that drowned it, because every new workshop it opened only opened more taps.</p>
+<p><strong>The moral:</strong> for a decade the world asked <em>whose dam is tallest,</em> and it was the right question for a decade — a city with no reservoir has no water. But the reservoir is rented now, cheaper every season, and never again your moat; the fortune has moved to the <strong>flow.</strong> The wise city rents the reservoir without shame and <strong>owns its waterworks</strong> — meters every tap, fixes every leak, filters and valves every line — so that when the water multiplies twenty-fold the growth is a fortune and not a flood. Rent the reservoir; <strong>own the pumps, the meters and the valves,</strong> because in the year the world began spending more to move the water than to raise the wall, the bill stopped coming from the masonry and started coming, barrel by metered barrel, from your own taps.</p>
+<p><strong>The question it forces:</strong> <em>Our AI spend has quietly flipped from a thing we build to a thing we run — metered by the token, growing with every agent we ship, and forecast to multiply many times over. Do we actually own our waterworks — do we know our cost per token, route cheap work to cheap models, cache and batch what we can, and meter and govern every tap — or are we still staring at whose model is biggest while the water bill runs, unmetered, toward a number our success alone will make ruinous?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we know our cost per token — and per unit of business value?</strong> 2026 is the first inference-first year; inference is ~two-thirds of AI compute and demand is forecast to multiply ~24× by 2030. <strong>Is our AI spend modelled as a scaling operating expense, or still booked as a one-off pilot cost that will surprise us at volume?</strong></li>
+  <li>The advantage moved from the dam to the flow. <strong>Are we still competing on "whose model is biggest" — or on whose inference is cheapest, fastest and cleanest per token: routing, caching, batching, and the right small-model/large-model split?</strong></li>
+  <li>Growth is the risk here. <strong>If a successful pilot's throughput rose 20×, would our unit economics still work — or would our own success be the thing that makes the project uneconomic?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Every scoring, fraud and advice agent is a tap that runs on real customer volume. <strong>Do we price each agent by tokens-per-decision, and have we set a cheaper model for the routine calls and the frontier model only for the hard ones — or is every query paying frontier rates?</strong></li>
+  <li>Inference is also where the regulated data flows. <strong>Is every metered tap also a governed one — airlock on egress, keyring on access — so the cost meter and the compliance meter are the same meter?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and triage agents cannot trade safety for a cheaper token, but they can waste tokens badly. <strong>Have we separated the cheap, high-volume work (summarisation, intake) from the costly, careful work (decision support) so we neither overpay nor under-verify?</strong></li>
+  <li>Throughput is coming whether budgeted or not. <strong>If patient-facing agents scaled to every clinic, is our inference cost per encounter known and survivable — or discovered on the invoice?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Line-side and supply-chain agents run continuously — the definition of a running tap. <strong>Do we run inference where it is cheapest and closest (edge, local, batched) for the always-on work, and reserve the deep reservoir for the exceptions?</strong></li>
+  <li>Engines keep getting cheaper. <strong>When we swap the model under a running agent, do we re-benchmark cost <em>and</em> quality per token — or assume last quarter's economics still hold for this quarter's engine?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Recommendation, search and support agents are the highest-volume taps in the building. <strong>At peak, do we know the token cost of serving one shopper — and does caching and a small-model tier keep it from scaling linearly with traffic?</strong></li>
+  <li>Success is the stress test. <strong>On the busiest day of the year, does our inference bill rise with revenue or faster than it — and which one have we actually measured?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-service agents must be both affordable and accountable at scale. <strong>Is every token both metered (for the public purse) and governed (for the public trust) — or are we scaling a service whose cost and whose risk are equally unmeasured?</strong></li>
+  <li>Budgets are annual; token demand is not. <strong>Have we modelled a multi-year inference run-rate against a fixed budget — or will the twenty-fold curve meet a flat line and stall the service?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Rent the Reservoir, Own the Waterworks</h2>
+<p>Read this month as one argument reaching its proof. The airlock (6 Aug) governs <strong>egress;</strong> the keyring (7 Aug) governs <strong>access;</strong> the proving ground (8 Aug) governs <strong>pre-production validation.</strong> Each is a control you own around a rented model. Today the market shows <em>why the whole thesis holds:</em> the economics themselves have moved from the model to the layer around it. The AI economy crossed from a <strong>buildout</strong> (train the biggest model — capital, concentrated, rented) to a <strong>run-rate</strong> (serve the tokens — operating expense, distributed, yours). The architecture splits cleanly into three: the <strong>reservoir</strong> (the rented, swappable model), the <strong>waterworks</strong> (the inference layer you own — routing, caching, metering, governance), and the <strong>flood you must plan for</strong> (a demand curve forecast to multiply ~24×).</p>
+<div class="card"><ul>
+  <li><strong>The reservoir — the commodity engine (rented, swappable).</strong> The menu is unchanged and cheaper by the week — <strong>Claude Opus 5</strong> (#1, Intelligence Index 61 / Agentic Index 55.3, $5/$25), <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT). Renting it is not the shame; it is the sense. But the reservoir is not where the money is any more, and it was never your moat. In an inference-first year, a bigger reservoir does not lower your water bill — only a better waterworks does.</li>
+  <li><strong>The waterworks — the inference layer (where the advantage moved).</strong> This is the part you own or fail to own: <strong>model routing</strong> (cheap model for routine calls, frontier model only for the hard ones), <strong>caching</strong> (never pay twice for the same answer), <strong>batching and quantisation</strong> (more tokens per watt), <strong>the small-model/large-model split</strong> at the edge and in the core, and — inseparable from all of it — the <strong>meter</strong> on every tap and the <strong>airlock, keyring and proving ground</strong> that keep the flow clean. Lisa Su's milestone (<strong>inference now exceeds training; ~35 quadrillion tokens/month, ~160× in two years, ~60% of capacity</strong>) and Deloitte's <strong>~two-thirds of AI compute</strong> are not trivia; they are the reason this layer, not the model, is now the P&amp;L.</li>
+  <li><strong>The flood you must plan for — the demand curve.</strong> Goldman Sachs forecasts token demand multiplying <strong>~24× to 120 quadrillion tokens/month by 2030,</strong> with a <strong>2028 waypoint near 47 quadrillion</strong> and a current run-rate already ahead of its May-2026 model. OpenAI's enterprise revenue crossing <strong>&gt;40%</strong> on "teams of agents," and <strong>&gt;15 billion tokens/minute</strong> through its APIs, is the same wave landing on P&amp;Ls. The point that matters: <strong>your inference bill scales with your success,</strong> so a waterworks that wastes nothing at 1× may drown you at 24×. Plan the flood before it arrives.</li>
+</ul></div>
+<p>The strategic core: <strong>the model is the reservoir; the waterworks is where you earn — or lose — the margin on every token.</strong> For a month the misread has been "own a great model and you have won." After this week the read is sharper: <strong>the model is rented and getting cheaper, and the fortune has moved to the flow.</strong> "We use the best model" is not the answer to "will this scale profitably and safely"; <em>"we route, cache and meter every token, and we govern every tap"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The waterworks: rent the reservoir, own the flow. 2026 is the first year the world spends more compute running models than training them; inference is about two-thirds of AI compute and token demand is forecast to multiply about 24 times by 2030. On the left, the reservoir: the rented, swappable model — Claude Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3 and DeepSeek V4-Flash, MIT-licensed — cheaper every week and not the moat; water flows in. On the right, the taps: production, every agent and every request, metered by the token, where the bill scales with success. In the middle, the waterworks — the inference layer you own: route cheap models for routine work and the frontier only for the hard; cache and batch so you never pay twice and get more tokens per watt; meter every tap so cost per token is a first-class P&L line; and govern with the airlock on egress, the keyring on access, and the proving ground before production. The cost meter and the compliance meter are the same meter. Plan for the flood: AMD's Lisa Su reports about 35 quadrillion tokens a month, about 160 times more in two years, about 60% inference; Deloitte puts inference at about two-thirds of compute; Goldman Sachs forecasts about 24 times growth by 2030 to 120 quadrillion a month; OpenAI reports enterprise above 40% of revenue. The trap is to admire the tallest dam, ship agents, and discover an unmetered flood of a bill. The win is to rent the reservoir, own the waterworks, meter every tap, and grow without drowning." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WATERWORKS — rent the reservoir, own the flow</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">2026: first year the world spends more compute RUNNING models than TRAINING them.</text>
+
+  <!-- the reservoir -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE RESERVOIR — rented model</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash (MIT)</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheaper every week · not the moat</text>
+
+  <!-- the taps -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#122a20" stroke="#1d7a56"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE TAPS — production</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">every agent · every request</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">metered by the token</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the bill scales with success</text>
+
+  <!-- arrow: reservoir down into waterworks -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#e0b45f"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">water in ↓</text>
+
+  <!-- arrow: waterworks up to taps (clean flow) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">clean flow out ↑</text>
+
+  <!-- the waterworks -->
+  <rect x="40" y="210" width="600" height="170" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE WATERWORKS — the inference layer you OWN</text>
+  <text x="340" y="258" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ ROUTE: cheap model for routine · frontier only for the hard</text>
+  <text x="340" y="280" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ CACHE + BATCH: never pay twice · more tokens per watt</text>
+  <text x="340" y="302" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ METER every tap: cost per token = a first-class P&amp;L line</text>
+  <text x="340" y="324" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ GOVERN: airlock (egress) · keyring (access) · proving ground</text>
+  <text x="340" y="348" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">the cost meter and the compliance meter are the SAME meter</text>
+  <text x="340" y="368" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">inference-first since 2026 — the buildout is over, the run-rate has begun</text>
+
+  <!-- plan for the flood -->
+  <rect x="40" y="398" width="600" height="64" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="419" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">PLAN FOR THE FLOOD:</text>
+  <text x="60" y="437" font-size="10" fill="#e8edf3" font-family="sans-serif">Su/AMD ~35 quadrillion tokens/mo (~160× in 2yr, ~60% inference) · Deloitte ~two-thirds of compute ·</text>
+  <text x="60" y="453" font-size="10" fill="#e8edf3" font-family="sans-serif">Goldman ~24× by 2030 (120q/mo) · OpenAI enterprise &gt;40% of revenue · &gt;15B tokens/min</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="462" x2="340" y2="480" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="504" font-size="9.5" fill="#e0b45f" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: admire the tallest dam → ship agents</text>
+  <text x="182" y="520" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">discover an unmetered flood of a bill</text>
+  <text x="498" y="504" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: rent the reservoir · own the waterworks</text>
+  <text x="498" y="520" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">meter every tap · grow without drowning</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The reservoir — the rented, swappable model</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The waterworks — the inference layer you own</span>
+  <span><i class="dot" style="background:#1d7a56"></i>The taps — production, metered by the token</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — admire the dam, drown in the flow</th><th>The discipline — own the waterworks</th></tr>
+<tr><td>Compete on "whose model is biggest"</td><td>Compete on cost, speed and safety per token of value</td></tr>
+<tr><td>One flat model for every call, at frontier rates</td><td>Route: cheap model for routine, frontier for the hard</td></tr>
+<tr><td>Pay again for every repeated answer</td><td>Cache and batch — never pay twice, more tokens per watt</td></tr>
+<tr><td>AI cost booked as a one-off pilot expense</td><td>Cost per token as a first-class, scaling P&amp;L line</td></tr>
+<tr><td>Cost meter and risk controls run separately</td><td>One metered, governed tap — cost and compliance together</td></tr>
+</table>
+
+<h3>Why owning the flow beats owning a bigger reservoir</h3>
+<div class="card">
+<p>Every control this month presumed a pipe you can see, price and shut. The inference crossover is what makes that pipe the whole business. A bigger model does not cut your token bill; a better waterworks does. And the reason the meter and the governance belong together is structural: an unmetered flow is a runaway cost <em>and</em> an ungoverned one — the same tap that hides a $2M surprise hides the prompt that should never have left. Route, cache and meter, and the airlock–keyring–proving-ground controls stop being a compliance tax and start being the thing that makes the flow both cheap and clean. The correct read of this week is not "AMD sold more chips" but "<strong>the advantage in AI just moved from the model you rent to the flow you run</strong> — so own the flow."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Jul the meter, 7 Jul the router, 8 Jul the MCP plane, 9 Jul the mercenary army, 10 Jul the switchboard, 11 Jul the night shift, 12 Jul the recipe, 13 Jul the cobra bounty, 14 Jul the learner's permit, 15 Jul the gauge war, 16 Jul the assayer's mark, 17 Jul the standard coupling, 18 Jul the aluminum age, 19 Jul the triage tent, 20 Jul the signet ring, 21 Jul the passport, 22 Jul the harvest, 23 Jul the company town, 24 Jul the enclosure, 25 Jul the provenance, 26 Jul the extension, 27 Jul the powder magazine, 28 Jul the mailroom, 29 Jul the pilot plant, 30 Jul the commonplace book, 31 Jul the last mile, 1 Aug the tide table, 2 Aug the loose cannon, 3 Aug the customs house, 4 Aug the two windows, 5 Aug the dark warehouse, 6 Aug the airlock, 7 Aug the keyring, 8 Aug the proving ground). This week fitted the controls; today shows the economics that make them the business. On legacy estates the temptation is to keep every call on one flat frontier model because it is simplest — the retrofit is specific and unglamorous: <strong>instrument the meter first</strong> (cost per token, per agent, per unit of business value — you cannot manage a flow you cannot read); <strong>route</strong> the routine, high-volume calls to a cheaper model and reserve the frontier reservoir for the hard ones; <strong>cache and batch</strong> relentlessly so you never pay twice; <strong>put the meter and the governance on the same tap</strong> so cost and compliance are one dashboard, not two; and <strong>model the flood</strong> — re-run your unit economics at 10× and 24× throughput before you scale, not after the invoice. Then be honest about the wall: a bigger rented model is not a cost strategy, and "we use the best model" is not an answer to "will this scale profitably."</p>
+<p><strong>The clean mental model:</strong> <em>The model is the reservoir — rented, swappable, cheaper every quarter, and never your moat. The waterworks is yours to own: the routing, caching, batching and small-model splits that make a token cheap; the meter that turns a mystery bill into a managed line; and the airlock, keyring and proving ground that keep the flow clean and stoppable. The world crossed into inference-first this year, and the water is forecast to multiply twenty-fold — so rent the reservoir and own the waterworks, or be metered to death on someone else's.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The crossover — inference now exceeds training.</strong> <strong>Lisa Su (AMD)</strong> framed 2026 as the first year global <strong>inference compute surpasses training;</strong> the industry runs <strong>~35 quadrillion tokens/month (~160× in two years),</strong> with <strong>~60% of capacity on inference,</strong> driven by agentic AI. <strong>Deloitte 2026 TMT:</strong> inference <strong>~two-thirds of AI compute</strong> (from ~33% in 2023, ~50% in 2025); inference-chip market <strong>&gt;$50B in 2026.</strong></li>
+  <li><strong>The flood — demand is far from peaking.</strong> <strong>Goldman Sachs:</strong> token demand multiplying <strong>~24× to 120 quadrillion tokens/month by 2030</strong> (2028 waypoint ~47q); current run-rate already ahead of its May-2026 estimate. Inference is <strong>~55% of cloud AI spending in 2026.</strong></li>
+  <li><strong>The P&amp;L signal — enterprise is the buyer.</strong> <strong>OpenAI:</strong> enterprise now <strong>&gt;40% of revenue,</strong> on track to consumer parity by year-end, on "teams of agents"; APIs process <strong>&gt;15 billion tokens/minute.</strong> <strong>Anthropic 2026 State of AI Agents:</strong> <strong>80% report measurable ROI;</strong> 57% run multi-stage workflows; 81% plan to expand.</li>
+  <li><strong>The controls — why they compound here.</strong> Meter + govern the same tap: airlock (egress, 6 Aug), keyring (access, 7 Aug), proving ground (pre-prod, 8 Aug). Unmetered flow = runaway cost <em>and</em> uncontained risk.</li>
+  <li><strong>The regulatory backdrop — still live.</strong> EU AI Act GPAI enforcement running since <strong>2 Aug;</strong> AI Office powers; <strong>€15M or 3%.</strong> The governed tap and the metered tap are increasingly the same requirement.</li>
+  <li><strong>The engine, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT) — the rented, swappable reservoir. Own the waterworks, not the wall.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">2026 marks a historical milestone: for the first time, global inference compute is set to surpass training compute — the industry now runs on the order of 35 quadrillion tokens a month, roughly 160× two years ago, with the majority of capacity now inference, driven by agentic AI.</div><div class="a">— Lisa Su, Chair &amp; CEO, AMD, at the company's 2026 flagship event (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">AI token demand is forecast to multiply roughly 24× — to about 120 quadrillion tokens a month — between 2026 and 2030 as agents move into production.</div><div class="a">— Goldman Sachs Research (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Enterprise is now more than 40% of our revenue and on track to reach parity with consumer by the end of the year, as customers move to teams of agents that coordinate and take action inside their tools.</div><div class="a">— OpenAI, "The next phase of enterprise AI" (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the reservoir — rented, swappable, cheaper every quarter, never your moat. The waterworks is yours: route, cache and meter every token, and govern every tap, because in an inference-first year the bill comes from the water, not the wall."</div><div class="a">— the radar, on the inference era</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Inference vs training compute, 2026</td><td><span class="v">First year inference compute surpasses training</span></td><td>AMD / Lisa Su (as reported)</td></tr>
+<tr><td>Monthly AI token volume</td><td><span class="v">~35 quadrillion tokens/month (~160× in two years)</span></td><td>AMD / Lisa Su (as reported)</td></tr>
+<tr><td>Inference share of capacity</td><td><span class="v">~60% (AMD); ~two-thirds of AI compute (Deloitte)</span></td><td>AMD / Deloitte 2026 TMT Predictions (as reported)</td></tr>
+<tr><td>Inference share of compute over time</td><td><span class="v">~33% (2023) → ~50% (2025) → ~66% (2026)</span></td><td>Deloitte 2026 TMT Predictions (as reported)</td></tr>
+<tr><td>Inference-optimized chip market, 2026</td><td><span class="v">&gt;$50B</span></td><td>Deloitte 2026 TMT Predictions (as reported)</td></tr>
+<tr><td>Token-demand forecast, 2026→2030</td><td><span class="v">~24× to ~120 quadrillion tokens/month (2028 ~47q)</span></td><td>Goldman Sachs Research (as reported)</td></tr>
+<tr><td>Inference share of cloud AI spending, 2026</td><td><span class="v">~55%</span></td><td>Analyst coverage (as reported)</td></tr>
+<tr><td>OpenAI enterprise revenue share</td><td><span class="v">&gt;40% of revenue; on track to consumer parity by end-2026</span></td><td>OpenAI (as reported)</td></tr>
+<tr><td>OpenAI API throughput</td><td><span class="v">&gt;15 billion tokens/minute</span></td><td>OpenAI (as reported)</td></tr>
+<tr><td>Organizations reporting measurable agent ROI</td><td><span class="v">~80% (57% run multi-stage workflows; 81% plan to expand)</span></td><td>Anthropic, 2026 State of AI Agents (as reported)</td></tr>
+<tr><td>EU AI Act — enforcement &amp; penalties</td><td><span class="v">GPAI enforcement live 2 Aug; €15M or 3% (€7.5M or 1.5% for incorrect info)</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash-0731 (MIT)</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Instrument the meter before you scale a single agent further.</strong> You cannot manage a flow you cannot read. Stand up cost-per-token telemetry <strong>per agent and per unit of business value,</strong> and re-run every production and near-production agent's unit economics at <strong>10× and 24× throughput</strong> — the curve the whole market is now on. Report one number to the board: <em>our fully-loaded inference cost per unit of business value, and where it lands if this workload's throughput rises twenty-fold.</em> The projects that belong in the cancelled column will show themselves here, cheaply, before the invoice does.</li>
+  <li><strong>Build the waterworks: route, cache, and split the reservoir.</strong> Stop paying frontier rates for routine work. Put a <strong>router</strong> in front of your agents (cheap model for the common calls, frontier reservoir only for the hard ones), <strong>cache</strong> repeated answers so you never pay twice, <strong>batch and quantise</strong> the always-on work, and push high-volume, low-stakes inference to the <strong>cheapest, closest</strong> place it can safely run. The model stays rented and swappable — Opus 5 for Gemini or GPT-5.6 as the price/quality moves — so keep the waterworks model-neutral and re-benchmark <strong>cost <em>and</em> quality per token</strong> on every swap.</li>
+  <li><strong>Put the meter and the governance on the same tap.</strong> In the waterworks era, unit economics and safety are one discipline: an unmetered flow is a runaway bill <em>and</em> an uncontained risk. Wire your cost meter to the same control points you fitted this week — the <strong>airlock</strong> (egress), the <strong>keyring</strong> (access), the <strong>proving ground</strong> (pre-production) — so one dashboard shows what each tap costs <em>and</em> whether it is clean. Then demand the same of every vendor and every model you rent: <em>show me the per-token cost, the routing, and the governance</em> — because in the year the world crossed into inference-first and demand is set to rise twenty-fold, the enterprises that thrive are the ones metered and governed by design, not the ones still measuring the height of a wall they rent.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> AMD (Advancing AI 2026; Lisa Su on the inference crossover, as reported) · Deloitte 2026 TMT Predictions (inference share of compute; inference-chip market) · Goldman Sachs Research (token-demand forecast) · OpenAI ("The next phase of enterprise AI") · Anthropic (2026 State of AI Agents) · analyst / press coverage · European Commission (EU AI Act enforcement) · LLM-Stats / model trackers. Figures are relayed from vendor events, analyst research and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 9 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
