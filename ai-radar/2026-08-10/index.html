@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 10 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the loading dock — as agents move from answering to acting, the browser becomes an enterprise control surface. On 7 Aug Cloudflare launched Kitesurf, a browser built for AI agents, not people; MCP's 28 July stateless spec re-architected agent tooling for scale (EMA stable; Tier-1 SDKs ~500M downloads/mo). Alibaba's Qwen3.8-Max claims frontier parity with open weights and Microsoft 365 Copilot passed 30M paid seats. The month's thesis extended: the model is a rented, commoditizing runner — own the loading dock, the governed gateway between your agents and the open web where every crate is weighed, logged and stoppable. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Agents &amp; the open web</div>
+  <h1>The Loading Dock</h1>
+  <div class="subhead">Agents are moving from answering to acting — and the browser becomes an enterprise control surface. Cloudflare's Kitesurf is a browser built for machines, not guests. Rent the runner; own the loading dock.</div>
+  <div class="meta">Monday, 10 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a month this radar has said the same thing in a dozen costumes: the model is a commodity, so own the layer around it. This week fitted the controls — the airlock (6 Aug), the keyring (7 Aug), the proving ground (8 Aug), the waterworks (9 Aug). Today the agents stop talking and start going out into the world. On 7 August Cloudflare launched Kitesurf — a cloud browser built for AI agents, not people: no tabs, no themes, no extensions, just a headless, controllable gateway to the open web. It is a small product with a large tell. Your agents are becoming first-class users of the internet, and the internet was built for human eyes. The board's question this morning: when our fleet of agents goes out to fetch and act on the whole web, do they run through a governed loading dock we own — where every crate in and out is weighed, inspected, logged and can be stopped in a heartbeat — or do we send them through the marble lobby, in a browser built for guests, and call the hole in the wall a strategy?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued the model is a commodity, so the durable advantage is the <strong>layer you own around it.</strong> This week made that concrete: the airlock at the door your data leaves through (6 Aug), the keyring to everything your agents may reach (7 Aug), the proving ground where you validate them before go-live (8 Aug), and the waterworks — the inference economics that turn all of it into a P&amp;L (9 Aug). Today the story crosses a threshold: agents stop being things you <em>talk to</em> and become things that <em>act on the open web.</em> And when they do, they need infrastructure built for machines, not the tools built for people.</p>
+<p><strong>The datable signal.</strong> On <strong>7 August 2026, Cloudflare launched "Kitesurf," a cloud-hosted browser built specifically for AI agents</strong> — headless, with none of the tabs, themes and extensions a human needs, engineered instead for <em>reliable, controllable</em> programmatic web access. It is the newest brick in a fast-rising wall of agent infrastructure. Underneath it, the <strong>Model Context Protocol's 28 July "stateless" specification</strong> re-architected agent tooling to scale horizontally behind ordinary load balancers, with Enterprise-Managed Authorization now stable and Tier-1 SDKs running at <strong>~500 million downloads a month</strong> (TypeScript and Python each past a billion total). The picture is unmistakable: the plumbing for agents that <em>do things</em> — reach the web, call the tools, cross app boundaries — is being poured this quarter.</p>
+<p><strong>Why it matters more than one product launch.</strong> A chatbot answers; an agent <em>reaches out and acts</em> — it opens pages, fills forms, moves money, files tickets. The moment it does, the browser stops being a human convenience and becomes an <strong>enterprise control surface:</strong> the one gate where what your agents fetch from and push to the wild internet can be metered, inspected, logged and shut. Give a fleet of tireless agents a human's browser — screen-scraping through a consumer app never built to be governed — and you have opened a hole in your wall you cannot see through. Cloudflare built a loading dock for machines; the strategic point is not that Cloudflare built it, but that <strong>you now need one, on ground you control.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Agents are becoming users of the internet — plan for it as infrastructure, not a feature.</strong> The web was built for human eyes; a fleet of agents needs a purpose-built, governable gateway. Kitesurf and the stateless MCP spec are the same wave: the layer between your agents and the outside world is being built now, and it is a layer you should own or knowingly rent — never leave to a script.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The browser is the new egress point — treat it like one.</strong> Everything the airlock taught about the prompt path applies to the web path: every crate in and out should be weighed, inspected and logged, with a shutter you can drop. An agent that can browse can also be <strong>phished, hijacked by a malicious page, or made to exfiltrate</strong> — the loading dock is where you stop that, not the model.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps commoditizing under all of it.</strong> In the same window, Alibaba's <strong>Qwen3.8-Max</strong> (a 2.4-trillion-parameter open-weight model claiming frontier parity) reset the ceiling again, and DeepSeek reportedly reopened an ~$8B raise on the strength of a cheaper model. The brains get cheaper and more interchangeable every week; the durable advantage is not which brain you rent but the <strong>dock, the airlock and the keyring</strong> you build around it.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month's thesis said <em>own the layer around the commodity model.</em> Today that layer grows a new wall — the one between your agents and the open web. Cloudflare poured the concrete for a browser built for machines; MCP re-poured the foundations for tools that scale. <strong>Rent the brain; own the loading dock</strong> — the governed gateway where your agents reach the world's goods and where every crate is weighed, logged and stoppable — because a business that lets a fleet of agents out through the marble lobby has not deployed AI, it has cut a door in its own hull and called it progress.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🚚 "The Loading Dock"</h3>
+<p><em>Topic: On 7 August 2026, Cloudflare launched Kitesurf, a cloud-hosted browser built specifically for AI agents rather than human users — headless, without the tabs, themes and extensions people rely on, and engineered for reliable, controllable programmatic web access. It arrives alongside the Model Context Protocol's 28 July "stateless" specification, which re-architected agent tooling for horizontal scale (Enterprise-Managed Authorization now stable; Tier-1 SDKs at roughly 500 million downloads a month), and against a backdrop of relentless model commoditization — Alibaba's Qwen3.8-Max, a 2.4-trillion-parameter open-weight model claiming frontier parity, and a reported ~$8B DeepSeek raise on a cheaper model. The lesson: as agents move from talking to acting, they become first-class users of the internet, and the internet was built for human eyes; the browser is turning into an enterprise control surface — the gate where what agents fetch from and push to the open web can be metered, inspected, logged and stopped.</em></p>
+<p>Picture a great house whose front door was built, lovingly, for <strong>guests.</strong> There is a marble lobby, a grand staircase, a coat room, a bell that chimes, a clerk who knows every caller by name. For a hundred years this was the only way in or out, and it was the right way, because the traffic was people — arriving one at a time, at human speed, with human manners. The lobby is full of things that exist only to please a human eye: the chandelier, the visitors' book, the little dish of cards, the velvet rope that guides the queue. None of it is waste. It is simply built for a <em>guest.</em></p>
+<p>Then the house changed its business. Overnight it began running a fleet of <strong>tireless errand-runners</strong> — machines that never sleep, that go out into the whole city a thousand at a time to fetch goods and carry messages and settle accounts, and come back and go out again. And for a while, out of habit, the house sent them through the <strong>front door.</strong> Picture it: a thousand machine-runners a minute, trying to squeeze past the velvet rope, tripping on the chandelier's low sweep, waiting for the clerk to look each of them up in the visitors' book, mistaking the little dish of cards for cargo. The lobby was built to <em>delight one guest,</em> and it is a catastrophe when you push freight through it — slow, unreliable, and worst of all <em>blind,</em> because the clerk was trained to greet callers, not to inspect a thousand crates an hour for what should never enter or leave.</p>
+<p>So the wise houses did what every house does the moment its traffic turns from guests to goods: they built a <strong>loading dock.</strong> Not grand — the opposite of grand. A plain concrete apron at the side of the building, with a wide roll-up shutter, a weighbridge, an inspector, and a daybook. It has none of the lobby's ornaments because a machine needs none: no chandelier, no visitors' book, no velvet rope — just a clean, wide, well-lit gate built for freight and for the <em>watching</em> of freight. And here is the whole of its value: at the dock, <strong>every crate in and out is weighed, inspected and written in the daybook, and the shutter can come down in a heartbeat.</strong> The runner that tries to carry out the house's silver is stopped at the dock. The crate that arrives with a snake in it — a poisoned page, a forged instruction, a trap dressed as a delivery — is opened and refused at the dock. The lobby could never do this; it was built to say <em>welcome,</em> not to say <em>let me see what's in that box.</em> This week a great builder (call it the firm of the kite and the surf) poured a dock built for machines and offered it to every house in town — and the point is not that the builder poured it, but that <strong>any house still running its runners through the lobby has, without noticing, cut a second door in its own wall that no one is watching.</strong></p>
+<p>Here is the turn the wise house sees and the proud one misses. The errand-runners themselves are <strong>rented</strong> — their tireless brains come from the great foundries, and this very season a foreign foundry (call it the house of the ten-thousand-fold loom) cast a brain as fine as any in the land and gave its plans away, so the brains grow cheaper and more alike by the week. Renting the brain is no shame; it is the sense. But precisely <em>because</em> the brain is rented and swappable, the <strong>dock is the part that is yours</strong> — the one place where the whole torrent of what your machines touch in the outside world passes through a gate you own, on your ground, under your daybook. The proud house buys the cleverest runners in the market and sends them out through the lobby, and cannot say what they carried, or what they were handed, or by whom — and calls the cleverness a strategy. The wise house rents the same runners and builds the dock: weighs every crate, opens every delivery, keeps the daybook, and holds one hand on the shutter — so that a fleet going out into a city full of thieves and forgers is a fortune, and not a wound.</p>
+<p><strong>The moral:</strong> when your traffic turns from guests to goods — from people you talk to into machines that go out and act — the front door built for guests becomes a liability, not a courtesy. Build the loading dock. Make it plain and make it yours: one wide gate for the whole fleet, a weighbridge and an inspector on everything in and out, a daybook that misses nothing, and a shutter you can drop before the next crate lands. Rent the runners; <strong>own the dock</strong> — because in the season the machines began going out into the world on your behalf, the danger stopped coming through the front door you watch and started coming through the freight door you forgot to build.</p>
+<p><strong>The question it forces:</strong> <em>Our agents have started going out onto the open web to fetch and act on our behalf. Do they pass through a loading dock we own — a purpose-built gateway where every page fetched and every action taken is inspected, logged and stoppable — or are we still running our fleet through a browser built for a single human guest, unable to say what our own machines carried out or were handed on the way back in?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>When our agents touch the open web, what gate do they pass through — and do we own it?</strong> Agents are becoming users of the internet; the browser is turning into an egress and ingress control surface. <strong>Is there one governed dock where every page fetched and action taken is inspected and logged, or does each agent reach the web its own unwatched way?</strong></li>
+  <li>The brain keeps commoditizing (Qwen3.8-Max at frontier parity, open-weight; DeepSeek raising on a cheaper model). <strong>Are we still shopping for the cleverest runner — or building the dock, the airlock and the keyring that make any rented runner safe to send out?</strong></li>
+  <li><strong>Could a malicious web page hijack one of our agents today?</strong> An agent that browses can be phished, fed forged instructions, or made to exfiltrate. <strong>Where, specifically, would we catch that — at the model, or at a gateway we control?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Agents that check balances, pull filings, or move money are the highest-stakes runners in the building. <strong>Does every agent's web and tool access flow through a monitored, logged gateway with a hard shutter — so a compromised page cannot turn an agent into an exfiltration path?</strong></li>
+  <li>The dock and the keyring are the same discipline. <strong>Is each agent's reach scoped by identity (keyring) <em>and</em> its traffic inspected at the gate (dock) — or have we governed who it is and left what it does on the web unwatched?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and research agents that browse literature, portals and records handle regulated data at speed. <strong>Is there a single inspected gateway for what they fetch and submit, with a daybook a regulator could read — or is PHI leaving through a browser no one is auditing?</strong></li>
+  <li>A poisoned page is a patient-safety event when an agent acts on it. <strong>Do we open every "crate" — validate what a browsing agent ingests before it drives a decision — or trust the open web the way we would never trust an unlabeled sample?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Supply-chain and procurement agents live on the open web — supplier portals, pricing, logistics. <strong>Do those always-on runners share one governed dock we can meter and shut, or has every integration cut its own quiet door to the outside?</strong></li>
+  <li>Purpose-built beats retrofit. <strong>Are we running agents through infrastructure designed for machines (headless, controllable, observable) — or bolting them onto tools built for a human operator and hoping it scales?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Pricing, catalog, review and support agents browse and act at the highest volume in the business. <strong>At peak, is every agent's web traffic flowing through a gateway we can rate-limit, cache, inspect and log — or scaling as a thousand unmonitored browser sessions?</strong></li>
+  <li>The web is adversarial on your busiest day. <strong>Would we know if a competitor's or attacker's page fed our shopping agents forged instructions — and where would we stop it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-service agents that browse and file must be both accountable and safe. <strong>Is every external fetch and submission passing through an auditable gate with a daybook — or are we standing up services whose agents touch the open internet with no record we could defend?</strong></li>
+  <li>Sovereignty lives at the gateway. <strong>Do we control the dock our agents pass through — its logs, its location, its shutter — or have we handed the one chokepoint over our agents' reach to a vendor we cannot direct?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Rent the Brain, Own the Loading Dock</h2>
+<p>Read this month as one argument adding one wall at a time. The airlock (6 Aug) governs <strong>egress</strong> of prompts; the keyring (7 Aug) governs <strong>access</strong> to tools; the proving ground (8 Aug) governs <strong>pre-production validation;</strong> the waterworks (9 Aug) governs the <strong>economics</strong> of the flow. Today's brick governs the newest surface: the <strong>agent's reach into the open web.</strong> As agents move from answering to acting, the browser stops being a human convenience and becomes an enterprise control point — the one gate where everything your agents fetch from and push to the wild internet can be seen, priced, logged and stopped. The architecture splits into three: the <strong>runner</strong> (the rented, swappable model), the <strong>dock</strong> (the governed web/tool gateway you own), and the <strong>city</strong> (the adversarial open web you must never trust raw).</p>
+<div class="card"><ul>
+  <li><strong>The runner — the commodity brain (rented, swappable).</strong> The menu is cheaper and more crowded by the week — <strong>Claude Opus 5</strong>, <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT), and now <strong>Alibaba Qwen3.8-Max</strong> (2.4T parameters, ~95B active, ~1M-token context, open weights planned) claiming frontier parity, with DeepSeek reportedly reopening an ~$8B raise on the back of a cheaper model. Renting the runner is the sense. But a cleverer runner does nothing for the hole in your wall — only a dock does.</li>
+  <li><strong>The dock — the web/tool gateway (where the new advantage sits).</strong> This is the part you own or fail to own. Cloudflare's <strong>Kitesurf</strong> (7 Aug) is the concrete: a cloud-hosted, headless browser built <em>for agents</em> — stripped of the tabs, themes and extensions a human needs, engineered for reliable, controllable, programmatic access. Beneath it, the <strong>MCP 28 July stateless spec</strong> makes the <em>tool</em> side of the dock scale — a stateless core behind ordinary load balancers, header-based routing, cacheable results, hardened authorization, and Enterprise-Managed Authorization now stable, on SDKs pulling <strong>~500M downloads/month.</strong> A real dock does more than open the gate: it <strong>inspects</strong> (what page is being fetched, what action taken), <strong>logs</strong> (a daybook a regulator or your own SOC can read), <strong>rate-limits and caches</strong> (the waterworks meter, applied to the web), and <strong>shuts</strong> (a hard stop for a compromised session).</li>
+  <li><strong>The city you must never trust — the open web.</strong> The internet is adversarial by default: prompt-injecting pages, forged instructions dressed as content, phishing, drive-by exfiltration. An agent with a browser is an agent that can be <em>hijacked by what it reads.</em> The dock is where you open every crate before the runner acts on it — because the model's safety training is the vendor's job, and validating what your agent ingests from the wild web is yours.</li>
+</ul></div>
+<p>The strategic core: <strong>the brain is the runner; the dock is where you decide, see and stop what your agents do in the world.</strong> For a month the misread has been "buy the cleverest model and you have deployed AI." After this week the read is sharper: <strong>the model is rented and getting cheaper, and the risk and the control have moved to the gateway between your agents and the open web.</strong> "We use the best model" is not the answer to "can a web page hijack our agent, and would we know"; <em>"every agent reaches the world through one dock we own, and every crate is weighed, logged and stoppable"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The loading dock: rent the runner, own the gateway. As agents move from answering to acting, the browser becomes an enterprise control surface. On 7 August 2026 Cloudflare launched Kitesurf, a browser built for machines, not guests. On the left, the runner: the rented, swappable brain — Claude Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash and Alibaba Qwen3.8-Max, an open-weight model claiming frontier parity — cheaper every week and not the moat; it drives the dock. On the right, the city: the open web of pages, portals, forms, money, tickets and records, adversarial by default with prompt injection, forged instructions and phishing; every crate in and out is inspected and logged. In the middle, the loading dock — the web and tool gateway you own: one gate every agent reaches the web and tools through, Kitesurf-style; inspect every crate by validating pages and actions before the runner acts; log a daybook your security operations centre and a regulator can read; meter and cache, the waterworks meter applied to the web; and shut, a hard stop for a hijacked or runaway session. It scales on the Model Context Protocol's 28 July stateless core, with Enterprise-Managed Authorization stable and about 500 million SDK downloads a month. The controls stack: airlock for egress on 6 August, keyring for access on 7 August, proving ground for pre-production on 8 August, waterworks for economics on 9 August, and the dock for the web today. The trap is to buy the cleverest runner and send it out the marble lobby, a door no one watches. The win is to rent the runner, own the dock, and weigh, log and shut every crate in and out." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE LOADING DOCK — rent the runner, own the gateway</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Agents move from answering to ACTING — the browser becomes a control surface.</text>
+
+  <!-- the runner -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE RUNNER — rented brain</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash · Qwen3.8-Max</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheaper every week · not the moat</text>
+
+  <!-- the city -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#2a1414" stroke="#a24040"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#e8907f" font-family="sans-serif">THE CITY — the open web</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">pages · portals · forms · money · tickets</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">adversarial: injection · forgery · phish</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">never trust a crate unopened</text>
+
+  <!-- arrow: runner down into dock -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#e0b45f"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">drives ↓</text>
+
+  <!-- arrow: dock up to city (inspected traffic) -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#e8907f" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#e8907f"/>
+  <text x="518" y="182" font-size="9" fill="#e8907f" font-family="sans-serif">inspected in/out ↑</text>
+
+  <!-- the loading dock -->
+  <rect x="40" y="210" width="600" height="184" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE LOADING DOCK — the web/tool gateway you OWN</text>
+  <text x="340" y="258" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ ONE GATE: every agent reaches the web/tools through it (Kitesurf-style)</text>
+  <text x="340" y="280" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ INSPECT: open every crate — validate pages &amp; actions before the runner</text>
+  <text x="340" y="302" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ LOG: a daybook your SOC and a regulator can read</text>
+  <text x="340" y="324" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ METER + CACHE: the waterworks meter, applied to the web</text>
+  <text x="340" y="346" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ SHUT: a hard stop for a hijacked or runaway session</text>
+  <text x="340" y="370" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">scales on MCP's 28-Jul stateless core · EMA stable · ~500M SDK dl/mo</text>
+  <text x="340" y="388" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the same session is an egress path, an actor, and an ingester — govern all three at the gate</text>
+
+  <!-- controls stacked -->
+  <rect x="40" y="404" width="600" height="42" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="423" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE CONTROLS, STACKED:</text>
+  <text x="60" y="439" font-size="10" fill="#e8edf3" font-family="sans-serif">airlock (egress, 6 Aug) · keyring (access, 7 Aug) · proving ground (pre-prod, 8 Aug) · waterworks (economics, 9 Aug) · dock (web, today)</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="454" x2="340" y2="472" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="496" font-size="9.5" fill="#e0b45f" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: cleverest runner → out the marble lobby</text>
+  <text x="182" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a door no one watches</text>
+  <text x="498" y="496" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: rent the runner · own the dock</text>
+  <text x="498" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">weigh, log and shut every crate</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The runner — the rented, swappable brain</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The loading dock — the web/tool gateway you own</span>
+  <span><i class="dot" style="background:#a24040"></i>The city — the adversarial open web</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — freight through the lobby</th><th>The discipline — own the loading dock</th></tr>
+<tr><td>Compete on "whose model is cleverest"</td><td>Compete on the gateway you own around any rented model</td></tr>
+<tr><td>Each agent reaches the web its own unwatched way</td><td>One governed dock every agent passes through</td></tr>
+<tr><td>Trust what a browsing agent reads off the open web</td><td>Inspect and validate every page and action before acting</td></tr>
+<tr><td>No record of what agents fetched or were handed</td><td>A daybook your SOC and a regulator can read</td></tr>
+<tr><td>Model safety assumed to cover web-borne attacks</td><td>Web-borne injection/exfiltration stopped at your gate</td></tr>
+</table>
+
+<h3>Why owning the gateway beats owning a cleverer brain</h3>
+<div class="card">
+<p>Every control this month presumed a chokepoint you can see and shut. The agent-web shift is what creates the newest one. A cleverer model does not close the hole a browsing agent opens in your wall; a dock does. And the reason the dock, the airlock and the keyring belong together is structural: an agent out on the open web is an <strong>egress path</strong> (the airlock's concern), an <strong>actor with permissions</strong> (the keyring's concern) and an <strong>ingester of untrusted content</strong> (the dock's concern) all at once — the same session that quietly exfiltrates a secret is the one that can be handed a forged instruction by a poisoned page. Route every agent through one governed gateway and those three controls become one dashboard. The correct read of this week is not "Cloudflare shipped a browser" but "<strong>the browser just became an enterprise control surface</strong> — so own it."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (6 Aug the airlock, 7 Aug the keyring, 8 Aug the proving ground, 9 Aug the waterworks). This week the agents step out onto the open web, and the gateway they step through is the new thing to own. On legacy estates the temptation is to let each team wire its agents to the web however is quickest — a headless script here, a screen-scraper there, a raw browser session in a container somewhere no one owns. The retrofit is specific and unglamorous: <strong>inventory every path your agents already take to the open web</strong> (you almost certainly have more than you think); <strong>funnel them through one governed gateway</strong> — a purpose-built agent browser like Kitesurf, or your own — that is headless, controllable and <em>observable;</em> <strong>inspect and log</strong> every fetch and action so there is a daybook, and <strong>validate untrusted web content</strong> before an agent acts on it (treat a page like an unlabeled sample, not a trusted source); <strong>scope each agent's reach by identity</strong> (the keyring) and <strong>meter and cache</strong> its traffic (the waterworks), and wire the whole thing to a <strong>shutter</strong> you can drop. Then be honest about the brain: Qwen3.8-Max and a cheaper DeepSeek prove again that the runner is a rented commodity — a bigger brain is not a security strategy, and "we use the best model" is not an answer to "can a web page hijack our agent."</p>
+<p><strong>The clean mental model:</strong> <em>The model is the runner — rented, swappable, cheaper and more interchangeable every quarter, and never your moat. The loading dock is yours to own: the one governed gateway between your agents and the open web, where every crate in and out is weighed, inspected and written in the daybook, and where the shutter can drop in a heartbeat. Agents crossed from answering to acting this quarter — so rent the runner and own the dock, or cut a second door in your own wall and call the draft a strategy.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The dock — a browser built for machines.</strong> <strong>Cloudflare Kitesurf</strong> (7 Aug): a cloud-hosted, headless browser built for AI agents — no tabs, themes or extensions — for reliable, controllable programmatic web access. The tell: agents are becoming first-class users of the internet, and the browser is turning into a control surface.</li>
+  <li><strong>The foundations — agent tooling scales.</strong> <strong>MCP 28 July stateless spec:</strong> stateless core for horizontal scale behind ordinary load balancers, header-based routing, cacheable results, hardened auth, <strong>Enterprise-Managed Authorization now stable;</strong> Tier-1 SDKs at <strong>~500M downloads/month</strong> (TypeScript &amp; Python each past 1B total). nCino shipped a <strong>Mortgage MCP</strong> for agent integration (7 Aug).</li>
+  <li><strong>The runner — commoditization, again.</strong> <strong>Alibaba Qwen3.8-Max</strong> (3 Aug): 2.4T params (~95B active), ~1M-token context, open weights planned, claiming frontier parity; shares rallied. <strong>DeepSeek</strong> reportedly reopened an <strong>~$8B raise at ~$74B</strong> on a cheaper model.</li>
+  <li><strong>The buyer — enterprise AI is real money.</strong> <strong>Microsoft FY26 Q4</strong> (29 Jul): <strong>Microsoft 365 Copilot past 30M paid seats,</strong> Azure <strong>+43% YoY</strong> and past <strong>$100B annualized,</strong> total revenue ~$90B. Satya Nadella: turning "tokens into business results."</li>
+  <li><strong>The regulatory backdrop — still live.</strong> <strong>EU AI Act</strong> enforcement running since <strong>2 Aug:</strong> GPAI oversight, transparency duties (label AI, deepfakes, synthetic media), fines up to <strong>€15M or 3%</strong> of worldwide turnover; <strong>180+</strong> GPAI Code-of-Practice signatories.</li>
+  <li><strong>The engine, for context.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT), Qwen3.8-Max — the rented, swappable runner. Own the dock, not the runner.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">We are advancing the frontier on the cost-to-outcome curve, ensuring every customer can turn tokens into business results.</div><div class="a">— Satya Nadella, Chairman &amp; CEO, Microsoft, on FY26 Q4 results (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">As enforcement begins, we are taking an important step towards AI that people and businesses can understand and trust, and whose benefits are shared widely across our society.</div><div class="a">— Henna Virkkunen, EU Executive Vice-President for Tech Sovereignty, Security and Democracy, on AI Act enforcement (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Kitesurf is a browser built for AI agents, not people — headless, without the tabs, themes and extensions a human needs, engineered for reliable, controllable web access.</div><div class="a">— Cloudflare, on its agent-browser launch (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the runner — rented, swappable, cheaper every quarter, never your moat. The loading dock is yours: one gateway between your agents and the open web, where every crate in and out is weighed, logged and stoppable — because agents crossed from answering to acting this quarter, and the browser just became a control surface."</div><div class="a">— the radar, on agents acting on the web</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Cloudflare Kitesurf</td><td><span class="v">Cloud browser built for AI agents (launched 7 Aug 2026)</span></td><td>TechCrunch (as reported)</td></tr>
+<tr><td>MCP Tier-1 SDK downloads</td><td><span class="v">~500 million/month (TypeScript &amp; Python each &gt;1B total)</span></td><td>Model Context Protocol blog (28 Jul 2026)</td></tr>
+<tr><td>MCP 28-Jul spec</td><td><span class="v">Stateless core; EMA now stable; header routing, cacheable results</span></td><td>Model Context Protocol blog (as documented)</td></tr>
+<tr><td>Alibaba Qwen3.8-Max</td><td><span class="v">2.4T params (~95B active), ~1M-token context, open weights; frontier-parity claim</span></td><td>CNBC / Bloomberg / Forbes (as reported)</td></tr>
+<tr><td>DeepSeek funding</td><td><span class="v">Reported ~$8B raise at ~$74B valuation</span></td><td>PYMNTS (as reported)</td></tr>
+<tr><td>Microsoft 365 Copilot</td><td><span class="v">&gt;30 million paid seats</span></td><td>Microsoft FY26 Q4 (29 Jul 2026)</td></tr>
+<tr><td>Microsoft Azure</td><td><span class="v">+43% YoY; past $100B annualized revenue</span></td><td>Microsoft FY26 Q4 (29 Jul 2026)</td></tr>
+<tr><td>EU AI Act — penalties</td><td><span class="v">Up to €15M or 3% of worldwide annual turnover</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>EU AI Act — GPAI Code of Practice</td><td><span class="v">180+ signatories</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash · Qwen3.8-Max</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory every path your agents already take to the open web.</strong> You cannot govern a door you have not found. Map, per agent and per team, how each one reaches the internet and external tools today — headless scripts, screen-scrapers, raw browser sessions, direct API calls. Report one number to the board: <em>how many distinct, ungoverned egress/ingress paths our agents currently use to touch the outside world.</em> The uncomfortable size of that number is the case for a single dock, made cheaply, before an incident makes it for you.</li>
+  <li><strong>Route the fleet through one governed gateway — and treat the web as untrusted.</strong> Stand up (or adopt) a purpose-built agent gateway — a headless, controllable, observable browser like Kitesurf, or your own — and make every agent reach the web and its tools through it. Then wire in the four things a real dock does: <strong>inspect</strong> (validate pages and actions before the agent acts on them), <strong>log</strong> (a daybook your SOC and a regulator can read), <strong>meter and cache</strong> (the waterworks, applied to web traffic), and <strong>shut</strong> (a hard stop for a hijacked session). Assume every page is adversarial until proven otherwise — an agent that browses can be phished and hijacked, and the gate is where you stop it.</li>
+  <li><strong>Stack the controls, and keep the brain swappable.</strong> The dock is one wall of a set — wire it to the same control points you fitted this month so one dashboard shows, per agent, <em>who it is</em> (keyring), <em>what leaves</em> (airlock), <em>what it did in pre-prod</em> (proving ground), <em>what it costs</em> (waterworks) and <em>what it touched on the web</em> (the dock). Then demand the same of every vendor and every model you rent — and re-benchmark the runner freely as Qwen3.8-Max, a cheaper DeepSeek and the next open-weight release reset the price, because the brain is a commodity and the gateway is the moat: rent the runner, own the dock.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Cloudflare / TechCrunch (Kitesurf agent browser, as reported) · Model Context Protocol blog (28 July stateless spec; SDK download figures) · CNBC / Bloomberg / Forbes (Alibaba Qwen3.8-Max) · PYMNTS (DeepSeek funding, as reported) · Microsoft (FY26 Q4 results; Nadella) · European Commission (EU AI Act enforcement; Virkkunen) · LLM-Stats / model trackers. Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 10 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
