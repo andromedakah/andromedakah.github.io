@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 11 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the signet ring — as agents act on your behalf, the question turns from access to identity. On 30 July Google gave Gemini Spark the run of your real Chrome — your logins and saved passwords — to run errands as you; on 28 July at Black Hat 2026 Snowflake launched its Cortex AI Gateway on the Natoma acquisition, enforcing agent identity, policy and audit at the tool-call level with seven identity partners. Reported surveys: only ~19% classify agents as human-equivalent insiders, ~80% have seen agents act beyond scope. The month's thesis extended: the model is a rented, commoditizing runner — own the signet office, where each agent is struck its own scoped, logged, revocable seal and every deed names the hand that made it. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Agents &amp; delegated identity</div>
+  <h1>The Signet Ring</h1>
+  <div class="subhead">Agents are moving from acting on the web to acting in your name — and the question turns from access to identity. Never lend the master's ring; strike each agent its own seal. Rent the runner; own the signet office.</div>
+  <div class="meta">Tuesday, 11 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a month this radar has said the same thing in a dozen costumes: the model is a commodity, so own the layer around it. This week fitted the controls — the airlock (6 Aug), the keyring (7 Aug), the proving ground (8 Aug), the waterworks (9 Aug), the loading dock (10 Aug). Today the question sharpens from which doors an agent may open to whose name it acts in. On 30 July Google gave Gemini Spark the run of your real Chrome — your logged-in accounts and your saved passwords — to run errands on your behalf. The tell is not the feature; it is the shortcut. The fastest way to let an agent act in the world is to hand it your own identity — your sessions, your credentials, your signet — and let every deed it does read, in the ledger, as a deed done by you. The board's question this morning: when our agents act on our behalf, do they press their own seal — a distinct, scoped, logged, revocable identity we issued them — or do we hand them the master's signet ring, so that nothing they sign can ever be told apart from what we signed ourselves?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued the model is a commodity, so the durable advantage is the <strong>layer you own around it.</strong> This week made that concrete: the airlock at the door your data leaves through (6 Aug), the keyring to the rooms your agents may enter (7 Aug), the proving ground where you validate them before go-live (8 Aug), the waterworks that meter the flow (9 Aug), and yesterday the loading dock, as agents crossed from answering to acting on the open web (10 Aug). Today the story turns from <em>access</em> to <strong>identity:</strong> not which doors an agent may open, but <strong>whose authority it acts under — and whether your ledger can tell the agent's deeds from your own.</strong></p>
+<p><strong>The datable signal.</strong> On <strong>30 July 2026, Google gave Gemini Spark the ability to drive your real desktop Chrome</strong> — using the accounts you are already signed into and the passwords saved in Chrome's password manager — to complete web errands on your behalf, now rolling out in the US. Google's own documentation is candid about what this means: run through your local Chrome, the agent "has access to all the same sites that you do, including sites you are signed into." It is the most convenient possible way to let an agent act — and the most dangerous, because the agent is no longer acting <em>as itself.</em> <strong>It is acting as you.</strong> Every session it borrows, every form it submits, every password it uses is stamped with <em>your</em> identity, and no audit log downstream can separate what the agent did from what you did.</p>
+<p><strong>Why it matters more than one product feature.</strong> The enterprise is discovering the same fork at scale, and racing to take the other road. On <strong>28 July, at Black Hat 2026, Snowflake launched its Cortex AI Gateway</strong> — built on its acquisition of <strong>Natoma,</strong> whose centralized MCP gateway "enforces identity, policy, and audit at the tool-call level" — governing how first-party and third-party agents (Claude Code, Cursor, Bedrock, Azure AI Foundry, ChatGPT, LangChain, LlamaIndex) access data, tools and models, and shipping with <strong>seven identity partners</strong> (1Password, Aembit, Cyera, Linx Security, Okta, SailPoint, Saviynt). The whole design premise is the opposite of the consumer shortcut: <strong>give each agent its own identity, scoped and logged, so every deed is attributable to the agent that did it</strong> — never fold the agent into a human's credentials. The gap this closes is already gaping: reportedly only <strong>19% of organizations</strong> classify an AI agent as equivalent to a human insider, yet <strong>80%</strong> have already seen agents act beyond their intended scope.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The most convenient identity for an agent is your own — which is exactly why it is the trap.</strong> Gemini Spark driving your Chrome with your saved passwords is the seductive shortcut: no provisioning, no scoping, instant reach. But an agent wearing your identity is an agent whose every action is indistinguishable from yours — you have handed it your signet ring, and the wax it presses is your wax. Convenience is the whole danger.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Attribution is the property you cannot buy back later.</strong> The hardest agent problem in the field is telling <em>which actions were the agent versus the user.</em> Solve it at issuance — strike each agent its own seal — or you never solve it: once the agent has acted in your name, no forensic tool can un-mix the two. A cleverer model does nothing for this; a distinct, scoped, revocable identity does everything.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps commoditizing under all of it.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT), and Alibaba's open-weight <strong>Qwen3.8-Max</strong> make the brain cheaper and more interchangeable by the week. The durable advantage is not which brain you rent but the <strong>signet office</strong> — the identity, scope, log and revocation — you build around it.</div></div>
+<div class="card"><strong>Bottom line:</strong> the month's thesis said <em>own the layer around the commodity model.</em> Today that layer grows a new wall — the one between <em>your</em> identity and your <em>agents'.</em> Google poured a frictionless path that runs your agents on your own credentials; Snowflake and a rank of identity vendors poured the opposite — a control plane that issues each agent its own seal and logs every deed at the tool call. <strong>Rent the brain; own the signet office</strong> — the place where every agent gets its own stamp, scoped and revocable, and every act is written to the agent that did it — because a business that hands its fleet the master's ring has not deployed AI, it has signed a blank cheque in its own hand and called it delegation.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>💍 "The Signet Ring"</h3>
+<p><em>Topic: On 30 July 2026, Google gave Gemini Spark the ability to operate a user's real desktop Chrome — using the accounts they are already signed into and the passwords saved in Chrome's password manager — to run web errands on their behalf, now rolling out in the US; Google's documentation notes that in local mode the agent has access to all the same sites the user does, including those they are signed into, while sensitive steps such as payments are handed back and the agent is meant to resist prompt injection. It lands against the enterprise moving the opposite way: on 28 July, at Black Hat 2026, Snowflake launched its Cortex AI Gateway, built on its acquisition of Natoma — a centralized MCP gateway that enforces identity, policy and audit at the tool-call level — with seven identity partners, the design premise being that each agent should carry its own scoped, logged identity rather than borrow a human's. As agents act on our behalf, the dangerous shortcut is to lend them our own identity; the discipline is to strike each agent its own seal — scoped, logged and revocable.</em></p>
+<p>Picture a great house in an age before signatures, when a man's authority travelled in a <strong>ring.</strong> The master's signet — a carved stone that pressed his mark into hot wax — was not jewellery; it <em>was</em> the master, in every place he could not stand himself. A letter sealed with it was his word. A contract stamped with it was his bond. A door opened to it because the porter knew that wax as surely as the master's face. For a hundred years the ring lived on one hand, and left it only for the steward's, because the whole house understood the terrible simplicity of the thing: <strong>whoever holds the signet is the master, for as long as he holds it, in every matter the wax can seal.</strong></p>
+<p>Then the house changed its business and hired a thousand <strong>errand-runners</strong> — tireless, quick, sent out a hundred a day to fetch and settle and sign on the master's behalf. And here the house met a fork it did not know it was at. The runners needed authority to act; the master could not walk beside each one. The <em>fast</em> way — the way that needed no thought and no waiting — was to press the master's own ring into each runner's hand as it went out the door. And oh, it worked: the runner reached every counting-house that honoured the master, opened every door that knew his wax, closed every deal in his name before nightfall. It was the most convenient thing in the world. It was also the moment the house lost the one thing a great house cannot lose: <strong>the power to say who did what.</strong> For now the daybook filled with deeds sealed by the master's mark that the master never made — and when one runner was turned, or bribed, or simply mistaken, and pressed that ring on a ruinous bargain, the ledger said only, in the master's own wax, <em>the master agreed.</em> There was no line to trace, no seal to melt but the master's own, no way to call back one runner's authority without unmaking the master's own name. The house had a thousand hands wearing its one face, and could no longer tell its face from its hands.</p>
+<p>So the wise houses did the older, slower, unglamorous thing. They built a <strong>signet office</strong> — a plain room with a stern clerk and a rack of blank rings — and they made a law: <em>no runner ever carries the master's ring; every runner is struck its own.</em> The runner presents itself at the office; the clerk cuts it a seal of its own — a distinct mark, no other runner's, carved for the errands it is trusted with and no more; stamps it with an hour it expires; writes in the daybook which runner holds which seal; and hands it out. Now every deed in the ledger bears the mark of the hand that made it. The counting-house that takes a runner's seal knows it is <em>that runner,</em> acting in the master's house but under its own name, for the narrow business it was struck to do — and if the runner strays, or is turned, the clerk melts <em>that one seal</em> in a heartbeat, and the master's ring never leaves the master's hand, and every other runner keeps working. This month a great firm of the north (call it the house of snow) opened exactly such an office for the whole agentic trade, and stood a rank of locksmiths behind the clerk; and a great firm of the search (call it the house that indexes the world) offered the other road — press the master's own ring into the runner's hand and let it out the door. <strong>The point is not which firm built which; it is that every house now stands at the fork, and one road cannot be walked back.</strong></p>
+<p>Here is the turn the wise house sees and the proud one misses. The runners themselves are <strong>rented</strong> — their tireless wits come from the great foundries, and grow cheaper and more alike by the week — so no house wins by hiring a cleverer runner; a clever runner wearing the master's ring is only a faster way to lose the ledger. Renting the runner is the sense. But precisely <em>because</em> the runner is rented and swappable, the <strong>signet office is the part that is yours</strong> — the one place where you decide what authority each runner carries, in whose name, for how long, and where every seal it presses is written back to the hand that made it. The proud house hands out the master's ring at the door because it is quick, and buys the daybook a thousand deeds it cannot account for. The wise house makes each runner earn its own small seal, and keeps a ledger it could set before any magistrate: <em>this deed, this runner, this hour, this errand.</em></p>
+<p><strong>The moral:</strong> when your traffic turns from a master who acts to a fleet that acts <em>for</em> him, the ring on one hand becomes a thousand hands wearing one face — and a house that cannot tell its face from its hands cannot be governed at all. Do not lend the runner your ring because it is fast. Build the signet office and make it yours: a seal struck for each runner, scoped to its errand, stamped with its hour, written in the daybook, and meltable alone. Rent the runner; <strong>own the signet office</strong> — because in the season the machines began signing in your name, the danger was never that they were clever; it was that you could no longer tell their wax from your own.</p>
+<p><strong>The question it forces:</strong> <em>Our agents have started acting on our behalf — signing, submitting, transacting in our name. Do they each press their own seal — a distinct, scoped, logged, revocable identity we issued and can melt alone — or have we handed them the master's ring for convenience, so that nothing our machines do can ever be told apart from what we did ourselves?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>When one of our agents acts, whose identity does the log record — the agent's, or a person's?</strong> The hardest agent problem in the field is telling which actions were the agent versus the user. <strong>Does every agent carry its own scoped, logged identity, or are our agents borrowing human credentials and sessions so that nothing they do can be attributed to them?</strong></li>
+  <li>The brain keeps commoditizing (Opus 5, Gemini 3.6 Flash, Qwen3.8-Max at frontier parity). <strong>Are we still shopping for the cleverest runner — or building the signet office: the identity, scope, log and revocation that make any rented runner safe to send out in our name?</strong></li>
+  <li><strong>If one agent were compromised tomorrow, could we revoke it alone — in seconds — without disrupting a single human or a single other agent?</strong> If revoking the agent means rotating a person's password, the agent was never a first-class identity.</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Agents that pull filings, check balances or move money are signing in the institution's name. <strong>Does each one act under its own scoped identity with an audit trail a regulator could read line by line — or are they inheriting an employee's access, so a compromised agent is indistinguishable from a compromised banker?</strong></li>
+  <li>Delegated authority is the oldest control you have. <strong>Is every agent's reach bound to the narrow business it was issued for (least privilege by identity), or have we handed the fleet broad, human-shaped credentials because it was faster to ship?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and research agents touch PHI at machine speed. <strong>Can we prove, per action, which agent accessed which record and why — or would the log simply show a clinician's identity that a clinician never used?</strong></li>
+  <li>A stolen or over-scoped agent seal is a breach that wears a caregiver's face. <strong>Do we issue agents their own revocable identities, so we can cut off one agent instantly — or would containing an incident mean locking out the people it impersonated?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Procurement and supply-chain agents sign orders and settle accounts with suppliers. <strong>Does each agent transact under its own identity, scoped and logged, or under a buyer's login — so the ledger can tell an agent's purchase order from a human's?</strong></li>
+  <li>Non-human identities already outnumber humans across the estate. <strong>Are our agents governed as first-class identities with their own lifecycle (issue, scope, expire, revoke) — or bolted onto human accounts we can neither scope tightly nor revoke cleanly?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Pricing, catalog and support agents act at the highest volume in the business. <strong>At peak, is every agent acting under its own attributable identity — or as a shared service account no incident responder could ever pin an action to?</strong></li>
+  <li>The convenient path is the consumer one: let the agent use a human's saved logins. <strong>Would we know if an agent, fed a forged instruction, transacted in a customer's or employee's name — and could we revoke just that agent without locking the person out?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-service agents that file and decide must be accountable by name. <strong>Does every agent act under its own identity with a daybook we could defend to an auditor — or are we standing up services whose agents act in a civil servant's name, with no clean line between the two?</strong></li>
+  <li>Accountability lives at issuance. <strong>Do we control the office that strikes each agent's seal — its scope, its expiry, its revocation, its log — or have we let agents inherit staff credentials because no one owned agent identity?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Rent the Brain, Own the Signet Office</h2>
+<p>Read this month as one argument adding one wall at a time. The airlock (6 Aug) governs <strong>egress</strong> of prompts; the keyring (7 Aug) governs <strong>access</strong> to tools — <em>which rooms</em> an agent may enter; the proving ground (8 Aug) governs <strong>pre-production validation;</strong> the waterworks (9 Aug) governs the <strong>economics;</strong> the loading dock (10 Aug) governs the agent's <strong>reach onto the open web.</strong> Today's brick governs a distinct surface the keyring only half-touched: <strong>identity and attribution — not which doors an agent may open, but <em>whose name it acts under,</em> and whether your ledger can tell the agent's deeds from a human's.</strong> The architecture splits into three: the <strong>runner</strong> (the rented, swappable model), the <strong>signet</strong> (the identity each agent acts under — yours to issue), and the <strong>ledger</strong> (the attribution trail that only survives if the signet is distinct).</p>
+<div class="card"><ul>
+  <li><strong>The runner — the commodity brain (rented, swappable).</strong> The menu is cheaper and more crowded by the week — <strong>Claude Opus 5</strong>, <strong>Gemini 3.6 Flash</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Kimi K3</strong>, <strong>DeepSeek V4-Flash-0731</strong> (MIT), and <strong>Alibaba Qwen3.8-Max</strong> (open weights, frontier-parity claim). Renting the runner is the sense. But a cleverer runner wearing your identity is just a faster way to fill your ledger with deeds you cannot account for — only a distinct seal fixes that.</li>
+  <li><strong>The signet — the identity you issue (where the new advantage sits).</strong> This is the part you own or fail to own. The consumer shortcut shows the trap in its purest form: <strong>Gemini Spark</strong> (30 Jul) can drive your <em>real</em> Chrome using the accounts you are signed into and the passwords in Chrome's manager — Google's own docs note the local-mode agent "has access to all the same sites that you do, including sites you are signed into." Convenient, and identity-blind: the agent acts <em>as you.</em> The enterprise answer runs the other way. <strong>Snowflake's Cortex AI Gateway</strong> (28 Jul, Black Hat 2026), built on its <strong>Natoma</strong> acquisition, is a centralized MCP gateway that "enforces identity, policy, and audit <em>at the tool-call level,</em>" governing first- and third-party agents (Claude Code, Cursor, Bedrock, Azure AI Foundry, ChatGPT, LangChain, LlamaIndex) and shipping with <strong>seven identity partners</strong> (1Password, Aembit, Cyera, Linx Security, Okta, SailPoint, Saviynt). A real signet office does four things: <strong>scope</strong> (a seal cut for the narrow errand, least privilege by identity), <strong>stamp</strong> (a distinct mark, never a human's credentials), <strong>log</strong> (every deed written back to the agent that did it), and <strong>revoke</strong> (melt one seal in a heartbeat without touching any human or any other agent).</li>
+  <li><strong>The ledger you must be able to defend — attribution.</strong> The hardest problem in the field is telling <em>which actions were the agent versus the user.</em> It is not a downstream analytics task; it is decided at issuance. Fold an agent into a human's identity and the answer is lost before the first action — no SIEM, no forensic tool can un-mix wax pressed by the same ring. Strike the agent its own seal and every line of the ledger names the hand that made it.</li>
+</ul></div>
+<p>The strategic core: <strong>the brain is the runner; the signet office is where you decide in whose name your agents act, and keep a ledger you can defend.</strong> For a month the misread has been "buy the cleverest model and you have deployed AI." After this week the read is sharper: <strong>the model is rented and getting cheaper, and the risk and the control have moved to identity — the seal each agent carries and the trail it leaves.</strong> "We use the best model" is not the answer to "when an agent acted in our name, can we prove it was the agent, and revoke just that agent"; <em>"every agent carries its own scoped, logged, revocable seal, and every deed names the hand that made it"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The signet ring: rent the runner, own the identity you issue. As agents act on your behalf, the question turns from access to identity. On 30 July 2026 Google gave Gemini Spark the ability to drive your real Chrome using your logged-in accounts and saved passwords. On the left, the runner: the rented, swappable brain — Claude Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash and Alibaba Qwen3.8-Max, an open-weight model claiming frontier parity — cheaper every week and not the moat; it acts under an identity. On the right, the ledger: attribution, who did what, provable by the seal on each deed, decided at issuance and not reconstructed after the fact; every deed is named to the hand that made it. In the middle, the signet office — the identity you issue and own: scope, a seal cut for the errand with least privilege by identity; stamp, the agent's own mark, never a human's credentials or sessions; log, every deed written back to the agent that did it at the tool-call level; and revoke, melt one seal in a heartbeat without touching any human or any other agent. It is anchored by Snowflake's Cortex AI Gateway built on the Natoma acquisition, with seven identity partners, enforcing identity at the MCP tool call. The controls stack: airlock for egress on 6 August, keyring for access on 7 August, proving ground for pre-production on 8 August, waterworks for economics on 9 August, loading dock for the web on 10 August, and the signet for identity today. The trap is to hand the runner the master's ring so its deeds read as yours and the ledger is lost. The win is to strike each runner its own seal, scoped, logged and revocable, so the ledger holds." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE SIGNET RING — rent the runner, own the identity you issue</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Agents act ON YOUR BEHALF — the question turns from access to IDENTITY.</text>
+
+  <!-- the runner -->
+  <rect x="34" y="64" width="286" height="96" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE RUNNER — rented brain</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Kimi K3 · DeepSeek V4-Flash · Qwen3.8-Max</text>
+  <text x="52" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheaper every week · not the moat</text>
+
+  <!-- the ledger -->
+  <rect x="360" y="64" width="286" height="96" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="378" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE LEDGER — attribution</text>
+  <text x="378" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">who did what · provable by the seal</text>
+  <text x="378" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">decided at ISSUANCE, not after the fact</text>
+  <text x="378" y="140" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">every deed named to the hand that made it</text>
+
+  <!-- arrow: runner down into office -->
+  <line x1="177" y1="160" x2="177" y2="196" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="171,196 177,208 183,196" fill="#e0b45f"/>
+  <text x="192" y="182" font-size="9" fill="#9aa7b6" font-family="sans-serif">acts under ↓</text>
+
+  <!-- arrow: office up to ledger -->
+  <line x1="503" y1="196" x2="503" y2="160" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="497,160 503,148 509,160" fill="#5dcaa5"/>
+  <text x="518" y="182" font-size="9" fill="#5dcaa5" font-family="sans-serif">named to agent ↑</text>
+
+  <!-- the signet office -->
+  <rect x="40" y="210" width="600" height="184" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="340" y="233" font-size="12.5" font-weight="700" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif">THE SIGNET OFFICE — the identity you ISSUE and OWN</text>
+  <text x="340" y="258" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ SCOPE: a seal cut for the errand — least privilege by identity</text>
+  <text x="340" y="280" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ STAMP: the agent's OWN mark — never a human's credentials/sessions</text>
+  <text x="340" y="302" font-size="10.5" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">→ LOG: every deed written back to the agent that did it (tool-call level)</text>
+  <text x="340" y="324" font-size="11" fill="#cfc9f7" text-anchor="middle" font-family="sans-serif" font-weight="700">→ REVOKE: melt one seal in a heartbeat — no human, no other agent touched</text>
+  <text x="340" y="348" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">Snowflake Cortex AI Gateway + Natoma · 7 identity partners · MCP tool-call</text>
+  <text x="340" y="366" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the same session is an identity, a holder of access, and an egress path — govern all three</text>
+
+  <!-- controls stacked -->
+  <rect x="40" y="404" width="600" height="42" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="60" y="423" font-size="10.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE CONTROLS, STACKED:</text>
+  <text x="60" y="439" font-size="9.6" fill="#e8edf3" font-family="sans-serif">airlock (egress, 6 Aug) · keyring (access, 7 Aug) · proving ground (8 Aug) · waterworks (9 Aug) · loading dock (web, 10 Aug) · signet (identity, today)</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="454" x2="340" y2="472" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="496" font-size="9.5" fill="#e0b45f" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: hand the runner the master's ring</text>
+  <text x="182" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">its deeds read as yours · the ledger is lost</text>
+  <text x="498" y="496" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: strike each runner its own seal</text>
+  <text x="498" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">scoped, logged, revocable · the ledger holds</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The runner — the rented, swappable brain</span>
+  <span><i class="dot" style="background:#7f77dd"></i>The signet office — the identity you issue and own</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The ledger — attribution you can defend</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — lend the master's ring</th><th>The discipline — strike each agent its own seal</th></tr>
+<tr><td>Agents borrow human logins, sessions and saved passwords</td><td>Each agent carries its own distinct, issued identity</td></tr>
+<tr><td>An agent's deeds are indistinguishable from a person's</td><td>Every deed is attributable to the agent that did it</td></tr>
+<tr><td>Broad, human-shaped access because it shipped faster</td><td>Least privilege by identity — a seal cut for the errand</td></tr>
+<tr><td>Revoking an agent means rotating a human's credentials</td><td>Melt one seal alone — no human, no other agent disturbed</td></tr>
+<tr><td>Attribution reconstructed (and lost) after an incident</td><td>Attribution decided at issuance and logged at the tool call</td></tr>
+</table>
+
+<h3>Why owning the signet office beats owning a cleverer brain</h3>
+<div class="card">
+<p>Every control this month presumed you could name and stop the actor. Identity is where that becomes possible — or impossible. A cleverer model cannot tell your ledger who acted; a distinct, scoped seal can. And the reason the signet, the keyring and the airlock belong together is structural: an agent acting in your name is an <strong>identity</strong> (the signet's concern), a <strong>holder of scoped access</strong> (the keyring's concern) and an <strong>egress path</strong> (the airlock's concern) at once — the same session that quietly exfiltrates a secret is the one whose deed, if it wears your identity, your ledger will attribute to <em>you.</em> Route every agent through one office that issues its seal, scopes it, logs it and can revoke it, and those controls become one accountable record. The correct read of this week is not "Google shipped a browsing feature" but "<strong>identity just became the agent control surface</strong> — so issue it, don't lend it."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>own and govern what doesn't commoditize</strong> (airlock, keyring, proving ground, waterworks, loading dock, and now the signet). On legacy estates the temptation is the Gemini-Spark shortcut at enterprise scale: let each team point its agents at a service account, a shared login, a human's session — whatever ships this sprint. The retrofit is specific and unglamorous: <strong>inventory every agent and the identity it currently acts under</strong> (you will find far too many riding human or shared credentials); <strong>issue each agent its own first-class identity</strong> — a non-human identity with a real lifecycle (provision, scope, expire, revoke), through a gateway that enforces identity and audit at the tool-call level (Cortex/Natoma-style, or your own); <strong>scope by least privilege</strong> so a seal is cut for the errand, not the org; <strong>log every action back to the agent</strong> so the ledger names the hand; and <strong>wire revocation you can pull on one agent alone.</strong> Then be honest about the brain: Qwen3.8-Max and a cheaper DeepSeek prove again that the runner is a rented commodity — a bigger brain is not an identity strategy, and "we use the best model" is not an answer to "can we prove which agent acted in our name."</p>
+<p><strong>The clean mental model:</strong> <em>The model is the runner — rented, swappable, cheaper and more interchangeable every quarter, and never your moat. The signet office is yours to own: the place where each agent is struck its own seal, scoped to its errand, stamped with its own mark, written to the daybook and revocable alone. Agents crossed from acting on the web to acting in your name this quarter — so rent the runner and issue the seal, or hand out the master's ring for convenience and sign a blank cheque in your own hand.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The trap, in the open — an agent wearing your identity.</strong> <strong>Google Gemini Spark</strong> (30 Jul): drives your real desktop Chrome using your signed-in accounts and saved passwords to run errands on your behalf (US rollout; sensitive steps like payments handed back; meant to resist prompt injection). The tell: the fastest way to let an agent act is to lend it your own identity — and that is exactly the wall to build.</li>
+  <li><strong>The discipline, at scale — issue the seal, log the deed.</strong> <strong>Snowflake Cortex AI Gateway</strong> (28 Jul, Black Hat 2026), on the <strong>Natoma</strong> acquisition: a centralized MCP gateway enforcing identity, policy and audit <strong>at the tool-call level,</strong> governing first- and third-party agents, with <strong>seven identity partners</strong> (1Password, Aembit, Cyera, Linx Security, Okta, SailPoint, Saviynt).</li>
+  <li><strong>The gap it closes.</strong> Reported surveys: only <strong>~19%</strong> of organizations classify an AI agent as equivalent to a human insider; <strong>~44%</strong> expect malicious use of agents to raise data-theft risk; <strong>~80%</strong> have already seen agents act beyond intended scope. OWASP's Top 10 for Agentic Applications names identity and privilege abuse a core risk.</li>
+  <li><strong>The runner — commoditization, again.</strong> Opus 5, Gemini 3.6 Flash, GPT-5.6 Sol, Kimi K3, DeepSeek V4-Flash-0731 (MIT), and <strong>Alibaba Qwen3.8-Max</strong> (open weights, frontier-parity claim) — the rented, swappable brain. Own the seal, not the runner.</li>
+  <li><strong>The buyer — enterprise AI is real money.</strong> <strong>Microsoft FY26 Q4</strong> (29 Jul): <strong>Microsoft 365 Copilot past 30M paid seats,</strong> Azure <strong>+43% YoY</strong> and past <strong>$100B annualized.</strong> Satya Nadella: turning "tokens into business results."</li>
+  <li><strong>The regulatory backdrop — still live.</strong> <strong>EU AI Act</strong> enforcement running since <strong>2 Aug:</strong> GPAI oversight, transparency duties, fines up to <strong>€15M or 3%</strong> of worldwide turnover — and an agent that cannot prove its identity or produce an audit trail of its access is, by design, hard to defend.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">Agent interoperability only works when enterprises can trust how agents from different platforms access data, invoke tools and take action on behalf of users. The future of the agentic enterprise will not be built in closed agent ecosystems — Snowflake is the trusted control plane that enables secure enterprise work.</div><div class="a">— Mayank Upadhyay, Chief Security and Trust Officer, Snowflake, on the Cortex AI Gateway launch (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">With auto browse in local Chrome, Spark has access to all the same sites that you do, including sites you are signed into.</div><div class="a">— Google, from its Gemini Spark documentation on the Chrome browsing feature (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">We are advancing the frontier on the cost-to-outcome curve, ensuring every customer can turn tokens into business results.</div><div class="a">— Satya Nadella, Chairman &amp; CEO, Microsoft, on FY26 Q4 results (as reported)</div></blockquote>
+<blockquote><div class="q">"The model is the runner — rented, swappable, cheaper every quarter, never your moat. The signet office is yours: strike each agent its own seal — scoped, logged, revocable — because agents crossed from acting on the web to acting in your name this quarter, and identity just became the control surface."</div><div class="a">— the radar, on agents that act on your behalf</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Google Gemini Spark</td><td><span class="v">Drives your real Chrome — your logins &amp; saved passwords — to run errands (30 Jul 2026)</span></td><td>Engadget / Digital Trends / 9to5Google (as reported)</td></tr>
+<tr><td>Snowflake Cortex AI Gateway</td><td><span class="v">MCP gateway enforcing identity, policy &amp; audit at the tool-call level (28 Jul, Black Hat 2026)</span></td><td>SiliconANGLE / VentureBeat (as reported)</td></tr>
+<tr><td>Cortex AI Gateway — identity partners</td><td><span class="v">7 (1Password, Aembit, Cyera, Linx, Okta, SailPoint, Saviynt)</span></td><td>Snowflake / press coverage (as reported)</td></tr>
+<tr><td>Natoma (acquired by Snowflake)</td><td><span class="v">27-person startup; centralized MCP gateway, tool-call-level identity/policy/audit</span></td><td>VentureBeat / Forkast (as reported)</td></tr>
+<tr><td>Agents classed as human-equivalent insiders</td><td><span class="v">~19% of organizations</span></td><td>AI agent identity surveys (as reported)</td></tr>
+<tr><td>Orgs seeing agents act beyond intended scope</td><td><span class="v">~80%</span></td><td>Non-human identity / agent security reporting (as reported)</td></tr>
+<tr><td>Orgs expecting agent misuse to raise data-theft risk</td><td><span class="v">~44%</span></td><td>AI agent identity surveys (as reported)</td></tr>
+<tr><td>Microsoft 365 Copilot</td><td><span class="v">&gt;30 million paid seats; Azure +43% YoY, &gt;$100B annualized</span></td><td>Microsoft FY26 Q4 (29 Jul 2026)</td></tr>
+<tr><td>EU AI Act — penalties</td><td><span class="v">Up to €15M or 3% of worldwide annual turnover</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Opus 5 · Gemini 3.6 Flash · GPT-5.6 Sol · Kimi K3 · DeepSeek V4-Flash · Qwen3.8-Max</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory which identity each of your agents acts under.</strong> You cannot govern in whose name an agent signs if you have not looked. Map, per agent and per team, whether it acts under its own issued identity or borrows a human's or a shared service account — logins, saved credentials, live sessions, standing tokens. Report one number to the board: <em>how many of our agents act on human or shared identities today, so that their actions cannot be attributed to the agent.</em> The uncomfortable size of that number is the case for a signet office, made cheaply, before an incident makes it for you.</li>
+  <li><strong>Issue every agent its own scoped, revocable seal — never lend it a human's.</strong> Stand up (or adopt) an agent-identity gateway — one that enforces identity, policy and audit at the tool-call level (Cortex/Natoma-style, or your own) — and give each agent a first-class non-human identity with a real lifecycle: <strong>scope</strong> it to the narrow errand (least privilege), <strong>stamp</strong> it distinctly, <strong>log</strong> every action back to the agent, and wire <strong>revocation you can pull on one agent alone.</strong> Treat the convenient path — pointing an agent at your own Chrome, your own logins, your own saved passwords — as the anti-pattern it is: fast today, unaccountable forever.</li>
+  <li><strong>Stack the controls, and keep the brain swappable.</strong> The signet is one wall of a set — wire it to the same control points you fitted this month so one dashboard shows, per agent, <em>who it is</em> (signet), <em>what rooms it may enter</em> (keyring), <em>what leaves</em> (airlock), <em>what it did in pre-prod</em> (proving ground), <em>what it costs</em> (waterworks) and <em>what it touched on the web</em> (the dock). Then demand the same of every vendor and every model you rent — and re-benchmark the runner freely as Qwen3.8-Max, a cheaper DeepSeek and the next open-weight release reset the price, because the brain is a commodity and the identity you issue is the moat: rent the runner, own the seal.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Google / Engadget / Digital Trends / 9to5Google / Dataconomy / Notebookcheck (Gemini Spark Chrome browsing, as reported) · Snowflake / SiliconANGLE / VentureBeat / Forkast (Cortex AI Gateway; Natoma; Upadhyay) · AI-agent-identity &amp; non-human-identity survey coverage (agent-identity figures, as reported) · Microsoft (FY26 Q4 results; Nadella) · European Commission (EU AI Act enforcement) · LLM-Stats / model trackers. Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 11 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
