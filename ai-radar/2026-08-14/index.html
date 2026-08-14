@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 14 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the harbor pilot — the value has moved from the engine to the pilotage. On 13 August Databricks closed $5B at a $190B valuation (up ~42% from $134B in February, on a >$7B run-rate growing >80%) for the context-and-data layer, and CEO Ali Ghodsi declared AGI has already arrived — the bottleneck is context, token cost and agent infrastructure, not intelligence. The same day Ramp's AI Index showed Anthropic's flagship Fable 5 was only ~6% of its tokens: nobody pays up for the biggest brain. Buy the pilotage — your context, grounded and reliable — not a bigger engine. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · AI value &amp; enterprise context</div>
+  <h1>The Harbor Pilot</h1>
+  <div class="subhead">The intelligence is abundant now — even "AGI," some say. What's scarce is the pilot who knows your harbor: your context, grounded, and reliable enough to bring the ship in every time.</div>
+  <div class="meta">Friday, 14 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the radar watched the market pay 40× forward for the agents on top of the stack. Today the market answered a sharper question: of all the layers, which one is actually worth the money? On 13 August, Databricks closed $5B at a $190B valuation — up ~42% from $134B in February, on a >$7B run-rate growing >80% — for a company whose whole pitch is grounding AI in an enterprise's own context. Its CEO, Ali Ghodsi, declared AGI has already arrived, and that the real bottleneck is no longer intelligence but enterprise context, token cost and agent infrastructure. The same day, Ramp's AI Index showed enterprises refusing to pay up for the single smartest brain: Anthropic's flagship Fable 5 was just ~6% of the tokens businesses bought from it in month one. The board's question: are we still shopping for a bigger engine — or investing in the pilot who can bring the ship into our harbor, loaded, on time, every time?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued the model is a commodity and the durable advantage is the layer you own around it. Yesterday the market priced the <em>agents</em> on top at 40× forward. Today it told us <strong>which layer it actually values — and it is not the brain.</strong> The money, and the thesis, moved to <strong>context</strong> and <strong>reliability.</strong></p>
+<p><strong>The datable signal.</strong> On <strong>13 August 2026, Databricks closed a $5 billion strategic round at a $190 billion valuation</strong> (led by Coatue, with Blackstone, MGX, T. Rowe Price and new investor Sixth Street) — up <strong>~42% from $134B in February,</strong> on a revenue run-rate that has <strong>crossed $7B, growing more than 80% year over year.</strong> Databricks does not sell a frontier model. It sells the <strong>context layer</strong> — the data platform, the semantic layer, the governance and the "agent infrastructure" that connect a model to the messy data already inside an enterprise. The market just paid $190B for <em>that,</em> not for a bigger brain. And its CEO, <strong>Ali Ghodsi, told interviewers AGI has already arrived</strong> — arguing that the real challenge is no longer making AI smarter, but <strong>connecting it to the data that already exists inside organizations,</strong> with token cost and agent infrastructure the binding constraints.</p>
+<p><strong>Why it matters more than one funding round.</strong> Read it beside the second signal of the day. <strong>Ramp's August AI Index</strong> — headlined "cracks in the AI thesis" — found that while Anthropic's <em>business adoption</em> rose to <strong>43.5% of US firms (+1.1pp),</strong> its <strong>flagship Fable 5 model accounted for only ~6% of the tokens</strong> businesses actually bought from Anthropic in its first month (OpenAI's GPT-5.6 Sol out-earned it on model-attributed spend). Enterprises are not paying up for the single cleverest brain; they are buying the <em>reliable, cheaper, context-connected</em> thing. OpenAI's own enterprise pitch says the quiet part out loud: <strong>"the challenge for enterprises is no longer proving that AI agents can work, it's making them reliable enough to do high-value work in production."</strong> The scarce, valuable resource is no longer intelligence. It is <strong>grounding intelligence in your context and making it reliable</strong> — the pilotage that brings a great engine safely into <em>your</em> harbor.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The market priced the harbor, not the engine.</strong> $190B went to the <em>context and data</em> layer (Databricks), while enterprises refused to pay up for the flagship <em>brain</em> (Fable 5 ≈ 6% of Anthropic tokens). The lesson of the day is a verdict on <em>which layer is worth money:</em> not the raw model — abundant, even "AGI," per Ghodsi — but the layer that grounds it in your data and runs it reliably. <strong>Buy the pilot, not a bigger engine.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>Reliability, not capability, is now the gating problem.</strong> OpenAI's enterprise line — <em>no longer proving agents can work, but making them reliable in production</em> — is the whole industry's admission. A demo that dazzles once is not a pilot who brings the ship in every run. The board metric shifts from benchmark score to <strong>success rate over N production runs, per unit cost.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>The engines keep getting cheaper and more interchangeable beneath the priced layer.</strong> xAI's <strong>Grok 4.6</strong> (12 Aug) ships agent-tuned at <strong>$2 / $6 per million tokens</strong> with a 500K context; DeepSeek shipped another V4 point-release; Opus 5, GPT-5.6 Sol, Gemini 3.6 Flash and open-weight Kimi K3 round out a field where the brain is a swappable part. The trust layer holds under all of it: the <strong>EU AI Act's transparency duties have been live since 2 August,</strong> and the <strong>AITSC consortium launched 12 August.</strong> Intelligence is the commodity; the harbor is yours.</div></div>
+<div class="card"><strong>Bottom line:</strong> yesterday's lesson was <em>don't pay the blossom price for the agent.</em> Today's is one layer deeper and more useful: <strong>the value was never in the engine — it is in the pilotage.</strong> The market just proved it, paying $190B for the context-and-reliability layer while the flagship model went begging for tokens. <strong>Stop shopping for a bigger brain. Invest in the pilot: your own context, grounded and governed, and the reliability to bring value into port on every run — because the biggest engine in the world will still run your ship aground in a harbor it does not know.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>⚓ "The Harbor Pilot"</h3>
+<p><em>Topic: On 13 August 2026, Databricks — a data-and-context platform, not a model maker — closed $5B at a $190B valuation (up ~42% from $134B in February, on a >$7B run-rate growing >80% YoY), and its CEO Ali Ghodsi declared that AGI has already arrived, arguing the real bottleneck is no longer intelligence but enterprise context, token cost and agent infrastructure. The same day, Ramp's August AI Index ("cracks in the AI thesis") found Anthropic's flagship Fable 5 made up only ~6% of the tokens businesses bought from it in its first month, even as Anthropic's overall business adoption rose to 43.5%. OpenAI's enterprise pitch frames the moment: the challenge is no longer proving agents can work, but making them reliable enough for production. The lesson: raw intelligence has become abundant and cheap; the scarce, valuable thing is grounding it in the enterprise's own context and running it reliably — so the board's discipline is to invest in that pilotage rather than keep buying a bigger, smarter engine.</em></p>
+<p>Picture a great port in the age when the world had gone mad for engines. For a generation, a ship's worth had been measured by its engine — how much horsepower it could buy, how fast it could cross open water — and the shipyards raced one another to build a bigger, cleverer engine every season. And they succeeded, gloriously: engines that had once been the pride of an empire became a thing any owner could order from a catalogue, cheaper each year, until the most powerful engine on the ocean was nearly a commodity. One famous builder even stood on the quay and announced that the age of the <em>perfect</em> engine had arrived — that horsepower was, for all practical purposes, a solved problem.</p>
+<p>And yet the ships kept running aground. Not on the open sea, where the great engines shone — but at the mouth of the <strong>harbor,</strong> in the last mile, where the water turns shallow and particular. Because a harbor is not open water. Every harbor has its own channel, its own shifting sandbars, its own tides and wrecks and rules, and none of that is written on the engine. A ship with the mightiest engine afloat, driven by a captain who does not know <em>this</em> harbor, will pile onto a bar in sight of the dock — and the cargo, which was the whole point, never lands.</p>
+<p>So the shrewd owners learned the thing the engine-buyers kept forgetting: what actually brings a laden ship to the quay, safely, on time, <strong>run after run,</strong> is not the engine. It is the <strong>harbor pilot</strong> — the man or woman who has the local chart in their bones, who knows where the silt has moved since spring, who can be <em>trusted</em> to bring her in on the foggiest night, and to do it again tomorrow. The pilot is not glamorous. No one writes ballads about pilotage. But every cargo that ever actually reached a warehouse reached it through a pilot's hands. And here is what the market saw this season: the town that grew rich was <strong>not</strong> the one that built the biggest engine — those were a commodity, ordered by the crate — it was the port that <strong>owned the pilots and the charts.</strong> The great house of the harbor sold for a king's ransom; the engine-works down the coast could barely give its newest, cleverest model away by the ton.</p>
+<p>There was one more thing the good ports understood. The harbor now had an <strong>authority</strong> at its gate — a harbourmaster who demanded to know that a pilot was licensed, that the manifest was honest and labeled, that the log of every run could be produced and audited. A pilot who could not show his charts and his license was not allowed to bring a ship in at all, however good his reputation. So the wise port did three things at once: it invested in <strong>charts</strong> (its own hard-won knowledge of its own waters), it graded its pilots on <strong>reliability</strong> (not the one dazzling run in fair weather, but the safe arrival in the hundredth fog), and it kept its papers <strong>in order</strong> for the harbourmaster. The proud port kept buying bigger engines and wondering why the cargo still didn't land; the wise port bought pilotage, and filled its warehouses.</p>
+<p><strong>The moral:</strong> when the engine becomes a commodity — abundant, cheap, nearly "solved" — the advantage stops being the engine and becomes the <strong>pilotage:</strong> your own context, the local chart no rival can buy off the shelf; the reliability to bring value into port on every run, not just the demo; and papers the harbourmaster will accept. Do not keep shopping for a bigger brain. The intelligence is not the bottleneck anymore — <em>your harbor</em> is. Invest in the pilot who knows it.</p>
+<p><strong>The question it forces:</strong> <em>The market just paid $190B for the layer that grounds AI in an enterprise's own context — and refused to pay up for the single smartest model. Are we still buying engines — chasing the cleverest model and the flashiest demo — or are we investing in pilotage: our own context grounded and governed, agents graded on reliability in production rather than benchmark scores, and a log the regulator will accept when they ask who brought the ship in?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Are we buying engines or pilotage?</strong> The market paid $190B for the <em>context</em> layer and let the flagship <em>model</em> go begging (Fable 5 ≈ 6% of Anthropic tokens). <strong>For each material AI bet, what share of the spend bought raw model capability — and what share bought grounding it in our own data and making it reliable?</strong> If the balance is tilted toward the brain, we are buying the commodity and skipping the moat.</li>
+  <li>Ghodsi's claim, stripped of the AGI headline, is an operating thesis: <strong>the bottleneck is context, not intelligence.</strong> <strong>Where is our AI actually failing today — because the model isn't smart enough, or because it can't reach and trust our own data?</strong> Almost always it is the second, and the second is the one we can fix.</li>
+  <li><strong>How do we grade an agent — by its demo or by its production reliability?</strong> OpenAI's own framing is that the hard part is no longer proving agents <em>can</em> work but making them reliable enough to do high-value work in production. <strong>What is our success-rate-over-N-runs metric, per unit cost, and who owns it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Your edge was never a smarter general model; it is your <strong>proprietary context</strong> — your book, your risk history, your customers. <strong>Are we investing in the grounded, governed context layer that turns a commodity brain into <em>our</em> advantage — or paying frontier prices for intelligence our competitors rent from the same catalogue?</strong></li>
+  <li>Reliability is a control, not a nicety. <strong>Before an agent touches a trade, a limit or a client, can we show a production reliability record and a full, auditable log — the pilot's license the regulator (and the EU AI Act) now expects?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>The scarce asset in clinical and discovery AI is <strong>context you can trust</strong> — your cohorts, your protocols, your provenance — not a cleverer base model. <strong>Are we spending to ground and govern that context, or to buy raw model capability that any competitor can also buy?</strong></li>
+  <li>A dazzling demo is not a pilot. <strong>For any patient-facing or discovery agent, do we grade it on reliability across many runs, disclose it as AI where the law requires, and keep an audit log that would survive inspection?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already know engines commoditize and the value migrates to integration and reliability. <strong>Are we applying that to AI — investing in the context layer and the reliability record (uptime, success rate, mean-time-to-recover) rather than the horsepower spec of the model?</strong></li>
+  <li>The reported wins are concrete: one manufacturer cut a production-optimization task from <strong>six weeks to one day</strong> on a grounded, connected agent platform. <strong>What is our one high-value, well-instrumented workflow where grounding beats a bigger brain — and are we measuring the fruit?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your context — catalogue, inventory, customer history — is the chart no rival can buy. <strong>Are we grounding agents in it reliably, or bolting a generic model onto the storefront and hoping?</strong></li>
+  <li>Reliability is margin at volume. <strong>Does our agent land the transaction correctly on the hundredth run, not just the demo — and is our AI-facing content disclosed and labeled as the EU AI Act now requires?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public value comes from grounding AI in <em>your</em> records and rules, reliably and transparently — not from procuring the largest model. <strong>Are we buying pilotage (context, reliability, auditability) or horsepower?</strong></li>
+  <li>The harbourmaster is real. <strong>With the EU AI Act's transparency duties live and the AITSC standard forming, can we produce the license and the log for every agent that touches a citizen — and do we hold the context and exit rights to stay accountable if a vendor is repriced or acquired?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Buy the Pilotage, Not the Engine</h2>
+<p>Read the stack, again, as layers priced in very different ways — but this week the market told us which layer it will actually pay for. At the <strong>bottom</strong> is the <em>engine</em> — the raw model, now so abundant that a serious CEO can stand up and call it "AGI, already arrived," and enterprises still won't pay up for the biggest one. Above it are the <strong>rails</strong> — the agent infrastructure and protocols that let a model reach tools and data. And at the top, in the money, is the <strong>pilotage:</strong> the <em>context layer</em> that grounds a model in your own data, plus the <em>reliability</em> that brings a workload into port on every run. The engineering point this week is blunt: <strong>the value has decoupled from the engine and attached to the pilotage.</strong> The $190B went to the layer that knows your harbor.</p>
+<div class="card"><ul>
+  <li><strong>The engine — abundant, commoditizing, "solved" (per some).</strong> xAI's <strong>Grok 4.6</strong> (12 Aug) ships agent-tuned at <strong>$2 / $6 per 1M tokens</strong> with a 500K context; <strong>DeepSeek</strong> shipped yet another V4 point-release; <strong>Opus 5, GPT-5.6 Sol, Gemini 3.6 Flash</strong> and open-weight <strong>Kimi K3</strong> fill out the field. The tell is demand, not supply: <strong>Anthropic's flagship Fable 5 was only ~6% of the tokens</strong> businesses bought from it in month one (Ramp), even as Anthropic's overall adoption rose to 43.5%. Enterprises are voting with their tokens — they want reliable and cheap, not merely clever. The engine is not where the money is.</li>
+  <li><strong>The rails — the agent infrastructure Ghodsi named as a bottleneck.</strong> The <strong>Model Context Protocol's 2026-07-28 specification</strong> went <strong>stateless</strong> (dropping the <code>initialize</code> handshake and session IDs so any server instance can answer behind ordinary HTTP), added cacheable list results and multi-round-trip requests, hardened authorization, and stabilized <strong>Enterprise-Managed Authorization.</strong> Adoption is infrastructure-scale — <strong>~500M SDK downloads/month, TypeScript and Python SDKs each past 1 billion.</strong> Standard rails are becoming free plumbing; they enable the priced layer above, they are not it.</li>
+  <li><strong>The pilotage — context + reliability, where the money is.</strong> This is the $190B layer. <strong>Databricks</strong> ($190B, 13 Aug) sells the <em>context</em> platform — data, semantic layer, governance, "agent infrastructure" — that grounds a model in an enterprise's own information. <strong>OpenAI's enterprise platform (Frontier/Presence)</strong> is built on the same premise: a <strong>"semantic layer for the enterprise"</strong> connecting siloed warehouses, CRM, ticketing and internal apps, wrapped in <strong>eval loops, audit logs, role-based access and SOC 2</strong> — because <em>"the challenge is no longer proving agents can work, it's making them reliable in production."</em> One reported customer cut a production-optimization task from <strong>six weeks to one day.</strong> That is fruit, and it grew from pilotage, not horsepower.</li>
+</ul></div>
+<p>The strategic core: <strong>intelligence became the commodity; grounding it and trusting it became the moat.</strong> For a month the misread was "buy the cleverest model and you have deployed AI." This week's proof is sharper still: <strong>you are not buying a brain, you are buying a pilot</strong> — the context that knows your harbor and the reliability to bring the ship in every run. "It benchmarks highest / a CEO called it AGI" is not the answer to "does it land our cargo, on our data, reliably, with a log we can defend"; <em>"we grounded it in our context and graded it on production reliability"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The harbor pilot: the value has decoupled from the engine. Intelligence is abundant — one CEO says AGI has already arrived — so the scarce, priced thing is pilotage: your own context, grounded, and reliable. At the top, the pilotage, which is what's priced: Databricks at 190 billion dollars for its context, data and semantic layer; OpenAI Frontier's semantic layer plus reliability in production. On the right, the engine, now abundant: Ali Ghodsi says AGI has arrived, and Anthropic's flagship Fable 5 was only about 6 percent of the tokens businesses bought from it — nobody pays up for the biggest brain, per Ramp. An arrow marks that the engine is worthless without context. Below the pilotage, the rails, which are the agent infrastructure: the MCP specification of 28 July 2026 went stateless at its core and its SDKs are past 1 billion installs. Alongside is the harbor authority — trust, now live: the AI Trust and Security Consortium launched on 12 August, and the EU AI Act transparency duties have applied since 2 August, requiring you to disclose AI, label output, license and log. At the bottom, the engines, which are cheap and swappable: Opus 5, GPT-5.6 Sol, Gemini, Grok 4.6 at 2 and 6 dollars per million tokens, Kimi K3 and DeepSeek V4, and falling. The trap is to buy a bigger engine and run aground in a harbor it does not know. The win is to buy pilotage: your context, reliability in production, and a clean log." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE HARBOR PILOT — the value decoupled from the engine</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Intelligence is abundant; the priced thing is PILOTAGE — context &amp; reliability.</text>
+
+  <!-- the pilotage -->
+  <rect x="34" y="64" width="330" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE PILOTAGE — what's priced</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Databricks ~$190B</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">(context · data · semantic layer)</text>
+  <text x="52" y="140" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI Frontier: semantic layer + reliability</text>
+  <text x="52" y="160" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">grounds &amp; runs the engine in YOUR harbor</text>
+
+  <!-- the engine -->
+  <rect x="404" y="64" width="242" height="118" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="422" y="86" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ENGINE — now abundant</text>
+  <text x="422" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Ghodsi: "AGI has arrived"</text>
+  <text x="422" y="122" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Fable 5 = ~6% of Anthropic</text>
+  <text x="422" y="140" font-size="10.5" fill="#e8edf3" font-family="sans-serif">tokens — nobody pays up (Ramp)</text>
+  <text x="422" y="160" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">worthless without your context</text>
+
+  <!-- worthless-without arrow -->
+  <line x1="402" y1="123" x2="366" y2="123" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="366,117 354,123 366,129" fill="#5dcaa5"/>
+  <text x="384" y="113" font-size="8.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">needs ← context</text>
+
+  <!-- grounds on arrow -->
+  <line x1="199" y1="182" x2="199" y2="212" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="193,212 199,224 205,212" fill="#5dcaa5"/>
+  <text x="214" y="200" font-size="9" fill="#9aa7b6" font-family="sans-serif">grounds on ↓</text>
+
+  <!-- the rails -->
+  <rect x="34" y="228" width="330" height="86" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="250" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE RAILS — agent infra (→ free)</text>
+  <text x="52" y="270" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MCP 2026-07-28: stateless core</text>
+  <text x="52" y="287" font-size="10.5" fill="#e8edf3" font-family="sans-serif">SDKs past 1B installs · ~500M/mo</text>
+  <text x="52" y="305" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">standard rails enable the priced layer, aren't it</text>
+
+  <!-- the harbor authority -->
+  <rect x="404" y="228" width="242" height="86" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="422" y="250" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE HARBOUR AUTHORITY — live</text>
+  <text x="422" y="270" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AITSC consortium (12 Aug)</text>
+  <text x="422" y="287" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act transparency (2 Aug)</text>
+  <text x="422" y="305" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">disclose · label · license · log</text>
+
+  <!-- engines arrow -->
+  <line x1="199" y1="314" x2="199" y2="344" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="193,344 199,356 205,344" fill="#b9b2f5"/>
+  <text x="214" y="332" font-size="9" fill="#9aa7b6" font-family="sans-serif">runs on ↓</text>
+
+  <!-- the engines -->
+  <rect x="34" y="360" width="612" height="86" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="382" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ENGINES — cheap &amp; swappable</text>
+  <text x="52" y="402" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · GPT-5.6 Sol · Gemini 3.6 Flash · Grok 4.6 ($2/$6) · Kimi K3 · DeepSeek V4</text>
+  <text x="52" y="420" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the brain is a commodity part — and getting cheaper</text>
+  <text x="52" y="438" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">value decoupled: the engine → cheap, the pilotage → the money</text>
+
+  <!-- trap vs win -->
+  <line x1="340" y1="454" x2="340" y2="472" stroke="#2a3240" stroke-width="1"/>
+  <text x="182" y="496" font-size="9.5" fill="#b9b2f5" text-anchor="middle" font-family="sans-serif" font-weight="700">TRAP: buy a bigger engine</text>
+  <text x="182" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">run aground in a harbor it doesn't know</text>
+  <text x="498" y="496" font-size="9.5" fill="#5dcaa5" text-anchor="middle" font-family="sans-serif" font-weight="700">WIN: buy the pilotage</text>
+  <text x="498" y="512" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">your context · reliability · a clean log</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d6e56"></i>The pilotage &amp; rails — context, reliability, agent infra (priced / enabling)</span>
+  <span><i class="dot" style="background:#34306a"></i>The engines — the brain, commoditizing</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The harbour authority — trust, now live</span>
+</div>
+</div>
+
+<h3>The trap vs. the discipline</h3>
+<table>
+<tr><th>The trap — keep buying the engine</th><th>The discipline — buy the pilotage</th></tr>
+<tr><td>Chase the cleverest model / highest benchmark</td><td>Ground a good-enough model in your own context</td></tr>
+<tr><td>Judge an agent by its demo</td><td>Grade it on reliability across N production runs</td></tr>
+<tr><td>Treat your data as plumbing to the model</td><td>Treat your context as the moat the model rents</td></tr>
+<tr><td>Assume a smarter brain fixes the failures</td><td>Fix reach-and-trust: the bottleneck is context, not IQ</td></tr>
+<tr><td>Deploy first, produce the audit log later</td><td>License + log the pilot before it touches the cargo</td></tr>
+</table>
+
+<h3>Why buying pilotage beats buying horsepower</h3>
+<div class="card">
+<p>Every layer of the stack this month presumed the brain was cheap and swappable — and this week the demand side confirmed it: enterprises won't even pay up for the flagship (Fable 5 ≈ 6% of tokens), and a data-and-context company, not a model lab, took the $190B. The reason engine and pilotage belong in the same picture is that they are <strong>complements the market keeps confusing for substitutes:</strong> more horsepower does nothing for a ship that runs aground at the harbor mouth, and a brilliant pilot with a modest engine lands the cargo every time. Read them together and you can answer the CFO's real question. The correct read of this week is not "a data company is worth $190B" but "<strong>the value moved to context and reliability</strong> — so buy the pilot, not another engine."</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance.</strong> On legacy estates the danger is spending the AI budget on the rented engine while starving the pilotage you actually own. The retrofit is a grounding-and-reliability exercise. <strong>Build the chart:</strong> invest in the context layer — a governed semantic layer over your own warehouses, CRM and tickets — so a good-enough, swappable model can reach and trust your data. <strong>Grade the pilot on reliability:</strong> instrument success-rate-over-N-runs and cost-per-successful-task in production, not demo pass-rate, and wire eval loops so agents improve against <em>your</em> workloads. <strong>Keep the papers:</strong> the EU AI Act's disclosure and labeling duties are live and the AITSC standard is forming — an agent whose runs you cannot audit or whose output you cannot label is not deployable at board scale, whatever its benchmark. And keep the engine swappable underneath — re-benchmark Grok 4.6, DeepSeek V4, Kimi K3 and the next release freely, because the brain is the commodity and the context is the moat.</p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — abundant, cheap, nearly "solved," never your moat. The rails are the plumbing — MCP and its kin, standardizing toward free. The pilotage is the layer the market just paid $190B for: your own context, grounded and governed, plus the reliability to bring value into port on every run, with a log the harbourmaster accepts. Buy the pilotage, not a bigger engine — because the mightiest brain afloat will still run your ship aground in a harbor it does not know.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The signal — the market prices the context layer.</strong> <strong>Databricks</strong> closed <strong>$5B at $190B</strong> (13 Aug; up ~42% from $134B in Feb; >$7B run-rate, >80% YoY; led by Coatue with Blackstone, MGX, T. Rowe Price, Sixth Street). CEO <strong>Ali Ghodsi:</strong> AGI has arrived; the bottleneck is enterprise context, token cost and agent infrastructure — CNBC / Forbes / Databricks (as reported).</li>
+  <li><strong>The demand-side proof — nobody pays up for the biggest brain.</strong> <strong>Ramp August AI Index</strong> ("cracks in the AI thesis"): Anthropic business adoption <strong>43.5% (+1.1pp)</strong>, but flagship <strong>Fable 5 ≈ 6% of Anthropic tokens</strong> in month one; GPT-5.6 Sol out-earned it on model-attributed spend (as reported).</li>
+  <li><strong>The reliability pivot — the real gating problem.</strong> OpenAI's enterprise platform (Frontier/Presence): a <strong>semantic layer</strong> connecting siloed data + <strong>reliability in production</strong>; one manufacturer reportedly cut a task from <strong>six weeks to one day</strong> (as reported).</li>
+  <li><strong>The harbour authority — trust, live.</strong> <strong>EU AI Act</strong> transparency duties enforceable since <strong>2 Aug</strong> (disclose AI, label output, fines up to €15M / 3%); <strong>AITSC</strong> consortium launched <strong>12 Aug</strong> (~50 founding enterprise security leaders).</li>
+  <li><strong>The rails — agent infrastructure standardizes.</strong> <strong>MCP 2026-07-28 spec:</strong> stateless core, cacheable results, hardened auth, stable Enterprise-Managed Authorization; <strong>~500M SDK downloads/month, TS &amp; Python each past 1B.</strong></li>
+  <li><strong>The engines — commoditization continues.</strong> <strong>Grok 4.6</strong> (12 Aug, $2/$6 per 1M, 500K context, agent-tuned), a fresh <strong>DeepSeek V4</strong> release, Opus 5, GPT-5.6 Sol, Gemini 3.6 Flash, <strong>Kimi K3.</strong> The brain keeps getting cheaper under the priced pilotage.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">AI doesn't have an intelligence problem — it has a context problem.</div><div class="a">— Ali Ghodsi, Co-founder &amp; CEO, Databricks, framing the company's thesis (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">[AGI] has already arrived… the real bottleneck now is enterprise context, the cost of AI tokens, and agent infrastructure.</div><div class="a">— Ali Ghodsi, Co-founder &amp; CEO, Databricks, on the $190B round (13 Aug, as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">The challenge for enterprises is no longer proving that AI agents can work — it's making them reliable enough to do high-value work in production.</div><div class="a">— OpenAI, on its enterprise agent platform (as reported)</div></blockquote>
+<blockquote><div class="q">"The engine is a commodity; the harbor is yours. When intelligence is abundant, the moat is the pilot who knows your waters — your context, grounded, and reliable enough to bring the cargo in on the hundredth foggy night."</div><div class="a">— the radar, on the value moving from the model to context and reliability</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Databricks funding round</td><td><span class="v">$5B raised at $190B valuation (up ~42% from $134B in Feb)</span></td><td>CNBC / Forbes / Databricks (13 Aug 2026, as reported)</td></tr>
+<tr><td>Databricks scale</td><td><span class="v">&gt;$7B revenue run-rate, growing &gt;80% YoY</span></td><td>Databricks newsroom (as reported)</td></tr>
+<tr><td>Databricks lead investors</td><td><span class="v">Coatue (lead); Blackstone, MGX, T. Rowe Price, Sixth Street Growth</span></td><td>CNBC / Forbes (as reported)</td></tr>
+<tr><td>Anthropic business adoption</td><td><span class="v">43.5% of US businesses (+1.1pp MoM)</span></td><td>Ramp AI Index, Aug 2026 (as reported)</td></tr>
+<tr><td>Anthropic Fable 5 token share</td><td><span class="v">~6% of Anthropic tokens in first month (GPT-5.6 Sol out-earned it)</span></td><td>Ramp AI Index / econlab (as reported)</td></tr>
+<tr><td>xAI Grok 4.6 pricing</td><td><span class="v">$2 / 1M input · $6 / 1M output (&lt;200K ctx); 500K context; agent-tuned</span></td><td>xAI / coverage (12 Aug 2026, as reported)</td></tr>
+<tr><td>OpenAI enterprise agents (Frontier)</td><td><span class="v">Semantic layer over siloed data + reliability in production; eval loops, audit logs, RBAC, SOC 2</span></td><td>OpenAI / coverage (as reported)</td></tr>
+<tr><td>Reported deployment win</td><td><span class="v">Production-optimization task cut from ~6 weeks to ~1 day</span></td><td>OpenAI Frontier coverage (as reported)</td></tr>
+<tr><td>EU AI Act — transparency &amp; penalties</td><td><span class="v">Live since 2 Aug: disclose AI, machine-readable labels; fines up to €15M or 3% of turnover</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>AI Trust &amp; Security Consortium (AITSC)</td><td><span class="v">Launched 12 Aug; ~50 founding enterprise security/tech leaders</span></td><td>AIwire / HPCwire (as reported)</td></tr>
+<tr><td>MCP 2026-07-28 specification</td><td><span class="v">Stateless core; ~500M SDK downloads/month; TS &amp; Python SDKs each past 1B total</span></td><td>Official MCP blog (28 Jul 2026)</td></tr>
+<tr><td>The engines (context)</td><td><span class="v">Opus 5 · GPT-5.6 Sol · Gemini 3.6 Flash · Grok 4.6 · Kimi K3 · DeepSeek V4</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Build the chart before you buy the engine.</strong> Split your AI budget line into <em>engine</em> (raw model capability) and <em>pilotage</em> (grounding it in your own context + reliability). Report the ratio to the board. If most of it is buying a bigger brain, redirect: fund a governed semantic layer over your own warehouses, CRM and tickets so a good-enough, swappable model can reach and trust your data. Ghodsi's point and the Fable-5-6% figure are the same lesson from two sides — <strong>the bottleneck is context, not IQ, and nobody wins by paying up for intelligence alone.</strong></li>
+  <li><strong>Grade every agent on reliability, not the demo.</strong> Adopt OpenAI's own framing as your metric: the hard part is not proving an agent <em>can</em> work, but making it reliable in production. For each material agent, instrument <strong>success rate over N runs</strong> and <strong>cost per successful task,</strong> wire eval loops against <em>your</em> workloads, and put a single reliability number in front of the board — the way a harbourmaster grades a pilot on safe arrivals, not one fair-weather run.</li>
+  <li><strong>Keep the pilot's papers in order — it's already law.</strong> The harbour authority is live: turn on the <strong>audit log</strong> over agent runs, <strong>disclose</strong> AI to customers where the EU AI Act now requires it, and <strong>label</strong> AI-generated output machine-readably. Track the AITSC standard as it forms. An agent whose runs you cannot audit, whose output you cannot label, or whose context you do not own is not deployable at board scale — and its benchmark score will not save you in front of a regulator, or bring the cargo into port.</li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> CNBC / Forbes / Databricks newsroom (Databricks $5B at $190B; run-rate; investors; Ghodsi remarks, as reported) · Ramp AI Index / econlab (Anthropic adoption; Fable 5 token share, as reported) · OpenAI / coverage (Frontier/Presence semantic layer &amp; reliability framing, as reported) · xAI / coverage (Grok 4.6 pricing) · European Commission (EU AI Act transparency &amp; penalties) · AIwire / HPCwire (AITSC launch) · Official MCP blog (2026-07-28 spec). Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 14 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
