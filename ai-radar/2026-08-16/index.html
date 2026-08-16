@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 16 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the AI business model — the layer that decides your real exposure. This week two of the biggest names in AI showed how they get paid: on 15 August OpenAI began turning ChatGPT's Free and $8 Go tiers into ad inventory in the EEA and Switzerland (the ad-free tiers are the ones you pay for), and on 14 August Reuters reported Anthropic's IPO valuation hinges on a $190–200B 2028 revenue forecast against a ~$47B run-rate. One rents your attention; the other is priced on a promise. Meanwhile the engine keeps commoditizing (GLM-5.3, Qwen3.8, Grok 4.6 at $2/$6). Follow the money for every AI vendor you depend on. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The AI business model &amp; your risk</div>
+  <h1>The Free Table</h1>
+  <div class="subhead">The engine is cheap and the rails are free — but nothing is. What decides your real exposure is how the vendor gets paid: rent your attention, or sell investors a promise.</div>
+  <div class="meta">Sunday, 16 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week the radar walked the value up the stack — from the engine to the pilotage to the last mile. Today it asks the question underneath all of them: how does the thing you depend on actually get paid? On 15 August, OpenAI began turning ChatGPT's Free and $8 Go tiers into ad inventory in the EEA and Switzerland — the ad-free tiers are the ones you pay for. And on 14 August, Reuters reported Anthropic's IPO valuation hinges on a $190–200B 2028 revenue forecast, against a ~$47B run-rate today. One rents your attention to advertisers; the other is priced on a promise three years out. The board's question: for every AI vendor we lean on, do we know how it gets paid — and have we priced that into our data policy and our vendor risk?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued the model is a commodity and the durable advantage is the layer you own around it — the controls, the compute, the pilotage, the last mile. Today the map turns over to the question that governs every one of those layers: <strong>the business model.</strong> Not "which model," not even "who delivers it," but <strong>how the vendor you depend on gets paid</strong> — because <em>how it gets paid decides what it does with you.</em> The scarce discipline this week is not technical. It is the old, unglamorous habit of following the money.</p>
+<p><strong>The datable signal — two of them, same window.</strong> On <strong>15 August 2026, OpenAI began notifying Free and Go-tier users in the EEA and Switzerland that ads will appear in ChatGPT "later this month"</strong> — extending an ad program that launched in the US in February and reached the UK, Mexico, Brazil, Japan and South Korea by 11 August. Ads show on the <strong>free tier and the $8/month Go tier</strong>; <strong>Plus, Pro, Business, Enterprise and Edu stay ad-free.</strong> OpenAI's stated guardrails, via CPO <strong>Fidji Simo</strong>: <strong>"Ads will not influence the answers ChatGPT gives you,"</strong> ads are labeled and separated from the answer, conversations kept private from advertisers and data not sold. The tell is structural: the most-used AI product on earth is now, for its free users, an <strong>advertising business</strong> — and the paid enterprise tiers are explicitly the ones you buy your way <em>out</em> of ads with. Meanwhile, on <strong>14 August, Reuters reported (exclusive) that Anthropic's forthcoming IPO valuation "hinges" on a forecast of roughly $190–200 billion in 2028 revenue</strong> — a number that dwarfs the <strong>~$47B run-rate</strong> it publicized in May (itself up from a <strong>~$9B run-rate at end-2025</strong>, and a <strong>$30B run-rate in April</strong> after what Dario Amodei called <strong>"crazy" 80× growth</strong>). Wall Street is reaching two years forward to price what may be one of the <strong>largest IPOs on record.</strong></p>
+<p><strong>Why it matters more than either headline.</strong> Read the two together and the lesson is blunt: <strong>there is no free lunch, and there is no free frontier lab.</strong> The free AI tier is paid for by <strong>your attention</strong> (and, under OpenAI's rewritten US privacy policy, by purchase data advertisers share back) — so the "$0" line item on your employees' desktops carries a data-governance question, not a zero. And the frontier lab you standardize on is itself <strong>running on a forward promise</strong> — a valuation it must grow into, which shapes its pricing, its urgency to monetize, and its durability as a supplier. The engine layer kept commoditizing underneath it all — open-weight <strong>Z.ai GLM-5.3</strong> and <strong>Alibaba Qwen3.8</strong> shipped <strong>14 August</strong>, <strong>xAI's Grok 4.6</strong> (12 Aug) tied GPT-5.6 Sol Max at the top of the intelligence index at <strong>$2/$6 per 1M</strong>, and <strong>Grok 3 was retired 15 August.</strong> The brain gets cheaper by the week; the <em>business model</em> around it is where your real exposure lives.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>"Free" is a price, not a gift — and it just reached ChatGPT in Europe.</strong> OpenAI is turning its Free and $8 Go tiers into ad inventory; the ad-free tiers are the ones you pay for. Every employee on a consumer or Go plan is now a data point in an ad-targeting system. <strong>Treat the free tier as a procurement and confidentiality decision, not a convenience</strong> — and note that the paid enterprise SKU is, among other things, the one that buys you <em>out</em> of being the product.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The frontier lab you standardize on is priced on a promise.</strong> Anthropic's IPO rests on a $190–200B <em>2028</em> forecast versus a ~$47B run-rate today; the market is paying now for revenue not yet earned. That is not a reason to avoid it — it is a reason to <strong>price vendor durability and your exit</strong> into every material dependency, because a supplier valued on a two-year-out story has powerful incentives to reprice, bundle and monetize between now and then.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps commoditizing under the business-model layer.</strong> <strong>GLM-5.3</strong> and <strong>Qwen3.8</strong> (14 Aug), <strong>Grok 4.6</strong> (12 Aug, tied at the top at $2/$6), the retirement of <strong>Grok 3</strong> (15 Aug) — the brain is a swappable, cheapening part, so the durable questions are about <em>terms,</em> not tokens. The trust gate holds: the <strong>EU AI Act's transparency duties have been live since 2 August</strong> — which is why ChatGPT ads landing in the EEA is a labeling-and-disclosure event, not just a monetization one — and the <strong>AITSC consortium launched 12 August.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the model is a commodity; the layer you own around it is the moat; and underneath every layer sits the <strong>business model of the vendor you rent it from</strong> — the thing that quietly decides what happens to your data, your spend and your continuity. This week two of the biggest names in AI showed their hands: one monetizes the free user through advertising, the other is valued on revenue it hasn't earned. <strong>Follow the money for every AI vendor you depend on — because a free plate is bought with your custom, and a house sold on a promise must someday collect.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🍽️ "The Free Table"</h3>
+<p><em>Topic: On 15 August 2026, OpenAI notified Free and $8/month Go users in the EEA and Switzerland that ads will appear in ChatGPT later this month, extending a program already live in the US, UK, Mexico, Brazil, Japan and South Korea; Plus, Pro, Business, Enterprise and Edu stay ad-free, and OpenAI (via CPO Fidji Simo) states ads will not influence answers, are labeled and separated, and that conversations are kept private from advertisers and data is not sold. On 14 August 2026, Reuters reported that Anthropic's IPO valuation — potentially one of the largest on record — hinges on a forecast of roughly $190–200 billion in 2028 revenue, against a ~$47B run-rate disclosed in May. The lesson: the model is a commodity, and the layer that decides your real exposure is the vendor's business model — how it gets paid. The free tier is paid for with your attention and data; the forward-priced lab runs on a promise it must keep.</em></p>
+<p>Picture an inn at the busiest crossroads in the country, famous for a thing no other house dared offer: a <strong>free table.</strong> Anyone could sit, and eat, and pay nothing — and so the whole road came, and the common room was never empty, and the inn's name was spoken in every village for a day's ride around. Travelers marveled at the innkeeper's generosity. But the innkeeper was no saint, and the free table was not charity; it was the cleverest business in the county. For the free diners were the <strong>crowd,</strong> and the crowd was the <strong>asset.</strong> The paying rooms upstairs filled precisely <em>because</em> the common room below was full and lively. And quietly, along the walls, merchants paid the innkeeper handsomely to set their wares beside the free plates — and paid more still to be told what the free diners reached for, lingered over, asked about. The diner ate for nothing and was, without quite noticing, <strong>the thing being sold.</strong> The plate was free. The diner was the inventory.</p>
+<p>The wise traveler understood this and was not scandalized by it — a full belly for the price of a little attention is often a fair trade. But the wise traveler also knew there were things one did not discuss aloud at a free table: the terms of a contract, the secret of a trade, the affairs of one's house. Because at a free table, <em>someone is always listening, and being listened to is how the plate is paid for.</em> The traveler who forgot this — who spread his ledgers on the free table and talked his business over the free wine — paid a price he had been told, in the small print by the door, he would pay. The generous house had never lied. It had simply been very clear, for those who read, about <strong>who paid, and with what.</strong></p>
+<p>Down the road stood a rival house, and this season it did something that startled the whole valley. It did not set a free table. Instead it was <strong>bought</strong> — by a syndicate of financiers who valued it not on the coin in its strongbox tonight, nor even on this year's takings, but on the <strong>grand feast they swore it would serve three years hence,</strong> a feast so large it dwarfed anything the house had ever cooked. The price they paid was a price for a promise. And a house sold on a promise is a house that <em>must keep it:</em> every season between now and the feast, it would be under quiet pressure to raise its prices a little, to bundle the bread with the wine, to find new coin wherever coin could be found — because the strongbox had to grow toward the number the syndicate had already paid for. The traveler who leaned his whole enterprise on that house was not wrong to — it set a fine table — but he was a fool if he did not know that its <strong>incentives were bent three years forward,</strong> and plan for the day the promise came due.</p>
+<p>There was, as ever, a steward at the door. The realm had lately appointed one who required that <strong>every merchant's placard beside the free plates be plainly marked as a paid placard</strong> — no ware could pose as the innkeeper's own honest recommendation, and every diner had to be told, in plain words, that the house made its money this way. The steward did not forbid the free table or the sale of the crowd's attention. It simply demanded that the <strong>payment be disclosed and labeled,</strong> so that a diner could know a paid word from an honest one. The houses that had built their trade on blurring the line grumbled. The houses that had been honest all along barely noticed.</p>
+<p><strong>The moral:</strong> when the meal looks free, you are not the customer — you are the <strong>inventory,</strong> and your attention and your table-talk are the coin. When the price looks like a bargain locked in, someone up the road is often <strong>paying now for a promise</strong> the house must strain to keep. Neither is a scandal; both are simply <em>how the house gets paid,</em> and how the house gets paid decides what it does with you at its table. So before you sit — and certainly before you spread your ledgers on the wood — <strong>ask how this house makes its money,</strong> read the placard the steward made them post, and keep your true business for a table where you know exactly who is paying, and with what.</p>
+<p><strong>The question it forces:</strong> <em>The most-used AI product on earth just turned its free tier into ad inventory, and the frontier lab everyone benchmarks against is being valued on revenue it will not earn until 2028. For every AI vendor our people and our systems depend on, do we actually know how it gets paid — by our subscription, by our attention and data, or by a promise to its investors — and have we priced that into what we say at its table, what we let it keep, and what happens to us when the bill comes due?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>How does each of our AI vendors actually get paid — and have we written it down?</strong> For every material AI dependency, name the revenue model: our paid seat, our tokens, our attention and data (ads), or a forward-priced promise to its own investors. <strong>The vendor's business model is a risk line, not trivia</strong> — it predicts how it will price, bundle and monetize you over the next three years. If no one can state it, we are trusting a house without reading its placard.</li>
+  <li><strong>Where are our people using the "free" tier — and what are they saying at that table?</strong> OpenAI's Free and $8 Go tiers are now ad-supported; the ad-free tiers are the ones you pay for. <strong>Do we have a policy that keeps confidential work off consumer/Go plans and on the ad-free enterprise SKU — and do our people know that "free" means their prompts and attention are the product?</strong></li>
+  <li><strong>Have we priced vendor durability and our exit into every standardization?</strong> A lab valued on a 2028 forecast has strong incentives to reprice and monetize before then. <strong>For each strategic dependency, can we state the switching cost, the exit path, and what a 2× price move would do to our economics</strong> — or have we married a supplier whose incentives are bent years forward?</li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Confidential deal terms, client data and trading intent do not belong at a free table. <strong>Can we prove that no material or client-confidential work touches an ad-supported consumer AI tier — and that everything sensitive runs on a contracted, ad-free, data-segregated enterprise agreement with an audit trail the EU AI Act now expects?</strong></li>
+  <li>Your vendors' monetization is your concentration risk. <strong>If the frontier lab we standardized on is priced on a two-year-out forecast, what is our second source, our exit, and our hedge against a repricing — and have we stress-tested a doubling of per-token cost the way we stress-test a rate move?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Patient data and discovery IP are the last things you want feeding an ad-targeting or training pipeline. <strong>Do our AI tools sit on agreements that contractually bar use of our data for advertising or model training — and can we show it — or are clinicians quietly pasting into a free consumer tier?</strong></li>
+  <li>A vendor priced on a distant promise may change its terms mid-trial. <strong>For any multi-year clinical or research workflow, have we secured price and data-use terms for the life of the program — not just today's rate card — and named the fallback if the vendor reprices to grow into its valuation?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You have always read the total cost of a "cheap" input — the tooling, the lock-in, the switching cost behind the sticker. <strong>Apply that instinct to AI: what does the free or near-free tier actually cost us in data exposure and lock-in, and is the ad-free enterprise SKU the real, honest line item we should be budgeting?</strong></li>
+  <li>Supplier continuity is a board-level risk on the factory floor. <strong>If our AI vendor is valued on a 2028 promise, do we treat it as a single-source supplier — with the same second-source, inventory and exit discipline we would demand of any critical component?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>You know the "free service, you're the product" model better than anyone — you buy that attention. <strong>Now that the AI layer runs the same play, are we clear on whether our customer and pricing data is safe from an AI vendor's advertising business — and are our own people keeping proprietary merchandising work off ad-supported tiers?</strong></li>
+  <li>Attention is being repriced in real time. <strong>As AI assistants become ad-supported surfaces, what does it mean for how customers discover our products — and have we thought about the AI ad channel the way we once thought about search and shelf placement?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data must never be the coin that pays for a free tool. <strong>Can we guarantee that no public-service AI use runs on an ad-supported consumer tier, and that every deployment sits on a contract barring advertising and training use — with the disclosure and labeling the EU AI Act now requires?</strong></li>
+  <li>Public institutions cannot afford a supplier that fails or reprices under the weight of its own valuation. <strong>For every AI dependency, do we hold the exit rights, the data-portability terms and the continuity guarantees a house priced on a distant promise makes essential?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Follow the Money, Not Just the Model</h2>
+<p>Read the stack, once more, as layers priced very differently — but this week look past <em>what each layer costs you</em> to <strong>how each layer gets paid,</strong> because that is the variable that actually governs your risk. At the <strong>bottom</strong> is the <em>engine</em> — the raw model, so abundant that open-weight frontier releases now land weekly, and paid for by the <strong>token,</strong> a price racing toward zero. Above it are the <strong>rails</strong> — the agent infrastructure (MCP and its kin), trending to <strong>free.</strong> Above those sit the layers this week's editions mapped — the <strong>pilotage</strong> (context and reliability) and the <strong>last mile</strong> (distribution). And threaded through <em>all</em> of them is the layer the market exposed this week: the <strong>vendor's business model</strong> — how the company you rent each layer from actually makes its money. This week two of them showed it plainly. One monetizes the <strong>free user through advertising</strong> (your attention is the product). The other is valued on a <strong>forward promise</strong> (revenue it must grow into). The engineering point is blunt: <strong>you cannot assess an AI dependency by its capabilities and its per-token price alone — you have to price how the vendor gets paid, because that is what determines what it does with your data and your spend.</strong></p>
+<div class="card"><ul>
+  <li><strong>The engine — abundant, commoditizing, still shipping weekly.</strong> On <strong>14 August</strong>, open-weight <strong>Z.ai GLM-5.3</strong> topped the open coding leaderboard <em>on post-training alone</em> (lifting Terminal-Bench 3.0 from 4.6 to 28.3 on the same base) and led cyber-capability benchmarks — with Z.ai <strong>holding back the open weights pending a staged cyber-safety review,</strong> itself a governance signal. <strong>Alibaba's Qwen3.8</strong> family landed the same day. On <strong>12 August</strong>, <strong>xAI's Grok 4.6</strong> tied <strong>GPT-5.6 Sol Max</strong> at the top of the Artificial Analysis intelligence index at <strong>$2/$6 per 1M</strong>, and <strong>Grok 3 was retired 15 August.</strong> Atop Opus 5, Kimi K3 and DeepSeek V4-Pro, the engine is a swappable, cheapening part. The token price is not where your exposure lives.</li>
+  <li><strong>The rails and the higher layers — priced, but not the whole risk.</strong> The <strong>Model Context Protocol's 2026-07-28 specification</strong> went stateless, with <strong>~500M SDK downloads/month and TypeScript and Python SDKs each past 1 billion</strong> — plumbing trending to free. The <strong>pilotage</strong> (context + reliability) took Databricks to $190B this week; the <strong>last mile</strong> (distribution) is the layer OpenAI rented from IBM and bought with a CRO hire. All real, all priced. But none of them answer the question this week forced: <em>how does the vendor of each layer get paid, and what does that incentivize it to do to you?</em></li>
+  <li><strong>The business model — where the market showed its hand.</strong> This is the layer the two datable moves exposed. <strong>OpenAI → advertising:</strong> Free and <strong>$8 Go</strong> tiers become ad inventory (EEA and Switzerland notified <strong>15 Aug</strong>; already live in US/UK/MX/BR/JP/KR); <strong>Plus/Pro/Business/Enterprise/Edu ad-free;</strong> guardrails per <strong>Fidji Simo</strong> — <em>"Ads will not influence the answers,"</em> labeled and separated, conversations private from advertisers, data not sold. <strong>Anthropic → forward-priced capital:</strong> an IPO potentially among the <strong>largest on record</strong>, valued (<strong>Reuters, 14 Aug</strong>) on a <strong>$190–200B 2028</strong> forecast versus a <strong>~$47B</strong> May run-rate (from <strong>~$9B</strong> end-2025, <strong>$30B</strong> in April after <strong>"80×"</strong> growth). Two of the biggest AI companies on earth, two revenue models — and each one is a different risk to the enterprise that leans on it.</li>
+</ul></div>
+<p>The strategic core: <strong>the engine is cheap, the rails are free, and the durable exposure is the vendor's business model.</strong> For a month the misread was "pick the best model." This week's correction is sharper: <strong>the same capability, from a vendor paid by ads versus by subscription versus priced on a distant promise, is three different risks to your data, your spend and your continuity.</strong> "It benchmarks highest / it's the cheapest per token" is not the answer to "what happens to our confidential prompts, and will this supplier reprice us to grow into its valuation"; <em>"we know exactly how this vendor gets paid, and we priced that in"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The free table: how the vendor gets paid is your risk. The engine is cheap and the rails are free, so the exposure that lasts is the business model of the vendor you rent each layer from. Top left: paid by ads, where you are the inventory — OpenAI is turning ChatGPT's Free and eight-dollar Go tiers into ad inventory, notified to the EEA on 15 August, while Plus, Pro and Enterprise stay ad-free and paid, and OpenAI says ads will not influence answers; your attention and data pay the bill. Top right: paid by a promise, forward priced — Anthropic's IPO is valued on 190 to 200 billion dollars of 2028 revenue versus a roughly 47 billion run-rate today, per Reuters, so it must grow into the number and its incentives are bent three years forward. Below both: the gate, trust now live — disclose the AI, label the ad, log it — the EU AI Act transparency duties since 2 August and the AITSC consortium of 12 August. At the bottom: the engine, paid per token and therefore cheap, with GLM-5.3, Qwen3.8 on 14 August, Grok 4.6 at two and six dollars, and Grok 3 retired on 15 August; and the rails, agent infrastructure trending to free, with the MCP specification of 28 July stateless and its SDKs past 1 billion. The trap is to judge a vendor by tokens and benchmarks; the win is to price how the vendor gets paid." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="24" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE FREE TABLE — how the vendor gets paid is your risk</text>
+  <text x="340" y="42" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The engine is cheap and the rails are free. The lasting exposure is the BUSINESS MODEL.</text>
+
+  <!-- paid by ads -->
+  <rect x="34" y="64" width="300" height="122" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="86" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">PAID BY ADS — you're the inventory</text>
+  <text x="52" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI: ChatGPT Free + $8 Go</text>
+  <text x="52" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">→ ad inventory (EEA, 15 Aug)</text>
+  <text x="52" y="140" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Plus/Pro/Enterprise = ad-FREE (paid)</text>
+  <text x="52" y="160" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">"ads won't influence the answers"</text>
+  <text x="52" y="177" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">your attention &amp; data pay the bill</text>
+
+  <!-- paid by a promise -->
+  <rect x="346" y="64" width="300" height="122" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="364" y="86" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">PAID BY A PROMISE — forward-priced</text>
+  <text x="364" y="106" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Anthropic IPO valued on</text>
+  <text x="364" y="123" font-size="10.5" fill="#e8edf3" font-family="sans-serif">$190–200B *2028* revenue</text>
+  <text x="364" y="140" font-size="10.5" fill="#e8edf3" font-family="sans-serif">vs ~$47B run-rate (Reuters)</text>
+  <text x="364" y="160" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">must grow INTO the number —</text>
+  <text x="364" y="177" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">incentives bent 3 years forward</text>
+
+  <!-- arrows down to gate -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#b9b2f5"/>
+
+  <!-- the gate -->
+  <rect x="34" y="230" width="612" height="72" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE GATE — trust, live: disclose the AI · LABEL the ad · log it</text>
+  <text x="52" y="272" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act transparency since 2 Aug · AITSC consortium 12 Aug</text>
+  <text x="52" y="290" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the steward makes the payment disclosed and labeled — paid word from honest one</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="302" x2="340" y2="330" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="334,330 340,342 346,330" fill="#5dcaa5"/>
+  <text x="356" y="320" font-size="9" fill="#9aa7b6" font-family="sans-serif">sits atop ↓</text>
+
+  <!-- the engine -->
+  <rect x="34" y="346" width="300" height="118" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="368" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ENGINE — paid per token → cheap</text>
+  <text x="52" y="388" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GLM-5.3 · Qwen3.8 (14 Aug, open)</text>
+  <text x="52" y="405" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Grok 4.6 $2/$6 · Grok 3 retired (15 Aug)</text>
+  <text x="52" y="422" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 · Kimi K3 · DeepSeek V4-Pro</text>
+  <text x="52" y="442" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the brain is a swappable, cheapening part</text>
+
+  <!-- the rails -->
+  <rect x="346" y="346" width="300" height="118" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="364" y="368" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE RAILS — agent infra (→ free)</text>
+  <text x="364" y="388" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MCP 2026-07-28: stateless · SDKs 1B+</text>
+  <text x="364" y="408" font-size="10.5" fill="#d85a30" font-family="sans-serif" font-weight="700">TRAP: judge a vendor by tokens &amp; bench</text>
+  <text x="364" y="428" font-size="10.5" fill="#5dcaa5" font-family="sans-serif" font-weight="700">WIN: price HOW the vendor gets paid</text>
+  <text x="364" y="447" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">follow the money — it's your exposure</text>
+
+  <!-- footer strip -->
+  <text x="340" y="496" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A free plate is bought with your custom · a house sold on a promise must someday collect</text>
+  <text x="340" y="514" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Same capability, different revenue model = a different risk to your data, spend &amp; continuity</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>Paid by ads — you're the inventory (attention &amp; data)</span>
+  <span><i class="dot" style="background:#34306a"></i>Paid by a promise / the engine &amp; rails — forward-priced, commoditizing</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The gate — trust, now live (disclose · label · log)</span>
+</div>
+</div>
+
+<h3>The hidden bill vs. the discipline</h3>
+<table>
+<tr><th>The hidden bill — judge by the sticker price</th><th>The discipline — price how the vendor gets paid</th></tr>
+<tr><td>Treat the "free" tier as free</td><td>Treat "free" as paid-in-attention-and-data — a governance decision</td></tr>
+<tr><td>Let confidential work touch consumer/Go tiers</td><td>Keep sensitive work on contracted, ad-free enterprise SKUs</td></tr>
+<tr><td>Pick the cheapest per-token engine and stop</td><td>Read the revenue model behind the price and its incentives</td></tr>
+<tr><td>Standardize on a lab, ignore its valuation</td><td>Price vendor durability, repricing risk and your exit</td></tr>
+<tr><td>Assume the placard doesn't matter</td><td>Demand disclosure and labeling — the EU AI Act now requires it</td></tr>
+</table>
+
+<h3>Why the business model is the risk, not the benchmark</h3>
+<div class="card">
+<p>Every layer of the stack this month presumed the brain was cheap and swappable — and this week two more frontier engines shipped to prove it. The reason the <em>business model</em> belongs in the same picture as the model is that <strong>the same capability carries a different risk depending on how its vendor gets paid.</strong> A model served by an ad business has an incentive to know what you asked; a lab priced on a distant forecast has an incentive to reprice you before it arrives; a subscription vendor's incentives are, at least, aligned with your renewal. None of these is disqualifying. All of them are <em>knowable,</em> and the enterprise that knows them buys AI with its eyes open. The correct read of this week is not "OpenAI sells ads" or "Anthropic is expensive" — it is "<strong>follow the money for every vendor, because how it gets paid is what it will eventually do with you.</strong>"</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> On legacy estates the danger is treating AI like a utility with a sticker price and never reading the meter behind it. The retrofit is a <strong>procurement and data-governance exercise. Name the revenue model:</strong> for every AI vendor, write down how it gets paid — subscription, tokens, ads, or forward-priced capital — and treat that as a risk line. <strong>Fence the free tier:</strong> put a policy between confidential work and any ad-supported consumer/Go plan, and make the ad-free enterprise SKU the sanctioned surface for anything sensitive. <strong>Read the placard:</strong> with the EU AI Act's disclosure and labeling duties live, insist your AI surfaces disclose when they are AI and label paid content, whoever supplies them. And keep the engine swappable underneath — re-benchmark GLM-5.3, Qwen3.8, Grok 4.6 and the next release freely, because the brain is the commodity and the <em>terms</em> are the moat.</p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — abundant, cheap, paid by the token, never your moat. The rails are the plumbing — MCP and its kin, trending to free. The pilotage and the last mile are the layers you own or rent to make AI stick. And under all of them is the business model — how the vendor gets paid, which quietly decides what it does with your data, your spend and your continuity. This week one big lab monetized the free user through ads and another was priced on revenue it hasn't earned. Follow the money for every AI vendor you depend on — because a free plate is bought with your custom, and a house sold on a promise must someday collect.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The signal — the free tier becomes an ad business.</strong> <strong>OpenAI</strong> notified <strong>Free and $8 Go</strong> users in the <strong>EEA and Switzerland (15 Aug)</strong> that ads arrive "later this month," extending a program live in the US/UK/MX/BR/JP/KR; <strong>Plus/Pro/Business/Enterprise/Edu remain ad-free;</strong> guardrails per <strong>Fidji Simo</strong> (ads won't influence answers, labeled/separated, conversations private from advertisers) — OpenAI / PPC Land / Engadget / The Register (as reported).</li>
+  <li><strong>The signal — the lab is priced on a promise.</strong> <strong>Anthropic's IPO valuation "hinges" on a $190–200B 2028 revenue forecast</strong> (<strong>Reuters, 14 Aug</strong>), against a <strong>~$47B</strong> May run-rate (from <strong>~$9B</strong> end-2025, <strong>$30B</strong> in April after <strong>"80×"</strong> growth); potentially one of the <strong>largest IPOs on record</strong> — Reuters / VentureBeat / PYMNTS (as reported).</li>
+  <li><strong>The engine — still shipping.</strong> Open-weight <strong>GLM-5.3</strong> and <strong>Qwen3.8</strong> (14 Aug), <strong>Grok 4.6</strong> tying GPT-5.6 Sol Max at <strong>$2/$6</strong> (12 Aug), <strong>Grok 3 retired</strong> (15 Aug), atop Opus 5, Kimi K3, DeepSeek V4-Pro — model-tracker / vendor coverage (as reported).</li>
+  <li><strong>The governance read — GLM-5.3's held-back weights.</strong> Z.ai released GLM-5.3's benchmarks but <strong>staged the open weights pending a cyber-safety review</strong> — an open-weight lab self-gating on capability, a straw in the wind for how the trust layer forms around frontier open models (as reported).</li>
+  <li><strong>The gate — trust, live.</strong> <strong>EU AI Act</strong> transparency duties enforceable since <strong>2 Aug</strong> (disclose AI, label output; fines up to €15M / 3%) — directly relevant to ChatGPT ads in the EEA; <strong>AITSC</strong> consortium launched <strong>12 Aug</strong> (~50 founding enterprise security leaders).</li>
+  <li><strong>The field — the race reshuffles.</strong> <strong>Google DeepMind's</strong> Koray Kavukcuoglu was reported (CNBC, 12 Aug) as its new AI chief tasked with catching OpenAI and Anthropic — a reminder that the vendors whose business models you are pricing are themselves in flux (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">Ads will not influence the answers ChatGPT gives you.</div><div class="a">— Fidji Simo, CEO of Applications, OpenAI, on how ads work in ChatGPT (as reported)</div></blockquote>
+<blockquote style="border-color:var(--accent)"><div class="q">We tried to plan very well for a world of 10× growth per year. And yet we saw 80×… it's just crazy.</div><div class="a">— Dario Amodei, CEO, Anthropic, on the growth underpinning the IPO case (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Anthropic's IPO valuation hinges on a $190–200 billion 2028 revenue forecast.</div><div class="a">— Reuters (exclusive), on how Wall Street is pricing the offering (14 Aug, as reported)</div></blockquote>
+<blockquote><div class="q">"The engine is cheap and the rails are free — but nothing is free. When the meal looks free, you are the inventory; when the price looks locked in, someone up the road is paying for a promise. Follow the money for every AI vendor, because how it gets paid is what it will do with you."</div><div class="a">— the radar, on the business model as the layer that decides your real exposure</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>ChatGPT ads reach Europe</td><td><span class="v">Free + $8 Go tiers in EEA &amp; Switzerland notified 15 Aug; ads "later this month"</span></td><td>OpenAI / PPC Land (15 Aug 2026, as reported)</td></tr>
+<tr><td>ChatGPT ads footprint</td><td><span class="v">Already live: US (Feb), UK, Mexico, Brazil, Japan, South Korea (by 11 Aug)</span></td><td>OpenAI / coverage (as reported)</td></tr>
+<tr><td>Ad-free ChatGPT tiers</td><td><span class="v">Plus, Pro, Business, Enterprise, Edu — no ads (you pay to opt out)</span></td><td>OpenAI Help Center (as reported)</td></tr>
+<tr><td>Anthropic IPO valuation basis</td><td><span class="v">Hinges on a $190–200B 2028 revenue forecast</span></td><td>Reuters (14 Aug 2026, as reported)</td></tr>
+<tr><td>Anthropic run-rate trajectory</td><td><span class="v">~$9B end-2025 → $30B (April, "80×" growth) → ~$47B (May)</span></td><td>Anthropic / VentureBeat / Reuters (as reported)</td></tr>
+<tr><td>Anthropic IPO scale</td><td><span class="v">Potentially one of the largest IPOs on record</span></td><td>Reuters (as reported)</td></tr>
+<tr><td>GLM-5.3 (open-weight)</td><td><span class="v">Tops open coding leaderboard on post-training alone; open weights staged for cyber-safety review</span></td><td>Z.ai / AI Weekly (14 Aug 2026, as reported)</td></tr>
+<tr><td>xAI Grok 4.6</td><td><span class="v">Ties GPT-5.6 Sol Max at top of Artificial Analysis index; $2 / $6 per 1M</span></td><td>xAI / coverage (12 Aug 2026, as reported)</td></tr>
+<tr><td>Grok 3 retirement</td><td><span class="v">Deprecated 15 Aug 2026</span></td><td>xAI / coverage (as reported)</td></tr>
+<tr><td>EU AI Act — transparency &amp; penalties</td><td><span class="v">Live since 2 Aug: disclose AI, machine-readable labels; fines up to €15M or 3% of turnover</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>AI Trust &amp; Security Consortium (AITSC)</td><td><span class="v">Launched 12 Aug; ~50 founding enterprise security/tech leaders</span></td><td>AIwire / HPCwire (as reported)</td></tr>
+<tr><td>MCP 2026-07-28 specification</td><td><span class="v">Stateless core; ~500M SDK downloads/month; TS &amp; Python SDKs each past 1B total</span></td><td>Official MCP blog (28 Jul 2026)</td></tr>
+<tr><td>The engines (context)</td><td><span class="v">Opus 5 · GPT-5.6 Sol · Gemini 3.7 Flash · Grok 4.6 · Kimi K3 · DeepSeek V4-Pro · GLM-5.3 · Qwen3.8</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Write down how every AI vendor gets paid — and treat it as a risk line.</strong> For each material dependency, record the revenue model (our subscription, our tokens, our attention and data via ads, or a forward-priced promise to investors) beside the capability and the price. Report it to the board. A vendor paid by ads, a vendor paid by subscription, and a vendor priced on a 2028 forecast are three different risks to your data, your spend and your continuity — and you cannot manage a risk you have not named. <strong>The business model is the layer that decides what the vendor eventually does with you.</strong></li>
+  <li><strong>Fence the free tier — make the ad-free enterprise SKU the sanctioned surface.</strong> OpenAI's Free and $8 Go tiers are now ad-supported; the ad-free tiers are the ones you pay for. Put an explicit policy between confidential work and any consumer/Go plan, tell your people plainly that "free" means their prompts and attention are the product, and route anything sensitive to a contracted, ad-free agreement that bars advertising and training use of your data — with the disclosure and labeling the EU AI Act now requires. <strong>Pay for the table where you can safely spread your ledgers.</strong></li>
+  <li><strong>Price vendor durability and your exit into every standardization.</strong> A lab valued on a two-year-out forecast has strong incentives to reprice, bundle and monetize before it arrives. For each strategic dependency, state the switching cost, keep the engine swappable underneath (re-benchmark GLM-5.3, Qwen3.8, Grok 4.6 freely), secure price and data-use terms for the life of the program, and hold the exit and data-portability rights. <strong>Lean on a house sold on a promise if you must — but know the promise is not yours, and plan for the day it comes due.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> OpenAI / OpenAI Help Center / PPC Land / Engadget / The Register / Variety (ChatGPT ads reach the EEA &amp; Switzerland, Free + $8 Go tiers, ad-free paid tiers, Fidji Simo guardrails, as reported) · Reuters / VentureBeat / PYMNTS / Cryptopolitan (Anthropic IPO $190–200B 2028 forecast, run-rate trajectory, "80×" growth, as reported) · model-tracker coverage (GLM-5.3, Qwen3.8, Grok 4.6, Grok 3 retirement) · European Commission (EU AI Act transparency &amp; penalties) · AIwire / HPCwire (AITSC launch) · Official MCP blog (2026-07-28 spec) · CNBC (Google DeepMind leadership). Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 16 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
