@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 18 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the shift from assistance to execution — enterprise AI has stopped advising and started acting. OpenAI's 13 August report shows Codex (an agent) now generates 64% of combined enterprise output tokens, and frontier firms use 8.3× as much AI per user as typical firms (up from 2.6× in January). When AI acts in your name, the control plane becomes identity, mandate and audit — which is why Google shipped per-agent identity (X.509-bound, unreplayable, no impersonation) as non-human identities outnumber humans ~45:1. The engine keeps commoditizing (Gemini 3.7 Flash for agents, GPT-5.6 Sol Ultrafast at 750 tok/s, GLM-5.3, Qwen3.8). Name every deputy, bound the mandate, keep the ledger. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · From assistance to execution</div>
+  <h1>The Deputy</h1>
+  <div class="subhead">Enterprise AI has stopped advising and started acting — the majority of its output is now the agent's work, not the chatbot's. When AI acts in your name, the control plane becomes identity, mandate and audit.</div>
+  <div class="meta">Tuesday, 18 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar counted the crossings and found 95% of pilots never reach the far bank. Today it looks at the ones that did — and finds they have changed what AI is inside the company: no longer a clever adviser you consult, but a deputy that acts. OpenAI's 13 August report shows Codex — an agent — now generates 64% of combined enterprise output tokens, and frontier firms use 8.3× as much AI per user as typical firms (up from 2.6× in January). The moment AI stops advising and starts acting, the question flips: not "is the answer good?" but "who is this agent, what may it touch, and can we prove what it did?" The board's question: for every agent acting in our name, do we know its identity, its mandate and its audit trail — or have we pinned our seal on servants we cannot name?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a month this radar has argued the model is a commodity and the moat is the layer you own around it; yesterday it showed how few organizations ever finish the crossing from pilot to value. Today the map turns to what changes for the 5% who <em>do</em> cross: <strong>AI has shifted from assistance to execution — from a thing that suggests to a thing that acts</strong> — and that shift, not the next model, is the event that should reorganize your controls. When an agent only advises, its worst failure is a bad idea you can decline. When an agent <em>acts,</em> its failure is an action already taken in your name. The scarce discipline this week is not a smarter engine. It is <strong>governing the deputy</strong> — its identity, its mandate, and its ledger.</p>
+<p><strong>The datable signal — the majority of the work is now the agent's.</strong> On <strong>13 August 2026, OpenAI published <em>"From assistance to execution: How enterprises put AI to work"</em></strong> (an Enterprise Signal report), and the numbers mark a threshold. <strong>As of June, Codex generated 64% of the combined Codex-and-ChatGPT output tokens among enterprise customers</strong> — most enterprise AI output is now produced by an agent doing multi-step work, not a chatbot answering a prompt. The gap between leaders and laggards is widening fast: <strong>"frontier firms" (top 10% by usage) now generate 8.3× as many output tokens per active user as typical firms — up from a 2.6× gap in January,</strong> roughly a tripling in five months. And execution is spreading far beyond engineering: since February, Codex weekly-active users grew <strong>108× in legal, 41× in sales and recruiting, 26× in marketing — versus 5× in engineering.</strong> As Moor Insights' <strong>Patrick Moorhead</strong> put it this week (17 Aug), <strong>"AI has moved out of the demo phase and into production."</strong></p>
+<p><strong>Why it matters more than any single launch.</strong> An acting agent is a new kind of actor in your enterprise — one with credentials, tool access and initiative — and the security world has a name for the gap it opens: <strong>non-human identity.</strong> In modern estates, non-human identities already outnumber human users by roughly <strong>45 to 1</strong> (and up to <strong>144 to 1</strong> in cloud-native environments); an autonomous agent can hold credentials for CRM, email, cloud and payments <em>at once,</em> and unlike a fixed service account it plans, picks tools and adapts as a task unfolds. That is why the most consequential enterprise release of the moment is not a model but an <strong>identity layer:</strong> Google's <strong>Gemini Enterprise Agent Platform</strong> gives each agent a <strong>fully managed, unique identity,</strong> with access tokens <strong>cryptographically bound to the agent's X.509 certificate</strong> (so a stolen token is unreplayable), agents that <strong>cannot be impersonated</strong> and no long-lived keys — plus per-action authorization and full audit. The engine, meanwhile, kept getting cheaper and more agentic underneath it all: <strong>Gemini 3.7 Flash</strong> (13 Aug) is built for agents (AutomationBench <strong>30.4%</strong> vs 17%, at a <strong>50%</strong> intro price cut), <strong>GPT-5.6 Sol Ultrafast</strong> hit <strong>~750 tokens/sec</strong> for agent loops (17 Aug), and open-weight <strong>GLM-5.3</strong> and <strong>Qwen3.8</strong> shipped 14 August. Intelligence and speed are abundant. <strong>Accountability for what the agent does with them is the scarce thing.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The majority of enterprise AI output is now the agent's, not the chatbot's.</strong> Codex = <strong>64%</strong> of combined enterprise output tokens; frontier firms pull away at <strong>8.3×.</strong> Treat this as a governance event, not a productivity stat: <strong>the work is increasingly being <em>done</em> by software acting in your name, and every act needs an owner, a boundary and a record.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>When AI acts, identity becomes the control plane.</strong> An acting agent is a non-human identity with real privileges — and there are already ~45 of them per human. <strong>The frontier control is no longer "which model" but "who is this agent, what may it touch, and can we prove what it did?"</strong> Google shipping cryptographically-bound per-agent identity is the tell that the market agrees.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps commoditizing — and getting built for action.</strong> <strong>Gemini 3.7 Flash</strong> for agents (13 Aug), <strong>GPT-5.6 Sol Ultrafast</strong> at ~750 tok/s (17 Aug), open-weight <strong>GLM-5.3/Qwen3.8</strong> (14 Aug), <strong>Grok 4.6</strong> at $2/$6 (12 Aug), <strong>Grok 3</strong> retired (15 Aug). The trust gate is live to meet the acting agent: the <strong>EU AI Act's transparency duties since 2 August</strong> (disclose AI, label output, log it) and the <strong>AITSC consortium (12 Aug).</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the model is a commodity, the moat is the layer you own — and this week the data showed that the layer now doing the work is the <strong>acting agent.</strong> The shift from assistance to execution is the real threshold of 2026: it moves AI from <em>advice you evaluate</em> to <em>action taken in your name,</em> and it makes <strong>agent identity, mandate and audit</strong> the control plane that matters. <strong>Name every deputy, bound what each may do, and keep the ledger of what it did — because you can no longer un-take an action your agent has already performed.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🎖️ "The Deputy"</h3>
+<p><em>Topic: On 13 August 2026, OpenAI's report "From assistance to execution: How enterprises put AI to work" reported that, as of June, Codex (an agent) generated 64% of combined Codex-and-ChatGPT output tokens among enterprise customers, that "frontier firms" now generate 8.3× as many output tokens per active user as typical firms (up from 2.6× in January), and that Codex weekly-active users grew 108× in legal, 41× in sales/recruiting and 26× in marketing since February versus 5× in engineering — evidence that enterprise AI is shifting from assistance (suggesting) to execution (acting). The consequence: an acting agent is a non-human identity with real privileges — such identities already outnumber humans ~45:1 (up to 144:1 in cloud-native estates) — which is why Google's Gemini Enterprise Agent Platform gives each agent a unique, cryptographically-bound identity that cannot be impersonated, with per-action authorization and audit. The lesson: when AI stops advising and starts acting, the control plane becomes identity, mandate and audit.</em></p>
+<p>For as long as the great house could remember, it had kept <strong>counselors.</strong> Clever men and women sat at the long table and gave their advice — where to plant, whom to trust, what price to hold — and the master listened, and weighed, and then <em>he</em> acted, or did not. A counselor's power ended at his lips. His worst counsel, taken, might cost the house a season; his worst counsel, <em>declined,</em> cost nothing at all. The whole art of keeping counselors was the art of listening well and choosing for yourself, and the house had grown skilled at it over long years. The counselor spoke; the hand that acted was always your own.</p>
+<p>This season the house did a thing it had never done. It pinned a <strong>deputy's badge</strong> on a servant and sent him out into the town to act <em>in the master's name</em> — to buy and to sign, to open the counting-house door, to give orders that tradesmen obeyed as though the master himself had spoken. And it did not stop at one. Soon there were deputies everywhere — in the market, in the granary, in the letter-room answering post before dawn — until, if you troubled to count, there were <strong>forty deputies wearing the badge for every one member of the family,</strong> each able to touch the strongroom, the seal, the ledgers and the outer gate at once. The house had discovered that a deputy who <em>acts</em> does in an hour what a counselor advising took a week to shape. Most of the day's business, before long, was done not by the family at all but by badged servants moving through the town on the family's authority.</p>
+<p>And here was the thing the house was slow to understand: <strong>the moment the badge goes on, every question changes.</strong> A counselor you judge by the wisdom of his words. A deputy you cannot judge that way at all, because by the time you hear of it the deed is already <em>done</em> — the coin already spent, the door already opened, the order already obeyed. So the questions that keep a house of deputies safe are not questions of wisdom but of <strong>identity, mandate and record:</strong> <em>Which deputy is this, exactly — and can a stranger pin on a borrowed badge and pass for him? What, precisely, did we authorize this one to do — and what did we forbid? And is there a ledger, honest and complete, of every act each deputy performed in our name, so that when the strongroom is short we can say whose hand was in it?</em> A house that sends out badges without answering those three has not become more efficient. It has become one confused morning away from ruin — not from a villain, necessarily, but from the ordinary chaos of authority given and never accounted.</p>
+<p>The wise houses, watching the town fill with badged servants, did the unglamorous work at once. They gave every deputy a badge that <strong>could not be forged or lent</strong> — struck so that the man and the badge were one, and a token snatched from his pocket was worth nothing in another's hand. They wrote each deputy's <strong>mandate</strong> narrow and plain — <em>this one may buy grain and nothing else; that one may open the letter-room but never the strongroom</em> — so that authority did not spill past its purpose. And they kept a <strong>ledger of every act,</strong> posted and inspected, so that nothing done in the master's name went unrecorded. There was a magistrate at the town gate now, too, newly insistent that any servant acting for a house <strong>declare himself as a deputy and not pose as the master,</strong> and that his doings be logged — for the realm had learned that unnamed authority walking the streets is how counting-houses quietly empty.</p>
+<p><strong>The moral:</strong> when your cleverest servants stop advising and start <em>acting,</em> you have not merely gained speed — you have handed out your seal, and a seal in an unnamed hand is a wound waiting to happen. The counselor's era rewarded good listening; the deputy's era rewards good <strong>governance of identity.</strong> Name every deputy so none can be counterfeited. Bound every mandate so authority cannot wander. Keep the ledger so every act has an owner. And never forget the hard asymmetry that separates the two ages: a counsel declined costs nothing, but <em>an act taken in your name cannot be un-taken.</em></p>
+<p><strong>The question it forces:</strong> <em>The majority of our AI's output is no longer advice we read and weigh — it is work already performed by agents acting in our name, and those agents now outnumber our people many times over. For every one of them, can we say who it is beyond forgery, exactly what we authorized it to touch, and produce the complete ledger of what it has already done — or have we pinned our seal on a crowd of servants we cannot name, bound or account for?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>How much of our AI output is now <em>action</em> rather than <em>advice</em> — and does each action have an owner?</strong> OpenAI's own data puts agent (Codex) output at 64% of the enterprise mix. <strong>For every agent acting in our name, can we name a human owner, a bounded mandate and an audit trail — or are we treating software that <em>does</em> things with the loose governance we used for software that only <em>suggested</em> things?</strong></li>
+  <li><strong>Do our agents have real identities, or borrowed ones?</strong> Non-human identities already outnumber people ~45:1, and an agent can hold CRM, email, cloud and payment credentials at once. <strong>Does each agent have a unique, non-forgeable identity (not a shared service-account key), least-privilege access scoped per action, and credentials that can be revoked the instant it misbehaves — or could a stolen token act as our agent undetected?</strong></li>
+  <li><strong>When an agent acts wrongly, how fast can we prove what it did and stop it?</strong> The failure of an acting agent is an action already taken. <strong>Can we, today, produce a complete ledger of every tool call, permission used, record touched and change made by a given agent — and kill its access in one move? If not, we are governing deputies as if they were counselors.</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>An agent that can <em>move</em> money or <em>submit</em> a trade is a different risk class from one that drafts a memo. <strong>For every agent with write access to a system of record, can we prove per-action authorization, segregation of duties, and an immutable audit trail — the same controls we demand of any human with those privileges, applied to a population of non-human identities 45× larger?</strong></li>
+  <li>Speed is now a control question. <strong>With agent loops running at hundreds of tokens a second, how quickly would we detect an agent acting outside its mandate — and is our monitoring built for machine-speed action, not human-speed review?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An acting agent that touches an EHR, orders a test, or writes to a clinical record carries patient-safety and liability weight the moment it acts. <strong>Does every clinical or research agent run under a named identity with a mandate that bars unauthorized actions on protected data, with human sign-off gated on the consequential steps — and a log a regulator could read?</strong></li>
+  <li>Delegated action must not outrun validation. <strong>For any agent embedded in a care or discovery workflow, have we bounded exactly what it may execute autonomously versus what requires a clinician's hand — and can we prove that boundary held on every run?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>On the floor, an agent that <em>acts</em> — adjusts a setpoint, releases an order, schedules maintenance — is closer to an actuator than an adviser. <strong>Do our operational agents have identities, mandates and interlocks the way any control system does, and an audit trail tying every action to an accountable owner?</strong></li>
+  <li>You govern who may touch a machine. <strong>Apply that to software that now touches machines: is every acting agent scoped to least privilege, monitored at machine speed, and revocable in one move if it behaves outside its envelope?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents are already acting in pricing, merchandising and customer service. <strong>When an agent changes a price, issues a refund, or messages a customer in our name, is there a bounded mandate and a ledger — or could a mis-scoped agent take thousands of actions before anyone notices?</strong></li>
+  <li>Delegation is spreading fastest outside engineering (marketing Codex use up 26×). <strong>Do the non-technical teams now running agents understand they are deploying software that <em>acts,</em> and are those agents governed to the same identity-and-audit standard as anything with access to customer data?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public trust cannot survive an unaccountable action taken in the state's name. <strong>Does every agent acting on citizen-facing processes have a declared identity (per the EU AI Act's disclosure duty), a mandate that forbids unauthorized action, and a complete, inspectable log of what it did?</strong></li>
+  <li>Authority given must be authority accounted. <strong>For each deployed agent, do we hold the identity, the least-privilege scope, the audit trail and the one-move revocation that let us answer, after the fact, exactly which agent did what — or have we delegated public authority to software we cannot name?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From Assistance to Execution</h2>
+<p>Read the stack, once more, as layers priced very differently — but this week look past <em>which layer you buy</em> to <strong>what the top of the stack now does,</strong> because it just changed. At the <strong>bottom</strong> is the <em>engine</em> — the raw model, abundant, cheap, and now increasingly <em>built for action</em> rather than conversation. Above it are the <strong>rails</strong> — agent infrastructure (MCP and its kin), trending to free. Above those sit the layers this month's editions mapped — the <strong>pilotage</strong> (context, reliability), the <strong>last mile</strong> (distribution), the <strong>business model</strong> (how the vendor gets paid), and the <strong>crossing</strong> (integration, data, adoption, governance) that carries a pilot to value. And sitting <em>on top of all of them</em> now is a new kind of actor: the <strong>acting agent</strong> — software that does not return an answer for a human to act on, but <em>takes the action itself.</em> The engineering point is blunt: <strong>the unit of AI work in the enterprise has shifted from a completion you read to an action the agent performs — and an action taken in your name demands identity, authorization and audit that a completion never did.</strong></p>
+<div class="card"><ul>
+  <li><strong>The engine — abundant, cheap, and re-tooled for action.</strong> On <strong>13 August</strong>, <strong>Gemini 3.7 Flash</strong> shipped built for agents, lifting <strong>AutomationBench to 30.4%</strong> (from 17%) and <strong>DeepSWE to 65.3%</strong> (from ~49%) at a <strong>50% introductory price cut</strong> ($0.75/$3.75 per 1M through year-end). On <strong>17 August</strong>, <strong>GPT-5.6 Sol Ultrafast</strong> (Cerebras-powered) reached <strong>~750 output tokens/sec</strong> — throughput matters because an agent's loop of tool calls is latency-bound, not just intelligence-bound. Open-weight <strong>GLM-5.3</strong> and <strong>Qwen3.8</strong> landed 14 August; <strong>Grok 4.6</strong> tied GPT-5.6 Sol Max at <strong>$2/$6</strong> (12 Aug); <strong>Grok 3</strong> was retired 15 August. Atop Opus 5, Kimi K3 and DeepSeek V4-Pro, the engine is a swappable, cheapening part — now optimized for the thing it will spend most of its cycles doing: <em>acting.</em></li>
+  <li><strong>The rails and the higher layers — necessary, and now carrying real authority.</strong> The <strong>Model Context Protocol's 2026-07-28 specification</strong> went stateless (SDKs past 1B total downloads) — the plumbing an agent uses to reach tools and systems. But a rail that lets an agent <em>act</em> on your CRM, your repo and your payments is no longer neutral plumbing; it is a <strong>grant of authority,</strong> and it needs identity and scope attached. This is the seam the market moved on this week.</li>
+  <li><strong>The acting agent — where identity becomes the control plane.</strong> This is the "layer" the OpenAI data exposed. <strong>The work is now the agent's:</strong> <strong>Codex = 64%</strong> of combined enterprise output tokens (June); <strong>frontier firms at 8.3×</strong> typical (from 2.6× in Jan); Codex WAU up <strong>108× legal / 41× sales / 26× marketing</strong> vs 5× engineering since February. <strong>The new actor is a non-human identity:</strong> they outnumber humans <strong>~45:1</strong> (up to <strong>144:1</strong> cloud-native), each potentially holding CRM/email/cloud/payment credentials and adapting its own tool use. <strong>The control that answers it is identity, not intelligence:</strong> Google's <strong>Gemini Enterprise Agent Platform</strong> gives each agent a <strong>unique managed identity,</strong> tokens <strong>cryptographically bound to X.509 certificates</strong> (unreplayable if stolen), agents that <strong>cannot be impersonated,</strong> <strong>no long-lived keys,</strong> <strong>per-action authorization</strong> and <strong>full audit.</strong></li>
+</ul></div>
+<p>The strategic core: <strong>the engine is cheap, the rails are free, and the newest actor in your enterprise is an agent that acts in your name.</strong> For a month the misread was "own the right layer"; yesterday's was "finish the crossing." This week's correction is sharper still: <strong>once you cross, the thing on the far bank is doing the work itself — so the discipline becomes governing the deputy.</strong> "It's the smartest / cheapest / fastest agent" is not the answer to "who is this actor, what may it touch, and can we prove what it did"; <em>"every agent has a non-forgeable identity, a bounded mandate and a complete audit trail, and we can revoke it in one move"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The deputy: when AI stops advising and starts acting, the control plane becomes identity, mandate and audit, and most enterprise AI output is now the agent's, not the chatbot's. Top left: assistance, the counselor — AI suggests and a human acts, chat completions you read, worst case is advice declined which costs nothing, judged by the wisdom of words. Top right: execution, the deputy — AI acts in your name, Codex is 64 percent of enterprise output tokens per OpenAI in June, frontier firms use 8.3 times as much as typical firms, worst case is an act already taken, and it is a new actor: a non-human identity, about 45 to 1 versus humans and up to 144 to 1 in cloud. The work crosses from left to right and the question flips. Below both: the control plane — identity, mandate and audit. Identity means a unique non-forgeable per-agent identity, X.509-bound and unreplayable. Mandate means least privilege, authorization scoped per action. Audit means a full ledger of every tool call and one-move revocation. This is what Google's Gemini Enterprise Agent Platform and Agent Identity ship. At the bottom: the engine, built for action, with Gemini 3.7 Flash for agents, GPT-5.6 Sol Ultrafast at 750 tokens a second, GLM-5.3 and Qwen3.8 at two and six dollars; and the gate, trust now live — disclose the AI, label, and log the act — the EU AI Act since 2 August and the AITSC consortium of 12 August, the magistrate that makes the deputy declare himself." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE DEPUTY — when AI stops advising and starts ACTING</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the control plane becomes IDENTITY · MANDATE · AUDIT</text>
+
+  <!-- assistance -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">ASSISTANCE — the counselor</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AI SUGGESTS — a human acts</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">chat / completions you read</text>
+  <text x="52" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">worst case: advice declined = $0</text>
+  <text x="52" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">judged by: wisdom of words</text>
+  <text x="52" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the hand that acts is your own</text>
+
+  <!-- execution -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">EXECUTION — the deputy</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AI ACTS — in your name</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Codex = 64% of enterprise tokens</text>
+  <text x="364" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">frontier firms 8.3× typical (was 2.6×)</text>
+  <text x="364" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">worst case: the act is already taken</text>
+  <text x="364" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a NEW actor: non-human identity</text>
+
+  <!-- arrow across -->
+  <line x1="336" y1="112" x2="344" y2="112" stroke="#9aa7b6" stroke-width="2" stroke-dasharray="3 3"/>
+  <polygon points="344,108 352,112 344,116" fill="#9aa7b6"/>
+  <text x="340" y="200" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the work crosses ▶ and the question flips · non-human identities ~45:1 vs humans (144:1 in cloud)</text>
+
+  <!-- arrows down to control plane -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+
+  <!-- control plane -->
+  <rect x="34" y="230" width="612" height="96" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE CONTROL PLANE — identity · mandate · audit</text>
+  <text x="52" y="272" font-size="10.5" fill="#e8edf3" font-family="sans-serif">IDENTITY: unique, non-forgeable per agent (X.509-bound, unreplayable)</text>
+  <text x="52" y="289" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MANDATE : least privilege · authorization scoped PER ACTION</text>
+  <text x="52" y="306" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AUDIT&#160;&#160;&#160;: full ledger of every tool call · one-move revocation</text>
+  <text x="52" y="322" font-size="9.5" fill="#c3ccd8" font-family="sans-serif" font-style="italic">↳ Google Gemini Enterprise Agent Platform · Agent Identity (the tell)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="326" x2="340" y2="352" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,352 340,364 346,352" fill="#b9b2f5"/>
+  <text x="356" y="344" font-size="9" fill="#9aa7b6" font-family="sans-serif">sits atop ↓</text>
+
+  <!-- the engine -->
+  <rect x="34" y="368" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="390" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ENGINE — built for action</text>
+  <text x="52" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 3.7 Flash (for agents, 13 Aug)</text>
+  <text x="52" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GPT-5.6 Sol Ultrafast ~750 tok/s (17 Aug)</text>
+  <text x="52" y="444" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GLM-5.3 · Qwen3.8 · Grok 4.6 $2/$6</text>
+  <text x="52" y="463" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the brain is a swappable, cheapening part</text>
+
+  <!-- the gate -->
+  <rect x="346" y="368" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="390" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE GATE — trust, live</text>
+  <text x="364" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">disclose the AI · label · LOG the act</text>
+  <text x="364" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act since 2 Aug · AITSC 12 Aug</text>
+  <text x="364" y="447" font-size="10.5" fill="#d85a30" font-family="sans-serif" font-weight="700">TRAP: judge the agent by how clever it is</text>
+  <text x="364" y="464" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the magistrate: declare the deputy, log the act</text>
+
+  <!-- footer strip -->
+  <text x="340" y="504" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Most enterprise AI output is now the agent's, not the chatbot's · a counsel declined costs nothing</text>
+  <text x="340" y="522" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">but an act taken in your name cannot be un-taken — name the deputy, bound the mandate, keep the ledger</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d6e56"></i>Assistance — the counselor (AI suggests, you act)</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>Execution — the deputy (AI acts in your name)</span>
+  <span><i class="dot" style="background:#34306a"></i>The control plane — identity · mandate · audit</span>
+</div>
+</div>
+
+<h3>The counselor vs. the deputy</h3>
+<table>
+<tr><th>The counselor — AI that advises</th><th>The deputy — AI that acts</th></tr>
+<tr><td>Judge the quality of the answer</td><td>Govern the identity of the actor</td></tr>
+<tr><td>Worst case: bad advice you can decline</td><td>Worst case: an action already taken in your name</td></tr>
+<tr><td>A shared login or service key will do</td><td>A unique, non-forgeable, revocable per-agent identity</td></tr>
+<tr><td>Broad access "to be helpful"</td><td>Least privilege, authorization scoped per action</td></tr>
+<tr><td>A chat log, if anyone keeps it</td><td>A complete audit ledger of every tool call, inspected</td></tr>
+</table>
+
+<h3>Why identity is the control, not capability</h3>
+<div class="card">
+<p>Every layer of the stack this month presumed the brain was cheap and swappable — and this week two things proved it while changing the question. First, the models got visibly <em>better at acting</em> (Gemini 3.7 Flash for agents, GPT-5.6 Sol Ultrafast for agent loops). Second, OpenAI's own telemetry showed that acting is now <strong>the majority of enterprise AI output.</strong> Put together, the constraint moves off capability entirely: the agent is smart enough and fast enough to act; the open question is whether you can <em>account</em> for what it does. That is not a model problem — it is an <strong>identity, authorization and audit</strong> problem, and it is exactly the problem a service account was never built to solve, because a service account performs fixed, predictable tasks while an agent <strong>plans, chooses tools and adapts.</strong> The correct read of this week is not "agents are getting powerful" — they plainly are — it is "<strong>powerful agents are now acting in your name, so the control plane is who they are and what they may do, not how clever they are.</strong>"</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> On legacy estates the danger is that agents inherit <em>human-shaped</em> access — a shared login, a broad role, a long-lived key — and then act at machine speed and machine scale through it. The retrofit is an <strong>identity-and-authority discipline. Name every agent:</strong> give each a unique, non-forgeable identity, never a shared service-account key. <strong>Bound every mandate:</strong> scope access to least privilege, authorize per action, and gate the consequential steps on a human hand. <strong>Keep the ledger:</strong> log every tool call, permission and change, and make the log inspectable and the access revocable in one move. <strong>Post the magistrate:</strong> under the EU AI Act's live duties, disclose when an agent is acting and label and log its actions. And keep the engine swappable underneath — re-benchmark Gemini 3.7 Flash, GLM-5.3, Qwen3.8 and the next release freely, because the brain is the commodity and <em>the governance of the acting agent is the moat.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — abundant, cheap, and now built for action. The rails, pilotage, last mile, business model and crossing are the layers you buy, own or finish. And sitting on top of them now is a new actor — the agent that acts in your name, which the counselor era never had. This week OpenAI's own data said the majority of enterprise AI output is already the agent's, and Google shipped per-agent identity to govern it. When AI stops advising and starts acting, the control plane is identity, mandate and audit. Name every deputy, bound what it may do, keep the ledger — and remember that an act taken in your name cannot be un-taken.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The signal — assistance becomes execution, measured.</strong> <strong>OpenAI's <em>"From assistance to execution"</em></strong> (13 Aug) reports <strong>Codex at 64%</strong> of combined enterprise output tokens (June), <strong>frontier firms at 8.3×</strong> typical (up from 2.6× in Jan), and Codex WAU up <strong>108× legal / 41× sales / 26× marketing</strong> vs 5× engineering since February — the majority of enterprise AI output is now the agent's (as reported).</li>
+  <li><strong>The control — identity becomes the plane.</strong> <strong>Google's Gemini Enterprise Agent Platform</strong> gives each agent a <strong>unique managed identity,</strong> tokens <strong>cryptographically bound to X.509 certs</strong> (unreplayable), agents that <strong>cannot be impersonated,</strong> no long-lived keys, per-action authorization and full audit — the enterprise answer to the acting agent (as reported).</li>
+  <li><strong>The scale of the problem — non-human identities.</strong> Non-human identities outnumber humans <strong>~45:1</strong> on average and up to <strong>144:1</strong> in cloud-native estates; a single agent can hold CRM/email/cloud/payment credentials and adapt its own tool use — the ungoverned population your agents now join (as reported).</li>
+  <li><strong>The engine — built for action.</strong> <strong>Gemini 3.7 Flash</strong> for agents (AutomationBench 30.4%, DeepSWE 65.3%, 50% intro price cut, 13 Aug); <strong>GPT-5.6 Sol Ultrafast</strong> ~750 tok/s (17 Aug); open-weight <strong>GLM-5.3/Qwen3.8</strong> (14 Aug); <strong>Grok 4.6</strong> $2/$6 (12 Aug); <strong>Grok 3</strong> retired (15 Aug) (as reported).</li>
+  <li><strong>The gate — trust, live.</strong> <strong>EU AI Act</strong> transparency duties enforceable since <strong>2 Aug</strong> (disclose AI, label output, log it; fines up to €15M/3%, up to €35M/7% for prohibited practice) — directly relevant to disclosing and logging agent action; <strong>AITSC</strong> consortium launched <strong>12 Aug</strong> (~50 founding enterprise security leaders).</li>
+  <li><strong>The field — production is the frame.</strong> <strong>Patrick Moorhead</strong> (Moor Insights, 17 Aug): "AI has moved out of the demo phase and into production," headlining the <strong>Six Five Summit: AI Unleashed</strong> (25–27 Aug, Marc Benioff opening) — the industry's own framing has moved from capability to deployment (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">AI has moved out of the demo phase and into production, and the enterprise leaders defining that shift are the ones building the platforms, the silicon, the cloud, and the agents that customers actually run.</div><div class="a">— Patrick Moorhead, CEO &amp; Chief Analyst, Moor Insights &amp; Strategy, on the enterprise-AI shift (17 Aug, as reported)</div></blockquote>
+<blockquote style="border-color:var(--accent)"><div class="q">Enterprise AI is moving from assistance to execution — and not all firms are making that transition at the same pace.</div><div class="a">— OpenAI, "From assistance to execution: How enterprises put AI to work" (13 Aug, as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">As of June, Codex generated 64% of the combined Codex-and-ChatGPT output tokens among enterprise customers.</div><div class="a">— OpenAI Enterprise Signal, on the majority of enterprise AI output now being the agent's (as reported)</div></blockquote>
+<blockquote><div class="q">"When your cleverest servant stops advising and starts acting, you have not merely gained speed — you have handed out your seal. A counsel declined costs nothing; an act taken in your name cannot be un-taken. Name every deputy, bound every mandate, keep the ledger."</div><div class="a">— the radar, on identity as the control plane for the acting agent</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Enterprise AI output from Codex (an agent) vs ChatGPT</td><td><span class="v">64% of combined output tokens (as of June)</span></td><td>OpenAI, "From assistance to execution" (13 Aug 2026, as reported)</td></tr>
+<tr><td>Frontier-firm vs typical-firm AI usage gap</td><td><span class="v">8.3× output tokens/active user (up from 2.6× in January)</span></td><td>OpenAI Enterprise Signal (as reported)</td></tr>
+<tr><td>Codex weekly-active-user growth since February</td><td><span class="v">108× legal · 41× sales/recruiting · 26× marketing · 5× engineering</span></td><td>OpenAI (as reported)</td></tr>
+<tr><td>Non-human identities vs human users</td><td><span class="v">~45:1 average; up to 144:1 in cloud-native estates</span></td><td>Industry / Cloud Security Alliance coverage (as reported)</td></tr>
+<tr><td>Google Agent Identity (Gemini Enterprise Agent Platform)</td><td><span class="v">Unique per-agent identity; tokens X.509-bound &amp; unreplayable; no impersonation; no long-lived keys; per-action auth + audit</span></td><td>Google Cloud (as reported)</td></tr>
+<tr><td>Gemini 3.7 Flash (built for agents)</td><td><span class="v">AutomationBench 30.4% (vs 17%); DeepSWE 65.3% (vs ~49%); 50% intro price cut ($0.75/$3.75 per 1M)</span></td><td>Google / VentureBeat (13 Aug 2026, as reported)</td></tr>
+<tr><td>GPT-5.6 Sol Ultrafast (Cerebras)</td><td><span class="v">~750 output tokens/sec; up to ~14× standard throughput</span></td><td>OpenAI / coverage (17 Aug 2026, as reported)</td></tr>
+<tr><td>Open-weight releases (14 Aug) · Grok 4.6 · Grok 3 retired</td><td><span class="v">GLM-5.3 · Qwen3.8 shipped; Grok 4.6 ties GPT-5.6 Sol Max at $2/$6 (12 Aug); Grok 3 deprecated 15 Aug</span></td><td>Model-tracker / vendor coverage (as reported)</td></tr>
+<tr><td>EU AI Act — transparency &amp; penalties</td><td><span class="v">Live since 2 Aug: disclose AI, label output, log it; fines up to €15M/3%, up to €35M/7% for prohibited practice</span></td><td>European Commission</td></tr>
+<tr><td>AI Trust &amp; Security Consortium (AITSC)</td><td><span class="v">Launched 12 Aug; ~50 founding enterprise security/tech leaders</span></td><td>AIwire / HPCwire (as reported)</td></tr>
+<tr><td>MCP 2026-07-28 specification</td><td><span class="v">Stateless core; TS &amp; Python SDKs each past 1B total downloads</span></td><td>Official MCP blog (28 Jul 2026)</td></tr>
+<tr><td>The engines (context)</td><td><span class="v">Opus 5 · GPT-5.6 Sol · Gemini 3.7 Flash · Grok 4.6 · Kimi K3 · DeepSeek V4-Pro · GLM-5.3 · Qwen3.8</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory every acting agent and give each a real identity — no shared keys.</strong> List every agent that can <em>do</em> something (not just answer): what it can touch, whose credentials it uses, and who owns it. Replace shared logins and long-lived service-account keys with a <strong>unique, non-forgeable, revocable identity per agent.</strong> OpenAI's own data says the majority of your AI output is already an agent's work — so this is not housekeeping, it is bringing your largest and fastest-growing population of actors under management. <strong>You cannot govern a deputy you cannot name.</strong></li>
+  <li><strong>Bound the mandate and gate the consequential act.</strong> For each agent, scope access to <strong>least privilege</strong> and <strong>authorize per action,</strong> not per session — and put a human hand on the steps that move money, change a system of record, or touch protected data. Grade agents on staying inside their envelope under real conditions, not on a clean demo. <strong>An adviser you can second-guess; an actor you must pre-authorize — because the act is done before you hear of it.</strong></li>
+  <li><strong>Keep the ledger and rehearse the kill switch.</strong> Stand up per-agent audit now: log every tool call, permission used and change made, make it inspectable, and prove you can <strong>revoke an agent's access in one move.</strong> Disclose and label agent action under the EU AI Act's live duties. Then run the drill: <em>a named agent acted outside its mandate at 3 a.m. — how fast can we say exactly what it did and stop it?</em> <strong>If the answer is "not fast, and not exactly," you are running deputies with a counselor's controls — fix that before the next agent you deploy.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> OpenAI / trade coverage ("From assistance to execution": Codex 64% of enterprise output tokens, frontier firms 8.3× vs 2.6×, Codex adoption by function, as reported) · Google Cloud (Gemini Enterprise Agent Platform &amp; Agent Identity: X.509-bound, unreplayable, no impersonation, per-action auth + audit) · Cloud Security Alliance / identity-industry coverage (non-human identities ~45:1, up to 144:1) · Google / VentureBeat (Gemini 3.7 Flash for agents) · OpenAI / coverage (GPT-5.6 Sol Ultrafast ~750 tok/s) · model-tracker coverage (GLM-5.3, Qwen3.8, Grok 4.6, Grok 3 retirement) · Six Five Media / GlobeNewswire (Patrick Moorhead, Six Five Summit) · European Commission (EU AI Act transparency &amp; penalties) · AIwire / HPCwire (AITSC launch) · Official MCP blog (2026-07-28 spec). Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 18 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
