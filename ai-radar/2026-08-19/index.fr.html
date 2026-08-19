@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 19 août 2026</title>
+<meta name="description" content="Radar quotidien de l'IA : synthèse, allégorie pour dirigeants, questions par secteur et analyse technique sur le déplacement du centre de gravité de l'IA vers la production. Le chiffre d'affaires entreprise d'OpenAI a dépassé le grand public pour la première fois (le directeur financier Sarah Friar, 14 août) — ~40 Md$ de revenus annualisés, deux trimestres en avance, porté par des équipes d'agents — tandis que Gartner fait de 2026 la première année où la dépense d'inférence dépasse l'entraînement (23,3 Md$ contre 19 Md$, ~55 cents de chaque dollar de cloud IA). Le poids de l'IA s'est déplacé du particulier vers l'entreprise et de la construction vers l'exploitation. Rééquilibrez : nommez le responsable, écrivez le SLA, mesurez la facture d'inférence, gréez pour les flottes d'agents. Le moteur continue de se banaliser (Gemini 3.7 Flash, Opus 5, Grok 4.6, GLM-5.3, Qwen3.8). Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Lecteur audio */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Le centre de gravité passe à la production</div>
+  <h1>Le Lest</h1>
+  <div class="subhead">Le poids de l'IA s'est déplacé sous la ligne de flottaison cette semaine — l'acheteur est passé du particulier à l'entreprise, et le calcul de l'entraînement à l'inférence. Un navire barré selon l'ancien assiette chavire.</div>
+  <div class="meta">Mercredi 19 août 2026 · Édition intersectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">Hier, ce radar regardait l'IA cesser de conseiller pour commencer à agir. Aujourd'hui il pèse le navire et constate que le lest a bougé. Le 14 août, le directeur financier d'OpenAI, Sarah Friar, a annoncé aux investisseurs que le chiffre d'affaires entreprise a, pour la première fois, dépassé le grand public — l'entreprise à ~40 Md$ de revenus annualisés, une croissance des revenus professionnels de ~32 % en un seul mois, le point de bascule deux trimestres en avance. Et Gartner fait de 2026 la première année où la dépense d'inférence dépasse l'entraînement — 23,3 Md$ contre 19 Md$, soit environ 55 cents de chaque dollar de cloud IA dépensés à faire tourner les modèles plutôt qu'à les construire. Le poids de l'IA est passé de l'individu à l'institution, et de la forge à l'atelier. La question du conseil d'administration : notre posture IA est-elle réglée pour l'endroit où le poids se trouve désormais — l'acheteur entreprise, et les modèles qui tournent en production — ou barrons-nous encore selon l'ère de démonstration de la nouveauté grand public et de la construction de modèles ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse <span class="pill">lecture de 90 secondes</span></h2>
+<div class="card">
+<p>Pendant une semaine, ce radar a remonté la valeur le long de la pile — moteur, pilotage, dernier kilomètre, modèle économique, la traversée vers la valeur, et hier l'agent qui agit. Aujourd'hui l'histoire n'est pas une couche mais un <strong>centre de gravité,</strong> et cette semaine il a bougé deux fois, dans le même sens. <strong>Le poids de l'IA s'est déplacé du grand public vers l'entreprise, et de l'entraînement vers l'inférence</strong> — de la construction de la chose à son exploitation, de la nouveauté à la production. Ce déplacement, et non le prochain modèle, est ce qui doit rééquilibrer votre stratégie. Quand le lest bouge et que le capitaine garde l'ancien cap, le navire ne va pas plus vite ; il gîte.</p>
+<p><strong>Le signal datable — l'acheteur est devenu l'entreprise.</strong> Le <strong>14 août 2026, le directeur financier d'OpenAI, Sarah Friar, a annoncé aux investisseurs que le chiffre d'affaires entreprise a dépassé le grand public pour la première fois,</strong> l'entreprise à <strong>~40 milliards de dollars de revenus annualisés</strong> et des revenus professionnels en hausse de <strong>~32 % en un seul mois</strong> — un rythme qui a avancé le point de bascule de <strong>deux trimestres pleins</strong> par rapport à sa propre prévision antérieure (parité d'ici la fin de l'année). L'entreprise représente désormais <strong>plus de 40 % du chiffre d'affaires d'OpenAI,</strong> et la société résume le moteur sans détour : les entreprises adoptent des <strong>« équipes d'agents ».</strong> L'autre laboratoire de pointe va dans le même sens — le <strong>18 août, Anthropic a publié <em>« How enterprises are building AI agents in 2026 »</em>,</strong> aux côtés d'une étude de cas entreprise Claude <em>Managed Agents.</em> La courbe de demande de l'IA de pointe s'incline désormais vers l'institution, pas vers l'individu.</p>
+<p><strong>La seconde charge — le calcul est passé de la construction à l'exploitation.</strong> <strong>Gartner fait de 2026 la première année où la dépense d'inférence dépasse l'entraînement :</strong> dans l'IaaS optimisé pour l'IA, <strong>23,3 milliards de dollars d'inférence contre 19 milliards d'entraînement,</strong> un segment en expansion de <strong>~96 %</strong> à <strong>42,3 milliards de dollars</strong> — soit environ <strong>55 cents de chaque dollar de cloud IA</strong> désormais dépensés en inférence. AMD, à Advancing AI 2026, en a donné l'échelle physique : <strong>plus de 35 quadrillions de tokens sont consommés chaque mois (~160× en deux ans),</strong> et pour la première fois le monde utilise <strong>plus de calcul IA pour faire tourner les modèles que pour les entraîner (~60 % d'inférence).</strong> Comme le formule Jeetu Patel de Cisco, <em>« Les humains cliquent, mais les agents essaiment. »</em> Le coût qui grandit désormais n'est pas la construction unique ; c'est la <strong>facture d'exploitation</strong> — et les tâches agentiques consomment <strong>5 à 30× plus de tokens</strong> qu'une requête de chatbot, même si le prix par token baisse.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>L'acheteur est désormais l'entreprise.</strong> Le chiffre d'affaires entreprise d'OpenAI a <strong>dépassé le grand public</strong> pour la première fois (<strong>~40 Md$ de revenus annualisés, ~deux trimestres en avance, &gt;40 % du chiffre d'affaires</strong>), porté par des <strong>équipes d'agents ;</strong> Anthropic a publié son manuel d'agents d'entreprise la même semaine. <strong>Traitez l'IA comme une capacité opérationnelle d'entreprise avec un responsable, un SLA et un budget — pas comme un pilote de nouveauté grand public.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>Le calcul est désormais l'inférence, pas l'entraînement.</strong> 2026 est la <strong>première année où la dépense d'inférence dépasse l'entraînement</strong> (Gartner : <strong>23,3 Md$ contre 19 Md$, ~55 cents de chaque dollar de cloud IA</strong>) ; <strong>35 quadrillions de tokens/mois,</strong> ~60 % d'inférence. <strong>Le coût qui grandit est la facture d'exploitation — instrumentez et prévoyez la dépense de tokens comme n'importe quelle autre ligne d'exploitation.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>Le moteur continue de se banaliser sous les deux charges.</strong> Gemini 3.7 Flash (13 août, pour les agents), Opus 5, GPT-5.6 Sol, Grok 4.6 à 2/6 $, GLM-5.3/Qwen3.8 en poids ouverts (14 août) — abondants et bon marché au token. Le portail de confiance est actif pour rencontrer la production : les <strong>pouvoirs d'application du Règlement IA de l'UE pour les GPAI depuis le 2 août</strong> (amendes jusqu'à 15 M€/3 %), et la <strong>spécification MCP 2026-07-28 sans état</strong> comme le rail sur lequel les agents tournent.</div></div>
+<div class="card"><strong>En résumé :</strong> le modèle est une matière première, le fossé est la couche que vous possédez — et cette semaine le <em>poids</em> de toute l'entreprise a bougé. La demande de l'IA s'est déplacée vers l'entreprise et son calcul vers l'inférence : l'ère de la construction et de la démonstration cède la place à l'ère de l'achat et de l'exploitation. <strong>Rééquilibrez pour cela — mettez un responsable, un SLA et un budget de tokens sur l'IA en production — car un navire barré selon l'ancien lest gîte précisément quand le vent forcit.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>⚓ « Le Lest »</h3>
+<p><em>Sujet : Le 14 août 2026, le directeur financier d'OpenAI, Sarah Friar, a annoncé aux investisseurs que le chiffre d'affaires entreprise avait, pour la première fois, dépassé le grand public, l'entreprise à ~40 Md$ de revenus annualisés, des revenus professionnels en hausse de ~32 % en un seul mois, et le point de bascule survenant ~deux trimestres en avance ; l'entreprise représente désormais &gt;40 % du chiffre d'affaires d'OpenAI et le moteur annoncé est l'adoption par les entreprises d'« équipes d'agents » (et, le 18 août, Anthropic a publié « How enterprises are building AI agents in 2026 »). Par ailleurs, Gartner fait de 2026 la première année où la dépense d'inférence dépasse l'entraînement — ~23,3 Md$ d'inférence contre ~19 Md$ d'entraînement dans l'IaaS optimisé pour l'IA, un segment de ~42,3 Md$, soit environ 55 cents de chaque dollar de cloud IA — tandis qu'AMD rapporte &gt;35 quadrillions de tokens consommés par mois et ~60 % du calcul IA désormais consacré à l'inférence. Ensemble : le centre de gravité de l'IA s'est déplacé du grand public vers l'entreprise (demande) et de l'entraînement vers l'inférence (calcul) — de la construction à l'exploitation. La leçon : rééquilibrez la stratégie, la responsabilité et le budget vers l'endroit où le poids se trouve désormais.</em></p>
+<p>Un grand navire de commerce avait été construit, tout le monde en convenait, pour l'<strong>émerveillement de la foule.</strong> Dans ses premières années, tout son intérêt était le lancement : les charpentiers peinaient saison après saison à le faire plus long, plus rapide, plus éblouissant, et le quai se remplissait de citadins qui payaient une piécette pour arpenter ses ponts et s'émerveiller. L'argent, tel qu'il était, venait de mille petits droits de passage de mille visiteurs curieux, et le chantier mesurait sa fierté à la <em>construction</em> — à quel point cette coque était plus fine que celle de l'an passé. Le navire était une merveille à montrer. Ce qu'il <em>transportait</em> réellement était presque hors de propos.</p>
+<p>Puis, discrètement, en une seule saison, deux poids se sont déplacés sous la ligne de flottaison — et un navire n'est régi par rien tant que par le poids qu'il ne voit pas. Le premier poids était <strong>qui payait.</strong> Il s'avéra que les mille badauds n'avaient jamais été l'affaire ; l'affaire, c'étaient les <strong>grandes maisons et les guildes</strong> qui affrétaient la cale à l'année pour transporter une vraie cargaison, et leur clientèle grandit si vite qu'en un mois elle bondit d'un tiers, jusqu'à ce que — deux saisons plus tôt que le capitaine du port ne l'avait calculé — <strong>les affrètements des guildes pèsent plus lourd que tous les droits de passage des visiteurs réunis.</strong> Le vrai maître du navire n'était plus la foule sur le quai ; c'était le contrat permanent au comptoir, et les guildes n'affrétaient pas un seul marin habile — elles affrétaient <strong>des équipages entiers qui travaillaient la cale jour et nuit.</strong></p>
+<p>Le second poids était <strong>ce pour quoi brûlaient les fourneaux.</strong> Pendant des années, les grands feux du chantier avaient rugi pour <em>forger</em> le navire — pour construire et reconstruire le moteur. Mais désormais, la cale affrétée jour et nuit, l'essentiel du charbon n'allait plus à forger quoi que ce soit de neuf mais à <strong>faire tourner</strong> ce qui était déjà construit, mille après mille payée. Pour la première fois, on brûlait plus de feu à <strong>naviguer</strong> qu'à <strong>charpenter</strong> — et la facture n'était plus le coût unique de la construction mais le coût sans fin du voyage, un compteur qui tournait à chaque heure où les équipages essaimaient dans la cale. Un charbon moins cher au sac ne les sauvait pas ; les équipages en brûlaient tellement plus, tellement plus souvent, que la facture d'exploitation grimpait même quand le sac devenait bon marché.</p>
+<p>Et voici ce qui perdit les capitaines qui le manquèrent : <strong>le navire reposait désormais tout autrement dans l'eau, et barrait tout autrement que son lui-même du jour de lancement.</strong> Un capitaine qui l'équilibrait encore pour la foule admiratrice — cale légère, tout en démonstration au-dessus de la ligne de flottaison, charbon thésaurisé pour un lancement éblouissant de plus — mettrait la barre dessous dans un vent frais et la sentirait gîter à donner mal au cœur, car le poids n'était plus là où ses mains s'en souvenaient. Les sages capitaines rééquilibrèrent pour le lest qu'ils portaient réellement : ils donnèrent à la cale affrétée un <strong>maître nommé et un contrat écrit</strong> — un responsable, un SLA, une norme — au lieu de la traiter comme une attraction foraine ; ils mirent un <strong>compteur et un budget sur le charbon,</strong> surveillant la facture d'exploitation comme ils surveillaient jadis la construction ; et ils gréèrent le navire pour des <strong>équipages permanents essaimant dans la cale,</strong> pas un marin de parade sur le pont. Un officier des douanes se tenait aussi désormais à l'entrée du port, ne laissant passer aucun affrètement dont la cargaison n'était pas déclarée et consignée — car le royaume avait décrété qu'un navire de travail en commerce est tenu à une norme plus lourde qu'une curiosité au quai.</p>
+<p><strong>La morale :</strong> quand la foule cesse d'être le client et que la guilde commence, et quand le feu cesse de forger pour se mettre à naviguer, vous n'avez pas seulement grandi — votre lest a bougé, et un navire barré selon son ancienne assiette chavire au premier vrai gros temps. L'ère du lancement récompensait la coque la plus fine montrée à la plus grande foule ; l'ère du commerce récompense le capitaine qui connaît le poids qu'il porte réellement et l'équilibre pour lui. Rééquilibrez vers l'affrètement qui paie et le compteur d'exploitation. Nommez le maître de la cale, budgétez le charbon au mille, et gréez pour les équipages qui essaiment — car le navire se juge désormais non à son allure du jour de lancement, mais à ce qu'il transporte, pour qui, à quel coût d'exploitation, voyage après voyage.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Le poids de notre IA a bougé — le client payant est désormais l'entreprise, pas l'individu curieux, et l'essentiel de notre calcul fait désormais tourner les modèles plutôt qu'il ne les entraîne. Avons-nous rééquilibré le navire pour ce lest — un responsable, un SLA et un budget mesuré sur l'IA en production, gréé pour des équipes d'agents permanentes — ou barrons-nous encore selon l'assiette du jour de lancement, prenant un modèle éblouissant pour une flotte affrétée, rentable et en exploitation ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions par secteur pour les dirigeants</h2>
+<div class="sector"><div class="t">🌐 Intersectoriel (tout conseil d'administration)</div><ul>
+  <li><strong>Avons-nous fait passer l'IA d'une démonstration à une opération affrétée ?</strong> Le chiffre d'affaires des laboratoires de pointe penche désormais vers l'entreprise (OpenAI : l'entreprise a dépassé le grand public, &gt;40 % du chiffre d'affaires, porté par des « équipes d'agents »). <strong>Chaque capacité IA en production a-t-elle un responsable nommé, un SLA écrit et une ligne de P&amp;L — ou la faisons-nous encore tourner comme un pilote de nouveauté grand public qui impressionne au lancement et barre mal par gros temps ?</strong></li>
+  <li><strong>Budgétons-nous pour le voyage, pas seulement pour la construction ?</strong> 2026 est la première année où l'inférence dépasse l'entraînement ; les tâches agentiques brûlent 5 à 30× plus de tokens qu'une requête de chatbot. <strong>Notre budget IA est-il bâti autour de la facture d'exploitation récurrente — la dépense mesurée de tokens en production — ou finançons-nous encore des constructions uniques pour être surpris par le compteur mensuel ?</strong></li>
+  <li><strong>Où se trouve notre propre centre de gravité — et barrons-nous vers lui ?</strong> <strong>Notre investissement IA est-il pondéré vers ce qui paie et tourne réellement (les flux d'entreprise en production), ou vers ce qui éblouit (un pilote de plus, un changement de modèle de plus) — et le conseil peut-il voir lequel, en une page ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>La banque et l'assurance sont parmi les plus rapides à mettre des agents en production. <strong>Alors que des flottes d'agents déplacent de vraies transactions, chacune est-elle affrétée comme une ligne d'activité — responsable nommé, SLA, séparation des tâches, audit — et son coût mesuré de tokens est-il une ligne d'exploitation prévue, pas une surprise sur la facture cloud ?</strong></li>
+  <li>La facture d'exploitation s'aggrave avec le volume. <strong>Avec des flux agentiques utilisant plusieurs fois les tokens d'un chatbot, avons-nous une discipline FinOps sur l'inférence — coût par flux, économie unitaire par transaction, et un coupe-circuit sur les dépenses incontrôlées — avant qu'une flotte d'agents ne devienne discrètement notre plus grand poste cloud ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Un modèle qui tourne en continu dans un flux de soins ou de découverte est un système de production, pas une démonstration. <strong>Chaque agent clinique ou de recherche a-t-il un responsable redevable, une norme de niveau de service, et un coût d'exploitation mesuré et prévu — les devoirs de divulgation et de journalisation du Règlement IA de l'UE étant respectés pour tout ce qui agit sur les patients ou les données protégées ?</strong></li>
+  <li>La valeur se comptabilise dans l'exploitation, pas dans le lancement. <strong>Finançons-nous l'exploitation durable des quelques flux IA qui aident manifestement — validation, surveillance, budget d'inférence — plutôt qu'une flotte tournante de pilotes qui ne quittent jamais le quai ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacture</div><ul>
+  <li>Sur l'atelier, un agent qui pilote une ligne est une cargaison affrétée, pas une curiosité. <strong>Nos systèmes IA opérationnels ont-ils des responsables nommés, des SLA, des verrouillages et un budget d'inférence mesuré, comme tout système de contrôle de production a un budget de maintenance et d'énergie ?</strong></li>
+  <li>Le charbon brûle désormais pour faire tourner, pas pour construire. <strong>Avons-nous dimensionné le coût continu de calcul/inférence de l'IA intégrée aux opérations — et pouvons-nous relier chaque token en exploitation à une unité de production, pour que la ligne IA grandisse avec la valeur, pas seulement avec l'usage ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>L'IA grand public est là où était jadis la foule — mais l'argent et la gouvernance résident désormais dans les opérations de production. <strong>Les agents de tarification, de service et de merchandising sont-ils affrétés avec des responsables, des SLA et des budgets mesurés — et leur dépense de tokens est-elle prévue face à la marge qu'ils protègent réellement ?</strong></li>
+  <li>La délégation se répand dans les équipes non techniques. <strong>Les responsables marketing et merchandising qui font tourner des agents comprennent-ils qu'ils possèdent désormais un coût d'<em>exploitation</em> et une norme de production — pas une démonstration gratuite — et ce coût est-il visible sur leur P&amp;L ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>L'IA publique doit être redevable en exploitation, pas seulement impressionnante en pilote. <strong>Chaque agent déployé a-t-il une identité déclarée (au titre du Règlement IA de l'UE), un responsable nommé, un journal inspectable, et un budget d'exploitation financé et mesuré — pour que le service puisse être maintenu et audité, pas abandonné quand l'éclat du lancement s'éteint ?</strong></li>
+  <li>L'autorité budgétaire suit le lest. <strong>Sommes-nous passés du financement d'expériences IA au financement d'<em>opérations</em> IA — l'inférence, la surveillance et la gouvernance qui maintiennent un service en marche — ou écrivons-nous encore des subventions uniques pour des démonstrations qui n'entrent jamais en production ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Le centre de gravité passe à la production</h2>
+<p>Lisez la pile, une fois de plus, comme des couches au prix très différent — mais cette semaine, regardez au-delà de <em>la couche que vous achetez</em> vers <strong>l'endroit où se trouve désormais le poids de l'ensemble,</strong> car il vient de se déplacer sous la ligne de flottaison. En <strong>bas</strong> se trouve le <em>moteur</em> — le modèle brut, abondant, bon marché, facturé au token. Au-dessus se trouvent les <strong>rails</strong> (l'infrastructure d'agents — MCP et consorts), le <strong>pilotage</strong> (contexte, fiabilité), le <strong>dernier kilomètre</strong> (distribution), le <strong>modèle économique</strong> (comment le fournisseur est payé), la <strong>traversée</strong> (intégration, données, adoption, gouvernance), et l'<strong>agent qui agit</strong> d'hier. Tout cela reste vrai. Ce qui a changé cette semaine, c'est le <strong>lest</strong> — les deux charges lourdes qui décident de la façon dont le navire repose : <strong>qui paie (désormais l'entreprise) et ce que fait le calcul (désormais l'inférence).</strong> Le point d'ingénierie est net : <strong>l'unité de valeur de l'IA est passée d'un modèle qu'on lance à une flotte qu'on fait tourner — et une flotte qu'on fait tourner se mesure par des responsables, des SLA et une facture de tokens mesurée, pas par un benchmark du jour de lancement.</strong></p>
+<div class="card"><ul>
+  <li><strong>La charge de demande — l'acheteur est désormais l'entreprise.</strong> Le <strong>14 août</strong>, le directeur financier d'OpenAI, <strong>Sarah Friar,</strong> a annoncé aux investisseurs que le <strong>chiffre d'affaires entreprise a dépassé le grand public pour la première fois</strong> — <strong>~40 Md$ de revenus annualisés,</strong> revenus professionnels <strong>+~32 % en un mois,</strong> le point de bascule <strong>~deux trimestres en avance ;</strong> l'entreprise représente <strong>&gt;40 %</strong> du chiffre d'affaires et le moteur est les <strong>« équipes d'agents ».</strong> Le <strong>18 août</strong>, <strong>Anthropic</strong> a publié <em>« How enterprises are building AI agents in 2026 ».</em> La croissance des deux laboratoires de pointe s'incline désormais vers l'institution qui fait tourner des agents en production, pas vers l'individu qui discute.</li>
+  <li><strong>La charge de calcul — le feu fait tourner les modèles désormais, il ne fait pas que les construire.</strong> <strong>Gartner</strong> fait de <strong>2026 la première année où la dépense d'inférence dépasse l'entraînement :</strong> <strong>23,3 Md$ d'inférence contre 19 Md$ d'entraînement</strong> dans l'IaaS optimisé pour l'IA, un segment de <strong>~42,3 Md$</strong> (<strong>+~96 %</strong>), ~<strong>55 cents de chaque dollar de cloud IA</strong> en inférence ; <strong>IDC</strong> chiffre la dépense totale d'infrastructure IA à près de <strong>487 Md$ (+53 % en glissement annuel).</strong> <strong>AMD</strong> (Advancing AI 2026) : <strong>&gt;35 quadrillions de tokens/mois (~160× en deux ans),</strong> <strong>~60 % du calcul IA désormais en inférence.</strong> La facture est le voyage, pas la construction — et les tâches agentiques brûlent <strong>5 à 30× plus de tokens</strong> par tâche qu'une requête de chatbot, même si le <strong>prix par token a chuté de ~280× depuis 2022.</strong></li>
+  <li><strong>Le moteur et le portail — carburant bon marché, douane active.</strong> Le <strong>modèle</strong> est une pièce interchangeable qui s'abaisse : <strong>Gemini 3.7 Flash</strong> (13 août, pour les agents), <strong>Opus 5, GPT-5.6 Sol, Grok 4.6</strong> à <strong>2/6 $,</strong> <strong>GLM-5.3/Qwen3.8</strong> en poids ouverts (14 août), au-dessus de <strong>Kimi K3, DeepSeek V4-Pro.</strong> Les <strong>rails</strong> sur lesquels la flotte tourne se sont standardisés : la <strong>spécification MCP 2026-07-28 sans état</strong> (Tasks pour les agents à longue durée ; SDK au-delà de <strong>1 Md</strong> de téléchargements). Et l'<strong>officier des douanes</strong> est actif : les <strong>pouvoirs d'application du Règlement IA de l'UE pour les GPAI depuis le 2 août</strong> (amendes jusqu'à <strong>15 M€/3 %</strong>), tenant un système de production à une norme plus lourde qu'une démonstration au quai.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>le moteur est bon marché, les rails sont gratuits, et le poids de l'entreprise s'est déplacé vers la production — l'acheteur entreprise et la facture d'inférence.</strong> Pendant une semaine le cadrage était « posséder la bonne couche » et « achever la traversée » ; la correction de cette semaine porte sur l'<em>assiette.</em> <strong>Une fois le lest déplacé, vous barrez vers le nouveau poids ou vous chavirez.</strong> « C'est le modèle le plus intelligent / le moins cher » n'est pas la réponse à « qui paie pour cela, qui le possède en production, et combien coûte-t-il à exploiter par voyage » ; <em>« cette capacité a un responsable entreprise, un SLA écrit, un budget de tokens mesuré et une flotte d'agents gouvernée »</em> est la réponse.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le lest : le poids de l'IA se déplace sous la ligne de flottaison — l'acheteur passe du grand public à l'entreprise, et le calcul de l'entraînement à l'inférence (construction vers exploitation). En haut à gauche : l'ère du lancement, l'ancienne assiette — le client est la foule, mille petits droits de passage, mesuré par la construction, un modèle éblouissant montré, coût de la forge unique. En haut à droite : l'ère du commerce, la nouvelle assiette — le client est l'entreprise, le chiffre d'affaires entreprise d'OpenAI a dépassé le grand public à environ 40 milliards de dollars annualisés, en hausse de 32 pour cent en un mois et désormais plus de 40 pour cent du chiffre d'affaires, affrété par des équipes d'agents, et le coût est la facture d'exploitation par voyage. Le lest se déplace de gauche à droite : la charge de demande va vers l'entreprise, la charge de calcul vers l'inférence, et 2026 est la première année où l'exploitation dépasse l'entraînement. En dessous : rééquilibrer pour la production — responsable, SLA, budget de tokens mesuré, flotte gouvernée. Gartner : 2026 première année, inférence à 23,3 milliards dépasse entraînement à 19 milliards. En bas : le moteur, carburant bon marché — Gemini 3.7 Flash, Opus 5, Grok 4.6 à 2 et 6 dollars, GLM-5.3, et 35 quadrillions de tokens par mois ; et la douane, confiance active — une flotte de travail tenue à une norme plus lourde, application du Règlement IA de l'UE pour les GPAI depuis le 2 août, et spécification MCP 2026-07-28 sans état avec SDK au-delà d'un milliard de téléchargements." style="max-width:660px;width:100%;height:auto">
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE LEST — le poids de l'IA se déplace SOUS la ligne de flottaison</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">acheteur : GRAND PUBLIC → ENTREPRISE · calcul : ENTRAÎNEMENT → INFÉRENCE</text>
+
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">L'ÈRE DU LANCEMENT — ancienne assiette</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">client : la FOULE (grand public)</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">mille petits droits · montré</text>
+  <text x="52" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">mesuré par : la CONSTRUCTION</text>
+  <text x="52" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">un modèle habile, sur le quai</text>
+  <text x="52" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">coût : la forge unique</text>
+
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">L'ÈRE DU COMMERCE — nouvelle assiette</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">client : l'ENTREPRISE</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI : entreprise &gt; grand public</text>
+  <text x="364" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~40 Md$ annualisés · +32 %/mois · &gt;40 %</text>
+  <text x="364" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">affrété par des équipes d'agents</text>
+  <text x="364" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">coût : la facture d'exploitation / voyage</text>
+
+  <line x1="336" y1="112" x2="344" y2="112" stroke="#9aa7b6" stroke-width="2" stroke-dasharray="3 3"/>
+  <polygon points="344,108 352,112 344,116" fill="#9aa7b6"/>
+  <text x="340" y="200" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">le lest se déplace ▶ demande → entreprise · calcul → inférence · 2026 : exploitation &gt; entraînement</text>
+
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+
+  <rect x="34" y="230" width="612" height="96" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">RÉÉQUILIBRER POUR LA PRODUCTION — responsable · SLA · budget de tokens mesuré · flotte gouvernée</text>
+  <text x="52" y="272" font-size="10.5" fill="#e8edf3" font-family="sans-serif">RESPONSABLE : un maître nommé de la cale, pas une attraction foraine</text>
+  <text x="52" y="289" font-size="10.5" fill="#e8edf3" font-family="sans-serif">SLA : une norme de production écrite, pas un benchmark du jour de lancement</text>
+  <text x="52" y="306" font-size="10.5" fill="#e8edf3" font-family="sans-serif">BUDGET : mesurer le charbon au mille — l'inférence est le coût qui grandit</text>
+  <text x="52" y="322" font-size="9.5" fill="#c3ccd8" font-family="sans-serif" font-style="italic">↳ Gartner : 2026 première année, inférence (23,3 Md$) dépasse entraînement (19 Md$)</text>
+
+  <line x1="340" y1="326" x2="340" y2="352" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,352 340,364 346,352" fill="#b9b2f5"/>
+  <text x="356" y="344" font-size="9" fill="#9aa7b6" font-family="sans-serif">au-dessus ↓</text>
+
+  <rect x="34" y="368" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="390" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">LE MOTEUR — carburant bon marché</text>
+  <text x="52" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 3.7 Flash · Opus 5 · GPT-5.6 Sol</text>
+  <text x="52" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Grok 4.6 2/6 $ · GLM-5.3 · Qwen3.8</text>
+  <text x="52" y="444" font-size="10.5" fill="#e8edf3" font-family="sans-serif">35 quadrillions de tokens/mois · ~60 % inférence</text>
+  <text x="52" y="463" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">le cerveau est une pièce interchangeable</text>
+
+  <rect x="346" y="368" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="390" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">LA DOUANE — confiance, active</text>
+  <text x="364" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">une flotte de travail tenue à une norme plus lourde</text>
+  <text x="364" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Règlement IA UE — GPAI depuis le 2 août</text>
+  <text x="364" y="447" font-size="10.5" fill="#d85a30" font-family="sans-serif" font-weight="700">PIÈGE : barrer selon l'assiette du lancement</text>
+  <text x="364" y="464" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">MCP 2026-07-28 sans état · SDK &gt;1 Md</text>
+
+  <text x="340" y="504" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Le poids de l'IA est passé à la production : l'entreprise l'achète, et l'inférence la fait tourner · un carburant moins cher ne vous sauve pas</text>
+  <text x="340" y="522" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">si vous en brûlez bien plus — nommez le responsable, écrivez le SLA, mesurez la facture, gréez pour la flotte</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>L'ère du lancement — ancienne assiette (grand public, la construction)</span>
+  <span><i class="dot" style="background:#1d6e56"></i>L'ère du commerce — nouvelle assiette (entreprise, le voyage)</span>
+  <span><i class="dot" style="background:#34306a"></i>Rééquilibrer pour la production — responsable · SLA · budget</span>
+</div>
+</div>
+
+<h3>L'ère du lancement vs. l'ère du commerce</h3>
+<table>
+<tr><th>L'ère du lancement — l'IA comme merveille à montrer</th><th>L'ère du commerce — l'IA comme flotte à exploiter</th></tr>
+<tr><td>Le client est la foule (grand public)</td><td>Le client est l'entreprise (affrétée à l'année)</td></tr>
+<tr><td>Mesuré par la construction — un modèle éblouissant</td><td>Mesuré par le voyage — la valeur transportée en production</td></tr>
+<tr><td>Calcul dépensé en entraînement (forger)</td><td>Calcul dépensé en inférence (~55 cents de chaque dollar de cloud IA)</td></tr>
+<tr><td>Un assistant habile, montré</td><td>Des équipes d'agents, essaimant dans la cale jour et nuit</td></tr>
+<tr><td>Coût = la forge unique</td><td>Coût = la facture d'exploitation, mesurée à chaque heure</td></tr>
+<tr><td>Succès = un lancement qui éblouit</td><td>Succès = un responsable, un SLA et un coût unitaire sain</td></tr>
+</table>
+
+<h3>Pourquoi la facture d'exploitation est le chiffre qui compte</h3>
+<div class="card">
+<p>Pendant un an, le réflexe fut de courir après le modèle le plus fin ; les données de cette semaine disent que le modèle le plus fin n'est pas là où se trouve le poids. <strong>Le prix par token a chuté de ~280× depuis 2022 — et les factures IA des entreprises augmentent tout de même,</strong> parce que les flux agentiques consomment <strong>5 à 30× plus de tokens par tâche</strong> et que le volume s'accumule à mesure que les flottes passent en production. C'est la signature d'un <strong>coût d'exploitation, pas d'un coût de construction :</strong> il grandit avec l'usage, indéfiniment, et un carburant moins cher ne vous sauve pas si vous en brûlez bien plus. Le point de bascule de Gartner — <strong>l'inférence à 23,3 Md$ dépassant l'entraînement à 19 Md$ en 2026</strong> — en est la preuve macro ; votre propre facture cloud en est la preuve micro. La lecture correcte n'est pas « les modèles deviennent moins chers » (c'est vrai) — c'est « <strong>le coût qui grandit dans l'IA est désormais l'inférence que vous faites tourner en production, alors budgétez-la, mesurez-la et possédez-la comme la ligne d'exploitation qu'elle est devenue.</strong> »</p>
+</div>
+
+<h3>Ce que cela donne sur les parcs existants</h3>
+<div class="card">
+<p>La même couture à laquelle ce radar revient sans cesse — <strong>soyez délibéré sur ce que vous possédez, louez et financez, et à quelles conditions.</strong> Sur les parcs existants, le danger est de traiter l'IA comme une série de lancements — financer des pilotes, changer de modèles, célébrer des démonstrations — tandis que le poids réel (l'usage en production, la dépense d'inférence, les flottes d'agents permanentes) grandit sans gouvernance en arrière-plan. Le rattrapage est une <strong>discipline de production et de coût. Affrétez la cale :</strong> donnez à chaque capacité IA en production un responsable nommé, un SLA écrit, et une place sur un P&amp;L. <strong>Mesurez le charbon :</strong> instrumentez la dépense de tokens d'inférence, prévoyez-la comme une ligne d'exploitation, et reliez-la à une unité de valeur ; appliquez le FinOps aux agents. <strong>Gréez pour les équipages :</strong> planifiez pour des équipes d'agents tournant en continu — identité, observabilité, gouvernance (la discipline du député d'hier appliquée à une flotte). <strong>Passez la douane :</strong> respectez les devoirs actifs du Règlement IA de l'UE pour tout ce qui tourne en production. Et gardez le moteur interchangeable en dessous — re-benchmarkez librement, car le cerveau est la matière première et <em>la flotte d'exploitation gouvernée, financée et possédée est le fossé.</em></p>
+<p><strong>Le modèle mental clair :</strong> <em>Le modèle est le moteur — abondant, bon marché, facturé au token. Les rails, le pilotage, le dernier kilomètre, le modèle économique, la traversée et l'agent qui agit sont les couches que vous achetez, possédez ou achevez. Mais le lest — qui paie et ce que fait le calcul — a bougé cette semaine : l'acheteur est l'entreprise et le calcul est l'inférence. Le poids de l'IA est passé du lancement au voyage, de la construction à l'exploitation. Rééquilibrez le navire : nommez le responsable, écrivez le SLA, mesurez la facture d'exploitation, gréez pour la flotte — car un capitaine qui barre selon l'assiette du jour de lancement chavire au moment où le vrai gros temps frappe.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>Le signal de demande — l'entreprise dépasse le grand public.</strong> Le directeur financier d'OpenAI, <strong>Sarah Friar</strong> (14 août) : chiffre d'affaires entreprise <strong>&gt; grand public</strong> pour la première fois ; <strong>~40 Md$ annualisés,</strong> <strong>+~32 %</strong> de revenus professionnels en un mois, <strong>~deux trimestres en avance ;</strong> entreprise <strong>&gt;40 %</strong> du chiffre d'affaires, porté par des <strong>« équipes d'agents ».</strong> <strong>Anthropic</strong> (18 août) : <em>« How enterprises are building AI agents in 2026 »</em> (tel que rapporté).</li>
+  <li><strong>Le signal de calcul — l'inférence dépasse l'entraînement.</strong> <strong>Gartner :</strong> 2026 première année où l'inférence dépasse l'entraînement — <strong>23,3 Md$ contre 19 Md$</strong> dans l'IaaS IA, segment <strong>~42,3 Md$</strong> (<strong>+~96 %</strong>), <strong>~55 cents</strong> de chaque dollar de cloud IA ; <strong>IDC :</strong> dépense d'infra IA <strong>~487 Md$ (+53 % en glissement annuel)</strong> (tel que rapporté).</li>
+  <li><strong>L'échelle — les tokens.</strong> <strong>AMD</strong> (Advancing AI 2026) : <strong>&gt;35 quadrillions de tokens/mois (~160× en deux ans),</strong> <strong>~60 %</strong> du calcul IA désormais en inférence ; tâches agentiques <strong>5 à 30× plus de tokens</strong> qu'un chatbot ; prix par token <strong>en baisse de ~280× depuis 2022</strong> (tel que rapporté).</li>
+  <li><strong>Le moteur — carburant bon marché.</strong> <strong>Gemini 3.7 Flash</strong> (13 août, pour les agents) ; <strong>Opus 5, GPT-5.6 Sol, Grok 4.6</strong> à <strong>2/6 $ ;</strong> <strong>GLM-5.3/Qwen3.8</strong> en poids ouverts (14 août) ; <strong>Kimi K3, DeepSeek V4-Pro</strong> (tel que rapporté).</li>
+  <li><strong>Le portail — douane, active.</strong> Les <strong>pouvoirs d'application du Règlement IA de l'UE pour les GPAI</strong> applicables depuis le <strong>2 août</strong> (amendes jusqu'à <strong>15 M€/3 %</strong> du chiffre d'affaires mondial ; pouvoirs de documentation, d'évaluation, de rappel) — une barre plus lourde pour l'IA en production ; <strong>MCP 2026-07-28</strong> spécification sans état (Tasks pour les agents à longue durée ; SDK au-delà de <strong>1 Md</strong> de téléchargements).</li>
+  <li><strong>Le cadrage — la production, pas la démonstration.</strong> Jeetu Patel de Cisco (Advancing AI 2026) : <em>« Les humains cliquent, mais les agents essaiment »</em> — le cadrage de l'industrie elle-même est passé de l'individu qui clique à la flotte qui essaime (tel que rapporté).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui accrochent l'œil</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Je n'ai jamais vu un tel niveau de conviction se répandre aussi vite et aussi régulièrement au sein des industries.</div><div class="a">— Denise Dresser, OpenAI, sur l'adoption par les entreprises des « équipes d'agents » (extrait de « The next phase of enterprise AI » d'OpenAI, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Les humains cliquent, mais les agents essaiment.</div><div class="a">— Jeetu Patel, président et directeur produit, Cisco, sur la façon dont l'IA agentique remodèle la demande d'inférence (Advancing AI 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Le chiffre d'affaires entreprise a, pour la première fois, dépassé le grand public — l'entreprise à environ 40 milliards de dollars de revenus annualisés, le point de bascule survenant environ deux trimestres en avance sur les prévisions.</div><div class="a">— Sarah Friar, directrice financière, OpenAI, dans des propos aux investisseurs (14 août ; rapporté par CNBC et d'autres ; paraphrase de la substance rapportée)</div></blockquote>
+<blockquote><div class="q">« Quand la foule cesse d'être votre client et que la guilde commence, et que le feu cesse de forger pour se mettre à naviguer, votre lest a bougé. Barrez vers le poids que vous portez — un responsable, un SLA, une facture mesurée — ou vous chavirez au premier vrai gros temps. »</div><div class="a">— le radar, sur le rééquilibrage de la stratégie IA pour l'ère de la production</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Chiffre d'affaires entreprise vs grand public d'OpenAI</td><td><span class="v">L'entreprise a dépassé le grand public pour la première fois ; ~40 Md$ de revenus annualisés ; revenus professionnels +~32 % en un mois ; ~2 trimestres en avance</span></td><td>Directeur financier Sarah Friar, propos aux investisseurs (14 août 2026, tel que rapporté)</td></tr>
+<tr><td>Part de l'entreprise dans le chiffre d'affaires d'OpenAI</td><td><span class="v">&gt;40 % du chiffre d'affaires ; porté par l'adoption d'« équipes d'agents »</span></td><td>OpenAI, « The next phase of enterprise AI » (tel que rapporté)</td></tr>
+<tr><td>Dépense d'inférence vs entraînement (2026)</td><td><span class="v">Première année où l'inférence dépasse l'entraînement : 23,3 Md$ d'inférence contre 19 Md$ d'entraînement (IaaS optimisé IA) ; segment ~42,3 Md$, +~96 % ; ~55 cents de chaque dollar de cloud IA</span></td><td>Gartner (tel que rapporté)</td></tr>
+<tr><td>Dépense d'infrastructure IA (2026)</td><td><span class="v">~487 Md$, +53 % en glissement annuel</span></td><td>IDC (tel que rapporté)</td></tr>
+<tr><td>Consommation mensuelle de tokens</td><td><span class="v">&gt;35 quadrillions de tokens/mois (~160× en deux ans) ; ~60 % du calcul IA désormais en inférence</span></td><td>AMD, Advancing AI 2026 (tel que rapporté)</td></tr>
+<tr><td>Multiplicateur de coût agentique</td><td><span class="v">Les tâches agentiques utilisent ~5 à 30× plus de tokens qu'une requête de chatbot ; prix par token en baisse de ~280× depuis 2022</span></td><td>Gartner (tel que rapporté)</td></tr>
+<tr><td>Poussée d'Anthropic vers les agents d'entreprise</td><td><span class="v">« How enterprises are building AI agents in 2026 » + étude de cas Claude Managed Agents</span></td><td>Anthropic / Claude (17–18 août 2026, tel que rapporté)</td></tr>
+<tr><td>Règlement IA de l'UE — application GPAI</td><td><span class="v">Pouvoirs d'application et de sanction applicables depuis le 2 août ; amendes jusqu'à 15 M€ ou 3 % du chiffre d'affaires mondial ; pouvoirs de documentation, évaluation, rappel</span></td><td>Commission européenne</td></tr>
+<tr><td>Spécification MCP 2026-07-28</td><td><span class="v">Cœur sans état ; extension Tasks pour les agents à longue durée ; SDK TS et Python chacun au-delà de 1 Md de téléchargements</span></td><td>Blog officiel MCP (28 juillet 2026)</td></tr>
+<tr><td>Les moteurs (contexte)</td><td><span class="v">Opus 5 · GPT-5.6 Sol · Gemini 3.7 Flash · Grok 4.6 (2/6 $) · Kimi K3 · DeepSeek V4-Pro · GLM-5.3 · Qwen3.8</span></td><td>Couverture fournisseurs / trackers de modèles (tel que rapporté)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois actions pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Rééquilibrez : affrétez chaque capacité IA en production comme une ligne d'activité.</strong> Cessez de financer l'IA comme une série tournante de lancements. Pour chaque capacité effectivement en production, désignez un <strong>responsable nommé,</strong> écrivez une <strong>norme de niveau de service,</strong> et donnez-lui une <strong>place sur un P&amp;L.</strong> Le chiffre d'affaires des laboratoires de pointe eux-mêmes s'est déplacé vers l'entreprise qui fait tourner des agents — reflétez-le en interne : ce qui paie est l'opération gouvernée, pas la démonstration éblouissante. <strong>On ne peut pas barrer un navire dont la cargaison la plus lourde n'a pas de maître.</strong></li>
+  <li><strong>Mesurez le charbon : instaurez une discipline FinOps sur l'inférence dès maintenant.</strong> 2026 est la première année où l'inférence dépasse l'entraînement, et les tâches agentiques brûlent 5 à 30× les tokens d'un chatbot. <strong>Instrumentez la dépense de tokens en production, prévoyez-la comme une ligne d'exploitation, et reliez chaque token en exploitation à une unité de valeur.</strong> Posez des alertes et un coupe-circuit pour les dépenses d'agents incontrôlées. Des prix par token moins chers ne sauveront <em>pas</em> un budget qui ignore le volume — la facture d'exploitation est désormais le chiffre qui grandit.</li>
+  <li><strong>Gréez pour la flotte : planifiez pour des équipes d'agents en production.</strong> OpenAI comme Anthropic présentent la croissance comme des entreprises faisant tourner des <em>équipes d'agents,</em> pas des assistants isolés. <strong>Appliquez la discipline du député d'hier à l'échelle de la flotte</strong> — identité, mandat, audit, observabilité — et concevez pour une exploitation continue, pas un pilote ponctuel. Puis faites l'exercice : <em>notre plus grande ligne de coût IA est désormais un essaim d'agents en production — savons-nous qui la possède, ce qu'elle coûte par voyage, et comment prouver ce qu'elle a fait ?</em> <strong>Sinon, vous barrez selon l'assiette du jour de lancement par un gros temps d'ère du commerce.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> Directeur financier d'OpenAI Sarah Friar / couverture presse (le chiffre d'affaires entreprise a dépassé le grand public, ~40 Md$ annualisés, +~32 %/mois, ~2 trimestres en avance, &gt;40 % du chiffre d'affaires, « équipes d'agents », tel que rapporté) · Anthropic / Claude (« How enterprises are building AI agents in 2026 », étude de cas Managed Agents) · Gartner (2026 première année, inférence 23,3 Md$ dépasse entraînement 19 Md$, ~55 cents de chaque dollar de cloud IA, agentique 5–30× tokens, prix par token en baisse de ~280× depuis 2022) · IDC (infra IA ~487 Md$, +53 % en glissement annuel) · AMD / Advancing AI 2026 (&gt;35 quadrillions de tokens/mois, ~60 % inférence ; citation Jeetu Patel / Cisco) · couverture trackers de modèles (Gemini 3.7 Flash, Opus 5, GPT-5.6 Sol, Grok 4.6, GLM-5.3, Qwen3.8) · Commission européenne (application et sanctions GPAI du Règlement IA de l'UE) · Blog officiel MCP (spécification 2026-07-28). Les chiffres sont relayés d'annonces de fournisseurs, de communications officielles et de sources de presse, marqués « tel que rapporté » lorsqu'ils reposent sur une couverture secondaire. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 19 août 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture audio non disponible ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /audrey|amelie|virginie|thomas|google fran/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>

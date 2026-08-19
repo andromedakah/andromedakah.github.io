@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 19 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on how AI's center of gravity moved to production. OpenAI's enterprise revenue overtook consumer for the first time (CFO Sarah Friar, 14 Aug) — ~$40B ARR, two quarters early, driven by teams of agents — while Gartner marks 2026 as the first year inference spending beats training ($23.3B vs $19B, ~55¢ of every AI-cloud dollar). The weight of AI shifted from consumer to enterprise and from building to running. Re-trim strategy: name the owner, write the SLA, meter the inference bill, rig for agent fleets. The engine keeps commoditizing (Gemini 3.7 Flash, Opus 5, Grok 4.6, GLM-5.3, Qwen3.8). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The center of gravity moves to production</div>
+  <h1>The Ballast</h1>
+  <div class="subhead">AI's weight shifted below the waterline this week — the buyer moved from consumer to enterprise, and the compute from training to inference. A ship steered to the old trim broaches.</div>
+  <div class="meta">Wednesday, 19 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar watched AI stop advising and start acting. Today it weighs the ship and finds the ballast has shifted. OpenAI's CFO Sarah Friar told investors on 14 August that enterprise revenue has, for the first time, overtaken consumer — the company at ~$40B annualized, business revenue up ~32% in a single month, the crossover two quarters early. And Gartner marks 2026 as the first year inference spending beats training — $23.3B vs $19B, roughly 55 cents of every AI-cloud dollar spent running models rather than building them. The weight of AI has moved from the individual to the institution, and from the forge to the mill-floor. The board's question: has our AI posture re-trimmed for where the weight now sits — the enterprise buyer, and models running in production — or are we still steering by the demo era of consumer novelty and model-building?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar walked the value up the stack — engine, pilotage, last mile, business model, the crossing to value, and yesterday the acting agent. Today the story is not a layer but a <strong>center of gravity,</strong> and this week it moved twice, in the same direction. <strong>AI's weight has shifted from the consumer to the enterprise, and from training to inference</strong> — from building the thing to running it, from novelty to production. That shift, not the next model, is what should re-trim your strategy. When the ballast moves and the captain keeps the old heading, the ship does not go faster; it heels over.</p>
+<p><strong>The datable signal — the buyer became the enterprise.</strong> On <strong>14 August 2026, OpenAI CFO Sarah Friar told investors that enterprise revenue has overtaken consumer for the first time,</strong> with the company at a <strong>~$40 billion annualized run-rate</strong> and business-customer revenue rising <strong>~32% in a single month</strong> — a pace that pulled the crossover <strong>two full quarters earlier</strong> than Friar's own prior forecast of parity by year-end. Enterprise is now <strong>more than 40% of OpenAI's revenue,</strong> and the company frames the driver plainly: enterprises are adopting <strong>"teams of agents."</strong> The other frontier lab is leaning the same way — on <strong>18 August, Anthropic published <em>"How enterprises are building AI agents in 2026,"</em></strong> alongside a Claude <em>Managed Agents</em> enterprise case study. The demand curve of frontier AI now bends toward the institution, not the individual.</p>
+<p><strong>The second load — compute moved from building to running.</strong> <strong>Gartner marks 2026 as the first year inference spending exceeds training:</strong> within AI-optimized IaaS, <strong>$23.3 billion of inference against $19 billion of training,</strong> a segment expanding <strong>~96%</strong> to <strong>$42.3 billion</strong> — roughly <strong>55 cents of every AI-cloud dollar</strong> now spent on inference. AMD, at Advancing AI 2026, put the physical scale on it: <strong>more than 35 quadrillion tokens are consumed every month (~160× in two years),</strong> and for the first time the world is using <strong>more AI compute to run models than to train them (~60% inference).</strong> As Cisco's <strong>Jeetu Patel</strong> framed the load, <em>"Humans click, but agents swarm."</em> The cost that scales from here is not the one-time build; it is the <strong>running bill</strong> — and agentic tasks burn <strong>5–30× more tokens</strong> than a chatbot query even as per-token prices fall.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The buyer is now the enterprise.</strong> OpenAI enterprise revenue <strong>overtook consumer</strong> for the first time (<strong>~$40B ARR, ~two quarters early, &gt;40% of revenue</strong>), driven by <strong>teams of agents;</strong> Anthropic published its enterprise-agent playbook the same week. <strong>Treat AI as an enterprise operating capability with an owner, an SLA and a budget — not a consumer-novelty pilot.</strong></div></div>
+<div class="num"><div class="b">2</div><div><strong>The compute is now inference, not training.</strong> 2026 is the <strong>first year inference spend beats training</strong> (Gartner: <strong>$23.3B vs $19B, ~55¢ of every AI-cloud dollar</strong>); <strong>35 quadrillion tokens/month,</strong> ~60% inference. <strong>The scaling cost is the running bill — instrument and forecast token spend like any other operating line.</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps commoditizing under both loads.</strong> Gemini 3.7 Flash (13 Aug, for agents), Opus 5, GPT-5.6 Sol, Grok 4.6 at $2/$6, open-weight GLM-5.3/Qwen3.8 (14 Aug) — abundant and cheap per token. The trust gate is live to meet production: the <strong>EU AI Act's GPAI enforcement powers since 2 August</strong> (fines up to €15M/3%), and <strong>MCP's 2026-07-28 stateless spec</strong> as the rail agents run on.</div></div>
+<div class="card"><strong>Bottom line:</strong> the model is a commodity, the moat is the layer you own — and this week the <em>weight</em> of the whole enterprise moved. AI's demand has shifted to the enterprise and its compute to inference: the era of building and demoing is giving way to the era of buying and running. <strong>Re-trim for it — put an owner, an SLA and a token budget on production AI — because a ship steered to the old ballast heels over exactly when the wind picks up.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>⚓ "The Ballast"</h3>
+<p><em>Topic: On 14 August 2026, OpenAI CFO Sarah Friar told investors that enterprise revenue had, for the first time, overtaken consumer revenue, with the company at a ~$40B annualized run-rate, business revenue up ~32% in a single month, and the crossover arriving ~two quarters ahead of forecast; enterprise is now &gt;40% of OpenAI's revenue and the stated driver is enterprises adopting "teams of agents" (and, on 18 August, Anthropic published "How enterprises are building AI agents in 2026"). Separately, Gartner marked 2026 as the first year inference spending beats training — ~$23.3B inference vs ~$19B training within AI-optimized IaaS, a ~$42.3B segment, roughly 55 cents of every AI-cloud dollar — while AMD reported &gt;35 quadrillion tokens consumed monthly and ~60% of AI compute now used for inference. Together: AI's center of gravity has shifted from consumer to enterprise (demand) and from training to inference (compute) — from building to running. The lesson: re-trim strategy, ownership and budget to where the weight now sits.</em></p>
+<p>A great trading ship had been built, everyone agreed, for the <strong>wonder of the crowd.</strong> In her first years the whole point of her was the launch: the shipwrights labored season after season to make her longer, faster, more dazzling, and the quay filled with townsfolk who paid a small coin to walk her decks and marvel. The money, such as it was, came in a thousand tiny fares from a thousand curious visitors, and the yard measured its pride in the <em>building</em> — in how much finer this hull was than last year's. The ship was a marvel to be shown. What she actually <em>carried</em> was almost beside the point.</p>
+<p>Then, quietly, over a single season, two weights shifted below the waterline — and a ship is ruled by nothing so much as the weight she cannot see. The first weight was <strong>who paid.</strong> It turned out the thousand gawking visitors were never the business; the business was the <strong>great houses and guilds</strong> who chartered the hold by the year to move real cargo, and their custom grew so fast that in one month it leapt by a third, until — two seasons sooner than the harbor-master had reckoned — <strong>the guild charters outweighed every visitor's fare combined.</strong> The ship's true master was no longer the crowd on the quay; it was the standing contract in the counting-house, and the guilds did not charter one clever sailor — they chartered <strong>whole crews that worked the hold day and night.</strong></p>
+<p>The second weight was <strong>what the furnaces burned for.</strong> For years the yard's great fires had roared to <em>forge</em> the ship — to build and rebuild the engine. But now, with the hold chartered round the clock, most of the coal went not to forging anything new but to <strong>running</strong> what was already built, mile after paid mile. For the first time, more fire was spent <strong>sailing</strong> than <strong>shipwrighting</strong> — and the bill was no longer the one-time cost of the build but the endless cost of the voyage, a meter that ran every hour the crews swarmed in the hold. Cheaper coal by the sack did not save them; the crews burned so much more of it, so much more often, that the running bill climbed even as the sack got cheap.</p>
+<p>And here was the thing that wrecked the captains who missed it: <strong>the ship now sat completely differently in the water, and steered nothing like her launch-day self.</strong> A captain who still trimmed her for the admiring crowd — light in the hold, all show above the waterline, coal hoarded for one more dazzling launch — would put the helm over in a stiff wind and feel her heel sickeningly, because the weight was no longer where his hands remembered it. The wise captains re-trimmed for the ballast they actually carried: they gave the chartered hold a <strong>named master and a written contract</strong> — an owner, an SLA, a standard — instead of treating it like a fairground ride; they put a <strong>meter and a budget on the coal,</strong> watching the running bill the way they once watched the build; and they rigged the ship for <strong>standing crews swarming the hold,</strong> not one show-sailor on deck. A customs officer stood at the harbor mouth now too, passing no charter whose cargo went undeclared and unlogged — for the realm had ruled that a working ship in trade is held to a heavier standard than a curiosity at the quay.</p>
+<p><strong>The moral:</strong> when the crowd stops being the customer and the guild starts, and when the fire stops forging and starts sailing, you have not merely grown — your ballast has shifted, and a ship steered to her old trim broaches in the first real weather. The launch era rewarded the finest hull shown to the largest crowd; the trade era rewards the captain who knows the weight he actually carries and trims to it. Re-trim to the paying charter and the running meter. Name the master of the hold, budget the coal by the mile, and rig for the crews that swarm — because the ship is judged now not by how she looked on launch day, but by what she carries, for whom, at what running cost, voyage after voyage.</p>
+<p><strong>The question it forces:</strong> <em>Our AI's weight has moved — the paying customer is now the enterprise, not the curious individual, and most of our compute now runs models rather than trains them. Have we re-trimmed the ship for that ballast — an owner, an SLA and a metered budget on production AI, rigged for standing teams of agents — or are we still steering by launch-day trim, mistaking a dazzling model for a chartered, profitable, running fleet?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we re-trimmed AI from a demo to a chartered operation?</strong> The frontier labs' own revenue now leans enterprise (OpenAI: enterprise overtook consumer, &gt;40% of revenue, driven by "teams of agents"). <strong>Does each production AI capability have a named owner, a written SLA and a P&amp;L line — or are we still running it like a consumer-novelty pilot that impresses in a launch and steers badly in real weather?</strong></li>
+  <li><strong>Do we budget for the voyage, not just the build?</strong> 2026 is the first year inference spend beats training; agentic tasks burn 5–30× more tokens than a chatbot query. <strong>Is our AI budget built around the recurring <em>running</em> bill — metered token spend in production — or are we still funding one-time builds and getting surprised by the monthly meter?</strong></li>
+  <li><strong>Where is our own center of gravity — and are we steering to it?</strong> <strong>Is our AI investment weighted toward what actually pays and runs (enterprise workflows in production), or toward what dazzles (another pilot, another model swap) — and can the board see which, in one page?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Banking and insurance are among the fastest to put agents into production. <strong>As agent fleets move real transactions, is each one chartered like a business line — named owner, SLA, segregation of duties, audit — and is its metered token cost a forecast operating line, not a surprise on the cloud bill?</strong></li>
+  <li>The running bill compounds with volume. <strong>With agentic workflows using many times the tokens of a chatbot, do we have FinOps discipline on inference — per-workflow cost, unit economics per transaction, and a kill-switch on runaway spend — before an agent fleet quietly becomes our largest cloud line item?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A model that runs continuously in a care or discovery workflow is a production system, not a demo. <strong>Does every clinical or research agent have an accountable owner, a service-level standard, and a metered, forecast running cost — with the EU AI Act's disclosure and logging duties met for anything acting on patients or protected data?</strong></li>
+  <li>Value is booked in the running, not the launch. <strong>Are we funding the sustained operation of the few AI workflows that demonstrably help — validation, monitoring, inference budget — rather than a rotating fleet of pilots that never leave the quay?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>On the floor, an agent that runs a line is chartered cargo, not a curiosity. <strong>Do our operational AI systems have named owners, SLAs, interlocks and a metered inference budget the way any production control system has a maintenance and energy budget?</strong></li>
+  <li>The coal now burns to run, not to build. <strong>Have we sized the ongoing compute/inference cost of AI embedded in operations — and can we tie each running token to a unit of output, so the AI line scales with value, not just with usage?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Consumer-facing AI is where the crowd once was — but the money and the governance now sit in production operations. <strong>Are pricing, service and merchandising agents chartered with owners, SLAs and metered budgets — and is their token spend forecast against the margin they actually protect?</strong></li>
+  <li>Delegation is spreading through non-technical teams. <strong>Do marketing and merchandising owners running agents understand they now own a <em>running</em> cost and a production standard — not a free demo — and is that cost visible on their P&amp;L?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public AI must be accountable in operation, not just impressive in a pilot. <strong>Does every deployed agent have a declared identity (per the EU AI Act), a named owner, an inspectable log, and a funded, metered running budget — so the service can be sustained and audited, not abandoned when the launch glow fades?</strong></li>
+  <li>Budget authority follows the ballast. <strong>Have we moved from funding AI experiments to funding AI <em>operations</em> — the inference, monitoring and governance that keep a working service running — or are we still writing one-time grants for demos that never enter production?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Center of Gravity Moves to Production</h2>
+<p>Read the stack, once more, as layers priced very differently — but this week look past <em>which layer you buy</em> to <strong>where the weight of the whole thing now sits,</strong> because it just shifted below the waterline. At the <strong>bottom</strong> is the <em>engine</em> — the raw model, abundant, cheap, priced per token. Above it are the <strong>rails</strong> (agent infrastructure — MCP and its kin), the <strong>pilotage</strong> (context, reliability), the <strong>last mile</strong> (distribution), the <strong>business model</strong> (how the vendor gets paid), the <strong>crossing</strong> (integration, data, adoption, governance), and yesterday's <strong>acting agent.</strong> All of that is still true. What changed this week is the <strong>ballast</strong> — the two heavy loads that decide how the ship sits: <strong>who pays (now the enterprise) and what the compute does (now inference).</strong> The engineering point is blunt: <strong>the unit of AI value has moved from a model you launch to a fleet you run — and a fleet you run is measured by owners, SLAs and a metered token bill, not by a benchmark on launch day.</strong></p>
+<div class="card"><ul>
+  <li><strong>The demand load — the buyer is the enterprise now.</strong> On <strong>14 August</strong>, OpenAI CFO <strong>Sarah Friar</strong> told investors <strong>enterprise revenue overtook consumer for the first time</strong> — <strong>~$40B ARR,</strong> business revenue <strong>+~32% in one month,</strong> the crossover <strong>~two quarters early;</strong> enterprise is <strong>&gt;40%</strong> of revenue and the driver is <strong>"teams of agents."</strong> On <strong>18 August</strong>, <strong>Anthropic</strong> published <em>"How enterprises are building AI agents in 2026."</em> Both frontier labs' growth now bends toward the institution running agents in production, not the individual chatting.</li>
+  <li><strong>The compute load — the fire runs models now, not just builds them.</strong> <strong>Gartner</strong> marks <strong>2026 as the first year inference spend beats training:</strong> <strong>$23.3B inference vs $19B training</strong> in AI-optimized IaaS, a <strong>~$42.3B</strong> segment (<strong>+~96%</strong>), ~<strong>55¢ of every AI-cloud dollar</strong> on inference; <strong>IDC</strong> puts total AI-infrastructure spend near <strong>$487B (+53% YoY).</strong> <strong>AMD</strong> (Advancing AI 2026): <strong>&gt;35 quadrillion tokens/month (~160× in two years),</strong> <strong>~60% of AI compute now inference.</strong> The bill is the voyage, not the build — and agentic tasks burn <strong>5–30× more tokens</strong> per task than a chatbot query even as <strong>per-token prices have fallen ~280× since 2022.</strong></li>
+  <li><strong>The engine and the gate — cheap fuel, live customs.</strong> The <strong>model</strong> is a swappable, cheapening part: <strong>Gemini 3.7 Flash</strong> (13 Aug, for agents), <strong>Opus 5, GPT-5.6 Sol, Grok 4.6</strong> at <strong>$2/$6,</strong> open-weight <strong>GLM-5.3/Qwen3.8</strong> (14 Aug), atop <strong>Kimi K3, DeepSeek V4-Pro.</strong> The <strong>rails</strong> the fleet runs on standardized: <strong>MCP's 2026-07-28 stateless spec</strong> (Tasks for long-running agents; SDKs past <strong>1B</strong> downloads). And the <strong>customs officer</strong> is live: the <strong>EU AI Act's GPAI enforcement powers since 2 August</strong> (fines up to <strong>€15M/3%</strong>), holding a working system in production to a heavier standard than a demo at the quay.</li>
+</ul></div>
+<p>The strategic core: <strong>the engine is cheap, the rails are free, and the weight of the enterprise has moved to production — the enterprise buyer and the inference bill.</strong> For a week the frame was "own the right layer" and "finish the crossing"; this week's correction is about <em>trim.</em> <strong>Once the ballast shifts, you steer to the new weight or you broach.</strong> "It's the smartest / cheapest model" is not the answer to "who pays for this, who owns it in production, and what does it cost to run per voyage"; <em>"this capability has an enterprise owner, a written SLA, a metered token budget and a governed agent fleet"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The ballast: AI's weight shifts below the waterline — the buyer moved from consumer to enterprise, and the compute from training to inference (build to run). Top left: the launch era, the old trim — customer is the crowd, a thousand tiny fares, measured by the build, one clever model shown off, cost is the one-time forge. Top right: the trade era, the new trim — customer is the enterprise, OpenAI's enterprise revenue overtook consumer at about 40 billion dollars ARR, up 32 percent in a month and now more than 40 percent of revenue, chartered by teams of agents, and the cost is the running bill per voyage. The ballast shifts from left to right: the demand load moves to enterprise, the compute load moves to inference, and 2026 is the first year running beats training. Below both: re-trim for production — owner, SLA, metered token budget, governed fleet. Owner means a named master of the hold. SLA means a written production standard. Budget means metering the coal by the mile, because inference is the scaling cost. Gartner: 2026 first year inference at 23.3 billion beats training at 19 billion. At the bottom: the engine, cheap fuel — Gemini 3.7 Flash, Opus 5, Grok 4.6 at two and six dollars, GLM-5.3, and 35 quadrillion tokens a month; and the customs, trust now live — a working fleet held to a heavier bar, EU AI Act GPAI enforcement since 2 August, and MCP's 2026-07-28 stateless spec with SDKs past one billion downloads." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE BALLAST — AI's weight shifts BELOW the waterline</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">buyer: CONSUMER → ENTERPRISE · compute: TRAINING → INFERENCE (build → run)</text>
+
+  <!-- launch era -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE LAUNCH ERA — old trim</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">customer: the CROWD (consumer)</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a thousand tiny fares · shown off</text>
+  <text x="52" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">measured by: the BUILD</text>
+  <text x="52" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one clever model, on the quay</text>
+  <text x="52" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cost: the one-time forge</text>
+
+  <!-- trade era -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE TRADE ERA — new trim</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">customer: the ENTERPRISE</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI: enterprise &gt; consumer</text>
+  <text x="364" y="136" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~$40B ARR · +32%/mo · &gt;40%</text>
+  <text x="364" y="156" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">chartered by teams of agents</text>
+  <text x="364" y="176" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cost: the running bill / voyage</text>
+
+  <!-- arrow across -->
+  <line x1="336" y1="112" x2="344" y2="112" stroke="#9aa7b6" stroke-width="2" stroke-dasharray="3 3"/>
+  <polygon points="344,108 352,112 344,116" fill="#9aa7b6"/>
+  <text x="340" y="200" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the ballast shifts ▶ demand load → enterprise · compute load → inference · 2026: run &gt; train</text>
+
+  <!-- arrows down to control plane -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+
+  <!-- re-trim plane -->
+  <rect x="34" y="230" width="612" height="96" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">RE-TRIM FOR PRODUCTION — owner · SLA · metered token budget · governed fleet</text>
+  <text x="52" y="272" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OWNER : a named master of the hold, not a fairground ride</text>
+  <text x="52" y="289" font-size="10.5" fill="#e8edf3" font-family="sans-serif">SLA&#160;&#160;&#160;: a written production standard, not a launch-day benchmark</text>
+  <text x="52" y="306" font-size="10.5" fill="#e8edf3" font-family="sans-serif">BUDGET: meter the coal by the mile — inference is the scaling cost</text>
+  <text x="52" y="322" font-size="9.5" fill="#c3ccd8" font-family="sans-serif" font-style="italic">↳ Gartner: 2026 first year inference ($23.3B) beats training ($19B)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="326" x2="340" y2="352" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,352 340,364 346,352" fill="#b9b2f5"/>
+  <text x="356" y="344" font-size="9" fill="#9aa7b6" font-family="sans-serif">atop ↓</text>
+
+  <!-- the engine -->
+  <rect x="34" y="368" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="390" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ENGINE — cheap fuel</text>
+  <text x="52" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 3.7 Flash · Opus 5 · GPT-5.6 Sol</text>
+  <text x="52" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Grok 4.6 $2/$6 · GLM-5.3 · Qwen3.8</text>
+  <text x="52" y="444" font-size="10.5" fill="#e8edf3" font-family="sans-serif">35 quadrillion tokens/mo · ~60% inference</text>
+  <text x="52" y="463" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the brain is a swappable, cheapening part</text>
+
+  <!-- the customs -->
+  <rect x="346" y="368" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="390" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE CUSTOMS — trust, live</text>
+  <text x="364" y="410" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a working fleet held to a heavier bar</text>
+  <text x="364" y="427" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act GPAI enforcement since 2 Aug</text>
+  <text x="364" y="447" font-size="10.5" fill="#d85a30" font-family="sans-serif" font-weight="700">TRAP: steer to launch-day trim in trade weather</text>
+  <text x="364" y="464" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">MCP 2026-07-28 stateless · SDKs &gt;1B</text>
+
+  <!-- footer strip -->
+  <text x="340" y="504" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The weight of AI moved to production: the enterprise buys it, and inference runs it · cheaper fuel does not save you</text>
+  <text x="340" y="522" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">if you burn far more of it — name the owner, write the SLA, meter the running bill, rig for the fleet</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The launch era — old trim (consumer, the build)</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The trade era — new trim (enterprise, the voyage)</span>
+  <span><i class="dot" style="background:#34306a"></i>Re-trim for production — owner · SLA · budget</span>
+</div>
+</div>
+
+<h3>The launch era vs. the trade era</h3>
+<table>
+<tr><th>The launch era — AI as a marvel to show</th><th>The trade era — AI as a fleet to run</th></tr>
+<tr><td>Customer is the crowd (consumer)</td><td>Customer is the enterprise (chartered by the year)</td></tr>
+<tr><td>Measured by the build — a dazzling model</td><td>Measured by the voyage — value carried in production</td></tr>
+<tr><td>Compute spent training (forging)</td><td>Compute spent inferencing (~55¢ of every AI-cloud dollar)</td></tr>
+<tr><td>One clever assistant, shown off</td><td>Teams of agents, swarming the hold day and night</td></tr>
+<tr><td>Cost = the one-time forge</td><td>Cost = the running bill, metered every hour</td></tr>
+<tr><td>Success = a launch that dazzles</td><td>Success = an owner, an SLA and a healthy unit cost</td></tr>
+</table>
+
+<h3>Why the running bill is the number that matters</h3>
+<div class="card">
+<p>For a year the reflex was to chase the finest model; this week's data says the finest model is not where the weight is. <strong>Per-token prices have fallen ~280× since 2022 — and enterprise AI bills are rising anyway,</strong> because agentic workflows consume <strong>5–30× more tokens per task</strong> and the volume compounds as fleets go into production. That is the signature of a <strong>running cost, not a build cost:</strong> it scales with use, forever, and cheaper fuel does not save you if you burn far more of it. Gartner's crossover — <strong>inference $23.3B beating training $19B in 2026</strong> — is the macro proof; your own cloud bill is the micro one. The correct read is not "models are getting cheaper" (they are) — it is "<strong>the scaling cost of AI is now the inference you run in production, so budget, meter and own it like the operating line it has become.</strong>"</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> On legacy estates the danger is treating AI as a series of launches — funding pilots, swapping models, celebrating demos — while the actual weight (production usage, inference spend, standing agent fleets) grows ungoverned in the background. The retrofit is a <strong>production-and-cost discipline. Charter the hold:</strong> give every production AI capability a named owner, a written SLA, and a place on a P&amp;L. <strong>Meter the coal:</strong> instrument inference token spend, forecast it as an operating line, and tie it to a unit of value; apply FinOps to agents. <strong>Rig for the crews:</strong> plan for teams of agents running continuously — identity, observability, governance (yesterday's deputy discipline applied to a fleet). <strong>Clear customs:</strong> meet the EU AI Act's live duties for anything running in production. And keep the engine swappable underneath — re-benchmark freely, because the brain is the commodity and <em>the governed, funded, owned running fleet is the moat.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — abundant, cheap, priced per token. The rails, pilotage, last mile, business model, crossing and acting agent are the layers you buy, own or finish. But the ballast — who pays and what the compute does — moved this week: the buyer is the enterprise and the compute is inference. AI's weight has shifted from the launch to the voyage, from building to running. Re-trim the ship: name the owner, write the SLA, meter the running bill, rig for the fleet — because a captain who steers to launch-day trim broaches the moment real weather hits.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The demand signal — enterprise overtakes consumer.</strong> OpenAI CFO <strong>Sarah Friar</strong> (14 Aug): enterprise revenue <strong>&gt; consumer</strong> for the first time; <strong>~$40B ARR,</strong> <strong>+~32%</strong> business revenue in a month, <strong>~two quarters early;</strong> enterprise <strong>&gt;40%</strong> of revenue, driven by <strong>"teams of agents."</strong> <strong>Anthropic</strong> (18 Aug): <em>"How enterprises are building AI agents in 2026"</em> (as reported).</li>
+  <li><strong>The compute signal — inference beats training.</strong> <strong>Gartner:</strong> 2026 first year inference spend beats training — <strong>$23.3B vs $19B</strong> in AI IaaS, <strong>~$42.3B</strong> segment (<strong>+~96%</strong>), <strong>~55¢</strong> of every AI-cloud dollar; <strong>IDC:</strong> AI infra spend <strong>~$487B (+53% YoY)</strong> (as reported).</li>
+  <li><strong>The scale — the tokens.</strong> <strong>AMD</strong> (Advancing AI 2026): <strong>&gt;35 quadrillion tokens/month (~160× in two years),</strong> <strong>~60%</strong> of AI compute now inference; agentic tasks <strong>5–30× more tokens</strong> than a chatbot; per-token prices <strong>down ~280× since 2022</strong> (as reported).</li>
+  <li><strong>The engine — cheap fuel.</strong> <strong>Gemini 3.7 Flash</strong> (13 Aug, for agents); <strong>Opus 5, GPT-5.6 Sol, Grok 4.6</strong> at <strong>$2/$6;</strong> open-weight <strong>GLM-5.3/Qwen3.8</strong> (14 Aug); <strong>Kimi K3, DeepSeek V4-Pro</strong> (as reported).</li>
+  <li><strong>The gate — customs, live.</strong> <strong>EU AI Act</strong> GPAI enforcement powers applicable since <strong>2 August</strong> (fines up to <strong>€15M/3%</strong> of global turnover; documentation, evaluation, recall powers) — a heavier bar for AI in production; <strong>MCP 2026-07-28</strong> stateless spec (Tasks for long-running agents; SDKs past <strong>1B</strong> downloads).</li>
+  <li><strong>The frame — production, not demo.</strong> Cisco's <strong>Jeetu Patel</strong> (Advancing AI 2026): <em>"Humans click, but agents swarm"</em> — the industry's own framing has moved from the clicking individual to the swarming fleet (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">I have never seen this level of conviction spread so quickly and consistently within the industries.</div><div class="a">— Denise Dresser, OpenAI, on enterprise adoption of "teams of agents" (from OpenAI's "The next phase of enterprise AI," as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Humans click, but agents swarm.</div><div class="a">— Jeetu Patel, President &amp; Chief Product Officer, Cisco, on how agentic AI reshapes inference demand (Advancing AI 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Enterprise revenue has, for the first time, overtaken consumer — the company at roughly a $40 billion annualized run-rate, with the crossover arriving about two quarters ahead of forecast.</div><div class="a">— Sarah Friar, CFO, OpenAI, in remarks to investors (14 Aug; reported by CNBC and others; paraphrase of reported substance)</div></blockquote>
+<blockquote><div class="q">"When the crowd stops being your customer and the guild starts, and the fire stops forging and starts sailing, your ballast has shifted. Steer to the weight you carry — an owner, an SLA, a metered bill — or you broach in the first real weather."</div><div class="a">— the radar, on re-trimming AI strategy for the production era</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>OpenAI enterprise vs consumer revenue</td><td><span class="v">Enterprise overtook consumer for the first time; ~$40B annualized run-rate; business revenue +~32% in one month; ~2 quarters early</span></td><td>CFO Sarah Friar, remarks to investors (14 Aug 2026, as reported)</td></tr>
+<tr><td>OpenAI enterprise share of revenue</td><td><span class="v">&gt;40% of revenue; driven by enterprises adopting "teams of agents"</span></td><td>OpenAI, "The next phase of enterprise AI" (as reported)</td></tr>
+<tr><td>Inference vs training spend (2026)</td><td><span class="v">First year inference beats training: $23.3B inference vs $19B training (AI-optimized IaaS); segment ~$42.3B, +~96%; ~55¢ of every AI-cloud dollar</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>AI infrastructure spend (2026)</td><td><span class="v">~$487B, +53% year-over-year</span></td><td>IDC (as reported)</td></tr>
+<tr><td>Monthly token consumption</td><td><span class="v">&gt;35 quadrillion tokens/month (~160× in two years); ~60% of AI compute now inference</span></td><td>AMD, Advancing AI 2026 (as reported)</td></tr>
+<tr><td>Agentic cost multiple</td><td><span class="v">Agentic tasks use ~5–30× more tokens than a chatbot query; per-token prices down ~280× since 2022</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>Anthropic enterprise-agent push</td><td><span class="v">"How enterprises are building AI agents in 2026" + Claude Managed Agents case study</span></td><td>Anthropic / Claude (17–18 Aug 2026, as reported)</td></tr>
+<tr><td>EU AI Act — GPAI enforcement</td><td><span class="v">Enforcement &amp; penalty powers applicable since 2 Aug; fines up to €15M or 3% of global turnover; documentation, evaluation, recall powers</span></td><td>European Commission</td></tr>
+<tr><td>MCP 2026-07-28 specification</td><td><span class="v">Stateless core; Tasks extension for long-running agents; TS &amp; Python SDKs each past 1B total downloads</span></td><td>Official MCP blog (28 Jul 2026)</td></tr>
+<tr><td>The engines (context)</td><td><span class="v">Opus 5 · GPT-5.6 Sol · Gemini 3.7 Flash · Grok 4.6 ($2/$6) · Kimi K3 · DeepSeek V4-Pro · GLM-5.3 · Qwen3.8</span></td><td>Vendor / model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Re-trim: charter every production AI capability like a business line.</strong> Stop funding AI as a rotating series of launches. For each capability actually running in production, assign a <strong>named owner,</strong> write a <strong>service-level standard,</strong> and give it a <strong>place on a P&amp;L.</strong> The frontier labs' own revenue has moved to the enterprise running agents — mirror that internally: the thing that pays is the governed operation, not the dazzling demo. <strong>You cannot steer a ship whose heaviest cargo has no master.</strong></li>
+  <li><strong>Meter the coal: put a FinOps discipline on inference now.</strong> 2026 is the first year inference outspends training, and agentic tasks burn 5–30× the tokens of a chatbot. <strong>Instrument token spend in production, forecast it as an operating line, and tie each running token to a unit of value.</strong> Set alerts and a kill-switch for runaway agent spend. Cheaper per-token prices will <em>not</em> save a budget that ignores volume — the running bill is now the number that scales.</li>
+  <li><strong>Rig for the fleet: plan for teams of agents in production.</strong> Both OpenAI and Anthropic frame the growth as enterprises running <em>teams of agents,</em> not single assistants. <strong>Apply yesterday's deputy discipline at fleet scale</strong> — identity, mandate, audit, observability — and design for continuous operation, not a one-off pilot. Then run the drill: <em>our largest AI cost line is now a swarm of agents running in production — do we know who owns it, what it costs per voyage, and how to prove what it did?</em> <strong>If not, you are steering by launch-day trim in trade-era weather.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> OpenAI CFO Sarah Friar / trade coverage (enterprise revenue overtook consumer, ~$40B ARR, +~32%/mo, ~2 quarters early, &gt;40% of revenue, "teams of agents," as reported) · Anthropic / Claude ("How enterprises are building AI agents in 2026," Managed Agents case study) · Gartner (2026 first year inference $23.3B beats training $19B, ~55¢ of every AI-cloud dollar, agentic 5–30× tokens, per-token down ~280× since 2022) · IDC (AI infra ~$487B, +53% YoY) · AMD / Advancing AI 2026 (&gt;35 quadrillion tokens/mo, ~60% inference; Jeetu Patel / Cisco quote) · model-tracker coverage (Gemini 3.7 Flash, Opus 5, GPT-5.6 Sol, Grok 4.6, GLM-5.3, Qwen3.8) · European Commission (EU AI Act GPAI enforcement &amp; penalties) · Official MCP blog (2026-07-28 spec). Figures are relayed from vendor announcements, official disclosures and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 19 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
