@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 23 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the gap between record AI spend and thin realized value. Gartner puts 2026 worldwide AI spending at $2.52T (+44% YoY, ~55% infrastructure), yet McKinsey finds only 39% of firms see measurable EBIT and only 6% are high performers, Gartner expects 40%+ of agentic projects cancelled by 2027, and Stanford's 2026 AI Index names security-and-risk the #1 barrier to scaling agentic AI (62%). The dam is not the harvest — dig the channels to a named P&L root, meter the flow, and oil the trust-gate open. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The spend-value gap</div>
+  <h1>The Reservoir</h1>
+  <div class="subhead">The dam has never been higher — Gartner puts 2026 AI spend at $2.52T — yet the fields are thin: only 39% of firms see measurable EBIT, and the gate holding the water back is trust.</div>
+  <div class="meta">Sunday, 23 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar found the agentic blade is two-edged and named trust "year zero." Today it follows the money and finds the two halves of the same story: the largest pool of capital ever aimed at a single technology, and a harvest so thin the boards are asking where it went. Gartner puts 2026 worldwide AI spending at $2.52 trillion — up 44% in a year — roughly 55% of it in infrastructure, the dam itself. Behind that dam the water is impounded at a scale never seen. In the fields below, the crop is thin: McKinsey finds only 39% of firms report measurable EBIT and just 6% are high performers; Gartner expects 40%+ of agentic projects cancelled by 2027. And the gate everyone needs is rusted shut — Stanford's 2026 AI Index names security-and-risk the #1 barrier to scaling agentic AI, cited by 62%. The board's question: we built the highest dam in history and the fields still crack — did we mistake impounding the water for watering the wheat, and have we dug the channels and oiled the trust-gate that turn spend into a harvest?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar walked the value up the stack — engine, pilotage, last mile, business model, the crossing, the acting agent, the ballast, the watchman, the guardrail, and yesterday the two-edged security blade. Today it turns to the number the whole stack now has to answer to: <strong>the gap between what enterprises are spending on AI and what they can prove it returned.</strong> The governing tension is no longer "can an agent act?" or even "is it safe?" but <strong>"we have impounded a record ocean of capital — why is only a trickle reaching the P&amp;L, and what is the valve that's stuck?"</strong></p>
+<p><strong>The datable signal — the dam has never been higher.</strong> <strong>Gartner's forecast puts worldwide AI spending at $2.52 trillion in 2026, a 44% jump year-over-year,</strong> with the majority — roughly 55%, about <strong>$1.43 trillion</strong> — flowing into AI infrastructure (data centers, chips, servers), the physical dam. On top sits the financing plumbing this radar has already noted: <strong>NVIDIA's platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize over $500 billion of third-party capital,</strong> with Jensen Huang calling AI compute an "investable asset class." The water impounded behind the dam is real, and it is vast.</p>
+<p><strong>The mirror — the fields are still thin.</strong> The harvest has not kept pace with the dam. <strong>McKinsey's State of AI survey (≈1,993 organizations) finds only 39% report any measurable EBIT impact from AI, and only 6% qualify as "high performers" (≥5% of EBIT attributable to AI); roughly 23% have scaled agent deployments beyond pilots.</strong> Gartner expects <strong>more than 40% of agentic-AI projects to be cancelled before production by the end of 2027,</strong> even as 40% of enterprise applications are set to embed agents by year-end (from &lt;5% in 2025) — and only <strong>17%</strong> of organizations have actually deployed agents. IDC/Microsoft's often-quoted <strong>$3.70 returned per $1 spent</strong> on GenAI comes with a <strong>14-month median</strong> to positive ROI and the harder truth that only ~<strong>25%</strong> of initiatives delivered the ROI executives expected. The dam is full; the channels to the field were never dug.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The dam has never been higher — and the harvest has never lagged it by more.</strong> <strong>Gartner: $2.52T AI spend in 2026 (+44% YoY), ~55% infrastructure (~$1.43T).</strong> <strong>McKinsey: only 39% see measurable EBIT, only 6% are high performers.</strong> <strong>Gartner: 40%+ of agentic projects cancelled by 2027; 17% have deployed agents.</strong> The spend is a reservoir; the value is a trickle, because impounding water is not the same as watering the wheat.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The rusted gate is trust.</strong> <strong>Stanford's 2026 AI Index names security-and-risk the #1 barrier to scaling agentic AI — 62%,</strong> ahead of technical limits (38%), regulatory uncertainty (38%) and responsible-AI-tooling gaps (32%); inaccuracy concern jumped to <strong>74%,</strong> cybersecurity to <strong>72%,</strong> regulatory to <strong>72%.</strong> Yesterday's "year zero" security gap is not a side issue — it is the sluice-gate standing between the reservoir and the field.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The engine keeps getting cheaper; the plumbing is the moat.</strong> Opus 5 (Intelligence ~63, Agentic ~55 at $5/$25), Grok 4.6 (~61 at $2/$6), GPT-5.6 / Luna ($0.20/$1.20), Gemini 3.6 Flash, open-weight GLM-5.3/Qwen3.8 — cost per unit of intelligence keeps falling. The trust gate has teeth: the <strong>EU AI Act's transparency + GPAI enforcement, live since 2 August,</strong> enables model inspections and market restrictions (fines up to €15M/3%), and <strong>MCP's 2026-07-28 stateless spec</strong> is the rail. None of it waters a field by itself.</div></div>
+<div class="card"><strong>Bottom line:</strong> the model is a commodity, the capital is abundant, and the moat is the unglamorous plumbing that turns impounded spend into a living yield — <strong>the channels (integration, data, adoption) and the trust-gate (security, governance) that carry water to a root.</strong> A record dam over cracked fields is not a triumph; it is a cost waiting to be written down. <strong>Stop admiring the reservoir. Dig the channels to a named P&amp;L line, meter the flow so no project drowns or starves, and above all oil the trust-gate open — because the height of the dam is not the harvest, and at 39% measurable EBIT with security the #1 barrier, most of the water you paid for is still behind the wall.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>💧 "The Reservoir"</h3>
+<p><em>Topic: Around 21–23 August 2026, the dominant enterprise-AI story became the widening gap between record AI spending and thin realized value. Gartner forecasts worldwide AI spending of $2.52 trillion in 2026 (up 44% year-over-year), roughly 55% of it (about $1.43 trillion) in infrastructure, atop NVIDIA-arranged platforms to mobilize over $500 billion of third-party capital. Yet McKinsey's State of AI finds only 39% of organizations report measurable EBIT impact and only 6% are high performers; Gartner expects 40%+ of agentic-AI projects cancelled before production by end-2027, with only 17% having deployed agents; and IDC/Microsoft's $3.70-per-dollar figure carries a 14-month median to positive ROI with only ~25% of initiatives hitting expected returns. Stanford's 2026 AI Index names security-and-risk the #1 barrier to scaling agentic AI (62%, a 24-point margin), tying the value gap back to the trust problem yesterday's edition called "year zero." The lesson: impounding capital and compute is not the same as delivering value; the moat is the unglamorous plumbing — integration, data, adoption and the trust-gate of security and governance — that carries spend to a P&amp;L root.</em></p>
+<p>There was a valley city that had lived for generations in fear of drought, and at last it resolved to end that fear forever. It threw its whole treasury and the labor of a generation at a single work: a <strong>dam</strong> across the great river, and behind it a <strong>reservoir</strong> so vast that, brim-full, it held water enough for every field in the valley for a hundred years. The building of it was the wonder of the age. Engineers came from distant cities to marvel; the merchants who financed the stone were feted in the great hall; and each season the citizens climbed the ridge to watch the water rise higher against the wall, and told one another that the drought was beaten and the valley's fortune made.</p>
+<p>But down in the fields, a strange thing was happening: the wheat was thin. Not everywhere, and not for everyone — a few farms near the old mill-race drank their fill and grew green and heavy — but most of the valley's crop came up pale and sparse, as though the greatest reservoir ever built stood a day's walk from a field that had never been watered. And that, the wiser heads slowly understood, was exactly the truth. <strong>For damming a river is not the same as watering wheat.</strong> Between the reservoir on the ridge and the root in the furrow lay the humble, invisible work that no one had climbed the ridge to admire: the <strong>channels</strong> cut to each field, the <strong>sluices</strong> that let the right measure through, the <strong>gates</strong> a farmer could open when his soil was dry and close before it flooded. The city had built the grandest source of water in the world and had <strong>not dug the ditches</strong> — and impounded water, however vast, waters nothing until a channel carries it to a living root.</p>
+<p>And there was one gate worse than un-dug: the gate that stood <strong>rusted shut.</strong> For even where a channel reached a field, many farmers would not open their headgate to the water — because they had no way to know it was clean, no fence against a sudden flood that would drown the crop and carry off the soil, and no one to answer to if the water ruined the ground. They had watched the river run wild in other seasons; they did not trust this water enough to let it into their fields. So the assessors who walked the valley found the bitter sum: for all the ocean impounded on the ridge, barely a third of the fields drank at all, and a bare handful drank their fill — and when they asked the dry farmers <em>why,</em> the answer, more than any ditch or drought, was <strong>trust.</strong></p>
+<p>The cities that thrived did the opposite of climbing the ridge to admire the wall. They treated the dam as the beginning, not the end — a cost, until its water reached a root. They <strong>dug the channels</strong> to each field one by one, unglamorous and slow, because that was the work that turned water into wheat. They <strong>metered the flow</strong> at every sluice, so that no field drowned and none was starved while the reservoir sat full and idle. And above all they <strong>oiled the trust-gate open:</strong> they proved the water clean before it reached the furrow, fenced the flood so a failure could not wash away the farm, and named plainly who answered if a field was ruined — so that a farmer could at last let the water in. Their reservoirs were no larger than the proud city's; their harvests were many times greater, because they had understood the thing the marvelers never did.</p>
+<p><strong>The moral:</strong> the dam is not the harvest. Impounding water — or capital, or compute, or the cleverest model ever forged — is a <em>cost,</em> not a yield, until the channels carry it to a living root and the trust-gate is open enough to let it in. The danger is the seductive grandeur of the reservoir: it is easy to fund the dam and feted to build it, and desperately unglamorous to dig a ditch to one more field or to oil one rusted gate. But a record reservoir over cracked fields is not a triumph — it is a write-down waiting for its season. Dig the channels, meter the flow, and open the trust-gate, because the height of the wall was never the point; the green in the furrow is.</p>
+<p><strong>The question it forces:</strong> <em>We have built the highest dam in the valley's history and the water stands brim-full on the ridge — but our fields are still thin, and when we ask the dry farms why, the answer is a ditch we never dug and a gate we never trusted enough to open. Have we mistaken the height of our spend for the size of our harvest? Have we dug the channels from the reservoir to a named P&amp;L root, metered the flow so nothing drowns or starves, and oiled open the trust-gate that 62% of us say is the thing holding the water back?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we measure the dam or the harvest?</strong> Gartner puts 2026 AI spend at $2.52T (+44%), yet McKinsey finds only 39% of firms see measurable EBIT and only 6% are high performers. <strong>Can we state, in EBIT, what our AI spend returned last quarter — and is that number on the same board dashboard as the spend, or do we only report the reservoir?</strong></li>
+  <li><strong>Where are our un-dug channels?</strong> The failure is rarely the model; it is integration, data and adoption between the reservoir and the field. <strong>For our top three AI investments, who owns the channel from spend to a named P&amp;L line — and if no one does, why are we still filling the dam?</strong></li>
+  <li><strong>Is our trust-gate rusted shut?</strong> Stanford's 2026 AI Index says 62% name security-and-risk the #1 barrier to scaling. <strong>Is trust — security, governance, the ability to prove an agent's actions — the valve throttling our own value, and who is accountable for oiling it open this quarter?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Regulators, model risk and data controls make the trust-gate heaviest here. <strong>Have we built the security, audit and human-oversight plumbing that lets a proven AI use case actually reach production — or are our best pilots impounded behind a compliance wall no one is funded to open?</strong></li>
+  <li>With 40%+ of agentic projects heading for cancellation industry-wide, capital discipline is the edge. <strong>Are we metering the flow — killing the projects that will never water a field early, and concentrating spend on the few channels that already run green?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical value is real but the trust-gate is life-or-death: provenance, safety, liability. <strong>Have we dug the channels — validation, integration into the clinical workflow, clinician adoption — that carry an AI pilot to a measurable outcome, rather than stockpiling models that never touch a patient?</strong></li>
+  <li>Inaccuracy concern jumped to 74% in the AI Index. <strong>Can we prove our clinical and research AI is clean water before it reaches the furrow, so our clinicians will open the gate at all?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Plant-floor value depends on integration with OT, MES and supply-chain systems — the ditches, not the dam. <strong>Have we funded the unglamorous channel work that connects an AI model to a line, a machine or a supplier, or bought intelligence that sits idle above a field it never reaches?</strong></li>
+  <li>Capital projects here are judged on payback. <strong>Are we holding AI infrastructure spend to the same metered, staged, kill-if-dry discipline as any other capital works — or is AI the one dam we build without a channel plan?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Consumer-facing AI value leaks at adoption and integration across a sprawling estate. <strong>Have we dug channels to the specific P&amp;L lines — conversion, basket, service cost, returns — or are we measuring model activity instead of margin?</strong></li>
+  <li>The trust-gate is the customer's. <strong>Have we fenced the flood — disclosure, safety, data governance under the EU AI Act's live transparency rules — so customers and regulators let our AI into the field rather than washing it out?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public spend is scrutinized on outcomes, not activity. <strong>Can we evidence the citizen or mission outcome our AI investment produced, and have we built the audit and oversight channel that turns a procurement into a delivered service?</strong></li>
+  <li>The trust-gate is statutory. <strong>Do our AI systems meet the EU AI Act's live transparency, logging and human-oversight duties — the very plumbing that lets an approved system move from pilot to production instead of impounding it in review forever?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Reservoir and the Channels</h2>
+<p>Read the stack once more as layers priced very differently — but this week look past <em>which layer you buy,</em> past <em>who watches it,</em> past <em>who is accountable,</em> and past <em>which edge of the blade reaches you first,</em> to the <strong>flow of value through the whole system: capital and compute impounded at the top, a P&amp;L root at the bottom, and a length of unbuilt plumbing in between.</strong> At the <strong>bottom</strong> of the stack is the <em>engine</em> — the raw model, cheap, per token. Above it are the <strong>rails</strong> (MCP), the <strong>pilotage,</strong> the <strong>last mile,</strong> the <strong>business model,</strong> the <strong>crossing,</strong> the <strong>acting agent,</strong> the <strong>ballast,</strong> the <strong>watchman,</strong> the <strong>guardrail</strong> and yesterday's <strong>two-edged blade.</strong> All still true. What this week measures is the <strong>throughput of the whole thing:</strong> how much of the record water impounded at the top actually reaches a root. The engineering point is blunt: <strong>the dam is not the harvest; the channels and the trust-gate are, and almost no one is funded to build them.</strong></p>
+<div class="card"><ul>
+  <li><strong>The datable finding — the dam at record height.</strong> <strong>Gartner, worldwide AI spending forecast: $2.52 trillion in 2026, +44% year-over-year,</strong> with roughly <strong>55% (~$1.43T)</strong> in AI infrastructure — servers, data centers, chips — the physical dam. Layered on top, the financing plumbing: <strong>NVIDIA's platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize over $500 billion of third-party capital,</strong> with Jensen Huang framing AI compute as an "investable asset class." The reservoir is real, vast, and rising faster than at any point in the technology's history.</li>
+  <li><strong>The mirror — the fields below the dam.</strong> The harvest lags the dam by the widest margin yet. <strong>McKinsey's State of AI (≈1,993 orgs):</strong> only <strong>39%</strong> report measurable EBIT impact; only <strong>6%</strong> are "high performers" (≥5% of EBIT from AI); roughly <strong>23%</strong> have scaled agents beyond pilots. <strong>Gartner:</strong> <strong>40%+</strong> of agentic-AI projects cancelled before production by end-2027; <strong>17%</strong> have deployed agents; 40% of apps will embed agents by year-end (from &lt;5% in 2025). <strong>IDC/Microsoft:</strong> <strong>$3.70</strong> returned per $1 on GenAI, but a <strong>14-month median</strong> to positive ROI and only ~<strong>25%</strong> of initiatives hitting expected returns. Damming a river is not watering the wheat.</li>
+  <li><strong>The rusted gate — trust as the throttling valve.</strong> <strong>Stanford's 2026 AI Index:</strong> security-and-risk is the <strong>#1 barrier to scaling agentic AI — 62%,</strong> a <strong>24-point margin</strong> over technical limitations (38%), regulatory uncertainty (38%) and responsible-AI-tooling gaps (32%). Escalating fast: inaccuracy concern <strong>60%→74%,</strong> cybersecurity <strong>66%→72%,</strong> regulatory compliance <strong>63%→72%.</strong> The trust problem yesterday's edition called "year zero" is, quantified across the enterprise, the specific gate standing between the reservoir and the field.</li>
+</ul></div>
+<p>The strategic core: <strong>the engine is cheap, the capital is abundant, the dam is at record height — and the newly scarce, decisive thing is the plumbing that converts impounded spend into a living yield: the channels of integration, data and adoption, and the trust-gate of security and governance.</strong> For a week the frame was "own the right layer," then "re-trim for where the weight sits," then "oversee without custody," then "own the guardrail," then "run the locksmith first"; this week's refinement is about <em>throughput.</em> "It's the smartest / cheapest model" and even "we spent $X on AI" are not answers to "what did the P&amp;L actually harvest, and what valve is holding the rest back"; <em>"we dug channels from spend to a named P&amp;L root, metered the flow, and oiled open the trust-gate that 62% call the #1 barrier"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The reservoir: a record dam over cracked fields; impounding the water is not the same as watering the wheat. Top left: the dam at record height — Gartner puts 2026 AI spend at $2.52 trillion, up 44 percent year-over-year, roughly 55 percent (about $1.43 trillion) in infrastructure, plus over $500 billion of third-party financing arranged by NVIDIA and Wall Street; compute called an investable asset class; the reservoir is full. Top right: the fields, a thin harvest — only 39 percent of organizations report measurable EBIT impact, only 6 percent are high performers with at least 5 percent of EBIT from AI, more than 40 percent of agentic projects will be cancelled by 2027, and only 17 percent have deployed agents; the crop is thin. It is not the same thing: between them lies the plumbing. In the middle: the un-dug channels and the rusted gate — the channels of integration, data and adoption that nobody is funded to dig, and the rusted gate of trust; Stanford's 2026 AI Index names security and risk the number one barrier to scaling agentic AI at 62 percent, a 24-point margin, with inaccuracy concern at 74 percent, cybersecurity at 72 percent and regulatory at 72 percent. Bottom left: dig the channels — connect spend to a named P&L root, fund integration, data and adoption, fund the ditch not the dam; the harvest is the point. Bottom right: oil the trust-gate and meter the flow — prove the water clean with security, fence the flood with governance and audit, kill dry projects and concentrate the flow; the EU AI Act has been live since 2 August with fines up to 15 million euros or 3 percent." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE RESERVOIR — a record dam over cracked fields</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">impounding the water is not the same as watering the wheat</text>
+
+  <!-- the dam -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#0f1f2e" stroke="#2b6a9e"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#6bb8e8" font-family="sans-serif">THE DAM — record height</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AI spend 2026: $2.52T (+44% YoY)</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~55% infrastructure (~$1.43T)</text>
+  <text x="52" y="139" font-size="10" fill="#8fcdf0" font-family="sans-serif">+ $500B financing (NVIDIA / Wall St)</text>
+  <text x="52" y="159" font-size="10" fill="#8fcdf0" font-family="sans-serif">"investable asset class"</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ the reservoir is full</text>
+
+  <!-- the fields -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE FIELDS — a thin harvest</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Measurable EBIT: only 39%</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">High performers (≥5% EBIT): 6%</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">Agentic projects killed by '27: 40%+</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">Agents deployed: only 17%</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the crop is thin</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#6bb8e8" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#6bb8e8"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">between them lies the plumbing ▼</text>
+
+  <!-- the plumbing / rusted gate -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">THE UN-DUG CHANNELS + THE RUSTED GATE — why the water never reaches a root</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Channels: integration · data · adoption (nobody funded to dig them)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">The rusted gate = TRUST: Stanford AI Index — security/risk #1 barrier, 62%</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">(24-pt margin) · inaccuracy 74% · cybersecurity 72% · regulatory 72%</text>
+  <text x="52" y="327" font-size="9.5" fill="#c3ccd8" font-family="sans-serif" font-style="italic">↳ the value gap and the security gap are the same gap seen from two sides</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#e07a8f" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#e07a8f"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- dig the channels -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">DIG THE CHANNELS</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· spend → named P&amp;L root</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· integration · data · adoption</text>
+  <text x="52" y="461" font-size="10" fill="#e8edf3" font-family="sans-serif">· fund the ditch, not the dam</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the harvest is the point</text>
+
+  <!-- oil the trust-gate -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">OIL THE TRUST-GATE + METER THE FLOW</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· prove the water clean (security)</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· fence the flood (governance, audit)</text>
+  <text x="364" y="461" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· kill dry projects; concentrate flow</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">EU AI Act live since 2 Aug (€15M/3%)</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Stop admiring the reservoir: dig the channels to a named P&amp;L root, meter the flow,</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">and oil the trust-gate open — the height of the dam is not the harvest; the green in the furrow is</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#2b6a9e"></i>The dam — $2.52T spend (+44%)</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The fields — 39% measurable EBIT</span>
+  <span><i class="dot" style="background:#8a2a3a"></i>The rusted gate — trust (#1 barrier, 62%)</span>
+  <span><i class="dot" style="background:#34306a"></i>Dig the channels · oil the trust-gate</span>
+</div>
+</div>
+
+<h3>The dam versus the harvest — same money, two very different numbers</h3>
+<table>
+<tr><th>The dam — what we impounded</th><th>The harvest — what reached a root</th></tr>
+<tr><td>$2.52T AI spend in 2026 (+44% YoY)</td><td>Only 39% report measurable EBIT impact</td></tr>
+<tr><td>~55% (~$1.43T) into infrastructure</td><td>Only 6% are high performers (≥5% EBIT from AI)</td></tr>
+<tr><td>+$500B third-party financing arranged</td><td>40%+ of agentic projects cancelled by 2027</td></tr>
+<tr><td>Compute an "investable asset class"</td><td>Only 17% have deployed agents at all</td></tr>
+<tr><td>Easy to fund, feted to build</td><td>~25% hit the ROI executives expected</td></tr>
+<tr><td>The reservoir on the ridge</td><td>The green — or the crack — in the furrow</td></tr>
+</table>
+
+<h3>Why "throughput to a root" is the number that matters</h3>
+<div class="card">
+<p>For a year the reflex was to chase the smartest model; this month's data says the defensible thing is <em>how much of your impounded spend actually reaches a P&amp;L root — and whether the trust-gate is open enough to let it.</em> The channels are model-agnostic and unglamorous: integration into real workflows, clean and governed data, and genuine user adoption. The trust-gate is the one Stanford quantified this year — <strong>62% name security-and-risk the #1 barrier</strong> — which means the value gap and the security gap are the same gap seen from two sides. Every un-dug channel and every rusted gate is a length of reservoir that will be written down, not harvested. The interesting artifact this week is not a benchmark and not a spend headline but a <strong>throughput ratio you can measure and raise</strong> — and measuring it honestly is the first move.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> On legacy estates the danger is the comforting story: <em>we've committed the budget, we've stood up the platform, the value will follow.</em> It will not follow the dam; it follows the ditch. The retrofit is <strong>reservoir discipline. Dig the channels:</strong> for every AI investment, name the P&amp;L line it is meant to move and fund the integration, data and adoption work — the unglamorous plumbing — that actually carries it there. <strong>Meter the flow:</strong> stage-gate spend, kill the projects that will never water a field (40%+ are heading for cancellation anyway — do it early and deliberately, not late and by attrition), and concentrate water on the channels already running green. <strong>Oil the trust-gate:</strong> treat security and governance not as a brake but as the sluice that <em>lets value through</em> — prove the model clean, fence the failure mode, name who answers — because 62% of the enterprise says that gate is what's holding the water back. <strong>Clear customs:</strong> the EU AI Act's transparency and oversight duties are the trust-gate in statute; meeting them is what lets an approved system move to production. And keep the engine swappable underneath — because the model is the commodity, the capital is abundant, and <em>the plumbing from spend to a harvested root is the moat.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — cheap, per-token. The capital is the water — abundant, and impounded now at record height ($2.52T, +44%). The dam, the financing, the platform are all cost until the water reaches a root. The channels (integration, data, adoption) and the trust-gate (security, governance) are the plumbing that turns impounded spend into a living yield — and this week's number is the throughput: only 39% see measurable EBIT, only 6% are high performers, and 62% say the trust-gate is what's stuck. Stop admiring the reservoir. Dig the channels to a named P&amp;L line, meter the flow, oil the trust-gate open. The height of the dam is not the harvest; the green in the furrow is.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The dam — the spend at record height.</strong> <strong>Gartner:</strong> 2026 worldwide AI spend <strong>$2.52T,</strong> <strong>+44% YoY,</strong> ~<strong>55%</strong> (~$1.43T) infrastructure; <strong>NVIDIA + Apollo/BlackRock/Blackstone/Brookfield/Goldman/KKR</strong> to mobilize <strong>&gt;$500B</strong> third-party capital; compute an "investable asset class" (as reported).</li>
+  <li><strong>The fields — the harvest that lags.</strong> <strong>McKinsey:</strong> <strong>39%</strong> measurable EBIT, <strong>6%</strong> high performers, ~<strong>23%</strong> scaled agents. <strong>Gartner:</strong> <strong>40%+</strong> agentic projects cancelled by 2027, <strong>17%</strong> deployed agents. <strong>IDC/Microsoft:</strong> <strong>$3.70/$1,</strong> 14-month median, ~<strong>25%</strong> hit expected ROI (as reported).</li>
+  <li><strong>The rusted gate — trust as the barrier.</strong> <strong>Stanford 2026 AI Index:</strong> security-and-risk the <strong>#1 barrier</strong> to scaling agentic AI, <strong>62%</strong> (24-pt margin); inaccuracy <strong>74%,</strong> cybersecurity <strong>72%,</strong> regulatory <strong>72%</strong> (as reported).</li>
+  <li><strong>The plumbing playbook — dig, meter, oil.</strong> Channel spend to a named P&amp;L root; stage-gate and kill dry projects; treat security/governance as the sluice that lets value through, not a brake. Deloitte context: <strong>53%</strong> still in pilot/experiment, only <strong>10%</strong> growth-driven (as reported).</li>
+  <li><strong>The engine &amp; the gate — cheap water, live customs.</strong> <strong>Opus 5</strong> (Intelligence ~63 / Agentic ~55, $5/$25), <strong>Grok 4.6</strong> (~61 at $2/$6), <strong>GPT-5.6 / Luna</strong> ($0.20/$1.20), <strong>Gemini 3.6 Flash,</strong> open-weight <strong>GLM-5.3/Qwen3.8;</strong> <strong>EU AI Act</strong> transparency + GPAI enforcement since <strong>2 August</strong> (inspections, fines up to <strong>€15M/3%</strong>); <strong>MCP 2026-07-28</strong> stateless spec (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Something may prove to be a successful pilot, but you need to understand the full cost of operations — the efficiencies of running tokens, or how you're handling traffic or RAG. What's on paper sometimes doesn't turn into real ROI given the reality of operational costs.</div><div class="a">— a TIAA technology executive, on the gap between pilot and realized AI ROI (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Worldwide AI spending is on pace to total $2.52 trillion in 2026 … as organizations continue to invest heavily despite uneven evidence of returns.</div><div class="a">— Gartner, 2026 worldwide AI spending forecast (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Security and risk is now the number one barrier to scaling agentic AI — cited by more organizations than technical limitations, regulatory uncertainty or responsible-AI tooling gaps.</div><div class="a">— paraphrase of the Stanford 2026 AI Index finding (62%) (as reported)</div></blockquote>
+<blockquote><div class="q">"The dam is not the harvest. Impounding the water is a cost until a channel carries it to a root — and the gate that stands rusted shut is trust."</div><div class="a">— the radar, on the reservoir</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The dam — total AI spend</td><td><span class="v">Worldwide AI spending forecast at $2.52 trillion in 2026, up 44% year-over-year</span></td><td>Gartner, 2026 worldwide AI spending forecast (as reported)</td></tr>
+<tr><td>The dam — infrastructure share</td><td><span class="v">~55% of 2026 AI spend (~$1.43 trillion) is AI infrastructure — data centers, chips, servers</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>The financing plumbing</td><td><span class="v">NVIDIA platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize &gt;$500B of third-party capital; compute an "investable asset class"</span></td><td>NVIDIA / Wall Street coverage (as reported)</td></tr>
+<tr><td>The harvest — measurable value</td><td><span class="v">Only 39% of organizations report measurable EBIT impact from AI; only 6% are "high performers" (≥5% of EBIT from AI); ~23% have scaled agents</span></td><td>McKinsey, State of AI (≈1,993 orgs, as reported)</td></tr>
+<tr><td>The harvest — agentic attrition</td><td><span class="v">40%+ of agentic-AI projects to be cancelled before production by end-2027; only 17% of firms have deployed agents; 40% of apps to embed agents by year-end (from &lt;5% in 2025)</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>The harvest — ROI reality</td><td><span class="v">$3.70 returned per $1 on GenAI, but a 14-month median to positive ROI and only ~25% of initiatives hitting expected returns</span></td><td>IDC / Microsoft (as reported)</td></tr>
+<tr><td>The rusted gate — trust</td><td><span class="v">Security-and-risk is the #1 barrier to scaling agentic AI — 62% (24-pt margin); inaccuracy concern 74%, cybersecurity 72%, regulatory 72%</span></td><td>Stanford 2026 AI Index (as reported)</td></tr>
+<tr><td>Still in the shallows</td><td><span class="v">53% of organizations still in "pilot and experiment"; only ~10% report growth-driven results</span></td><td>Deloitte, State of AI in the Enterprise 2026 (as reported)</td></tr>
+<tr><td>The engines (context)</td><td><span class="v">Opus 5 (Intelligence ~63 / Agentic ~55, $5/$25) · Grok 4.6 (~61, $2/$6) · GPT-5.6 / Luna ($0.20/$1.20) · Gemini 3.6 Flash · GLM-5.3 · Qwen3.8</span></td><td>Model-tracker coverage (as reported)</td></tr>
+<tr><td>EU AI Act — enforcement</td><td><span class="v">Transparency + GPAI enforcement powers applicable since 2 Aug; model inspections and market restrictions; fines up to €15M or 3% of global turnover; high-risk deadlines deferred to Dec 2027 / 2028 (Digital Omnibus)</span></td><td>European Commission / legal coverage</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Put the harvest on the same page as the dam.</strong> Most boards see the spend line and never the yield line. <strong>This month, build one dashboard that sets AI spend against measurable EBIT impact, use case by use case,</strong> and compute your throughput: what fraction of spend reached a named P&amp;L root. If you cannot answer it, that <em>is</em> the finding — you have been measuring the reservoir, not the harvest, and McKinsey's 39%/6% says most of your peers are too.</li>
+  <li><strong>Dig the channels — and kill the dry ones.</strong> Value follows the ditch, not the dam. <strong>For your top AI investments, name the P&amp;L line each is meant to move and fund the integration, data and adoption work that carries it there</strong> — the unglamorous plumbing no one climbs the ridge to admire. In the same review, meter the flow: with 40%+ of agentic projects heading for cancellation anyway, kill the ones that will never water a field <em>early and deliberately,</em> and pour the freed water into the channels already running green.</li>
+  <li><strong>Oil the trust-gate — treat security as the sluice, not the brake.</strong> Stanford says <strong>62% name security-and-risk the #1 barrier to scaling</strong> — which means trust is not a compliance cost sitting beside your value, it is the valve throttling it. <strong>Fund the security, governance and audit plumbing as an enabler of throughput:</strong> prove the model clean, fence the failure mode, name who answers, and meet the EU AI Act's live duties — so that a proven pilot can actually reach production instead of impounding forever behind a wall of doubt. Then report the readiness number to the board next to the spend and the yield. <strong>The height of the dam was never the point; the green in the furrow is.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Gartner, 2026 worldwide AI spending forecast ($2.52T, +44% YoY; ~55% / ~$1.43T infrastructure; 40%+ of agentic projects cancelled before production by 2027; 17% have deployed agents; 40% of apps embed agents by year-end, as reported) · NVIDIA / Wall Street coverage (platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize &gt;$500B; compute an "investable asset class," as reported) · McKinsey, State of AI (≈1,993 orgs — 39% measurable EBIT, 6% high performers, ~23% scaled agents, as reported) · IDC / Microsoft ($3.70/$1, 14-month median, ~25% hit expected ROI, as reported) · Stanford 2026 AI Index (security/risk #1 barrier at 62%, 24-pt margin; inaccuracy 74%, cybersecurity 72%, regulatory 72%, as reported) · Deloitte, State of AI in the Enterprise 2026 (53% still in pilot/experiment; ~10% growth-driven, as reported) · TIAA executive quote (as reported) · model-tracker coverage (Opus 5, Grok 4.6, GPT-5.6 / Luna, Gemini 3.6 Flash, GLM-5.3, Qwen3.8) · European Commission / legal coverage (EU AI Act transparency &amp; GPAI enforcement live since 2 Aug; model inspections; Digital Omnibus deferrals) · Official MCP blog (2026-07-28 spec). Figures are relayed from analyst reports, vendor announcements and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 23 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
