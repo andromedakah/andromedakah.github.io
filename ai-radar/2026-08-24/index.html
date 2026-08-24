@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 24 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the agent/MCP gateway crystallizing as the enterprise control plane. Gravitee finds 47% of ~3M deployed agents unmonitored and 88% of firms hit by an agent incident; IBM finds only 18% keep a complete agent inventory; Snowflake's Cortex AI Gateway enforces identity, policy and audit at the tool-call level across 100+ MCP servers. Build the one gate every agent must pass — named, permissioned, inspected, metered and logged. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The agent control plane</div>
+  <h1>The Gatehouse</h1>
+  <div class="subhead">Enterprises wired agents into their systems through a hundred unrecorded gaps — and the market's converging answer is a single governed gate every agent must pass.</div>
+  <div class="meta">Monday, 24 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday this radar found the moat is the unglamorous plumbing — the channels and the trust-gate that carry record AI spend to a P&amp;L root. Today it names the one piece of that plumbing the market is now racing to pour in concrete: the gateway — one governed point every agent must pass to reach a model, a database or a tool. The picture that forces it is stark: Gravitee finds 47% of the ~3 million agents surveyed firms have deployed are not actively monitored or secured — about 1.5 million "at risk of going rogue" — and 88% have already had an AI-agent incident; only 18% keep a complete inventory of their agents (IBM). So the industry is crystallizing a category: at Black Hat 2026, Snowflake shipped its Cortex AI Gateway — identity, policy and audit at the tool-call level, across 100+ MCP servers, with real-time exfiltration safeguards before an agent touches a row — and analysts now call the MCP gateway the control plane for enterprise AI. The board's question: our agents already walk in and out through a hundred gaps no one records — have we built the one gatehouse where every agent is named, its papers checked, its cargo inspected, its toll metered and its passage logged?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar walked the value up the stack and, yesterday, found the moat is the plumbing between record spend and a harvested P&amp;L root. Today it names the one length of plumbing the whole market is now racing to lay: <strong>the agent gateway — a single governed chokepoint through which every agent's request to a model, a dataset or a tool must pass, so the enterprise can finally see, permission, meter and record what its agents actually do.</strong> The governing shift is no longer "can an agent act?" (the deputy), "who watches it?" (the watchman), "who is accountable?" (the guardrail) or "why is so little value reaching the P&amp;L?" (the reservoir) — it is <strong>"through what single door does all of this pass, and have we built it?"</strong></p>
+<p><strong>The datable signal — the wall is full of gaps.</strong> The reason a gate suddenly matters is that today most enterprises don't have one. <strong>Gravitee's survey (750 CIOs, CTOs and engineering leaders across the US and UK) finds 47% of the ~3 million AI agents these firms have deployed are not actively monitored or secured — roughly 1.5 million agents "at risk of going rogue" — and 88% have had or suspected an AI-agent security or data-privacy incident in the past twelve months.</strong> Beneath the agents sits an even less-governed layer: <strong>MCP servers</strong>, the connectors that wire agents into file systems, databases and APIs, adopted <strong>&gt;400% in 2025</strong> largely outside any security review, with <strong>315 MCP vulnerabilities logged in 2025 (14.4% of all AI vulnerabilities) and a 270% jump quarter-over-quarter.</strong> And you cannot govern what you cannot see: <strong>IBM's Think 2026 research finds only 18% of organizations maintain a complete inventory of their AI agents.</strong> Gartner expects shadow AI to be a contributing factor in <strong>40% of enterprise AI failures by 2027.</strong></p>
+<p><strong>The move — the gatehouse gets built.</strong> The market's answer is a single governed door. <strong>At Black Hat 2026, Snowflake launched its Cortex AI Gateway: it enforces identity, policy and audit at the tool-call level, centralizes authentication, permissions and audit logging in one place across more than 100 MCP servers, and applies zero-copy boundaries, dynamic data masking and real-time exfiltration safeguards before an agent ever touches a row of data</strong> — built on Natoma (acquired May 2026) and launched with seven identity partners (1Password, Aembit, Cyera, Linx Security, Okta, SailPoint, Saviynt). It is not one product but a <em>category:</em> Forbes calls agent gateways "the control plane for enterprise AI," and analysts say MCP gateways are "crystallizing as infrastructure." The same door also meters the toll — <strong>VentureBeat frames the gateway as a way to control agents and prevent runaway costs,</strong> the same escalating-cost driver behind Gartner's forecast that <strong>40%+ of agentic projects are cancelled by 2027.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>A hundred gaps in the wall.</strong> <strong>Gravitee: 47% of ~3M deployed agents unmonitored (~1.5M at risk of going rogue); 88% had an agent incident.</strong> <strong>IBM: only 18% keep a complete agent inventory.</strong> <strong>MCP adoption +400%; 315 MCP vulns in 2025 (14.4% of all AI vulns).</strong> You cannot permit, meter or prove what walks in through a gap you never recorded.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The gatehouse crystallizes as infrastructure.</strong> <strong>Snowflake Cortex AI Gateway (Black Hat 2026): identity, policy and audit at the tool-call level; 100+ MCP servers; zero-copy, masking, exfiltration prevention before data is touched; seven identity partners.</strong> Forbes: agent gateways are becoming <strong>"the control plane for enterprise AI."</strong> The identity market is pricing the same shift — <strong>Cyera bought Oasis for ~$1B, Okta bought Permiso for ~$200M</strong> in a single 72-hour window.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The gate is also the toll and the ledger.</strong> The same chokepoint that names and permits the agent also <strong>meters its spend</strong> (a defense against Gartner's cost-driven <strong>40%+ agentic cancellation</strong> rate) and <strong>logs its actions</strong> — which the <strong>EU AI Act's Article 12 reconstructability logging and Article 50 transparency duties, live since 2 August (fines up to €15M/3%),</strong> now make a hard requirement for any agent touching credit, employment, healthcare or critical-infrastructure data. The rail underneath is standardizing: <strong>MCP was donated to the Linux Foundation's Agentic AI Foundation, and its 2026-07-28 stateless spec</strong> is the protocol the gate governs.</div></div>
+<div class="card"><strong>Bottom line:</strong> the engine is a commodity (the fastest month in AI history just shipped 11+ models in 20 days) and the plumbing is the moat — and the specific fitting the whole market is now installing is <strong>the gate: one governed point where every agent is named, permissioned, inspected, metered and logged.</strong> An enterprise that wired agents into its systems through a hundred unrecorded gaps did not gain speed; it lost the wall. <strong>Stop counting agents and start routing them: build (or buy) the single gateway every agent must pass, put identity, policy, cost-metering and audit at that one door, and make "no gate, no access" the rule — because at 47% of agents unmonitored and 18% even inventoried, the danger is not that an agent acts, but that it acts through a hole you never knew was there.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏰 "The Gatehouse"</h3>
+<p><em>Topic: Around 22–24 August 2026, the dominant enterprise-AI thread became the emergence of the agent/MCP gateway as the control plane for enterprise AI — the single governed point through which every agent's access to models, data and tools is routed, named, permissioned, metered and logged. Snowflake's Cortex AI Gateway, launched at Black Hat 2026 (identity, policy and audit at the tool-call level across 100+ MCP servers, with zero-copy boundaries, dynamic data masking and real-time exfiltration prevention, built on its May-2026 Natoma acquisition and seven identity partners), is the marquee example, with analysts calling MCP gateways "crystallizing as infrastructure" and Forbes calling agent gateways "the control plane for enterprise AI." The urgency is the ungoverned status quo: Gravitee finds 47% of ~3M deployed agents unmonitored (~1.5M at risk of going rogue) and 88% of firms hit by an agent incident; IBM finds only 18% keep a complete agent inventory; MCP adoption is up 400% with 315 logged vulnerabilities in 2025; Gartner expects shadow AI to factor in 40% of AI failures by 2027 and 40%+ of agentic projects cancelled over cost, value and risk. The EU AI Act's Article 12 reconstructability logging and Article 50 transparency duties (live since 2 August, fines up to €15M/3%) make audit-grade gateway logs a hard requirement. The lesson: after naming the deputy, hiring the watchman and building the guardrail, the market's converging answer is a single gate — build the one governed door every agent must pass.</em></p>
+<p>There was a walled city that had grown rich on trade, and for a hundred years its wall had done its work. But the trade grew faster than the stone, and the city, impatient, did a careless thing: rather than widen its one great gate, it let the wall fall into a hundred small gaps — a breach here where a cart could pass, a gap there behind the tannery, a place by the river where the stone had simply crumbled and no one had troubled to mend it. And through those hundred gaps the trade poured. It was wonderfully fast. A carter no longer queued at the gate; he slipped in through whichever gap was nearest, did his business, and slipped out again the way he came. The merchants marveled at how quick the city had become, and pointed to the crowded markets as proof that the old, slow gate had only ever held them back.</p>
+<p>But a wall with a hundred gaps is not a wall, and a city that cannot see who enters cannot govern what happens inside it. No one at the gaps asked a stranger his name, or what his papers permitted, or what lay under the cloth in his cart. No one weighed what he carried out against what he had carried in. And when a warehouse was found empty in the morning, or a fire started in a district no honest trader had reason to be in, there was no ledger anywhere in the city that could say who had passed, when, or where they had gone — because the passing had never been written down. The assessors who finally counted found the bitter arithmetic: of every hundred souls moving through the city on a given day, the watch could account for barely a handful; the rest had come and gone through gaps, unnamed and unrecorded, and a great many of them, it turned out, had no honest business there at all.</p>
+<p>And the deeper danger was not the thief who slipped a gap on purpose; it was that <strong>the city had lost the very act of knowing.</strong> It could not meter a toll it never collected, could not enforce a law at a threshold it did not man, could not answer the magistrate who asked <em>who did this</em> because it had kept no record of anyone. Speed had been bought by tearing out the one thing a wall exists to provide: a single, watched, written place where the inside meets the outside on terms the city sets.</p>
+<p>The cities that thrived did not tear the wall down, and — this is the part the careless city never grasped — <strong>they did not turn a single honest trader away.</strong> They did the plain, unglamorous thing: they mended the gaps and built one <strong>gatehouse,</strong> and they made every cart pass through it. At that one door a traveler gave his <strong>name;</strong> his <strong>papers</strong> were checked against what he was permitted to carry; his <strong>cargo</strong> was inspected before it ever reached the market, and dyed goods that must not leave were marked so a gap could not smuggle them out; a fair <strong>toll</strong> was metered on what he brought; and a clerk wrote in the <strong>ledger</strong> who had passed, what they carried, and where they were bound. It was slower than a gap by a minute, and it made the city richer and safer by a mile — because now the city could <em>see,</em> and a thing you can see you can permit, price, and prove. The one gate was not a wall against trade; it was the wall doing at last what a wall is for.</p>
+<p><strong>The moral:</strong> an agent that reaches your models, your data and your tools through a hundred unrecorded paths has not made you fast — it has torn out your wall. The point was never to keep agents out; it is to make them all pass one door you control, where each is <strong>named</strong> (identity), its <strong>papers checked</strong> (policy and permission), its <strong>cargo inspected</strong> (data-loss and exfiltration control), its <strong>toll metered</strong> (cost governance), and its <strong>passage logged</strong> (audit). The seduction is the gap: it is quicker this quarter to wire one more agent straight into the database than to route it through a gate. But a system whose agents come and go through gaps no one records is not agile; it is ungoverned, and it will be un-auditable on the day a regulator, or a breach, asks who did what. Mend the gaps, build the gatehouse, and make the rule absolute: <strong>no gate, no access.</strong></p>
+<p><strong>The question it forces:</strong> <em>We have wired our agents into our systems for speed, and most of them now come and go through gaps in the wall no one records — 47% unmonitored, only 18% even inventoried. Have we mistaken a wall full of holes for an open city? Have we built the one gatehouse every agent must pass — named, permissioned, inspected, metered and logged — or are we one breach, or one audit, away from discovering we cannot say who walked through, what they took, or how to prove it?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do our agents pass a gate, or a gap?</strong> Gravitee finds 47% of deployed agents unmonitored and IBM finds only 18% of firms keep a complete agent inventory. <strong>Can we produce, today, a single list of every agent that can reach our data and tools — and does every one of them route through one governed point, or straight into the system through a connection no one records?</strong></li>
+  <li><strong>Who owns the gatehouse?</strong> Agent gateways are becoming the control plane for enterprise AI — identity, policy, cost and audit at one door. <strong>Is there a named owner and a funded programme for that control plane, or is agent access still being wired ad-hoc, team by team, with no one accountable for the wall as a whole?</strong></li>
+  <li><strong>Could we answer "who did this?"</strong> The EU AI Act's Article 12 now requires logs built for full reconstructability. <strong>If a regulator or an incident asked us to replay exactly what an agent did, when, and on whose authority, could we — or have we kept no ledger because the agent walked in through a gap?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Credit, payments and customer data are exactly the "high-risk" categories where audit-grade gateway logs are becoming a hard requirement. <strong>Does every agent touching a regulated dataset pass a gate that enforces permission and records the passage, or do we have agents querying financial data through ungoverned MCP connections we could not defend to an examiner?</strong></li>
+  <li>Runaway agent spend is a real P&amp;L risk (reports of an enterprise burning through its AI budget in a single month). <strong>Is agent cost metered and capped at the gate, or can an agent loop run our token bill to a number no one authorized?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Patient data demands provenance, minimization and an answer to "who accessed this." <strong>Do our clinical and research agents reach PHI only through a gate that masks, minimizes and logs — or have we let agents wire directly into systems that hold the most sensitive data we own?</strong></li>
+  <li>Shadow MCP is the layer below the agent. <strong>Do we even know which MCP connectors are running against our clinical systems, or are 315-vulnerabilities-a-year connectors quietly bridging our agents to our patient data with no review?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Agents touching OT, MES and supply-chain systems can move physical outcomes, not just rows. <strong>Is there one gate between our agents and our operational systems that enforces least privilege and records every command, or can an agent reach a line or a supplier through a gap?</strong></li>
+  <li>Critical-infrastructure data falls squarely inside the EU AI Act's logging duties. <strong>Have we built the reconstructable audit trail at the gate, or is our compliance resting on connections no one inventoried?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Consumer-facing and commerce agents sprawl across a large estate, each a potential gap. <strong>Do all of them — recommendation, service, pricing, fulfilment — pass one governed gateway, or are we counting agents we deployed but cannot see or meter?</strong></li>
+  <li>Data exfiltration is the consumer-trust risk. <strong>Does the gate stop an agent from carrying customer data out (zero-copy, masking, exfiltration control) before it ever touches a row, or do we find out what left only after it has left?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability means every automated action must be attributable. <strong>Can we name the agent, its authority and its full action trail for any decision taken in a citizen's case — or did the agent act through an ungoverned path we cannot reconstruct?</strong></li>
+  <li>Procurement and statute both now assume a control plane. <strong>Are we buying or building the one gate that gives us identity, permission, cost-control and Article-12-grade logging, rather than bolting oversight onto agents already loose inside the wall?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Gate, the Gaps, and the Ledger</h2>
+<p>Read the stack once more as layers priced very differently — but this week, past <em>which layer you buy,</em> past <em>who watches it,</em> past <em>who is accountable,</em> past <em>which edge of the blade reaches you first,</em> and past <em>how much of the spend reaches a root,</em> to a single structural question: <strong>through what point does an agent's request actually travel to reach a model, a dataset or a tool — and is that point one governed door, or a hundred unrecorded gaps?</strong> At the <strong>bottom</strong> of the stack is the <em>engine</em> — the raw model, cheap, per token, and multiplying (the fastest month in AI history just shipped 11+ models in 20 days). Above it are the <strong>rails</strong> (MCP), the <strong>pilotage,</strong> the <strong>last mile,</strong> the <strong>business model,</strong> the <strong>crossing,</strong> the <strong>acting agent,</strong> the <strong>ballast,</strong> the <strong>watchman,</strong> the <strong>guardrail,</strong> the <strong>two-edged blade</strong> and the <strong>reservoir.</strong> All still true. What this week identifies is the <strong>control plane:</strong> the one place all of that agent traffic can be seen, named, permissioned, metered and recorded. The engineering point is blunt: <strong>the gateway is the wall doing its job — and most enterprises tore theirs out for speed.</strong></p>
+<div class="card"><ul>
+  <li><strong>The gaps — the ungoverned status quo.</strong> The reason a gate suddenly matters is that agents mostly don't pass one today. <strong>Gravitee (750 CIOs/CTOs, US + UK):</strong> 47% of ~3M deployed agents are not actively monitored or secured (~1.5M "at risk of going rogue"); 88% of firms had or suspected an AI-agent incident in twelve months. <strong>IBM (Think 2026):</strong> only 18% keep a complete inventory of their AI agents. Below the agent, <strong>shadow MCP:</strong> adoption up <strong>&gt;400% in 2025</strong> largely outside security review; <strong>315 MCP vulnerabilities logged in 2025 (14.4% of all AI vulnerabilities), up 270% quarter-over-quarter.</strong> <strong>Gartner:</strong> shadow AI a factor in <strong>40% of enterprise AI failures by 2027.</strong> You cannot permit, meter or prove what walks in through a gap you never recorded.</li>
+  <li><strong>The gatehouse — the control plane crystallizes.</strong> <strong>Snowflake Cortex AI Gateway (Black Hat 2026):</strong> enforces <strong>identity, policy and audit at the tool-call level;</strong> centralizes authentication, permissions and audit logging in one place across <strong>100+ MCP servers;</strong> applies <strong>zero-copy boundaries, dynamic data masking and real-time exfiltration safeguards before an agent touches a row;</strong> built on <strong>Natoma</strong> (acquired May 2026) with <strong>seven identity partners</strong> (1Password, Aembit, Cyera, Linx Security, Okta, SailPoint, Saviynt). It is a <em>category,</em> not a product: <strong>Forbes</strong> — agent gateways are becoming <strong>"the control plane for enterprise AI";</strong> analysts — MCP gateways are <strong>"crystallizing as infrastructure."</strong> The identity market prices the same shift: <strong>Cyera bought Oasis (~$1B), Okta bought Permiso (~$200M)</strong> in one 72-hour window.</li>
+  <li><strong>The toll and the ledger — cost and compliance at the door.</strong> The same gate that names and permits also <strong>meters spend</strong> — the defense against <strong>Gartner's 40%+ agentic-cancellation</strong> rate driven by escalating cost and weak controls (reports of an enterprise burning its AI budget in a single month) — and <strong>records the passage.</strong> The <strong>EU AI Act's Article 12</strong> (event logging built for full reconstructability) and <strong>Article 50</strong> transparency duties, <strong>live since 2 August (fines up to €15M/3%),</strong> make audit-grade gateway logs a hard requirement for agents touching credit, employment, healthcare or critical-infrastructure data. The rail underneath is standardizing: <strong>MCP → the Linux Foundation's Agentic AI Foundation,</strong> with the <strong>2026-07-28 stateless spec</strong> the protocol the gate governs.</li>
+</ul></div>
+<p>The strategic core: <strong>the engine is cheap and multiplying, the value is in the plumbing, and the specific fitting the whole market is now installing is the gate — one governed point where identity, policy, cost and audit meet the agent.</strong> For a week the frame moved from "own the right layer" to "re-trim for the weight" to "oversee without custody" to "own the guardrail" to "dig the channels"; this week's refinement is <em>routing.</em> "We have lots of agents" and even "we govern our agents" are not answers to "through what single door does every agent reach our data and tools, and what does that door see"; <em>"every agent passes one gate that names it, checks its papers, inspects its cargo, meters its toll and logs its passage"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The gatehouse: one governed door, or a hundred unrecorded gaps. An agent that reaches your data through a gap has not made you fast; it has torn out your wall. Top left: the gaps, the status quo — 47 percent of roughly 3 million agents unmonitored, about 1.5 million at risk of going rogue, 88 percent of firms had an agent incident, only 18 percent keep a full inventory, MCP adoption up 400 percent with 315 vulnerabilities in 2025; the wall is full of holes. Top right: the gate, the control plane — Snowflake Cortex AI Gateway enforces identity, policy and audit at the tool-call level across 100-plus MCP servers with zero-copy boundaries, data masking and exfiltration prevention; the wall does its job. Every agent must pass one door. In the middle: what the gate does — name equals identity with seven partners including Okta, SailPoint, 1Password, Aembit and Cyera; papers equal policy and permission; cargo equals data-loss and exfiltration control; toll equals cost metering against the 40 percent-plus of agentic projects cancelled on cost per Gartner; ledger equals audit logging for EU AI Act Article 12 reconstructability, live, with fines up to 15 million euros or 3 percent. Bottom left: mend the gaps — inventory every agent, find shadow MCP servers, no gate no access; see it before you govern it. Bottom right: build or buy the gatehouse — route all agent traffic through one governed gateway, put identity, policy, cost and audit here; MCP donated to the Linux Foundation Agentic AI Foundation, 2026-07-28 spec." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE GATEHOUSE — one governed door, or a hundred unrecorded gaps</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">an agent that reaches your data through a gap has not made you fast; it has torn out your wall</text>
+
+  <!-- the gaps -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE GAPS — the status quo</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">47% of ~3M agents unmonitored</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">(~1.5M "at risk of going rogue")</text>
+  <text x="52" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">88% had an agent incident · 18% inventoried</text>
+  <text x="52" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">MCP +400% · 315 vulns in 2025</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ the wall is full of holes</text>
+
+  <!-- the gate -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE GATE — the control plane</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Snowflake Cortex AI Gateway</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">identity·policy·audit at TOOL-CALL level</text>
+  <text x="364" y="139" font-size="10" fill="#9fe0c6" font-family="sans-serif">100+ MCP servers · zero-copy · masking</text>
+  <text x="364" y="159" font-size="10" fill="#9fe0c6" font-family="sans-serif">· real-time exfiltration prevention</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the wall does its job</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">every agent must pass one door ▼</text>
+
+  <!-- what the gate does -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#0f1f2e" stroke="#2b6a9e"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#6bb8e8" font-family="sans-serif">WHAT THE GATE DOES — name · papers · cargo · toll · ledger</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">NAME = identity (7 partners: Okta, SailPoint, 1Password, Aembit, Cyera…)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">PAPERS = policy &amp; permission · CARGO = data-loss / exfiltration control</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">TOLL = cost metering (vs 40%+ agentic projects cancelled on cost, Gartner)</text>
+  <text x="52" y="327" font-size="9.5" fill="#8fcdf0" font-family="sans-serif" font-style="italic">LEDGER = audit log (EU AI Act Art.12 reconstructability, live · €15M/3%)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#6bb8e8" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#6bb8e8"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- mend the gaps -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">MEND THE GAPS</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inventory every agent</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· find shadow MCP servers</text>
+  <text x="52" y="461" font-size="10" fill="#e8edf3" font-family="sans-serif">· "no gate, no access"</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">see it before you govern it</text>
+
+  <!-- build the gatehouse -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">BUILD (OR BUY) THE GATEHOUSE</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· route all agent traffic through</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">  one governed gateway</text>
+  <text x="364" y="461" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· identity + policy + cost + audit here</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">MCP → Linux Foundation (AAIF); 2026-07-28</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Stop counting agents and start routing them: mend the gaps, build the gatehouse,</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">and make it absolute — no gate, no access. The speed of the gap is borrowed; the ledger of the gate is what you own</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The gaps — 47% of agents unmonitored</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The gate — Cortex AI Gateway (control plane)</span>
+  <span><i class="dot" style="background:#2b6a9e"></i>What the gate does — name·papers·cargo·toll·ledger</span>
+  <span><i class="dot" style="background:#34306a"></i>Mend the gaps · build the gatehouse</span>
+</div>
+</div>
+
+<h3>The gap versus the gate — the same agent, two very different postures</h3>
+<table>
+<tr><th>The gap — how agents run today</th><th>The gate — how the market says to run them</th></tr>
+<tr><td>47% of ~3M agents unmonitored (~1.5M at risk)</td><td>Every agent routed through one governed point</td></tr>
+<tr><td>Only 18% keep a complete agent inventory</td><td>Identity checked at the door (name at the gate)</td></tr>
+<tr><td>Shadow MCP: +400% adoption, 315 vulns in 2025</td><td>Policy &amp; permission enforced at the tool-call level</td></tr>
+<tr><td>Data leaves before anyone sees it</td><td>Zero-copy, masking, exfiltration control before a row is touched</td></tr>
+<tr><td>Token spend runs uncapped (budgets burned)</td><td>Cost metered and capped at the gate (the toll)</td></tr>
+<tr><td>No record of who did what</td><td>Article-12 reconstructable audit log (the ledger)</td></tr>
+</table>
+
+<h3>Why "the control plane" is the artifact that matters</h3>
+<div class="card">
+<p>For a year the reflex was to chase the smartest model; this week's news says the defensible thing is <em>the single governed point every agent passes.</em> A gateway is model-agnostic and unglamorous — it does not make an agent smarter; it makes the whole fleet <em>visible, permissioned, metered and provable.</em> That is why the market is converging on it fast: a data platform (Snowflake) buys an MCP-gateway company (Natoma) and ships a gateway; the identity vendors consolidate around it (Cyera/Oasis, Okta/Permiso); the analysts name it "the control plane." The interesting artifact this week is not a benchmark and not a model — it is an <strong>architectural chokepoint you can either own or leave as a hundred holes.</strong></p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> On legacy estates the danger is the seductive gap: it is quicker this quarter to wire one more agent straight into the database or bolt an MCP connector onto a workflow than to route it through a gate. That speed is borrowed against governability. The retrofit is <strong>gatehouse discipline. Mend the gaps:</strong> inventory every agent and every MCP server (only 18% can today), and make "no gate, no access" a hard rule. <strong>Build (or buy) the gatehouse:</strong> route all agent traffic through one control plane and put identity, policy, cost-metering and audit at that single door — don't scatter oversight across every team. <strong>Man the door with the five checks:</strong> name (identity), papers (policy/permission), cargo (data-loss and exfiltration control), toll (cost caps), ledger (reconstructable audit). <strong>Clear customs:</strong> the EU AI Act's Article 12 and Article 50 make the ledger a legal requirement for regulated data. And keep the engine swappable behind the gate — because the model is the commodity, and <em>the governed door every agent passes is the moat.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is the engine — cheap, per-token, multiplying. The agents are the traders — fast, useful, and multiplying faster. The gateway is the wall doing its job: one governed door where every trader is named, papers checked, cargo inspected, toll metered and passage logged. A city that let its wall fall into a hundred gaps for speed did not become open; it became ungoverned and un-auditable — 47% of agents unmonitored, 18% even inventoried. Stop counting agents and start routing them. Mend the gaps, build the gatehouse, and make it absolute: no gate, no access. The speed of the gap is borrowed; the ledger of the gate is what you own.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The gaps — the ungoverned status quo.</strong> <strong>Gravitee:</strong> 47% of ~3M agents unmonitored (~1.5M at risk), 88% had an incident. <strong>IBM:</strong> only 18% keep a complete agent inventory. <strong>Shadow MCP:</strong> +400% adoption, 315 vulns in 2025 (14.4% of AI vulns, +270% QoQ). <strong>Gartner:</strong> shadow AI a factor in 40% of AI failures by 2027 (as reported).</li>
+  <li><strong>The gate — the control plane crystallizes.</strong> <strong>Snowflake Cortex AI Gateway (Black Hat 2026):</strong> identity/policy/audit at the tool-call level, 100+ MCP servers, zero-copy/masking/exfiltration prevention, built on Natoma, seven identity partners. <strong>Forbes:</strong> "the control plane for enterprise AI." Identity M&amp;A: <strong>Cyera/Oasis (~$1B), Okta/Permiso (~$200M)</strong> (as reported).</li>
+  <li><strong>The toll &amp; the ledger — cost and compliance at the door.</strong> <strong>Gartner:</strong> 40%+ of agentic projects cancelled by 2027 (cost/value/risk); reports of an enterprise burning its AI budget in a month. <strong>EU AI Act:</strong> Article 12 reconstructability logging + Article 50 transparency live since 2 Aug, fines up to €15M/3%; high-risk deferred to Dec 2027 / Aug 2028 (Digital Omnibus) (as reported).</li>
+  <li><strong>The rail — the protocol standardizes.</strong> <strong>MCP → the Linux Foundation's Agentic AI Foundation;</strong> the <strong>2026-07-28 stateless spec</strong> (Extensions framework, Tasks) is the protocol the gate governs (as reported).</li>
+  <li><strong>The engine — cheap and multiplying.</strong> The fastest month in AI history: <strong>11+ models in 20 days.</strong> <strong>Opus 5</strong> (Intelligence ~63 / Agentic ~55, $5/$25), <strong>Grok 4.6</strong> (~61 at $2/$6), <strong>GPT-5.6 / Luna</strong> ($0.20/$1.20), <strong>Gemini 3.7 Flash,</strong> open-weight <strong>GLM-5.3 / Qwen3.8</strong> (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Agent gateways are becoming the control plane for enterprise AI.</div><div class="a">— Forbes (Janakiram MSV), on the emergence of the agent gateway (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Snowflake's Cortex AI Gateway signals MCP gateways are crystallizing as infrastructure.</div><div class="a">— industry analysis, on the gateway becoming a category (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">[The gateway] enforces identity, policy, and audit at the tool-call level — effectively treating the agent as a first-class citizen within the enterprise perimeter.</div><div class="a">— paraphrase of the Snowflake Cortex AI Gateway design (as reported)</div></blockquote>
+<blockquote><div class="q">"The point was never to keep the agents out. It is to make them all pass one door you control — named, permissioned, inspected, metered and logged. A wall with a hundred gaps is not a wall."</div><div class="a">— the radar, on the gatehouse</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The gaps — unmonitored agents</td><td><span class="v">47% of the ~3 million agents surveyed firms have deployed are not actively monitored or secured (~1.5M "at risk of going rogue"); 88% had or suspected an AI-agent incident in 12 months</span></td><td>Gravitee, survey of 750 CIOs/CTOs, US + UK (as reported)</td></tr>
+<tr><td>The gaps — inventory blindness</td><td><span class="v">Only 18% of organizations maintain a complete inventory of their AI agents</span></td><td>IBM, Think 2026 research (as reported)</td></tr>
+<tr><td>The gaps — shadow MCP</td><td><span class="v">MCP adoption up &gt;400% in 2025 (largely outside security review); 315 MCP vulnerabilities logged in 2025 (14.4% of all AI vulnerabilities), up ~270% quarter-over-quarter</span></td><td>Security-vendor coverage (Qualys, Zuplo, others, as reported)</td></tr>
+<tr><td>The gaps — future failure driver</td><td><span class="v">Shadow AI a contributing factor in 40% of enterprise AI failures by 2027</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>The gate — the control plane</td><td><span class="v">Snowflake Cortex AI Gateway: identity, policy and audit at the tool-call level; 100+ MCP servers; zero-copy boundaries, dynamic data masking, real-time exfiltration prevention; built on Natoma; seven identity partners</span></td><td>Snowflake / Black Hat 2026 coverage (as reported)</td></tr>
+<tr><td>The gate — market validation</td><td><span class="v">Agent gateways "the control plane for enterprise AI"; MCP gateways "crystallizing as infrastructure"; identity M&amp;A — Cyera/Oasis (~$1B), Okta/Permiso (~$200M) in one 72-hour window</span></td><td>Forbes / analyst / deal coverage (as reported)</td></tr>
+<tr><td>The toll — runaway cost</td><td><span class="v">40%+ of agentic-AI projects cancelled before production by end-2027 (escalating cost, unclear value, weak controls); reports of an enterprise spending ~$500M in a month with no usage caps</span></td><td>Gartner / trade coverage (as reported)</td></tr>
+<tr><td>The ledger — compliance</td><td><span class="v">EU AI Act Article 12 (event logging for full reconstructability) + Article 50 transparency live since 2 Aug; audit-grade logs a hard requirement for regulated-data agents; fines up to €15M or 3% of global turnover; high-risk deferred to Dec 2027 / Aug 2028</span></td><td>European Commission / legal coverage</td></tr>
+<tr><td>The rail — the standard</td><td><span class="v">MCP donated to the Linux Foundation's Agentic AI Foundation; 2026-07-28 stateless spec (Extensions, Tasks) is the protocol the gate governs</span></td><td>Official MCP blog / AAIF (as reported)</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Fastest month in AI history — 11+ models in 20 days. Opus 5 (~63 / ~55, $5/$25) · Grok 4.6 (~61, $2/$6) · GPT-5.6 / Luna ($0.20/$1.20) · Gemini 3.7 Flash · GLM-5.3 · Qwen3.8</span></td><td>Model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Take the census — inventory every agent and every MCP server.</strong> You cannot govern what you cannot see, and only 18% of firms can see it. <strong>This month, produce one list of every agent that can reach your data or tools, and every MCP connector running in your estate,</strong> and mark which ones pass a governed point and which walk in through a gap. If you cannot build the list, that <em>is</em> the finding — you are the 82%, and Gravitee's 47%-unmonitored is your number too until proven otherwise.</li>
+  <li><strong>Build (or buy) the one gate — and make "no gate, no access" the rule.</strong> The market has named the pattern: route all agent traffic through a single control plane. <strong>Pick your gateway — build on the MCP standard or buy a Cortex-class gateway — and put the five checks at that one door:</strong> identity (name), policy (papers), data-loss/exfiltration control (cargo), cost metering (toll) and reconstructable audit (ledger). Then close the gaps: any agent or MCP connector that reaches data another way gets cut over to the gate or turned off.</li>
+  <li><strong>Wire the ledger to cost and to compliance.</strong> The same door that permits the agent should meter its spend and record its actions. <strong>Set token/cost caps at the gate</strong> (a direct defense against the 40%+ of agentic projects cancelled on runaway cost) <strong>and make the gate's logs Article-12-grade</strong> — built for full reconstructability, so that when a regulator or an incident asks "who did this, when, and on what authority," you answer from the ledger, not from silence. Report two numbers to the board next quarter: the share of agents that pass the gate, and the share of agent spend metered at it. <strong>The speed of the gap is borrowed; the ledger of the gate is what you own.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Gravitee, State of AI Agent Security (750 CIOs/CTOs, US + UK — 47% of ~3M agents unmonitored, ~1.5M at risk, 88% had an agent incident, as reported) · IBM, Think 2026 research (only 18% keep a complete agent inventory, as reported) · security-vendor coverage on shadow MCP (Qualys, Zuplo, others — MCP adoption +400%, 315 vulns in 2025, 14.4% of AI vulns, +270% QoQ, as reported) · Gartner (shadow AI a factor in 40% of AI failures by 2027; 40%+ of agentic projects cancelled by 2027 on cost/value/risk, as reported) · Snowflake / Black Hat 2026 coverage (Cortex AI Gateway — identity/policy/audit at the tool-call level, 100+ MCP servers, zero-copy/masking/exfiltration prevention, built on Natoma, seven identity partners, as reported) · Forbes / analyst / deal coverage (agent gateways "the control plane for enterprise AI"; MCP gateways "crystallizing as infrastructure"; Cyera/Oasis ~$1B, Okta/Permiso ~$200M, as reported) · European Commission / legal coverage (EU AI Act Article 12 reconstructability logging + Article 50 transparency live since 2 Aug; €15M/3% fines; Digital Omnibus deferrals) · Official MCP blog / AAIF (MCP → Linux Foundation; 2026-07-28 spec) · model-tracker coverage (fastest month in AI history — 11+ models in 20 days; Opus 5, Grok 4.6, GPT-5.6 / Luna, Gemini 3.7 Flash, GLM-5.3, Qwen3.8). Figures are relayed from surveys, vendor announcements and press sources, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 24 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
