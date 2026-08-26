@@ -1,0 +1,61 @@
+# Sources — AI Tech Radar, 26 August 2026 ("The Passport")
+
+Every claim in this edition traces to a public source below. Figures are attributed to the organization or outlet that published them. Lines explicitly marked as "the radar's framing" are editorial and are not attributed to any third party. Where a figure or characterization is reported via secondary coverage, it is marked "as reported." Note: several primary and secondary pages (including okta.com and a number of trade outlets) were unreachable from the compile environment behind the network egress proxy; those figures were verified by cross-referencing multiple reputable outlets and search summaries and are flagged accordingly, and should be re-verified at source before republishing.
+
+## The story — the model is rented, the knowledge is owned, and now the question is *who is the agent* — identity is the control point
+
+### The passport — agents become first-class identities (the datable hook)
+
+- Okta, "Okta brings first-class identity to AI agents with Agent SSO" (press release) — https://www.okta.com/newsroom/press-releases/okta-brings-first-class-identity-to-ai-agents-with-agent-sso/
+- Okta, "Cross App Access | Controlling AI Agent and App Connections" — https://www.okta.com/solutions/cross-app-access/
+- Okta, "Agent SSO: Secure Agent-to-App Connections" (datasheet) — https://www.okta.com/resources/datasheets/agent-sso/
+- Okta Developer, "Build Secure Agent-to-App Connections with Cross App Access (XAA) Using OIDC" — https://developer.okta.com/blog/2025/09/03/cross-app-access
+- SecurityBrief, "Okta launches Agent SSO to manage enterprise AI agent access" — https://securitybrief.com.au/story/okta-launches-agent-sso-to-manage-enterprise-ai-agent-access
+- TechNode Global, "Okta launches Agent SSO for governing enterprise AI agents" (26 August 2026) — https://technode.global/2026/08/26/okta-launches-agent-sso-enterprise-ai-agents/
+- vmblog, "Okta brings first-class identity to AI agents with Agent SSO" — https://vmblog.com/news/okta-brings-first-class-identity-to-ai-agents-with-agent-sso/
+- MSSP Alert, "Okta Wants AI Agents Treated Like Identities. Here's Why That Matters." — https://www.msspalert.com/news/okta-wants-ai-agents-treated-like-identities-heres-why-that-matters
+
+Claims sourced here (as reported): Okta announced the general availability of Agent SSO in the last week of August 2026, bringing the open Cross App Access (XAA) protocol directly into the identity product used by more than 20,000 customers. Agent SSO lets an organization register an AI agent as a first-class identity in Okta's Universal Directory and govern it with the same centralized policies used for human employees — shifting agent authorization from individual applications to the enterprise identity provider (just as SSO once centralized human access), issuing short-lived, scoped tokens when an agent needs to act in another application on a user's behalf, and reducing reliance on static API keys, unmanaged tool-to-tool links and repeated user-consent prompts. Supported XAA applications (e.g. Glean, Cursor, Zoom) are reachable through the Okta Integration Network. Okta CEO Todd McKinnon said: "AI agents are a powerful new identity type. They can act independently, on their own or on behalf of a user or a team or a company." Okta Platform Chief Product Officer Arnab Bose said: "With Cross App Access, Okta is excited to bring oversight and control to how agents interact across the enterprise. Since protocols are only as powerful as the ecosystem that supports them, we're also committed to collaborating across the software industry to help provide agents with secure, standardized access to all apps." These are the "passport" facts: agent identity, issued and governed centrally, as the enterprise control point.
+
+### The census — machine (and agent) identities now dwarf people
+
+- Palo Alto Networks, 2026 Identity Security Landscape — machine identities now outnumber humans ~109 to 1 (up from ~82:1 a year earlier), with ~79 of those 109 being AI agents (~72%) — relayed via the coverage below
+- CyberArk, "Machine Identities Outnumber Humans by More Than 80 to 1: New Report Exposes the Exponential Threats of Fragmented Identity Security" — https://www.cyberark.com/press/machine-identities-outnumber-humans-by-more-than-80-to-1-new-report-exposes-the-exponential-threats-of-fragmented-identity-security/
+- Axis Intelligence, "Machine Identity Statistics 2026: Non-Human Identity Ratios, Secrets Sprawl, and Certificate Lifecycle Data" — https://axis-intelligence.com/machine-identity-statistics/
+- Merlin Cyber, "Identity Security as the Control Plane for the AI Era: Insights from CyberArk IMPACT 2026" — https://www.merlincyber.com/insights/blog/identity-security-ai-era
+- MyABT, "The AI Agent Identity Crisis: Machine IDs Will Outnumber Humans by 2027" — https://www.myabt.com/blog/ai-agent-identity-crisis-machine-ids
+
+Claims sourced here (as reported): Palo Alto Networks' 2026 Identity Security Landscape report found that machine identities — including AI agents — now outnumber human identities roughly 109 to 1, up from about 82:1 a year earlier, and that roughly 79 of those 109 (about 72%) are AI agents. CyberArk's 2026 machine-identity research puts the ratio at "more than 80 to 1" and positions machine-identity security as the control plane for the AI era. These are the "census" figures: the population an enterprise must now name, paper and govern is overwhelmingly non-human, and increasingly agentic.
+
+### The gap — adoption has outrun agent identity governance
+
+- Okta, "AI Agents at Work 2026: Securing the agentic enterprise" — https://www.okta.com/newsroom/articles/ai-agents-at-work-2026-agentic-enterprise-security/
+- Cloud Security Alliance, "AI Agent Identity Crisis: Standards Emerge as Enterprises Lag" — https://labs.cloudsecurityalliance.org/research/csa-research-note-okta-ai-agent-iam-framework-enterprise-gap/
+- ecorpit, "AI agent identity governance: the 2026 build list" — https://ecorpit.com/ai-agent-identity-governance-nhi-okta-permiso-2026/
+- HR Chief, "Okta Extends Workforce Security to AI Employees" — https://hrchiefmagazine.com/news/okta-extends-workforce-security-to-ai-employees
+
+Claims sourced here (as reported): Okta's "AI Agents at Work 2026" research — commissioned by Okta and conducted by Apprize360 in March 2026, surveying 292 executives and 492 knowledge workers across seven countries (US, UK, Australia, Canada, Japan, France, Germany) — found that while 91% of organizations were already using AI agents, only 10% had a well-developed strategy or roadmap for managing non-human identities (NHIs); 88% reported suspected or confirmed AI-agent security incidents; only 34% apply the same identity and security controls to their agentic workforce as to human employees; and only 22% treat AI agents as independent, identity-bearing entities. These are the "gap" figures: agents are everywhere, but the papers, policies and revocation that govern human identities have not been extended to them.
+
+### The ledger — identity is the precondition for the compliance floor
+
+- European Commission, "Commission starts enforcing AI Act rules and new transparency requirements on 2 August" — https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august
+- Salt Security, "EU AI Act Compliance 2026: What High-risk AI Systems Must Do Now" (Article 12 logging) — https://salt.security/eu-ai-act-compliance
+- Gibson Dunn, "EU AI Act Omnibus Agreement — Postponed High-Risk Deadlines and Other Key Changes" — https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/
+
+Claims sourced here (as reported): As of 2 August 2026, the European Commission's AI Office, with national authorities, began enforcing the AI Act, and Article 50 transparency rules began to apply. Article 12 requires automatic event logging built for full reconstructability of what a system did, when, and on what basis — a duty an enterprise cannot meet unless every acting agent has a distinct, attributable identity. Fines for these obligations run up to the higher of €15 million or 3% of worldwide annual turnover. High-risk obligations were deferred to December 2027 and August 2028 under the Digital Omnibus on AI. Cited as the "ledger" that a passport makes possible: you cannot reconstruct who did what if the actors have no names.
+
+## The engine — commodity models, priced per token (standing context)
+
+- Local AI Zone, "Latest AI Developments: August 2026 Update" — https://local-ai-zone.github.io/blog/ai-updates-august-2026.html
+- LLM-Stats, "AI Updates Today (August 2026) – Latest AI Model Releases" — https://llm-stats.com/llm-updates
+- Netguru, "Latest AI developments 2026: Models, agentic AI, infrastructure" — https://www.netguru.com/blog/latest-ai-developments-2026
+
+Claims sourced here (as reported, standing context): August 2026 was described as the fastest month in AI history, with 11+ model releases in roughly 20 days from five-plus providers. The standing engine field carried as context — Claude Opus 5, xAI Grok 4.6, OpenAI GPT-5.6 and GPT-5.6-Luna, Google Gemini 3.7 Flash, and open-weight Z.ai GLM-5.3, Alibaba Qwen3.8 and Moonshot Kimi K3 — is relayed from model-tracker and vendor coverage as the rented, swappable, per-token-priced model layer whose cost per unit of intelligence keeps falling. Carried here only as context: the interchangeable engine is precisely why identity, knowledge and governance — not the model — are where advantage and control now sit.
+
+## Prior-day context (background only)
+
+Claims sourced here (context only): This week's earlier editions — "The Recipe" (25 Aug, the model as a rented commodity and governed proprietary knowledge as the moat), "The Gatehouse" (24 Aug, the agent/MCP gateway as the enterprise control plane), "The Reservoir" (23 Aug, the spend-value gap and the trust-gate), "The Locksmith" (22 Aug, agentic AI as a two-edged security actor) and "The Guardrail" (21 Aug, agentic adoption outrunning governance) — are referenced only as prior-day background. The passport is the natural next step from the gatehouse and the recipe: once every agent must pass one governed door (the gate) and draw on knowledge only you own (the larder), the remaining question is *who is the agent standing at the door* — and this week's answer is that the agent must carry a real, centrally issued, revocable identity.
+
+---
+
+*Editorial lines marked as the radar's own (e.g. "A gate is only as good as its ability to say who is standing at it.") are the AI Tech Radar's framing and are not third-party quotes. The passport allegory — a realm flooded with new travelers who carry no papers, borrow or forge each other's tokens, and cannot be named or turned back, until the realm issues every traveler one centrally stamped, short-dated, revocable passport checked at every door — is a common illustration used allegorically and is not a sourced claim about any specific company or product. Where a quotation or figure is attributed via secondary coverage rather than a primary release, it is marked "as reported." Product, firm and institution names (Okta, Cross App Access, Palo Alto Networks, CyberArk, Apprize360, the European Commission, and the model vendors) reflect the sources as described in the cited 2026 material. Several primary and secondary pages were unreachable behind the network egress proxy and the figures were cross-referenced across multiple reputable outlets; they should be re-verified at source before republishing. This edition's central development in the window is the arrival of agent identity as a first-class, centrally governed control point — Okta's Agent SSO bringing the open Cross App Access standard into a 20,000-customer identity platform — set against a population where machine identities outnumber people ~109 to 1 (Palo Alto Networks) with ~72% of them AI agents, an adoption-governance gap (Okta/Apprize360: 91% use agents, 10% have an NHI strategy, 88% report incidents), and a compliance floor (EU AI Act Article 12 reconstructability) that identity alone makes reachable.*
