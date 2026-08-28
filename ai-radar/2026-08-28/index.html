@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 28 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on why agent orchestration — not the model or the agent count — is the enterprise control point. Deloitte finds only 15% of organizations have scaled, orchestrated, cross-functional multi-agent adoption while 74% expect half their processes redesigned around agents within four years; Gartner projects 40%+ of agentic-AI projects canceled by end of 2027. Hire the conductor. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The agent orchestration layer</div>
+  <h1>The Conductor</h1>
+  <div class="subhead">The lingua franca let every named agent speak; today the market's data asks who makes them play together — and finds that almost no one has hired the conductor.</div>
+  <div class="meta">Friday, 28 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the radar settled the language: the two open tongues an agent must speak now live in a neutral library no vendor can lock. But a hundred thousand named agents that can all speak the same tongue is not a workforce; it is a crowd. Today the radar asks the question the lingua franca leaves open: once every agent can speak, who makes them play together — in time, toward one piece of work? Deloitte's new agentic-AI survey (501 senior-manager-to-C-suite leaders across five US industries, fielded April–June 2026) finds only 15% of organizations have scaled, orchestrated, cross-functional multi-agent adoption — and mostly in low-risk, low-ROI corners — even as 74% expect nearly half their processes redesigned around agents within four years. Gartner warns that 40%+ of agentic-AI projects will be canceled by end of 2027. We have hired virtuoso soloists all year; the question is whether we have hired the conductor.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar walked the value up the stack — the watchman, the guardrail, the reservoir's value gap, the gate every agent must pass, the governed knowledge worth defending, the passport that names each agent, and yesterday the common tongue they all speak. Today it names the layer that turns all of them into <em>work:</em> <strong>the conductor.</strong> The governing shift is no longer "can an agent act?", "who is the agent?" or "what language does it speak?" — it is <strong>"who coordinates the hundred thousand of them so they produce one outcome instead of a hundred thousand collisions?"</strong> The market's answer this week is <strong>orchestration — and the sober evidence that it, not the model or the agent count, is where value now lives or dies.</strong></p>
+<p><strong>The datable signal — orchestration is the gate almost no one has passed.</strong> Deloitte's latest research, <em>"AI agents are only the beginning: the path to agentic transformation"</em> (a survey of <strong>501 senior-manager-to-C-suite leaders across five US industries, fielded April–June 2026</strong>), finds that <strong>only 15% of organizations have reached scaled, orchestrated, cross-functional multi-agent adoption</strong> — and that where scaling is happening, it clusters in <strong>lower-risk, repeatable, near-term-ROI use cases</strong> (customer service, IT, engineering), not the high-value core. Yet ambition dwarfs readiness: <strong>74% of leaders expect nearly half of their business processes to be redesigned or rebuilt around AI agents within four years.</strong> Deloitte's U.S. TMT AI growth leader <strong>Laura Shact</strong> frames the gap bluntly: quick, layered-on fixes "may create the sense of getting ahead," but "thriving in the agentic future will require more" — work and organization redesign, not one-off wins.</p>
+<p><strong>The move — the reckoning has a number, and it is unforgiving.</strong> The reason orchestration suddenly dominates is that un-orchestrated agent sprawl is starting to be <em>canceled.</em> <strong>Gartner: more than 40% of agentic-AI projects will be scrapped by the end of 2027,</strong> on escalating costs, unclear business value and inadequate risk controls — and, by a separate forecast, a comparable share of enterprises may <strong>demote or decommission autonomous agents</strong> after governance failures surface in production. The appetite is real (Gartner logged a <strong>1,445% jump in multi-agent-system inquiries</strong> from early 2024 to mid-2025, as reported), but appetite without a conductor is exactly what gets cut. Deloitte's own market math makes the upside concrete: the agentic-AI market could grow from roughly <strong>US$8.5B in 2026 to ~US$35B by 2030 — and up to ~30% higher (≈US$45B) for enterprises that orchestrate well.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The gap — few have hired the conductor.</strong> <strong>Deloitte: only 15% have scaled, orchestrated, cross-functional multi-agent adoption,</strong> and most of that sits in low-risk, low-ROI corners; <strong>74% expect ~half of business processes rebuilt around agents within four years.</strong> The distance between those two numbers is the orchestration gap.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reckoning — un-orchestrated sprawl gets cut.</strong> <strong>Gartner: 40%+ of agentic-AI projects canceled by end of 2027</strong> (cost, value, controls); a similar share of enterprises may demote or decommission agents after production governance failures (as reported). More agents is not more value; coordinated agents is.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The prize — orchestration is where the exponential lives.</strong> <strong>Deloitte: agentic-AI market ~US$8.5B (2026) → ~US$35B (2030), up to +30% (~US$45B) for those who orchestrate well.</strong> The value is not in the number of players but in whether they play together — and yesterday's open tongues (A2A + MCP) are the score they can finally all read.</div></div>
+<div class="card"><strong>Bottom line:</strong> the lingua franca let every named agent speak; the conductor is what makes them play one piece of music instead of a hundred thousand solos. <strong>When an enterprise is heading for six figures of agents that can all talk, the control point is not another model, another agent, or another pilot — it is the orchestration layer that sequences them, cues the handoffs, silences the ones that should rest, meters the cost, and keeps the whole in time toward a business outcome.</strong> The firm that answers "how many agents do you have?" is counting musicians; the firm that answers "what does your orchestra actually <em>play,</em> and who conducts it?" is building value. <strong>Stop hiring soloists and start hiring the conductor: pick the high-value processes worth redesigning around coordinated agents, put orchestration, governance and cost-metering on the same podium, and measure the music — because when the model is rented, the knowledge is the moat, the agent is named and the language is open, the thing that turns all of it into work is who keeps time.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🎼 "The Conductor"</h3>
+<p><em>Topic: In late August 2026 the dominant enterprise-AI thread shifted from agent interoperability to agent orchestration — the coordination layer that turns many independent agents into one working system. Deloitte's survey "AI agents are only the beginning: the path to agentic transformation" (501 senior-manager-to-C-suite respondents across five US industries, fielded April–June 2026) found only 15% of organizations have scaled, orchestrated, cross-functional multi-agent adoption, with most scaling confined to lower-risk, near-term-ROI use cases, even as 74% of leaders expect nearly half of business processes to be redesigned around agents within four years; Deloitte's Laura Shact stressed that true transformation requires work and organization redesign, not layered-on quick fixes. Gartner projects that more than 40% of agentic-AI projects will be canceled by the end of 2027, and that a comparable share of enterprises may demote or decommission autonomous agents after governance failures; Gartner also logged a 1,445% rise in multi-agent-system inquiries from Q1 2024 to Q2 2025. Deloitte's TMT predictions put the agentic-AI market at ~US$8.5B in 2026, potentially ~US$35B by 2030 and up to ~30% higher for enterprises that orchestrate well. This follows the week's editions on the gate, the larder, the passport and the lingua franca. The lesson: after every agent is named and can speak a common tongue, the remaining question is who conducts them — and the data says almost no one does yet.</em></p>
+<p>There was a city that fell in love with musicians. For years its great houses competed to hire the finest players — a virtuoso here, a prodigy there, a section of tireless performers who never tired and never slept. And the city had, at last, solved the old problems: every player carried papers that named them (no more anonymous fiddlers in the pit), every player had passed through the one guarded door of the concert hall, and — as of this very season — every player could at last <strong>read the same score and tune to the same pitch,</strong> for the city had agreed on a common notation kept in a public library no house could lock. It was, on paper, the greatest assembly of talent the city had ever fielded.</p>
+<p>And yet the concerts were <strong>unlistenable.</strong> A hundred players, each brilliant, each reading the same score, all began playing at once — the strings racing ahead, the brass entering four bars early, two soloists performing entirely different movements in the same breath, nobody resting, nobody yielding, every section certain it was carrying the melody. The audience heard not a symphony but a <strong>magnificent, costly roar.</strong> The houses had assumed that if you hired enough good musicians and taught them all to read, music would simply happen. It did not. What they had built was not an orchestra; it was a crowd that could all read music, which is a very expensive kind of noise.</p>
+<p>The houses that kept their footing learned the thing the others would not: <strong>the missing figure was not another player — it was the conductor.</strong> Not a better violinist; someone on the podium who did nothing an audience could name, produced no note of their own, and yet was the reason the notes became music. The conductor set the <strong>tempo,</strong> so a hundred players kept one time. The conductor <strong>cued each entrance,</strong> so the brass came in on the bar and not before. The conductor <strong>silenced the sections that should rest,</strong> so the melody could be heard. The conductor held the whole toward <strong>one piece of music</strong> — and, quietly, kept an eye on what the evening cost, dismissing the players who added volume but no line. The remarkable discovery was that a modest orchestra with a real conductor made better music than a legendary one without, and at a fraction of the din.</p>
+<p>But the cautionary half of the tale was the houses that heard "you need a conductor" and still failed. Some <strong>hired a conductor but never wrote the piece</strong> — put a figure on the podium to wave at a hundred players who had no shared score to play, so the waving changed nothing. Some let the conductor beat time but <strong>never redesigned the seating or the parts,</strong> so the old solos kept colliding under a new baton. And some, dazzled by the podium, <strong>kept hiring more soloists</strong> faster than any conductor could fold them in, until the orchestra grew too large to lead and the house, exhausted by the cost of the roar, <strong>canceled the concert season entirely</strong> — which is precisely what the city's ledger-keepers predicted for two of every five houses that had bought players but never bought coordination. A conductor is only worth the score that gives the players one piece to play, the seating that lets the sections hand off cleanly, and the discipline to stop adding musicians the moment the music stops improving.</p>
+<p><strong>The moral:</strong> when the hall fills with a hundred thousand players who are all named, all admitted through one door, and all able at last to read one score, the figure you have been slowest to hire is the one who produces no note and is nonetheless the whole difference between music and noise — the <strong>conductor.</strong> The model is a rented stove, the knowledge is your larder, the gate is your one door, the passport names each player, the lingua franca is the score they can all read — and the <strong>conductor</strong> is who makes a hundred thousand reading, named players perform one piece of work instead of a hundred thousand solos. Hire the conductor, write the piece worth playing, seat the sections to hand off cleanly, and keep an ear on the cost. Keep hiring soloists into an unled pit and you have not built an orchestra; you have funded a roar and will, in time, cancel the season.</p>
+<p><strong>The question it forces:</strong> <em>We have named our agents, admitted them through one gate, and taught them a common tongue — and we keep hiring more of them. But have we hired the conductor? Have we chosen the high-value pieces worth redesigning around coordinated agents, seated the sections so their work hands off cleanly, put orchestration and cost-metering on the same podium — or are we still adding virtuoso soloists to an unled pit, mistaking the volume for music, and heading for the season that gets canceled?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we hired the conductor, or just more soloists?</strong> Deloitte finds only 15% have scaled, orchestrated multi-agent adoption while 74% expect half their processes rebuilt around agents in four years. <strong>Are we investing in the orchestration layer that sequences and governs our agents — or still measuring success by how many agents and pilots we've launched?</strong></li>
+  <li><strong>Which of our agent efforts is heading for cancellation?</strong> Gartner expects 40%+ of agentic-AI projects scrapped by end of 2027 on cost, unclear value and weak controls. <strong>Which of our agent initiatives has a named business outcome, a coordinated design and a cost ceiling — and which is an unled pit we should stop funding now?</strong></li>
+  <li><strong>Are we orchestrating the high-value work, or only the safe corners?</strong> Most scaled orchestration today sits in low-risk, low-ROI use cases. <strong>Have we picked at least one high-value, cross-functional process to redesign around coordinated agents — where the exponential actually lives — rather than automating only what was easy?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Payments, underwriting, fraud and client service each already run several agents that must hand off cleanly and in sequence. <strong>Do we have an orchestration and governance layer that sequences those agents, meters their cost per interaction, and keeps a reconstructable record — or a set of soloists colliding across the same customer?</strong></li>
+  <li>Un-orchestrated agents fail loudly in regulated workflows. <strong>When two agents disagree on the same transaction, who conducts the resolution — and can we show a regulator the tempo, the handoffs and the audit trail?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical, coding, scheduling and research agents must coordinate across EHRs, labs and partners without stepping on each other. <strong>Is there a conductor sequencing the multi-agent care or research workflow end to end, or independent agents each optimizing a fragment while the patient journey fractures at the seams?</strong></li>
+  <li>Redesign, not layering, is the Deloitte lesson. <strong>Have we redesigned a clinical or research process around coordinated agents — or bolted agents onto an unchanged workflow and called it transformation?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Planning, quality, maintenance and multi-tier supplier agents must play in time across OT and MES. <strong>Do our agents share a conductor that keeps the production line's agents in sequence and hands off cleanly at each station — or does every plant run its own uncoordinated pit?</strong></li>
+  <li>Long-lived estates punish sprawl. <strong>Are we scaling one well-orchestrated agent workflow to real value, or accumulating dozens of unled pilots that the next budget review will cancel?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Pricing, inventory, fulfillment and service agents must coordinate at speed across marketplaces and logistics partners. <strong>Is there an orchestration layer conducting the demand-to-delivery agents as one system — or independent agents optimizing pricing, stock and service against each other?</strong></li>
+  <li>Consumer-facing agents proliferate fastest and collide most visibly. <strong>Can each new agent join a conducted ensemble with a defined entrance and cost — or does every launch add another soloist to an already noisy floor?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-facing services demand coordinated, accountable, auditable automation. <strong>Are we orchestrating agents across a benefit or permitting process as one governed workflow — with a conductor, a score and a ledger — or standing up disconnected agents that fragment the citizen's experience?</strong></li>
+  <li>Cancellation is a public-money risk, not just a private one. <strong>Does every agent program have a named outcome, a coordinated design and a cost ceiling, so it isn't among the 40% that get scrapped after the spend?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Score, the Podium, and the Cost of the Roar</h2>
+<p>Read the stack once more as layers priced and governed very differently — but this week, past <em>which layer you buy,</em> past <em>who watches it,</em> past <em>through what door every agent passes,</em> past <em>what governed knowledge sits behind that door,</em> past <em>who the agent is,</em> and past <em>what language it speaks,</em> to the question every enterprise hits the moment it has more than one agent: <strong>who coordinates them, and toward what?</strong> At the <strong>bottom</strong> is the <em>engine</em> — the rented, swappable model. Above it sit the <strong>rails,</strong> the <strong>pilotage,</strong> the <strong>acting agent,</strong> the <strong>watchman,</strong> the <strong>guardrail,</strong> the <strong>gate,</strong> the <strong>larder,</strong> the <strong>passport</strong> and the <strong>lingua franca.</strong> All still true. What this week isolates is the layer that turns a field of named, speaking agents into <em>one outcome:</em> <strong>orchestration — the conductor.</strong> The engineering point is blunt: <strong>an interoperable agent is not a coordinated one; the standard lets them talk, orchestration makes them work — and without it, more agents is more collision, not more value.</strong></p>
+<div class="card"><ul>
+  <li><strong>The gap — orchestration is the unpassed gate.</strong> <strong>Deloitte: only 15% of organizations have scaled, orchestrated, cross-functional multi-agent adoption</strong> (survey of 501 senior-manager-to-C-suite leaders, five US industries, fielded April–June 2026), and most of that scaling sits in <strong>low-risk, near-term-ROI</strong> corners — customer service, IT, engineering — not the high-value core. Meanwhile <strong>74% expect ~half of business processes redesigned around agents within four years.</strong> The distance between "15% orchestrated" and "74% expect wholesale redesign" is the work. Laura Shact (Deloitte): layered-on quick fixes create "the sense of getting ahead," but true transformation "will require more" — work and organization redesign.</li>
+  <li><strong>The reckoning — un-orchestrated sprawl is what gets canceled.</strong> <strong>Gartner: more than 40% of agentic-AI projects will be canceled by the end of 2027,</strong> on escalating costs, unclear business value and inadequate risk controls; a comparable share of enterprises may <strong>demote or decommission</strong> autonomous agents after production governance failures (as reported). Appetite is not the problem — Gartner logged a <strong>1,445% rise in multi-agent inquiries</strong> (Q1 2024 → Q2 2025, as reported) — coordination is. Cost is a live edge: an orchestrated agent interaction can run near <strong>US$1.20 versus ~US$0.04</strong> for a 2023 chatbot call (~30×, as reported), so an unconducted pit is expensive noise.</li>
+  <li><strong>The prize — orchestration is where the exponential lives.</strong> <strong>Deloitte's TMT math: the agentic-AI market at ~US$8.5B in 2026 could reach ~US$35B by 2030 — and up to ~30% higher (≈US$45B) for enterprises that orchestrate agents well.</strong> The multiplier is not another model or more agents; it is the conductor. And yesterday's settlement is what makes conducting possible: <strong>the open tongues (A2A for agent-to-agent, MCP for agent-to-tool), now under the Linux Foundation's AAIF, are the shared score every player can finally read</strong> — orchestration is what you build <em>on top of</em> that score.</li>
+</ul></div>
+<p>The strategic core: <strong>when agents must act at six-figure scale, the control point is the orchestration layer that coordinates them — and this week's data says almost no one has built it, while the projects that skip it are the ones getting cut.</strong> For a week the frame moved from "own the right layer" to "oversee without custody" to "build the gate" to "own the governed knowledge" to "name every agent" to "speak the open tongue"; this week's refinement is <em>who conducts the named, speaking agents into one piece of work.</em> "We have hundreds of agents" is not an answer to "what does your orchestra play, and who keeps time"; <em>"we orchestrate coordinated agents across our highest-value processes, on open standards, with governance and cost-metering on the same podium, and we measure the outcome"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The conductor: an interoperable agent is not a coordinated one. Only 15 percent of organizations have scaled orchestration, while 74 percent expect half their processes rebuilt around agents. Top left: the roar, why orchestration now — only 15 percent have scaled, orchestrated multi-agent adoption per Deloitte, most of it low-risk and low-ROI; 74 percent expect about half of processes rebuilt around agents; more agents equals more collision. Top right: the podium, the settlement — orchestration is the conductor: sets the tempo (sequence), cues entrances (handoffs), rests the idle (governance), meters the cost (the ledger). The missing figure is not another player, but the podium. In the middle: the cost of the roar — un-orchestrated sprawl gets canceled: Gartner says 40 percent or more of agentic-AI projects canceled by end of 2027 on cost and value; about 40 percent may demote or decommission agents after governance failures; about 1.20 US dollars per orchestrated agent call versus about 0.04 dollars for a 2023 chatbot, roughly 30 times; the score is ready, A2A plus MCP under the Linux Foundation's AAIF. Bottom left: stop hiring soloists — counting agents and pilots, bolting agents onto unchanged workflows, volume mistaken for value. Bottom right: start conducting the high-value work — pick processes worth redesigning, orchestrate plus govern plus meter cost on one podium, measure the music not the musicians." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE CONDUCTOR — an interoperable agent is not a coordinated one</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">15% have scaled orchestration; 74% expect half their processes rebuilt around agents</text>
+
+  <!-- the roar -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE ROAR — why orchestration now</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 15% scaled, orchestrated</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">multi-agent adoption (Deloitte)</text>
+  <text x="52" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">most of it low-risk / low-ROI</text>
+  <text x="52" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">74% expect ~½ processes rebuilt</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ more agents = more collision</text>
+
+  <!-- the podium -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE PODIUM — the settlement</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Orchestration = the conductor:</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· sets the tempo (sequence)</text>
+  <text x="364" y="139" font-size="10" fill="#9fe0c6" font-family="sans-serif">· cues entrances (handoffs)</text>
+  <text x="364" y="159" font-size="10" fill="#9fe0c6" font-family="sans-serif">· rests the idle · meters the cost</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ not another player, but the podium</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the missing figure is the podium, not another player ▼</text>
+
+  <!-- cost of the roar -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">THE COST OF THE ROAR — un-orchestrated sprawl gets canceled</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gartner: 40%+ of agentic-AI projects canceled by end of 2027 (cost / value)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~40% may demote / decommission agents after governance failures (as reported)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~US$1.20 per orchestrated agent call vs ~US$0.04 chatbot (2023), ~30×</text>
+  <text x="52" y="327" font-size="9.5" fill="#f0a9b6" font-family="sans-serif" font-style="italic">the score is ready: A2A + MCP under the Linux Foundation's AAIF (yesterday)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#e07a8f" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#e07a8f"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop hiring soloists -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">STOP: hiring soloists</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· counting agents &amp; pilots</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· bolting agents on unchanged work</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· volume mistaken for value</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a magnificent, costly roar</text>
+
+  <!-- start conducting -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">START: conduct the high-value work</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· pick processes worth redesigning</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· orchestrate + govern + meter cost</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· on one podium</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">measure the music, not the musicians</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Conduct, redesign, meter.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Hire the conductor and the agents you already have play one piece of work, not a hundred thousand solos.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The roar — talent without coordination</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The podium — orchestration is the conductor</span>
+  <span><i class="dot" style="background:#8a2a3a"></i>The cost of the roar — sprawl gets canceled</span>
+  <span><i class="dot" style="background:#34306a"></i>Stop hiring soloists · conduct the high-value work</span>
+</div>
+</div>
+
+<h3>The unled pit versus the conducted orchestra — the same agents, two very different results</h3>
+<table>
+<tr><th>A field of un-orchestrated agents</th><th>A conducted, orchestrated ensemble</th></tr>
+<tr><td>Counted by how many agents you run</td><td>Measured by the outcome they produce</td></tr>
+<tr><td>Agents collide, duplicate, and race</td><td>Sequenced entrances and clean handoffs</td></tr>
+<tr><td>Cost sprawls, unmetered, per agent</td><td>Cost metered on the podium, per workflow</td></tr>
+<tr><td>Scaled in low-risk, low-ROI corners</td><td>Aimed at high-value, redesigned processes</td></tr>
+<tr><td>Bolted onto unchanged workflows</td><td>Work and org redesigned around coordination</td></tr>
+<tr><td>Among the 40% Gartner says gets canceled</td><td>Where Deloitte's ~30% orchestration premium lives</td></tr>
+</table>
+
+<h3>Why "the conductor" is the artifact that matters</h3>
+<div class="card">
+<p>For a year the reflex was to <em>acquire</em> — more models, more agents, more pilots — on the assumption that talent, assembled, becomes an orchestra. This week's data says otherwise: <strong>assembled talent without a conductor is a roar, and the roar is what gets defunded.</strong> Orchestration is unglamorous — it produces no new model headline, no agent demo — but it is the difference between a hundred thousand solos and one piece of music. That is why the signal is sharp: only <strong>15%</strong> have built it, <strong>40%+</strong> of the projects that skipped it will be canceled, and the <strong>~30% value premium</strong> Deloitte attributes to good orchestration is the whole game. The interesting artifact this week is not a smarter agent — it is <strong>the podium that makes the agents you already have play together.</strong></p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms</strong> — now applied to coordination. Integration debt was the old tax; <em>coordination debt</em> is the new one: dozens of agents, each doing its fragment, none sequenced, none metered, none redesigned into a shared flow. The retrofit is <strong>conduct, redesign, meter. Conduct:</strong> stand up an orchestration layer (built on the open A2A/MCP score) that sequences agents, cues handoffs and rests the idle, with governance on the same podium. <strong>Redesign:</strong> don't bolt agents onto an unchanged process — redesign the highest-value work around coordinated agents, as Deloitte insists, or the collisions persist under a new baton. <strong>Meter:</strong> put cost-per-workflow on the conductor's stand and dismiss the agents that add volume but no value — because the unconducted pit is the line item that gets cut. And keep the engine swappable beneath it — the model is the commodity, the knowledge is the moat, the passport names the agent, the lingua franca is the score, and <em>the conductor is what turns them into work.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove; your proprietary knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score they can all read. The conductor is who makes a hundred thousand named, speaking agents play one piece of work instead of a hundred thousand solos — setting the tempo, cuing the handoffs, resting the idle, metering the cost. Hire the conductor and pick the piece worth playing. Keep hiring soloists into an unled pit and you have funded a roar that gets canceled.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The gap — orchestration is the unpassed gate.</strong> <strong>Deloitte: only 15% have scaled, orchestrated, cross-functional multi-agent adoption; 74% expect ~half of processes rebuilt around agents within four years</strong> (survey of 501 leaders, five US industries, April–June 2026, as reported).</li>
+  <li><strong>The reckoning — sprawl gets cut.</strong> <strong>Gartner: 40%+ of agentic-AI projects canceled by end of 2027</strong> (cost, value, controls); ~40% may demote/decommission agents after governance failures (as reported).</li>
+  <li><strong>The appetite — coordination is the bottleneck, not interest.</strong> <strong>Gartner: 1,445% rise in multi-agent-system inquiries</strong> (Q1 2024 → Q2 2025); orchestrated agent calls ~US$1.20 vs ~US$0.04 chatbot (2023), ~30× (as reported).</li>
+  <li><strong>The prize — orchestration is the multiplier.</strong> <strong>Deloitte: agentic-AI market ~US$8.5B (2026) → ~US$35B (2030), up to +30% (~US$45B) for those who orchestrate well</strong> (TMT predictions, as reported).</li>
+  <li><strong>The score — yesterday's settlement makes conducting possible (context).</strong> <strong>A2A + MCP under the Linux Foundation's AAIF</strong> give every agent one open score to read; orchestration is what you build on top of it (as reported).</li>
+  <li><strong>The engine — cheap and multiplying (context).</strong> The fastest month in AI history: <strong>11+ models in 20 days.</strong> <strong>Opus 5, Grok 4.6, GPT-5.6 / Luna, Gemini 3.7 Flash,</strong> open-weight <strong>GLM-5.3 / Qwen3.8 / Kimi K3</strong> — the interchangeable engine is why coordination, not the model, is the control point (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--accent)"><div class="q">Thriving in the agentic future will require more. True transformation asks for more than just alignment with technology and data strategies — it also requires investments in work and organization design, as well as intentional leadership and workforce enablement.</div><div class="a">— Laura Shact, U.S. Technology, Media &amp; Telecommunications AI growth leader, Deloitte, on why layered-on quick fixes fall short of agentic transformation (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">More than 40% of agentic-AI projects will be canceled by the end of 2027, due to escalating costs, unclear business value or inadequate risk controls.</div><div class="a">— Gartner, on the cost of un-orchestrated agent sprawl (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Autonomous AI agents may be transformational, but orchestration can be the key to intelligent automation — and to unlocking the exponential value of agentic systems.</div><div class="a">— Deloitte, 2026 TMT Predictions, "Unlocking exponential value with AI agent orchestration" (as reported)</div></blockquote>
+<blockquote><div class="q">"An interoperable agent is not a coordinated one. The standard lets them talk; the conductor makes them play — and without it, more agents is just a louder roar."</div><div class="a">— the radar, on orchestration</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The gap — scaled orchestration</td><td><span class="v">Only 15% of organizations have scaled, orchestrated, cross-functional multi-agent adoption — and most of that is in low-risk, near-term-ROI use cases (customer service, IT, engineering)</span></td><td>Deloitte, "AI agents are only the beginning: the path to agentic transformation" (501 leaders, five US industries, Apr–Jun 2026) (as reported)</td></tr>
+<tr><td>The ambition — process redesign</td><td><span class="v">74% of leaders expect nearly half of their business processes to be redesigned or rebuilt around AI agents within four years</span></td><td>Deloitte agentic-AI survey (as reported)</td></tr>
+<tr><td>The reckoning — cancellations</td><td><span class="v">More than 40% of agentic-AI projects will be canceled by the end of 2027 (escalating cost, unclear value, weak risk controls); a comparable share of enterprises may demote or decommission autonomous agents after governance failures</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>The appetite — multi-agent demand</td><td><span class="v">Multi-agent-system inquiries rose 1,445% from Q1 2024 to Q2 2025</span></td><td>Gartner (as reported)</td></tr>
+<tr><td>The cost edge</td><td><span class="v">An orchestrated agent interaction can run near US$1.20 versus ~US$0.04 for a 2023 chatbot call — roughly 30× higher</span></td><td>Analyst / trade coverage (as reported)</td></tr>
+<tr><td>The prize — orchestration premium</td><td><span class="v">Agentic-AI market ~US$8.5B (2026) → ~US$35B (2030); up to ~30% higher (≈US$45B) for enterprises that orchestrate agents well</span></td><td>Deloitte 2026 TMT Predictions (as reported)</td></tr>
+<tr><td>The score (context)</td><td><span class="v">A2A (agent-to-agent) + MCP (agent-to-tool) now sit under the Linux Foundation's Agentic AI Foundation — the open, shared score orchestration builds on</span></td><td>Linux Foundation / trade coverage (as reported)</td></tr>
+<tr><td>The ledger — compliance (context)</td><td><span class="v">EU AI Act Article 12 (reconstructability logging) + Article 50 transparency live since 2 Aug; fines up to €15M or 3% of global turnover</span></td><td>European Commission / legal coverage</td></tr>
+<tr><td>The engine (context)</td><td><span class="v">Fastest month in AI history — 11+ models in 20 days. Opus 5 · Grok 4.6 · GPT-5.6 / Luna · Gemini 3.7 Flash · GLM-5.3 · Qwen3.8 · Kimi K3 (open-weight)</span></td><td>Model-tracker coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Conduct — stand up an orchestration layer, not another agent.</strong> You do not need more soloists; you need a podium. <strong>This month, put one orchestration layer over your existing agents — built on the open A2A/MCP score — that sequences them, cues handoffs, rests the idle, and enforces governance, and prove it on one real multi-agent workflow.</strong> Report the outcome, not the agent count: what the ensemble produced end to end, versus the same agents running uncoordinated. If you can't name who conducts a given agent workflow, that workflow is a candidate for cancellation, not scaling.</li>
+  <li><strong>Redesign — aim the orchestra at a high-value piece, and rebuild the work around it.</strong> Deloitte's lesson is that layered-on agents on unchanged processes are not transformation; only 15% have scaled orchestration and most of that sits in safe, low-ROI corners. <strong>Pick one high-value, cross-functional process and redesign it around coordinated agents — the seating and the parts, not just the baton — where the ~30% orchestration premium actually lives.</strong> Ask of every agent program: is this a redesigned piece of music, or an unchanged score with agents bolted on? If the latter, the collisions will outlive the pilot.</li>
+  <li><strong>Meter — put cost and value on the conductor's stand, and cut the roar.</strong> Un-orchestrated sprawl is what Gartner says gets canceled — 40%+ by end of 2027 — because cost outran value and no one was keeping time. <strong>Wire cost-per-workflow and a named business outcome into the orchestration layer, dismiss the agents that add volume but no value, and give every agent program a cost ceiling and an owner on the podium.</strong> Report two numbers to the board next quarter: the share of your agents that run under real orchestration toward a named outcome, and the cost-per-outcome of your top agent workflow. <strong>The model is rented, the knowledge is the moat, the agent is named, the language is open — and the conductor is what turns all of it into work.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Deloitte ("AI agents are only the beginning: the path to agentic transformation" — survey of 501 senior-manager-to-C-suite leaders across five US industries, fielded April–June 2026: only 15% have scaled, orchestrated, cross-functional multi-agent adoption, mostly in low-risk/low-ROI use cases; 74% expect ~half of business processes redesigned around agents within four years; Laura Shact quote, as reported) · Deloitte 2026 TMT Predictions ("Unlocking exponential value with AI agent orchestration" — agentic-AI market ~US$8.5B in 2026, ~US$35B by 2030, up to ~30% higher for well-orchestrated enterprises, as reported) · Gartner (40%+ of agentic-AI projects canceled by end of 2027; a comparable share of enterprises may demote/decommission autonomous agents after governance failures; 1,445% rise in multi-agent-system inquiries Q1 2024→Q2 2025, as reported) · analyst / trade coverage (orchestrated agent interaction ~US$1.20 vs ~US$0.04 for a 2023 chatbot call, ~30×, as reported) · Linux Foundation / Agentic AI Foundation (A2A + MCP under vendor-neutral governance — the open score orchestration builds on, context, as reported) · European Commission / legal coverage (EU AI Act Article 12 reconstructability logging + Article 50 transparency live since 2 Aug; €15M/3% fines, context) · model-tracker coverage (fastest month in AI history — 11+ models in 20 days; Opus 5, Grok 4.6, GPT-5.6 / Luna, Gemini 3.7 Flash, GLM-5.3, Qwen3.8, Kimi K3, context). Figures are relayed from analyst and vendor research and press coverage, marked "as reported" where they rest on secondary reporting. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 28 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
