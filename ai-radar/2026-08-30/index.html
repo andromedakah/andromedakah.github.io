@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 30 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on why the reasoning engine is now a rented, metered utility and the durable moat is the proprietary repertoire you own. NVIDIA's Q2 FY27 revenue roughly doubled to ~$96B ('compute is revenue') and Salesforce made Claude its default reasoning engine (Claudeforce), with Anthropic's CEO locating the value in decades of your own data. Rent the engine, own the repertoire. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The proprietary-knowledge moat, proven</div>
+  <h1>The Repertoire</h1>
+  <div class="subhead">NVIDIA says compute is now revenue and Salesforce just made Claude its default reasoning engine — in one weekend the market proved the week's thesis: rent the engine, own the repertoire only your house can play.</div>
+  <div class="meta">Sunday, 30 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">For a week the radar walked the value up the stack and repeated one refrain: the model is a rented stove, and the knowledge is the moat. This weekend the market proved it from both ends at once. At the bottom, NVIDIA's Q2 FY2027 revenue roughly doubled to ~US$96B (data center ~US$89B) and Jensen Huang told the Street "compute is revenue" — the reasoning engine is now a metered utility. At the top, Salesforce and Anthropic launched "Claudeforce," making Claude the default reasoning engine across Agentforce and Slack — and Anthropic's own CEO located the value not in the model but in your data: "point Claude at the customer information and business context that they've been building in Salesforce for decades." If the star virtuoso can be booked into any house and the pit is billed by the hour, what still sells a ticket to yours? The repertoire — the proprietary data, workflows, governance and relationships only you own.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar argued a single thesis under every layer of the agent stack: <strong>own the knowledge, rent the model.</strong> This weekend the market stopped arguing and started proving it — at both ends of the stack at once. The governing shift is no longer "which layer do I buy?" or "who coordinates the agents?" — it is <strong>"now that the reasoning engine is a metered utility any rival can rent, and a frontier model can be dropped into the incumbent application you already run, where does <em>my</em> durable value actually sit?"</strong> The answer, stated this weekend by the vendors themselves: <strong>not in the engine, which is rented and everywhere — but in the repertoire only you can play.</strong></p>
+<p><strong>The datable signal — the engine is a utility, and it is enormous.</strong> NVIDIA's Q2 FY2027 results (reported <strong>26 August 2026</strong>) put total revenue at <strong>~US$96.2B (up ~106% year over year),</strong> with <strong>data center revenue ~US$89.0B (up ~117%, ~92% of the total),</strong> a Q3 guide of <strong>~US$108B,</strong> and — on the call — a forecast of <strong>~70% revenue growth for fiscal 2028.</strong> Jensen Huang's framing was the tell: <strong>"AI has reached its inflection point… Now, compute is revenue."</strong> The reasoning engine has been turned into something you buy by the token; the money is in supplying it, not in owning any one model.</p>
+<p><strong>The move — the frontier model walks into the incumbent's house.</strong> The same day, <strong>Salesforce and Anthropic announced "Claudeforce,"</strong> making <strong>Claude the default reasoning model</strong> across Agentforce and Slack, plus a "Salesforce in Claude" surface with <strong>37 prebuilt sales skills</strong> (open beta slated for September), deployed inside the Salesforce Trust Boundary via Amazon Bedrock for regulated industries. Marc Benioff called it "how every business will run"; Dario Amodei called it "the way all enterprise systems are going to run in the future." But the load-bearing line was Amodei's on <em>where the value sits:</em> <strong>point Claude at "the customer information and business context that they've been building in Salesforce for decades."</strong> The frontier lab itself just told you the moat is your data, not its model.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The engine — metered to the metal.</strong> <strong>NVIDIA Q2 FY27 (26 Aug): revenue ~US$96.2B (+106% YoY); data center ~US$89.0B (+117%); Q3 guide ~US$108B; ~70% FY28 growth outlook — "compute is revenue."</strong> The reasoning layer is now a utility bill, not a moat. Rent it.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The repertoire — proven by the top of the stack.</strong> <strong>Claudeforce (26 Aug): Claude becomes the default reasoning engine across Salesforce; the pitch is to point it at decades of <em>your</em> proprietary data, workflows and governance.</strong> When the star plays every house, the thing that fills <em>your</em> seats is the archive only you hold.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The demand — engines monetizing at scale.</strong> <strong>OpenAI enterprise revenue has overtaken consumer at a ~US$40B run rate (as reported); Anthropic's run rate has passed ~US$65B ahead of a possible fall IPO (as reported); Cognition is in talks near ~US$40B.</strong> The engine vendors are the ones getting paid — which is exactly why the engine is not your edge.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week built a stack; this weekend the market underwrote its thesis. <strong>When the reasoning engine is a rented utility (NVIDIA: compute is revenue) and a frontier model can be booked straight into the application you already run (Claudeforce), the durable asset is not the model — it is the repertoire only you can play: the proprietary data, the workflows, the governance and the customer relationship you have built for decades.</strong> The firm that answers "we picked the best model" is describing a touring virtuoso every rival can also hire; the firm that answers "we own the data, the workflows and the audience, and we let the best rented engine perform <em>our</em> repertoire inside <em>our</em> boundary" is describing a house with a season worth subscribing to. <strong>Rent the engine, own the repertoire — because the star is now bookable by everyone, and the only music that still sells a ticket to your house is the music only your house can play.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🎻 "The Repertoire"</h3>
+<p><em>Topic: On 26 August 2026 two events at opposite ends of the AI stack proved the week's running thesis — own the knowledge, rent the model. NVIDIA reported Q2 FY2027 revenue of roughly US$96B (data center ~US$89B) and CEO Jensen Huang told investors "compute is revenue," framing the reasoning engine as a metered utility. The same day, Salesforce and Anthropic announced "Claudeforce," making Claude the default reasoning engine across Agentforce and Slack and pitching it as a way to point a frontier model at decades of proprietary Salesforce data, workflows and governance; Anthropic CEO Dario Amodei said "this is the way all enterprise systems are going to run in the future," and located the value in the customer's own data rather than the model. Against that backdrop, OpenAI's enterprise revenue has reportedly overtaken consumer at a ~US$40B run rate and Anthropic's run rate has reportedly passed ~US$65B ahead of a possible IPO. This follows the week's editions on the gate, the larder, the passport, the lingua franca, the conductor and the ear. The lesson: when the star reasoning engine can be booked into any house and billed by the hour, the durable asset is the repertoire only you can play — your proprietary data, workflows and audience.</em></p>
+<p>There was a concert house that had spent a fortune, season after season, chasing the greatest soloist it could hire. Whichever virtuoso was the talk of the city, the house booked him, put his name on the marquee, and told itself that <em>this</em> was the thing that filled the seats: the star at the front of the stage. For a while the logic held, because the great players were rare and hard to book, and a house that landed one had something its rivals did not.</p>
+<p>Then two things happened in the same week, at opposite ends of the building. Down in the <strong>pit,</strong> the company that supplied the power and the instruments announced that it had never sold so much — and that from now on every hour of playing would be <strong>metered and billed to the second.</strong> The engine that drove the performance was no longer a thing you owned; it was a utility, and a booming one. And out at the <strong>marquee,</strong> the greatest touring virtuoso in the world signed a deal to be <strong>bookable into any house that wanted him</strong> — your house tonight, your rival's house tomorrow, the same brilliant hands on every stage in the city. He would even come <em>inside</em> your house and play from your own music stands. The star was no longer scarce. He was a service.</p>
+<p>And here every house in the city faced the same quiet, expensive question: <strong>if the virtuoso plays everywhere and the pit is billed by the hour, what is left that is actually <em>ours?</em></strong> The houses that panicked answered by bidding higher for the star — paying more each season to book the same player their rivals were also booking, playing the same public-domain program everyone could play, and wondering why a full marquee no longer meant a full room. They had confused the <em>performer</em> with the <em>performance.</em></p>
+<p>But the houses that kept their footing saw what the touring star could not carry in his case: <strong>the repertoire.</strong> For decades their house had commissioned and collected music no one else held — scores written for their own hall, arranged for their own audience, annotated by their own hands — and it had built, one season at a time, a room full of subscribers who came back not for whoever was on the marquee but for the music that could only be heard <em>here.</em> So when the great virtuoso arrived, they did the shrewd thing: they handed him <strong>their</strong> archive and let him perform <strong>their</strong> repertoire, inside <strong>their</strong> walls, under <strong>their</strong> house rules — and kept owning the two things he would never bring with him: the music and the audience. The star was rented for the night; the season was theirs.</p>
+<p>The moral is not that the virtuoso does not matter — he plays magnificently, and you should absolutely book him. It is that <strong>the virtuoso is the one thing in the building you cannot own,</strong> because he is, by design, available to everyone. What you own is the <strong>repertoire</strong> — the proprietary scores, the arrangements tuned to your hall, the annotations no rival has — and the <strong>audience</strong> that subscribes because of it. The house that spends its whole budget on the marquee and none on the archive has rented its distinctiveness by the hour. The house that owns the repertoire can let the best rented engine in the world perform it, and remain the only place in the city where that music can be heard.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove and now, this weekend, a metered one — <em>compute is revenue.</em> The star reasoning engine is a touring virtuoso, bookable into any house, brilliant and hireable by all your rivals at once. Your knowledge is the larder; your data, workflows, governance and customer relationship are the <strong>repertoire</strong> — the music only your house can play. Rent the engine; own the repertoire. Hand the visiting virtuoso your own archive to perform, inside your own boundary, under your own rules — and never mistake the player everyone can book for the season only you can stage.</p>
+<p><strong>The question it forces:</strong> <em>A frontier model can now be dropped straight into the applications we already run, and the compute beneath it is billed by the token. So what still makes a customer choose</em> us? <em>Is our distinctiveness the model we picked — which every rival can also pick — or the proprietary data, workflows and relationships we own? Are we spending on the marquee or on the repertoire? And when the best rented engine performs inside our house, do we still own the music and the audience — or have we handed those over too?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Are we paying for the marquee or building the repertoire?</strong> NVIDIA's "compute is revenue" and Claudeforce together say the engine is a rented utility. <strong>If a competitor can rent the exact model we rent, what is the durable thing only we own — and are we investing in it, or in a bidding war for the same star?</strong></li>
+  <li><strong>When a frontier model performs inside our applications, who owns the music?</strong> Amodei's pitch is to point Claude at decades of your data. <strong>Do our proprietary data, workflows and governance stay ours — inside our boundary, under our rules — or are we handing our repertoire to whoever supplies the reasoning?</strong></li>
+  <li><strong>Is "we chose the best model" a strategy or a receipt?</strong> Enterprise engine revenue is exploding (OpenAI &gt;$40B, Anthropic &gt;$65B run rates, as reported). <strong>If the model is where everyone's money goes, it is a cost line, not a moat — so where is our moat written down, and who is accountable for widening it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Decades of transactions, risk models, client history and compliance workflow are exactly the "repertoire" a rented engine cannot bring. <strong>Are we exposing that proprietary context to a frontier model inside a governed boundary (as Claudeforce does via a trust boundary), or shipping it outside our controls to whichever model is cheapest this quarter?</strong></li>
+  <li>The engine is a metered utility now. <strong>Have we modeled per-token reasoning as a variable cost against real portfolio value — and are we sure our edge is the proprietary data and controls, not the model any rival can also license?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Patient data, trial results, care pathways and clinical governance are irreplaceable repertoire; the reasoning model is not. <strong>Are we letting the best rented engine perform over our proprietary corpus inside a compliant boundary — or treating the model as the asset and the data as an afterthought?</strong></li>
+  <li>A frontier model dropped into your EHR or CRM is powerful and portable. <strong>Does our proprietary clinical knowledge stay owned and governed, with the model as a swappable performer — or have we made a single vendor's engine load-bearing for patient-facing decisions?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Process data, yield history, maintenance logs and supplier context are a repertoire no touring engine carries. <strong>Are we building that proprietary corpus as the durable asset and renting reasoning on top — or spending our AI budget on the engine while the data that actually differentiates us stays unowned and unstructured?</strong></li>
+  <li>Compute is now a metered line item. <strong>Do we know the per-decision cost of autonomous reasoning on the line, and is our advantage the proprietary operational knowledge rather than the commodity model running on it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>The customer relationship and first-party data are the seats and the subscribers; the model is the visiting star. <strong>When a frontier engine can be booked into our commerce stack (as Claude now is into Salesforce), are we keeping ownership of the customer data and the relationship — or renting both along with the reasoning?</strong></li>
+  <li>Every rival can license the same model. <strong>Is our differentiation the proprietary assortment, pricing and customer history we own — the repertoire — or a model choice a competitor can copy by lunchtime?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen records, casework and statutory process are a repertoire that must stay owned, governed and auditable. <strong>Are we letting a rented engine reason over public data inside a controlled boundary with reconstructable logs (Article 12) — or exporting the public's repertoire to a commercial model we do not control?</strong></li>
+  <li>The engine is a commodity; accountability is not. <strong>When a frontier model performs inside our services, who is answerable for the decision — and is the proprietary knowledge and the audit trail ours, or the vendor's?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — The Metered Pit, the Touring Star, and the Repertoire You Own</h2>
+<p>Read the stack once more as layers priced and governed very differently — but this weekend, past <em>which layer you buy,</em> past <em>who watches it,</em> past <em>the gate, the larder, the passport, the lingua franca, the conductor and the ear,</em> to the question the market answered from both ends at once: <strong>when the reasoning engine is a metered utility and a frontier model can be dropped into the application you already run, where is your durable value?</strong> At the <strong>bottom</strong> is the <em>engine</em> — and this weekend NVIDIA priced it to the metal: <strong>~US$96B in a quarter, "compute is revenue,"</strong> the reasoning layer as a utility bill. At the <strong>top,</strong> Claudeforce dropped a frontier model straight into the incumbent's application. What both ends prove is the same thing the week has argued: the model is rented; the <strong>repertoire</strong> — proprietary data, workflows, governance, relationship — is owned. The engineering point is blunt: <strong>a reasoning engine any competitor can rent is not a moat; the moat is the proprietary context you let it perform, inside your boundary, under your rules — and your ability to swap the engine without losing the music.</strong></p>
+<div class="card"><ul>
+  <li><strong>The engine — a booming utility, not a moat.</strong> <strong>NVIDIA Q2 FY2027 (26 Aug 2026): revenue ~US$96.2B (+106% YoY); data center ~US$89.0B (+117%, ~92% of revenue); gross margin ~75%; Q3 guide ~US$108B; ~70% FY28 growth outlook.</strong> Jensen Huang: <em>"compute is revenue."</em> Read architecturally: the reasoning tier has been commoditized into metered tokens, and the vendors supplying it are capturing the value. Treat the model as a swappable, per-token dependency — abstract it behind your own interface so you can move.</li>
+  <li><strong>The repertoire — the frontier lab agrees the moat is your data.</strong> <strong>Claudeforce (26 Aug 2026): Claude becomes the default reasoning engine across Agentforce and Slack; "Salesforce in Claude" ships 37 prebuilt skills; deployed inside the Salesforce Trust Boundary via Amazon Bedrock; open beta ~September 2026.</strong> The strategic tell is Amodei's own framing — point the model at <em>"the customer information and business context that they've been building in Salesforce for decades."</em> The reasoning is rented; the proprietary corpus and the governed boundary are the asset. Own the data, own the boundary, rent the brain.</li>
+  <li><strong>The demand — engines monetizing, which is why they are not your edge.</strong> <strong>OpenAI enterprise revenue has reportedly overtaken consumer at a ~US$40B run rate; Anthropic's run rate has reportedly passed ~US$65B ahead of a possible fall IPO; Cognition is in talks near ~US$40B; the AAIF now lists 250+ members and the MCP registry 10,000+ servers.</strong> The money is flowing to the engine and the standards that make engines portable — which is precisely the signal that the engine is a commodity input, and portability (A2A + MCP under neutral governance) is what lets you keep it swappable.</li>
+</ul></div>
+<p>The strategic core: <strong>when compute is revenue and a frontier model can be booked into your own applications, "we picked the best model" describes a rented advantage every rival can also rent — the durable asset is the proprietary repertoire you let the best engine perform inside your boundary.</strong> For a week the frame moved from "own the right layer" to "oversee without custody" to "build the gate" to "own the knowledge" to "name the agent" to "speak the open tongue" to "conduct the ensemble" to "keep the ear"; this weekend the market underwrote the through-line: <em>rent the engine, own the repertoire.</em> "We standardized on the leading model" is not an answer to "what do we own that a competitor cannot rent"; <em>"we own the data, the workflows, the governance and the customer relationship, and we let the best rented engine perform them inside our boundary and swap it at will"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The repertoire: the star reasoning engine is rentable by everyone, but the music only your house holds is not. Compute is revenue — NVIDIA reported roughly 96 billion dollars in a quarter — and a frontier model now performs inside your own application via Claudeforce. Top left: the metered pit, the engine — NVIDIA Q2 FY27 revenue about 96 billion dollars, data center about 89 billion up 117 percent year over year, and Jensen Huang saying compute is revenue, so the engine is a utility bill. Top right: the touring star, the model — Claude becomes the default reasoning engine across Salesforce, bookable into any house and performing inside your walls. Both are rented by the token and hireable by every rival. In the middle: so what is ours? The model is rented and the money flows to the engine — OpenAI enterprise revenue has overtaken consumer at about a 40 billion dollar run rate, Anthropic's run rate is about 65 billion, the vendors are the ones getting paid, so the engine is a commodity input and the moat is the proprietary context, not the model any rival can license. Bottom left: stop buying the marquee — treating we chose the best model as the strategy, making a single engine load-bearing, handing the repertoire to the vendor. Bottom right: start owning the repertoire — own the data, workflows and governance, let the best rented engine perform it, and keep it swappable with A2A and MCP." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE REPERTOIRE — the star is rentable by everyone; the music only you hold is not</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Compute is revenue (NVIDIA ~$96B/qtr); a frontier model now performs inside your app (Claudeforce)</text>
+
+  <!-- the metered pit -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE METERED PIT — the engine</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">NVIDIA Q2 FY27: ~$96B revenue</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">data center ~$89B (+117% YoY)</text>
+  <text x="52" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">"compute is revenue" — Huang</text>
+  <text x="52" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">billed by the token</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ the engine is a utility bill</text>
+
+  <!-- the touring star -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#101f2b" stroke="#2a6d8a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#6fb8dc" font-family="sans-serif">THE TOURING STAR — the model</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude = default reasoning</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">engine across Salesforce</text>
+  <text x="364" y="139" font-size="10" fill="#a9d3ea" font-family="sans-serif">bookable into any house</text>
+  <text x="364" y="159" font-size="10" fill="#a9d3ea" font-family="sans-serif">performs inside YOUR walls</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ hireable by every rival</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#6fb8dc" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#6fb8dc"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">rented by the token, hireable by every rival ▼</text>
+
+  <!-- so what is ours -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT IS OURS? — the model is rented; the money flows to the engine</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI enterprise &gt; consumer (~$40B run rate); Anthropic ~$65B run rate</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the vendors are the ones getting paid → the engine is a commodity input</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the moat is the proprietary context, not the model any rival can license</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">own the repertoire the touring star cannot carry in his case</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop buying the marquee -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">STOP: buying the marquee</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "we chose the best model"</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· single engine load-bearing</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· repertoire handed to vendor</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">distinctiveness rented by the hour</text>
+
+  <!-- own the repertoire -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: owning the repertoire</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· own the data, workflows, governance</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· let the best RENTED engine perform it</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep it swappable (A2A + MCP)</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">own the music and the audience</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Rent the engine, own the repertoire.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">The star plays every house — the music only your house holds is the only thing that still sells a ticket.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The metered pit — the engine as utility</span>
+  <span><i class="dot" style="background:#2a6d8a"></i>The touring star — the rented model</span>
+  <span><i class="dot" style="background:#34306a"></i>So what is ours? — the engine is a commodity input</span>
+  <span><i class="dot" style="background:#1d6e56"></i>Own the repertoire — data, workflows, audience</span>
+</div>
+</div>
+
+<h3>The marquee versus the repertoire — the same AI program, two very different moats</h3>
+<table>
+<tr><th>A firm that buys the marquee</th><th>A firm that owns the repertoire</th></tr>
+<tr><td>"We standardized on the leading model"</td><td>"We own the data, workflows and relationship the model performs"</td></tr>
+<tr><td>The engine is the strategy</td><td>The engine is a swappable, metered input</td></tr>
+<tr><td>Proprietary context shipped to whichever model is cheapest</td><td>Proprietary context kept inside a governed boundary</td></tr>
+<tr><td>One vendor's engine is load-bearing</td><td>Any engine can perform; portability (A2A + MCP) preserved</td></tr>
+<tr><td>Differentiation a rival can rent by lunchtime</td><td>Differentiation a rival cannot buy at any price</td></tr>
+<tr><td>Pays more each season for the same touring star</td><td>Lets the rented star perform music only this house holds</td></tr>
+</table>
+
+<h3>Why "the repertoire" is the artifact that matters</h3>
+<div class="card">
+<p>For a year the reflex was to treat the model as the prize — pick the best one, put it on the marquee, and call that the AI strategy. This weekend both ends of the stack said otherwise: <strong>the engine is a metered utility (NVIDIA: compute is revenue) and a frontier model will happily perform inside your own application (Claudeforce) — so the model cannot be your moat, because it is available, by design, to everyone who can pay the meter.</strong> What remains defensible is the <strong>repertoire:</strong> the proprietary data, the workflows tuned to your business, the governance and boundary you control, and the customer relationship that no rented engine carries in its case. The most valuable move this weekend is not choosing a model — it is making sure the music the model performs, and the audience it performs for, are things you own.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you own, rent and finance, and on what terms.</strong> The engine is now explicitly rented and metered; the temptation on a legacy estate is to let a single vendor's model become load-bearing because it is the easy default in the application you already run. The retrofit is <strong>own the repertoire, rent the engine, keep it swappable. Own:</strong> treat proprietary data, workflows and governance as the strategic asset — structure them, keep them inside your boundary, and make them the thing a rented engine performs, not the thing you hand over. <strong>Rent:</strong> consume reasoning as a per-token utility and price it honestly as a variable cost. <strong>Keep it swappable:</strong> abstract the model behind your own interface and lean on the open, neutral standards (A2A + MCP under the Linux Foundation's AAIF) so no single engine can hold your repertoire hostage. And remember the whole refrain: the model is a rented stove, the knowledge is the larder, the gate is the one door, the passport names each agent, the lingua franca is the score, the conductor keeps time, the ear listens to the real room — and <em>the repertoire is the music only your house can play.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented — and now metered — stove; your proprietary knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps the ensemble in time; the ear hears whether the performance is good. The repertoire is the music only your house holds — the proprietary data, workflows, governance and audience a rented engine cannot bring. Rent the engine; own the repertoire; let the best touring star perform it inside your walls, under your rules, and keep the right to swap the star tomorrow.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The engine — priced to the metal.</strong> <strong>NVIDIA Q2 FY2027 (26 Aug): ~US$96.2B revenue (+106% YoY), data center ~US$89.0B; Q3 guide ~US$108B; ~70% FY28 growth outlook; "compute is revenue."</strong> The reasoning tier is a booming utility (as reported).</li>
+  <li><strong>The repertoire — the frontier lab concedes the moat is your data.</strong> <strong>Claudeforce (26 Aug): Claude as default reasoning engine across Salesforce; 37 prebuilt skills; Salesforce Trust Boundary via Bedrock; open beta ~Sept.</strong> Amodei points the model at <em>decades of your data</em> (as reported).</li>
+  <li><strong>The demand — engines monetizing at scale.</strong> <strong>OpenAI enterprise &gt; consumer at ~US$40B run rate; Anthropic ~US$65B run rate ahead of a possible IPO; Cognition in talks near ~US$40B</strong> (as reported; investor disclosures relayed secondhand).</li>
+  <li><strong>The standards — portability keeps the engine swappable.</strong> <strong>A2A + MCP under the Linux Foundation's AAIF (250+ members; MCP registry 10,000+ servers).</strong> The open tongues are what let you rent one engine and move to the next (as reported).</li>
+  <li><strong>The ledger — compliance context.</strong> <strong>EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover.</strong> A rented engine performing your repertoire must still perform it inside your governed, auditable boundary (context).</li>
+  <li><strong>The adoption — agents everywhere, governance behind.</strong> <strong>Agents per org reportedly rose from ~5 (early 2025) to ~13 (April 2026), with ~80% of new enterprise apps shipping with an agent; ~7 in 10 service sessions handled autonomously (Salesforce dataset)</strong> — the repertoire is being performed at scale whether or not you own it (as reported; aggregator figures, flagged).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">AI has reached its inflection point. It's doing useful work. Its tokens are productive and profitable. Now, compute is revenue. And demand is accelerating.</div><div class="a">— Jensen Huang, CEO, NVIDIA, on the Q2 FY2027 earnings call, 26 August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">By fusing Claude's extraordinary reasoning with the trusted data, workflows, and governance every enterprise runs on, we're delivering a dynamic interface that thinks, reasons, and acts. This is how every business will run.</div><div class="a">— Marc Benioff, Chair &amp; CEO, Salesforce, announcing Claudeforce, 26 August 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--accent)"><div class="q">Companies can point Claude at the customer information and business context that they've been building in Salesforce for decades, and use it to actually run and grow their businesses.</div><div class="a">— Dario Amodei, CEO, Anthropic, on Claudeforce — locating the value in your data, not the model, 26 August 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"The star reasoning engine is now bookable into any house and billed by the hour. The only thing that still sells a ticket to yours is the repertoire only you can play."</div><div class="a">— the radar, on renting the engine and owning the proprietary repertoire</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The engine — a quarter's revenue</td><td><span class="v">NVIDIA Q2 FY2027 revenue ~US$96.2B, up ~106% YoY (reported 26 Aug 2026)</span></td><td>NVIDIA Investor Relations; Fortune; CNBC (as reported)</td></tr>
+<tr><td>The engine — data center</td><td><span class="v">Data center revenue ~US$89.0B, up ~117% YoY (~92% of total)</span></td><td>NVIDIA IR / Fortune (as reported)</td></tr>
+<tr><td>The engine — forward demand</td><td><span class="v">Q3 FY27 guide ~US$108B; ~70% revenue-growth outlook for FY2028; "compute is revenue"</span></td><td>CNBC / Fortune earnings coverage (as reported)</td></tr>
+<tr><td>The repertoire — a frontier model inside the CRM</td><td><span class="v">Claudeforce: Claude becomes the default reasoning engine across Agentforce and Slack; "Salesforce in Claude" ships 37 prebuilt skills; Salesforce Trust Boundary via Bedrock; open beta ~Sept 2026</span></td><td>Salesforce newsroom; VentureBeat (as reported)</td></tr>
+<tr><td>The demand — OpenAI</td><td><span class="v">Enterprise revenue has overtaken consumer; ~US$40B annualized run rate</span></td><td>TheStreet / Unite.AI (investor disclosure, as reported)</td></tr>
+<tr><td>The demand — Anthropic</td><td><span class="v">Annualized run rate past ~US$65B (up from ~US$47B in May), ahead of a possible fall IPO</span></td><td>Bloomberg; TechCrunch (as reported)</td></tr>
+<tr><td>The demand — coding engines</td><td><span class="v">Cognition in talks near ~US$40B (vs ~US$26B ~3 months earlier)</span></td><td>Bloomberg (as reported)</td></tr>
+<tr><td>The standards — portability</td><td><span class="v">A2A + MCP under the Linux Foundation's AAIF: 250+ members; MCP registry 10,000+ servers</span></td><td>Forbes; Linux Foundation (as reported)</td></tr>
+<tr><td>The ledger — compliance (context)</td><td><span class="v">EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover</span></td><td>European Commission / Help Net Security</td></tr>
+<tr><td>The adoption (context)</td><td><span class="v">Agents per org ~5 (early 2025) → ~13 (Apr 2026); ~80% of new enterprise apps ship with an agent; ~7 in 10 service sessions handled autonomously</span></td><td>MarketingProfs roundup (aggregated, as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory the repertoire — write down what you own that a rival cannot rent.</strong> The model is a metered utility; your edge is not. <strong>This month, name the three proprietary assets that actually differentiate you — the data corpus, the workflows, the customer relationships — and rate, honestly, how well-owned, structured and governed each one is.</strong> If your "AI strategy" is a model choice, you have bought a marquee; if it is a repertoire, you have a season. Report one thing to the board: the specific proprietary asset your competitor could <em>not</em> replicate by licensing the same model tomorrow.</li>
+  <li><strong>Rent the engine, but keep it swappable.</strong> NVIDIA priced the engine to the token; do not let a single vendor's model become load-bearing just because it is the default in an app you already run. <strong>Abstract every model behind your own interface, price reasoning as a variable per-token cost, and build on the open, neutral standards (A2A + MCP under the AAIF) so you can move engines without re-owning the integration.</strong> Let the best rented star perform — but make sure you can book a different one next season without losing the music.</li>
+  <li><strong>Let the star perform inside your boundary, under your rules.</strong> Claudeforce's design tell is the <em>trust boundary:</em> a frontier model reasoning over your data inside your governance, not your data shipped out to the model. <strong>Where you drop a frontier engine into your applications, keep the proprietary data, the workflows and the audit trail inside a boundary you control — governed, reconstructable to the Article 12 standard — and keep ownership of the customer relationship.</strong> Report two numbers next quarter: the share of AI value running on proprietary assets you own, and the share of reasoning you could move to a different engine within 30 days. <strong>The model is rented — and now metered — the knowledge is the moat, and the repertoire is the music only your house can play.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> NVIDIA Investor Relations / Newsroom (Q2 FY2027 results, 26 Aug 2026 — revenue ~US$96.2B, up ~106% YoY; data center ~US$89.0B, up ~117%; Q3 guide ~US$108B; ~70% FY28 growth outlook, as reported), corroborated by Fortune and CNBC earnings coverage (Jensen Huang: "compute is revenue," as reported) · Salesforce newsroom &amp; VentureBeat ("Claudeforce" — Claude as the default reasoning engine across Agentforce and Slack; "Salesforce in Claude" with 37 prebuilt skills; Salesforce Trust Boundary via Amazon Bedrock; open beta ~Sept 2026; Benioff and Amodei quotes, as reported) · CNBC (Benioff–Amodei interview, 26 Aug 2026, as reported) · TheStreet / Unite.AI (OpenAI enterprise revenue overtaking consumer at a ~US$40B run rate — investor disclosure, as reported) · Bloomberg / TechCrunch (Anthropic run rate past ~US$65B ahead of a possible IPO, as reported) · Bloomberg (Cognition in funding talks near ~US$40B, as reported) · Forbes / Linux Foundation (A2A + MCP under the Agentic AI Foundation — 250+ members; MCP registry 10,000+ servers, as reported) · European Commission / Help Net Security (EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover, context) · MarketingProfs roundup (agent-adoption figures, aggregated, as reported). Figures are relayed from primary investor materials, major-outlet and analyst coverage; several rest on closed-door investor disclosures or aggregator summaries and are marked "as reported." Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 30 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
