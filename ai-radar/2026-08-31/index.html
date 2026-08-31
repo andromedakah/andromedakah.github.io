@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 31 August 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on why AI agent sprawl is now a board-level issue. Gartner projects 150,000+ agents per Fortune 500 enterprise by 2028 (from fewer than 15 in 2025), yet only ~13% believe their governance is adequate and fewer than half can inventory the agents they run. Count before you scale: take the census, build the register. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Agent sprawl becomes a board-level issue</div>
+  <h1>The Census</h1>
+  <div class="subhead">All week the radar built an agentic workforce; this morning the board must count it. Gartner projects 150,000+ agents per Fortune 500 by 2028 — yet only ~13% believe their governance is adequate and fewer than half can even inventory the agents they run. You cannot govern a workforce you have never counted.</div>
+  <div class="meta">Monday, 31 August 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">All week the radar walked the value up the stack — the gate, the larder, the passport, the lingua franca, the conductor, the ear and the repertoire — and built a workforce of agents that pass one door, own their knowledge, carry an identity, speak an open tongue, play in time and can be heard when they err. This morning the board hits the question that comes after: how many of these digital workers do we actually employ — and can we name a single one? The freshest data says most cannot. Gartner projects 150,000+ agents per Fortune 500 by 2028 (from fewer than 15 in 2025), reframed this week (SAP, CIO) as "agent sprawl is now a board-level issue." Only ~13% believe their governance is right, and fewer than half can inventory the agents they run (SAP LeanIX). If we are about to employ a hundred thousand tireless digital workers, do we have a census — or are we running a city whose population we have never counted?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar assembled the parts of an agentic workforce — one door, owned knowledge, an identity, a shared language, a conductor, an ear, a repertoire. This morning the governing question is no longer <em>how do I build one agent well?</em> It is <strong>"now that every team can spin up agents faster than anyone can track them, do I even know how many I have, who owns them, and what they are allowed to touch?"</strong> The answer, across this week's board-level coverage, is uncomfortable: <strong>most enterprises are scaling the agent population far faster than they are counting or governing it.</strong></p>
+<p><strong>The datable signal — the population is exploding, and it is uncounted.</strong> Gartner's forecast that the <strong>average Global Fortune 500 enterprise will run more than 150,000 AI agents by 2028 (up from fewer than 15 in 2025)</strong> was recirculated this week (SAP, CIO, Reworked) explicitly as a governance alarm, not a bragging point. The counting gap is the story: <strong>only ~13% of organizations believe they have the right agent governance in place</strong>, and per an <strong>SAP LeanIX survey, fewer than half can produce an inventory of the agents they already run.</strong> Gartner's own framing is the tell — <em>"organizations don't intentionally create agent sprawl… it is an after-effect of successful AI adoption"</em> — which is exactly why it creeps up on the board.</p>
+<p><strong>The move — the enterprise starts building the register.</strong> The vendor response this week was uniform: <strong>by mid-2026 Microsoft, AWS and Google Cloud had each shipped or expanded agent registry, identity, governance and lifecycle capabilities</strong> — a centralized "single source of truth" for every agent, sanctioned, third-party and shadow. Okta's <strong>"AI Agents at Work 2026"</strong> report (200+ executives) puts a number on the maturity gap: <strong>91% of organizations already use AI agents, but only ~10% have a well-developed strategy for managing the non-human identities those agents carry.</strong> The market has understood the assignment — you cannot govern what you have not first <em>counted and named.</em></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The population — uncounted.</strong> <strong>Gartner: ~150,000+ agents per Fortune 500 enterprise by 2028 (from &lt;15 in 2025); only ~13% adequately governed; SAP LeanIX: fewer than half can inventory their agents.</strong> The digital workforce is arriving faster than the headcount.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The register — the fix everyone is building.</strong> <strong>Microsoft, AWS and Google Cloud all shipped agent registry / lifecycle / identity tooling by mid-2026; Okta: 91% use agents, only ~10% have a mature non-human-identity strategy.</strong> The census is the control plane: name every agent, assign an owner, scope what it can touch, retire it when it is done.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The bill — the reason the board cares now.</strong> <strong>A three-way squeeze (SAP): the workforce wants more agent permissions, the CFO says token spend is too high, the CEO wants results; Google Cloud ROI report: 74% of production deployers report first-year ROI, but ~22% of deployments show negative ROI at 12 months and only ~12% of CEOs report both revenue gain and cost reduction.</strong> Uncounted agents are an uncounted cost — and an uncounted liability.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week built the workforce; this morning the board must count it. <strong>When an enterprise is heading toward 150,000 agents it cannot yet inventory, "we're scaling agents fast" is not a strategy — it is an unmeasured liability, because you cannot govern, budget for, audit, or stand behind a workforce you have never counted.</strong> The firm that answers "how many agents do we run?" with a shrug is running a city with no census — no way to tax, govern, or account for its residents. The firm that answers with a <strong>register — every agent named, owned, scoped and retirable</strong> — can let the population grow because it can still see it. <strong>Count before you scale: take the census, build the register, and make "we know exactly how many agents we run, who owns each, and what it can touch" the answer the board can give — because the sprawl is coming whether or not you are counting.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏛️ "The Census"</h3>
+<p><em>Topic: This week the enterprise-AI conversation pivoted from building agents to governing the sheer number of them. Gartner's forecast that the average Global Fortune 500 enterprise will run more than 150,000 AI agents by 2028 (up from fewer than 15 in 2025) was recirculated across the trade press (SAP News, CIO, Reworked) as the framing "AI agent sprawl is now a board-level issue." The alarm is a counting gap: only about 13% of organizations believe they have the right agent governance in place, and per an SAP LeanIX survey fewer than half can even produce an inventory of the agents they already run. In response, Microsoft, AWS and Google Cloud have each shipped agent registry, identity and lifecycle tooling; Okta's "AI Agents at Work 2026" report finds 91% of organizations using agents but only ~10% with a mature strategy for the non-human identities they carry. This follows the week's editions on the gate, the larder, the passport, the lingua franca, the conductor, the ear and the repertoire. The lesson: after you learn to build one agent well, the governing problem becomes counting and accounting for all of them — you cannot govern a workforce you have never counted.</em></p>
+<p>There was a city that fell in love with hiring. Its workers were tireless — they never slept, never tired, and could be conjured by any household that wanted one — and so, quarter by quarter, every household hired more. The mayor was proud of it. "We are the fastest-growing city in the province," he told the council, and the council nodded, because everywhere you looked there was work being done: messages carried, ledgers kept, bargains struck, goods moved through the night.</p>
+<p>But one autumn the treasurer came to the council with a simple, terrible admission. Asked how many workers the city now employed, she could not say. Not roughly. Each household had hired on its own — through the front gate, through the back, through a cousin who knew a cousin — and no one had ever kept a roll. There was no register of who worked where, who had hired them, which doors their keys opened, or which of them were still needed and which had finished their task months ago and simply kept drawing breath and pay. The city had a hundred thousand workers and could not name one of them. It had grown too fast to count itself.</p>
+<p>And here the danger stopped being abstract. A worker no one remembered hiring still held a key to the treasury. A task finished in spring still had three workers assigned to it in autumn, quietly costing wages no one had budgeted. When something went wrong — a message misdelivered, a ledger altered, a door left open — no one could say which worker had done it, or who was answerable, because no one owned the roll. The city was not badly <em>run;</em> it was <strong>uncounted,</strong> and an uncounted city cannot be governed, cannot be taxed honestly, and cannot answer for itself when a magistrate asks who did this.</p>
+<p>The households that panicked did the loud thing: they froze all hiring, and watched the work stop. But the households that kept their footing did the dull, decisive thing — they <strong>took the census.</strong> They walked every ward and wrote down every worker: a name, the household that owned it, the doors its key opened, the task it was hired for, and the date it should be let go. They built a single roll that the whole city could read, and a rule that no new worker could start until it was written into the roll and given an owner. They did not hire fewer workers than the panicking households — in the end they hired far more — but they could always answer the treasurer's question, because they never again let a worker exist that the roll did not know.</p>
+<p>The moral is not that the workers were the problem — they did prodigious work, and a city that refused to hire them fell behind. It is that <strong>a workforce you have not counted is not an asset; it is an exposure</strong> — an unbudgeted cost, an ungoverned key, an unanswerable question when something breaks. The census is not bureaucracy for its own sake. It is the one thing that lets a city keep hiring at scale <em>without</em> losing the ability to govern, pay for, and stand behind the work being done in its name.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; your knowledge is the larder; the gate is the one door; the passport names each agent at that door; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether the performance is good; the repertoire is the music only your house can play — and <strong>the census is the roll that knows how many players you have, who owns each, what door their key opens, and when to let them go.</strong> Count the workforce before it counts you. Build the register, assign every agent an owner, scope what it can touch, and retire it when its task is done — because the population is arriving whether or not you are keeping the roll.</p>
+<p><strong>The question it forces:</strong> <em>We are about to employ a hundred thousand tireless digital workers. So — how many do we run right now? Can we produce, this afternoon, a single roll that names every agent, the human who owns it, the systems its credentials can reach, and the date it should be retired? If we cannot, we are not governing a workforce — we are hoping one governs itself. Are we counting our agents, or only admiring how fast they multiply?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Can we produce an agent census today?</strong> Gartner projects 150,000+ agents per Fortune 500 by 2028, yet fewer than half of firms can inventory the agents they run now (SAP LeanIX). <strong>If the CEO asked this afternoon "how many agents do we operate, and who owns each," could anyone answer — or would we be a city with no roll?</strong></li>
+  <li><strong>Is "we're scaling agents fast" an achievement or an exposure?</strong> Only ~13% of organizations believe their agent governance is adequate. <strong>An uncounted agent is an unbudgeted cost and an ungoverned key — so where is our register, who maintains it, and what stops a new agent from existing before it is written into the roll with an owner?</strong></li>
+  <li><strong>Who is answerable when an agent we can't name does something we can't explain?</strong> The engine is rented; the accountability is not. <strong>When an agent alters a record or opens a door, can we trace it to a named agent, a human owner, and an Article-12 log — or does the trail end at "one of our agents, we're not sure which"?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Every unregistered agent with a live credential is model risk, access risk and audit risk in one. <strong>Do we hold a single register mapping each agent to an owner, a scope of accounts and systems it may touch, and a retirement date — or are there agents holding keys to positions and client data that no inventory knows about?</strong></li>
+  <li>The regulator will ask "who authorized this and who is accountable." <strong>Can we answer at the level of a named agent and a named human — with reconstructable logs (Article 12) — or only at the level of "the platform did it"?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Agents touching patient records, trial data and care pathways cannot be allowed to accumulate uncounted. <strong>Is every clinical or research agent on a governed roll — named, owned, scoped to the minimum data it needs, and retired when its study or workflow ends — or are finished-task agents still holding live access months later?</strong></li>
+  <li>Accountability for a patient-facing decision must resolve to a person. <strong>When an agent acts, can we name the agent, its human owner and its audit trail — or have we deployed a workforce we cannot account for to a regulator or an ethics board?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Agents on the line, in the supply chain and across OT/IT multiply per site and per team — the definition of sprawl. <strong>Do we run one register across plants, or does every site hire its own untracked workers with keys to control systems no central roll can see?</strong></li>
+  <li>Idle agents are silent cost and silent risk. <strong>Do we know which agents finished their task and should be retired — and who is accountable for pruning the roll — or are we paying wages and holding open doors for workers no one remembers hiring?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents across storefront, pricing, service and logistics are exactly where sprawl hides behind "it's working." <strong>Can we inventory every customer-facing and back-office agent, its owner and its data scope — or is our agent estate growing faster than our ability to see it, one team's quick win at a time?</strong></li>
+  <li>Token spend and negative-ROI agents drain margin quietly. <strong>With ~22% of agent deployments reportedly showing negative ROI at 12 months, do we measure per-agent value and retire the losers — or does the roll only ever grow?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Agents acting on citizen records and statutory process must be countable, owned and auditable by definition. <strong>Is there a public-grade register of every agent in service — name, owner, scope, retirement — with Article-12-style reconstructable logs, or are we running ungoverned digital workers over the public's data?</strong></li>
+  <li>Accountability is not delegable to a vendor. <strong>When an agent makes or supports a decision affecting a citizen, can we name the responsible agent and official — or have we lost the roll and, with it, the ability to answer for the state's own actions?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Counting the Digital Workforce Before It Counts You</h2>
+<p>Read the stack once more as the parts of an agentic workforce this radar has assembled all week — but now step past <em>building one agent well</em> to the question every enterprise hits the moment it has built more than a handful: <strong>do you actually know how many you are running, and can you name each one?</strong> The gate admits them; the passport identifies one at the door; the lingua franca lets them speak; the conductor coordinates them; the ear hears their errors; the repertoire is the data they perform. <strong>The census is the layer above all of it — the register that turns an uncounted crowd of agents into a governed workforce.</strong> The engineering point is blunt: <strong>an agent that is not on a register, owned by a human, scoped to least privilege and given a retirement date is not a capability — it is an unmanaged non-human identity with a live credential, and at 150,000 per enterprise that is not an edge case, it is the default.</strong></p>
+<div class="card"><ul>
+  <li><strong>The population — arriving faster than the headcount.</strong> <strong>Gartner: ~150,000+ AI agents per average Fortune 500 enterprise by 2028, up from fewer than 15 in 2025; ~40% of enterprise apps will ship a task-specific agent by end of 2026 (up from &lt;5% in 2025); Microsoft: ~80% of the Fortune 500 already run active AI agents.</strong> Read architecturally: agent creation has been democratized to every team and every app, so the growth is <em>organic and decentralized</em> — which is precisely why no single team has the roll. Treat every agent as a first-class, registered non-human identity from creation, not an afterthought.</li>
+  <li><strong>The register — the control plane everyone is now building.</strong> <strong>Microsoft, AWS and Google Cloud each shipped agent registry / identity / lifecycle tooling by mid-2026; the design pattern is a single source of truth for every agent (sanctioned, third-party and shadow), each mapped to an owner, a permission scope and a lifecycle state.</strong> Okta ("AI Agents at Work 2026," 200+ executives): <strong>91% use agents, but only ~10% have a mature non-human-identity strategy</strong> — and <em>agentic readiness is identity readiness.</em> The census is not a spreadsheet; it is enforced provisioning: no agent runs unless it is registered, owned and scoped.</li>
+  <li><strong>The bill and the liability — why the board is counting now.</strong> <strong>SAP frames a three-way squeeze: the workforce demands more agent permissions, the CFO flags token spend, the CEO demands results. Google Cloud ROI report: 74% of production deployers claim first-year ROI, yet ~22% of deployments reportedly show negative ROI at 12 months and only ~12% of CEOs report both revenue gain and cost reduction.</strong> The uncounted agent is the one running up token spend on a finished task and holding a key no one is watching — the census is how you find and retire it.</li>
+</ul></div>
+<p>The strategic core: <strong>when the agent population is heading to six figures per enterprise and fewer than half of firms can inventory what they already run, "we're scaling agents" describes an exposure, not a moat — the durable capability is the register that lets you scale the workforce while still being able to count, own, scope and retire every member of it.</strong> For a week the frame moved from "own the right layer" to "oversee without custody" to "build the gate" to "own the knowledge" to "name the agent" to "speak the open tongue" to "conduct the ensemble" to "keep the ear" to "own the repertoire"; this morning it lands on the discipline that makes all of it governable at scale: <em>count the workforce.</em> "We deploy agents everywhere" is not an answer to "how many do you run and who owns them"; <em>"every agent is on one register — named, owned, scoped to least privilege, logged to the Article-12 standard, and retired when its task ends"</em> is the answer.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The census: you cannot govern a digital workforce you have never counted. Enterprises are heading toward roughly 150,000 agents per Fortune 500 by 2028, yet fewer than half can inventory the agents they run today. Top left: the population, uncounted — about 150,000 agents per Fortune 500 by 2028, up from fewer than 15 in 2025, about 80 percent of the Fortune 500 already running agents, and growth that is decentralized across every team. Top right: the counting gap, the alarm — only about 13 percent adequately governed, fewer than half can inventory their agents, and 91 percent use agents but only about 10 percent have a mature non-human-identity strategy, so nobody holds the roll. Both feed the middle: an uncounted agent is an unbudgeted cost and an ungoverned key. Middle: so what breaks — the workforce arrives faster than the headcount, finished-task agents still hold live keys, token spend no one budgeted, about 22 percent of deployments negative ROI at 12 months and only about 12 percent of CEOs see both gain and cut, and when an agent errs the trail ends at one of ours, not sure which. Bottom left: stop admiring the growth — we're scaling agents fast, agents hired team by team, no roll, no owner, no retirement. Bottom right: start taking the census — one register with name, owner and scope, no agent runs unless it is on the roll, retire finished agents and log to the Article 12 standard." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE CENSUS — you cannot govern a workforce you have never counted</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Heading to ~150,000 agents / Fortune 500 by 2028; fewer than half can inventory the agents they run today</text>
+
+  <!-- the population -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#101f2b" stroke="#2a6d8a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#6fb8dc" font-family="sans-serif">THE POPULATION — uncounted</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~150,000 agents / F500 by 2028</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">(from &lt;15 in 2025)</text>
+  <text x="52" y="139" font-size="10" fill="#a9d3ea" font-family="sans-serif">~80% of F500 already run agents</text>
+  <text x="52" y="159" font-size="10" fill="#a9d3ea" font-family="sans-serif">growth is decentralized</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ arriving faster than the headcount</text>
+
+  <!-- the counting gap -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE COUNTING GAP — the alarm</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~13% adequately governed</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">&lt; half can inventory their agents</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">91% use agents, ~10% mature NHI</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">nobody holds the roll</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ you cannot govern the uncounted</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#6fb8dc" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#6fb8dc"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">uncounted agent = unbudgeted cost + ungoverned key ▼</text>
+
+  <!-- so what breaks -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">SO WHAT BREAKS? — the workforce arrives faster than the headcount</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">finished-task agents still holding live keys; token spend no one budgeted</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~22% of deployments negative ROI at 12 mo; only ~12% of CEOs see gain+cut</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">when an agent errs, the trail ends at "one of ours, not sure which"</text>
+  <text x="52" y="327" font-size="9.5" fill="#f0b6c2" font-family="sans-serif" font-style="italic">a workforce you cannot name is a workforce you cannot answer for</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop admiring the growth -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231017" stroke="#8a2a3a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e07a8f" font-family="sans-serif">STOP: admiring the growth</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "we're scaling agents fast"</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agents hired team-by-team</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no roll, no owner, no retire</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the number is a liability, not a boast</text>
+
+  <!-- take the census -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: taking the census</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one register: name + owner + scope</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no agent runs unless it's on the roll</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· retire finished agents; Article-12 log</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">scale the workforce, still see it</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Count before you scale.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">The register is what lets you employ a hundred thousand digital workers and still answer for every one.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#2a6d8a"></i>The population — uncounted and growing</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The counting gap — nobody holds the roll</span>
+  <span><i class="dot" style="background:#8a2a3a"></i>So what breaks — cost, keys, accountability</span>
+  <span><i class="dot" style="background:#1d6e56"></i>Take the census — name, own, scope, retire</span>
+</div>
+</div>
+
+<h3>The uncounted crowd versus the governed workforce — the same agents, two very different risk postures</h3>
+<table>
+<tr><th>A firm that admires the growth</th><th>A firm that takes the census</th></tr>
+<tr><td>"We're scaling agents fast"</td><td>"We run exactly this many, and here is the roll"</td></tr>
+<tr><td>Agents hired team-by-team, no central roll</td><td>One register: every agent named and owned</td></tr>
+<tr><td>Permissions granted ad hoc, rarely revoked</td><td>Least-privilege scope per agent, reviewed and revocable</td></tr>
+<tr><td>Finished-task agents keep running and keep keys</td><td>Lifecycle state tracked; idle agents retired</td></tr>
+<tr><td>"One of our agents did it, we're not sure which"</td><td>Any action traces to a named agent + human owner</td></tr>
+<tr><td>Token spend and risk grow invisibly</td><td>Per-agent cost and access are counted and governed</td></tr>
+</table>
+
+<h3>Why "the census" is the artifact that matters</h3>
+<div class="card">
+<p>For a year the reflex was to celebrate the <em>number</em> of agents as proof of progress — more agents, more automation, more pilots shipped. This week the trade press reframed that number as a liability: <strong>an enterprise heading to 150,000 agents it cannot inventory is not ahead, it is exposed.</strong> What makes the population governable is not another capability layer but a <em>count</em> — the register that maps every agent to an owner, a permission scope and a lifecycle. The most valuable move this week is not deploying one more agent; it is being able to answer, honestly and instantly, how many you already run and who is accountable for each.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be deliberate about what you run, own and can account for.</strong> On a legacy estate the temptation is to let every team stand up its own agents against the systems they already touch, because it is fast and it works — and that is exactly how sprawl accretes. The retrofit is <strong>count first, then scale. Count:</strong> build one register now, before the population is six figures, and reconcile it against reality — walk the estate and write down every agent, its owner, its credentials and its task. <strong>Enforce:</strong> make registration a gate — no agent runs in production unless it is on the roll, owned, scoped to least privilege, and given a review-and-retire date. <strong>Account:</strong> wire identity and Article-12-style logging into every agent so any action resolves to a named agent and a human, and prune the roll on a schedule so finished-task agents lose their keys. And remember the whole refrain: the model is a rented stove, the knowledge is the larder, the gate is the one door, the passport names each agent, the lingua franca is the score, the conductor keeps time, the ear listens to the real room, the repertoire is the music only your house can play — and <em>the census is the roll that lets you employ a hundred thousand of them and still answer for every one.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove; your proprietary knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps the ensemble in time; the ear hears whether the performance is good; the repertoire is the music only your house holds. The census is the roll above all of it — the register that knows how many agents you run, who owns each, what its key opens, and when to let it go. Count the workforce before it counts you.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The population — a governance story now.</strong> <strong>Gartner: ~150,000+ agents per Fortune 500 by 2028 (from &lt;15 in 2025), recirculated this week (SAP, CIO, Reworked) as "agent sprawl is a board-level issue."</strong> The number is an alarm, not a boast (as reported).</li>
+  <li><strong>The counting gap — the alarm itself.</strong> <strong>Only ~13% believe their agent governance is adequate; SAP LeanIX: fewer than half can inventory their agents; Okta: 91% use agents, ~10% mature on non-human identity.</strong> Nobody holds the roll (as reported).</li>
+  <li><strong>The register — the fix everyone is shipping.</strong> <strong>Microsoft, AWS and Google Cloud each shipped agent registry / identity / lifecycle tooling by mid-2026; the pattern is one source of truth for every agent.</strong> Count, own, scope, retire (as reported).</li>
+  <li><strong>The bill — why the board cares.</strong> <strong>Three-way squeeze (SAP): permissions vs. token spend vs. results; Google Cloud ROI report: 74% claim first-year ROI, ~22% of deployments negative at 12 mo, ~12% of CEOs see both gain and cut.</strong> Uncounted agents are uncounted cost (as reported).</li>
+  <li><strong>The ledger — compliance context.</strong> <strong>EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover.</strong> A workforce you cannot name is a workforce you cannot log to the Article-12 standard (context).</li>
+  <li><strong>The standards — identity on the wire.</strong> <strong>A2A + MCP under the Linux Foundation's AAIF (250+ members; MCP registry 10,000+ servers); the MCP roadmap folds agent identity into the protocol.</strong> The register is easiest to keep when identity is native to how agents connect (as reported).</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">Organizations don't intentionally create agent sprawl. Interestingly, it is an after-effect of successful AI adoption in the company, which also drives governance challenges.</div><div class="a">— Gartner, on how agent sprawl emerges, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Organizations need to find a balance where they can govern agents and manage sprawl, but also safely empower employees to innovate with these tools.</div><div class="a">— Max Goss, Senior Director Analyst, Gartner, on managing agent sprawl, 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">For CIOs, CEOs and company boards, the question is no longer whether to govern AI agents, but whether governance gets designed into the architecture from the start or retrofitted after the first serious failure.</div><div class="a">— trade coverage of agent sprawl (SAP / CIO), reframing governance as a board-level issue, August 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"You cannot govern, budget for, or answer for a digital workforce you have never counted. Before you scale the agents, take the census."</div><div class="a">— the radar, on counting the agent population before governing it</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The population — the headline forecast</td><td><span class="v">~150,000+ AI agents per average Global Fortune 500 enterprise by 2028, up from fewer than 15 in 2025</span></td><td>Gartner (2026-04-28 sprawl guidance), via SAP News / CIO / Reworked (as reported)</td></tr>
+<tr><td>The population — enterprise apps</td><td><span class="v">~40% of enterprise apps will ship a task-specific AI agent by end of 2026, up from &lt;5% in 2025</span></td><td>Gartner (Aug 2025 forecast, as reported)</td></tr>
+<tr><td>The population — already live</td><td><span class="v">~80% of the Fortune 500 already run active AI agents</span></td><td>Microsoft Security Blog (Feb 2026, as reported)</td></tr>
+<tr><td>The counting gap — governance</td><td><span class="v">Only ~13% of organizations believe they have the right AI agent governance in place</span></td><td>Gartner via SAP News (as reported)</td></tr>
+<tr><td>The counting gap — inventory</td><td><span class="v">Fewer than half of organizations can produce an inventory of the agents they already run</span></td><td>SAP LeanIX survey, via SAP News / CIO (as reported)</td></tr>
+<tr><td>The register — identity maturity</td><td><span class="v">91% of organizations use AI agents; only ~10% have a mature non-human-identity strategy</span></td><td>Okta, "AI Agents at Work 2026" (200+ executives, as reported)</td></tr>
+<tr><td>The register — vendor response</td><td><span class="v">Microsoft, AWS and Google Cloud each shipped agent registry / identity / lifecycle tooling by mid-2026</span></td><td>Vendor coverage; agent-registry roundups (as reported)</td></tr>
+<tr><td>The bill — ROI reality</td><td><span class="v">74% of production deployers claim first-year ROI; ~22% of deployments show negative ROI at 12 months; only ~12% of CEOs report both revenue gain and cost reduction</span></td><td>Google Cloud "ROI of AI" report; Forbes survey coverage (as reported)</td></tr>
+<tr><td>The ledger — compliance (context)</td><td><span class="v">EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover</span></td><td>European Commission / Cooley / Faegre Drinker</td></tr>
+<tr><td>The standards — portability &amp; identity</td><td><span class="v">A2A + MCP under the Linux Foundation's AAIF: 250+ members; MCP registry 10,000+ servers</span></td><td>Forbes; Linux Foundation (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Take the census — produce one register of every agent you run.</strong> You cannot govern what you have not counted. <strong>This month, stand up a single source of truth that lists every agent — sanctioned, third-party and shadow — mapped to a human owner, the systems and data its credentials can reach, and the task it was created for.</strong> Reconcile it against reality by walking the estate, not by trusting anyone's memory. Report one number to the board: how many agents we actually run today, and how many of them we could name an owner for. If the honest answer is "we don't know," that <em>is</em> the finding.</li>
+  <li><strong>Make registration a gate — no agent runs unless it is on the roll.</strong> Sprawl is what happens when creation is easy and counting is optional. <strong>Flip it: require that every new agent be registered, owned, and scoped to least privilege before it can touch production — treat an unregistered agent the way you would treat an unbadged employee with a master key.</strong> Wire identity and Article-12-style logging into every agent so any action resolves to a named agent and a named human. The register is only real if nothing can exist outside it.</li>
+  <li><strong>Prune the roll — retire the agents whose task is done.</strong> A census you never update becomes another stale spreadsheet, and a finished-task agent still holding a key is pure downside. <strong>Assign a lifecycle owner, review the register on a schedule, and retire or de-provision agents that have finished their work or gone idle — and measure per-agent cost and value so the negative-ROI agents get pruned, not just accumulated.</strong> Report two numbers next quarter: the share of agents on a governed register with a named owner, and the share you retired this quarter. <strong>The model is rented, the knowledge is the moat, and the census is what lets you employ a hundred thousand digital workers and still answer, instantly, for every one.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Gartner ("Six Steps to Manage AI Agent Sprawl," 28 Apr 2026 — 150,000+ agents per Fortune 500 by 2028, up from &lt;15 in 2025; only ~13% adequately governed; Max Goss quote, as reported), recirculated this week by SAP News ("AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue"), CIO and Reworked · SAP LeanIX (fewer than half can inventory their agents, as reported) · Gartner (Aug 2025 — ~40% of enterprise apps ship a task-specific agent by end of 2026, up from &lt;5%, as reported) · Microsoft Security Blog (~80% of the Fortune 500 run active AI agents, Feb 2026, as reported) · Okta "AI Agents at Work 2026" (91% use agents, ~10% mature on non-human identity; 200+ executives, as reported) · Google Cloud "ROI of AI" report &amp; Forbes survey coverage (74% first-year ROI; ~22% negative at 12 months; ~12% of CEOs see both gain and cut, as reported) · European Commission / Cooley / Faegre Drinker (EU AI Act enforcement live since 2 Aug; Article 12 reconstructability + Article 50 transparency; fines up to €15M or 3% of global turnover, context) · Forbes / Linux Foundation (A2A + MCP under the Agentic AI Foundation — 250+ members; MCP registry 10,000+ servers, as reported). This was a lighter weekend for hard news; figures are relayed from analyst, vendor and major-outlet coverage, several rest on survey summaries or aggregator roundups and are marked "as reported." Several primary pages were unreachable behind the network egress proxy and were cross-referenced across multiple outlets; they should be re-verified at source before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 31 August 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
