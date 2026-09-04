@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 4 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on model commoditization. Three frontier-class models shipped in ~48h (Claude Fable 5.1, Gemini 3.8 Flash, Muse Spark 1.3) and token prices fell ~60% — but the cheapest tier (Muse Spark Contributor, $0.10/$0.20, ~21× cheaper) is paid for by training on your data, set by a model id not a contract. The miller's toll: when grinding is free, you pay in grain. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The model goes commodity</div>
+  <h1>The Miller's Toll</h1>
+  <div class="subhead">Yesterday the board asked whether the wheel grinds any flour. This morning the river floods: three frontier-class models shipped in ~48 hours and token prices fell ~60%. The rented stove is nearly free — but the cheapest tier is paid for in your data, and the switch is a model id, not a contract.</div>
+  <div class="meta">Friday, 4 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday the board asked whether the wheel was grinding any flour. This morning the river answers by flooding: three frontier-class model labs shipped within roughly 48 hours — Anthropic's Claude Fable 5.1 (26 Aug), Google's Gemini 3.8 Flash (1 Sep) and Meta's Muse Spark 1.3 (2 Sep) — and the trade press reported AI token prices collapsing ~60% in a single window (Tech Startups, 3 Sep), with GPT-4-class quality now under $0.50 per million tokens vs ~$30 three years ago (as reported). The wheel — the model this radar has called a rented stove all along — is nearly free to rent. But the cheapest grinding is not free: Muse Spark 1.3's Contributor tier is up to ~21× cheaper, and the discount is paid by letting Meta train on your prompts and completions — a toll set by a model id, not a contract. The rented stove got cheaper; the cheapest stove keeps a taste of everything you cook.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a week this radar assembled the agentic workforce, counted it, faced the inspector, priced the break-in, and asked whether any of the motion grinds flour. This morning the model layer itself moved, loudly: <strong>capability is commoditizing in real time, and the cheapest capability is now sold for data instead of dollars.</strong> Three frontier-class labs shipped inside ~48 hours and token prices fell off a cliff — but the discount tier that everyone will be tempted to flip on is the one that turns your proprietary prompts into someone else's training set.</p>
+<p><strong>The number that frames it — the wheel is nearly free now.</strong> On 2–3 September the trade press reported <strong>AI token prices collapsing ~60% in a single window (Tech Startups, 3 Sep)</strong>, extending a multi-year slide that has taken <strong>GPT-4-class quality from ~$30 to under $0.50 per million tokens</strong> and <strong>Google's Flash line down ~99.7% in three years (as reported).</strong> Three frontier-class releases landed almost on top of each other — <strong>Claude Fable 5.1 (26 Aug; Artificial Analysis Intelligence Index 66, the current top), Gemini 3.8 Flash (1 Sep; $0.75/$3.75 per million), and Muse Spark 1.3 (2 Sep; Index 61–62, behind only Fable 5.1 and Claude Opus 5) (as reported).</strong> The rented stove is now a near-commodity. Renting it is no longer where the money — or the risk — lives.</p>
+<p><strong>The catch that makes it a board issue — the cheapest tier is paid for in your data.</strong> Meta's Muse Spark 1.3 lists <strong>a Standard tier at $1.25/$4.25 per million tokens (no training on your data) and a Contributor tier at $0.10/$0.20 — up to ~21× cheaper — whose discount is granted in exchange for permission to train on your prompts and completions (as reported).</strong> Meta's own terms tell users <strong>not to submit sensitive, confidential or personal information</strong> to the discounted tier. And the governance failure is structural: <strong>Contributor is not a signed agreement or an account-level control; it is a different model id, so any engineer who changes one config string moves that workload onto the training tier — no procurement, no approval gate, invisible until an audit greps the config (Atlassian defaulted ~300k orgs into training Rovo on 17 Aug) (as reported).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The wheel is nearly free — capability is commoditizing in real time.</strong> <strong>Three frontier-class models in ~48h (Claude Fable 5.1, 26 Aug, Index 66; Gemini 3.8 Flash, 1 Sep, $0.75/$3.75; Muse Spark 1.3, 2 Sep, Index 61–62); token prices ~-60% in one window (Tech Startups, 3 Sep); GPT-4-class quality now &lt;$0.50/M vs ~$30 three years ago (as reported).</strong> Renting the model is no longer the moat or the cost center.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The cheapest grinding takes a toll in grain, not coin.</strong> <strong>Muse Spark 1.3 Contributor $0.10/$0.20 (up to ~21× cheaper than Standard) in exchange for training on your prompts and completions; Meta says do not submit sensitive data (as reported).</strong> The near-free tier is paid for with the one asset this radar keeps calling your moat — your proprietary data.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The toll is invisible — it is a model id, not a contract.</strong> <strong>Contributor is not an account setting or a signed agreement; one changed config string moves a workload onto the training tier, with no procurement gate and no audit trail until someone reads the config (Atlassian Rovo defaulted ~300k orgs on 17 Aug) (as reported).</strong> You cannot govern a price you cannot see being paid.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that built, counted, inspected, secured and finally questioned the value of the agentic workforce ends where the whole stack begins — the model — and finds it collapsing toward free. <strong>But "free" is a pricing tier, not a fact: the cheapest tokens in the market are now sold for training rights on your own prompts, and the switch that buys them is a config string, not a contract.</strong> The mill in the old country never charged coin; it took the multure — a fixed handful of every sack it ground — and the miller who ground cheapest kept the biggest toll, learned every household's recipe from the grain that passed through, and in time sold their own bread back to them. <strong>Price your model tiers in data as well as dollars, make the training-tier model id a governed procurement decision rather than a config default, and keep your proprietary grain out of the cheap mill — because the wheel is finally almost free, and that is exactly when you pay with something dearer than money.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏛️ "The Miller's Toll"</h3>
+<p><em>Topic: This week the model layer commoditized in public. Three frontier-class systems shipped within ~48 hours — Claude Fable 5.1 (26 Aug; Intelligence Index 66), Gemini 3.8 Flash (1 Sep; $0.75/$3.75 per million tokens) and Muse Spark 1.3 (2 Sep; Index 61–62) — and on 2–3 September the trade press reported AI token prices collapsing ~60% in a single window, extending a slide that has taken GPT-4-class quality from ~$30 to under $0.50 per million tokens. The board-level catch sits in Meta's pricing: Muse Spark 1.3 offers a Standard tier ($1.25/$4.25, no training on your data) and a Contributor tier ($0.10/$0.20, up to ~21× cheaper) whose discount is paid by granting Meta permission to train on your prompts and completions — and Contributor is not a contract but a different model id. The lesson: when the model rents for almost nothing, the cheapest tier is paid for in your own data — the mill's ancient "multure."</em></p>
+<p>In the old country a miller did not ask for coin. He asked for the multure — the toll — a fixed portion scooped from every sack of grain that passed under his stone, and out of those scoops he made his living. So when a household carried its wheat to be ground, it paid not in money but in flour: a handful here, a measure there, taken from the very grain it brought. For most of a lifetime this seemed a fair and settled thing, because the toll was small and the grinding was necessary, and no one thought very hard about the slow river of everyone's grain running quietly into one man's storehouse.</p>
+<p>Then a season came when new mills sprang up all along the river, one after another in the space of a few days, each grinding faster and finer than the last, until the grinding that had once been dear was suddenly almost free. And into that crowd stepped a miller who made an offer no one had heard before. <em>Bring your grain to me,</em> he said, <em>and I will grind it for almost nothing — a tenth of what the others charge, less than the cost of the water.</em> The households could not believe their luck, and the queues at his gate ran long. Only the careful few asked the question that mattered: <em>if he charges almost no coin, what is he living on?</em> And the answer was the oldest answer in milling. He was living on the toll. He had simply moved it out of sight. The cheap miller took barely a coin — but from every sack he kept a generous handful, and he did something with those handfuls that the old millers never had: he studied them. He learned which household grew which wheat, whose grain made the finest bread, which recipes sold at market and which did not — and by harvest he was baking, from the accumulated scoops of a whole valley's grain, the exact loaves his own customers had brought him to grind, and selling them back at his own gate.</p>
+<p>The dear miller up the road, the one who still charged honest coin and kept not a single grain that was not his, watched the queues pass him by and said nothing, because he understood what his neighbors did not: <strong>the cheapest mill was not cheap. It had only changed what it charged. It took its price in grain instead of coin, and grain — your grain, your seed, your recipe — is dearer than coin, because coin buys one loaf and grain buys every loaf you will ever bake.</strong> The households that flocked to the cheap gate thought they were saving money. They were paying the most expensive toll in the valley, and they were paying it in the one thing they could never buy back.</p>
+<p>And here was the cruelest part, the part that undid even careful households: <strong>the toll was invisible.</strong> There was no contract to sign at the cheap mill, no ledger, no moment where a steward looked up and said <em>this sack will be tolled in grain.</em> There was only which gate your cart happened to roll through — and the gates stood side by side, unmarked, so that a single hired hand, sent down with the morning's grain and told merely to <em>use the cheap mill, it's faster,</em> could route a season's harvest into the tolling gate without anyone in the household ever deciding to. By the time the master noticed, the grain was already ground, the handfuls already scooped, the recipe already learned. You cannot refuse a toll you never saw yourself agree to.</p>
+<p>The households that kept their footing did the unglamorous thing. They did not swear off the cheap mill entirely — the grinding was genuinely good, and coin saved is coin saved. But they wrote down, plainly, <strong>which grain could go to the tolling gate and which could not.</strong> The common wheat, the grain whose recipe was no secret, the flour anyone in the valley could already make — that they sent to the cheap mill gladly and pocketed the savings. But the seed stock, the heirloom strain, the recipe that was the whole reason anyone bought their bread — that grain went only to the dear mill that took coin and kept nothing, and it went there by rule, not by the whim of whoever happened to be driving the cart. <strong>They priced their grain in two currencies at once — coin and toll — and they decided, deliberately and in advance, which sacks they were willing to pay for in each.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, and this week the rent fell to almost nothing; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour — and <strong>the miller's toll is what the cheapest grinding actually charges: not coin, but a handful of your grain, taken invisibly, learned, and sold back to you.</strong> When the wheel is nearly free, price it in data too, mark which gate each sack may pass through, and keep your seed stock out of the cheap mill — because <em>free grinding is never free; you pay the toll in grain.</em></p>
+<p><strong>The question it forces:</strong> <em>The model just got cheaper than it has ever been — three frontier labs shipped in a week and token prices fell by more than half. So the question is not "are we getting a good price," it is "what are we paying with?" Do we know which of our AI workloads run on a data-tolling tier — a Contributor model id, a default-on training setting, a free plan that trains on our content? Can any engineer flip a production workload onto the cheap mill with one config string, or is the tolling model id a governed procurement decision with a named owner? And have we actually written down which of our data is common wheat we will happily trade for cheap tokens, and which is the seed stock that must never pass through a mill that keeps a handful — or are we, like most of the valley, carting our whole harvest to the cheapest gate because the coin price looked too good to ask what the real toll was?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>What are we actually paying with?</strong> Token prices fell ~60% in a single window this week, and the cheapest tier on the market (Muse Spark 1.3 Contributor, $0.10/$0.20) is discounted up to ~21× in exchange for training on your prompts and completions. <strong>Do we know which of our AI workloads run on a data-tolling tier — and did anyone decide that on purpose, or did it arrive as a config default?</strong></li>
+  <li><strong>Can one config string move us onto the cheap mill?</strong> The tolling tier is a different model id, not a contract or an account setting — no procurement step, no audit trail until someone greps the config. <strong>Is our training-tier model id a governed procurement decision with a named owner, or can any engineer flip a production workload onto it unnoticed?</strong></li>
+  <li><strong>Which of our data is common wheat, and which is seed stock?</strong> Free and discounted tiers now train on your content by default across the stack (Atlassian Rovo defaulted ~300k orgs on 17 Aug). <strong>Have we written down, in advance, which data may pass through a data-tolling model and which must never — or do we decide it by whoever happens to be driving the cart?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Customer records, transaction data and proprietary models are regulated seed stock, not common wheat. <strong>Do we have a hard control that blocks data-tolling model ids (Contributor tiers, train-by-default free plans) from touching regulated data — enforced at the gateway, not asked of the developer?</strong></li>
+  <li>The cheap-token temptation lands hardest on high-volume, low-margin automation. <strong>Where we chase the ~21× discount, can we prove the workload carries only non-sensitive grain — or are we tolling customer data to shave inference cost?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>PHI and proprietary research are the definition of grain you can never buy back. <strong>Does any pathway exist by which a clinician's or researcher's prompt could reach a train-on-your-data tier — and can we prove it is closed, given the switch is a model id an engineer controls?</strong></li>
+  <li>The savings are real and the pressure to capture them is real. <strong>Have we designated which non-clinical, non-identifiable workflows may use the cheap mill, so the discount is captured deliberately rather than the sensitive data leaking into it by accident?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Process data, yields and designs are the recipe competitors would pay for. <strong>Do our engineering and design tools default to a Standard (no-training) model id, or could a Contributor-tier config string route proprietary process data into a vendor's training set?</strong></li>
+  <li>Commoditizing model prices are a genuine cost win at industrial token volumes. <strong>Have we split our workloads — common wheat to the cheap mill, seed stock to the dear one — so we bank the savings without tolling the designs?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer behavior, pricing and assortment logic are exactly the "recipe" the cheap miller learns and resells. <strong>Are our customer-facing and merchandising agents pinned to no-training model ids, or are we trading tomorrow's competitive edge for today's cheaper tokens?</strong></li>
+  <li>Consumer free tiers train by default too. <strong>Do we know which shadow, employee-adopted AI tools are grinding company data at a tolling gate for free — and can we even see them?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data tolled into a vendor's training set is a headline, not a saving. <strong>Can we demonstrate, to an auditor, that no public-service workload runs on a train-on-your-data tier — by policy and by enforced control, not by developer good intent?</strong></li>
+  <li>Procurement is the natural gate. <strong>Have we made the tolling model id a procurement-and-approval decision, so the cheapest tier cannot enter production as a quiet config change?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Pricing the Model in Two Currencies</h2>
+<p>Read the whole stack one more time, but from the seat of the person signing the model bill — and paying a second, invisible bill they never see. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour. <strong>The miller's toll is what the model layer underneath all of it now charges — because this week the model rented for almost nothing, and the cheapest rent is paid not in dollars but in the right to train on your data.</strong> The engineering point is blunt: <strong>a model tier is now two prices at once — a dollar price per token and a data price in training rights — and the second price is set by a model id, invisible to every dashboard that only tracks the first.</strong></p>
+<div class="card"><ul>
+  <li><strong>Capability is commoditizing in real time.</strong> <strong>Three frontier-class releases in ~48h: Claude Fable 5.1 (26 Aug; Artificial Analysis Intelligence Index 66, current top); Gemini 3.8 Flash (1 Sep; $0.75/$3.75 per million tokens); Muse Spark 1.3 (2 Sep; Index 62 for the preview "max," 61 for the shipping "xhigh," behind only Fable 5.1 and Opus 5; 75.4 on DeepSWE v1.1, 88.8 on Terminal-Bench 2.1) — and token prices reported ~-60% in a single window (Tech Startups, 3 Sep), with GPT-4-class quality now &lt;$0.50/M vs ~$30 three years ago and Google's Flash line down ~99.7% in three years (as reported).</strong> Read architecturally: the model is a near-commodity utility, near-perfectly substitutable across vendors, and the per-token dollar cost is trending toward the floor. If your AI strategy still treats the model as the scarce, expensive, differentiating asset, it is fighting the last war. The scarce asset is on your side of the API: your data.</li>
+  <li><strong>The cheapest tier is a data toll, and the toll is a model id.</strong> <strong>Meta's Muse Spark 1.3: Standard $1.25/$4.25 per million tokens (no training on your data); Contributor $0.10/$0.20 (up to ~21× cheaper), discounted in exchange for permission to train on your prompts and completions — with Meta's terms instructing users not to submit sensitive, confidential or personal information to it (as reported).</strong> The design failure is that Contributor is not a signed agreement or an account-level setting — <strong>it is a different model id.</strong> Any engineer who changes one string in a config moves that workload onto the tier that feeds the vendor's training pipeline: no procurement step, no approval gate, nothing that surfaces in an audit until someone reads the config. Open questions the terms do not answer: retention of Contributor prompts, whether humans review them, whether training rights can be revoked after a request is sent, and whether tool-call arguments, tool results and file attachments count as "prompts" for training. If your cost dashboard tracks dollars per token and nothing else, you are instrumented for the cheap price and blind to the dear one.</li>
+  <li><strong>This is the default, not the exception.</strong> The refrain holds and sharpens: the model is a rented, now near-free utility; portability (MCP, A2A under neutral governance) keeps it swappable; the moat is your proprietary data — which is precisely what the cheap tier is designed to acquire. <strong>Atlassian began training its Rovo AI on Confluence and Jira content by default from 17 August (~300,000 organizations; genuine opt-out reserved for Enterprise/Premium), and consumer free tiers of major assistants train on user content by default (as reported).</strong> Standing context: <strong>~43% of organizations say they cannot audit the AI tools already in use, and only ~24% have implemented AI-specific data-loss-prevention controls (as reported).</strong> The tooling to route your grain into someone's larder is everywhere and mostly on-by-default; the control to stop it is rare.</li>
+</ul></div>
+<p>The strategic core: <strong>when the model commoditizes toward free, value and risk both migrate to your data — and the cheapest model tier is the market's most efficient mechanism for acquiring it.</strong> For weeks the frame climbed the stack — own the layer, build the gate, own the knowledge, name the agent, speak the open tongue, conduct the ensemble, keep the ear, own the repertoire, take the census, face the inspector, shut the break-in, rebuild the mill's works. This morning it returns to the foundation and finds the ground shifting: the model is nearly free, and "nearly free" is a tier with a toll. "We got a great price on tokens" is not the whole sentence; the whole sentence is <em>"we got a great price on tokens, and here is the data we agreed to pay with, and here is the control that keeps our seed stock out of the cheap mill."</em></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The miller's toll: when the model is nearly free, the cheapest tier charges in your data, not your dollars. This week three frontier-class models shipped in about 48 hours — Claude Fable 5.1, Gemini 3.8 Flash and Muse Spark 1.3 — and token prices fell about 60 percent in a single window. Top left: the dear mill, paid in coin — Standard tier at $1.25 in and $4.25 out per million tokens, no training on your data, a dollar price and only that; you pay in coin and keep your grain. Top right: the cheap mill, paid in a toll of grain — Contributor tier at $0.10 in and $0.20 out per million tokens, about 21 times cheaper, but it trains on your prompts and completions; you pay in grain, meaning your data. Between them: the toll is invisible — it is not a contract but a model id, so one config string routes the sack to the tolling gate. Middle: so what — the model is a near-commodity; value and risk moved to your data; a cost dashboard that tracks only dollars per token is blind to the data price of a tier; Atlassian trained about 300,000 organizations by default on 17 August; about 43 percent of firms cannot audit their AI tools; the cheap miller learns your recipe from the handfuls and sells it back. Bottom left: stop pricing in dollars only — the cheap tier as a config default, dollars per token as the only KPI, seed stock sent to the cheap mill. Bottom right: start pricing the model in two currencies — make the tolling model id a procurement decision, classify grain as common wheat versus seed stock, and enforce the split at the gateway." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE MILLER'S TOLL — when the model is nearly free, the toll is your data</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">3 frontier models in ~48h (Fable 5.1 · Gemini 3.8 Flash · Muse Spark 1.3); token prices ~-60% in one window</text>
+
+  <!-- the dear mill -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE DEAR MILL — paid in coin</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Standard tier: $1.25 / $4.25 per M</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">no training on your data</text>
+  <text x="52" y="139" font-size="10" fill="#9fe6c8" font-family="sans-serif">a dollar price, and only that</text>
+  <text x="52" y="159" font-size="10" fill="#9fe6c8" font-family="sans-serif">the vendor learns nothing</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ you pay in coin, keep your grain</text>
+
+  <!-- the cheap mill -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE CHEAP MILL — toll in grain</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Contributor tier: $0.10 / $0.20 per M</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~21× cheaper — trains on your data</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">your prompts &amp; completions</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">"do not submit sensitive data"</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ you pay in grain (your data)</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the toll is invisible: not a contract, a model id — one config string routes the sack ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — the model is a near-commodity; value &amp; risk moved to your data</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a cost dashboard that tracks $/token is blind to the data price of a tier</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Atlassian Rovo trained ~300k orgs on your content by default (17 Aug); ~43% can't audit AI</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the cheap miller learns your recipe from the handfuls and sells it back</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">free grinding is never free; you pay the toll in grain</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: pricing in dollars only</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· the cheap tier as a config default</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· $/token as the only KPI</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· seed stock sent to the cheap mill</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the toll you cannot see, you cannot refuse</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: price in two currencies</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· tolling model id = procurement decision</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· classify grain: common wheat vs seed</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· enforce the split at the gateway</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">bank the discount, keep the seed stock</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Price the model in dollars and data; mark which gate each sack may pass; keep the seed stock out of the cheap mill.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">The rented stove got cheaper — the cheapest stove keeps a taste of everything you cook.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d6e56"></i>The dear mill — paid in coin, keeps nothing</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The cheap mill — toll in your data</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — value moved to your data</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Price the model in two currencies</span>
+</div>
+</div>
+
+<h3>The dear mill versus the cheap mill — same grain, two very different tolls</h3>
+<table>
+<tr><th>A workload sent to the cheap mill by default</th><th>A workload priced in two currencies</th></tr>
+<tr><td>"We cut token cost 21× — great deal"</td><td>"We cut token cost 21× on the data we chose to trade"</td></tr>
+<tr><td>Tier chosen by a config string, no owner</td><td>Tolling model id is a governed procurement decision</td></tr>
+<tr><td>Cost tracked in dollars per token only</td><td>Cost tracked in dollars <em>and</em> training rights</td></tr>
+<tr><td>Any engineer can route any data to it</td><td>Gateway enforces which data may reach which tier</td></tr>
+<tr><td>Seed-stock data grinds at the tolling gate</td><td>Seed stock only ever touches a no-training model id</td></tr>
+<tr><td>The vendor learns your recipe for free</td><td>Your proprietary grain stays out of the vendor's larder</td></tr>
+</table>
+
+<h3>Why "the miller's toll" is the layer that matters now</h3>
+<div class="card">
+<p>For two years the reflex was to treat the model as the expensive, differentiating part of the stack — pick the best one, pay the premium, guard the API key. This week broke that frame in public: <strong>capability is commoditizing toward free, and once the dollar price of a token approaches zero, the only price left to charge is your data.</strong> The cheapest tier on the market is now, explicitly, a data-acquisition instrument dressed as a discount. What separates a firm that banks the commoditization win from one that quietly hands over its moat is not a better model or a bigger budget — it is the discipline to price every model tier in two currencies, to classify data as common wheat or seed stock, and to enforce the split at the gateway rather than trust it to whoever writes the config.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now aimed at the model bill's invisible second line. On a legacy estate the temptation is to chase the ~21× discount everywhere, because the dollar saving is real and immediate and the data cost is silent. The retrofit is <strong>inventory, classify, gate, govern. Inventory:</strong> enumerate every model id in production and flag which ones train on your data (Contributor tiers, default-on free plans, train-by-default enterprise features). <strong>Classify:</strong> label your data as common wheat (no-secret, tradeable for cheap tokens) or seed stock (proprietary, regulated, never tolled). <strong>Gate:</strong> enforce at the AI gateway which data classes may reach which model ids, so the split is a control, not a request. <strong>Govern:</strong> make adopting a data-tolling model id a procurement-and-approval decision with a named owner, not a config change any engineer can make. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the passport names each agent, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour — and <em>the miller's toll is what the cheapest grinding charges in your own grain.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent just fell to almost nothing; your proprietary knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour. The miller's toll is what the cheapest tier charges — a handful of your grain, taken by a model id, not a contract. Price the model in two currencies, classify your grain, and keep the seed stock out of the cheap mill.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The commoditization — three frontier labs in one week.</strong> <strong>Claude Fable 5.1 (26 Aug, Index 66); Gemini 3.8 Flash (1 Sep, $0.75/$3.75); Muse Spark 1.3 (2 Sep, Index 61–62, 75.4 DeepSWE v1.1, 88.8 Terminal-Bench 2.1) (as reported).</strong> Frontier capability is now a fast-moving, near-substitutable commodity.</li>
+  <li><strong>The price collapse — the dollar cost of a token is heading to the floor.</strong> <strong>~-60% in a single window (Tech Startups, 3 Sep); GPT-4-class quality &lt;$0.50/M (from ~$30); Google Flash ~-99.7% over three years (as reported).</strong> Renting the model is no longer where the cost — or the moat — lives.</li>
+  <li><strong>The toll — the cheapest tier is paid in data.</strong> <strong>Muse Spark 1.3 Contributor $0.10/$0.20 (up to ~21× cheaper), trains on your prompts and completions; Meta says do not submit sensitive data; the tier is a model id, not a contract (as reported).</strong> The discount is a data-acquisition instrument.</li>
+  <li><strong>The default — training-on-your-data is spreading by default.</strong> <strong>Atlassian Rovo trains on Confluence/Jira content by default from 17 Aug (~300k orgs; opt-out only on Enterprise/Premium); consumer free tiers train by default (as reported).</strong> On-by-default is the norm; the control is the exception.</li>
+  <li><strong>The blind spot — most firms cannot see the toll being paid.</strong> <strong>~43% of organizations cannot audit the AI tools in use; ~24% have AI-specific DLP (as reported).</strong> You cannot govern a data price you cannot observe.</li>
+  <li><strong>The standing frame — value already moved to your data.</strong> <strong>McKinsey 2026: only ~6% AI high performers, ~37% any EBIT (flat YoY); the differentiator is process redesign and proprietary data, not the model (as reported).</strong> The cheap mill is competing for exactly the asset that separates the 6%.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">Heavily discounted token pricing in exchange for permission to use your prompts and completions to train future Meta models.</div><div class="a">— Meta's Muse Spark documentation, describing what the Contributor tier actually charges (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Contributor mode is not a signed agreement or an account-level setting — it is a different model id. Any engineer who changes one string in a config file has moved that workload onto a tier where prompts and completions feed the vendor's training.</div><div class="a">— paraphrase of trade coverage of Muse Spark 1.3's Contributor tier, on why the toll is a governance problem, not a price (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">We went from 9.7 trillion tokens a month to over 3.2 quadrillion in two years.</div><div class="a">— Sundar Pichai, CEO, Google/Alphabet, at I/O 2026, on the paradox that per-token prices are collapsing while total consumption explodes (as reported)</div></blockquote>
+<blockquote><div class="q">"The cheapest mill takes no coin — it takes a handful of every sack, learns your recipe, and sells your own bread back to you. Free grinding is never free; you pay the toll in grain."</div><div class="a">— the radar, on why a near-free model tier is a data-acquisition instrument</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The commoditization — frontier releases</td><td><span class="v">Three frontier-class models in ~48h: Claude Fable 5.1 (26 Aug), Gemini 3.8 Flash (1 Sep), Muse Spark 1.3 (2 Sep)</span></td><td>Artificial Analysis; VentureBeat; Local AI Zone (as reported)</td></tr>
+<tr><td>The price collapse — single window</td><td><span class="v">AI token prices reported down ~60% in one window</span></td><td>Tech Startups, 3 Sep 2026 (as reported)</td></tr>
+<tr><td>The price collapse — multi-year</td><td><span class="v">GPT-4-class quality from ~$30 to under $0.50 per million tokens; Google Flash line ~-99.7% over three years</span></td><td>The GTM Newsletter / AI Magicx (as reported)</td></tr>
+<tr><td>The cheap tier — the toll</td><td><span class="v">Muse Spark 1.3 Contributor $0.10 / $0.20 per million tokens — up to ~21× cheaper — in exchange for training on your prompts and completions</span></td><td>CryptoBriefing; Codersera; Coursiv (as reported)</td></tr>
+<tr><td>The dear tier — no toll</td><td><span class="v">Muse Spark 1.3 Standard $1.25 / $4.25 per million tokens, no training on your data; Gemini 3.8 Flash $0.75 / $3.75</span></td><td>Local AI Zone; Yahoo (as reported)</td></tr>
+<tr><td>The capability — near the frontier</td><td><span class="v">Claude Fable 5.1 Intelligence Index 66 (top); Muse Spark 1.3 "max" 62 (behind only Fable 5.1 &amp; Opus 5), "xhigh" 61; 75.4 DeepSWE v1.1, 88.8 Terminal-Bench 2.1</span></td><td>Artificial Analysis (as reported)</td></tr>
+<tr><td>The default — training on your data</td><td><span class="v">Atlassian began training Rovo AI on Confluence/Jira content by default from 17 Aug (~300,000 orgs); genuine opt-out only on Enterprise/Premium</span></td><td>HelpDocs / Digital Applied (as reported)</td></tr>
+<tr><td>The blind spot — governance gap</td><td><span class="v">~43% of organizations cannot audit the AI tools in use; only ~24% have AI-specific data-loss-prevention controls</span></td><td>Airia (as reported)</td></tr>
+<tr><td>The consumption paradox</td><td><span class="v">Google: from 9.7 trillion tokens/month to over 3.2 quadrillion in two years — prices fall while total spend rises</span></td><td>Sundar Pichai, Google I/O 2026 (as reported)</td></tr>
+<tr><td>Standing — value is in your data</td><td><span class="v">McKinsey 2026: only ~6% AI high performers, ~37% any EBIT (flat YoY); the differentiator is process redesign and proprietary data, not the model</span></td><td>McKinsey State of AI 2026 (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Inventory every model id and flag the ones that train on your data.</strong> The dollar price of a token is collapsing, but the cheapest tiers charge a second price your cost dashboard cannot see. <strong>This month, enumerate every model and tier in production and mark which train on your prompts and completions — Contributor-style tiers, default-on free plans, train-by-default enterprise features (Atlassian Rovo defaulted ~300k orgs on 17 Aug).</strong> Report one number to the board: the share of production AI workloads whose data-training terms have been reviewed and named, versus those running on whatever model id a config happened to set.</li>
+  <li><strong>Classify your data as common wheat or seed stock — and enforce the split at the gateway.</strong> The near-free tier is a data-acquisition instrument; the defense is deciding, in advance, which grain you will trade for cheap tokens and which you never will. <strong>Label your data as tradeable (no-secret, non-regulated) or seed stock (proprietary, regulated, identifiable), and enforce at the AI gateway which classes may reach which model ids — so the split is a control, not a developer's good intention.</strong> Report the share of seed-stock data flows that are hard-blocked from data-tolling model ids versus those protected only by policy.</li>
+  <li><strong>Make adopting a data-tolling model id a procurement decision, not a config change.</strong> Today the switch to the cheap mill is one string an engineer can change unnoticed; that is the governance failure, not the price. <strong>Require that turning on any train-on-your-data tier is a named-owner procurement-and-approval step, and capture the ~21× discount deliberately on the common-wheat workloads where it is safe.</strong> Report two numbers next quarter: the token-cost savings banked on workloads cleared for the cheap tier, and the count of data-tolling model ids that entered production without approval — driving the second to zero. <strong>The model is rented and now nearly free, the knowledge is the moat, the census is the roll, the inspector asks for it, the break-in is what the missing entries cost, the two mills are whether it grinds flour — and the miller's toll is the reminder that when grinding is almost free, you pay with your grain, so decide which sacks you are willing to toll.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> Model releases and benchmarks — Artificial Analysis (Muse Spark 1.3 "max" Intelligence Index 62, "xhigh" 61; Claude Fable 5.1 66), VentureBeat, DataCamp, Local AI Zone, Vals AI (Claude Fable 5.1, 26 Aug; Gemini 3.8 Flash, 1 Sep, $0.75/$3.75; Muse Spark 1.3, 2 Sep; 75.4 DeepSWE v1.1, 88.8 Terminal-Bench 2.1; as reported) · Token price collapse — Tech Startups ("AI token prices collapse nearly 60%", 3 Sep 2026), The GTM Newsletter, AI Magicx (GPT-4-class quality &lt;$0.50/M vs ~$30; Google Flash ~-99.7% over three years; as reported) · The Contributor toll — CryptoBriefing, Codersera, Coursiv, New Pelican (Muse Spark 1.3 Contributor $0.10/$0.20, up to ~21× cheaper, trains on prompts &amp; completions; "do not submit sensitive data"; a different model id, not a contract; as reported) · Training-by-default — HelpDocs, Digital Applied (Atlassian Rovo trains on Confluence/Jira by default from 17 Aug, ~300k orgs, opt-out only on Enterprise/Premium; as reported) · Governance gap — Airia (~43% cannot audit AI tools in use; ~24% have AI-specific DLP; as reported) · Consumption paradox — Sundar Pichai, Google I/O 2026 (9.7T → 3.2 quadrillion tokens/month in two years; as reported) · Standing — McKinsey State of AI 2026 (only ~6% AI high performers, ~37% any EBIT, flat YoY). Figures are relayed from analyst, vendor, benchmark-aggregator and secondary coverage and are marked "as reported"; several should be re-verified against the primary vendor and benchmark publications before republishing, and most source domains were unreachable to direct fetch from the compile environment behind the network egress proxy (figures rest on search-engine extraction of the named sources). Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 4 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
