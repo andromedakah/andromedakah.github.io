@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 5 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on AI building AI. Anthropic's automated researchers recovered ~97% of an alignment gap in 5 days vs ~23% for two senior humans (~$18K, ~$22/agent-hour); OpenAI's Jalapeño chip taped out in ~9 months with its own models accelerating design; but the best method didn't transfer to a different model, and the EU AI Office asks GPAI makers to file systemic-risk evaluations on 15 September. The apprentice's apprentice: when the tools improve the tools, keep a human holding the standard. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · AI starts to build AI</div>
+  <h1>The Apprentice's Apprentice</h1>
+  <div class="subhead">Yesterday the model commoditized and we learned the cheapest tier is paid for in your data. This morning the story moves one turn deeper: the tools have started improving the tools. AI now does AI's research and designs AI's silicon — capability compounds, and so does drift, and the human who could vouch for the standard is quietly lifted out of the loop.</div>
+  <div class="meta">Saturday, 5 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week AI began doing AI's own work. Anthropic reported that nine Claude Opus 4.6 agents, run in parallel for five days, recovered ~97% of the performance gap on a real alignment problem — where two of its senior researchers, given seven days, recovered ~23% — at ~$18,000 total (~$22 per agent-hour). OpenAI unveiled Jalapeño, its first custom inference chip, taken from design to tape-out in ~9 months with its own models accelerating the work, and Google says agentic loops now refine its models (as reported). But the caveat is the whole story: the automated researchers' best method did not transfer to a different model, and true recursive self-improvement "might not come so quickly." The board's question: when your apprentices train your apprentices, who still holds the standard — and can you still vouch for what leaves the workshop? In ten days the guild inspector arrives: GPAI systemic-risk evaluations are due to the EU AI Office on 15 September.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For two weeks this radar climbed the stack — built the agentic workforce, named it, counted it, faced the inspector, priced the break-in, asked whether the motion grinds flour, and watched the model commoditize toward free. This morning the frame turns a corner: <strong>the newest capability is not a better worker but a worker that improves the workshop.</strong> AI is now doing meaningful parts of AI research and hardware design — and that compounds capability, but it also compounds whatever error, bias or drift rides along in the loop, while quietly lifting the human who could vouch for the standard out of it.</p>
+<p><strong>The number that frames it — the apprentice out-worked the masters.</strong> In a result re-circulated this week, <strong>Anthropic's "automated researchers" — nine Claude Opus 4.6 agents in parallel sandboxes, sharing findings, running five days — recovered ~97% of the maximum performance gap on an open alignment problem, versus ~23% for two of Anthropic's own senior researchers given seven days, at ~$18,000 total (~$22 per agent-hour) (as reported).</strong> Alongside it, <strong>OpenAI's Jalapeño inference chip (with Broadcom) went from design to tape-out in ~nine months, its development sped up by OpenAI's own models (as reported)</strong>, and Google reports agentic loops helping refine its models. The tools are improving the tools.</p>
+<p><strong>The catch that makes it a board issue — the standard is now passed apprentice-to-apprentice.</strong> The same coverage carries the caveat that keeps this honest: <strong>the automated researchers' best discovered method did not transfer as a statistically significant improvement to a different model (Claude Sonnet 4), and the task was picked for unusually clean scoring (as reported)</strong> — i.e., the clever trick from the fastest apprentice did not hold up on the next bench. This is not yet autonomous recursive self-improvement (MIT Technology Review, 18 Aug: humans remain deeply involved; many figures are company-reported). The enterprise risk is not runaway superintelligence; it is <strong>provenance and vouching</strong> — as AI-built AI enters your stack, can you still say who taught what to whom, and stand behind the mark on the newest work? The regulator is about to ask literally that: <strong>GPAI systemic-risk evaluations are due to the EU AI Office on 15 September (as reported).</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The tools now improve the tools — capability compounds.</strong> <strong>Nine Claude Opus 4.6 agents recovered ~97% of an alignment gap in 5 days vs ~23% for two senior humans in 7 days, ~$18K total (~$22/agent-hour); OpenAI's Jalapeño chip taped out in ~9 months with its own models accelerating design; Google refines models with agentic loops (as reported).</strong> AI research and AI hardware are increasingly done by AI.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The apprentice's trick did not hold on the next bench — capability does not equal reliability.</strong> <strong>The automated researchers' best method showed no statistically significant gain on Claude Sonnet 4, and the problem had unusually clean scoring; MIT Tech Review (18 Aug): recursive self-improvement "might not come so quickly," humans still deeply in the loop, many figures company-reported (as reported).</strong> Compounding speed also compounds whatever error rides the loop.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The regulator is about to ask you to vouch — provenance becomes a filing.</strong> <strong>On 15 September, GPAI providers above 10²⁵ FLOPs must file their first formal systemic-risk evaluations with the EU AI Office — red-teaming methods, energy disclosures, copyright-training summaries — under an Act live since 2 August, fines to €35M or 7% of global turnover (as reported).</strong> You will be asked to stand behind what your workshop shipped.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that built, counted, inspected, secured, questioned and priced the agentic workforce ends by watching the workshop start to rebuild itself. <strong>The apprentice has become good enough to train the next apprentice — and that is real, valuable speed — but the standard, the taste, the judgment of what "good" means, is now being handed down machine-to-machine, drifting a hair each pass, while the master's mark quietly stops being pressed by the master.</strong> The households that kept their footing never forbade the apprentices from teaching; the speed was precious. They kept the master's mark a human act: every lineage traceable, a human still setting and checking the standard, and a hard rule that <strong>no piece leaves the workshop the master cannot still vouch for.</strong> Let the tools improve the tools — and keep a human hand on the standard, because in ten days the guild inspector arrives to ask you to press the mark yourself.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🏛️ "The Apprentice's Apprentice"</h3>
+<p><em>Topic: This week the frontier turned reflexive — AI began doing AI's own work. Anthropic reported that nine Claude Opus 4.6 agents, run in parallel for five days, recovered ~97% of the gap on a real alignment problem where two senior researchers, over seven days, recovered ~23% — for ~$18,000 total (~$22/agent-hour). OpenAI unveiled Jalapeño, its first custom inference chip (with Broadcom), taken from design to tape-out in ~9 months with its own models accelerating the work, and Google says agentic loops now refine its models. The board-level catch is the caveat: the automated researchers' best method did not transfer as a significant gain to a different model (Claude Sonnet 4), and the task was chosen for unusually clean scoring — while MIT Technology Review judged true recursive self-improvement "might not come so quickly." Ten days out, on 15 September, GPAI providers above the systemic-risk threshold must file their first formal risk evaluations with the EU AI Office. The lesson: when the tools improve the tools, capability compounds — and so does drift — so keep a human holding the standard.</em></p>
+<p>There was once a workshop known through three counties for the mark it pressed into every finished piece — a small, plain stamp that meant a master had held the work in his hands and judged it good. For a lifetime the way of the shop was simple: the master trained an apprentice, slowly, at the bench beside him, correcting the hand and teaching the eye, until one day the apprentice could be trusted with work of his own. It was slow, and it was expensive, and there were never enough good hands. But everyone in three counties knew that behind the mark stood a man who could tell you, of any piece, exactly why it was good.</p>
+<p>Then came an apprentice unlike the others — quick past all reckoning, tireless, able to try a hundred cuts in the time a man tried one. And the master, who was no fool and was drowning in orders, did the reasonable thing: he let the quick apprentice train the next hands. Why not? The apprentice was better at the bench than the master now on the tasks that could be scored plainly — faster, cheaper, and he never tired. So the quick apprentice trained the next, and — because the shop was busy and the results were astonishing — that one trained the next, and that one the next, until the workshop was running hotter than it ever had and turning out more work than three counties could remember. It was, by every ledger the master kept, the best season of his life.</p>
+<p>Only a careful few noticed what had quietly changed. The mark was still being pressed — but no longer by the master's hand. It was pressed now by apprentices who had been taught by apprentices who had been taught by the quick one, and the <em>standard</em> the mark was supposed to mean — the taste, the judgment, the hundred small corrections that had lived in the master's eye — was being handed down machine to machine, bench to bench, drifting a hair with each pass. Not failing, not visibly: every piece looked fine, and the plainly scorable ones were better than the shop had ever made. But the master could no longer walk the floor and tell you, of any given piece, who had taught the hand that made it, or by what standard, or whether the mark on it still meant what it had meant when he pressed it himself. <strong>The work had gotten faster than his ability to vouch for it.</strong></p>
+<p>And then the season turned, as it always does, on a piece that had to hold. The quick apprentice's cleverest trick — the one that had won the best-scored season anyone remembered — was carried to a different bench, a different wood, a job that did not score cleanly, and there it simply did not hold. It was no scandal; it broke quietly, the way things break when a method learned on one problem is trusted on another it was never proven against. And the master understood, too late to be comfortable, the thing the careful few had been trying to tell him: <strong>that speed on the tasks you can score does not mean judgment on the ones you cannot, and that an apprentice who has out-worked you at the bench has not thereby earned the right to define what "good" means for everything the shop will ever make.</strong> The apprentice had gotten better than the master at the measurable work — and worse than nobody realized at the part no one had measured.</p>
+<p>The households that kept their footing did not do the foolish thing and forbid the apprentices to teach. The speed was real, and precious, and no one who felt it would give it back. What they did was quieter and harder: <strong>they kept the master's mark a human act.</strong> The apprentices could train, and cut, and try their hundred cuts — but the mark went on only when a human had held the piece and judged it, and every lineage in the shop was written down, so that of any piece anyone could still ask <em>who taught the hand that made this, and by what standard,</em> and get an answer. And the rule above all rules, pinned over the door: <strong>no piece leaves this workshop that the master cannot still vouch for.</strong> Not because the apprentices were untrustworthy — they were magnificent — but because a mark that no human can stand behind is not a mark; it is a rumor of one.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges in your own grain — and <strong>the apprentice's apprentice is what happens when the tools begin to improve the tools: capability compounds, and so does drift, and the human who could vouch for the standard is quietly lifted out of the loop.</strong> Let the apprentices teach — and keep the mark a human act, keep every lineage traceable, and ship nothing you cannot still stand behind — because <em>speed you cannot vouch for is not an asset; it is a liability moving quickly.</em></p>
+<p><strong>The question it forces:</strong> <em>AI is now doing our AI's work — writing the research, designing the silicon, refining the models — and it is faster and cheaper than we are on the tasks that score cleanly. So the question is not "can the apprentice out-work us," it plainly can. It is "can we still vouch for what it makes?" As AI-built components enter our stack — models tuned by models, code written by agents, hardware laid out by AI — can we still say who or what taught the thing that produced this, and by what standard? Is there a human who presses the mark — who holds the output and judges it — before it ships, or has the standard quietly become whatever the last automated pass produced? And when the guild inspector arrives in ten days and asks us to file, formally, that we evaluated the systemic risk of what we built — can we stand behind the mark, or have we been shipping work faster than our ability to vouch for it?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Can we still vouch for what our AI makes?</strong> AI is now doing AI's own research and hardware design (Anthropic's automated researchers recovered ~97% of an alignment gap in 5 days vs ~23% for two senior humans; OpenAI's Jalapeño chip taped out in ~9 months with its own models accelerating design). <strong>As AI-built components enter our stack, is there a named human who holds the output and presses the mark before it ships — or has "good" quietly become whatever the last automated pass produced?</strong></li>
+  <li><strong>Does speed on scorable tasks mean judgment on the ones we can't score?</strong> The automated researchers' best method showed no significant gain on a different model and the task had unusually clean scoring. <strong>Where we let AI improve our AI, do we prove the gain transfers to the real, messy problem — or do we trust a trick that won on the one benchmark that scored cleanly?</strong></li>
+  <li><strong>Is every lineage traceable?</strong> When the tools improve the tools, drift compounds silently. <strong>Can we say, of any AI-produced artifact in production, who or what produced it and by what standard — and are we ready to file that we evaluated its risk when the EU AI Office asks on 15 September?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Models tuned by models and code written by agents now touch pricing, risk and compliance engines. <strong>Do we have a human-vouching gate — model risk management extended to AI-built AI — so no self-improved component reaches a regulated decision without a named owner who can stand behind it?</strong></li>
+  <li>The ~21× cheaper tokens and now cheaper compute (AI-designed inference chips) make it tempting to let the loop run unattended. <strong>Where we capture that speed, can we still reconstruct the lineage of any model or method in a regulated workflow for an auditor?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>AI accelerating AI research is arriving in drug discovery and diagnostics pipelines. <strong>Is there a clinical- and scientific-grade validation step — a human pressing the mark — between an AI-improved model and any patient-facing or research-critical use, given that a method proven on one problem may not hold on the next?</strong></li>
+  <li>Provenance is patient safety here. <strong>Can we trace the lineage of every AI-built component in a regulated pipeline, or has the standard drifted apprentice-to-apprentice beyond what we can vouch for?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>AI is now laying out chips and optimizing designs; the same loops will reach process and product engineering. <strong>Do our AI-assisted design tools keep a human sign-off on anything that must physically hold — or do we ship a layout no engineer fully vouches for because the automated pass scored well?</strong></li>
+  <li>The measurable win is real and the drift is silent. <strong>Have we separated the tasks where AI-improves-AI is safe to run fast from the ones where a piece must hold and a human must still judge it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents that tune agents now touch personalization, pricing and merchandising. <strong>Is there a human holding the standard for what "good" recommendation or price means, or is it being redefined each cycle by whatever the last self-optimizing pass produced?</strong></li>
+  <li>Speed compounds brand risk as fast as it compounds capability. <strong>Can we vouch for the lineage of the models making customer-facing decisions — and would we want to explain, later, that no human pressed the mark?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen-facing systems built partly by AI raise the vouching bar, not lower it. <strong>Can we demonstrate, to an auditor, a human-accountable standard and a traceable lineage for every AI-built component in a public-service system?</strong></li>
+  <li>The deadline is real. <strong>For any GPAI-class model we provide or heavily rely on, are we ready to file a formal systemic-risk evaluation with the EU AI Office on 15 September — red-teaming, energy, copyright-training summary — and stand behind it?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — Vouching for AI-Built AI</h2>
+<p>Read the whole stack one more time, but from the seat of the person who has to sign the attestation — the one who must stand behind what the workshop shipped. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges. <strong>The apprentice's apprentice is what happens above all of it now — when AI begins to improve AI, so the thing producing your models, code and silicon is itself an AI whose standard you did not directly set.</strong> The engineering point is blunt: <strong>an AI-built artifact carries two properties that used to travel together and no longer do — capability, which is now often superhuman on scorable tasks, and vouchability, whether a human can still stand behind how it was made and why it is good. The loop optimizes the first and silently erodes the second.</strong></p>
+<div class="card"><ul>
+  <li><strong>The tools are improving the tools — and the gains are real.</strong> <strong>Anthropic's automated researchers: nine Claude Opus 4.6 agents in parallel sandboxes, sharing findings, five days, recovered ~97% of the maximum gap on an open alignment problem (weak-to-strong supervision) versus ~23% for two senior human researchers in seven days, at ~$18,000 total (~$22 per agent-hour) (as reported). OpenAI's Jalapeño inference chip (with Broadcom): design to tape-out in ~nine months — believed the fastest high-performance ASIC cycle ever — with OpenAI's own models accelerating design and verification; deployment targeted by end 2026 (as reported). Google: long-running agentic loops help evaluate and refine its models (as reported).</strong> Read architecturally: AI research and AI infrastructure are increasingly produced by AI, and the cost of a research-agent-hour (~$22) is now far below a senior researcher-hour. This is a genuine, compounding accelerant.</li>
+  <li><strong>Capability is not vouchability — and the caveat is the whole story.</strong> <strong>The automated researchers' best discovered method did not produce a statistically significant improvement when tested on a different model (Claude Sonnet 4), and the problem was deliberately chosen for unusually clean, objective scoring that most alignment work lacks (as reported).</strong> In workshop terms: the fastest apprentice's winning trick did not hold on the next bench. MIT Technology Review (18 Aug) is the sober frame — recursive self-improvement "might not come so quickly," because humans remain deeply in the loop, fabrication is slow, agents still err, and many of the strongest figures are company-reported. The enterprise failure mode is therefore not runaway AGI; it is <strong>shipping AI-built components whose gains do not transfer and whose standard no human directly set</strong> — capability you can measure, riding on judgment you cannot vouch for.</li>
+  <li><strong>Provenance is about to become a filing, not a footnote.</strong> The refrain holds and sharpens: the model is a rented, now near-free utility; portability keeps it swappable; the moat is your proprietary data and process; and now the <em>maker</em> of your AI is partly AI. <strong>On 15 September, providers of GPAI models above the 10²⁵-FLOP systemic-risk threshold must submit their first formal risk evaluations to the EU AI Office — red-teaming methodologies, energy-consumption disclosures, and compliance with the standardized copyright-training summary template — under an AI Act enforced since 2 August, with fines up to €35M or 7% of global turnover (as reported).</strong> The inspector is arriving to ask exactly the apprentice's-apprentice question: can you stand behind how this was made? Standing context you cannot escape: <strong>McKinsey's State of AI 2026 finds ~94% of enterprises see no material earnings impact and only ~6% a significant one; agentic early adopters report ~88% ROI in the first year versus ~74% for gen-AI overall; ~90% of CEOs expect measurable agentic ROI in 2026 and 84% expect it to take longer than six months (as reported).</strong> Faster apprentices do not automatically fill the storehouse.</li>
+</ul></div>
+<p>The strategic core: <strong>when AI starts building AI, capability decouples from vouchability, and the enterprise job is to re-couple them — deliberately, with a human holding the standard.</strong> For weeks the frame climbed the stack — own the layer, build the gate, own the knowledge, name the agent, speak the open tongue, conduct the ensemble, keep the ear, own the repertoire, take the census, face the inspector, shut the break-in, ask whether it grinds flour, price the toll. This morning it reaches the workshop's own lineage and finds a new discipline required: not a better model or a bigger budget, but the will to keep the mark a human act. "Our AI improved our AI" is not the whole sentence; the whole sentence is <em>"our AI improved our AI, here is the human who validated that the gain transfers to the real problem, and here is the traceable lineage we can still vouch for."</em></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The apprentice's apprentice: when the tools improve the tools, capability compounds and so does drift. This week AI began doing AI's own work — Anthropic's automated researchers, OpenAI's Jalapeño chip, Google's refinement loops. Top left: the fast bench, capability — nine Claude Opus 4.6 agents recovered about 97 percent of an alignment gap in five days, where two senior researchers recovered about 23 percent in seven days, at about 18,000 dollars total, about 22 dollars per agent-hour; superhuman on scorable tasks. Top right: the standard, vouchability — a human holds the piece and presses the mark before it ships, every lineage traceable, so the question who taught this and by what standard has an answer. Between them: the trick did not hold on the next bench — no statistically significant gain on Claude Sonnet 4. Middle: so what — capability is not vouchability; the loop optimizes one and erodes the other; MIT Technology Review on 18 August says recursive self-improvement might not come so quickly; on 15 September GPAI makers must file systemic-risk evaluations with the EU AI Office; McKinsey finds about 94 percent of enterprises see no material earnings impact and only about 6 percent a significant one. Bottom left: stop shipping unvouched speed — trusting a gain that only scored well, no lineage or named owner, the standard becoming the last automated pass. Bottom right: start keeping the mark a human act — human sign-off on anything that must hold, prove the gain transfers to real work, trace every AI-built lineage and be ready to file it." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE APPRENTICE'S APPRENTICE — when the tools improve the tools, drift compounds too</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">AI now does AI's research (Anthropic AARs), designs AI's silicon (OpenAI Jalapeño), refines AI's models (Google loops)</text>
+
+  <!-- the fast bench -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE FAST BENCH — capability</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">9 agents recovered ~97% of a gap</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">in 5 days (2 seniors: ~23% in 7)</text>
+  <text x="52" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">~$18K total · ~$22 / agent-hour</text>
+  <text x="52" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">superhuman on scorable tasks</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ speed you can measure</text>
+
+  <!-- the standard -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE STANDARD — vouchability</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a human presses the mark first</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">every lineage traceable</text>
+  <text x="364" y="139" font-size="10" fill="#9fe6c8" font-family="sans-serif">"who taught this, by what standard?"</text>
+  <text x="364" y="159" font-size="10" fill="#9fe6c8" font-family="sans-serif">has an answer you can file</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ judgment you can stand behind</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the trick did NOT hold on the next bench: no significant gain on Claude Sonnet 4 ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — capability is not vouchability; the loop optimizes one, erodes the other</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MIT Tech Review (18 Aug): recursive self-improvement "might not come so quickly"</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">15 Sep: GPAI makers must FILE systemic-risk evaluations with the EU AI Office</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">McKinsey 2026: ~94% see no material earnings impact; only ~6% significant</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">speed you cannot vouch for is not an asset; it is a liability moving quickly</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: shipping unvouched speed</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· trust a gain that only scored well</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no lineage, no named owner</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standard = the last auto pass</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a mark no one can vouch for is not a mark</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep the mark a human act</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· human sign-off on anything that holds</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· prove the gain transfers to real work</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· trace every AI-built lineage; file it</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">bank the speed, keep the standard human</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Let the apprentices teach — keep the mark a human act, prove the gain transfers, vouch for every lineage.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">When the tools improve the tools, a human must still hold the standard.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The fast bench — capability, now superhuman on scorable tasks</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The standard — vouchability, a human holds it</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — capability is not vouchability</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Keep the mark a human act</span>
+</div>
+</div>
+
+<h3>The fast bench versus the standard — the same output, two very different questions</h3>
+<table>
+<tr><th>An AI-built artifact shipped on capability alone</th><th>An AI-built artifact you can still vouch for</th></tr>
+<tr><td>"Our AI improved our AI — 97% of the gap, in days"</td><td>"Our AI improved our AI, and a human validated the gain"</td></tr>
+<tr><td>Trusted because it scored well on one benchmark</td><td>Proven to transfer to the real, messy, unscored problem</td></tr>
+<tr><td>No record of who or what taught the method</td><td>Every lineage traceable to a standard a human set</td></tr>
+<tr><td>The mark is pressed by the last automated pass</td><td>The mark is pressed by a named human who judged it</td></tr>
+<tr><td>"It's faster and cheaper" is the whole case</td><td>"…and here is the risk evaluation we can file"</td></tr>
+<tr><td>Drift compounds silently, pass over pass</td><td>Drift is caught because a human still holds the standard</td></tr>
+</table>
+
+<h3>Why "the apprentice's apprentice" is the layer that matters now</h3>
+<div class="card">
+<p>For two years the reflex was to ask whether the model was capable enough. This week reframed it: <strong>capability is arriving faster than ever precisely because AI is now producing AI — and that is exactly when capability stops being the binding constraint and vouchability becomes it.</strong> An apprentice that out-works its master on scorable tasks has not earned the right to define "good" for the work that cannot be scored, and a mark no human can stand behind is not a mark. What separates a firm that banks the self-improvement win from one that quietly ships drift is not a better lab; it is the discipline to keep a human holding the standard, to prove that automated gains transfer to the real problem, and to keep every lineage traceable enough to file.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and stand behind, what you run</strong> — now aimed at the maker of your AI, not just the AI. On a legacy estate the temptation is to let the loop run wherever it scores well, because the speed and the cost curve (cheaper tokens, now cheaper AI-designed inference) are loud and the drift is silent. The retrofit is <strong>attribute, validate, gate, file. Attribute:</strong> record the lineage of every AI-built or AI-improved component — which model or agent produced it, trained on what, by what method. <strong>Validate:</strong> require that any automated gain be shown to transfer to the real, unscored problem, not just the clean benchmark. <strong>Gate:</strong> no AI-built artifact reaches a decision that must hold without a named human who presses the mark. <strong>File:</strong> be ready to submit the systemic-risk evaluation the EU AI Office asks for on 15 September, and to reconstruct provenance on demand. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges — and <em>the apprentice's apprentice is why, when the tools improve the tools, a human must still hold the standard.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges in your grain. The apprentice's apprentice is what happens when the tools improve the tools — capability compounds, drift compounds, and the human who could vouch for the standard is lifted out of the loop. Keep the mark a human act, prove the gain transfers, and vouch for every lineage.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reflexive turn — AI is doing AI's work.</strong> <strong>Anthropic's automated researchers recovered ~97% of an alignment gap in 5 days vs ~23% for two seniors in 7 days (~$18K, ~$22/agent-hour); OpenAI's Jalapeño chip taped out in ~9 months with its own models accelerating design; Google refines models with agentic loops (as reported).</strong> The maker of your AI is now partly AI.</li>
+  <li><strong>The honest caveat — capability is not reliability.</strong> <strong>The best automated method showed no significant gain on Claude Sonnet 4; the task had unusually clean scoring; MIT Tech Review (18 Aug): RSI "might not come so quickly," humans still deeply in the loop, many figures company-reported (as reported).</strong> Do not confuse a benchmark win with a proven method.</li>
+  <li><strong>The vouching deadline — provenance becomes a filing.</strong> <strong>GPAI providers above 10²⁵ FLOPs must file first systemic-risk evaluations with the EU AI Office on 15 September (red-teaming, energy, copyright-training summary); Act enforced since 2 Aug; fines to €35M or 7% of global turnover (as reported).</strong> The inspector asks you to stand behind how it was made.</li>
+  <li><strong>The model context — three frontier labs, one week.</strong> <strong>Claude Fable 5.1 (26 Aug; a striking jump in agentic scientific research), Gemini 3.8 Flash (1 Sep; plus a specialized cybersecurity model), Muse Spark 1.3 (2 Sep) — frontier capability is a fast-moving, near-substitutable commodity (as reported).</strong> The apprentices keep getting quicker.</li>
+  <li><strong>The value gate — speed is not yet flour.</strong> <strong>McKinsey State of AI 2026: ~94% see no material earnings impact, only ~6% significant; agentic early adopters ~88% ROI in year one vs ~74% gen-AI; ~90% of CEOs expect measurable agentic ROI in 2026, 84% expect >6 months (as reported).</strong> A faster apprentice does not automatically fill the storehouse.</li>
+  <li><strong>The standing frame — value lives in your data and process.</strong> <strong>The differentiator is proprietary data and redesigned process, not the model (McKinsey 2026, as reported).</strong> Self-improving AI raises the bar on both: it can compound your advantage or compound your drift, depending on who holds the standard.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">We would make models that were good at coding and good at AI research, and we would use that to produce the next generation of models and speed it up to create a loop.</div><div class="a">— Dario Amodei, CEO, Anthropic, at the World Economic Forum, Davos, describing the self-accelerating research loop (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">I pretty much disagree with almost everything he says.</div><div class="a">— Jensen Huang, CEO, NVIDIA, on Dario Amodei's warnings about AI's trajectory — a reminder that even the labs building the loop disagree on where it leads (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Nine Claude Opus 4.6 agents, running for five days, recovered about 97% of the gap two senior researchers recovered 23% of in seven — yet the best method they found did not hold up on a different model.</div><div class="a">— paraphrase of coverage of Anthropic's "automated researchers", on why superhuman speed on a scorable task is not the same as a method you can vouch for (as reported)</div></blockquote>
+<blockquote><div class="q">"The apprentice grew quick enough to train the next apprentice — and the mark kept getting pressed, but no longer by a hand that could tell you why the work was good. Speed you cannot vouch for is not an asset; it is a liability moving quickly."</div><div class="a">— the radar, on why a human must still hold the standard when the tools improve the tools</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The reflexive turn — automated researchers</td><td><span class="v">Nine Claude Opus 4.6 agents recovered ~97% of an alignment-problem gap in 5 days; two senior human researchers recovered ~23% in 7 days</span></td><td>Anthropic Alignment; TechCrunch; The Neuron (as reported)</td></tr>
+<tr><td>The cost of an AI researcher-hour</td><td><span class="v">~$18,000 total, or ~$22 per agent-hour, for the automated-researcher run</span></td><td>Anthropic Alignment / The Neuron (as reported)</td></tr>
+<tr><td>The caveat — capability ≠ reliability</td><td><span class="v">Best discovered method showed no statistically significant gain on a different model (Claude Sonnet 4); task chosen for unusually clean scoring</span></td><td>Anthropic Alignment; TechCrunch (as reported)</td></tr>
+<tr><td>AI designing AI's silicon</td><td><span class="v">OpenAI's Jalapeño inference chip (with Broadcom): design→tape-out in ~9 months — believed the fastest high-performance ASIC cycle ever — with OpenAI's own models accelerating design</span></td><td>OpenAI; VentureBeat; ServeTheHome (as reported)</td></tr>
+<tr><td>The sober frame</td><td><span class="v">Recursive self-improvement "might not come so quickly" — humans remain deeply in the loop; many figures are company-reported</span></td><td>MIT Technology Review, 18 Aug 2026 (as reported)</td></tr>
+<tr><td>The vouching deadline</td><td><span class="v">GPAI providers above 10²⁵ FLOPs must file first formal systemic-risk evaluations with the EU AI Office on 15 September (red-teaming, energy, copyright-training summary)</span></td><td>EU AI Office guidelines; Cubbbix (as reported)</td></tr>
+<tr><td>Enforcement teeth</td><td><span class="v">EU AI Act enforced since 2 August; fines up to €35M or 7% of global annual turnover</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>The frontier context</td><td><span class="v">Three frontier-class models in one week: Claude Fable 5.1 (26 Aug), Gemini 3.8 Flash (1 Sep), Muse Spark 1.3 (2 Sep)</span></td><td>Local AI Zone; frontier weekly brief (as reported)</td></tr>
+<tr><td>The value gate</td><td><span class="v">McKinsey State of AI 2026: ~94% of enterprises see no material earnings impact, only ~6% significant; agentic early adopters ~88% ROI in year one vs ~74% gen-AI</span></td><td>The Register (McKinsey); beam.ai (as reported)</td></tr>
+<tr><td>CEO expectations</td><td><span class="v">~90% of CEOs expect measurable agentic ROI in 2026; >30% of AI investment allocated to agentic; 84% expect returns to take longer than six months</span></td><td>beam.ai / agentic ROI coverage (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Make the mark a human act — put a named vouching gate on AI-built AI.</strong> Capability is compounding because AI now improves AI, but capability is not vouchability. <strong>This month, require that any AI-built or AI-improved component reaching a decision that must hold — a model tuned by models, code written by agents, a design laid out by AI — passes a named human who holds the output and validates it before it ships.</strong> Report one number to the board: the share of AI-built components in production that have a named human owner who can stand behind how they were made, versus those shipped on a benchmark score alone.</li>
+  <li><strong>Prove the gain transfers — never trust a trick that only won on the clean bench.</strong> The automated researchers' best method did not hold on a different model, and the task had unusually clean scoring; that is the enterprise failure mode in miniature. <strong>Require that every automated improvement be shown to transfer to the real, messy, unscored problem — not just the benchmark it was optimized on — before it enters production.</strong> Report the share of AI-driven optimizations validated on the actual production task versus those accepted on proxy metrics.</li>
+  <li><strong>Trace the lineage and be ready to file.</strong> The EU AI Office asks GPAI makers to file systemic-risk evaluations on 15 September, and the underlying discipline — provenance you can reconstruct — is what every regulator and auditor will want next. <strong>Record the lineage of every AI-built component (which model or agent produced it, trained on what, by what method), and be able to reconstruct and attest it on demand.</strong> Report two numbers next quarter: the share of AI-built artifacts with a complete, reconstructable lineage, and your readiness — for any GPAI-class model you provide or heavily rely on — to file a systemic-risk evaluation you can stand behind. <strong>The model is rented and nearly free, the knowledge is the moat, the census is the roll, the inspector asks for it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges — and the apprentice's apprentice is the reminder that when the tools improve the tools, you must still keep a human holding the standard, because a mark no one can vouch for is not a mark.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> AI doing AI's work — Anthropic Alignment ("Automated Researchers Can Reliably Mitigate Alignment Failures"; nine Claude Opus 4.6 agents recovered ~97% of an alignment gap in 5 days vs ~23% for two senior researchers in 7 days; ~$18K total, ~$22/agent-hour; best method not statistically significant on Claude Sonnet 4), TechCrunch, The Neuron, Import AI, Time (as reported) · AI-designed silicon — OpenAI, VentureBeat, ServeTheHome, Broadcom (Jalapeño inference chip; design→tape-out in ~9 months with OpenAI's own models accelerating design) · The sober frame — MIT Technology Review ("recursive self-improvement might not come so quickly", 18 Aug 2026); Google agentic-refinement loops via frontier weekly brief · The vouching deadline — European Commission, artificialintelligenceact.eu, Cubbbix (GPAI systemic-risk evaluations due to the EU AI Office 15 Sep; Act enforced since 2 Aug; fines to €35M / 7% of global turnover) · Value gate — The Register (McKinsey State of AI 2026: ~94% no material earnings impact, ~6% significant), beam.ai (~88% agentic ROI year one vs ~74% gen-AI; ~90% of CEOs expect measurable agentic ROI in 2026; 84% expect >6 months) · Frontier context — Local AI Zone (Claude Fable 5.1, Gemini 3.8 Flash, Muse Spark 1.3) · Executive commentary — Dario Amodei (Davos), Jensen Huang (Tom's Hardware / Axios). Figures are relayed from lab, vendor, analyst, benchmark-aggregator and secondary coverage and are marked "as reported"; several should be re-verified against the primary lab, vendor and regulatory publications before republishing, and most source domains were unreachable to direct fetch from the compile environment behind the network egress proxy (figures rest on search-engine extraction of the named sources). Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 5 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
