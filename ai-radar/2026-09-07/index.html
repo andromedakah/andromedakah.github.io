@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 7 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on non-human identity. Docusign will open its agreement layer to every AI agent via MCP (GA 30 September); Anthropic's Enterprise Frontier Safeguards keeps logs and keys in the customer's own cloud. But nobody keeps the ring: non-human identities outnumber humans ~100:1 (144:1 cloud), >16% of orgs don't track AI-identity creation, only ~10% govern them, ~51% have no owner, and Okta finds ~90% can't govern what production agents do and ~54% already had an agent incident. The keyring: every agent you admit is handed a key — keep the ring. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Who holds the keys</div>
+  <h1>The Keyring</h1>
+  <div class="subhead">Yesterday a lab rang the bell for the age of AGI and the task was to mind the locks the new tool can open. This morning the story turns to the keys — because the market is opening your systems to every agent that can speak the protocol, and the keys are handed out faster than anyone writes down who holds them. Every agent you admit is handed a key. Keep the ring.</div>
+  <div class="meta">Monday, 7 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Two datable moves make it concrete. Docusign said it will open its agreement layer to <em>every</em> AI agent via the Model Context Protocol — its MCP Server, powered by the Iris AI engine, callable natively from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September, giving agents governed access to a system-of-record (PRNewswire, The New Stack, as reported). And Anthropic introduced Enterprise Frontier Safeguards on 1 September — zero data retention <em>plus</em> automated cross-session misuse detection, with logs held in the customer's own cloud under the customer's own keys, no human review by Anthropic, built with 100+ customers including a quarter of the Fortune 100 and every U.S. systemically important bank (Unite.AI, MarkTechPost, as reported). One hands agents keys to more rooms; the other hands the customer the keyring. And the ledger underneath is stark: non-human identities outnumber humans ~100:1 (144:1 in cloud); ~91% of firms use agents but only ~10% govern their identities; ~51% report no clear owner; Okta finds ~90% cannot govern what production agents do and ~54% have already had an agent-related incident (CSA, GitGuardian, WEF, Okta, as reported). The question: every agent we admit gets a key — can we name who holds each one, scope it, and take it back the day the work ends?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday the radar stood in the square while a lab proclaimed the age of AGI, and the discipline was to mind the locks a computer-using model can now open. This morning the frame turns from the locks to the keys — because the enterprise reality moving fastest right now is not a new model but a new <strong>distribution of access</strong>: your systems are being opened to any agent that can speak the protocol, and the keys are being handed out faster than anyone is writing down who holds them.</p>
+<p><strong>The event — the house is opening its rooms to every agent.</strong> <strong>Docusign announced it will open its agreement layer to <em>every</em> AI agent via the Model Context Protocol: its MCP Server (powered by the Iris AI engine) becomes generally available and callable natively from Claude, ChatGPT, Gemini, Copilot, Slack, Salesforce and any MCP client from 30 September, with account-level admin controls, global multi-region infrastructure and multilingual support, letting agents reach past negotiations, accepted terms, clauses and company policy (PRNewswire, The New Stack, Yahoo Finance, as reported).</strong> This is the agentic enterprise arriving in production form: not a demo, but a governed door into a system-of-record that any agent can now walk through — which is exactly why <em>who holds the key</em> stops being a detail.</p>
+<p><strong>The counter-move — hand the customer the keyring.</strong> <strong>Anthropic introduced Enterprise Frontier Safeguards on 1 September: zero data retention combined with automated cross-session misuse detection, where activity logs live in the customer's own cloud storage (Amazon S3, Azure Blob Storage, Google Cloud Storage) under the customer's own encryption keys and access policies, with no human review by Anthropic — developed with 100+ customers including a quarter of the Fortune 100 and every U.S. systemically important bank, alongside Comcast, KPMG, Mastercard, Salesforce and Visa, rolling out in phases this fall (Unite.AI, MarkTechPost, Qz, as reported).</strong> Read as governance, EFS is the pattern the moment demands: the customer holds the keys and the logs, and the vendor still watches for misuse without ever holding your grain.</p>
+<p><strong>The stakes — nobody is keeping the ring.</strong> The plumbing to hand out keys has outrun the discipline to track them. <strong>Non-human identities already outnumber human users roughly 100-to-1, reaching ~144:1 in cloud-native estates; a 2026 CSA analysis found more than 16% of organizations do not track the creation of AI-related identities at all; ~91% of organizations use AI agents but only ~10% have a well-developed strategy for governing non-human identities, and a WEF analysis found ~51% report no clear ownership of AI identities. Okta's <em>AI Agents at Work 2026</em> (200+ executives) finds only ~34% always apply the same security controls to their digital labor as to their human labor, ~90% have no way to govern what agents in production are actually doing, and ~54% have already suffered a security incident from an agent acting unexpectedly (CSA, GitGuardian, WEF, Okta, as reported).</strong> A key is being cut for every agent; the ring on which they should hang does not exist in most houses.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The house is opening every room — via the open protocol.</strong> <strong>Docusign will open its agreement layer to <em>every</em> AI agent through its MCP Server (Iris engine), GA and callable from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September, with account-level admin controls and multi-region infrastructure (PRNewswire, The New Stack, as reported).</strong> Governed access to a system-of-record is now a key any agent can hold.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The good pattern — the customer keeps the keys and the logs.</strong> <strong>Anthropic's Enterprise Frontier Safeguards (1 Sep): zero data retention plus cross-session misuse detection, logs in the customer's own cloud under the customer's own keys, no Anthropic human review; built with 100+ customers incl. a quarter of the Fortune 100 and every U.S. systemically important bank (Unite.AI, MarkTechPost, as reported).</strong> Hold the ring yourself; let the watcher watch without holding your data.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The gap is real regardless — no one keeps the ring.</strong> <strong>NHIs outnumber humans ~100:1 (144:1 cloud); &gt;16% of orgs don't track AI-identity creation; ~91% use agents but only ~10% govern their identities; ~51% report no clear ownership; Okta: ~90% can't govern what production agents do, ~54% already had an agent-related incident (CSA, GitGuardian, WEF, Okta, as reported).</strong> The keys are cut faster than the ring is kept.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that built, counted, inspected, secured, priced, questioned and proclaimed the agentic workforce arrives this morning at the plainest operational fact of all — <strong>every agent you admit is handed a key, and in most houses no one keeps the ring.</strong> The market is moving on both sides of this at once: Docusign is cutting keys for every agent to a system-of-record, and Anthropic is handing the customer the keyring and the logbook. The households that keep their footing will do the unglamorous thing the census and the inspector already pointed to: <strong>treat every agent's access as a numbered key on a ring you keep — named to a holder, scoped to the rooms it needs, revocable the day the work ends, and with the most precious rooms behind a key no single agent holds alone.</strong> You minded the locks yesterday. Today, keep the keyring — because a lock is only as good as your knowledge of who holds its key.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🔑 "The Keyring"</h3>
+<p><em>Topic: This morning the enterprise-AI story turns from the locks to the keys. Docusign said it will open its agreement layer to every AI agent via the Model Context Protocol — its MCP Server, powered by the Iris AI engine, callable natively from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September, giving agents governed access to a system-of-record (PRNewswire, The New Stack). Anthropic introduced Enterprise Frontier Safeguards on 1 September — zero data retention plus automated cross-session misuse detection, with logs held in the customer's own cloud under the customer's own keys and no human review by Anthropic, built with 100+ customers including a quarter of the Fortune 100 and every U.S. systemically important bank (Unite.AI, MarkTechPost). The board-level catch is the identity ledger beneath: non-human identities outnumber humans ~100:1 (144:1 cloud-native); &gt;16% of organizations don't track the creation of AI-related identities; ~91% use agents but only ~10% govern their identities; ~51% report no clear ownership; Okta's AI Agents at Work 2026 finds ~90% cannot govern what production agents do and ~54% have already had an agent-related incident. The lesson: every agent you admit is handed a key — keep the ring, so you can name who holds each one, scope it, and take it back.</em></p>
+<p>There was once a great house that ran on keys. Every door in it — the wine cellar, the counting-room, the muniment room where the deeds were kept, the little cupboard where the seed for next year's planting was locked away — had a lock, and every lock a key, and for generations the whole security of the house came down to one humble object: the steward's ring, on which every key hung, each one numbered, each one written in a book against the name of the person allowed to carry it. When a new maid was hired she was handed the three keys her work required and no more; when she left, the three keys came back to the ring before she was paid her last wage. It was a boring system. It was also the reason the house had never, in living memory, been robbed from the inside.</p>
+<p>Then came a season of such plenty that the old ways could not keep up. The house took on helpers faster than it ever had — not by threes but by hundreds — and because there was no time to cut each helper a careful set of keys, someone had the bright idea of handing every new helper a <strong>master key</strong>, the kind that opened every door in the house, so that no helper would ever be slowed by a door. It worked wonderfully, for a while. The work flew. The helpers multiplied until they outnumbered the family a hundred to one, and every one of them could open every room, and the house had never been so productive. Nobody meant any harm. It simply became easier to cut another master key than to decide which three doors a helper actually needed — and easier still to skip writing the key down in the book, because the book had a hundred new lines a day and no one had been given the job of keeping it.</p>
+<p>The careful few — there are always a careful few — went looking for the ring one evening, and could not find it. Not because it was stolen, but because it had quietly ceased to exist. There was no ring any more; there were hundreds of loose master keys, in hundreds of pockets, and no book that said whose. When they asked the plainest questions a steward is supposed to be able to answer — <em>how many keys are out; who holds them; which doors does each open; which of these hundred helpers left last month with a master key still in his coat</em> — the house could not answer a single one. It was not that the answers were bad. It was that there were no answers, because no one had kept the ring. The doors were all still locked, and the locks were all still good; but <strong>a lock is only as good as your knowledge of who holds its key</strong>, and the house had lost that knowledge the day it started cutting master keys faster than it wrote them down.</p>
+<p>And the danger was not theoretical, because a house with a hundred master keys in unknown pockets is a house where a single lost coat is a catastrophe. One helper's key, dropped in the road or lifted from a pocket, now opened not one door but <strong>every</strong> door — the cellar, the counting-room, the muniment room, the seed cupboard all at once — and because no one knew that helper had held a master key in the first place, no one would know to change the locks until long after the grain was gone. The house had spent everything on hiring hands and nothing on keeping the ring, and so it had, without ever deciding to, made every helper a potential thief and every lost key a total loss. The productivity was real. So was the exposure, and the exposure had grown with every key cut and every line left unwritten.</p>
+<p>The households that kept their footing did the boring thing, at scale. <strong>They kept the ring</strong> — one place where every key, human or not, was hung and counted, so the plainest questions had answers again. <strong>They stopped cutting master keys</strong> — every helper got only the doors the work required, and the precious rooms, the muniment room and the seed cupboard, sat behind a key no single helper held alone. <strong>They wrote every key in the book at the moment it was cut, not after</strong> — and, most important, <strong>they took the key back the day the helper's work ended,</strong> because an un-returned key is the whole risk in one sentence. One wise house went further and did what the best vendors were beginning to offer: it kept its own logbook, in its own strong-room, under its own lock, and let a trusted watchman read the log for signs of mischief without ever taking the book out of the house — so it got the watching without giving away the keys. They were not the fastest-hiring houses that season. But they were the ones that, when a coat went missing, could say in an hour exactly which three doors were exposed and change exactly those three locks — while the master-key houses were still trying to work out how many keys they had cut.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is the reminder that a declaration of arrival is not arrival — and <strong>the keyring is the discipline of knowing, for every agent you admit, exactly which key it holds: named to a holder, scoped to the rooms it needs, written down the moment it is cut, taken back the day the work ends, and never a master key when three doors would do.</strong> Keep the ring — because a lock is only as good as your knowledge of who holds its key, and a house that cuts keys faster than it writes them down has already been robbed; it just doesn't know by whom yet.</p>
+<p><strong>The question it forces:</strong> <em>We spent yesterday minding the locks a powerful new tool can open. This morning the harder question is the keys. Every agent we admit — every MCP client we let reach a system-of-record, every helper we hire into the estate — is handed a key, and the market is now handing out keys to every agent that can speak the protocol. So: do we keep a ring? Can we answer, this afternoon, how many non-human keys are out in our house, who holds each one, which rooms it opens, and which were never returned when the work ended? Are we still cutting master keys because it is faster than deciding which three doors a helper needs — and if a single agent's key were lost tomorrow, would we know within the hour which doors it opened, or would we find out the way robbed houses always do, after the grain is gone? When the whole market is cutting keys for every agent, the only question that matters is the oldest one in the house: who is keeping the ring?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we keep a ring — one roll of every non-human key?</strong> NHIs outnumber humans ~100:1 (144:1 in cloud), yet ~51% of organizations report no clear owner for AI identities and &gt;16% don't even track when an AI identity is created. <strong>Can we answer this afternoon how many agent identities are live in our estate, who owns each, and what each can reach — or have we been cutting keys faster than we write them down?</strong></li>
+  <li><strong>Have we stopped cutting master keys?</strong> The fast path is to give every agent broad access because scoping is slower — and Okta finds only ~34% of firms apply the same controls to digital labor as to human labor. <strong>Is every agent scoped to the rooms its work needs, with the muniment room and seed cupboard — our crown-jewel systems — behind a key no single agent holds alone?</strong></li>
+  <li><strong>Can we take a key back — instantly — the day the work ends?</strong> ~90% of organizations say they have no way to govern what production agents are actually doing, and ~54% have already had an incident from an agent acting unexpectedly. <strong>If one agent's credential were compromised tomorrow, would we know within the hour which doors it opens and be able to revoke exactly those — or would we find out after the grain is gone?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Agents are being handed keys to systems-of-record (Docusign is opening its agreement layer to every MCP client from 30 September). <strong>For every agent reaching a book of record — payments, positions, customer data — is the access a scoped, named, revocable key on a ring we keep, or a standing master key no one wrote down?</strong></li>
+  <li>Anthropic's EFS is being built with every U.S. systemically important bank precisely so logs and keys stay in the customer's cloud. <strong>For the models we run, do we hold our own keys and our own logs — and can we prove misuse is monitored without our data ever leaving our control, as our regulators will now ask?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A single agent identity chaining across EHR, lab and research systems is a blast radius, not a convenience. <strong>Have we scoped every clinical or research agent to the minimum rooms, and can we name the owner and revoke the key for each — before an agent with a master key touches patient data?</strong></li>
+  <li>The identity, not the prompt, is now the control surface. <strong>Are we hardening who the agent <em>is</em> and what its key opens — not only what we tell it — given that ~90% of organizations cannot govern what their production agents actually do?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Non-human identities on the plant floor — agents touching MES, PLM, supplier and OT systems — are the fastest-growing keys in the estate. <strong>Do we keep a ring for machine and agent identities the way we keep one for people, and is any agent holding a master key to systems that can move a physical process?</strong></li>
+  <li>A lost or stale credential here mis-operates a line, not just a document. <strong>Can we revoke a specific agent's key without halting the whole floor — or is access so coarse that the only "off switch" is pulling the plant?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents are being pointed at pricing, checkout, inventory and customer data through open protocols. <strong>Is each commerce agent a scoped, logged, revocable key — or have we widened the attack surface by handing master keys to every helper in the rush to "agentic everything"?</strong></li>
+  <li>Third-party agents (via MCP clients like Docusign's) now reach into your stack from outside. <strong>Do we know which external agents hold keys to our rooms, who approved each, and whether that access was ever scoped or reviewed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>The EU AI Act's live regime turns "who accessed what, and who approved it" from hygiene into evidence. <strong>For every agent touching a citizen record or a regulated workflow, can we produce the key, the holder, the scope and the approval on demand — the inspector is already asking?</strong></li>
+  <li>Custody of keys and logs is now a procurement requirement, not a feature. <strong>Are we buying the pattern Anthropic's EFS represents — our data, our keys, our logs, monitored in place — rather than surrendering custody of either the keys or the logbook to a vendor?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Locks to the Keys</h2>
+<p>Read the whole stack one more time, but from the seat of the person who has to answer, this afternoon, how many keys are out in the house. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is a claim about the age, not a delivery. <strong>The keyring sits underneath all of it as the operational floor — because every layer above assumes something most houses do not have: a single, authoritative answer to "which agent holds which key, and can we take it back."</strong> The engineering point is blunt: <strong>the industry has spent two years making it trivial to grant an agent access and has barely started making it trivial to inventory, scope and revoke that access — and the gap between those two is now the enterprise's largest ungoverned surface.</strong></p>
+<div class="card"><ul>
+  <li><strong>The door — access is being opened to every agent, over the open protocol.</strong> <strong>Docusign will open its agreement layer to <em>every</em> AI agent via its MCP Server, powered by the Iris AI engine and generally available globally, callable natively from Claude, ChatGPT, Gemini, Copilot, Slack, Salesforce and any MCP client from 30 September, with account-level admin controls, global multi-region infrastructure and multilingual support; agents reach past negotiations, accepted terms, clauses and company policy (PRNewswire, The New Stack, Yahoo Finance, as reported).</strong> Read architecturally: this is a system-of-record exposing a governed, protocol-native door that any conformant agent can walk through. The capability is real and valuable — and it means the unit of access is no longer a human login but an agent identity, and there will be far more of those than there are people. The standards beneath make this concrete: the MCP 2026-07-28 spec promoted <strong>Enterprise-Managed Authorization (EMA)</strong> to stable — centralized, IdP-based access to MCP servers replacing per-server consent prompts — and adopted <strong>Client ID Metadata Documents (CIMD)</strong> in place of Dynamic Client Registration (verified at the MCP primary source). EMA and CIMD <em>are</em> the keyring standard: the plumbing to name and centrally govern which client holds which key. The point of the deep-dive is that the plumbing now exists — and most houses have not adopted it.</li>
+  <li><strong>The keyring — hold your own keys and your own logs.</strong> <strong>Anthropic's Enterprise Frontier Safeguards (1 Sep) combines zero data retention with automated cross-session misuse detection by keeping activity logs in the customer's own cloud (Amazon S3, Azure Blob Storage, Google Cloud Storage) under the customer's own encryption keys and access policies, with automated safety monitoring but no human review by Anthropic; developed with 100+ customers including a quarter of the Fortune 100 and every U.S. systemically important bank, plus Comcast, KPMG, Mastercard, Salesforce and Visa, rolling out in phases this fall (Unite.AI, MarkTechPost, Qz, Neowin, as reported).</strong> In keyring terms: the customer keeps the ring and the logbook in its own strong-room, and the vendor's watchman reads the log for misuse without ever removing the book. This is the shape enterprise governance is converging on — custody of keys and custody of logs stay on your side of the API — and it is exactly what regulated buyers were withholding budget for until it existed.</li>
+  <li><strong>The missing ring — the identity governance vacuum.</strong> The refrain from the census and the break-in returns as an operational floor: you cannot govern what you cannot enumerate. <strong>Non-human identities already outnumber human users roughly 100-to-1, reaching ~144:1 in cloud-native environments; a 2026 CSA analysis found more than 16% of organizations do not track the creation of AI-related identities at all; ~91% of organizations use AI agents but only ~10% have a well-developed non-human-identity strategy, and a WEF analysis found ~51% report no clear ownership of AI identities. Okta's <em>AI Agents at Work 2026</em> (Okta Platform data plus 200+ executives) finds only ~34% always apply the same security controls to their digital labor force as to their human one, ~90% have no way to govern what agents in production are actually doing, and ~54% have already suffered a security incident from an agent acting unexpectedly (CSA, GitGuardian, WEF, Okta, as reported).</strong> The engineering failure mode is precise: agents acquire permissions dynamically at runtime, spawn sub-agents, invoke external APIs and chain actions across dozens of systems — so a single compromised agent credential is not a service-account leak but an enterprise-scale access path, and the blast radius is exactly as large as the un-scoped, un-inventoried, un-revocable keys you handed out.</li>
+</ul></div>
+<p>The strategic core: <strong>the industry optimized granting and neglected governing, and the agentic enterprise makes that asymmetry the main event.</strong> For weeks the frame climbed the stack — own the layer, build the gate, name the agent, speak the open tongue, conduct the ensemble, keep the ear, own the repertoire, take the census, face the inspector, shut the break-in, ask whether it grinds flour, price the toll, keep a human holding the standard, measure the age by your storehouse. This morning it lands on the plainest floor beneath all of them: an agent is an identity, an identity holds keys, and the enterprise that cannot name, scope and revoke its non-human keys has no security story at all — only a productivity story with an unmeasured liability underneath. "We opened it to every agent" is not the whole sentence; the whole sentence is <em>"we opened it to every agent — and here is the ring on which every one of those keys hangs, named, scoped, and revocable the day the work ends."</em></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The keyring: every agent you admit is handed a key, so keep the ring. This morning Docusign said it will open its agreement layer to every AI agent via the Model Context Protocol, generally available from 30 September, and Anthropic introduced Enterprise Frontier Safeguards, keeping keys and logs in the customer's own cloud. Top left: the doors, access opening fast — every agent over MCP, a system-of-record generally available on 30 September, Enterprise-Managed Authorization and Client ID Metadata Documents are the keyring standard but mostly unadopted, and granting is trivial. Top right: the ring, who holds the key — non-human identities outnumber humans about 100 to 1, about 144 to 1 in cloud-native estates, more than 16 percent of organizations don't track AI-identity creation, only about 10 percent govern them, and about 51 percent have no clear owner. Between them: Okta finds about 90 percent cannot govern what production agents do and about 54 percent have already had an agent incident. Middle: so what — an agent is an identity and an identity holds keys; a compromised agent key is an enterprise-scale access path, not a service-account leak; the EU AI Act has been live since 2 August so who accessed what and who approved it is now evidence; Anthropic's Enterprise Frontier Safeguards shows the pattern, your keys and your logs watched in place. Bottom left: stop cutting master keys — broad access to be fast, no owner and no entry in the book, no way to revoke and no log. Bottom right: start keeping the ring — one roll of every non-human key, scope to the rooms the work needs, write it at cut-time and revoke at the end." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE KEYRING — every agent you admit is handed a key; keep the ring</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Docusign opens its agreement layer to EVERY agent via MCP (30 Sep). Anthropic EFS (1 Sep): your keys, your logs, in your cloud.</text>
+
+  <!-- the doors -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE DOORS — access, opening fast</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">every agent, over MCP</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">system-of-record, GA 30 Sep</text>
+  <text x="52" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">EMA + CIMD = the keyring standard</text>
+  <text x="52" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">(exists — mostly unadopted)</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ granting is trivial</text>
+
+  <!-- the ring -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE RING — who holds the key</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">NHIs outnumber humans ~100:1</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~144:1 in cloud-native</text>
+  <text x="364" y="139" font-size="10" fill="#9fe6c8" font-family="sans-serif">&gt;16% don't track AI-identity creation</text>
+  <text x="364" y="159" font-size="10" fill="#9fe6c8" font-family="sans-serif">only ~10% govern them · ~51% no owner</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the ring is not kept</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Okta: ~90% can't govern what production agents do · ~54% already had an agent incident ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — an agent is an identity; an identity holds keys</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a compromised agent key is an enterprise-scale access path, not a service-account leak</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act live since 2 Aug: "who accessed what, who approved it" is now evidence</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Anthropic EFS shows the pattern: your keys + your logs, watched in place</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">granting is trivial; governing is the work</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: cutting master keys</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· broad access "to be fast"</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no owner, no entry in book</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no way to revoke, no log</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one lost key opens every room</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep the ring</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one roll of every non-human key</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· scope to the rooms the work needs</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· write it at cut-time; revoke at end</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">name it, scope it, take it back</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You minded the locks yesterday — today, keep the keyring for every agent you admit.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">A lock is only as good as your knowledge of who holds its key.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The doors — access, opening to every agent</span>
+  <span><i class="dot" style="background:#1d6e56"></i>The ring — who holds the key</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — an agent is an identity</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Keep the ring</span>
+</div>
+</div>
+
+<h3>Cutting master keys vs keeping the ring — the same estate, two very different mornings</h3>
+<table>
+<tr><th>Cutting a master key for every agent</th><th>Keeping the ring</th></tr>
+<tr><td>"Give it broad access — scoping is slow"</td><td>"Give it only the rooms the work needs"</td></tr>
+<tr><td>Access granted; nobody writes it down</td><td>Every key entered in the book at the moment it is cut</td></tr>
+<tr><td>No named owner for the identity</td><td>A named human owns every non-human key</td></tr>
+<tr><td>One lost credential opens every room</td><td>One lost credential opens only its scoped rooms</td></tr>
+<tr><td>No way to revoke without halting everything</td><td>Revoke a specific key the day the work ends</td></tr>
+<tr><td>Logs (if any) held by the vendor</td><td>Logs and keys held in your own cloud (the EFS pattern)</td></tr>
+</table>
+
+<h3>Why "the keyring" is the layer that matters now</h3>
+<div class="card">
+<p>For two years the reflex was to ask whether an agent <em>could</em> reach a system; the win was making access easy. This morning reframes it: <strong>the market has made granting access to every agent trivial — over an open protocol, into systems-of-record — and has left inventorying, scoping and revoking that access almost entirely to the buyer.</strong> A house can adopt every agent in the valley and still be one lost coat away from total loss, because the security of the estate was never the locks; it was the ring — the authoritative knowledge of who holds which key. What separates a firm that banks the agentic productivity from one that is quietly robbed is not a better model or a bolder rollout; it is whether it kept the ring while it hired the hundred hands.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for what you run</strong> — now aimed at the identity floor. On a legacy estate, identity was built for people: a few thousand humans, each with a login, each reviewed at joining and leaving. The agentic estate breaks every assumption in that sentence — the identities are machines, they outnumber people a hundred to one, they are created at runtime, they spawn more of themselves, and nobody was given the job of keeping their ring. The retrofit is <strong>enumerate, own, scope, revoke. Enumerate:</strong> build one authoritative inventory of every non-human identity, because &gt;16% of firms don't even track creation. <strong>Own:</strong> assign a named human owner to every agent identity, because ~51% have none. <strong>Scope:</strong> replace master keys with least-privilege access to the specific rooms the work needs, and put crown-jewel systems behind a key no single agent holds alone. <strong>Revoke:</strong> make it possible to kill one agent's key in an hour without halting the estate — and hold your own keys and logs (the EFS pattern) so misuse is watched in place. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges, the apprentice's apprentice is why a human must still hold the standard, the herald's proclamation is why you measure the age by your storehouse — and <em>the keyring is why you must know, for every agent you admit, exactly which key it holds and how to take it back.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is what happens when a lab rings the bell for the age itself. The keyring is what happens when every agent you admit is handed a key: keep the ring — name every key to a holder, scope it to the rooms it needs, write it down when it is cut, take it back when the work ends, and never cut a master key when three doors would do.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The door — every agent, over the open protocol.</strong> <strong>Docusign opens its agreement layer to <em>every</em> AI agent via its MCP Server (Iris engine), GA and callable from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September, with account-level admin controls and multi-region infrastructure (PRNewswire, The New Stack, as reported).</strong> A system-of-record now has a protocol-native door any agent can hold a key to.</li>
+  <li><strong>The keyring pattern — your keys, your logs.</strong> <strong>Anthropic's Enterprise Frontier Safeguards (1 Sep): zero data retention plus cross-session misuse detection, logs in the customer's own cloud under the customer's own keys, no Anthropic human review; built with 100+ customers incl. a quarter of the Fortune 100 and every U.S. systemically important bank (Unite.AI, MarkTechPost, as reported).</strong> Custody of keys and logs stays on the customer's side of the API.</li>
+  <li><strong>The vacuum — no one keeps the ring.</strong> <strong>NHIs outnumber humans ~100:1 (144:1 cloud); &gt;16% don't track AI-identity creation; ~91% use agents but only ~10% govern their identities; ~51% no clear owner; Okta: ~34% apply equal controls to digital labor, ~90% can't govern production agents, ~54% already had an agent incident (CSA, GitGuardian, WEF, Okta, as reported).</strong> Granting outran governing.</li>
+  <li><strong>The standards floor — EMA and CIMD are the keyring standard.</strong> <strong>MCP 2026-07-28: Enterprise-Managed Authorization promoted to stable (centralized IdP-based access replacing per-server consent), Client ID Metadata Documents replacing Dynamic Client Registration, stateless core; Tier-1 SDKs ~half a billion downloads/month, TS and Python SDKs each past 1B total (verified at the MCP primary source).</strong> The plumbing to keep the ring exists; adoption is the gap.</li>
+  <li><strong>The inspector is already asking.</strong> <strong>EU AI Act GPAI enforcement live since 2 Aug 2026; "who accessed what, and who approved each workflow" is now evidence; GPAI fines to €15M / 3% of turnover, top tier €35M / 7% (European Commission, as reported).</strong> An estate that cannot list its keys cannot answer the regulator.</li>
+  <li><strong>The standing frame — value lives in your data and process.</strong> <strong>The differentiator is proprietary data and redesigned process, not the model (McKinsey State of AI 2026, as reported).</strong> The keyring is how you keep that data yours: an ungoverned agent key is the shortest path out of your larder.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Agentic AI readiness is identity readiness.</div><div class="a">— Okta, <em>AI Agents at Work 2026</em> (Okta Platform data plus a survey of 200+ executives), on why governing non-human identity is the precondition for the agentic enterprise (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Docusign's agreement layer for the agentic enterprise is coming to every agent — agreement intelligence and governed action, callable natively from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client.</div><div class="a">— Docusign, announcing general availability of its MCP Server (Iris AI engine) from 30 September (PRNewswire / The New Stack, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">~90% of organizations have no way to govern what agents in production are actually doing, and ~54% have already suffered a security incident from an agent acting unexpectedly.</div><div class="a">— paraphrase of Okta's <em>AI Agents at Work 2026</em> and 2026 CSA / non-human-identity research, on the governance vacuum beneath the agent boom (as reported)</div></blockquote>
+<blockquote><div class="q">"The doors were all still locked, and the locks were all still good; but a lock is only as good as your knowledge of who holds its key — and the house had lost that knowledge the day it started cutting master keys faster than it wrote them down."</div><div class="a">— the radar, on keeping the ring for every agent you admit</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The door — every agent, over MCP</td><td><span class="v">Docusign will open its agreement layer to <em>every</em> AI agent via its MCP Server (Iris engine); GA and callable from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September</span></td><td>PRNewswire; The New Stack; Yahoo Finance (as reported)</td></tr>
+<tr><td>The keyring pattern — your keys, your logs</td><td><span class="v">Anthropic Enterprise Frontier Safeguards (1 Sep): zero data retention + cross-session misuse detection; logs in customer's own cloud (S3/Azure/GCS) under customer keys; no Anthropic human review</span></td><td>Unite.AI; MarkTechPost; Qz (as reported)</td></tr>
+<tr><td>EFS reach</td><td><span class="v">Built with 100+ customers, incl. ~a quarter of the Fortune 100 and every U.S. systemically important bank (also Comcast, KPMG, Mastercard, Salesforce, Visa); phased rollout this fall</span></td><td>Unite.AI; MarkTechPost (as reported)</td></tr>
+<tr><td>The identity ratio</td><td><span class="v">Non-human identities outnumber human users ~100:1 (≈144:1 in cloud-native estates)</span></td><td>CSA; GitGuardian (as reported)</td></tr>
+<tr><td>The tracking gap</td><td><span class="v">&gt;16% of organizations do not track the creation of AI-related identities at all</span></td><td>CSA (as reported)</td></tr>
+<tr><td>The governance gap</td><td><span class="v">~91% of organizations use AI agents, but only ~10% have a well-developed non-human-identity strategy; ~51% report no clear ownership of AI identities</span></td><td>CSA; WEF (as reported)</td></tr>
+<tr><td>The Okta ledger</td><td><span class="v">Only ~34% always apply the same controls to digital labor as to human labor; ~90% have no way to govern what production agents do; ~54% already had a security incident from an agent acting unexpectedly</span></td><td>Okta, <em>AI Agents at Work 2026</em> (200+ execs); MSSP Alert (as reported)</td></tr>
+<tr><td>The standards floor</td><td><span class="v">MCP 2026-07-28 spec: Enterprise-Managed Authorization stable (centralized IdP-based access), Client ID Metadata Documents replace Dynamic Client Registration; Tier-1 SDKs ~half a billion downloads/month; TS and Python SDKs each past 1B total</span></td><td>modelcontextprotocol.io (verified at primary source)</td></tr>
+<tr><td>Enforcement is live</td><td><span class="v">EU AI Act GPAI enforcement live since 2 Aug 2026; "who accessed what, who approved it" now evidence; GPAI fines to €15M or 3% of turnover (top tier €35M / 7%)</span></td><td>European Commission; MediaLaws (as reported)</td></tr>
+<tr><td>The standing frame</td><td><span class="v">The differentiator is proprietary data and redesigned process, not the model (McKinsey State of AI 2026); ~80% report productivity but only ~37% any EBIT</span></td><td>McKinsey (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Keep the ring — build one authoritative inventory of every non-human key.</strong> The market is opening systems-of-record to every agent over MCP, and &gt;16% of firms don't even track when an AI identity is created. <strong>This month, stand up a single roll of every agent, service and machine identity in the estate — with a named human owner for each, because ~51% of organizations have none.</strong> Report one number to the board: the share of non-human identities in our estate that are inventoried, owned and mapped to what they can reach — and be honest that if the number is near zero, we have been cutting keys faster than we write them down.</li>
+  <li><strong>Stop cutting master keys — scope every agent, and lock the crown jewels behind a shared key.</strong> ~90% of organizations cannot govern what their production agents actually do, and a single compromised agent credential is an enterprise-scale access path, not a service-account leak. <strong>Require least-privilege for every agent — access to the specific rooms the work needs, nothing more — and put crown-jewel systems behind a key no single agent holds alone (human-in-the-loop or dual control).</strong> Report the share of agent identities on least-privilege scopes versus broad or standing access, and adopt the keyring standards the plumbing already offers (MCP Enterprise-Managed Authorization and Client ID Metadata Documents) rather than per-server consent sprawl.</li>
+  <li><strong>Be able to take a key back — and hold your own keys and logs.</strong> ~54% of organizations have already had an incident from an agent acting unexpectedly, and the EU AI Office's live regime turns "who accessed what, who approved it" into evidence. <strong>Make it possible to revoke a specific agent's key within the hour — without halting the estate — and buy the pattern Anthropic's EFS represents: our data, our keys, our logs, misuse watched in place rather than in a vendor's cloud.</strong> Report two numbers next quarter: our mean-time-to-revoke a compromised agent credential, and the share of our AI workloads where keys and logs stay in our own control. <strong>The model is rented and nearly free, the knowledge is the moat, the census is the roll, the inspector asks for it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges, the apprentice's apprentice is why a human must still hold the standard, the herald's proclamation is why you measure the age by your storehouse — and the keyring is why you must know, for every agent you admit, exactly which key it holds and how to take it back.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The door — PRNewswire ("Docusign Agreement Layer for the Agentic Enterprise Coming to Every Agent"), The New Stack ("Docusign MCP agentic agreements"), Yahoo Finance, StockTitan (MCP Server on the Iris AI engine, GA and callable from Claude, ChatGPT, Gemini, Copilot, Slack and any MCP client from 30 September) · The keyring pattern — Unite.AI, MarkTechPost, Qz, Neowin (Anthropic Enterprise Frontier Safeguards, 1 Sep: zero data retention + cross-session misuse detection; logs in the customer's own cloud under the customer's own keys; no Anthropic human review; built with 100+ customers incl. a quarter of the Fortune 100 and every U.S. systemically important bank) · The vacuum — Cloud Security Alliance (NHIs outnumber humans ~100:1; &gt;16% don't track AI-identity creation; only ~10% govern them), GitGuardian (~144:1 cloud-native NHI sprawl), World Economic Forum (~51% no clear ownership), Okta <em>AI Agents at Work 2026</em> and MSSP Alert (~34% apply equal controls, ~90% can't govern production agents, ~54% already had an agent incident) · Standards floor — Model Context Protocol 2026-07-28 spec (Enterprise-Managed Authorization stable; Client ID Metadata Documents replace Dynamic Client Registration; Tier-1 SDKs ~half a billion downloads/month; TS &amp; Python SDKs each past 1B total) — the only source read at its primary page · Enforcement — European Commission, MediaLaws (AI Act GPAI enforcement live 2 Aug 2026; GPAI fines to €15M / 3%, top tier €35M / 7%) · Standing frame — McKinsey State of AI 2026 (differentiator is proprietary data and redesigned process, not the model; ~80% productivity vs ~37% EBIT). Figures are relayed from vendor, lab, analyst, standards-body and secondary coverage and are marked "as reported"; several should be re-verified against the primary publications before republishing, and essentially all source domains were unreachable to direct fetch from the compile environment behind the network egress proxy — the sole exception being the Model Context Protocol primary blog — so most figures rest on search-engine extraction of the named sources. 7 September is a lighter news day; the corroborated anchors are the Docusign agentic-agreement announcement and Anthropic's Enterprise Frontier Safeguards, with the surrounding identity metrics carried as standing context. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 7 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
