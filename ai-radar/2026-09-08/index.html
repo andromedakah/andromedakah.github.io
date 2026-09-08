@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 8 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on the dual-use frontier cyber capability. Three frontier labs — Google (Gemini 3.8 Flash Cyber via Fairwind), OpenAI (GPT-6 Astra via Daybreak) and Anthropic (Claude Mythos 5.1 via a Cyber Verification Program) — independently shipped a safeguarded public model plus a gated cyber twin for vetted defenders. The stakes: 21 FFmpeg zero-days for ~$1,000, exploit dev from weeks/$50K to hours/$2,200, a record 206-CVE Patch Tuesday, and attackers moving 7 days before a patch exists. The locksmith: a tool that opens any lock and mends it — get to the defenders' side of the gate and mend faster. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Who holds the lockpick</div>
+  <h1>The Locksmith</h1>
+  <div class="subhead">Yesterday the story was the keyring — every agent you admit is handed a key, so keep the ring. This morning the tool that was cutting the keys turns out to open the locks too. Three frontier labs have independently shipped the same thing: a safeguarded public model and a gated, more-capable "cyber twin" released only to vetted defenders. A locksmith that can open any lock — and mend it — has been invented. Get to the defenders' side of the gate, and mend your own locks faster than an adversary can pick them.</div>
+  <div class="meta">Tuesday, 8 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Google shipped Gemini 3.8 Flash Cyber (2 Sep) — frontier-level autonomous vulnerability discovery on the CyberGym benchmark, and 2.6× more correct patches to real Chrome bugs than far larger models — gated to defenders via its Fairwind Program (650+ partners incl. CrowdStrike, Datadog, Menlo Security, Palo Alto Networks, Snowflake) with its CodeMender harness (blog.google, DeepMind, as reported). OpenAI's GPT-6 Astra (1–3 Sep) became the first OpenAI model to cross the "Critical" cybersecurity threshold — autonomous zero-day exploit development — released with hardened safeguards (91.5% cyber-jailbreak refusal) first via the Daybreak program (OpenAI, CNBC, as reported). Anthropic's Claude Mythos 5.1 (1 Sep) is the same underlying model as public Fable 5.1, gated only by safeguard strength via a Cyber Verification Program, because the capability is dual-use (Anthropic, SecurityWeek, as reported). The stakes are already loose: 21 FFmpeg zero-days for ~$1,000; exploit dev from weeks/$50K to hours/$2,200; a record 206-CVE Patch Tuesday; and attackers moving 7 days <em>before</em> a patch exists (CSA, Unit 42, Dark Reading, as reported). The question: are we on the defenders' side of the gate, mending our own locks faster than a thief who holds the same tool?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday the radar kept the ring — the discipline of knowing which key each agent holds. This morning the frame turns to the tool that cut the keys, because it has quietly become something more dangerous and more useful at once: <strong>a locksmith that can open any lock ever made, and mend it just as fast.</strong> The single most important development of the week is not one model but a <em>convergence</em>: the three leading labs, working independently, have arrived at the identical governance answer to a frontier cyber capability — ship a safeguarded public model, and gate the un-restricted, more-capable "cyber twin" behind a defenders-only door.</p>
+<p><strong>The event — the same tool now opens locks and mends them, and the labs are gating who gets the sharp edge.</strong> <strong>Google's Gemini 3.8 Flash Cyber (2 Sep) posts frontier-level autonomous vulnerability discovery on the CyberGym benchmark and, per Google's Chrome Security team, produced 2.6× more correct patches to real Chrome vulnerabilities than the best, far larger commercial models — and it is not on open release: it reaches only vetted defenders (governments, healthcare, telecoms and named partners including CrowdStrike, Datadog, Menlo Security, Palo Alto Networks and Snowflake — 650+ in all) through the Fairwind Program, paired with the CodeMender harness to find, verify and fix at agentic scale (blog.google, DeepMind, TechTimes, as reported).</strong> <strong>OpenAI's GPT-6 Astra (1–3 Sep) is the first OpenAI model to trip the "Critical" cybersecurity threshold in its Preparedness Framework — meaning it can identify and develop functional zero-day exploits of any severity in hardened real-world systems without a human in the loop — so it ships with hardened safeguards (91.5% cyber-jailbreak refusal vs 59% for GPT-5.6 Sol) and its advanced cyber capabilities are released first only to a vetted set of firms through the Daybreak program (OpenAI, CNBC, CSO Online, Fortune, as reported).</strong> <strong>Anthropic's Claude Mythos 5.1 (1 Sep) is architecturally identical to the public Fable 5.1 and differs only in safeguard strength, and its reduced-safeguard version is available only to vetted organisations via trusted-access programs — a Cyber Verification Program for defensive security work and a Life Sciences Verification Program — precisely because the same capability that defends can also attack (Anthropic, SecurityWeek, GBHackers, as reported).</strong> Three labs, one pattern: the locksmith is real, and the covenant is to hand it to the watch before the thief.</p>
+<p><strong>The counter-fact — the thief is already at the bench.</strong> Gating the frontier model does not un-invent the technique, and the open-source and lower-tier frontier of autonomous vulnerability discovery is moving on its own. <strong>A security team used an autonomous agent to find 21 previously unknown zero-days in FFmpeg for roughly $1,000 of compute; capable exploit development has collapsed from weeks and ~$50,000 to hours and ~$2,200–$15,700; Microsoft's June 2026 Patch Tuesday carried a record 206 unique CVEs; CISA's full-remediation rate on its Known Exploited Vulnerabilities catalog fell from 38% to 26% in a single year even as the critical-vulnerability count rose ~50%; and IBM's 2026 Cost of a Data Breach Report puts the global average breach at $4.99M ($11.5M in the US), with AI-driven breaches costing about $1M more (CSA, Unit 42, Dark Reading, IBM, as reported).</strong> The most sobering line comes from Palo Alto Unit 42: for more than half of zero-day exploits, attackers are already moving seven days <em>before</em> a patch exists. The locksmith's art cannot be kept in one guildhall; the only durable defence is to hold it first and mend faster.</p>
+<p><strong>The stakes — the patch window is closing to machine speed.</strong> For an enterprise, this is not an AI-lab story; it is a defensive-tempo story. <strong>The capability that lets a defender find and fix a flaw autonomously is the same capability that lets an adversary find and weaponise it autonomously — and it is being priced at the cost of a day of consultant time.</strong> The advantage no longer goes to whoever has the best analysts; it goes to whoever closes the loop — discover, validate, patch — fastest, and who was first through the defenders' gate. The board question stops being "can AI find our vulnerabilities" and becomes "are we using the locksmith on our own locks before someone else uses it on us — and can we, at machine speed?"</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The pattern — a public model and a gated cyber twin, three times over.</strong> <strong>Google Gemini 3.8 Flash Cyber via the Fairwind Program (2 Sep); OpenAI GPT-6 Astra's Critical-threshold cyber capabilities via Daybreak (1–3 Sep); Anthropic Claude Mythos 5.1 via a Cyber Verification Program (1 Sep) — the same underlying model as public Fable 5.1, gated only by safeguard strength (blog.google, OpenAI, Anthropic, as reported).</strong> Defenders-first gating is now the industry's shared answer to a dual-use frontier.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The proof it works — and cuts both ways.</strong> <strong>Gemini 3.8 Flash Cyber: frontier-level on CyberGym, 2.6× more correct Chrome patches than far larger models; Astra: Critical cyber threshold, autonomous zero-day exploit development; both wrapped in hardened safeguards (Astra 91.5% jailbreak refusal) (blog.google, OpenAI, as reported).</strong> The tool that mends the lock is the tool that picks it.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The stakes — the window is collapsing.</strong> <strong>21 FFmpeg zero-days for ~$1,000; exploit dev weeks/$50K → hours/$2,200; record 206 CVEs in one Patch Tuesday; CISA KEV remediation 38%→26% while critical vulns +50%; attackers moving 7 days before a patch exists; breach cost $4.99M, +$1M when AI-driven (CSA, Unit 42, Dark Reading, IBM, as reported).</strong> Defensive tempo is now the whole game.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that opened every room to every agent and told you to keep the ring arrives this morning at the tool underneath all of it — <strong>a locksmith that can open any lock and mend it, invented at three labs at once, and deliberately handed to the watch before the thief.</strong> The households that keep their footing will do two unglamorous things. First, <strong>get on the defenders' side of the gate</strong> — join the trusted-access and defender programs, and put frontier vulnerability discovery to work mending your own locks before an adversary tests them. Second, <strong>assume the adversary has an equal locksmith</strong> — because the technique is loose in the open-source frontier already — and <strong>compress your discover-validate-patch loop to machine speed</strong>, since a patch that lands in weeks is a patch that lands seven days after the break-in. You kept the ring yesterday; today, become your own locksmith — because when a tool can open every lock, the only safety is to be the first to hold it and the fastest to mend.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🔓 "The Locksmith"</h3>
+<p><em>Topic: This morning the enterprise-AI story turns from the keys to the tool that opens the locks. Three frontier labs independently shipped the same architecture — a public model and a gated, more-capable "cyber twin" for vetted defenders. Google's Gemini 3.8 Flash Cyber (2 Sep) posts frontier-level autonomous vulnerability discovery on CyberGym and 2.6× more correct Chrome patches than far larger models, gated to defenders via the Fairwind Program (650+ partners incl. CrowdStrike, Datadog, Menlo Security, Palo Alto Networks, Snowflake) with the CodeMender harness. OpenAI's GPT-6 Astra (1–3 Sep) is the first OpenAI model to cross the "Critical" cybersecurity threshold — autonomous zero-day exploit development — released with hardened safeguards (91.5% jailbreak refusal) first via the Daybreak program. Anthropic's Claude Mythos 5.1 (1 Sep) is the same model as public Fable 5.1, gated by safeguard strength via a Cyber Verification Program, because the capability is dual-use. The stakes: 21 FFmpeg zero-days for ~$1,000; exploit dev from weeks/$50K to hours/$2,200; record 206-CVE Patch Tuesday; CISA KEV remediation 38%→26%; attackers moving 7 days before a patch exists. The lesson: a locksmith that can open any lock has been invented — be on the defenders' side of the gate and use it to mend your own locks faster than an adversary can pick them.</em></p>
+<p>There was once a walled town whose whole peace rested on the honest ignorance of its locksmiths. They could make a good lock, and they could open one they had made themselves if a key was lost — but no locksmith living could stand before a <em>strange</em> lock, one he had never built, and simply open it. So the town slept soundly behind doors of a hundred different makes, trusting that a thief would have to be a locksmith of every lock at once, and no such person had ever been born. The locks were not perfect. They were merely stranger to any one man than any one man could master, and that strangeness was the town's real wall.</p>
+<p>Then, in the space of a single season, three master locksmiths in three different quarters each arrived — working entirely apart, none knowing of the others — at the same terrible and wonderful art: a way to stand before <em>any</em> lock, of any make, never seen before, and read its workings, and open it. And the very same art, run the other way, could look at a lock and tell you exactly where it was weak and forge the precise pin that would make it whole. It was the most powerful thing the town's craft had ever produced, because it was perfectly two-faced: the identical skill that opened a strange door in a minute could, turned around, mend every strange door in the town before nightfall. A blessing in the watchman's hand; a catastrophe in the thief's; and it did not care in the least which hand held it.</p>
+<p>What the three masters did next is the whole of the story, and they did it, remarkably, the same way. Not one of them taught the art in the open square. Each kept the sharpest version of it behind a door of his own and swore a covenant: he would teach it <em>first</em> to the town watch, to the keepers of the granary and the well and the infirmary — the doors that mattered most — and only to those he had vetted and could vouch for. To everyone else he gave a gentler tool, one that could mend a lock but balked and refused when asked to force a strange one open. The reasoning was plain and correct: <strong>the art could not be un-invented, and it would spread; the only question was whether the watch learned it before the thieves, or after.</strong> Give the watch a head start, and the town could go door to door mending its own locks while the thieves were still working out the trick. Give the thieves the head start, and every strange lock in the town — the whole wall — fell at once.</p>
+<p>But the covenant of the guilds was never the whole of the danger, because the art was not a possession that could be locked in a guildhall; it was a <em>technique</em>, and techniques leak. Long before the masters had finished vetting their watchmen, cruder versions of the same art were already loose in the lanes — good enough that a nobody with a few coins of compute could stand before a strange lock and, in an afternoon, find the flaw that had kept the town safe for a generation. And here was the part that turned careful men grey: the thieves were not waiting for a door to be known-weak before they worked it. They were finding the weakness <em>first</em>, in silence, and standing at the weakened door for days before anyone in the town so much as suspected that lock could be picked. The old comfort — <em>we will patch it once we hear it is broken</em> — was worthless, because the breaking now came a week before the hearing.</p>
+<p>So the households that kept their footing understood the new arithmetic exactly. <strong>They got themselves through the watch's gate first</strong> — took the covenant, learned the sharp art under oath, and turned it inward: they walked their own town, door by door, and had the locksmith find every weak lock and forge its mending pin before a thief ever tried it. <strong>They stopped trusting strangeness as a wall,</strong> because strangeness was no longer a wall to a locksmith who could read any lock. And above all <strong>they raced the clock they could not stop</strong> — they built their mending into a loop that ran at the speed the picking now ran, so that the gap between <em>a flaw exists</em> and <em>the flaw is mended</em> shrank from the old leisurely weeks to something a machine could close in a day. They were not the loudest households, and they did not pretend the art could be kept in a box. But when the season of strange-lock thievery came — and it came — they were the ones whose doors had already been mended, quietly, by their own locksmith, the week before.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is that a declaration of arrival is not arrival; the keyring is knowing which key each agent holds — and <strong>the locksmith is the tool that can open any lock and mend it: get to the defenders' side of the gate first, turn it inward on your own doors, and close the gap between a flaw existing and a flaw being mended before a thief who holds the same tool closes it for you.</strong> A wall of strangeness is no wall at all once the locksmith is loose; the only wall left is speed.</p>
+<p><strong>The question it forces:</strong> <em>We kept the ring yesterday. This morning the harder question is the locksmith the whole craft has just invented — a tool that reads any lock we own and either mends it or forces it, and does not care which. So: are we on the defenders' side of the gate — have we taken the covenant, joined the programs, and turned the sharp art inward on our own doors — or are we still trusting that our locks are too strange for anyone to pick? Have we run our own town door by door and mended the weak locks before a thief finds them, or are we waiting to hear a lock is broken, in a season where the breaking comes a week before the hearing? And when we admit — because it is true — that the thief has a locksmith too, do we still believe the gap between our flaw and our fix can be measured in weeks, or have we finally built the loop that closes it in a day? A tool that can open every lock has been placed in the town. The only question left is the oldest one the watch ever asked: did we learn it first, and did we mend faster than they can pick?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Are we on the defenders' side of the gate?</strong> The three leading labs have gated their most capable cyber models to vetted defenders (Google's Fairwind, OpenAI's Daybreak, Anthropic's Cyber Verification Program). <strong>Have we applied to and joined the defender/trusted-access programs relevant to our stack — or are our security teams on the safeguarded public tier while adversaries develop equivalent capability in the open?</strong></li>
+  <li><strong>Have we turned the locksmith inward?</strong> Gemini 3.8 Flash Cyber posts 2.6× more correct patches than far larger models; the same class of tool can autonomously find and fix flaws in our own code. <strong>Are we running frontier vulnerability discovery against our own estate, at agentic scale, to mend our locks before an adversary tests them — or is our AppSec still paced to human review?</strong></li>
+  <li><strong>Can we close the loop at machine speed?</strong> Attackers are moving seven days <em>before</em> a patch exists, and exploit development has fallen to hours and ~$2,200. <strong>What is our mean-time-from-flaw-to-fix today, and does our discover-validate-patch loop run fast enough to matter in a world where the picking is automated and cheap?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>A frontier model that can autonomously develop functional zero-day exploits against hardened systems (OpenAI's Astra crossed the "Critical" threshold) is precisely the adversary capability our threat model must now assume. <strong>Have we re-run our red-team assumptions against machine-speed, machine-cost exploitation — and are our most critical trading, payments and custody systems being continuously probed and patched by our own locksmith?</strong></li>
+  <li>Named defender partners already include the security vendors we rely on (CrowdStrike, Palo Alto Networks). <strong>Do our security-tooling contracts give us the benefit of these gated cyber models, and can we prove to regulators that our defensive tempo matches the automated threat?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Google's Fairwind explicitly prioritises healthcare providers as high-priority defenders, and Anthropic's dual-use gating covers <em>both</em> cyber and life-sciences capability. <strong>Are our clinical and connected-device estates enrolled where they can get the defensive head start — and have we hardened against the biology-adjacent misuse the same models are safeguarded against?</strong></li>
+  <li>Patient-safety systems cannot absorb a seven-day silent-exploit window. <strong>Can we find and mend a flaw in an infusion pump, an EHR integration or an imaging system before an adversary weaponises it — and is that loop measured in hours, not the next maintenance cycle?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>OT and embedded systems are the "strange locks" this radar warns about — long-lived, rarely patched, and now readable by an autonomous locksmith. <strong>Have we inventoried the flaws in our plant-floor and product firmware using the same class of tool an attacker would, before a strange-lock exploit reaches a line that moves a physical process?</strong></li>
+  <li>A record 206-CVE Patch Tuesday is the new baseline volume. <strong>Can our OT patch process keep pace at all — or is coarse, slow patching leaving weak locks standing for months while the picking gets cheaper by the week?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Autonomous vulnerability discovery costs about a day of consultant time (21 zero-days for ~$1,000). <strong>Are we probing our own checkout, loyalty and supply-chain systems with frontier tooling continuously — or waiting for a disclosure that, statistically, arrives a week after the exploitation started?</strong></li>
+  <li>Third-party and open-source components carry the flaws the machines find first (21 FFmpeg zero-days). <strong>Do we know which AI-discoverable flaws sit in our dependency tree, and can we mend or mitigate them faster than an adversary running the same locksmith?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>The EU AI Act's live systemic-risk regime imposes red-teaming, incident-reporting and cybersecurity duties on exactly these cyber-capable frontier models — and the labs' defenders-first gating is, in part, a response to it. <strong>Do our procurement and assurance processes require evidence of this gating and of documented safeguards from any frontier model we deploy?</strong></li>
+  <li>Governments are named as first-priority Fairwind defenders. <strong>Are our critical-infrastructure operators enrolled to get the defensive head start the covenant is designed to give them — and can we demonstrate that citizen-facing systems are being mended at the tempo the threat now demands?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Keys to the Locksmith</h2>
+<p>Read the whole stack one more time, but from the seat of the person who has to answer, this afternoon, whether the same tool that finds your flaws is finding them faster for someone else. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is a claim about the age; the keyring is knowing which key each agent holds. <strong>The locksmith sits beneath the whole security stack as the new adversary baseline — because the capability to read and open a strange lock, once the province of elite human researchers, is now a model you can rent, and a technique loose in the open.</strong> The engineering point is blunt: <strong>autonomous vulnerability discovery has crossed from research demo to shipped product on the same day it crossed into cheap commodity — and the enterprise that patches on a human clock is now defending against an attacker on a machine one.</strong></p>
+<div class="card"><ul>
+  <li><strong>The tool — frontier autonomous vulnerability discovery, gated to defenders.</strong> <strong>Google's Gemini 3.8 Flash Cyber (2 Sep) demonstrates frontier-level performance on CyberGym, the standard benchmark for autonomous vulnerability discovery, and — per Google's own Chrome Security team — produced 2.6× more correct patches to real Chrome vulnerabilities than the best, far larger commercial models; it is delivered only to vetted defenders through the Fairwind Program (governments, healthcare, telecoms, and 650+ partners including CrowdStrike, Datadog, Menlo Security, Palo Alto Networks and Snowflake), bundled with the CodeMender harness so a defender can find, verify and fix at agentic scale (blog.google, DeepMind, TechTimes, as reported).</strong> Read architecturally: this is a system that closes the full discover→validate→patch loop autonomously, and Google deliberately did not put it on open release. The gating is the governance: capability this two-faced is handed to the watch first.</li>
+  <li><strong>The threshold — a model that can build the exploit, not just find the flaw.</strong> <strong>OpenAI's GPT-6 Astra (1–3 Sep) is the first OpenAI model to cross the "Critical" cybersecurity capability threshold under its Preparedness Framework — defined as being able to identify and develop functional zero-day exploits of all severity levels in many hardened, real-world systems without human intervention, or to devise and execute end-to-end novel cyberattack strategies against hardened targets from only a high-level goal. It ships with materially hardened safeguards (refusing 91.5% of cyber-jailbreak prompts versus 59% for GPT-5.6 Sol) and its advanced cyber capabilities are released first only to a vetted set of firms via the application-based Daybreak program (OpenAI, CNBC, CSO Online, Fortune, as reported).</strong> The significant fact is not the label but the crossing: a frontier model has been assessed as capable of the full offensive chain autonomously, which is why the release looks like arms control, not a product launch.</li>
+  <li><strong>The convergence — three labs, one covenant.</strong> <strong>Anthropic's Claude Mythos 5.1 (1 Sep) is the <em>same underlying model</em> as the public Claude Fable 5.1, differing only in the strength of its safeguards; its reduced-safeguard form is restricted to vetted organisations through trusted-access programs — a Cyber Verification Program (reduced cyber safeguards for defensive security work) and a Life Sciences Verification Program — because the capability is explicitly dual-use across cyber and biology (Anthropic, SecurityWeek, GBHackers, as reported).</strong> That three frontier labs, working independently, all landed on the identical pattern — a safeguarded public model plus a gated, more-capable cyber twin for vetted defenders — is the tell. It means the industry has concluded, in unison, that this capability is too dangerous to open-release and too valuable to withhold from defenders, and the only stable answer is defenders-first gating under a covenant of vetting and safeguards.</li>
+</ul></div>
+<p>The strategic core: <strong>the offence-defence balance in enterprise security has been re-based, and the labs' gating buys defenders a head start, not immunity.</strong> The same model that lets your AppSec team find and fix a flaw autonomously lets an adversary find and weaponise one autonomously — and while the frontier versions are gated, the <em>technique</em> is already loose at commodity prices. The economics tell the story: <strong>an autonomous agent found 21 previously unknown zero-days in FFmpeg for ~$1,000 of compute; capable exploit development has fallen from weeks and ~$50,000 to hours and ~$2,200–$15,700; Microsoft's June 2026 Patch Tuesday carried a record 206 unique CVEs; CISA's full-remediation rate on its Known Exploited Vulnerabilities catalog dropped from 38% to 26% in a year while the critical-vulnerability count rose ~50%; and IBM's 2026 report puts the average breach at $4.99M, +$1M when AI-driven (CSA, Unit 42, Dark Reading, IBM, as reported).</strong> The failure mode is precise and unforgiving: <strong>for more than half of zero-days, the attacker is already at the weakened door for seven days before a patch exists</strong> — so a patch process paced to human review is defending yesterday's town.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The locksmith: a tool that opens any lock and mends it, so get to the defenders' side of the gate first and mend faster. Three frontier labs independently shipped a safeguarded public model plus a gated cyber twin for vetted defenders. Top left: the tool, gated frontier cyber — Google Gemini 3.8 Flash Cyber shipped on 2 September with frontier performance on the CyberGym benchmark and 2.6 times more correct Chrome patches than larger models; OpenAI Astra crossed the Critical cyber threshold; Anthropic Claude Mythos 5.1 is the same model as public Fable, gated by safeguard strength; all handed to the watch first. Top right: the threat, already loose and cheap — an autonomous agent found 21 FFmpeg zero-days for about 1,000 dollars; exploit development fell from weeks and 50,000 dollars to hours and 2,200 dollars; a record 206-CVE Patch Tuesday; attackers move seven days before a patch even exists. Between them: CISA Known Exploited Vulnerabilities full-remediation fell from 38 percent to 26 percent in a year while critical vulnerabilities rose 50 percent. Middle: so what — the same tool finds and fixes; the tool that mends the lock is the tool that picks it; gating buys defenders a head start, not immunity; the EU AI Act has been live since 2 August, so cyber-capable frontier models owe red-teaming and incident reporting; the average breach costs 4.99 million dollars, one million more when AI-driven. Bottom left: stop trusting strange locks — patching on a human clock, waiting to hear a lock is broken, assuming you are not a target. Bottom right: start being your own locksmith — get through the defenders' gate first, turn the tool inward on your own doors, close the flaw-to-fix loop at machine speed." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE LOCKSMITH — a tool that opens any lock and mends it; get to the gate first, mend faster</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Three labs, one covenant: a safeguarded public model + a gated cyber twin for vetted defenders.</text>
+
+  <!-- the tool -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE TOOL — frontier cyber, gated</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 3.8 Flash Cyber (2 Sep)</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">frontier CyberGym · 2.6× Chrome patches</text>
+  <text x="52" y="139" font-size="10" fill="#9fe6c8" font-family="sans-serif">Astra: "Critical" cyber threshold</text>
+  <text x="52" y="159" font-size="10" fill="#9fe6c8" font-family="sans-serif">Mythos 5.1 = Fable, gated by safeguards</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ handed to the watch first</text>
+
+  <!-- the threat -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE THREAT — already loose, cheap</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">21 FFmpeg 0-days for ~$1,000</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">exploit dev: weeks/$50K → hrs/$2.2K</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">record 206-CVE Patch Tuesday</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">attackers move 7 DAYS BEFORE a patch</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ before anyone knows to patch</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">CISA KEV full-remediation 38%→26% in a year · critical vulns +50% ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — the same tool finds AND fixes</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the tool that mends the lock is the tool that picks it — gating buys a head start, not immunity</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">EU AI Act live since 2 Aug: cyber-capable frontier models owe red-teaming + incident reporting</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">breach cost $4.99M, +$1M when AI-driven (IBM)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">discovery is trivial and cheap; mending faster than the thief is the work</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: trusting strange locks</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· patch on a human clock</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· wait to hear a lock is broken</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· assume you're not a target</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">strangeness is no wall to a locksmith</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: be your own locksmith</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· get through the defenders' gate first</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· turn the tool inward on your own doors</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· close flaw→fix loop at machine speed</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">hold it first, mend faster</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You kept the ring yesterday — today, become your own locksmith before a thief who holds the same tool does.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">A wall of strangeness is no wall at all once the locksmith is loose; the only wall left is speed.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#1d6e56"></i>The tool — frontier cyber, gated to defenders</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The threat — already loose and cheap</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — the same tool finds and fixes</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Be your own locksmith</span>
+</div>
+</div>
+
+<h3>Trusting strange locks vs being your own locksmith — the same estate, two very different mornings</h3>
+<table>
+<tr><th>Trusting that your locks are too strange to pick</th><th>Being your own locksmith</th></tr>
+<tr><td>"No one knows our stack well enough to exploit it"</td><td>"An autonomous tool can read any stack — including ours"</td></tr>
+<tr><td>Patch when a CVE is disclosed</td><td>Find and mend the flaw before disclosure, at agentic scale</td></tr>
+<tr><td>Security team on the safeguarded public tier</td><td>Enrolled in the defender/trusted-access programs (Fairwind, Daybreak, Cyber Verification)</td></tr>
+<tr><td>Mean-time-to-patch measured in weeks</td><td>Discover→validate→patch loop measured in hours</td></tr>
+<tr><td>Threat model assumes human-speed attackers</td><td>Threat model assumes a machine-speed, ~$2,200 attacker</td></tr>
+<tr><td>Defensive advantage rests on obscurity</td><td>Defensive advantage rests on tempo and the head start</td></tr>
+</table>
+
+<h3>Why "the locksmith" is the layer that matters now</h3>
+<div class="card">
+<p>For years, enterprise defence quietly rested on an asymmetry: finding a novel flaw in a specific, unusual system took elite human skill, time and money, so most estates were safe simply by being <em>strange</em>. <strong>This week that asymmetry broke in public: three labs shipped models that read strange locks autonomously, and the technique is already available in the open at the price of a day's compute.</strong> The security of most estates was never really the strength of the locks; it was the strangeness — the bet that no attacker would invest the human effort to learn your particular doors. A locksmith that reads any lock retires that bet. What separates a firm that keeps its footing from one that is quietly picked is no longer obscurity or even a bigger security budget; it is whether it got to the defenders' side of the gate first and rebuilt its mending loop to run at the speed the picking now runs.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for what you run</strong> — now aimed at the flaw floor. On a legacy estate, security-through-strangeness was load-bearing: old, bespoke, rarely-touched systems were safe because learning them was expensive. The autonomous locksmith breaks that in one stroke — the cost of learning a strange lock falls to compute, so the oldest, least-patched corners become the <em>first</em> to fall. The retrofit is <strong>enrol, turn inward, compress, assume-breach. Enrol:</strong> get your security function through the defender and trusted-access gates (Fairwind, Daybreak, Cyber Verification Program) so you hold the sharp tool, not just the safeguarded one. <strong>Turn inward:</strong> run frontier vulnerability discovery against your own estate — especially legacy and OT — and mend before an adversary probes. <strong>Compress:</strong> rebuild the discover→validate→patch loop to run at agentic speed, because a seven-day-before-disclosure attacker makes a weeks-long patch cycle irrelevant. <strong>Assume-breach:</strong> treat the offensive capability as already in adversary hands, because the technique is loose. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges, the apprentice's apprentice is why a human must still hold the standard, the herald's proclamation is why you measure the age by your storehouse, the keyring is why you know which key each agent holds — and <em>the locksmith is why you must hold the tool that reads your own locks, and mend them faster than an adversary who holds the same tool.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is what happens when a lab rings the bell for the age; the keyring is what happens when every agent you admit is handed a key. The locksmith is what happens when the same tool can open any lock and mend it: get to the defenders' side of the gate first, turn the tool inward on your own doors, and close the gap between a flaw and its fix before a thief who holds the same tool closes it for you.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The tool — frontier vuln-discovery, gated to defenders.</strong> <strong>Google Gemini 3.8 Flash Cyber (2 Sep): frontier-level on CyberGym, 2.6× more correct Chrome patches than far larger models; defenders-only via the Fairwind Program (650+ partners incl. CrowdStrike, Datadog, Menlo Security, Palo Alto Networks, Snowflake) + CodeMender harness (blog.google, DeepMind, as reported).</strong> The discover→validate→patch loop is now an autonomous product.</li>
+  <li><strong>The threshold — a model that builds the exploit.</strong> <strong>OpenAI GPT-6 Astra (1–3 Sep): first OpenAI model over the "Critical" cyber threshold (autonomous zero-day exploit development against hardened systems); 91.5% cyber-jailbreak refusal; advanced cyber capabilities first via the Daybreak program (OpenAI, CNBC, CSO Online, as reported).</strong> Released like arms control, not a product.</li>
+  <li><strong>The convergence — three labs, one covenant.</strong> <strong>Anthropic Claude Mythos 5.1 (1 Sep): same model as public Fable 5.1, gated by safeguard strength via a Cyber Verification Program (defensive work) and a Life Sciences Verification Program; explicitly dual-use (Anthropic, SecurityWeek, GBHackers, as reported).</strong> Defenders-first gating is now the shared industry answer.</li>
+  <li><strong>The economics — the picking is cheap and loose.</strong> <strong>21 FFmpeg zero-days for ~$1,000; exploit dev weeks/$50K → hours/$2,200–$15,700; record 206-CVE Patch Tuesday; attackers move 7 days before a patch exists (CSA, Unit 42, Dark Reading, as reported).</strong> The technique is out of the guildhall.</li>
+  <li><strong>The cost of standing still.</strong> <strong>CISA KEV full-remediation 38%→26% in a year while critical vulns +50%; average breach $4.99M ($11.5M US), +$1M when AI-driven (CISA, IBM, as reported).</strong> A human-clock patch process is defending yesterday's town.</li>
+  <li><strong>The inspector is watching this capability specifically.</strong> <strong>EU AI Act GPAI/systemic-risk enforcement live since 2 Aug 2026; cyber-capable frontier models owe model evaluation, red-teaming, serious-incident reporting and cybersecurity duties; fines to €15M / 3% (top tier €35M / 7%) (European Commission, as reported).</strong> The gating is partly a compliance response.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">The Fairwind Program gives high-priority defenders — like governments, healthcare providers, and telecommunications services — early access to advanced models that help them build better defenses, before new threats arrive.</div><div class="a">— Google, describing the defenders-first covenant behind gating Gemini 3.8 Flash Cyber (blog.google, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">A model reaches the Critical cybersecurity threshold if it can identify and develop functional zero-day exploits of all severity levels in many hardened real-world systems without human intervention.</div><div class="a">— OpenAI Preparedness Framework, on the bar GPT-6 Astra became the first OpenAI model to cross (OpenAI / CNBC, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Both models share an identical underlying architecture; they differ in one key respect — the strength of their safeguards.</div><div class="a">— paraphrase of Anthropic on Claude Fable 5.1 and Mythos 5.1, on why the dangerous capability is a gating decision, not a different model (Anthropic, as reported)</div></blockquote>
+<blockquote><div class="q">"A wall of strangeness is no wall at all once the locksmith is loose; the only wall left is speed."</div><div class="a">— the radar, on defending an estate against machine-speed, machine-cost vulnerability discovery</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The tool — gated frontier cyber model</td><td><span class="v">Google Gemini 3.8 Flash Cyber (2 Sep): frontier-level autonomous vuln discovery on CyberGym; 2.6× more correct Chrome patches than far larger commercial models; defenders-only via the Fairwind Program (650+ partners) + CodeMender harness</span></td><td>blog.google; DeepMind; TechTimes (as reported)</td></tr>
+<tr><td>The threshold — autonomous exploit development</td><td><span class="v">OpenAI GPT-6 Astra (1–3 Sep): first OpenAI model over the "Critical" cybersecurity threshold; 91.5% cyber-jailbreak refusal (vs 59% GPT-5.6 Sol); advanced cyber capabilities first via the Daybreak program</span></td><td>OpenAI; CNBC; CSO Online; Fortune (as reported)</td></tr>
+<tr><td>The convergence — a gated cyber twin</td><td><span class="v">Anthropic Claude Mythos 5.1 (1 Sep): same underlying model as public Fable 5.1, gated by safeguard strength via a Cyber Verification Program + Life Sciences Verification Program; explicitly dual-use</span></td><td>Anthropic; SecurityWeek; GBHackers (as reported)</td></tr>
+<tr><td>The cost of finding a flaw</td><td><span class="v">An autonomous agent found 21 previously unknown zero-days in FFmpeg for ~$1,000 of compute</span></td><td>Cloud Security Alliance (as reported)</td></tr>
+<tr><td>The cost of building an exploit</td><td><span class="v">Capable exploit development fell from weeks and ~$50,000 to hours and ~$2,200–$15,700</span></td><td>CSA; Palo Alto Unit 42 (as reported)</td></tr>
+<tr><td>The volume</td><td><span class="v">Microsoft's June 2026 Patch Tuesday carried a record 206 unique CVEs</span></td><td>Dark Reading (as reported)</td></tr>
+<tr><td>The window</td><td><span class="v">For &gt;50% of zero-days, attackers are moving ~7 days <em>before</em> a patch exists</span></td><td>Palo Alto Unit 42 (as reported)</td></tr>
+<tr><td>The remediation gap</td><td><span class="v">CISA Known Exploited Vulnerabilities full-remediation rate fell 38% → 26% in a year while the critical-vulnerability count rose ~50%</span></td><td>CISA; secondary coverage (as reported)</td></tr>
+<tr><td>The breach cost</td><td><span class="v">Average breach $4.99M globally ($11.5M US); AI-driven breaches cost ~$1M more</span></td><td>IBM 2026 Cost of a Data Breach (as reported)</td></tr>
+<tr><td>Enforcement is live</td><td><span class="v">EU AI Act GPAI/systemic-risk enforcement live since 2 Aug 2026; cyber-capable frontier models owe red-teaming + incident reporting; fines to €15M / 3% (top tier €35M / 7%)</span></td><td>European Commission (as reported)</td></tr>
+<tr><td>The standing frame</td><td><span class="v">The differentiator is proprietary data and redesigned process, not the model (McKinsey State of AI 2026); ~80% report productivity but only ~37% any EBIT</span></td><td>McKinsey (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Get to the defenders' side of the gate — and turn the locksmith inward.</strong> The three leading labs have gated their most capable cyber models to vetted defenders, and the same tool that finds a flaw also mends it. <strong>This month, have your security function apply to and enrol in the defender/trusted-access programs relevant to your stack (Google Fairwind, OpenAI Daybreak, Anthropic's Cyber Verification Program), and stand up a program that runs frontier vulnerability discovery against your <em>own</em> estate — especially legacy and OT — at agentic scale.</strong> Report one number to the board: the share of our critical systems that have been probed and mended by our own AI-driven discovery in the last 30 days, and whether we hold the gated tool or only the public one.</li>
+  <li><strong>Compress the discover→validate→patch loop to machine speed.</strong> Attackers are moving seven days before a patch exists, exploit development costs ~$2,200, and a record 206 CVEs landed in a single Patch Tuesday — a patch cycle paced to human review is defending yesterday's town. <strong>Rebuild the loop so that finding, validating and fixing a flaw runs at agentic tempo, and set an explicit target for mean-time-from-flaw-to-fix on crown-jewel systems.</strong> Report our current mean-time-to-patch on critical systems versus the machine-speed threat, and the plan to close the gap — because CISA's remediation rate is falling (38%→26%) exactly as the picking gets cheaper.</li>
+  <li><strong>Re-base the threat model on a machine-speed, machine-cost adversary — and govern who wields the tool inside your own house.</strong> The offensive capability is loose in the open at commodity prices; assume the adversary has an equal locksmith, and remember (from yesterday's keyring) that the same power is a weapon in the wrong hands inside your estate too. <strong>Update red-team assumptions to autonomous, hardened-target exploitation; scope, log and gate who inside the organisation can wield offensive AI tooling; and require evidence of gating and documented safeguards from any frontier model you deploy, as the EU AI Act's live regime now expects.</strong> Report two numbers next quarter: the share of our AI workloads and security tooling backed by safeguarded, gated frontier models, and our tested mean-time-to-detect-and-mend against a simulated machine-speed attacker. <strong>The model is rented and nearly free, the knowledge is the moat, the census is the roll, the inspector asks for it, the break-in is what the missing entries cost, the keyring is which key each agent holds — and the locksmith is why you must hold the tool that reads your own locks and mend them faster than an adversary who holds the same tool.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The pattern — The Hacker News ("Google, Anthropic, and OpenAI Unveil Cyber AI Models, Safeguards, and Access Programs") consolidating the cross-lab convergence · The tool — blog.google, Google DeepMind (Fairwind Program; Gemini 3.8 Flash Cyber model page), TechTimes, tech-insider (Gemini 3.8 Flash Cyber, 2 Sep: frontier-level on CyberGym; 2.6× more correct Chrome patches than far larger models; defenders-only via the Fairwind Program, 650+ partners incl. CrowdStrike, Datadog, Menlo Security, Palo Alto Networks, Snowflake; CodeMender harness) · The threshold — OpenAI ("Path to Astra"), CNBC, CSO Online, Fortune, Qz (GPT-6 Astra, 1–3 Sep: first OpenAI model over the "Critical" cybersecurity threshold; 91.5% cyber-jailbreak refusal vs 59% for GPT-5.6 Sol; advanced cyber capabilities first via the Daybreak program) · The convergence — Anthropic, SecurityWeek, GBHackers, CyberSecurityNews (Claude Mythos 5.1, 1 Sep: same underlying model as public Fable 5.1, gated by safeguard strength via a Cyber Verification Program and a Life Sciences Verification Program; explicitly dual-use; $35M open-source fund) · The economics — Cloud Security Alliance (21 FFmpeg zero-days for ~$1,000; exploit dev weeks/$50K → hours/$2,200–$15,700), Palo Alto Unit 42 (attackers move ~7 days before a patch exists), Dark Reading (record 206-CVE Patch Tuesday), CISA (KEV full-remediation 38%→26% in a year; critical vulns +50%), IBM 2026 Cost of a Data Breach ($4.99M average breach; +$1M when AI-driven) · Enforcement — European Commission (EU AI Act GPAI/systemic-risk enforcement live 2 Aug 2026; fines to €15M / 3%, top tier €35M / 7%) · Standing frame — McKinsey State of AI 2026 (differentiator is proprietary data and redesigned process, not the model; ~80% productivity vs ~37% EBIT). Figures are relayed from lab, vendor, analyst, standards-body and secondary coverage and are marked "as reported"; several should be re-verified against the primary publications before republishing, and essentially all source domains were unreachable to direct fetch from the compile environment behind the network egress proxy, so the figures rest on search-engine extraction of the named sources. The anchor events (the 1–3 September cyber-model releases) fall slightly outside a strict 24–48-hour window; 8 September is a lighter same-day news morning, and this edition honestly consolidates the week's defining pattern — the cross-lab convergence on defenders-first gating of frontier cyber capability. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 8 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
