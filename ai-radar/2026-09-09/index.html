@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 9 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'model fatigue' — four frontier labs (Anthropic Fable 5.1 + Mythos 5.1, Meta Muse Spark 1.3, Google Gemini 3.8 Flash, OpenAI GPT-6 Astra) shipped major models in one week, and enterprise buyers can't keep up. The board move: stop re-integrating each release; build a model-agnostic gateway (the quay any ship can dock at), keep a disciplined evaluation watch-list (the tide table), and put your effort into proprietary data and process (the larder). ~37% of orgs already run 5+ models in production; lock-in costs ~19–34% to switch. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · When the ships arrive weekly</div>
+  <h1>The Tide Table</h1>
+  <div class="subhead">Yesterday the story was the locksmith — a tool that opens any lock and mends it. This morning the frame pulls back from any one model to the cadence of them, because four frontier labs shipped major models inside a single week and the market named what it did to buyers: "model fatigue." The tide will not stop coming in. So stop re-cutting the pier for every hull — build one quay any ship can dock at, keep a disciplined watch of the sea, and put your strength in the larder, not the pier.</div>
+  <div class="meta">Wednesday, 9 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Four frontier labs shipped in one week — Anthropic's Claude Fable 5.1 and Mythos 5.1 (1 Sep), Meta's Muse Spark 1.3 (2 Sep), Google's Gemini 3.8 Flash (2 Sep, its third Flash release in six weeks) and OpenAI's GPT-6 Astra (3 Sep) (CNBC, Startup Fortune, as reported). CNBC (6 Sep) reports the effect as "model fatigue": CEOs, IT managers and CFOs spend outsized hours comparing cost and capability only to watch the comparison go stale before they finish, and some cap their shortlist at ~5 models instead of 10. The pace is a share-of-wallet arms race by labs valued near $1T each and racing to public markets; 1,100+ lab employees have petitioned Washington to help slow it. The board move is not to pick the grandest ship but to decouple from the cadence: build a model-agnostic gateway (~37% of orgs already run 5+ models in production; lock-in costs ~19–34% to switch), keep an evaluation harness, and put real effort into proprietary data and process — the differentiator McKinsey's State of AI 2026 names, not the model (~80% productivity, ~37% EBIT). The question: have we built a harbor that any ship can dock at, or are we still re-fitting the pier for every hull?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday the radar handed you the locksmith and told you to hold it first and mend faster. This morning the frame widens from any single tool to the <em>rate</em> at which the tools arrive, because that rate has itself become the enterprise problem. The single most important development of the week is not a model at all: it is that <strong>the release cadence crossed the threshold where a rational buyer can no longer keep up, and the market named the condition — "model fatigue."</strong></p>
+<p><strong>The event — four frontier labs shipped in one week, and buyers broke.</strong> <strong>Anthropic released Claude Fable 5.1 and its gated sibling Mythos 5.1 (1 Sep); Meta shipped Muse Spark 1.3 (2 Sep); Google shipped Gemini 3.8 Flash the same day — its third Flash release in six weeks; and OpenAI followed with GPT-6 Astra (3 Sep) (CNBC, Startup Fortune, llm-stats, as reported).</strong> CNBC's 6 September account describes an enterprise buyer's market reduced to "complexity and chaos": IT managers, CFOs and founders spend an outsized share of their time comparing prices and capabilities, and by the time a comparison is finished a newer model has made it stale. Some startups have <strong>stopped evaluating every release and capped their shortlist at ~5 models</strong> rather than 10. The releases are not incremental noise — Anthropic's Fable 5.1, for one, <strong>kept headline API rates flat but cut cached-input reads from $1.00 to $0.25 per million tokens, making typical workloads ~25% cheaper and highly agentic ones up to ~45% cheaper (as reported)</strong> — which is exactly why buyers feel they cannot afford to ignore any of them, and exactly why the fatigue is real.</p>
+<p><strong>The counter-fact — the churn is a feature of the sellers' race, not a signal about your business.</strong> The tempo is being set by a <strong>share-of-wallet arms race</strong> among labs each valued near <strong>$1 trillion</strong> privately and racing toward public markets; the cadence serves their competition, not your P&amp;L. The tell that even insiders find it unsustainable: <strong>more than 1,100 lab employees have petitioned Washington to help pace frontier development (CNBC, as reported).</strong> For the enterprise, chasing the frontier release-by-release is a treadmill that consumes the scarcest thing a technology function has — attention — and converts almost none of it into durable advantage. And the ledger underneath says the treadmill is misdirected: <strong>McKinsey's State of AI 2026 finds the differentiator is proprietary data and redesigned process, not the model (~80% of firms report productivity gains but only ~37% any EBIT impact) — and 32% of organisations have already skipped buying at least one software product or feature because they could build it internally with agentic coding tools (McKinsey, as reported).</strong> The value was never in holding this week's model. It was in the layer beneath it.</p>
+<p><strong>The stakes — the enterprises that keep their footing decouple from the cadence.</strong> For a board, "model fatigue" is not a complaint to sympathise with; it is a <strong>design instruction.</strong> When the supply of near-frontier models becomes a fast, noisy, roughly-interchangeable stream, the winning move is to stop treating each model as a bespoke integration and start treating it as a <strong>swappable input behind a stable interface</strong> — a model-agnostic gateway — so that adopting the newest, cheapest, or best-fit model is a routing decision made in a day, not a re-platforming project made in a quarter. The market has already begun pricing the cost of <em>not</em> doing this: <strong>AI vendor lock-in is estimated to cost ~19–34% in switching, ~37% of organisations now run five or more models in production (up from ~29% a year earlier), and the behavioural lock-in lives in prompts, workflows and accumulated instructions tuned to one provider, not in the API itself (industry analyses, as reported).</strong> The board question stops being "which model do we standardise on?" and becomes "<strong>can we swap models as fast as they ship — and is our real work accumulating in a layer that outlives any of them?</strong>"</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — four labs, one week, buyer fatigue.</strong> <strong>Anthropic Fable 5.1 + Mythos 5.1 (1 Sep), Meta Muse Spark 1.3 (2 Sep), Google Gemini 3.8 Flash (2 Sep, third Flash in six weeks), OpenAI GPT-6 Astra (3 Sep); CNBC (6 Sep) reports buyers capping shortlists at ~5 models as comparisons go stale before they finish (CNBC, Startup Fortune, as reported).</strong> The cadence itself is now the enterprise's problem.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The cause — a sellers' arms race, not a signal about you.</strong> <strong>Labs valued near $1T each and racing to public markets set the tempo; 1,100+ lab employees have petitioned Washington to slow it (CNBC, as reported).</strong> The churn serves their competition; chasing it burns your scarcest resource.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — build the harbor, not a new pier per ship.</strong> <strong>~37% of orgs already run 5+ models in production; lock-in costs ~19–34% to switch; value lives in proprietary data and process, not the model (McKinsey; industry analyses, as reported).</strong> Put a model-agnostic layer between your work and any one vendor and let the tide come in.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that shipped four frontier models in seven days is not asking you to pick the best one — it is telling you the picking will never stop, and any answer you standardise on will be stale within the fortnight. <strong>The tide table is the discipline of a harbor town that has stopped being surprised by the sea.</strong> The households that keep their footing will do two unglamorous things. First, <strong>build one quay any ship can dock at</strong> — a model-agnostic gateway and an evaluation harness — so swapping to the newest or cheapest model is routine, and route each workload to the model that fits it rather than betting the estate on one. Second, <strong>put your real effort into the larder, not the pier</strong> — the proprietary data, the redesigned process, the evaluations and guardrails that are yours no matter which hull is tied up this morning — because that is the only part of the stack a new release cannot make stale. You held the locksmith yesterday; today, keep the tide table — because when a grander ship arrives every week, the town that thrives is not the one with the newest ship, but the one whose quay was built to receive them all.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🌊 "The Tide Table"</h3>
+<p><em>Topic: This morning the enterprise-AI story turns from any one model to the cadence of them. Four frontier labs shipped major models inside a single week — Anthropic's Claude Fable 5.1 and Mythos 5.1 (1 Sep), Meta's Muse Spark 1.3 (2 Sep), Google's Gemini 3.8 Flash (2 Sep, its third Flash release in six weeks) and OpenAI's GPT-6 Astra (3 Sep) — and CNBC (6 Sep) reports the effect as "model fatigue": buyers spend outsized hours comparing cost and capability only to watch the comparison go stale before they finish, and some cap their shortlist at ~5 models instead of 10. The pace is a share-of-wallet arms race by labs valued near $1T each and racing to public markets; 1,100+ lab employees have petitioned Washington to slow it. The strategic answer is not to pick the grandest ship but to build a harbor any ship can dock at — a model-agnostic gateway and evaluation harness — and to put real effort into the larder (proprietary data, redesigned process) that no new release can make stale, because ~37% of orgs already run 5+ models in production and lock-in costs ~19–34% to switch.</em></p>
+<p>There was once a harbor town that had grown rich, slowly, on the sea. In the old days a supply-ship came once a season — a grand event — and the whole town would turn out to rebuild the dock to fit its particular hull: this captain wanted his gangway here, that one drew more water and needed the berth dredged deeper, and the carpenters would spend a fortnight re-cutting the pier to the shape of the ship that had come. It was a great deal of work, but there was only one ship a season, so the town could afford to make each arrival a festival and each berth a bespoke thing built to one hull.</p>
+<p>Then the sea changed its temper. Ships began to arrive not once a season but once a week, each one grander than the last, each captain crying up from the deck that <em>this</em> hull was the finest ever floated and the town would be mad to tie up to yesterday's. And the town did what it had always done: it fell on the pier with saws and hammers and began re-cutting the berth to fit the new arrival — and before the work was half done, a grander ship hove into view, and the carpenters looked up from a half-rebuilt dock at a hull that made all their cutting wrong. They worked themselves grey. The harbormaster's ledger filled with comparisons of draught and beam and rigging, every entry obsolete before the ink dried, and the merchants who had come to the harbor to <em>fill their larders</em> found that no cargo was ever landed, because the town was always rebuilding the pier and never unloading the ship.</p>
+<p>A few households, quieter than the rest, watched the frenzy and asked the only question that mattered: <em>what are the ships actually for?</em> Not to be admired from the quay — to land cargo that filled the larder and fed the town. And they saw that in their mania for the newest hull the town had forgotten this entirely: <strong>it was spending its whole strength on the dock and none on the cargo,</strong> and worse, it had built each berth so tightly around one captain's whims that when a better ship came the town was hostage — re-cutting everything, or turning the better ship away, because it had wed its pier to a single hull.</p>
+<p>So those households built differently, and it looked almost boring next to the festival. <strong>They built one standing quay, with an adjustable gangway, that any ship of any make could tie up to</strong> — not cut to one hull, but shaped to receive them all, so a new arrival was a matter of throwing a line, not rebuilding a pier. <strong>They kept a tide table</strong> — a plain, disciplined record of what actually came in and when, so they were never surprised by the sea and never had to drop everything for a ship they could have predicted; and they stopped trying to inspect every hull, keeping a short watch-list of the few worth tracking rather than a ledger of all of them going stale by the hour. And above all <strong>they moved their real labor off the pier and into the larder</strong> — they spent their strength on the storehouse, the recipes, the knowledge of which cargo their own townsfolk needed, the things that were <em>theirs</em> no matter which ship was tied up this morning. They judged every ship by one test only: <em>what did it land in our larder?</em> — not by how fresh its paint, nor how loud its captain, nor how it compared to the ship three berths down.</p>
+<p>And when the season of weekly ships came in earnest — and it came — those households were the calm ones. A grander hull would appear, and where the rest of the town fell again on the pier with saws, these merely threw a line to the standing quay, unloaded what was worth unloading, checked it against the tide table, and went back to their storehouses. They did not have the newest ship. They had something the frenzy never bought: a harbor that received every ship without being remade by any of them, and a larder that grew heavier no matter which one came.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is that a declaration of arrival is not arrival; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it — and <strong>the tide table is what happens when a grander ship arrives every week: you cannot re-fit the harbor to every hull, so you build one quay any ship can dock at, put your strength in the larder rather than the pier, and judge each ship by what it lands in your storehouse, not by how fresh its paint.</strong> A harbor wed to one hull is a harbor held hostage by the next; the only harbor that thrives on a rising tide is the one built to receive them all.</p>
+<p><strong>The question it forces:</strong> <em>We held the locksmith yesterday. This morning the harder question is the sea itself — a grander ship every week, and a whole town wearing itself out re-cutting the pier to the last hull that came. So: have we built a standing quay any ship can dock at — a layer between our work and any one model, so swapping to the newest or cheapest is throwing a line, not rebuilding a pier — or is every model still a bespoke integration we are hostage to? Do we keep a tide table — a disciplined watch of the few models worth tracking — or are we drowning in comparisons that go stale before we finish them? And when we ask what all these ships are actually for, can we answer honestly that our strength is going into the larder — the proprietary data, the redesigned process, the evaluations that are ours no matter which hull is tied up — or is it all going into the pier, rebuilt weekly for a ship that will be old by Friday? A grander ship will arrive next week. The only question is whether we have a harbor that receives it, or a pier we must tear down again.</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Can we swap models as fast as they ship?</strong> Four frontier models landed in one week and buyers are capping shortlists at ~5 as comparisons go stale (CNBC). <strong>Do we have a model-agnostic gateway and an evaluation harness so adopting a new model is a routing decision made in a day — or is each model a bespoke integration that takes a quarter to change, leaving us hostage to whatever we standardised on last?</strong></li>
+  <li><strong>Where is our real effort going — the pier or the larder?</strong> The differentiator is proprietary data and redesigned process, not the model (McKinsey: ~80% productivity, ~37% EBIT). <strong>What share of our AI budget and engineering hours is spent chasing and re-integrating models versus building the data, process and evaluations that are ours no matter which model we run?</strong></li>
+  <li><strong>Have we stopped over-inspecting the sea?</strong> Buyers are burning outsized hours comparing releases that are obsolete before the ink dries. <strong>Have we defined a disciplined watch-list of the few models worth tracking and an explicit trigger for when a new release actually warrants a switch — or are we treating every launch as a fire drill?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model choice is now a portfolio and routing question: run five-plus models and route each workload to the best fit on cost, latency, quality and data-sensitivity. <strong>Do our model-risk, procurement and architecture functions support multi-model routing behind one governed interface — or does every model change trigger a fresh, months-long model-risk review that guarantees we are always a release behind?</strong></li>
+  <li>Switching costs of ~19–34% and behavioural lock-in in tuned prompts and workflows are a concentration risk like any other. <strong>Have we quantified our vendor-concentration and switching exposure to a single model provider, and can we fail a workload over to an alternate model the way we fail over any other critical dependency?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and research workloads need stability and validation, not the newest hull every week. <strong>Have we built an abstraction layer that lets us pin a validated model for regulated use while still evaluating newer models in parallel — so the release cadence never forces an unvalidated model into a patient-facing path?</strong></li>
+  <li>The lasting asset in healthcare AI is proprietary clinical data and redesigned care process. <strong>Is our strength going into that larder — curated data, workflow redesign, evaluation against clinical ground truth — rather than into re-integrating a model that will be superseded before validation completes?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>OT and long-lived systems cannot be re-platformed on a weekly cadence. <strong>Have we insulated our plant-floor and product AI from model churn with a stable interface, so a model upgrade is a configuration change and not a line-stopping re-integration?</strong></li>
+  <li>The value in industrial AI lives in proprietary process data and physics, not the frontier model. <strong>Are we accumulating that durable asset — or spending scarce engineering capacity chasing releases that add little to a well-understood, narrow industrial task?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Cost per token is collapsing and a cheaper, good-enough model ships almost weekly; routing to the right model per task is now a margin lever. <strong>Do we have the gateway and telemetry to route high-volume, low-complexity workloads to the cheapest capable model automatically — or are we overpaying by running everything on one premium model because switching is hard?</strong></li>
+  <li>The moat is proprietary customer data and redesigned journeys, not the model. <strong>Is our effort compounding in that larder — first-party data, personalisation logic, evaluation — or leaking into perpetual model re-integration?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Procurement and assurance move slower than a weekly model cadence, and locking to one vendor is both a resilience and a sovereignty risk. <strong>Do our frameworks require a model-agnostic architecture and a documented exit/switching path from any single provider, so we are never stranded on a model we can neither validate nor leave?</strong></li>
+  <li>The EU AI Act's live regime (since 2 Aug) expects documented evaluation and governance regardless of which model is in place. <strong>Can our assurance evidence survive a model swap — is it attached to our governed interface and evaluations, not to one vendor's model card?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Locksmith to the Tide Table</h2>
+<p>Read the whole stack one more time, but from the seat of the architect who has to decide, this afternoon, whether the fourth frontier model in a week is a project or a config change. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is a claim about the age; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it. <strong>The tide table sits above the whole stack as the operating discipline for a market whose defining feature is now <em>cadence</em> — because when near-frontier capability arrives weekly and is roughly interchangeable, the scarce enterprise skill is no longer picking a model but absorbing a stream of them without being remade by any one.</strong> The engineering point is blunt: <strong>the model has become a fast-moving, commoditising input, and any architecture that treats it as a fixed, load-bearing choice is a pier you will be tearing down every week.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — four frontier models in seven days, and the buyer breaks.</strong> <strong>Anthropic's Claude Fable 5.1 and Mythos 5.1 (1 Sep), Meta's Muse Spark 1.3 (2 Sep), Google's Gemini 3.8 Flash (2 Sep — its third Flash release in six weeks), and OpenAI's GPT-6 Astra (3 Sep) all landed inside a week (CNBC, Startup Fortune, llm-stats, as reported).</strong> CNBC (6 Sep) reports the effect as "model fatigue": buyers spend an outsized share of their time comparing cost and capability only to watch the comparison go stale before it is finished, and some have capped their evaluation shortlist at ~5 models rather than 10. Read architecturally, the significance is not any one model — it is that the <em>arrival rate</em> has crossed the point where per-model integration is a losing strategy. The releases are substantive (Fable 5.1 alone cut cached-input reads from $1.00 to $0.25/M tokens, ~25–45% cheaper depending on workload, as reported), which is precisely why ignoring them is not an option and re-integrating each is not affordable — the contradiction the tide table resolves.</li>
+  <li><strong>The cause — a sellers' race, decoupled from your value.</strong> <strong>The cadence is set by a share-of-wallet arms race among labs valued near $1T each and racing toward public markets; 1,100+ lab employees have petitioned Washington to help pace frontier development (CNBC, as reported).</strong> The tempo is a function of the sellers' competition, not of your business improving weekly. Treating it as a signal you must chase converts the labs' race into your treadmill and spends your scarcest asset — engineering attention — on integration churn that produces no durable advantage.</li>
+  <li><strong>The answer — a standing quay: the model-agnostic layer.</strong> <strong>The structural response the market has converged on is a model gateway: an abstraction layer between your applications and model providers that routes every request through a unified, vendor-neutral API, so switching or adding a provider needs no application change; mature estates route each workload to the optimal model on cost, latency, quality and data-sensitivity, and ~37% of organisations already run five or more models in production, up from ~29% a year earlier (industry analyses, as reported).</strong> The gateway is the quay; the evaluation harness is the tide table; and the standards floor beneath it is real — <strong>the MCP 2026-07-28 specification promoted Enterprise-Managed Authorization to stable and adopted Client ID Metadata Documents in place of Dynamic Client Registration (verified at the MCP primary source in prior editions)</strong> — vendor-neutral plumbing to admit, name and govern models and agents without wedding the estate to one supplier.</li>
+</ul></div>
+<p>The strategic core: <strong>when the model commoditises into a weekly stream, competitive advantage migrates out of the model and into two things you control — the interface that makes models swappable, and the proprietary data and process that no release can make stale.</strong> The ledger is unambiguous: <strong>McKinsey's State of AI 2026 finds the differentiator is proprietary data and redesigned process, not the model (~80% report productivity gains, only ~37% any EBIT), and 32% of organisations have already declined to buy a software product or feature because they could build it internally with agentic coding tools — while large enterprises scaling agents in one or more functions rose from ~27% to ~40% (McKinsey, as reported).</strong> The build-vs-buy line is moving and the value is accumulating in-house — but only for those pointing their effort at the larder. The failure mode is precise: <strong>an estate that hard-wires one model into every application pays the switching tax (~19–34%) every time the frontier moves, is perpetually a release behind, and has spent its strength on a pier it must keep rebuilding — while its actual moat, the data and process, went untended.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The tide table: a grander ship arrives every week, so you cannot re-cut the pier for each hull — build one quay any ship can dock at, keep a disciplined watch of the sea, and fill the larder. Top left: the sea, the cadence — four labs in one week: Anthropic Fable 5.1 and Mythos 5.1 on 1 September, Meta Muse Spark 1.3 and Google Gemini 3.8 Flash on 2 September (Google's third Flash release in six weeks), and OpenAI GPT-6 Astra on 3 September; the effect is called model fatigue. Top right: the frenzy of chasing each hull — comparing cost and capability only for the comparison to go stale before you finish (CNBC), capping the shortlist at about five models instead of ten, paying a switching tax of about 19 to 34 percent each move, and always being a release behind. Between them: labs valued near one trillion dollars each and racing to public markets set the pace, and more than 1,100 lab employees have petitioned Washington to slow it. Middle: so what — the model is now a fast, swappable input, not a fixed choice; value lives in the interface that makes models swappable plus your data and process; McKinsey finds about 80 percent report productivity but only about 37 percent any EBIT, and the differentiator is data and process; about 37 percent of organisations already run five or more models in production, up from about 29 percent. Bottom left: stop — a pier per hull: hard-wiring one model into applications, re-integrating every release, effort going into the pier. Bottom right: start — build the harbor: a model-agnostic gateway that lets any model in, a tide table of evaluation harness and watch-list, routing per task, and effort going into the larder." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE TIDE TABLE — a grander ship every week; you cannot re-cut the pier for each hull</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Build one quay any ship can dock at, keep a disciplined watch, and fill the larder.</text>
+
+  <!-- the sea -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#12212e" stroke="#2b6fb0"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#6fb3e6" font-family="sans-serif">THE SEA — the cadence, 4 labs, 1 week</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Anthropic Fable 5.1 + Mythos (1 Sep)</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Meta Muse Spark 1.3 · Gemini 3.8 Flash (2 Sep)</text>
+  <text x="52" y="139" font-size="10" fill="#a9d3f0" font-family="sans-serif">Google's 3rd Flash in 6 weeks · GPT-6 Astra (3 Sep)</text>
+  <text x="52" y="159" font-size="10" fill="#a9d3f0" font-family="sans-serif">the effect has a name: "model fatigue"</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ the release rate is the story</text>
+
+  <!-- the frenzy -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE FRENZY — chasing each hull</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">compare cost/capability →</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">stale before you finish (CNBC)</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">cap shortlist at ~5, not 10</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">switching tax ~19–34% each move</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ always a release behind</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#6fb3e6" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#6fb3e6"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Labs ~$1T each racing to IPO set the pace · 1,100+ staff ask to slow it ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — the model is now a fast, swappable input</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">value lives in the interface that makes models swappable + your data/process</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">McKinsey: ~80% productivity, ~37% EBIT — the differentiator is data + process</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~37% of orgs already run 5+ models in production (up from ~29%)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">the picking never stops; making it cheap and reversible is the work</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: a pier per hull</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· hard-wire one model into apps</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· re-integrate every release</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· effort goes into the pier</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">wed to one hull, hostage to the next</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: build the harbor</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· model-agnostic gateway (any model in)</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a tide table: eval harness + watch-list</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· route per task; effort into the larder</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">receive every ship, remade by none</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You held the locksmith yesterday — today, keep the tide table: build the quay, and fill the larder, not the pier.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">A harbor wed to one hull is a harbor held hostage by the next; build the one that receives them all.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#2b6fb0"></i>The sea — the release cadence</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>The frenzy — chasing each hull</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — the model is a swappable input</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Build the harbor</span>
+</div>
+</div>
+
+<h3>Re-cutting the pier vs building the harbor — the same estate, two very different weeks</h3>
+<table>
+<tr><th>Re-cutting the pier for every hull</th><th>Building a harbor any ship can dock at</th></tr>
+<tr><td>"We standardised on one model"</td><td>"We route to five-plus models behind one interface"</td></tr>
+<tr><td>Each new model is a bespoke integration project</td><td>Adopting a new model is a routing/config change</td></tr>
+<tr><td>Comparisons go stale before the evaluation finishes</td><td>A tide table: a short watch-list and a clear switch trigger</td></tr>
+<tr><td>Prompts and workflows tuned to one provider (lock-in)</td><td>Prompts, evals and guardrails owned at the gateway layer</td></tr>
+<tr><td>Effort spent chasing and re-integrating models</td><td>Effort spent on proprietary data, process and evaluation</td></tr>
+<tr><td>Always a release behind; switching tax ~19–34% per move</td><td>Newest/cheapest model in a day; no re-platforming</td></tr>
+</table>
+
+<h3>Why "the tide table" is the discipline that matters now</h3>
+<div class="card">
+<p>For two years the enterprise question was <em>which model is best</em>, and it was a reasonable question when models arrived rarely and differed sharply. <strong>This week that question expired in public: four frontier-class models shipped in seven days, the differences narrowed, and the answer to "which is best" changed faster than any buyer could act on it.</strong> When the supply of near-frontier capability becomes a fast, noisy, roughly-interchangeable stream, "pick the best one" is no longer a strategy — it is a treadmill. What separates a firm that compounds advantage from one that merely churns is no longer model selection; it is whether it built the layer that makes selection cheap and reversible, and then spent its freed attention on the assets a new release cannot touch.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for what you run</strong> — now aimed at the model layer's cadence. On a legacy estate, the instinct is to standardise: pick one model, wire it deep into applications, and treat it as fixed infrastructure. In a weekly-release market that instinct is the trap — it maximises switching cost exactly as switching becomes routine. The retrofit is <strong>abstract, watch, route, invest. Abstract:</strong> put a model-agnostic gateway between every application and any provider, so no application names a model directly and switching is a config change. <strong>Watch:</strong> keep a tide table — a disciplined evaluation harness and a short watch-list of the few models worth tracking, with an explicit trigger for when a release warrants a switch, instead of a fire drill per launch. <strong>Route:</strong> send each workload to the model that fits it on cost, latency, quality and data-sensitivity, running several in production rather than betting the estate on one. <strong>Invest:</strong> move your real effort off the pier and into the larder — proprietary data, redesigned process, evaluations and guardrails owned at your layer — because that is the only part of the stack a new model cannot make stale. And keep the whole refrain: the model is a rented stove — now nearly free and swapped weekly — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges, the apprentice's apprentice is why a human must still hold the standard, the herald's proclamation is why you measure the age by your storehouse, the keyring is why you know which key each agent holds, the locksmith is why you hold the tool that reads your own locks — and <em>the tide table is why you build one quay any ship can dock at, and put your strength in the larder, not the pier.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is what happens when a lab rings the bell for the age; the keyring is what happens when every agent you admit is handed a key; the locksmith is what happens when the same tool can open any lock and mend it. The tide table is what happens when a grander ship arrives every week: build one quay any ship can dock at, keep a disciplined watch of the sea, and put your strength in the larder rather than the pier — because the harbor that thrives on a rising tide is the one built to receive every ship without being remade by any of them.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The cadence — four frontier models in a week.</strong> <strong>Anthropic Fable 5.1 + Mythos 5.1 (1 Sep), Meta Muse Spark 1.3 (2 Sep), Google Gemini 3.8 Flash (2 Sep, third Flash in six weeks), OpenAI GPT-6 Astra (3 Sep); CNBC (6 Sep) names the effect "model fatigue," with buyers capping shortlists at ~5 (CNBC, Startup Fortune, as reported).</strong> The release rate is the story.</li>
+  <li><strong>The economics inside the churn.</strong> <strong>Anthropic's Fable 5.1 kept headline rates flat but cut cached-input reads from $1.00 to $0.25/M tokens — ~25% cheaper typical, up to ~45% for highly agentic workloads (as reported).</strong> Each release is substantive enough that ignoring it costs money and chasing it costs attention.</li>
+  <li><strong>The structural answer — the model gateway.</strong> <strong>A vendor-neutral abstraction layer routes every request through one API; ~37% of orgs already run 5+ models in production (up from ~29%); lock-in costs ~19–34% to switch, and lives in tuned prompts/workflows, not the API (industry analyses, as reported).</strong> The quay any ship can dock at.</li>
+  <li><strong>The value is in the larder.</strong> <strong>McKinsey State of AI 2026: differentiator is proprietary data and redesigned process, not the model (~80% productivity, ~37% EBIT); 32% skipped buying software they could build internally with agentic tools; large-enterprise agent scaling ~27%→~40% (McKinsey, as reported).</strong> Effort belongs in the storehouse.</li>
+  <li><strong>The deployment gap is being industrialised.</strong> <strong>Microsoft's Frontier Company — $2.5B and ~6,000 forward-deployed engineers embedded in enterprise clients — is built to turn model access into measurable ROI, not more pilots (CNBC, The Decoder, as reported).</strong> The scarce work is deployment and process, not model choice.</li>
+  <li><strong>The standards and inspector still stand.</strong> <strong>MCP 2026-07-28 (Enterprise-Managed Authorization stable; CIMD replacing Dynamic Client Registration) is the vendor-neutral floor; the EU AI Act's GPAI/systemic-risk regime has been live since 2 Aug 2026 and expects documented evaluation regardless of model (MCP primary source; European Commission, as reported).</strong> Governance attaches to your layer, not one vendor's card.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">'Model fatigue' sets in as AI labs race to roll out new versions at a frenetic pace.</div><div class="a">— CNBC headline (6 Sep 2026), on four frontier labs shipping major models in a single week and the toll on enterprise buyers (CNBC, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The most effective structural investment against vendor lock-in is a model gateway: an abstraction layer that routes all LLM requests through a unified, vendor-agnostic API — your code calls the gateway, the gateway routes to any provider, with no code changes when you switch.</div><div class="a">— paraphrase of the 2026 enterprise-architecture consensus, on building the quay any ship can dock at (industry analyses, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">The differentiator is proprietary data and redesigned process, not the model.</div><div class="a">— paraphrase of McKinsey's State of AI 2026, on why the lasting value lives in the larder, not the newest hull (McKinsey, as reported)</div></blockquote>
+<blockquote><div class="q">"A harbor wed to one hull is a harbor held hostage by the next; the only harbor that thrives on a rising tide is the one built to receive them all."</div><div class="a">— the radar, on absorbing a weekly stream of frontier models without being remade by any one</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The cadence — four frontier models in a week</td><td><span class="v">Anthropic Fable 5.1 + Mythos 5.1 (1 Sep); Meta Muse Spark 1.3 (2 Sep); Google Gemini 3.8 Flash (2 Sep, third Flash in six weeks); OpenAI GPT-6 Astra (3 Sep)</span></td><td>CNBC; Startup Fortune; llm-stats (as reported)</td></tr>
+<tr><td>Model fatigue is real</td><td><span class="v">Buyers spend outsized hours comparing cost/capability only for comparisons to go stale before finishing; some cap shortlists at ~5 models instead of 10</span></td><td>CNBC (6 Sep) (as reported)</td></tr>
+<tr><td>The tempo is a sellers' race</td><td><span class="v">Labs valued near $1T each and racing to public markets set the pace; 1,100+ lab employees petitioned Washington to help slow frontier development</span></td><td>CNBC (as reported)</td></tr>
+<tr><td>The releases are substantive</td><td><span class="v">Anthropic Fable 5.1: headline rates flat, cached-input reads cut $1.00 → $0.25/M tokens (~25% cheaper typical, up to ~45% for highly agentic workloads)</span></td><td>Startup Fortune; Price Per Token (as reported)</td></tr>
+<tr><td>Multi-model is already the norm</td><td><span class="v">~37% of organisations now run five or more models in production, up from ~29% a year earlier</span></td><td>Industry analyses (as reported)</td></tr>
+<tr><td>The switching tax</td><td><span class="v">AI vendor lock-in is estimated to cost ~19–34% to switch; behavioural lock-in lives in tuned prompts and workflows, not the API</span></td><td>Industry analyses (as reported)</td></tr>
+<tr><td>The value is in the larder</td><td><span class="v">Differentiator is proprietary data and redesigned process, not the model (McKinsey State of AI 2026): ~80% report productivity, only ~37% any EBIT</span></td><td>McKinsey (as reported)</td></tr>
+<tr><td>Build-vs-buy is moving in-house</td><td><span class="v">32% of organisations skipped buying at least one software product/feature because they could build it internally with agentic coding tools; large-enterprise agent scaling ~27% → ~40%</span></td><td>McKinsey (as reported)</td></tr>
+<tr><td>Deployment is the scarce work</td><td><span class="v">Microsoft's Frontier Company: $2.5B and ~6,000 forward-deployed engineers embedded in enterprise clients to drive measurable ROI</span></td><td>CNBC; The Decoder (as reported)</td></tr>
+<tr><td>The vendor-neutral floor</td><td><span class="v">MCP 2026-07-28: Enterprise-Managed Authorization stable; Client ID Metadata Documents replace Dynamic Client Registration</span></td><td>Model Context Protocol (verified, prior editions)</td></tr>
+<tr><td>Enforcement is live</td><td><span class="v">EU AI Act GPAI/systemic-risk enforcement live since 2 Aug 2026; documented evaluation expected regardless of model; fines to €15M / 3% (top tier €35M / 7%)</span></td><td>European Commission (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Build the quay: put a model-agnostic gateway between your work and any one vendor.</strong> Four frontier models shipped in a week and the switching tax runs ~19–34% every time you are wed to one. <strong>This month, stand up (or consolidate onto) a model gateway so no application names a model directly, every request routes through a unified vendor-neutral API, and adopting the newest or cheapest model is a config change, not a re-platforming project — with several models already live in production behind it.</strong> Report one number to the board: how long it takes us today to move a production workload from one model to another, and the target once the gateway is in place.</li>
+  <li><strong>Keep the tide table: replace release-chasing with a disciplined watch and an explicit switch trigger.</strong> Buyers are burning outsized hours on comparisons that go stale before they finish. <strong>Define a short watch-list of the few models worth tracking, a standing evaluation harness that scores them on your own workloads, and a written trigger for when a new release actually warrants a switch — so a launch is a scheduled evaluation, not a fire drill.</strong> Report our shortlist, our last evaluation date, and the criteria by which the next model would (or would not) displace the current one.</li>
+  <li><strong>Move your strength off the pier and into the larder.</strong> The differentiator is proprietary data and redesigned process, not the model (McKinsey: ~80% productivity, ~37% EBIT) — and 32% of firms are already building internally what they used to buy. <strong>Rebalance AI budget and engineering hours away from model chasing and re-integration and toward the durable assets: proprietary data, redesigned process, evaluations and guardrails owned at your gateway layer, and the deployment work that turns access into ROI.</strong> Report the share of our AI spend and engineering hours going into that larder versus into per-model integration — and set an explicit target to shift it. <strong>The model is rented and swapped weekly, the knowledge is the moat, the census is the roll, the inspector asks for it, the keyring is which key each agent holds, the locksmith is the tool that reads your own locks — and the tide table is why you build one quay any ship can dock at, and put your strength in the larder, not the pier.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The cadence — CNBC ("'Model fatigue' sets in as AI labs race to roll out new versions at a frenetic pace," 6 Sep), Startup Fortune, llm-stats (four frontier models in one week: Anthropic Claude Fable 5.1 + Mythos 5.1, 1 Sep; Meta Muse Spark 1.3, 2 Sep; Google Gemini 3.8 Flash, 2 Sep, third Flash in six weeks; OpenAI GPT-6 Astra, 3 Sep; buyers capping shortlists at ~5; labs valued near $1T; 1,100+ employees petitioned Washington) · The economics — Startup Fortune, Price Per Token (Anthropic Fable 5.1 kept headline rates flat but cut cached-input reads $1.00 → $0.25/M tokens, ~25–45% cheaper by workload) · The structural answer — enterprise-architecture analyses on model gateways and vendor lock-in (vendor-neutral abstraction layer; ~37% of orgs run 5+ models in production, up from ~29%; switching tax ~19–34%; lock-in lives in tuned prompts/workflows) · The value gate — McKinsey State of AI 2026 (differentiator is proprietary data and redesigned process, not the model; ~80% productivity vs ~37% EBIT; 32% skipped buying software they could build internally; large-enterprise agent scaling ~27%→~40%) · Deployment — CNBC, The Decoder (Microsoft Frontier Company: $2.5B, ~6,000 forward-deployed engineers) · Standards — Model Context Protocol (MCP 2026-07-28: EMA stable, CIMD replacing DCR; verified at the primary source in prior editions) · Enforcement — European Commission (EU AI Act GPAI/systemic-risk enforcement live 2 Aug 2026; fines to €15M / 3%, top tier €35M / 7%). Figures are relayed from lab, vendor, analyst, standards-body and secondary coverage and are marked "as reported"; several should be re-verified against the primary publications before republishing, and essentially all source domains were unreachable to direct fetch from the compile environment behind the network egress proxy, so the figures rest on search-engine extraction of the named sources. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 9 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
