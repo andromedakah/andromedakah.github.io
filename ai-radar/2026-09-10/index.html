@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 10 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'provenance' — OpenAI says a ~10,000-agent swarm produced a candidate proof of the 90-year-old Navier–Stokes problem in ~88 hours (~130B tokens), unverified and disputed over whether it used two researchers' private work; the same day, NSA/CISA/FBI accuse six China-based firms of industrial-scale distillation of U.S. frontier models. The board move: when value is produced by ingestion at machine scale, hold the provenance — a reconstructable record of what your AI consumed and by what right, guard the model boundary in both directions, and verify before you rely. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Where did it come from?</div>
+  <h1>The Provenance</h1>
+  <div class="subhead">Yesterday the story was the tide table — build one quay any ship can dock at. This morning the frame turns from how fast the ships arrive to what is inside the cargo and whether you can prove where it came from. A ~10,000-agent swarm produced a dazzling result no one could fully trace, and the same day the NSA, CISA and FBI said U.S. frontier models are being copied out at industrial scale. When value is made by ingestion at machine scale, the papers that trace what went in — and the watch on what is taken out — are the asset.</div>
+  <div class="meta">Thursday, 10 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">OpenAI says a swarm of ~10,000 coordinating agents, on an unreleased internal model, produced a candidate proof of the 90-year-old Navier–Stokes problem in ~88 hours — ~3M inter-agent messages, ~130B output tokens (CNBC, Fortune, VentureBeat, as reported). Sam Altman called it "one of the most amazing moments" in OpenAI history. Within hours it became a provenance dispute: NYU's Tristan Buckmaster and Anthropic's Levent Alpöge had a closely related result weeks earlier and questioned whether their private work was used; OpenAI denied direct access but "can't rule out having benefited from de-identified data derived from their use of its products," and the Clay Institute has not verified the proof. The same day, the mirror image: NSA/CISA/FBI advisory AA26-251A (8 Sep) accuses six China-based firms — DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun, Z.AI — of "industrial-scale" distillation of Claude, GPT, Gemini and Grok. One story asks what our agents consumed; the other, what is copied out of our models. Both are the same board question: can we produce the provenance?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday the radar handed you the tide table and told you to stop re-cutting the pier for every hull. This morning the frame moves from the <em>cadence</em> of arrivals to the <em>provenance</em> of the cargo, because the two loudest developments in the window are two faces of one problem: <strong>AI now produces value by ingesting knowledge at machine scale, and the ability to account for what went in — and what is taken out — has become the asset and the risk.</strong></p>
+<p><strong>The event — a 10,000-agent swarm produced a dazzling result, and a provenance dispute within hours.</strong> <strong>OpenAI says an internal model "significantly more capable than GPT-6 Astra," directing a swarm of ~10,000 coordinating agents, produced a candidate proof that the 3-D Navier–Stokes equations can develop a singularity — one of the Clay Mathematics Institute's $1M Millennium Prize Problems — after ~88 hours, ~3 million inter-agent messages and ~130 billion output tokens (CNBC, Fortune, VentureBeat, phys.org, as reported).</strong> Sam Altman called it "one of the most amazing moments for me in OpenAI history." But the applause was immediate and so was the dispute: <strong>NYU's Tristan Buckmaster and Anthropic's Levent Alpöge had proved a closely related finite-time-blowup result weeks earlier (breakthrough ~15 Aug, formalised in Lean ~22 Aug), and Buckmaster questioned whether OpenAI's system had accessed or benefited from their private Codex sessions; OpenAI denied direct access to their work but conceded it "can't rule out having benefited from de-identified data derived from their use of its products," and the Clay Institute has not verified the proof (Fortune, VentureBeat, Tom's Hardware, as reported).</strong> Terence Tao praised the human work as "a remarkable achievement" and warned against "converting a historically productive and motivating problem … into a mere viral social media post advertising some benchmark progress, rather than actually advancing the field" (Fortune, Nature, as reported).</p>
+<p><strong>The mirror — the other direction of the same problem, on the same day.</strong> <strong>The NSA, CISA and FBI issued joint advisory AA26-251A (8 Sep) naming DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun and Z.AI for "aggressive, malicious, and targeted distillation activities at an industrial scale that extract restricted proprietary functionalities and capabilities of U.S. frontier AI models" — billions of tokens across millions of exchanges from Claude, GPT, Gemini and Grok since late 2024, with DeepSeek's widely quoted $5.6M training cost called "misleading" because it excludes the value of data taken this way (CISA, Reuters, The Register, as reported).</strong> The agencies' recommended countermeasures are themselves a provenance regime: behavioural monitoring of who is extracting what, quietly degrading suspect outputs, and sharing threat intelligence. Read together, the two stories bracket the same reality: <strong>inbound, you must prove what your AI consumed and that you had the right to use it; outbound, you must assume what your models produce is being copied, and watch for it.</strong></p>
+<p><strong>The stakes — provenance is now a first-order asset, not a compliance afterthought.</strong> For a board, the lesson is blunt and it is not about who solved Navier–Stokes. It is that <strong>a brilliant artifact you cannot trace is a liability, not a moat.</strong> A proof no one can independently verify and whose inputs cannot be reconstructed is, in Tao's words, of "little value" — and in an enterprise, an agent output whose data lineage you cannot produce is something you can neither trust, defend as your own, nor prove you were entitled to make. The failure mode runs both ways: <strong>your agents silently ingest a partner's, a competitor's, or a regulated data subject's material and you cannot prove they did not; or your own proprietary data and model outputs are distilled away and you never see it happen.</strong> The board question stops being "how capable is the model?" and becomes "<strong>can we produce the provenance — a reconstructable record of what our AI consumed, our right to consume it, and what is being extracted from us?</strong>"</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — a swarm produced the masterwork, and no one can produce the papers.</strong> <strong>~10,000 agents, ~130B tokens, ~88 hours, an unverified $1M-problem proof — then a same-day dispute over whether it benefited from two researchers' private work; OpenAI "can't rule out" de-identified benefit (CNBC, Fortune, VentureBeat, as reported).</strong> Dazzling output, contested provenance.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The mirror — the same problem, pointed the other way.</strong> <strong>NSA/CISA/FBI (8 Sep) accuse six China-based firms of "industrial-scale" distillation of U.S. frontier models — billions of tokens, millions of exchanges, since late 2024 (CISA, Reuters, as reported).</strong> What you make is being copied out; what you consume must be accounted for.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — hold the provenance, guard the door both ways, verify before you rely.</strong> Attach a reconstructable record of inputs, data lineage and rights to every agentic work product; put data-boundary controls on both what your agents ingest and what leaves your models; and treat independent verification, not applause, as the test of an AI result.</div></div>
+<div class="card"><strong>Bottom line:</strong> the week that shipped four frontier models now shows you what to fear about them — not their speed, but the opacity of what they eat and what is eaten from them. <strong>The provenance is the paper trail that turns a dazzling artifact into an asset you can own, trust and defend.</strong> The households that keep their footing will do two unglamorous things. First, <strong>make provenance a requirement, not a nicety</strong> — every agent output carries a reconstructable record of what data and tools went into it and the right to use them, kept in logs the agents cannot alter, so you can prove your work is yours and prove it is clean. Second, <strong>guard the door in both directions</strong> — control what your agents ingest (so you cannot be accused of eating a rival's unpublished notebook) and assume what your models emit is being distilled (so you watch for it). You held the tide table yesterday; today, keep the provenance — because when the work is produced by ingestion at machine scale, the only durable thing is the record of where it came from.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖼️ "The Provenance"</h3>
+<p><em>Topic: This morning the enterprise-AI story turns from the cadence of models to the provenance of what they consume and emit. OpenAI says a swarm of ~10,000 agents on an internal model produced a candidate proof of the 90-year-old Navier–Stokes problem in ~88 hours (~3M messages, ~130B tokens; CNBC, Fortune) — and within hours it became a provenance dispute, with NYU's Buckmaster and Anthropic's Alpöge questioning whether their private work was used, OpenAI conceding it "can't rule out" benefiting from de-identified data, and the Clay Institute not verifying the proof. The same day, NSA/CISA/FBI advisory AA26-251A accused six China-based firms of "industrial-scale" distillation of U.S. frontier models. Both are the same board question: when value is produced by ingestion at machine scale, the record of what went in — and the watch on what is copied out — is the asset.</em></p>
+<p>There was once a great house of art — a gallery grown famous, its rooms hung with masterworks, its name a byword for the real thing. And in the old days the house had a simple discipline that everyone forgot to notice, because nothing important ever depended on it visibly: <strong>for every piece it held, it kept the papers.</strong> Where the work had been made, and by whose hand; whose collection it had passed through; what older works its maker had studied, and by what right. The papers were dull. They filled a back room no visitor ever asked to see. But they were the reason a piece on the gallery's wall was <em>worth</em> what the wall said it was — because the house could prove it was genuine, prove it was theirs to sell, and prove it had not been lifted from someone else's vault.</p>
+<p>Then a new kind of workshop opened in the town, and it worked at a speed no one had seen. Where a master had once labored a year over a single canvas, this workshop loosed a thousand hands at once — copyists, mixers, sketchers, finishers — all working through the night, passing sketches hand to hand, until by morning a finished masterwork stood in the courtyard, breathtaking, and the whole town came to gasp at it. The workshop's owner stood beside it and said, truthfully, <em>look what we made in a single night.</em> And it was magnificent. And then a quieter master from the next street came and stood before it and went pale, because in the sweep of one figure, in a particular solved problem of light, he saw his own unpublished study — the thing he had been laboring over privately for a year — and he asked the only question that mattered: <strong>whose hands went into this, and what did they study to make it? Show me the papers.</strong> And the workshop could not. It had a thousand hands and no ledger of who drew what, no record of which studies were consulted, no way to prove the courtyard masterwork had not, somewhere in the rush of the night, copied the neighbor's private sketch. The owner said, honestly, <em>we did not mean to, and we cannot prove we didn't.</em> And the magnificent thing in the courtyard, admired by the whole town, could not be sold, could not be trusted, and could not be defended — not because it was ugly, but because it had no provenance.</p>
+<p>And there was a second thing the great house learned that same season, from the other side of the same lesson. While it fretted over what its own workshops might have copied <em>in</em>, it discovered that forgers had been standing at its gallery windows for two years, studying its masterworks stroke by stroke, and turning out imitations to sell cheap in every market town — and boasting that their imitations had cost them almost nothing to make, which was true only because they had left out the one enormous cost they had simply taken: the years of work hanging on the great house's wall. The house had watched the front door for thieves and never thought to watch the <em>window</em> for eyes. What left the building as mere light — the look of a masterwork, seen through glass — was being carried off and sold, and the house had kept no watch on it at all.</p>
+<p>So the wise houses, the ones that lasted, rebuilt the dull discipline for the fast new age, and it looked like nothing next to the courtyard spectacle. <strong>They made provenance a requirement of every piece, no matter how fast it was made</strong> — a thousand hands could work through the night, but each finished thing carried a record of what studies it drew on and by what right, kept in a book the workshop could not go back and edit. <strong>They judged a work not by how much it dazzled but by whether they could account for it</strong> — a masterpiece they could not trace, they treated as a liability, not a treasure, and they let no piece onto the selling wall until an independent eye had verified it and its papers together. <strong>And they guarded the door in both directions</strong> — not only the front door against what might come in dirty, but the window against what was being copied out, watching who lingered too long at the glass, and marking their own works so a forgery could be named. They understood the thing the fast workshop never did: in an age when a masterwork can be made in a single night by a thousand borrowed hands, the value was never in the making. <strong>The value is in being able to say, and prove, where it came from.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is that a declaration of arrival is not arrival; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it; the tide table is building one quay any ship can dock at — and <strong>the provenance is what happens when a thousand borrowed hands can make a masterwork in a night: the making is no longer the moat, so you keep the papers that trace what went into the work and by what right, you guard the window as jealously as the door, and you trust nothing you cannot account for — because a work you cannot trace is a liability, however much it dazzles.</strong> A house that cannot produce the papers cannot own what it made, cannot defend it, and cannot see what is being copied off its walls.</p>
+<p><strong>The question it forces:</strong> <em>We held the tide table yesterday. This morning the harder question is the cargo, not the cadence — a thousand borrowed hands can make a masterwork in a night, and the whole town is gasping at the courtyard. So: for every dazzling thing our agents produce, can we produce the papers — a record of what data and tools went into it and by what right — or do we have a thousand hands and no ledger? Can we prove our work did not, somewhere in the rush, copy a neighbor's private sketch — or would we have to say, as the workshop did, "we did not mean to, and we cannot prove we didn't"? Do we trust a result because it dazzles, or only once an independent eye has verified it and its provenance together? And while we watch our own front door for what comes in dirty, is anyone watching the window — is our proprietary data and our models' output being copied off the wall and sold cheap, and would we even know? A masterwork will be made in the courtyard tomorrow. The only question is whether we can say where it came from.</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Can we produce the papers?</strong> A 10,000-agent swarm made a dazzling result whose provenance no one could produce, and the maker had to concede it "can't rule out" benefiting from someone's private data (Fortune, VentureBeat). <strong>For every material output our agents produce, can we reconstruct what data, tools and sources went into it, and prove we had the right to use them — or do we have a thousand hands and no ledger?</strong></li>
+  <li><strong>Do we trust results because they dazzle, or because they are verified?</strong> The proof is unverified and disputed, yet was announced as a triumph. <strong>Have we built independent verification and an audit of provenance into the path before any AI output is relied on, sold, or filed — or does a confident, impressive answer go straight to the customer, the regulator, or the board?</strong></li>
+  <li><strong>Are we watching the window as well as the door?</strong> NSA/CISA/FBI say U.S. frontier models are being distilled at industrial scale (CISA, 8 Sep). <strong>Do we assume our proprietary data and model outputs are being copied out, and do we monitor for extraction and mark what is ours — or do we only guard against what comes in?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model risk and IP risk now include data lineage: an agent output whose inputs you cannot trace is unauditable and potentially tainted. <strong>Can our model-risk and control functions reconstruct the full provenance of an agent's decision — every dataset, document and tool it consumed — well enough to satisfy a regulator or survive discovery, or is the chain opaque the moment a swarm is involved?</strong></li>
+  <li>The distillation advisory reframes proprietary data and models as extractable assets. <strong>Have we treated our proprietary trading, credit and customer models as things that can be distilled through their outputs, and put monitoring, rate controls and terms in place — the way we protect any other exfiltration-prone asset?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Patient data and unpublished research are exactly the "private sketch" the allegory warns of. <strong>Can we prove our agents did not ingest protected or unconsented data — and that our vendors' models are not retaining and learning from what we send — with zero-data-retention and reconstructable lineage, so a provenance challenge does not become a breach or an IP loss?</strong></li>
+  <li>Research integrity now turns on process, not just result. <strong>Before an AI-assisted finding enters a filing, a trial design or a publication, do we require a traceable, independently verifiable provenance — or would we, like the workshop, be unable to say what went into the answer?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Proprietary process data and designs are distillable through the tools that use them. <strong>Do we know what leaves the building when our engineers query external models with drawings, tolerances and process parameters — and have we assumed that output can be reconstructed and copied by a competitor?</strong></li>
+  <li>Long-lived safety and quality systems need auditable inputs. <strong>Can we produce the provenance of any AI-generated design, inspection or maintenance decision that touches a safety case — or is it an untraceable artifact we cannot defend to a regulator or a court?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Personalisation and pricing models are built on first-party data that competitors would love to distill. <strong>Are we watching for large-scale extraction of our models' outputs, and have we set terms and rate limits on the interfaces that expose them — or is our proprietary customer intelligence leaking out through its own answers?</strong></li>
+  <li>Provenance is becoming a consumer-trust and legal question. <strong>Can we prove the content, recommendations and creative our agents produce did not copy protected material, and would we know if they had — before it ships to millions?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty and assurance both require accountable inputs. <strong>Do our frameworks demand a reconstructable provenance for AI-assisted decisions — what data was consumed, from where, under what authority — so a citizen, an auditor or a court can trace it, and so we are never relying on an artifact we cannot account for?</strong></li>
+  <li>The EU AI Act's live transparency and documentation regime (since 2 Aug) expects evidence, not assurances. <strong>Can we produce documented evaluation and data-provenance evidence on demand — attached to our own governed records, not a vendor's word — and does it survive the fact that the answer came from a swarm we do not fully control?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Tide Table to the Provenance</h2>
+<p>Read the whole stack once more, but from the seat of the architect who has to decide, this afternoon, whether a brilliant answer from a swarm of agents is an asset she can defend or a liability she cannot trace. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is a claim about the age; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it; the tide table is building one quay any ship can dock at. <strong>The provenance sits over the whole stack as the discipline for a market whose newest capability — value produced by ingestion at machine scale — has quietly made <em>where it came from</em> more important than <em>how good it is</em>.</strong> The engineering point is blunt: <strong>when a swarm of thousands of agents can generate a masterwork overnight by consuming enormous, only-partly-traceable inputs, an output you cannot account for is not a moat — it is an exposure, on both the way in and the way out.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — the swarm as the new unit of work, and the provenance gap it opens.</strong> <strong>OpenAI reports an internal model directing ~10,000 coordinating agents that exchanged ~3 million messages and generated ~130 billion output tokens over ~88 hours to produce a candidate proof of a 3-D Navier–Stokes singularity — a $1M Clay Millennium Prize Problem, not yet verified by the Clay Institute (CNBC, Fortune, VentureBeat, phys.org, as reported).</strong> Read architecturally, the significance is not the theorem — it is that the <em>unit of AI work is now the orchestrated swarm</em>, and a swarm of 10,000 agents consuming 130B tokens is a system whose inputs are, in practice, extremely hard to fully trace. That is exactly why the provenance dispute followed within hours: OpenAI could deny direct access to Buckmaster and Alpöge's private work while conceding it "can't rule out having benefited from de-identified data derived from their use of its products" (VentureBeat, as reported). The gap between <em>we produced this</em> and <em>we can account for everything that went into it</em> is the whole story.</li>
+  <li><strong>The mirror — extraction is the same gap, pointed outward.</strong> <strong>NSA/CISA/FBI advisory AA26-251A (8 Sep) accuses DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun and Z.AI of "aggressive, malicious, and targeted distillation … at an industrial scale," extracting billions of tokens across millions of exchanges from Claude, GPT, Gemini and Grok since late 2024; DeepSeek's quoted $5.6M training cost is called "misleading" because it excludes the value of distilled data (CISA, Reuters, The Register, as reported).</strong> Distillation is the provenance problem in reverse: the value of a model can be reconstructed from its outputs and carried off, and unless you are watching the interface, you never see it leave. The agencies' own remedy — behavioural monitoring, degrading suspect outputs, sharing intelligence — is a provenance-and-egress regime bolted onto the model boundary.</li>
+  <li><strong>The answer — provenance as a first-class property of every agentic output.</strong> <strong>The structural response is to attach a reconstructable record to every material AI work product: what data and documents it consumed, which tools and models it called, whose data lineage it carries, and by what right — written to append-only logs the agents cannot alter — plus data-boundary controls on both directions of the model interface (zero-data-retention and private processing inbound; extraction monitoring, rate limits and watermarking outbound).</strong> This is the same seam the radar keeps returning to — <em>be able to account for what you run</em> — now aimed at the <em>inputs and outputs</em> of agentic work. The standards floor is real: <strong>MCP (2026-07-28) makes Enterprise-Managed Authorization stable and adopts Client ID Metadata Documents, and MCP is now the de-facto integration layer (reported at ~97M monthly SDK downloads and 9,400+ public servers) — the plumbing through which provenance and egress can be governed at one point rather than per application (Model Context Protocol; industry trackers, as reported).</strong></li>
+</ul></div>
+<p>The strategic core: <strong>when the making is done by a swarm and the inputs are only partly traceable, competitive advantage and legal safety migrate out of the output and into the record of its origin.</strong> Terence Tao made the point for mathematics and it transfers exactly to the enterprise: even a complete solution holds "little value" if the process behind it is opaque to outside scrutiny, and he warned against "converting a historically productive and motivating problem … into a mere viral social media post advertising some benchmark progress, rather than actually advancing the field" (Fortune, Nature, as reported). The board translation: <strong>a dazzling, unverifiable, untraceable artifact is not an achievement you can bank — it is a claim you cannot defend.</strong> The failure mode is precise and bidirectional: <strong>an estate that lets agents ingest whatever they reach and cannot reconstruct what went into an output can neither prove its work is clean nor prove it is its own — while an estate that never watches its model outputs is being distilled in plain sight and paying the full cost of R&D that a rival is taking for the price of an API call.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The provenance: a thousand borrowed hands can make a masterwork in a night, so the making is no longer the moat — the record of where it came from is. Top left, inbound, what did we consume: OpenAI's roughly 10,000 agents generated about 130 billion output tokens across about 3 million messages over about 88 hours to produce a candidate Navier–Stokes proof that is unverified by the Clay Mathematics Institute, and OpenAI can't rule out using two researchers' private data. Top right, outbound, what is copied off the wall: the NSA, CISA and FBI advisory AA26-251A of 8 September names six China-based firms — DeepSeek, Moonshot, Alibaba, MiniMax, StepFun and Z.AI — for industrial-scale distillation of Claude, GPT, Gemini and Grok. Between them, the same question in both directions: where did it come from? Middle, so what: value is now produced by ingestion at machine scale, a dazzling artifact you cannot trace is a liability not a moat, as Tao says an opaque process is of little value, and the record of origin is the asset. Bottom left, stop, trusting the dazzle: relying on impressive output, ingesting whatever agents reach, watching only the front door. Bottom right, start, holding the provenance: a reconstructable record of inputs and right, verifying before you rely, and guarding both doors with zero data retention inbound and extraction monitoring outbound." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="22" font-size="14" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE PROVENANCE — a thousand borrowed hands can make a masterwork in a night</text>
+  <text x="340" y="40" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The making is no longer the moat; the record of where it came from is.</text>
+
+  <!-- inbound -->
+  <rect x="34" y="60" width="300" height="126" rx="9" fill="#12212e" stroke="#2b6fb0"/>
+  <text x="52" y="82" font-size="11.5" font-weight="700" fill="#6fb3e6" font-family="sans-serif">INBOUND — what did we consume?</text>
+  <text x="52" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~10,000 agents · ~130B tokens</text>
+  <text x="52" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~3M messages · ~88 hours</text>
+  <text x="52" y="139" font-size="10" fill="#a9d3f0" font-family="sans-serif">candidate Navier–Stokes proof · UNVERIFIED</text>
+  <text x="52" y="159" font-size="10" fill="#a9d3f0" font-family="sans-serif">"can't rule out" using private data</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▲ dazzling output, contested provenance</text>
+
+  <!-- outbound -->
+  <rect x="346" y="60" width="300" height="126" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="364" y="82" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">OUTBOUND — copied off the wall?</text>
+  <text x="364" y="102" font-size="10.5" fill="#e8edf3" font-family="sans-serif">NSA/CISA/FBI AA26-251A (8 Sep)</text>
+  <text x="364" y="119" font-size="10.5" fill="#e8edf3" font-family="sans-serif">6 firms: DeepSeek, Moonshot, Alibaba,</text>
+  <text x="364" y="139" font-size="10" fill="#e8c98f" font-family="sans-serif">MiniMax, StepFun, Z.AI</text>
+  <text x="364" y="159" font-size="10" fill="#e8c98f" font-family="sans-serif">"industrial-scale" distillation</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ of Claude / GPT / Gemini / Grok</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#6fb3e6" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#6fb3e6"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e0b45f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the same question, both directions: where did it come from? ▼</text>
+
+  <!-- so what -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">SO WHAT? — value is now produced by ingestion at machine scale</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a dazzling artifact you cannot trace is a liability, not a moat</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Tao: an opaque, unverifiable process is of "little value"</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the record of origin — inbound and outbound — is the asset</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">the making is no longer the moat; being able to prove where it came from is</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="112" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">STOP: trust the dazzle</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· rely on impressive output</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ingest whatever agents reach</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· watch only the front door</text>
+  <text x="52" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a masterwork you cannot trace is a liability</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="112" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: hold the provenance</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· reconstructable record of inputs + right</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· verify before you rely (the "ear")</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· guard both doors: ZDR in / watch out</text>
+  <text x="364" y="479" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">keep the papers; guard the window too</text>
+
+  <!-- footer strip -->
+  <text x="340" y="516" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You held the tide table yesterday — today, keep the provenance: keep the papers, guard the window as jealously as the door.</text>
+  <text x="340" y="534" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">A house that cannot produce the papers cannot own what it made, defend it, or see what is copied off its walls.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#2b6fb0"></i>Inbound — what did we consume?</span>
+  <span><i class="dot" style="background:#8a6a2a"></i>Outbound — what is copied out?</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>So what — the record of origin is the asset</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Hold the provenance</span>
+</div>
+</div>
+
+<h3>Trusting the dazzle vs holding the provenance — the same output, two very different exposures</h3>
+<table>
+<tr><th>Trusting the dazzle</th><th>Holding the provenance</th></tr>
+<tr><td>"The answer is impressive, ship it"</td><td>"The answer is verified and traceable, then ship it"</td></tr>
+<tr><td>No record of what data/tools an output consumed</td><td>Reconstructable input, tool and data-lineage record per output</td></tr>
+<tr><td>Cannot prove work is clean or is our own</td><td>Can prove rights and origin; can defend and can own</td></tr>
+<tr><td>Agents ingest whatever they can reach</td><td>Data-boundary controls on what agents may consume</td></tr>
+<tr><td>Only the front door is watched</td><td>Both doors watched: ZDR/private processing in, extraction monitoring out</td></tr>
+<tr><td>Model outputs flow out unwatched (distillable)</td><td>Egress monitored, rate-limited, watermarked</td></tr>
+</table>
+
+<h3>Why "the provenance" is the discipline that matters now</h3>
+<div class="card">
+<p>For two years the enterprise question was <em>how capable is the model</em>, and it was a reasonable question when a single model answered a single prompt and you could read what you gave it. <strong>This week that question quietly changed shape: a swarm of ten thousand agents consumed 130 billion tokens to make one artifact, and neither its maker nor its critics could fully say what went into it.</strong> When value is produced by ingestion at that scale, "is the output good?" stops being sufficient, because a good output you cannot trace is one you cannot trust, cannot defend as yours, and cannot prove you were entitled to make. What separates a firm that compounds advantage from one that accumulates liability is no longer capability; it is whether it can produce the provenance — inbound and outbound — for everything its agents touch.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for what you run</strong> — now aimed at the <em>inputs and outputs</em> of agentic work. On a legacy estate the instinct is to celebrate the output and move on; in a swarm world that instinct is the trap, because the thing you cannot see is what the swarm consumed and what your models are leaking. The retrofit is <strong>record, restrict, verify, watch. Record:</strong> attach a reconstructable provenance to every material agent output — inputs, tools, data lineage, and the right to use them — in append-only logs the agents cannot alter. <strong>Restrict:</strong> put data-boundary controls on what agents may ingest, and demand zero-data-retention and private processing from vendors, so you can prove your agents did not eat what they should not have. <strong>Verify:</strong> treat independent verification, not confidence, as the gate before any output is relied on, sold or filed — the "ear" applied to provenance, not just quality. <strong>Watch:</strong> assume your models and data are being distilled, and monitor egress, rate-limit exposed interfaces and mark what is yours. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the two mills are whether it grinds flour, the miller's toll is what the cheap tier charges, the apprentice's apprentice is why a human must still hold the standard, the herald's proclamation is why you measure the age by your storehouse, the keyring is which key each agent holds, the locksmith is why you hold the tool that reads your own locks, the tide table is why you build one quay any ship can dock at — and <em>the provenance is why you keep the papers that trace what went into the work, guard the window as jealously as the door, and trust nothing you cannot account for.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is what happens when a lab rings the bell for the age; the keyring is what happens when every agent you admit is handed a key; the locksmith is what happens when the same tool can open any lock and mend it; the tide table is what happens when a grander ship arrives every week. The provenance is what happens when a thousand borrowed hands can make a masterwork in a night: keep the papers that trace what went into the work and by what right, guard the window as jealously as the door, verify before you trust — because in an age of ingestion at machine scale, the value was never in the making; it is in being able to prove where it came from.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — the swarm and the provenance gap.</strong> <strong>OpenAI: ~10,000 agents, ~3M messages, ~130B tokens, ~88 hours → a candidate Navier–Stokes singularity proof ($1M Clay problem), unverified; Altman calls it "one of the most amazing moments" (CNBC, Fortune, VentureBeat, phys.org, as reported).</strong> The swarm is the new unit of AI work.</li>
+  <li><strong>The dispute — contested inputs.</strong> <strong>Buckmaster (NYU) + Alpöge (Anthropic) had a related result (~15 Aug; Lean-verified ~22 Aug); OpenAI denied direct access but "can't rule out" benefiting from de-identified data derived from their product use; Tao praised the human work and warned against opaque, "viral" results (Fortune, Nature, Tom's Hardware, as reported).</strong> Provenance, not capability, is the fight.</li>
+  <li><strong>The mirror — distillation.</strong> <strong>NSA/CISA/FBI AA26-251A (8 Sep): six China-based firms (DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun, Z.AI) ran "industrial-scale" distillation of U.S. frontier models — billions of tokens, millions of exchanges, since late 2024; DeepSeek's $5.6M cost called "misleading" (CISA, Reuters, The Register, as reported).</strong> What you make is being copied out.</li>
+  <li><strong>The standards floor — govern provenance at one point.</strong> <strong>MCP 2026-07-28 (EMA stable, CIMD replacing DCR); MCP now the de-facto layer at a reported ~97M monthly SDK downloads and 9,400+ public servers — a single place to govern what agents consume and emit (Model Context Protocol; industry trackers, as reported).</strong> The plumbing under the provenance regime.</li>
+  <li><strong>The governance gap is quantified.</strong> <strong>A reported ~83% of businesses plan to roll out agentic AI but only ~24% have live controls such as tracking and guardrails (industry survey, as reported).</strong> Most estates cannot yet produce the papers.</li>
+  <li><strong>The regulator expects evidence, not assurances.</strong> <strong>EU AI Act enforcement live since 2 Aug 2026: transparency duties in force, high-risk rules pushed to Dec 2027, fines to €15M/3% (top tier €35M/7%); the EU AI Office is staffing up (European Commission, Help Net Security, as reported).</strong> Documented, reconstructable provenance is what an audit will ask for.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">One of the most amazing moments for me in OpenAI history was watching this happen over the past week.</div><div class="a">— Sam Altman (X, ~8–9 Sep 2026), on ~10,000 agents producing a candidate Navier–Stokes proof in ~88 hours (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[The opportunity cost lies in] converting a historically productive and motivating problem … into a mere viral social media post advertising some benchmark progress, rather than actually advancing the field.</div><div class="a">— Terence Tao (Mathstodon, Sep 2026), warning that an opaque, unverifiable AI result is of little value however impressive (Fortune, Nature, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Aggressive, malicious, and targeted distillation activities at an industrial scale that extract restricted proprietary functionalities and capabilities of U.S. frontier AI models.</div><div class="a">— NSA/CISA/FBI joint advisory AA26-251A (8 Sep 2026), on six China-based firms distilling Claude, GPT, Gemini and Grok (CISA, as reported)</div></blockquote>
+<blockquote><div class="q">"A house that cannot produce the papers cannot own what it made, cannot defend it, and cannot see what is being copied off its walls."</div><div class="a">— the radar, on why provenance, not the making, is now the moat</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The swarm as the new unit of work</td><td><span class="v">~10,000 coordinating agents · ~3M inter-agent messages · ~130B output tokens · ~88 hours → a candidate 3-D Navier–Stokes singularity proof</span></td><td>CNBC; Fortune; VentureBeat; phys.org (as reported)</td></tr>
+<tr><td>The proof is unverified</td><td><span class="v">A $1M Clay Millennium Prize Problem; NOT yet verified or accepted by the Clay Mathematics Institute</span></td><td>CNBC; Nature (as reported)</td></tr>
+<tr><td>Contested provenance</td><td><span class="v">Buckmaster (NYU) + Alpöge (Anthropic) had a related result (~15 Aug; Lean-verified ~22 Aug); OpenAI "can't rule out" benefiting from de-identified data derived from their product use</span></td><td>Fortune; VentureBeat; Tom's Hardware (as reported)</td></tr>
+<tr><td>Distillation, industrial scale</td><td><span class="v">NSA/CISA/FBI AA26-251A (8 Sep): 6 China-based firms extracted billions of tokens across millions of exchanges from Claude/GPT/Gemini/Grok since late 2024</span></td><td>CISA; Reuters; The Register (as reported)</td></tr>
+<tr><td>The hidden cost of a "cheap" model</td><td><span class="v">DeepSeek's widely quoted $5.6M training cost called "misleading" because it excludes the value of data acquired via distillation</span></td><td>CISA; The Hacker News (as reported)</td></tr>
+<tr><td>The governance gap</td><td><span class="v">~83% of businesses plan to roll out agentic AI; only ~24% have live controls such as tracking and guardrails</span></td><td>Industry survey (as reported)</td></tr>
+<tr><td>The de-facto governance point</td><td><span class="v">MCP 2026-07-28: EMA stable, CIMD replacing DCR; MCP at a reported ~97M monthly SDK downloads and 9,400+ public servers</span></td><td>Model Context Protocol; industry trackers (as reported)</td></tr>
+<tr><td>Enforcement is live</td><td><span class="v">EU AI Act: transparency duties in force since 2 Aug 2026; high-risk rules pushed to Dec 2027; fines to €15M / 3% (top tier €35M / 7%)</span></td><td>European Commission; Help Net Security (as reported)</td></tr>
+<tr><td>Coding is the first big agent market</td><td><span class="v">Cognition AI reported at a ~$48B valuation, on demand for coding agents</span></td><td>Tech Startups (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Make provenance a requirement, not a nicety: attach a reconstructable record to every material agent output.</strong> A swarm produced a masterwork no one could trace, and its maker had to concede it "can't rule out" using someone's private data. <strong>This month, require that every material AI work product carries a record of what data and documents it consumed, which tools and models it called, whose data lineage it carries, and the right to use them — written to append-only logs the agents cannot alter.</strong> Report one number to the board: the share of production agent outputs for which we can, today, reconstruct their full inputs and prove our right to them — and the target.</li>
+  <li><strong>Guard the door in both directions.</strong> Inbound, you must be able to prove your agents did not ingest what they should not have; outbound, you must assume your models and data are being distilled. <strong>Put data-boundary controls on what agents may consume, demand zero-data-retention and private processing from model vendors, and — per the NSA/CISA/FBI advisory — monitor your exposed model interfaces for large-scale extraction, rate-limit them, and mark what is yours.</strong> Report our zero-data-retention coverage on sensitive workloads and whether we would detect industrial-scale extraction of our own models' outputs.</li>
+  <li><strong>Verify before you rely — treat the dazzle as a claim, not a conclusion.</strong> The proof is impressive, unverified and disputed; Tao's point is that an opaque result is of "little value" however good it looks. <strong>Put independent verification and a provenance check in the path before any AI output is relied on, sold, or filed — the "ear" applied not just to whether the answer is right, but to whether we can account for how it was made.</strong> Report the share of high-stakes AI outputs that pass an independent verification-and-provenance gate before use — and set a target to close the rest. <strong>The model is rented and swapped weekly, the knowledge is the moat, the census is the roll, the inspector asks for it, the keyring is which key each agent holds, the locksmith is the tool that reads your own locks, the tide table is the quay any ship can dock at — and the provenance is why you keep the papers that trace what went into the work, guard the window as jealously as the door, and trust nothing you cannot account for.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — CNBC ("OpenAI claims to have solved the 90-year-old Navier-Stokes math problem in 88 hours," 9 Sep), Fortune, VentureBeat, phys.org, Nature, CNN (a ~10,000-agent swarm on an internal model, ~3M messages, ~130B output tokens, ~88 hours → a candidate 3-D Navier–Stokes singularity proof, a $1M Clay Millennium Prize Problem not yet verified; Altman: "one of the most amazing moments") · The dispute — Fortune, VentureBeat, Tom's Hardware, Mathstodon/Terry Tao (Buckmaster (NYU) + Alpöge (Anthropic) related result ~15 Aug, Lean-verified ~22 Aug; OpenAI denied direct access but "can't rule out" benefiting from de-identified data; Tao praised the human work, warned against opaque "viral" results) · The mirror — CISA (advisory AA26-251A, 8 Sep), Reuters/CyberScoop, The Register, The Hacker News (six China-based firms — DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun, Z.AI — "industrial-scale" distillation of Claude/GPT/Gemini/Grok since late 2024; DeepSeek's $5.6M cost "misleading") · Standards — Model Context Protocol (MCP 2026-07-28: EMA stable, CIMD replacing DCR; ~97M monthly SDK downloads, 9,400+ public servers, as reported) · Governance gap — industry surveys (~83% plan agentic AI, ~24% have live controls) · Enforcement — European Commission, Help Net Security (EU AI Act transparency live 2 Aug 2026; high-risk pushed to Dec 2027; fines to €15M / 3%, top tier €35M / 7%) · Context — Tech Startups (Cognition AI ~$48B). Figures are relayed from lab, agency, analyst, standards-body and secondary coverage and are marked "as reported"; several should be re-verified against the primary publications before republishing, and essentially all source domains were unreachable to direct fetch from the compile environment behind the network egress proxy, so the figures rest on search-engine extraction of the named sources. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 10 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
