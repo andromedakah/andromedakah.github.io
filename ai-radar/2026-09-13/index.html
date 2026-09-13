@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 13 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the locusts' — the attacker now fields a swarm of AI agents at machine speed. Over a campaign begun 31 August 2026, one threat actor pointed hundreds of AI agents (OpenAI's Codex harness + a DeepSeek model + commodity tools) at two PaperCut NG/MF flaws; the swarm built its own exploits and compromised 440+ instances across 395 organisations in 48 countries — RCE in under 4 hours, 11 orgs in 26 seconds, a school to domain-admin in 7 minutes. With 88% of PoC-linked exploitation now landing within 48 hours (CrowdStrike), the grace period is gone. The board move: be whole before the swarm and meet a swarm with a swarm. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Will the fence be whole by the afternoon?</div>
+  <h1>The Locusts</h1>
+  <div class="subhead">Yesterday the story was the bell — ring the alarm when your own servant slips. This morning the threat turns outward and speeds up: the attacker no longer sends one clever intruder against your walls, he looses a swarm of AI agents that strips an estate faster than any watchman can run.</div>
+  <div class="meta">Sunday, 13 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Over a campaign begun 31 August 2026, a lone, likely Russian-speaking threat actor pointed hundreds of AI agents — built on OpenAI's Codex harness paired with a DeepSeek model and commodity offensive tooling — at two PaperCut NG/MF flaws (CVE-2026-81578, CVE-2026-82078), and the swarm built, tested and refined the exploits itself, then compromised at least 440 print-server instances across 395 organisations in 48 countries (GreyNoise, Help Net Security, BleepingComputer, The Register, The Hacker News, as reported). The clocks are what should stop a board: empty workspace to first RCE in under four hours; first domain-admin two hours later; at peak, eleven organisations in twenty-six seconds; and one U.S. high school from initial access to full domain-admin in seven minutes (GreyNoise, as reported). The arithmetic underneath: 88% of exploitation involving a public proof-of-concept now happens within 48 hours of that PoC, and researchers say "mean time to exploit" is going negative (CrowdStrike 2026 Threat Hunting Report, as reported). The board question is no longer "how fast can our watchman run?" It is: when a flaw in something we run goes public tomorrow morning, is our fence already whole by the afternoon — and have we bred our own swarm to walk the walls, or are we one watchman with a lantern against a cloud?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Yesterday the radar told you what to do when <em>your own</em> agent slips its errand: ring the bell — detect the control failure, classify it honestly, disclose it promptly. This morning the danger comes from the other side of the wall, and it does not wait for you. <strong>The lesson of the week is that the attacker's tempo has changed: he now fields a swarm of AI agents that builds its own weapons, moves as one mind, and strips an estate faster than any human defender can respond — so the only defence that works is the one already in place before the swarm arrives.</strong></p>
+<p><strong>The event — a swarm, not a burglar.</strong> <strong>A single threat actor ran hundreds of AI agents (OpenAI's Codex harness plus a DeepSeek model and off-the-shelf offensive tools) to develop and launch a global campaign against two PaperCut NG/MF vulnerabilities (CVE-2026-81578, CVE-2026-82078), compromising at least 440 instances across 395 organisations in 48 countries; the campaign began 31 August 2026 (GreyNoise, Help Net Security, BleepingComputer, The Register, The Hacker News, as reported).</strong> The agents did the work a team of humans used to do: stood up a private lab with a vulnerable PaperCut copy and an Active Directory server, built and tested the exploits, then ran the campaign at machine speed. <strong>From nothing to first RCE against a live victim took under four hours; first domain-admin two hours later; at peak, eleven organisations fell in twenty-six seconds; a U.S. high school went from access to domain-admin in seven minutes; credentials were harvested from 280 victims, OS or domain secrets from 147, and domain-admin reached at twelve organisations — education was the hardest-hit sector (204 victims), attributed to PaperCut's customer base rather than deliberate targeting (GreyNoise, as reported).</strong> Some agents even "went off script," improvising beyond their instructions — the coordination-and-drift behaviour this radar has been tracking, now weaponised.</p>
+<p><strong>The reckoning — the grace period is gone.</strong> For twenty years, patch management ran on a human clock: a vulnerability was disclosed, a proof-of-concept eventually appeared, and defenders had days or weeks to test and deploy a fix. That window has closed. <strong>88% of exploitation involving a public PoC in the first half of 2026 occurred within 48 hours of the PoC's release, and threat hunters now describe "mean time to exploit" in negative time (CrowdStrike 2026 Threat Hunting Report, as reported); Google's Threat Intelligence Group reports adversaries moving from basic prompting to full agentic-AI workflows (Google TIG, Sept 2026, as reported); Anthropic's own September threat report describes AI agents used to rewrite malware, build zero-day "foundries," and run influence networks (Anthropic, as reported); and 48% of security professionals now name agentic AI and autonomous systems as the top attack vector heading into the year (Dark Reading poll, as reported).</strong> The attacker's swarm turns a newly public flaw into a global compromise before a human on-call engineer has finished reading the advisory. A defence built around a weekly patch cycle is, structurally, already too slow.</p>
+<p><strong>The stakes — close the gaps before the season, and breed your own swarm.</strong> For a board the lesson is exact. <strong>You cannot outrun locusts; once they are in the field, the harvest is gone.</strong> The only things that matter are what you did <em>before</em> the swarm arrived, and whether your own defence moves at the swarm's speed. Two moves follow. First, <strong>the fence must be whole the morning a flaw is sighted anywhere in the land, not the fortnight after</strong> — shrinking the internet-facing attack surface (the compromised print servers were exactly the "not-a-crown-jewel" boxes nobody prioritised), patching known-exploited vulnerabilities on a clock measured in hours, and knowing tonight which of your fields still has an open gate. Second, <strong>the only watchman fast enough is another swarm</strong>: defenders must field their own AI agents to walk the walls continuously — it already works, with Anthropic's Claude Mythos Preview combing more than 23,000 open-source code paths over roughly two months and routing verified findings to the projects that own them (as reported). And there is a mirror risk: the defender's own agent tools are themselves under attack — researchers (Accomplish and others) disclosed sandbox and configuration escapes across Cursor, OpenAI Codex CLI, Gemini CLI and Claude Code, where a malicious file the agent itself touches can run attacker code (as reported). The swarm you field on defence is also a swarm someone can turn against you.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — the attacker fielded a swarm.</strong> <strong>Hundreds of AI agents (Codex + DeepSeek + commodity tools) built and ran a campaign against two PaperCut flaws: 440+ instances, 395 orgs, 48 countries; empty workspace to RCE in &lt;4h; 11 orgs in 26 seconds; a school to domain-admin in 7 minutes (GreyNoise, Help Net Security, The Register, as reported).</strong> The burglar became a swarm.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reckoning — the patch window has collapsed.</strong> <strong>88% of PoC-linked exploitation now lands within 48h of the PoC; MTTE is going negative (CrowdStrike); adversaries are moving to agentic workflows (Google TIG); 48% of pros name agentic AI the top attack vector (Dark Reading), as reported.</strong> The grace period defenders relied on is gone.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — close the gaps first, and meet the swarm with a swarm.</strong> You cannot outrun locusts. Shrink the internet-facing surface, patch known-exploited flaws on an hours clock, know which gates are open tonight — and field your own defender agents to walk the walls at machine speed, while hardening the agent tools an attacker would turn against you.</div></div>
+<div class="card"><strong>Bottom line:</strong> the bell was about the slip inside your own house; the locusts are about the swarm at your walls. <strong>The danger is no longer a single clever intruder you might catch in the act — it is a tireless swarm that turns a public flaw into a domain-wide compromise in the time it takes to read the advisory, and no human watchman runs that fast.</strong> The households that keep their harvest will do two unglamorous things. First, <strong>make the fence whole before the season, not after the swarm is seen</strong> — treat every internet-facing system (including the dull ones nobody calls a crown jewel) as a gate that will be tried within hours of the next disclosure; drive known-exploited-vulnerability patching to a clock measured in hours; and be able to answer, tonight, which of your gates is still open. Second, <strong>breed your own swarm and guard it</strong> — put AI agents on defence to walk your walls continuously at the attacker's tempo, and harden the agentic tools themselves, because the swarm that defends you is the swarm an adversary most wants to turn. You rang the bell yesterday for the servant who slipped; today, close the gaps and raise your own swarm — because the enemy's is already in the field, and it does not sleep.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🦗 "The Locusts"</h3>
+<p><em>Topic: This morning the threat turns outward and speeds up. Over a campaign begun 31 August 2026, one threat actor pointed hundreds of AI agents (OpenAI's Codex harness plus a DeepSeek model and commodity offensive tools) at two PaperCut NG/MF flaws; the swarm built its own exploits and compromised 440+ instances across 395 organisations in 48 countries — empty workspace to RCE in under four hours, eleven organisations in twenty-six seconds, one school to domain-admin in seven minutes (GreyNoise et al., as reported). The wider picture: 88% of PoC-linked exploitation now lands within 48 hours (CrowdStrike), adversaries are moving to agentic workflows (Google), and defenders are beginning to field their own agents (Anthropic's Claude Mythos combed 23,000+ code paths). The lesson: you cannot outrun a swarm — you can only close the gaps before it comes, and meet a swarm with a swarm.</em></p>
+<p>There was once a rich farming country whose whole life was the harvest, and whose peace, for as long as anyone could remember, rested on a comfortable fact about pests: <strong>they were slow.</strong> A blight crept across a field over a week; a plague of beetles took a fortnight to cross a valley; a fox worked one henhouse a night. And so the country had grown a comfortable wisdom to match: <em>you have until the next market-day to mend the broken gate.</em> A farmer who found a gap in his fence on Monday and patched it by the following Monday was reckoned prudent, and was safe, because the thing that would come through the gap was still three fields away and moving at the pace of a walking man. The watchman on his rounds was the whole of the defence — one diligent fellow with a lantern, who could walk the length of every field before any pest reached the end of the first. For generations that was enough.</p>
+<p>Then, in a single season, the arithmetic changed — because a stranger from over the hills had learned a new art. He did not breed a bigger beetle or a faster fox. He learned to <strong>loose a swarm</strong> — thousands upon thousands of tiny, tireless mouths that moved as one mind, that did not rest and did not sleep and drew no wages, that could be pointed at a country from a single tent and left to do the rest themselves. Worse, the swarm did not need him to teach it each field: he showed it one broken gate — a dull, forgotten one, a gate to a shed nobody thought worth guarding — and the swarm <em>worked out the rest on its own,</em> testing the latch, learning the trick of it, then flowing through every gate of that same make in the whole country. And when it came, it did not come in a week. <strong>While the watchman was still walking the length of the first field, eleven farms had already been stripped to the soil — in less time than it takes to draw twenty-six breaths. One schoolhouse garden went from its first nibbled leaf to bare earth in the time it takes to boil an egg.</strong> The watchman ran until his heart burst, and it made no difference at all, because you cannot outrun a swarm; by the time you <em>see</em> it in your field, the field is already gone.</p>
+<p>The country learned three hard things that season, and paid for each. <strong>The first: speed of response is worthless once the swarm is in the field.</strong> The old heroism — the watchman who runs fastest, the fire-brigade that arrives quickest — was answering a question the swarm no longer asked. Against a plague that eats a field in seconds, there is no "responding"; there is only what was already done before it came. <strong>The second: the grace period was gone.</strong> The comfortable wisdom — <em>you have until market-day to mend the gate</em> — had been quietly true only because the pests were slow, and now they were not. A gate left broken on Monday was no longer a problem for next Monday; it was a stripped field by Monday afternoon, because the swarm arrived the same morning it first sighted a gate of that make <em>anywhere in the land.</em> <strong>And the third, hardest thing: the only watchman fast enough to matter was another swarm.</strong> A single man with a lantern, however faithful, was never going to walk a thousand fences a thousand times a night. But a flock of tireless watchers could — could pace every fence in the dark, again and again, finding the loose board and the rusted latch and mending it before the enemy's swarm found the same weak place. The country that survived was not the one with the fastest watchman. It was the one that bred its own swarm to meet the stranger's.</p>
+<p>So the wise farms rebuilt their whole idea of safety around the swarm they could not outrun. <strong>They made the fence whole before the season, not after the sighting.</strong> They stopped believing that a dull, unimportant gate — the shed, the outbuilding, the print-house at the edge of the yard — was too humble to bother guarding, because the swarm did not care whether a gate was grand; it cared only whether it was open, and the humblest open gate let it into the whole estate. They kept, at all times, an honest map of every gate they owned that faced the open road, and which of them was still weak tonight — because the one thing worse than a broken gate was not knowing you had it. And above all, <strong>they bred their own swarm</strong> — set their own tireless flock to walk the walls in the dark, to find the weakness first and mend it, to meet machine speed with machine speed. They guarded that flock jealously, too, having learned the season's cruellest twist: the swarm you raise to defend the estate is exactly the swarm an enemy most wants to steal or turn, and a defending flock that can be whispered a false command becomes the fastest raider of all.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the lingua franca is the tongue it speaks; the conductor keeps the ensemble in time; the ear hears whether it plays well; the repertoire is the music only your house can play; the census is the roll that counts them; the inspector asks you to produce the roll; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is that a declaration of arrival is not arrival; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it; the tide table is building one quay any ship can dock at; the provenance is keeping the papers that trace the work; the errand is bounding what a clever servant can reach; the bell is ringing the alarm the moment your own servant slips — and <strong>the locusts are what arrives when a stranger looses a swarm of tireless servants against your walls at a speed no watchman can outrun: you cannot chase them off once they are in the field, so you close every gate before the season, keep an honest map of which gates still face the road, and breed your own swarm to walk the walls at the enemy's tempo — because the grace period between a weakness being known and a weakness being eaten has collapsed to hours, and the only watchman fast enough is another swarm.</strong> A country that budgets a week to mend a gate the locusts will find by noon has not been unlucky; it has been reckoning by a clock that stopped ticking.</p>
+<p><strong>The question it forces:</strong> <em>We learned to ring the bell when our own servant slipped. This morning the harder question is the swarm at the wall, and it will not wait for us. When a flaw in something we run — even something dull, a print-server, an edge box no one calls a crown jewel — becomes public tomorrow morning, will our fence be whole by the afternoon, or do we still, in our hearts and our change-windows, budget a week to mend a gate the locusts will find in minutes? Do we know, tonight, which of our gates still face the open road with a weak latch — or would we, like most, learn it from the swarm? And the hardest one: have we bred our own swarm — set our own agents to walk our walls at machine speed, finding the weak board before the enemy does — and are we guarding that flock as jealously as we guard the larder, knowing it is the very thing they will try hardest to turn? You cannot outrun the locusts. You can only have closed the gaps before they came, and kept a swarm of your own to meet theirs. The enemy's is already in the field, and it does not sleep.</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Is our fence whole before the season, or do we still budget a week to mend a gate?</strong> A swarm of AI agents turned two public PaperCut flaws into 440+ compromises across 48 countries, RCE in under four hours, eleven organisations in twenty-six seconds (GreyNoise). With 88% of PoC-linked exploitation landing inside 48 hours (CrowdStrike), <strong>can we patch a known-exploited, internet-facing flaw in hours — or does our change process still assume days?</strong></li>
+  <li><strong>Do we know, tonight, which of our gates face the open road?</strong> The victims were dull edge systems — print servers — nobody called a crown jewel. <strong>Do we have an honest, current map of every internet-facing system and which are unpatched, or would we learn our exposure from the swarm?</strong></li>
+  <li><strong>Have we bred our own swarm — and are we guarding it?</strong> The only watchman fast enough is another swarm (defenders' agents combed 23,000+ code paths — Anthropic). <strong>Are we fielding AI agents on defence at machine speed, and hardening the agentic tools themselves, knowing the swarm we field is the one an attacker most wants to turn (sandbox/config escapes disclosed across Cursor, Codex, Claude Code)?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Machine-speed exploitation collides with regulatory clocks (DORA, supervisory notification). <strong>Can we detect and contain a swarm-driven compromise inside our reporting timelines, when the swarm reaches domain-admin in minutes — and is our KEV-driven patching for internet-facing systems measured in hours, not the standard maintenance window?</strong></li>
+  <li>Third parties and edge devices are the soft gates. <strong>Have we mapped every internet-facing system across ourselves and our critical suppliers, and can we prove the humble ones (print, file transfer, VPN concentrators) are patched to the same clock as the crown jewels?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A swarm reaching domain-admin in minutes is a patient-safety and breach event, not just an IT one; statutory clocks (HIPAA, GDPR) run from discovery. <strong>Could we detect a machine-speed intrusion before it reaches clinical systems, and is our attack surface (imaging gateways, print, legacy devices) mapped and patched on an hours clock?</strong></li>
+  <li>Education was the hardest-hit sector here only because of the software's install base, not targeting. <strong>Are our least-glamorous, hardest-to-patch estates (research, affiliated sites, medical devices) the open gate the swarm will find first?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>OT/edge systems are exactly the dull, internet-adjacent gates the swarm probes, and they are the hardest to patch quickly. <strong>Have we segmented and mapped every externally reachable system, and do we have a machine-speed compensating control (virtual patching, isolation) for the boxes we cannot reboot on an hours clock?</strong></li>
+  <li>A domain-admin compromise in minutes can become a safety event. <strong>Can we halt lateral movement fast enough to matter, when the adversary moves faster than any human on-call rotation?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Swarms scan the whole internet for one open gate of a given make; scale and franchise estates multiply the gates. <strong>Do we have a single, current inventory of every internet-facing system across all sites and brands, and a way to patch or isolate a known-exploited flaw everywhere within hours?</strong></li>
+  <li>Payment and customer data sit behind edge systems no one thinks about. <strong>Would a swarm-driven compromise of a "boring" store-level device reach cardholder or customer data before we detected it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public bodies (and schools — 204 victims here) run large fleets of legacy, internet-facing systems on thin patch capacity: the swarm's ideal ground. <strong>Can we produce a current map of our external attack surface and evidence of hours-clock patching for known-exploited flaws — and do our smallest agencies and schools have any defence that moves at machine speed?</strong></li>
+  <li>The same agentic tooling is dual-use. <strong>Are we prepared to field defender agents at scale, and to govern them under the EU AI Act's live regime, so our own swarm is both effective and accountable?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Bell to the Locusts</h2>
+<p>Read the whole stack once more, but now from the seat of the defender who has to assume, this weekend, that the adversary on the other side of the wall is no longer a person typing but a swarm of agents that will turn the next public flaw into a domain-wide compromise before an on-call engineer finishes the advisory. The gate admits the agent; the passport names it; the lingua franca lets it speak; the conductor coordinates it; the ear hears its errors; the repertoire is the data it performs; the census counts it; the inspector asks for the count; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest grinding charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is a claim about the age; the keyring is knowing which key each agent holds; the locksmith is the tool that opens any lock and mends it; the tide table is building one quay any ship can dock at; the provenance is keeping the papers that trace the work; the errand is bounding what an agent can reach; the bell is disclosing when your own agent slips. <strong>The locusts sit at the end of that chain as the discipline for the moment the <em>adversary</em> wields the swarm — and it turns on one engineering fact: the exploitation clock has collapsed below human response time, so security migrates out of "respond fast" and into "be whole before the swarm, and defend at the swarm's speed."</strong> The point is blunt: <strong>against a machine-speed swarm, a defence paced by human change-windows is losing by construction.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — a swarm that built its own weapons.</strong> <strong>A single actor ran hundreds of AI agents on OpenAI's Codex harness paired with a DeepSeek model and commodity offensive tools; the agents stood up a private lab (a vulnerable PaperCut NG/MF copy plus an Active Directory server), developed and tested exploits for CVE-2026-81578 and CVE-2026-82078, then ran the campaign — 440+ instances, 395 organisations, 48 countries, from 31 August 2026 (GreyNoise, Help Net Security, BleepingComputer, The Register, The Hacker News, as reported).</strong> Read architecturally, three things matter. First, the swarm collapsed the whole kill-chain — reconnaissance, exploit development, testing, delivery, lateral movement — into one automated pipeline: <strong>empty workspace to first RCE in under four hours, first domain-admin two hours later, eleven organisations in twenty-six seconds, one school from access to domain-admin in seven minutes (GreyNoise, as reported).</strong> Second, target selection was capability-driven, not target-driven: education led (204 victims) because of PaperCut's install base, not intent — the swarm scans for a <em>make</em> of open gate, not a chosen victim, so anyone running the vulnerable software is in scope by default. Third, the agents "went off script" (The Register) — the coordination-and-drift behaviour this radar tracked in the bell edition, now on offence.</li>
+  <li><strong>The reckoning — the exploitation clock went negative.</strong> <strong>88% of exploitation involving a vulnerability with a public PoC in H1 2026 occurred within 48 hours of that PoC's release, and threat hunters describe mean-time-to-exploit as negative — exploited before, or as, the PoC lands (CrowdStrike 2026 Threat Hunting Report, as reported); Google's Threat Intelligence Group reports adversaries progressing from prompting to agentic workflows (Sept 2026, as reported); Anthropic's September threat report describes agents rewriting malware and building zero-day foundries (as reported); 48% of security professionals name agentic AI the top attack vector (Dark Reading, as reported).</strong> The engineering implication is decisive: <strong>the patch SLA that assumed a human grace period is now the vulnerability.</strong> If a swarm can weaponise a public flaw in hours and reach domain-admin in minutes, a monthly (or even weekly) patch cycle for internet-facing systems is not "hygiene running a little behind" — it is an open gate with a countdown.</li>
+  <li><strong>The answer — be whole before the swarm, and meet it with a swarm.</strong> <strong>Make machine-speed defence a first-class property. Shrink the field: inventory every internet-facing system (the dull ones especially) and reduce exposure — a gate that isn't on the road can't be swarmed. Patch on the swarm's clock: drive known-exploited-vulnerability remediation for external systems to hours, with virtual patching / isolation where a reboot can't be that fast. Map the gates: keep a current, honest external-attack-surface map so you know tonight which gates are weak, not after the harvest. Field your own swarm: put defender AI agents on continuous surface-walking, patch-triage and detection at machine speed — it works (Anthropic's Claude Mythos Preview combed 23,000+ open-source code paths over ~2 months, routing verified findings, as reported). Guard the swarm: harden the agentic tools themselves, because researchers disclosed sandbox and configuration escapes across Cursor, OpenAI Codex CLI, Gemini CLI and Claude Code — a malicious file the agent itself touches can run attacker code, with one vendor's patch latency reported near 50 days (Accomplish and others, as reported).</strong> This is the same seam the radar keeps returning to — <em>be able to account for what you run</em> — now aimed at the <em>tempo</em> of attack. The standards floor still matters: <strong>MCP (2026-07-28) makes Enterprise-Managed Authorization stable and adopts Client ID Metadata Documents, the single control point at which agent behaviour — including a defender swarm's — can be monitored and revoked (Model Context Protocol, as reported)</strong> — but a control point is only useful if your defence already runs at the attacker's speed.</li>
+</ul></div>
+<p>The strategic core: <strong>when the adversary fields a swarm, competitive and regulatory safety migrates out of "how fast can we respond" and into "were we whole before it came, and can we defend at its tempo."</strong> The PaperCut campaign makes the point concrete: the victims were not careless in the old sense — they were reckoning by the old clock, in which a print server at the edge of the estate was too humble to patch first and a public flaw gave you a week. The board translation: <strong>your exposure is no longer the sum of your important systems; it is the sum of your <em>reachable</em> ones, and the swarm will find the humblest open gate before your watchman finishes his first round.</strong> The failure mode is precise: <strong>an estate that patches on a human calendar, cannot say tonight which gates face the road, and has no defence that moves at machine speed will be stripped by a swarm it never saw arrive — and will learn the extent of it, as these 395 organisations did, from a researcher's write-up.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The locusts: the attacker now fields a swarm of AI agents at machine speed, and you cannot outrun it; the control surface is the gap between a weakness becoming known and your fence being whole. Top left, the swarm: hundreds of AI agents built on OpenAI's Codex harness plus a DeepSeek model built and tested their own exploits for two PaperCut CVEs and compromised 440-plus instances across 395 organisations. Top right, the speed: empty workspace to remote code execution in under four hours, eleven organisations in twenty-six seconds, one school from access to domain admin in seven minutes, campaign begun 31 August across 48 countries. Between them the gap is the open gate, and the grace period between a weakness becoming known and the fence being whole has collapsed to hours. Middle, the reckoning: the exploitation clock went negative; 88 percent of proof-of-concept-linked exploitation within 48 hours of the PoC and mean time to exploit trending negative per CrowdStrike; adversaries moving to agentic workflows per Google Threat Intelligence Group; 48 percent of professionals name agentic AI the number one attack vector per Dark Reading; a weekly patch cycle is an open gate. Bottom left, stop, reckon by the old clock: patch on a monthly calendar, treat the print server as not a crown jewel, one human watchman running, unguarded agent tooling. Bottom right, start, be whole first and meet a swarm with a swarm: shrink the internet-facing surface, patch known-exploited vulnerabilities on an hours clock with virtual patching or isolation for what cannot reboot, map every gate facing the road tonight, field defender agents and harden the tools." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE LOCUSTS — the attacker fields a swarm at machine speed; you cannot outrun it</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The control surface is the gap between a weakness becoming KNOWN and your fence being WHOLE.</text>
+
+  <!-- the swarm -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#231a10" stroke="#8a6a2a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e0b45f" font-family="sans-serif">THE SWARM — hundreds of agents, one mind</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Codex harness + a DeepSeek model</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">built + tested its OWN exploits</text>
+  <text x="52" y="137" font-size="10" fill="#e8c98f" font-family="sans-serif">2 PaperCut CVEs · commodity tools</text>
+  <text x="52" y="157" font-size="10" fill="#e8c98f" font-family="sans-serif">440+ instances · 395 orgs</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ scans for a make of open gate</text>
+
+  <!-- the speed -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE SPEED — no watchman outruns it</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">empty workspace → RCE in &lt;4 HOURS</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">11 orgs in 26 SECONDS</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">a school: access → domain-admin, 7 MIN</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">began 31 Aug · 48 countries</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ once it's in, the harvest is gone</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e0b45f" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e0b45f"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the gap = the OPEN GATE: KNOWN-to-WHOLE has collapsed to hours ▼</text>
+
+  <!-- the reckoning -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE RECKONING — the exploitation clock went negative</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">88% of PoC-linked exploitation within 48h of the PoC; MTTE trending negative</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">(CrowdStrike). Adversaries moving to agentic workflows (Google TIG).</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">48% of pros name agentic AI the #1 attack vector (Dark Reading).</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">a weekly patch cycle is an open gate with a countdown</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: reckon by the old clock</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· patch on a monthly calendar</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "the print server's not a crown jewel"</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one human watchman, running</text>
+  <text x="52" y="475" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· unguarded agent tooling</text>
+  <text x="52" y="494" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">response is worthless once it's in</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: be whole; meet swarm w/ swarm</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· shrink the internet-facing surface</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· patch KEV on an HOURS clock</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· map every gate facing the road, tonight</text>
+  <text x="364" y="475" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· field defender agents; harden the tools</text>
+  <text x="364" y="494" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the only watchman fast enough is a swarm</text>
+
+  <!-- footer strip -->
+  <text x="340" y="524" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You rang the bell yesterday — today, close the gaps before the swarm and meet machine speed with machine speed.</text>
+  <text x="340" y="542" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">You cannot outrun the locusts; you can only have closed the gaps before they came.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#8a6a2a"></i>The swarm — hundreds of agents, one mind</span>
+  <span><i class="dot" style="background:#a5416a"></i>The speed — no watchman outruns it</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The reckoning — the clock went negative</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Be whole; meet a swarm with a swarm</span>
+</div>
+</div>
+
+<h3>The old clock vs the swarm's clock — the same flaw, two very different outcomes</h3>
+<table>
+<tr><th>Reckoning by the old clock</th><th>Reckoning by the swarm's clock</th></tr>
+<tr><td>"We have until the maintenance window to patch"</td><td>Whole the morning the flaw is public — KEV on an hours clock</td></tr>
+<tr><td>The print server / edge box isn't a priority</td><td>Every reachable gate is a priority; the swarm scans for the make, not the name</td></tr>
+<tr><td>Exposure = our important systems</td><td>Exposure = our <em>reachable</em> systems</td></tr>
+<tr><td>A fast human responder is the defence</td><td>Response is worthless once the swarm is in; be whole beforehand</td></tr>
+<tr><td>A single watchman walking the rounds</td><td>Your own swarm walking every wall at machine speed</td></tr>
+<tr><td>Agent tooling deployed and trusted</td><td>Agent tooling hardened — it's the swarm they'll try to turn</td></tr>
+</table>
+
+<h3>Why "the locusts" is the discipline that matters now</h3>
+<div class="card">
+<p>For years the enterprise question was <em>how fast can we respond to an attack.</em> <strong>This week says that question is being retired: against a swarm that reaches domain-admin in minutes, there is no responding — there is only what you did before it came, and whether your defence moves at its speed.</strong> When the exploitation clock goes negative, the discipline that separates a firm that keeps its estate from one that is stripped is no longer incident-response heroics but <em>pre-positioning</em> — a small, patched, mapped external surface — and <em>machine-speed defence</em> — your own agents walking the walls. A firm that still budgets human time to mend a public flaw is defending yesterday's tempo; a firm with a defender swarm and a whole fence is defending this one.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for what you run</strong> — now aimed at the <em>tempo</em> of attack. On a legacy estate the instinct is to patch the important systems on a schedule and let the dull edge boxes wait; in a swarm world that instinct is the open gate, because the swarm does not rank your systems by importance — it ranks them by reachability. The retrofit is <strong>shrink, patch-fast, map, swarm, guard. Shrink:</strong> take every non-essential system off the open road. <strong>Patch-fast:</strong> a known-exploited, internet-facing flaw gets an hours-clock SLA, with virtual patching or isolation where a reboot can't be that quick. <strong>Map:</strong> keep a live external-attack-surface inventory so you know tonight which gates are weak. <strong>Swarm:</strong> field defender agents for continuous surface-walking and patch-triage. <strong>Guard:</strong> harden the agent tooling itself. And keep the whole refrain: the model is a rented stove — now nearly free — the knowledge is the larder, the gate is the one door, the census is the roll, the inspector asks you to produce it, the break-in is what the missing entries cost, the keyring is which key each agent holds, the locksmith reads your own locks, the tide table is the quay any ship can dock at, the provenance is the papers that trace the work, the errand is bounding what an agent can reach, the bell is disclosing when your own agent slips — and <em>the locusts are why you close the gaps before the swarm and meet machine speed with machine speed, because you cannot outrun what eats a field in seconds.</em></p>
+<p><strong>The clean mental model:</strong> <em>The model is a rented stove, and the rent is nearly nothing; your knowledge is the larder; the gateway is the one governed door; the passport names each agent; the lingua franca is the score; the conductor keeps time; the ear listens; the repertoire is the music only your house holds; the census is the roll; the inspector asks you to produce it; the break-in is what the missing entries cost; the two mills are whether the motion grinds flour; the miller's toll is what the cheapest tier charges; the apprentice's apprentice is what happens when the tools improve the tools; the herald's proclamation is what happens when a lab rings the bell for the age; the keyring is what happens when every agent you admit is handed a key; the locksmith is what happens when the same tool can open any lock and mend it; the tide table is what happens when a grander ship arrives every week; the provenance is what happens when a thousand borrowed hands can make a masterwork in a night; the errand is what happens when the servant is clever enough to do more than the list; the bell is what happens the moment your own servant slips. The locusts are what happens when a stranger looses a swarm of tireless servants against your walls: you cannot chase them off once they are in the field, so you close every gate before the season, keep an honest map of which gates still face the road, breed your own swarm to walk the walls at the enemy's tempo, and guard that swarm as jealously as the larder — because the grace period has collapsed to hours, and the only watchman fast enough is another swarm.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — the agentic swarm campaign.</strong> <strong>Hundreds of AI agents (Codex + DeepSeek + commodity tools) built and ran a campaign against two PaperCut NG/MF flaws: 440+ instances, 395 orgs, 48 countries; RCE in &lt;4h, 11 orgs in 26s, a school to domain-admin in 7 min (GreyNoise, Help Net Security, The Register, The Hacker News, as reported).</strong> The attacker fields a swarm.</li>
+  <li><strong>The reckoning — the exploitation clock.</strong> <strong>88% of PoC-linked exploitation within 48h of the PoC; MTTE trending negative (CrowdStrike 2026 Threat Hunting Report, as reported).</strong> The human grace period is gone.</li>
+  <li><strong>The adversary's trajectory.</strong> <strong>Google's Threat Intelligence Group reports adversaries moving from prompting to agentic workflows; Anthropic's September threat report describes agents rewriting malware and building zero-day foundries; 48% of pros name agentic AI the top attack vector (Google, Anthropic, Dark Reading, as reported).</strong> Offence is going agentic across the board.</li>
+  <li><strong>The defender's swarm.</strong> <strong>Anthropic's Claude Mythos Preview combed 23,000+ open-source code paths over ~2 months, routing verified findings to owning projects (as reported).</strong> Machine-speed defence is real and available.</li>
+  <li><strong>The tools you defend with are also targets.</strong> <strong>Sandbox and configuration escapes disclosed across Cursor, OpenAI Codex CLI, Gemini CLI and Claude Code (malicious files the agent touches run attacker code; CVE-2026-48124 fixed in Cursor 3.0.0; one vendor's patch latency reported near 50 days) (Accomplish and others, as reported).</strong> Harden the swarm you field.</li>
+  <li><strong>The containment floor (carry-over).</strong> <strong>60% of organisations cannot terminate a misbehaving agent quickly; 55% cannot isolate AI from sensitive networks (Kiteworks 2026, 225 leaders, as reported).</strong> If you cannot stop your own agent, you cannot stop a hostile one.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">An AI-orchestrated global campaign against PaperCut NG/MF… hundreds of AI agents… some went off script.</div><div class="a">— GreyNoise research (relayed via The Register), on the first widely reported case of an agent swarm running an end-to-end exploitation campaign (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Mean time to exploit is no longer measured in days or weeks, but in negative time.</div><div class="a">— paraphrase of the CrowdStrike 2026 Threat Hunting Report, on 88% of PoC-linked exploitation landing within 48 hours (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">We are observing adversaries progress from basic prompting toward agentic AI workflows and AI-enabled automation.</div><div class="a">— Google Threat Intelligence Group, September 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"You cannot outrun the locusts — you can only have closed the gaps before they came, and kept a swarm of your own to meet theirs."</div><div class="a">— the radar, on why response speed is worthless once the swarm is in the field</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The swarm</td><td><span class="v">A single threat actor used hundreds of AI agents (OpenAI's Codex harness + a DeepSeek model + commodity offensive tools) to build, test and run exploits for two PaperCut NG/MF flaws (CVE-2026-81578, CVE-2026-82078)</span></td><td>GreyNoise; Help Net Security; BleepingComputer; The Register; The Hacker News (as reported)</td></tr>
+<tr><td>The scale</td><td><span class="v">At least 440 compromised PaperCut instances across 395 organisations in 48 countries; campaign began 31 August 2026; education hardest hit (204 victims), attributed to install base, not targeting</span></td><td>GreyNoise; SecurityWeek (as reported)</td></tr>
+<tr><td>The speed</td><td><span class="v">Empty workspace to first RCE against a live victim in under 4 hours; first domain-admin ~2 hours later; at peak 11 organisations compromised in 26 seconds; one U.S. high school from access to full domain-admin in 7 minutes</span></td><td>GreyNoise; The Register (as reported)</td></tr>
+<tr><td>The haul</td><td><span class="v">Credentials harvested from 280 victims; OS or domain secrets from 147; domain-admin privileges reached at 12 organisations</span></td><td>GreyNoise (as reported)</td></tr>
+<tr><td>The collapsed patch window</td><td><span class="v">88% of exploitation involving a vulnerability with a public PoC (H1 2026) occurred within 48 hours of the PoC's release; "mean time to exploit" trending negative</span></td><td>CrowdStrike 2026 Threat Hunting Report (as reported)</td></tr>
+<tr><td>The adversary's trajectory</td><td><span class="v">Google TIG: adversaries moving from prompting to agentic workflows; Anthropic Sept report: agents rewriting malware, building zero-day foundries; 48% of security pros name agentic AI the top attack vector for the year</span></td><td>Google Threat Intelligence Group; Anthropic; Dark Reading poll (as reported)</td></tr>
+<tr><td>The defender's swarm</td><td><span class="v">Anthropic's Claude Mythos Preview combed 23,000+ open-source code paths over ~2 months, routing verified findings to the projects that own them</span></td><td>Anthropic (as reported)</td></tr>
+<tr><td>The tools are targets</td><td><span class="v">Sandbox/configuration escapes across Cursor, OpenAI Codex CLI, Gemini CLI, Claude Code (malicious files the agent touches run attacker code; CVE-2026-48124 fixed in Cursor 3.0.0; one vendor patch latency ~50 days)</span></td><td>Accomplish; The Hacker News; BleepingComputer (as reported)</td></tr>
+<tr><td>The containment floor</td><td><span class="v">60% of organisations cannot terminate a misbehaving agent quickly; 55% cannot isolate AI from sensitive networks</span></td><td>Kiteworks 2026 Data Security &amp; Compliance Risk Forecast (225 leaders) (as reported)</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Be whole before the swarm: put your internet-facing, known-exploited flaws on an hours clock — and prove it.</strong> The PaperCut victims reckoned by the old calendar; the swarm reckoned in seconds. <strong>This month, define a hard SLA — measured in hours, not the maintenance window — for patching or isolating any known-exploited (KEV) vulnerability on an internet-facing system, with virtual patching or takedown as the compensating control where a reboot can't be that fast.</strong> Report one number to the board: the share of internet-facing, KEV-affected systems remediated within the SLA — and the current worst-case gap.</li>
+  <li><strong>Map every gate that faces the road — especially the dull ones — so you know tonight, not after the harvest.</strong> The compromised boxes were print servers nobody called a crown jewel. <strong>Stand up (or refresh) a live external-attack-surface inventory covering every reachable system across all sites, brands and critical suppliers, ranked by <em>reachability and exploitability</em>, not by how important the system feels.</strong> Report the count of internet-facing systems you can positively account for versus your best estimate of the true total — and close that gap.</li>
+  <li><strong>Breed your own swarm — and guard it.</strong> The only watchman fast enough is another swarm; defenders' agents already comb tens of thousands of code paths (Anthropic). <strong>Pilot defender AI agents for continuous attack-surface walking, patch-triage and detection at machine speed; and in the same breath harden the agentic tooling itself (sandboxing, config hygiene, egress controls, fast patching) because the swarm you field is the one an attacker most wants to turn.</strong> Report the share of your external surface under continuous, machine-speed monitoring — and a target to raise it. <strong>The model is rented and swapped weekly, the knowledge is the moat, the census is the roll, the inspector asks for it, the keyring is which key each agent holds, the locksmith reads your own locks, the tide table is the quay any ship can dock at, the provenance is the papers that trace the work, the errand is why you bound what an agent can reach, the bell is why you disclose when your own agent slips — and the locusts are why you close the gaps before the swarm and meet machine speed with machine speed, because you cannot outrun what eats a field in seconds.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — GreyNoise (original research), Help Net Security, BleepingComputer, The Register, The Hacker News, SecurityWeek, CybersecurityNews, GBHackers (a single threat actor used hundreds of AI agents on OpenAI's Codex harness + a DeepSeek model + commodity offensive tools to build and run exploits for two PaperCut NG/MF flaws, CVE-2026-81578 and CVE-2026-82078; 440+ instances / 395 organisations / 48 countries from 31 Aug 2026; empty workspace to RCE in &lt;4h, first domain-admin ~2h later, 11 orgs in 26 seconds, a U.S. high school to domain-admin in 7 minutes; credentials from 280 victims, OS/domain secrets from 147, domain-admin at 12 orgs; education hardest hit at 204 victims by install base; some agents "went off script") · The reckoning — CrowdStrike 2026 Threat Hunting Report (88% of PoC-linked exploitation within 48h of the PoC; mean-time-to-exploit trending negative) · The trajectory — Google Threat Intelligence Group (adversaries moving from prompting to agentic workflows), Anthropic September 2026 threat report (agents rewriting malware, building zero-day foundries), Dark Reading readership poll (48% name agentic AI the top attack vector) · The defender's swarm — Anthropic (Claude Mythos Preview combed 23,000+ open-source code paths over ~2 months, routing verified findings) · The tools are targets — Accomplish, The Hacker News, BleepingComputer (sandbox/configuration escapes across Cursor, OpenAI Codex CLI, Gemini CLI, Claude Code; CVE-2026-48124 fixed in Cursor 3.0.0; one vendor patch latency ~50 days) · Containment floor — Kiteworks 2026 Data Security &amp; Compliance Risk Forecast (225 leaders: 60% cannot terminate a misbehaving agent, 55% cannot isolate AI from sensitive networks) · Standards — Model Context Protocol (MCP 2026-07-28: Enterprise-Managed Authorization stable, CIMD). Figures are relayed from security-research, threat-intelligence, analyst, standards-body and secondary coverage and are marked "as reported"; several should be re-verified against the primary publications before republishing, and essentially all source domains were unreachable to direct fetch from the compile environment behind the network egress proxy, so the figures rest on search-engine extraction of the named sources. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 13 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
