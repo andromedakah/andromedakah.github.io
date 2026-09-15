@@ -125,9 +125,26 @@ REQUIRED SECTIONS in every brief, in this order:
   companies/verticals are indexed. Do NOT hand-edit inside the EXPLORE markers.
 
 ## Monthly wrap-up (end of each month)
-On (or just after) the last edition of a month, build/refresh the monthly wrap-up at
+
+> **Scheduling.** The monthly wrap-up now also has its own dedicated, self-contained
+> routine — `ai-radar/WRAPUP_ROUTINE_PROMPT.md` — meant to run as a **separate cloud
+> routine** on the 1st of each month (suggested cron `41 8 1 * *`, Europe/Paris). That
+> is the reliable trigger. The catch-up clause below is a safety net so a missed month
+> is still filled in by the daily run.
+
+> **Catch-up safeguard (do this on EVERY daily run, before finishing).** Do not rely on
+> catching "the last edition of the month." Instead, on every run, check the **previous
+> calendar month**: if `/ai-radar/wrap-ups/<prev-YYYY-MM>/` does not exist (or is missing
+> `index.html`/`index.fr.html`), the month was never wrapped up — **build it now** from
+> that month's editions, following the spec below, and surface it (see "Surface it"
+> below). This self-heals a skipped month (e.g. if the month's final daily run failed).
+> Only build a wrap-up for a month that is fully over — never the current, in-progress
+> month.
+
+On (or just after) the last edition of a month — and via the catch-up safeguard above —
+build/refresh the monthly wrap-up at
 `/ai-radar/wrap-ups/YYYY-MM/index.html` (EN) and `index.fr.html` (FR), structurally
-identical, both with the TTS player and EN/FR toggle. Distill that month's ~28 editions
+identical, both with the TTS player and EN/FR toggle. Distill that month's ~28–31 editions
 into: overview KPIs, Allegory of the Month, the week-by-week arc, a **mindmap**, the
 Signal-vs-Noise map (inline SVG quadrant + mirror table), C-level questions by sector,
 the owner-verified fact core (`ai-radar/verified_facts.json` only), and What to look for.
@@ -143,6 +160,17 @@ Keep it accurate and fact-checked — verified facts marked separately from "as 
   and a `<title>` tooltip on every branch stating its source basis. Recentre the thesis and
   rebuild the branches for the new month — do NOT reuse July's. Mirror everything into the FR
   page (translate the aria-label, tooltips, and labels). See July 2026 as the reference.
+
+- **Surface it (required).** A wrap-up nobody links to is invisible, so after building it,
+  point the site's "latest wrap-up" surfaces at the new month and keep older ones reachable:
+  (1) landing `ai-radar/index.html` — the hero "📊 Start here: <Month> wrap-up" button →
+  new month; (2) `ai-radar/archive/index.html` — flip that month's header from the
+  `<span class="wrapna">Monthly wrap-up — at month end</span>` placeholder to
+  `<a class="wrapbtn" href="../wrap-ups/YYYY-MM/index.html">📊 Monthly wrap-up →</a>`,
+  and update the nav + footer "wrap-up" links to the new month (leave the previous month's
+  own archive-row button intact); (3) `ai-radar/trends/index.html` — nav + footer wrap-up
+  links → new month. Each new wrap-up's own nav/footer should link back to the previous
+  month's wrap-up (EN→EN, FR→FR), as August 2026 links to July.
 
 ## Finish
 Commit (end the message with `Co-Authored-By: Claude <noreply@anthropic.com>`) and
