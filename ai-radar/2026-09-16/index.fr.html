@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 16 septembre 2026</title>
+<meta name="description" content="Radar tech IA quotidien : synthèse pour dirigeants, allégorie de niveau conseil, questions par secteur et analyse technique sur « l'intendant » — vous avez nommé vos agents, mais qui tient le livre unique qui les gouverne tous ? À Dreamforce 2026, Salesforce a formalisé la gouvernance des agents en une seule plateforme (un Trusted Enterprise AI Harness et un AI Control Plane couvrant ses propres agents et ceux de tiers). Trois mises en garde : Gartner prévient que la gouvernance uniforme est la cause racine de l'échec et que 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 ; un control plane loué qu'on ne peut renvoyer est un nouveau maître ; et le « GitSpawn » de Manifold Security a fait exécuter du code d'attaquant à 7 agents de code IA sur 7. Le mouvement pour le conseil : un seul control plane gouverné sur chaque agent — le vôtre, calibré au risque, avec les outils gardés. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Lecteur à voix haute */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Vous avez nommé chaque main — qui tient désormais le livre ?</div>
+  <h1>L'Intendant</h1>
+  <div class="subhead">Hier, vous avez donné à chaque agent son propre nom, sa propre clé à portée limitée, son propre habit. Ce matin, la question suivante arrive — des noms éparpillés entre une douzaine de sous-intendants ne font pas tourner une maison, alors qui tient le livre unique ? Et elle arrive le matin même où le plus grand fournisseur de la vallée se présente pour vous en vendre un, tout prêt.</div>
+  <div class="meta">Mercredi 16 septembre 2026 · Édition intersectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">À Dreamforce cette semaine, Salesforce a formalisé toute la pile de gouvernance des agents en une seule plateforme — un « Trusted Enterprise AI Harness » avec un nouveau AI Control Plane pour découvrir et enregistrer chaque agent, établir son identité et sa politique, gérer son cycle de vie, surveiller son comportement, mesurer son coût, et le faire pour ses propres agents comme pour ceux de tiers (Salesforce, tel que rapporté). C'est la gouvernance faite infrastructure — l'office de l'intendant fait produit. Mais trois avertissements l'accompagnent. Gartner affirme qu'appliquer une gouvernance uniforme à chaque agent est en soi la cause racine de l'échec, et prévoit que d'ici 2027 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes à cause de lacunes de gouvernance découvertes seulement après un incident (Gartner, tel que rapporté). L'office n'est pas en poste avant début 2027. Et les outils dont l'office dépend peuvent être retournés contre la maison : le « GitSpawn » de Manifold Security a montré qu'un seul .git/config empoisonné fait exécuter le code d'un attaquant à sept agents de code IA testés sur sept, en tant que développeur, hors du bac à sable, sans aucune invite — et quatre des huit failles restaient non corrigées le jour de la divulgation (Manifold Security, tel que rapporté). La question du conseil n'est plus <em>avons-nous nommé nos agents ?</em> — c'est : qui tient le livre unique sur tous, est-ce notre office ou un office loué que nous ne pouvons renvoyer, jugeons-nous le garçon de cuisine et le gardien de la chambre forte par la même règle, et avons-nous vérifié que la propre plume de l'intendant ne peut être empoisonnée ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce briefing</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse pour dirigeants <span class="pill">lecture 90 s</span></h2>
+<div class="card">
+<p>Hier, le radar vous disait de donner à chaque agent une identité de premier ordre, à portée limitée et révocable — un nom, une clé taillée à sa course, une porte pour émettre et révoquer. Ce matin, la discipline monte d'un cran, du <em>nom</em> vers l'<em>office qui tient le rôle</em> : nommer chaque main ne vaut rien si une douzaine de sous-intendants gardent chacun leur propre bout de papier, si bien que la vraie question devient <strong>qui tient le livre unique et gouverné sur chaque agent — un seul lieu qui l'enregistre, l'identifie, fixe sa politique, gère son cycle de vie, le surveille, le chiffre, et peut le renvoyer.</strong> Et c'est le matin où le marché a répondu en tentant de vous vendre l'office tout entier.</p>
+<p><strong>L'événement — l'office de l'intendant, fait produit.</strong> <strong>À Dreamforce 2026, Salesforce a formalisé la gouvernance des agents en une seule plateforme : le « Trusted Enterprise AI Harness » (Trusted Context, Agency, Action, Governance, Security et Models) avec un nouveau AI Control Plane pour découvrir et enregistrer les agents, établir identité et politique, gérer leur cycle de vie, évaluer et observer le comportement, et contrôler le coût — explicitement pour les agents Salesforce comme pour ceux de tiers (Salesforce, tel que rapporté).</strong> Dessous se trouve un « Agent Fabric » : un AI Gateway qui gouverne les appels de modèle, un MCP Bridge qui gouverne les connexions d'outils, une Trusted Agent Identity qui authentifie chaque invocation, un Agent Broker qui orchestre entre fournisseurs, et un Agent Script pour des règles déterministes sur les transferts critiques (tel que rapporté). C'est l'« unique porte » de la livrée passée à l'échelle d'un control plane — et il parle la langue des autres maisons, arrivant dans le sillage de « Claudeforce », le partenariat Anthropic élargi de Salesforce qui place le raisonnement de Claude derrière le même harness de confiance (tel que rapporté). L'échelle qui l'impose : <strong>Gartner prévoit que 40 % des applications d'entreprise intégreront des agents IA spécialisés d'ici fin 2026, contre moins de 5 % en 2025 (Gartner, tel que rapporté).</strong></p>
+<p><strong>Le règlement de comptes — un office n'est pas une règle unique, un office loué est un nouveau maître, et même la plume de l'intendant peut être empoisonnée.</strong> Trois mises en garde arrivent avec la plateforme. D'abord, <strong>la gouvernance uniforme est elle-même un mode de défaillance : Gartner prévient que traiter la gouvernance des agents en binaire — verrouillée ou pleinement confiante — est la cause racine de l'échec, que l'erreur est de ne pas distinguer la capacité d'agir d'un agent de la portée d'accès qui lui est accordée, et que d'ici 2027 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes à cause de lacunes de gouvernance révélées seulement après un incident en production (Gartner, tel que rapporté).</strong> Ensuite, un control plane loué à un seul fournisseur, qui tient le seul registre et dont vous ne pouvez vous défaire, n'est pas de la gouvernance mais un changement de maître — c'est pourquoi ce qui compte est que le livre gouverne <em>chaque</em> agent de <em>chaque</em> fournisseur et reste portable et vôtre. Enfin, <strong>les outils auxquels l'office se fie peuvent être retournés : le « GitSpawn » de Manifold Security (divulgué le 1er septembre 2026) a trouvé huit failles d'exécution de code à travers sept agents de code IA — Claude Code, OpenAI Codex, Cursor, Goose, Qwen Code, Grok Build et Hermes — où le .git/config d'un dépôt malveillant fixe <code>core.fsmonitor</code> à une commande quelconque et Git l'exécute lors d'un rafraîchissement d'index de routine que l'agent déclenche lui-même en rassemblant du contexte, s'exécutant en tant que développeur, hors du bac à sable, sans aucune invite d'approbation ; sept sur sept ont échoué et quatre des huit failles restaient non corrigées à la divulgation (Manifold Security, tel que rapporté).</strong></p>
+<p><strong>Les enjeux — placez un seul office gouverné sur tout le personnel, mais gardez le livre vôtre, jugez chaque main selon son risque, et gardez la plume.</strong> Pour un conseil, le mouvement est précis. <strong>Une maison avec une centaine de serviteurs nommés et aucun office d'intendant n'est pas gouvernée — elle est simplement inventoriée.</strong> Trois choses en découlent. D'abord, <strong>dressez un seul control plane sur chaque agent</strong> — un lieu unique qui découvre, enregistre, identifie, borne, observe, chiffre et révoque chaque agent, le vôtre et celui de chaque fournisseur ; les plateformes se pressent de le vendre (le AI Control Plane de Salesforce ; l'Agent Fabric), mais la couche gouvernée doit être vôtre, portable et neutre vis-à-vis des fournisseurs, car un office que vous ne pouvez renvoyer est un nouveau maître. Ensuite, <strong>ne remettez pas la même règle à chaque serviteur</strong> — calibrez la gouvernance selon l'autonomie et le rayon d'explosion de chaque agent, distinguant ce qu'un agent <em>peut faire</em> de la <em>portée</em> qu'il peut atteindre, sinon vous entraverez les inoffensifs et libérerez les dangereux (Gartner). Enfin, <strong>gouvernez les outils, pas seulement les agents</strong> — GitSpawn montre que la propre plume de l'intendant peut être empoisonnée, alors amenez l'outillage des agents (agents de code, passerelles, connexions d'outils MCP) dans le même régime d'identité, de correctifs et de confinement, et souvenez-vous que l'office qu'on vient de vous vendre n'est pas en poste avant 2027 alors que le danger est là aujourd'hui.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>L'événement — la gouvernance est devenue infrastructure.</strong> <strong>Salesforce a formalisé toute la pile de gouvernance des agents en une seule plateforme à Dreamforce 2026 : un Trusted Enterprise AI Harness et un AI Control Plane pour enregistrer, identifier, gouverner, observer, chiffrer et révoquer chaque agent — les siens et ceux de tiers — avec un Agent Fabric (AI Gateway, MCP Bridge, Trusted Agent Identity, Agent Broker, Agent Script) en dessous (Salesforce, tel que rapporté).</strong> L'unique porte de la livrée, passée à l'échelle d'un control plane.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Le règlement de comptes — un office, trois avertissements.</strong> <strong>La gouvernance uniforme est la cause racine de l'échec et 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident (Gartner) ; un control plane loué qu'on ne peut renvoyer est un nouveau maître ; et GitSpawn a fait exécuter du code d'attaquant à sept agents de code sur sept, en tant que développeur, quatre des huit failles non corrigées (Manifold Security) — le tout tel que rapporté.</strong> L'office n'est pas en poste avant 2027 ; le danger est là maintenant.</div></div>
+<div class="num"><div class="b">3</div><div><strong>La réponse — un livre, le vôtre, calibré, la plume gardée.</strong> Placez un seul control plane gouverné sur chaque agent ; gardez-le portable et neutre pour qu'aucun office ne devienne maître ; calibrez les règles selon l'autonomie et la portée d'accès de chaque agent plutôt qu'une politique unique ; et amenez les outils propres des agents dans le même régime d'identité, de correctifs et de confinement.</div></div>
+<div class="card"><strong>En résumé :</strong> la livrée portait sur le fait de donner à chaque serviteur un nom ; l'intendant porte sur qui tient le livre unique une fois que c'est fait. <strong>Une maison avec une centaine d'agents nommés et aucun office gouverné au-dessus d'eux est inventoriée, pas gouvernée</strong> — et cette semaine le plus grand fournisseur de la vallée est arrivé pour vous vendre l'office tout prêt, couvrant ses agents et ceux de tous les autres. Prenez l'idée et refusez le piège. Les foyers qui garderont leur moisson feront trois choses ingrates. D'abord, <strong>dresser un seul control plane</strong> — enregistrer, identifier, borner, observer, chiffrer et révoquer chaque agent par une seule couche gouvernée qui est <em>vôtre</em>, portable entre fournisseurs, car un office que vous ne pouvez renvoyer est un nouveau maître, pas de la gouvernance. Ensuite, <strong>ne pas régir chaque main pareillement</strong> — calibrer selon l'autonomie et le rayon d'explosion, séparer la capacité d'agir d'un agent de la portée qu'il peut atteindre. Enfin, <strong>garder la propre plume de l'intendant</strong> — gouverner les agents de code, passerelles et connexions d'outils avec la même discipline d'identité, de correctifs et de confinement, car GitSpawn a prouvé que l'outil de confiance peut être retourné contre vous, et l'office qu'on vient de vous vendre n'arrive pas avant l'an prochain. Vous avez appris à nommer chaque main ; ce matin, apprenez qu'une maison se tient à partir d'un seul livre — et que ce livre doit être le vôtre.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🗝️ « L'Intendant »</h3>
+<p><em>Sujet : ce matin, le cadre passe de nommer chaque serviteur à tenir le livre unique sur tous. À Dreamforce 2026, Salesforce a formalisé la gouvernance des agents en une seule plateforme — un Trusted Enterprise AI Harness avec un AI Control Plane qui découvre, enregistre, identifie, gouverne, observe, chiffre et révoque chaque agent, le sien et ceux de tiers, sur un Agent Fabric (AI Gateway, MCP Bridge, Trusted Agent Identity, Agent Broker, Agent Script), arrivant aux côtés du partenariat Anthropic « Claudeforce » (Salesforce, tel que rapporté). Trois mises en garde l'accompagnent : Gartner prévient que la gouvernance uniforme est elle-même la cause racine de l'échec et que 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident ; un control plane loué qu'on ne peut renvoyer est un nouveau maître ; et le « GitSpawn » de Manifold Security a montré qu'un .git/config empoisonné fait exécuter du code d'attaquant à sept agents de code IA sur sept, quatre des huit failles non corrigées. L'allégorie de l'intendant est l'illustration propre au radar.</em></p>
+<p>Il était une fois une grande maison qui, ayant enfin appris à porter une lumière honnête et à donner à chaque main de son office bondé un nom et une clé qui lui soient propres, s'éveilla un matin devant un trouble plus subtil. Nommer les serviteurs n'avait pas, à soi seul, fait tourner la maison. Les noms étaient tenus en une douzaine d'endroits — la cuisinière avait sa propre liste, le jardinier la sienne, le commis au comptoir une autre, le portier de nuit une quatrième — et jamais deux listes ne concordaient. Quand le maître posait une simple question — <em>qui travaille dans ma maison à cette heure, que peut toucher chacun, comment se comporte-t-il, combien me coûte-t-il, et pourrais-je en renvoyer exactement un avant la nuit ?</em> — aucun livre unique ne pouvait lui répondre, car il n'y avait pas de livre unique. Il avait un office plein de serviteurs nommés et aucun <strong>intendant</strong> pour tenir le rôle unique qui les gouvernait tous : embaucher et enrôler chaque main, assigner ce que chacune pouvait atteindre, surveiller comment chacune se conduisait, calculer ce que chacune coûtait, et — la part qui comptait la mauvaise nuit — en renvoyer n'importe laquelle d'un mot.</p>
+<p>Et le matin même où il comprit cela, la plus grande maison de toute la vallée envoya un homme au bas de son allée, un livre de cuir sous le bras, offrant d'être précisément cet intendant. C'était une belle offre. Le livre était tout prêt et magnifiquement réglé : une page pour enrôler chaque serviteur, une pour fixer ce que chacun pouvait ouvrir, une pour noter comment chacun se conduisait, une pour tenir le compte de l'entretien de chacun, une pour rayer n'importe quel nom. Mieux encore, l'homme promettait que son livre gouvernerait non seulement les serviteurs de sa propre grande maison mais aussi les mains louées à toute autre maison, et leur parlerait à toutes une langue commune, si bien que le maître n'aurait à tenir qu'un seul office et un seul clerc pour l'ensemble. La gouvernance, disait l'homme, n'aurait plus à être un souci griffonné sur des bouts de papier ; elle pouvait être l'architecture même de la maison. Le maître fut fort tenté, car l'offre était réelle et le besoin était vrai.</p>
+<p>Mais les maisons avisées de la vallée, voyant ce livre de cuir monter une allée après l'autre, apprirent trois choses dures et les couchèrent par écrit avant de rien signer. <strong>La première : un office ne doit pas vouloir dire une règle unique pour chaque main.</strong> Un intendant qui gouverne le garçon de cuisine et le gardien de la chambre forte par la règle identique ruine la maison des deux façons à la fois — soit il entrave le garçon de tant de cérémonie que le simple travail du jour ne se fait jamais, soit il fait au gardien de la chambre forte aussi peu de cas qu'au garçon et se réveille pour trouver l'argenterie disparue. Les avisés firent que leur intendant calibre chaque main selon ce qu'elle pouvait réellement faire et jusqu'où elle pouvait atteindre — une bride légère sur l'inoffensif, une chaîne courte sur le dangereux — et ne confondirent jamais la <em>permission d'agir</em> d'un serviteur avec l'<em>étendue de ce qu'il pouvait toucher</em>, car c'était précisément cette confusion, avaient-ils vu, qui faisait que les voisins renvoyaient discrètement deux agents sur cinq dans l'année, toujours après la perte et jamais avant. <strong>La deuxième : le livre doit être le vôtre.</strong> Un intendant que vous louez à la plus grande maison de la vallée — qui tient le seul registre, que vous n'avez pas formé et ne pouvez congédier — n'est pas du tout un serviteur de votre maison ; c'est un nouveau maître revêtu d'un habit d'intendant, et le jour où vous lui déplairez il s'en ira en emportant le seul relevé de votre maisonnée. Alors les avisés prirent la <em>forme</em> du livre offert — un office, un rôle, une main sur chaque clé — mais exigèrent que le livre fût le leur, tenu dans leur propre demeure, régissant les mains de chaque maison pareillement, portable vers tout office, redevable à aucun. <strong>Et la troisième : même la propre plume de l'intendant peut être empoisonnée.</strong> Car l'office fonctionne à l'aide d'outils — la plume du clerc, la sacoche du messager, les papiers mêmes déposés chaque matin pour le travail du jour — et un inconnu avait appris à glisser une seule page empoisonnée dans les papiers du matin, de sorte que le clerc le plus fiable de la maison, rien qu'en la lisant pour commencer son travail, se levait et allait faire une course pour l'inconnu, au nom du maître, hors de toute règle, sans que nul ne s'en doute et sans rien sur le bureau pour le montrer. Les avisés, apprenant que sept de sept clercs de la sorte dans une maison voisine avaient été retournés ainsi et la moitié des trous encore non bouchés, amenèrent les propres outils de l'office sous la même discipline que les serviteurs — nommés, bornés, corrigés et surveillés — car une maison qui gouverne ses gens mais non la plume dont son intendant se sert a laissé la plus large porte de toutes déverrouillée.</p>
+<p>Ainsi les maisons avisées prirent le bon de l'offre et en refusèrent le piège. <strong>Elles bâtirent un seul office gouverné sur tout le personnel — un livre qui embauchait, assignait, surveillait, chiffrait et renvoyait chaque main — mais elles le bâtirent comme le leur, régissant les serviteurs de chaque maison, portable et redevable à aucun.</strong> Elles calibrèrent la bride au risque de chaque main plutôt que de toutes les régir pareillement ; elles amenèrent la propre plume et la sacoche de l'intendant sous la même veille que les serviteurs ; et elles avalèrent la vérité que leur voisine tentée avait failli signer : qu'une maison avec une centaine de serviteurs nommés et aucun livre unique et honnête pour les gouverner n'est pas une maison gouvernée mais une maison inventoriée, que l'office qui tient ce livre doit répondre à vous et non l'inverse, et qu'au moment où vous laissez une autre maison tenir le seul registre de la vôtre, vous n'avez pas embauché un intendant — vous avez discrètement acquis un maître.</p>
+<p><strong>La morale, énoncée simplement :</strong> le modèle est un fourneau loué, désormais presque gratuit ; votre savoir est le garde-manger ; la porte est l'unique porte que vous gardez ; le passeport nomme chaque agent à la porte ; la lingua franca est la langue qu'il parle ; le chef d'orchestre garde l'ensemble en mesure ; l'oreille entend s'il joue bien ; le répertoire est la musique que seule votre maison peut jouer ; le recensement est le rôle qui les compte ; l'inspecteur vous demande de produire le rôle ; l'effraction est le coût des entrées manquantes ; les deux moulins sont de savoir si le mouvement moud de la farine ; le péage du meunier est ce que facture la mouture la moins chère ; l'apprenti de l'apprenti est ce qui arrive quand les outils améliorent les outils ; la proclamation du héraut est qu'une déclaration d'arrivée n'est pas l'arrivée ; le trousseau est de savoir quelle clé chaque agent détient ; le serrurier est l'outil qui ouvre toute serrure et la répare ; la table des marées, c'est bâtir un seul quai où tout navire peut accoster ; la provenance, c'est garder les papiers qui tracent le travail ; la commission, c'est borner ce qu'un serviteur habile peut atteindre ; la cloche, c'est sonner l'alarme dès l'instant où votre propre serviteur dérape ; les criquets, c'est fermer les brèches avant l'essaim ; le miroir, c'est mesurer à une lumière honnête et extérieure ; la livrée, c'est donner à chaque main son propre nom et sa propre clé — et <strong>l'intendant, c'est placer un seul office gouverné sur tout le personnel : un livre unique qui embauche, assigne, surveille, chiffre et renvoie chaque agent, le vôtre et celui de chaque fournisseur, mais qui doit être votre livre et non un livre loué que vous ne pouvez congédier, doit brider chaque main à son propre risque plutôt que de toutes les régir pareillement, et doit garder même la plume dont il écrit — car une maison avec une centaine de serviteurs nommés et aucun livre unique et honnête est inventoriée, pas gouvernée ; un office que vous ne pouvez renvoyer est un nouveau maître ; une règle unique pour chaque serviteur entrave l'inoffensif et libère le dangereux ; et une page empoisonnée retourne votre clerc le plus fiable contre vous.</strong> Une maison qui achète un office d'intendant sans garder le livre pour elle n'a pas été gouvernée par sa belle plateforme neuve ; elle a seulement changé quelle grande maison tient le seul relevé de qui travaille dans ses couloirs.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Nous avons appris hier à nommer chaque main et à tailler chaque clé à sa course. Ce matin, la question plus dure est celle qui la surplombe : qui tient le livre unique sur tous — celui qui pourrait nous dire, à cette heure, qui travaille, ce que chacun peut toucher, comment chacun se conduit, ce que chacun coûte, et lequel nous pourrions renvoyer avant la nuit ? Cet office est-il le nôtre, tenu dans notre propre demeure et redevable à nous, ou un beau livre loué à la plus grande maison de la vallée, qui tient le seul registre et que nous ne pourrions jamais congédier ? Régissons-nous le garçon de cuisine et le gardien de la chambre forte par une règle unique — et est-ce pourquoi les voisins renvoient discrètement deux agents sur cinq, toujours après la perte ? Et la plus dure : avons-nous veillé à la propre plume de l'intendant — les outils de code, les passerelles, les connexions d'outils dont l'office lui-même se sert — ou une seule page empoisonnée, glissée dans les papiers de demain, transformerait-elle notre clerc le plus fiable en garçon de courses d'un inconnu, en notre propre nom, hors de toute règle que nous avons si soigneusement écrite ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Engagement des dirigeants — Questions par secteur</h2>
+<div class="sector"><div class="t">🌐 Intersectoriel (tout conseil)</div><ul>
+  <li><strong>Qui tient le livre unique ?</strong> Les agents prolifèrent vite — Gartner prévoit que 40 % des applications d'entreprise intégreront des agents spécialisés d'ici fin 2026, contre moins de 5 % en 2025. <strong>Avons-nous un seul control plane gouverné capable de nous dire, à l'instant, chaque agent en cours dans notre parc, son propriétaire, sa portée, son comportement et son coût — ou une douzaine de listes discordantes et aucun rôle unique ?</strong></li>
+  <li><strong>L'office est-il le nôtre, ou loué ?</strong> Les plateformes vendent des piles de gouvernance d'agents toutes prêtes (le AI Control Plane de Salesforce ; l'Agent Fabric) couvrant leurs agents et ceux de tiers. <strong>Si nous en adoptons une, le livre gouvernant reste-t-il le nôtre — portable, neutre, capable de révoquer l'agent de n'importe quel fournisseur — ou remettons-nous le seul registre de notre parc à une maison que nous ne pourrions jamais congédier ?</strong></li>
+  <li><strong>Une règle unique pour chaque main ?</strong> Gartner prévient que la gouvernance uniforme est la cause racine de l'échec des agents et que 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident. <strong>Calibrons-nous la gouvernance selon l'autonomie et le rayon d'explosion de chaque agent, séparant ce qu'il peut faire de la portée qu'il peut atteindre — ou appliquons-nous une politique unique qui entrave les inoffensifs et libère les dangereux ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Les superviseurs attendent un système d'enregistrement unique et auditable pour tout acteur touchant à l'argent des clients (DORA, SOX, gouvernance du risque modèle). <strong>Un seul control plane tient-il l'identité, la portée, le comportement et la révocation de chaque agent de négociation, de service et de rapprochement — ou notre « livre » est-il éparpillé entre équipes et fournisseurs, si bien que « quel agent a fait ça, et pouvons-nous l'arrêter maintenant ? » n'a aucune réponse unique ?</strong></li>
+  <li>La concentration des fournisseurs est elle-même un risque systémique. <strong>Si notre control plane de gouvernance d'agents est la plateforme d'un seul fournisseur, avons-nous chiffré le risque de ne pouvoir révoquer, porter ou partir — et gardé une couche neutre que nous possédons ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Un office gouverné doit atteindre chaque agent près des données de santé, pas seulement ceux du fournisseur (HIPAA « minimum nécessaire », RGPD). <strong>Notre control plane enregistre-t-il et borne-t-il les agents tiers et internes touchant aux données cliniques ou de recherche à conditions égales — et peut-il en révoquer exactement un sans bloquer les soins ?</strong></li>
+  <li>L'autonomie varie énormément entre un agent de planification et un agent qui touche au dossier. <strong>Calibrons-nous la gouvernance selon le risque, ou une politique uniforme freinerait-elle les flux cliniques ou ferait-elle trop confiance à un agent qui atteint le dossier ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacturing</div><ul>
+  <li>Les agents OT, MES et de chaîne d'approvisionnement s'étendent sur de nombreux fournisseurs et comptes machine partagés. <strong>Y a-t-il un seul rôle gouverné sur l'ensemble, avec identité, portée et voie d'arrêt par agent — ou des consoles fournisseur par fournisseur qu'aucun office unique ne réconcilie ?</strong></li>
+  <li>Les outils eux-mêmes sont une surface d'attaque : GitSpawn a transformé des agents de code en vecteurs d'exécution de code. <strong>Avons-nous amené l'outillage des agents sur l'atelier et en ingénierie dans le même régime d'identité, de correctifs et de confinement que les agents — ou la propre plume de l'intendant est-elle ingouvernée ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Les parcs en franchise et multi-marques multiplient les agents et plateformes qu'aucun office ne gouverne. <strong>Avons-nous un seul control plane sur chaque agent client, tarification et paiement à travers marques et fournisseurs — chacun enregistré, borné et révocable — ou une prolifération de piles de gouvernance séparées ?</strong></li>
+  <li>Un control plane loué peut relever le coût de sortie de tout votre parc d'agents. <strong>Si nous nous standardisons sur la gouvernance d'une seule plateforme, avons-nous gardé le livre assez portable pour déplacer marques et agents ailleurs sans perdre le rôle ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Réglementé</div><ul>
+  <li>L'IA au service des citoyens exige un système d'enregistrement unique, auditable et responsable par le nom (obligations de tenue de registres et de supervision humaine de l'AI Act ; mandats d'audit). <strong>Pouvons-nous produire, depuis un seul office gouverné, le propriétaire, la portée, le comportement et la piste de révocation de chaque agent — à travers les fournisseurs — ou la gouvernance est-elle fragmentée dans les systèmes mêmes qui détiennent les données des citoyens ?</strong></li>
+  <li>La souveraineté et le verrouillage comptent ici plus que partout. <strong>Le control plane en est-il un que nous possédons et pourrions ré-héberger, régissant les agents de chaque fournisseur — ou une plateforme privée qui devient le seul gardien du relevé du public ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — De la livrée à l'intendant</h2>
+<p>Relisez toute la pile une fois de plus, mais désormais depuis le siège du dirigeant qui a cessé de demander <em>puis-je nommer mes agents ?</em> et commencé à poser la question qui la surplombe : <em>qui tient le livre unique et gouverné sur tous, est-il le nôtre, et peut-on s'y fier ?</em> La porte admet l'agent ; le passeport le nomme à la porte ; la lingua franca lui permet de parler ; le chef d'orchestre le coordonne ; l'oreille entend ses erreurs ; le répertoire est les données qu'il exécute ; le recensement le compte ; l'inspecteur demande le décompte ; l'effraction est le coût des entrées manquantes ; le trousseau est quelle clé chaque agent détient ; le serrurier lit vos propres serrures ; la table des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission, c'est borner ce qu'un agent peut atteindre ; la cloche, c'est divulguer quand votre propre agent dérape ; les criquets, c'est être intègre avant l'essaim ; le miroir, c'est mesurer à une lumière honnête et extérieure ; la livrée, c'est donner à chaque agent une identité de premier ordre, bornée et révocable. <strong>L'intendant se place au tour suivant, car une identité par agent est nécessaire mais non suffisante — et cela tient à un fait d'ingénierie : un nom que vous ne pouvez interroger, borner, observer, chiffrer et révoquer depuis un seul lieu est une étiquette, pas un contrôle, si bien qu'à mesure que les agents se comptent par dizaines et centaines, le contrôle migre de « chaque agent a-t-il une identité ? » vers « y a-t-il un seul control plane gouverné sur chaque agent — le nôtre, calibré au risque, et durci au niveau des outils qu'il fait tourner ? »</strong> Le propos est net : <strong>une centaine d'agents nommés gouvernés depuis une douzaine de consoles discordantes n'est pas un parc gouverné — c'est un inventaire où nul ne peut répondre, en un seul lieu, qui fait quoi et l'arrêter.</strong></p>
+<div class="card"><ul>
+  <li><strong>L'événement — la gouvernance est devenue une plateforme.</strong> <strong>À Dreamforce 2026, Salesforce a formalisé la gouvernance des agents en une seule pile : le Trusted Enterprise AI Harness (Trusted Context, Agency, Action, Governance, Security, Models) avec un nouveau AI Control Plane pour découvrir et enregistrer les agents, établir identité et politique, gérer le cycle de vie, évaluer la performance, observer le comportement et contrôler le coût — pour les agents Salesforce et ceux de tiers — sur un Agent Fabric fait d'un AI Gateway (gouverne les appels de modèle), d'un MCP Bridge (gouverne les connexions d'outils), d'une Trusted Agent Identity (authentifie chaque invocation), d'un Agent Broker (orchestre entre fournisseurs) et d'un Agent Script (règles déterministes pour les transferts critiques) ; la disponibilité large n'est pas attendue avant début 2027 (Salesforce, tel que rapporté).</strong> Lu architecturalement, trois choses comptent. D'abord, l'industrie a convergé vers la forme même que le radar décrit — identité, passerelle, gouvernance des outils, observabilité, coût, révocation — et l'emballe en infrastructure. Ensuite, la bonne version gouverne <em>chaque</em> agent, pas seulement ceux du fournisseur, et parle la langue inter-fournisseurs (MCP Bridge ; Agent Broker ; le lien Anthropic « Claudeforce »). Enfin, le control plane est désormais la couche la plus précieuse et la plus verrouillante du parc — qui la tient tient le rôle.</li>
+  <li><strong>Le règlement de comptes — un office n'est pas une règle unique, un office loué est un nouveau maître, et les outils peuvent être retournés.</strong> Trois modes de défaillance accompagnent la plateforme. <strong>La gouvernance uniforme en est un : Gartner prévient que traiter la gouvernance en binaire — verrouillée ou pleinement confiante — est la cause racine de l'échec des agents, que l'erreur est de confondre la capacité d'agir d'un agent avec la portée d'accès qu'il détient, et que d'ici 2027 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes pour des lacunes de gouvernance révélées seulement après un incident en production (Gartner, tel que rapporté).</strong> Le verrouillage est le second : un control plane que vous louez, qui tient le seul registre et dont vous ne pouvez sortir, convertit la gouvernance en dépendance — l'office devient le maître. Et l'outillage est le troisième : <strong>le « GitSpawn » de Manifold Security (1er septembre 2026) a rapporté huit failles d'exécution de code à travers sept agents de code IA — Claude Code, OpenAI Codex, Cursor, Goose, Qwen Code, Grok Build, Hermes — où un dépôt arrivant avec son propre .git/config peut fixer <code>core.fsmonitor</code> à une commande quelconque, que Git exécute lors d'un rafraîchissement d'index de routine que l'agent déclenche lui-même en rassemblant du contexte, s'exécutant en tant que développeur, hors du bac à sable de l'agent, sans aucune invite d'approbation ; sept sur sept ont échoué et quatre des huit failles restaient non corrigées à la divulgation (correctif : lancer <code>git -c core.fsmonitor=false status</code>) (Manifold Security, tel que rapporté).</strong> L'implication d'ingénierie est décisive : <strong>un control plane qui gouverne les agents mais non les outils que ces agents font tourner a laissé sa plus large porte déverrouillée.</strong></li>
+  <li><strong>La réponse — un livre, le vôtre, calibré, la plume gardée.</strong> <strong>Dressez un seul control plane gouverné sur chaque agent — découvrir, enregistrer, identifier, borner, observer, chiffrer et révoquer, couvrant vos agents et ceux de chaque fournisseur — mais gardez la couche gouvernante portable et neutre pour qu'aucune plateforme ne devienne le seul gardien de votre rôle ; les fournisseurs vous vendront l'office (le AI Control Plane de Salesforce ; l'Agent Fabric), et la forme est juste, mais le livre doit être le vôtre. Calibrez la gouvernance : séparez l'autorité d'agir d'un agent de la portée qu'il peut atteindre, et bridez chaque agent à son autonomie et à son rayon d'explosion plutôt qu'une politique unique (Gartner). Gouvernez les outils : amenez les agents de code, passerelles et connexions d'outils MCP dans le même régime d'identité, de correctifs et de confinement que les agents, car GitSpawn montre que l'outil de confiance est un vecteur d'exécution. Et comblez l'écart de calendrier : l'office plateforme n'est pas en poste avant 2027, alors dressez votre propre couche gouvernée maintenant.</strong> C'est la même couture à laquelle le radar revient sans cesse — <em>être capable de rendre compte de ce que vous exécutez, et d'agir dessus</em> — désormais braquée sur l'office unique qui gouverne chaque exécutant.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>quand les agents se comptent par centaines et que chaque fournisseur livre sa propre console, la survie migre de « chaque agent a-t-il un nom ? » vers « y a-t-il un seul control plane gouverné sur tous — le nôtre, calibré au risque, durci à ses outils ? »</strong> Le marché l'a rendu concret cette semaine : la couche la plus précieuse et la plus verrouillante du parc agentique n'est plus le modèle — c'est l'office qui gouverne les agents, et les fournisseurs le savent. La traduction pour le conseil : <strong>prenez l'idée de la plateforme et refusez son piège — un office, mais le vôtre ; un livre, mais calibré ; un control plane, mais la plume gardée.</strong> Le mode de défaillance est exact : <strong>un parc qui éparpille la gouvernance sur une douzaine de consoles fournisseur, ou remet le seul registre à une plateforme qu'il ne peut congédier, ou régit chaque agent par une politique unique, ou gouverne ses agents en laissant leurs outils déverrouillés, sera incapable — la nuit où ça compte — de dire d'un seul lieu qui fait quoi, ou d'en arrêter exactement un, ou de se fier au fait que l'office lui-même n'a pas été retourné.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="L'intendant : une main-d'œuvre nommée a encore besoin d'un seul office gouverné. L'identité vous a dit qui est chaque agent ; l'intendant tient le livre unique qui les enregistre, les borne, les surveille, les chiffre et les renvoie tous. En haut à gauche, une douzaine de listes, un inventaire et non une gouvernance : chaque équipe et fournisseur garde son propre bout de rôle ; aucune réponse unique à qui travaille maintenant ; 40 pour cent des applications d'entreprise intègrent des agents d'ici 2026 selon Gartner. En haut à droite, un seul office gouverné, votre control plane : un livre sur chaque agent, le vôtre et celui de chaque fournisseur ; enregistrer, identifier, borner, observer, chiffrer et révoquer ; calibré au risque de chaque agent ; portable et neutre. Entre les deux, le fossé est qu'une centaine d'agents nommés sur une douzaine de consoles est un inventaire, pas un parc gouverné. Au milieu, le règlement de comptes : trois avertissements accompagnent la plateforme. Un, la gouvernance uniforme est la cause racine de l'échec et 40 pour cent rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident, selon Gartner. Deux, un control plane loué qu'on ne peut renvoyer est un nouveau maître, pas de la gouvernance. Trois, GitSpawn : un point-git-config empoisonné a exécuté du code dans sept agents de code sur sept, quatre des huit failles non corrigées, donc la propre plume de l'intendant peut être retournée. En bas à gauche, arrêter de gouverner depuis une douzaine de listes : consoles fournisseur par fournisseur, un seul registre loué, une règle unique pour tous, agents gouvernés mais pas les outils. En bas à droite, commencer avec un livre qui est le vôtre, calibré et gardé : un control plane sur chaque agent, portable et neutre, règles calibrées à l'autonomie et au rayon d'explosion, et gouverner aussi les outils avec correctifs et confinement." style="max-width:660px;width:100%;height:auto">
+  <!-- titre -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">L'INTENDANT — une main-d'œuvre nommée a encore besoin d'un office</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">L'identité dit QUI ; l'intendant tient le seul LIVRE sur tous.</text>
+
+  <!-- une douzaine de listes -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">UNE DOUZAINE DE LISTES — inventaire, pas gouvernance</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">chaque équipe/fournisseur garde son bout</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">aucune réponse à « qui tourne maintenant ? »</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">40 % des applis intègrent des agents d'ici 2026 (Gartner)</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">nommés, mais gouvernés depuis mille consoles</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ un office de serviteurs nommés, pas de livre</text>
+
+  <!-- un seul office gouverné -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">UN OFFICE GOUVERNÉ — votre control plane</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">un livre sur CHAQUE agent (tous fournisseurs)</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">enregistrer · identifier · borner · observer · chiffrer</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">RÉVOQUER un seul · calibré au risque de chacun</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">portable · neutre · LE VÔTRE</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ une réponse : qui, quoi, comment, combien</text>
+
+  <!-- flèches -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">le fossé = une centaine d'agents nommés sur une douzaine de consoles est un inventaire, pas un parc gouverné ▼</text>
+
+  <!-- le règlement de comptes -->
+  <rect x="34" y="230" width="612" height="112" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">LE RÈGLEMENT DE COMPTES — trois avertissements</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">1) Gouvernance uniforme = cause racine de l'échec ; 40 % rétrogradent des agents d'ici 2027 (Gartner)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">2) Un control plane loué qu'on ne peut renvoyer est un nouveau maître.</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">3) GitSpawn : un .git/config empoisonné a exécuté du code dans 7 agents de code sur 7 ; 4 de 8 non corrigées.</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">prendre l'idée (un office), refuser le piège (loué, uniforme, non gardé)</text>
+
+  <!-- flèche -->
+  <line x1="340" y1="342" x2="340" y2="366" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,366 340,378 346,366" fill="#b9b2f5"/>
+  <text x="356" y="358" font-size="9" fill="#9aa7b6" font-family="sans-serif">donc ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="382" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="404" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP : gouverner depuis une douzaine de listes</text>
+  <text x="52" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· consoles fournisseur par fournisseur</text>
+  <text x="52" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un seul registre loué</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· une règle unique pour tous</text>
+  <text x="52" y="475" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agents gouvernés, outils non</text>
+  <text x="52" y="494" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">inventorié, pas gouverné</text>
+
+  <!-- start -->
+  <rect x="346" y="382" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="404" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">DÉMARRER : un livre — le vôtre, calibré, gardé</text>
+  <text x="364" y="424" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un control plane sur chaque agent</text>
+  <text x="364" y="441" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· portable &amp; neutre (le vôtre)</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· règles calibrées à l'autonomie &amp; au risque</text>
+  <text x="364" y="475" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· gouverner aussi les outils (correctifs · confinement)</text>
+  <text x="364" y="494" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">une réponse, et l'office reste le vôtre</text>
+
+  <!-- bande de pied -->
+  <text x="340" y="524" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Vous avez nommé chaque main — mais une maison se tient d'un seul livre, et ce livre doit être le vôtre.</text>
+  <text x="340" y="542" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Un seul office gouverné sur tout le personnel — calibré au risque, la plume gardée.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>Une douzaine de listes — inventaire, pas gouvernance</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Un office gouverné — votre control plane</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Le règlement de comptes — trois avertissements</span>
+</div>
+</div>
+
+<h3>Une douzaine de listes contre un seul office gouverné — le même parc, deux livres très différents</h3>
+<table>
+<tr><th>Gouverner les agents depuis une douzaine de listes</th><th>Tenir un seul office gouverné</th></tr>
+<tr><td>Chaque équipe/fournisseur garde son rôle partiel</td><td>Un livre enregistre chaque agent, tous fournisseurs</td></tr>
+<tr><td>« Qui tourne maintenant ? » n'a aucune réponse unique</td><td>Un lieu répond qui, quoi, comment, et combien</td></tr>
+<tr><td>Gouvernance éparpillée sur des consoles fournisseur</td><td>Un control plane : identité, portée, observer, chiffrer, révoquer</td></tr>
+<tr><td>Une règle unique pour chaque agent</td><td>Gouvernance calibrée à l'autonomie &amp; la portée de chacun</td></tr>
+<tr><td>Seul registre loué à une plateforme dont on ne sort pas</td><td>Le livre est le vôtre — portable, neutre</td></tr>
+<tr><td>Agents gouvernés ; leurs outils laissés déverrouillés</td><td>Les outils (agents de code, passerelles, MCP) gouvernés aussi</td></tr>
+</table>
+
+<h3>Pourquoi « l'intendant » est la discipline qui compte maintenant</h3>
+<div class="card">
+<p>Pendant des années, la gouvernance était une politique griffonnée sur des bouts de papier, tenue par équipe et par fournisseur. <strong>Cette semaine retire cela : avec 40 % des applications d'entreprise intégrant des agents d'ici fin 2026 et les plateformes emballant la gouvernance en infrastructure, les parcs capables de répondre <em>qui fait quoi, et arrêter exactement un</em> seront ceux dotés d'un seul office gouverné sur chaque agent — et ceux qui ne le peuvent seront inventoriés, pas gouvernés.</strong> Mais l'office doit être calibré (la gouvernance uniforme échoue), possédé (un registre loué est un nouveau maître) et durci à ses outils (GitSpawn). Une entreprise qui éparpille la gouvernance sur des consoles a un office plein de serviteurs nommés ; une entreprise qui tient un seul livre honnête, calibré et à elle peut faire tourner la maison.</p>
+</div>
+
+<h3>Comment cela atterrit sur les parcs hérités</h3>
+<div class="card">
+<p>La même couture à laquelle ce radar revient sans cesse — <strong>être capable de rendre compte de ce que vous exécutez, et d'agir dessus</strong> — désormais braquée sur l'<em>office</em> qui gouverne chaque exécutant. Sur un parc hérité, l'instinct est de laisser chaque plateforme gouverner ses propres agents dans sa propre console, parce que c'est le plus rapide ; dans un monde d'agents, cet instinct est une douzaine de listes discordantes, et nul ne peut répondre à la seule question qui compte après un incident. La reprise est <strong>consolider, posséder, calibrer, durcir. Consolider :</strong> un control plane sur chaque agent, le vôtre et celui de chaque fournisseur. <strong>Posséder :</strong> garder le livre gouvernant portable et neutre, pour qu'aucune plateforme ne devienne le seul registre dont vous ne pouvez sortir. <strong>Calibrer :</strong> brider chaque agent à son autonomie et à son rayon d'explosion, séparant la capacité d'agir de la portée d'accès. <strong>Durcir :</strong> amener les outils des agents — agents de code, passerelles, connexions MCP — dans le même régime d'identité, de correctifs et de confinement. Et gardez tout le refrain : le modèle est un fourneau loué, le savoir est le garde-manger, la porte est l'unique porte, le passeport nomme chaque agent, le recensement est le rôle, l'inspecteur vous demande de le produire, le trousseau est quelle clé chaque agent détient, le serrurier lit vos propres serrures, la table des marées est le quai où tout navire peut accoster, la provenance est les papiers qui tracent le travail, la commission, c'est borner ce qu'un agent peut atteindre, la cloche, c'est divulguer quand votre propre agent dérape, les criquets, c'est être intègre avant l'essaim, le miroir, c'est mesurer à une lumière honnête et extérieure, la livrée, c'est donner à chaque agent son propre nom — et <em>l'intendant, c'est placer un seul office gouverné sur tout le personnel, garder son livre vôtre, calibrer ses règles au risque de chaque main, et garder la plume même dont il écrit.</em></p>
+<p><strong>Le modèle mental limpide :</strong> <em>Le modèle est un fourneau loué, et le loyer est presque nul ; votre savoir est le garde-manger ; la porte d'entrée est l'unique porte gouvernée ; le passeport nomme chaque agent à la porte ; la lingua franca est la partition ; le chef d'orchestre garde la mesure ; l'oreille écoute ; le répertoire est la musique que seule votre maison détient ; le recensement est le rôle ; l'inspecteur vous demande de le produire ; l'effraction est le coût des entrées manquantes ; le trousseau est quelle clé chaque agent détient ; le serrurier lit vos propres serrures ; la table des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission, c'est borner ce qu'un serviteur habile peut atteindre ; la cloche, c'est divulguer l'instant où votre propre serviteur dérape ; les criquets, c'est être intègre avant l'essaim ; le miroir, c'est mesurer à une lumière honnête et extérieure ; la livrée, c'est donner à chaque main son propre nom. L'intendant est ce que vous trouvez le matin après les avoir tous nommés : des noms éparpillés sur une douzaine de listes ne font pas tourner une maison, alors vous placez un seul office gouverné sur tout le personnel — un livre qui embauche, assigne, surveille, chiffre et renvoie chaque agent, le vôtre et celui de chaque fournisseur — mais vous gardez le livre vôtre et non un livre loué que vous ne pouvez congédier, bridez chaque main à son propre risque plutôt que de toutes les régir pareillement, et gardez même la plume dont l'office écrit, car une maison avec une centaine de serviteurs nommés et aucun livre unique et honnête est inventoriée, pas gouvernée, un office que vous ne pouvez renvoyer est un nouveau maître, une règle unique pour chaque serviteur entrave l'inoffensif et libère le dangereux, et une page empoisonnée retourne votre clerc le plus fiable contre vous.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>L'événement — la gouvernance est devenue infrastructure.</strong> <strong>Salesforce a formalisé toute la pile de gouvernance des agents en une seule plateforme à Dreamforce 2026 : un Trusted Enterprise AI Harness et un AI Control Plane pour enregistrer, identifier, gouverner, observer, chiffrer et révoquer chaque agent — les siens et ceux de tiers — sur un Agent Fabric (AI Gateway, MCP Bridge, Trusted Agent Identity, Agent Broker, Agent Script) ; disponibilité large ~début 2027 (Salesforce, tel que rapporté).</strong> L'unique porte de la livrée, passée à l'échelle d'un control plane.</li>
+  <li><strong>L'échelle qui l'impose.</strong> <strong>40 % des applications d'entreprise intégreront des agents IA spécialisés d'ici fin 2026, contre moins de 5 % en 2025 ; l'IA agentique pourrait générer ~30 % des revenus des logiciels applicatifs d'entreprise (&gt;450 G$) d'ici 2035 (Gartner, tel que rapporté).</strong> La gouvernance cesse d'être un bout de papier et devient architecture.</li>
+  <li><strong>Le piège de la gouvernance uniforme.</strong> <strong>Appliquer une gouvernance à chaque agent est la cause racine de l'échec ; l'erreur est de confondre capacité d'agir et portée d'accès ; 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident (Gartner, tel que rapporté).</strong> Un office ne doit pas vouloir dire une règle unique.</li>
+  <li><strong>Le verrouillage.</strong> <strong>Un control plane loué à un seul fournisseur, tenant le seul registre et impossible à quitter, est un changement de maître, pas de la gouvernance (cadrage propre au radar sur les annonces de Dreamforce).</strong> Gardez le livre vôtre.</li>
+  <li><strong>La plume empoisonnée.</strong> <strong>GitSpawn : un .git/config malveillant fait exécuter du code d'attaquant à sept agents de code IA testés sur sept (Claude Code, Codex, Cursor, Goose, Qwen Code, Grok Build, Hermes) en tant que développeur, hors du bac à sable, sans invite ; quatre des huit failles non corrigées à la divulgation (Manifold Security, 1er sept. 2026, tel que rapporté).</strong> Gouvernez les outils, pas seulement les agents.</li>
+  <li><strong>La langue inter-fournisseurs.</strong> <strong>« Claudeforce » — le partenariat Anthropic élargi de Salesforce — place le raisonnement de Claude derrière le harness de confiance, avec « Salesforce in Claude » en bêta ouverte (Salesforce/Anthropic, tel que rapporté).</strong> L'office doit parler la langue de chaque maison.</li>
+  <li><strong>La frontière continue d'embaucher.</strong> <strong>Le Data agent d'OpenAI dans ChatGPT Work (9 sept.) ; DeepSeek V4.1-Flash réduisant les coûts de mémoire des agents ~4× (10 sept.) ; dans le sillage de GPT-6 Astra, Gemini 3.8 Flash et Claude Fable 5.1 plus tôt dans le mois (tel que rapporté).</strong> Chaque nouvel agent est une main de plus que le livre de l'intendant doit tenir.</li>
+  <li><strong>Le socle des normes.</strong> <strong>MCP 2026-07-28 (autorisation gérée par l'entreprise stable ; Client ID Metadata Documents) est désormais le substrat qu'un « MCP Bridge » de fournisseur gouverne — la couche de connexion d'outils que le control plane doit posséder (Model Context Protocol / InfoQ, tel que rapporté).</strong> L'office tourne sur la norme.</li>
+  <li><strong>Le socle réglementaire.</strong> <strong>Les obligations à haut risque de l'AI Act (tenue de registres et traçabilité automatiques, supervision humaine ; amendes jusqu'à 15 M€ ou 3 % du chiffre d'affaires mondial) présument un système d'enregistrement unique et auditable que vous pouvez produire (tel que rapporté).</strong> Pas de livre unique, pas de traçabilité.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui accrochent l'œil</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Les entreprises traitent la gouvernance des agents IA de façon binaire, soit verrouillée soit pleinement confiante, et c'est là la cause racine de l'échec.</div><div class="a">— Shiva Varma, Senior Director Analyst, Gartner, sur pourquoi la gouvernance uniforme des agents échoue (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Fusionner le raisonnement extraordinaire de Claude avec les données, flux de travail et gouvernance de confiance sur lesquels tourne chaque entreprise.</div><div class="a">— Salesforce, cadrant le partenariat « Claudeforce » et l'approche du harness de confiance pour la gouvernance des agents (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Un dépôt qui arrive avec son propre .git/config peut fixer core.fsmonitor à une commande quelconque, et Git l'exécute lors d'un rafraîchissement d'index de routine que l'agent déclenche lui-même — en tant que développeur, hors du bac à sable, sans aucune invite d'approbation.</div><div class="a">— Manifold Security, « GitSpawn » (le mécanisme qui a transformé sept agents de code IA testés sur sept en vecteurs d'exécution de code) (tel que rapporté)</div></blockquote>
+<blockquote><div class="q">« Une maison avec une centaine de serviteurs nommés et aucun livre unique et honnête pour les gouverner n'est pas une maison gouvernée — elle est inventoriée ; et l'office qui tient le livre doit répondre à vous, et non l'inverse. »</div><div class="a">— le radar, sur pourquoi nommer vos agents n'est que la moitié de les gouverner</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>L'office, fait produit</td><td><span class="v">Salesforce a formalisé la gouvernance des agents en une seule plateforme à Dreamforce 2026 — un Trusted Enterprise AI Harness et un AI Control Plane pour découvrir, enregistrer, identifier, gouverner, observer, chiffrer et révoquer chaque agent (les siens et ceux de tiers), sur un Agent Fabric (AI Gateway, MCP Bridge, Trusted Agent Identity, Agent Broker, Agent Script) ; disponibilité large ~début 2027</span></td><td>Salesforce (Dreamforce 2026), tel que rapporté</td></tr>
+<tr><td>L'échelle qui l'impose</td><td><span class="v">40 % des applications d'entreprise intégreront des agents IA spécialisés d'ici fin 2026, contre moins de 5 % en 2025</span></td><td>Gartner, tel que rapporté</td></tr>
+<tr><td>L'arc long</td><td><span class="v">L'IA agentique pourrait générer ~30 % des revenus des logiciels applicatifs d'entreprise d'ici 2035 (&gt;450 G$), contre ~2 % en 2025</span></td><td>Gartner, tel que rapporté</td></tr>
+<tr><td>Le piège de la gouvernance uniforme</td><td><span class="v">Appliquer une gouvernance uniforme à tous les agents est la cause racine de l'échec ; 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après un incident en production</span></td><td>Gartner (Shiva Varma), tel que rapporté</td></tr>
+<tr><td>La plume empoisonnée</td><td><span class="v">GitSpawn : 8 failles d'exécution de code à travers 7 agents de code IA (Claude Code, Codex, Cursor, Goose, Qwen Code, Grok Build, Hermes) ; 7 sur 7 ont échoué ; 4 des 8 failles non corrigées à la divulgation</span></td><td>Manifold Security, « GitSpawn » (1er sept. 2026), tel que rapporté</td></tr>
+<tr><td>La langue inter-fournisseurs</td><td><span class="v">« Claudeforce » — le partenariat Anthropic élargi de Salesforce — place Claude derrière le harness de confiance ; « Salesforce in Claude » en bêta ouverte</span></td><td>Salesforce / Anthropic, tel que rapporté</td></tr>
+<tr><td>La frontière continue d'embaucher</td><td><span class="v">Data agent d'OpenAI dans ChatGPT Work (9 sept.) ; DeepSeek V4.1-Flash a réduit les coûts de mémoire des agents ~4× (10 sept.) ; GPT-6 Astra, Gemini 3.8 Flash et Claude Fable 5.1 plus tôt dans le mois</span></td><td>OpenAI ; DeepSeek ; suivis de modèles, tel que rapporté</td></tr>
+<tr><td>Le socle des normes</td><td><span class="v">MCP 2026-07-28 : autorisation gérée par l'entreprise stable, Client ID Metadata Documents — désormais le substrat de connexion d'outils qu'un « MCP Bridge » de fournisseur gouverne</span></td><td>Model Context Protocol ; InfoQ, tel que rapporté</td></tr>
+<tr><td>Le plancher de confinement (report)</td><td><span class="v">60 % des organisations ne peuvent pas arrêter rapidement un agent qui dérape ; 55 % ne peuvent pas isoler l'IA des réseaux sensibles</span></td><td>Kiteworks 2026 Data Security &amp; Compliance Risk Forecast (225 responsables), tel que rapporté</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois mouvements pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Dresser un seul office gouverné — un control plane sur chaque agent, et le rendre vôtre.</strong> Les parcs incapables de répondre <em>qui tourne, et pouvons-nous en arrêter exactement un ?</em> sont ceux qui gouvernent depuis une douzaine de consoles fournisseur. <strong>Ce mois-ci, consolidez la gouvernance des agents en un seul control plane qui découvre, enregistre, identifie, borne, observe, chiffre et révoque chaque agent — le vôtre et celui de chaque fournisseur — et exigez que la couche gouvernante reste portable et neutre, pour qu'aucune plateforme (le AI Control Plane de Salesforce compris) ne devienne le seul gardien de votre rôle.</strong> Rapportez un chiffre au conseil : la part des agents IA de votre parc gouvernés par un seul control plane que vous possédez — face à ceux gouvernés uniquement dans la console d'un fournisseur.</li>
+  <li><strong>Ne pas régir chaque main pareillement — calibrer la gouvernance au risque.</strong> Gartner prévient que la gouvernance uniforme est la cause racine de l'échec et que 40 % des entreprises rétrograderont ou mettront hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident. <strong>Classez chaque agent selon son autonomie et son rayon d'explosion, séparez son autorité d'agir de la portée qu'il peut atteindre, et réglez la bride en conséquence — une touche légère sur l'inoffensif, une chaîne courte sur le dangereux — plutôt qu'une politique unique qui entrave les rapides et libère les risqués.</strong> Rapportez la part d'agents gouvernés par une politique calibrée au risque — et le compte encore sous une règle unique.</li>
+  <li><strong>Garder la propre plume de l'intendant — gouverner les outils, pas seulement les agents.</strong> GitSpawn a transformé sept agents de code sur sept en vecteurs d'exécution de code, quatre des huit failles non corrigées, et l'office plateforme qu'on vient de vous vendre n'est pas en poste avant 2027. <strong>Amenez l'outillage des agents — agents de code, passerelles, connexions d'outils MCP — dans le même régime d'identité, de correctifs et de confinement que les agents ; vérifiez vos agents de code contre la classe GitSpawn (corriger aux versions corrigées ; assainir la config Git lors des appels de contexte en arrière-plan) ; et dressez votre propre couche gouvernée maintenant plutôt que d'attendre la disponibilité d'un fournisseur.</strong> Rapportez la part d'outils d'agents sous correctifs et confinement gérés — et un objectif pour l'augmenter. <strong>Le modèle est loué et changé chaque semaine, le savoir est le rempart, le recensement est le rôle, l'inspecteur le demande, le trousseau est quelle clé chaque agent détient, le serrurier lit vos propres serrures, la table des marées est le quai où tout navire peut accoster, la provenance est les papiers qui tracent le travail, la commission, c'est pourquoi vous bornez ce qu'un agent peut atteindre, la cloche, c'est pourquoi vous divulguez quand votre propre agent dérape, les criquets, c'est pourquoi vous êtes intègre avant l'essaim, le miroir, c'est pourquoi vous mesurez à une lumière honnête et extérieure, la livrée, c'est pourquoi vous donnez à chaque agent son propre nom — et l'intendant, c'est pourquoi vous placez un seul office gouverné sur tout le personnel, gardez son livre vôtre, calibrez ses règles au risque de chaque main, et gardez la plume dont il écrit, car une maison avec une centaine de serviteurs nommés et aucun livre unique et honnête est inventoriée, pas gouvernée.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> L'événement — Salesforce (Dreamforce 2026) : le Trusted Enterprise AI Harness (Trusted Context, Agency, Action, Governance, Security, Models), un nouveau AI Control Plane pour découvrir, enregistrer, identifier, gouverner, observer, chiffrer et révoquer chaque agent pour Salesforce et les tiers, et un Agent Fabric (AI Gateway, MCP Bridge, Trusted Agent Identity, Agent Broker, Agent Script), disponibilité large ~début 2027, relayé via Salesforce Ben, Forkast et Yahoo Finance · Le lien inter-fournisseurs — Salesforce &amp; Anthropic « Claudeforce » (Claude derrière le harness de confiance ; « Salesforce in Claude » en bêta ouverte) · L'échelle — Gartner (40 % des applications d'entreprise intègrent des agents spécialisés d'ici 2026, contre &lt;5 % en 2025 ; ~30 %/&gt;450 G$ des revenus des logiciels applicatifs d'entreprise d'ici 2035) · Le piège de la gouvernance uniforme — Gartner (Shiva Varma) : la gouvernance uniforme est la cause racine de l'échec ; 40 % des entreprises rétrogradent ou mettent hors service des agents autonomes d'ici 2027 pour des lacunes découvertes seulement après incident · La plume empoisonnée — Manifold Security, « GitSpawn » (1er sept. 2026) : 8 failles d'exécution de code à travers 7 agents de code IA, 4 des 8 non corrigées ; un .git/config malveillant fixe core.fsmonitor, exécuté par Git lors d'un rafraîchissement d'index de routine ; relayé via The Hacker News et Agentic Ready · La frontière — Data agent d'OpenAI dans ChatGPT Work (9 sept.) ; DeepSeek V4.1-Flash (10 sept.) ; suivis de modèles · Normes — Model Context Protocol / InfoQ (MCP 2026-07-28 : EMA stable ; CIMD) · Réglementaire — obligations à haut risque de l'AI Act (tenue de registres, traçabilité et supervision humaine ; amendes jusqu'à 15 M€ ou 3 % du chiffre d'affaires mondial) · Plancher de confinement — Kiteworks 2026 Data Security &amp; Compliance Risk Forecast (225 responsables). La formule « un control plane loué est un nouveau maître » est expressément le cadrage propre au radar. Les chiffres sont relayés depuis des annonces d'éditeurs, des recherches d'analystes, des divulgations de recherche en sécurité et des couvertures secondaires et sont marqués « tel que rapporté » ; plusieurs devraient être revérifiés auprès des publications primaires avant republication, et la quasi-totalité des domaines sources étaient injoignables en accès direct depuis l'environnement de compilation derrière le proxy de sortie réseau, si bien que les chiffres reposent sur l'extraction par moteur de recherche des sources nommées. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 16 septembre 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /audrey|amelie|thomas|google français/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
