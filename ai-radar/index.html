@@ -995,7 +995,38 @@
 
 <footer class="border-t border-line py-10 text-center text-sm text-faint">
   <p>AI Tech Radar · a daily enterprise-AI situational-awareness brief · <a href="archive/index.html" class="font-semibold text-accent hover:text-accentdark">Archive</a> · <a href="trends/index.html" class="font-semibold text-accent hover:text-accentdark">Trends</a> · <a href="feed.xml" class="font-semibold text-accent hover:text-accentdark">RSS</a></p>
+  <p class="mt-3 text-xs text-faint" id="visit-counter" hidden>👁 <span id="visit-count" class="font-semibold text-subink">—</span> visits</p>
 </footer>
+
+<script>
+  /* visit counter — global tally via a free no-signup counter service (counterapi.dev).
+     Static GitHub Pages can't count server-side, so state lives with the service.
+     Increments once per browser session; caches the last number for in-session reloads;
+     fails silent (stays hidden) if the service is unreachable so the page never breaks. */
+  (function(){
+    var out = document.getElementById('visit-count');
+    var wrap = document.getElementById('visit-counter');
+    if(!out || !wrap) return;
+    var NS = 'andromedakah-ai-radar', KEY = 'site-visits';
+    function fmt(n){ try{ return Number(n).toLocaleString('en-US'); }catch(e){ return String(n); } }
+    function show(n){ out.textContent = fmt(n); wrap.hidden = false; }
+    var counted = false, cached = null;
+    try{ counted = sessionStorage.getItem('radar-visit-counted') === '1'; }catch(e){}
+    try{ cached = localStorage.getItem('radar-visit-count'); }catch(e){}
+    if(counted && cached){ show(cached); return; }
+    var url = 'https://api.counterapi.dev/v1/' + NS + '/' + KEY + '/up';
+    fetch(url, { cache: 'no-store' })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var n = d && (d.count != null ? d.count : d.value);
+        if(n == null) throw new Error('no count field');
+        show(n);
+        try{ sessionStorage.setItem('radar-visit-counted','1'); }catch(e){}
+        try{ localStorage.setItem('radar-visit-count', String(n)); }catch(e){}
+      })
+      .catch(function(){ /* leave the counter hidden if the service is down */ });
+  })();
+</script>
 
 <script>
   /* reading progress */
