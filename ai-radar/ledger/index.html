@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Prediction Ledger — AI Tech Radar</title>
+<meta name="description" content="A captain's log of dated, falsifiable forecasts cited across the AI Tech Radar briefs — each with the day it was logged, its due date, and a status stamp: Pending, Hit, Miss, or Ongoing. Filterable and searchable.">
+<style>
+  :root{
+    --ground:#0c1712; --ground2:#0e1a15; --panel:#12211a; --panel2:#16281f;
+    --rule:rgba(201,162,75,.22); --rule-strong:rgba(201,162,75,.5);
+    --brass:#c9a24b; --brass-dark:#b8912f; --wax:#a83232; --wax-light:#c85a4e;
+    --ink:#e8e2d0; --ink-soft:#cfc9b6; --faint:#93a093; --green:#3f9d6d; --green-dark:#2f7d55;
+    --stamp-pending:#8c9a8c;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--ground);
+    background-image:
+      radial-gradient(1200px 600px at 78% -10%, rgba(201,162,75,.06), transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, rgba(63,157,109,.05), transparent 60%),
+      linear-gradient(180deg, var(--ground2), var(--ground));
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 16px}
+  a{color:var(--brass); text-decoration:none}
+  a:hover{color:var(--brass-dark); text-decoration:underline}
+  .mono{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace}
+
+  /* ---- masthead ---- */
+  header.top{border-bottom:1px solid var(--rule); background:rgba(9,17,13,.55); backdrop-filter:blur(6px); position:sticky; top:0; z-index:20}
+  .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; max-width:1080px; margin:0 auto}
+  .brand{display:inline-flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.02em; color:var(--ink)}
+  .brand .glyph{display:grid; place-items:center; width:28px; height:28px; border-radius:7px; background:var(--brass); color:#1a130a; font-size:15px}
+  .brand:hover{text-decoration:none; color:var(--ink)}
+  .navlinks{display:flex; gap:4px; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; letter-spacing:.03em}
+  .navlinks a{padding:6px 10px; border-radius:7px; color:var(--ink-soft)}
+  .navlinks a:hover{background:rgba(201,162,75,.1); color:var(--brass); text-decoration:none}
+
+  /* ---- hero ---- */
+  .hero{padding:46px 0 26px}
+  .kicker{font-family:ui-monospace,Menlo,monospace; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--brass); margin-bottom:14px}
+  h1{font-size:clamp(30px,6vw,50px); line-height:1.04; margin:0 0 16px; font-weight:700; letter-spacing:-.01em}
+  h1 .amp{color:var(--brass)}
+  .lede{max-width:660px; font-size:clamp(16px,2.4vw,19px); color:var(--ink-soft)}
+  .lede em{color:var(--ink); font-style:italic}
+
+  /* ---- tally strip ---- */
+  .tally{display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 8px}
+  .tally .t{flex:1 1 130px; border:1px solid var(--rule); border-radius:10px; padding:12px 14px; background:linear-gradient(180deg,var(--panel2),var(--panel))}
+  .tally .n{font-family:ui-monospace,Menlo,monospace; font-size:26px; font-weight:700; line-height:1}
+  .tally .l{font-size:12.5px; color:var(--faint); margin-top:6px; letter-spacing:.02em}
+  .tally .t.hit .n{color:var(--brass)}
+  .tally .t.pending .n{color:var(--stamp-pending)}
+  .tally .t.ongoing .n{color:var(--green)}
+  .tally .t.miss .n{color:var(--wax-light)}
+
+  /* ---- controls ---- */
+  .controls{margin:24px 0 10px; border:1px solid var(--rule); border-radius:14px; background:rgba(18,33,26,.6); padding:16px}
+  .searchrow{position:relative}
+  #q{width:100%; background:var(--ground2); border:1.5px solid var(--rule); border-radius:11px; color:var(--ink); font-size:16px; padding:13px 42px 13px 42px; font-family:inherit; -webkit-appearance:none; appearance:none}
+  #q::placeholder{color:var(--faint)}
+  #q:focus{outline:none; border-color:var(--brass); box-shadow:0 0 0 4px rgba(201,162,75,.14)}
+  .searchrow .ico{position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--faint); font-size:15px}
+  .searchrow .clr{position:absolute; right:9px; top:50%; transform:translateY(-50%); border:0; background:rgba(201,162,75,.14); color:var(--brass); width:26px; height:26px; border-radius:50%; cursor:pointer; font-size:13px; display:none}
+  .searchrow .clr:hover{background:var(--brass); color:#1a130a}
+  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .filters .lbl{width:100%; font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:2px}
+  .f{border:1px solid var(--rule); background:transparent; color:var(--ink-soft); border-radius:999px; padding:7px 15px; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; letter-spacing:.03em; cursor:pointer; transition:all .14s}
+  .f:hover{border-color:var(--brass); color:var(--brass)}
+  .f.on{background:var(--brass); border-color:var(--brass-dark); color:#1a130a; font-weight:700}
+  .f .c{opacity:.7; margin-left:5px}
+
+  /* ---- ledger table ---- */
+  .ledger-wrap{margin:14px 0 6px; overflow-x:auto; border:1px solid var(--rule); border-radius:14px; background:
+    repeating-linear-gradient(180deg, transparent, transparent 55px, rgba(201,162,75,.035) 55px, rgba(201,162,75,.035) 56px),
+    linear-gradient(180deg,var(--panel),var(--ground2));}
+  table{width:100%; border-collapse:collapse; min-width:760px}
+  thead th{font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); text-align:left; padding:16px 16px 10px; border-bottom:2px double var(--rule-strong); white-space:nowrap; background:rgba(9,17,13,.4)}
+  thead th.due, thead th.logged{width:118px}
+  tbody td{padding:16px; border-bottom:1px solid var(--rule); vertical-align:top; font-size:15px}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:rgba(201,162,75,.05)}
+  td.logged, td.due{font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap}
+  td.due .rel{display:block; color:var(--faint); font-size:11px; margin-top:3px}
+  td.src{white-space:nowrap; color:var(--ink)}
+  td.src .org{font-weight:700}
+  td.src .doc{display:block; color:var(--faint); font-size:11.5px; font-family:ui-monospace,Menlo,monospace; white-space:normal; max-width:220px; margin-top:3px}
+  td.claim{color:var(--ink-soft); min-width:300px}
+  td.claim .fig{color:var(--ink); font-weight:700}
+  td.stamp{white-space:nowrap; text-align:center; width:120px}
+
+  /* wax / brass stamps */
+  .st{display:inline-block; transform:rotate(-6deg); font-family:ui-monospace,Menlo,monospace; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:6px 11px; border-radius:4px; border:2px solid; position:relative}
+  .st.hit{color:var(--brass); border-color:var(--brass); background:rgba(201,162,75,.08); box-shadow:inset 0 0 0 1px rgba(201,162,75,.25)}
+  .st.miss{color:var(--wax-light); border-color:var(--wax); background:rgba(168,50,50,.12)}
+  .st.pending{color:var(--stamp-pending); border-color:var(--stamp-pending); border-style:dashed; background:transparent; transform:rotate(-3deg)}
+  .st.ongoing{color:var(--green); border-color:var(--green-dark); background:rgba(63,157,109,.1); transform:rotate(-4deg)}
+
+  .empty{display:none; text-align:center; padding:44px 16px; color:var(--faint); font-style:italic}
+  .empty.show{display:block}
+
+  /* ---- notes / footer ---- */
+  .notes{margin:30px 0 8px; border-top:1px solid var(--rule); padding-top:22px; color:var(--faint); font-size:13.5px; max-width:760px}
+  .notes h3{font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); margin:0 0 10px}
+  .notes p{margin:0 0 10px}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin:6px 0 16px}
+  .legend span{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft)}
+  .legend .dot{width:10px; height:10px; border-radius:2px; display:inline-block}
+  .legend .dot.hit{background:var(--brass)}
+  .legend .dot.miss{background:var(--wax)}
+  .legend .dot.pending{background:transparent; border:1.5px dashed var(--stamp-pending)}
+  .legend .dot.ongoing{background:var(--green)}
+  footer{border-top:1px solid var(--rule); margin-top:26px; padding:26px 0 40px; text-align:center; color:var(--faint); font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.02em}
+  footer a{color:var(--brass)}
+  @media (max-width:640px){
+    .hero{padding:34px 0 18px}
+    thead th, tbody td{padding:12px}
+    .tally .t{flex-basis:calc(50% - 10px)}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <a class="brand" href="../index.html"><span class="glyph">◎</span> AI Tech Radar</a>
+    <nav class="navlinks">
+      <a href="../index.html">Home</a>
+      <a href="../archive/index.html">Archive</a>
+      <a href="../trends/index.html">Trends</a>
+      <a href="../feed.xml">RSS</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">◧ The Captain's Log · Forecasts on the books</div>
+    <h1>The Prediction Ledger</h1>
+    <p class="lede">Every brief that cites a dated, falsifiable forecast enters one line here — the day it was <em>logged</em>, the source that made the call, the claim, its <em>due date</em>, and a status stamp. Nothing is graded on a hunch: a stamp changes only when the calendar comes due and the record is checked against the source. <em>Search and filter the log below.</em></p>
+
+    <div class="tally" id="tally">
+      <div class="t total"><div class="n" id="n-total">0</div><div class="l">entries on the books</div></div>
+      <div class="t hit"><div class="n" id="n-hit">0</div><div class="l">Hit — came to pass</div></div>
+      <div class="t pending"><div class="n" id="n-pending">0</div><div class="l">Pending — awaiting due date</div></div>
+      <div class="t ongoing"><div class="n" id="n-ongoing">0</div><div class="l">Ongoing — recurring benchmark</div></div>
+    </div>
+  </section>
+
+  <section class="controls" aria-label="Filter the ledger">
+    <div class="searchrow">
+      <span class="ico">⌕</span>
+      <input id="q" type="search" placeholder="Search source, claim, figure…" autocomplete="off" aria-label="Search the ledger">
+      <button class="clr" id="clr" aria-label="Clear search">✕</button>
+    </div>
+    <div class="filters" id="filters">
+      <span class="lbl">Filter by status</span>
+      <button class="f on" data-s="all">All <span class="c" id="c-all">0</span></button>
+      <button class="f" data-s="pending">Pending <span class="c" id="c-pending">0</span></button>
+      <button class="f" data-s="hit">Hit <span class="c" id="c-hit">0</span></button>
+      <button class="f" data-s="miss">Miss <span class="c" id="c-miss">0</span></button>
+      <button class="f" data-s="ongoing">Ongoing <span class="c" id="c-ongoing">0</span></button>
+    </div>
+  </section>
+
+  <div class="ledger-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="logged">Logged</th>
+          <th class="src">Source</th>
+          <th class="claim">The claim (paraphrased)</th>
+          <th class="due">Due</th>
+          <th class="stamp">Status</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty">No entries match this filter or search. Clear it to see the whole log.</div>
+  </div>
+
+  <section class="notes">
+    <h3>How to read the stamps</h3>
+    <div class="legend">
+      <span><i class="dot hit"></i> <strong>Hit</strong> — due date reached and the forecast held</span>
+      <span><i class="dot miss"></i> <strong>Miss</strong> — due date reached and it did not</span>
+      <span><i class="dot pending"></i> <strong>Pending</strong> — logged, due date still ahead</span>
+      <span><i class="dot ongoing"></i> <strong>Ongoing</strong> — a recurring benchmark that is re-checked, not closed</span>
+    </div>
+    <p>Each claim is paraphrased from the edition that first cited it; the full source link lives in that edition's <span class="mono">sources.md</span>. Figures are relayed from the named source and, where they rest on secondary coverage, were marked "as reported" in the original brief. A stamp is resolved against a current source when its due date arrives — not assumed. This log is kept for its own sake: a forecast you cannot go back and grade is an opinion, not a prediction.</p>
+    <p>Last reckoning: <span class="mono">20 September 2026</span>. The EU AI Office's 15 September GPAI systemic-risk filing deadline came due this week and is stamped <strong>Hit</strong>, checked against the Act's live enforcement rather than assumed.</p>
+  </section>
+</main>
+
+<footer>
+  AI Tech Radar · The Prediction Ledger · <a href="../index.html">Home</a> · <a href="../archive/index.html">Archive</a> · <a href="../feed.xml">RSS</a>
+</footer>
+
+<script>
+/* ---- the ledger: forecasts cited across the briefs ----
+   Each entry: logged (edition date it first appeared), source org + doc,
+   claim (paraphrased, never quoted), due date, status. All figures trace to
+   the edition's sources.md; secondary-sourced figures were marked "as reported" there. */
+var LEDGER = [
+  { logged:"2026-07-09", org:"Gartner", doc:"agentic-AI forecast (26 Aug 2025 release)",
+    claim:"<span class='fig'>40%</span> of enterprise applications will embed task-specific AI agents by the end of 2026, up from under 5% in 2025.",
+    due:"2026-12-31", status:"pending" },
+  { logged:"2026-07-15", org:"Gartner", doc:"agentic-AI forecast",
+    claim:"More than <span class='fig'>40%</span> of agentic-AI projects will be cancelled by the end of 2027, on cost, unclear value or inadequate controls.",
+    due:"2027-12-31", status:"pending" },
+  { logged:"2026-09-16", org:"Gartner", doc:"agent-governance research (Shiva Varma)",
+    claim:"By 2027, <span class='fig'>40%</span> of enterprises will demote or decommission autonomous agents over governance gaps surfaced only after a production incident.",
+    due:"2027-12-31", status:"pending" },
+  { logged:"2026-09-16", org:"Gartner", doc:"enterprise-app software forecast",
+    claim:"Agentic AI could drive roughly <span class='fig'>30%</span> of enterprise-application software revenue — over <span class='fig'>$450B</span> — by 2035.",
+    due:"2035-12-31", status:"pending" },
+  { logged:"2026-08-21", org:"Deloitte", doc:"State of AI in the Enterprise 2026, “The Untapped Edge”",
+    claim:"About <span class='fig'>74%</span> of organizations plan to use agentic AI at least moderately within two years, up from roughly 23% today.",
+    due:"2028-08-31", status:"pending" },
+  { logged:"2026-09-05", org:"McKinsey", doc:"The State of AI: Global Survey 2026",
+    claim:"Only about <span class='fig'>6%</span> of enterprises are high performers seeing a significant earnings impact from AI; roughly 94% see none.",
+    due:"", status:"ongoing" },
+  { logged:"2026-09-05", org:"EU AI Office", doc:"GPAI systemic-risk obligations (EU AI Act)",
+    claim:"Providers of GPAI models above the 10²⁵-FLOP systemic-risk threshold must file their first formal risk evaluations — red-teaming, energy, copyright-training summary — by 15 September 2026.",
+    due:"2026-09-15", status:"hit" },
+  { logged:"2026-07-09", org:"European Commission", doc:"EU AI Act, GPAI enforcement",
+    claim:"GPAI-model enforcement powers and Article 50 transparency obligations become applicable on 2 August 2026, with fines up to the higher of €15M or 3% of global turnover.",
+    due:"2026-08-02", status:"hit" },
+  { logged:"2026-09-17", org:"European Commission", doc:"EU AI Act, high-risk timeline",
+    claim:"High-risk obligations for AI embedded in regulated products take effect from August 2027, extending the record-keeping and oversight duties already live since 2 August 2026.",
+    due:"2027-08-31", status:"pending" },
+  { logged:"2026-07-20", org:"Illinois (SB 315)", doc:"AI Safety Measures Act",
+    claim:"Independent third-party audit, catastrophic-risk-framework and 72-hour incident-reporting requirements for large frontier developers (>$500M revenue) take effect 1 January 2028.",
+    due:"2028-01-01", status:"pending" },
+  { logged:"2026-07-15", org:"MCP project", doc:"Model Context Protocol spec",
+    claim:"The Model Context Protocol ships its stable specification dated 28 July 2026.",
+    due:"2026-07-28", status:"hit" },
+  { logged:"2026-09-16", org:"Salesforce", doc:"Dreamforce 2026 — Trusted Enterprise AI Harness",
+    claim:"The Trusted Enterprise AI Harness and AI Control Plane reach broad availability in early 2027.",
+    due:"2027-03-31", status:"pending" },
+  { logged:"2026-07-22", org:"Forrester", doc:"AI-spend outlook (via trade coverage)",
+    claim:"Roughly <span class='fig'>25%</span> of planned AI spend is being postponed to 2027 as ROI scrutiny tightens.",
+    due:"2027-12-31", status:"ongoing" }
+];
+
+(function(){
+  var STATUS_LABEL = { pending:"Pending", hit:"Hit", miss:"Miss", ongoing:"Ongoing" };
+  var TODAY = new Date("2026-09-20T00:00:00Z");
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function fmtDate(iso){
+    if(!iso) return "&mdash;";
+    var p = iso.split("-");
+    return p[2] + " " + MONTHS[+p[1]-1] + " " + p[0];
+  }
+  function relDue(iso, status){
+    if(!iso) return "recurring";
+    if(status === "ongoing") return "re-checked";
+    var d = new Date(iso + "T00:00:00Z");
+    var days = Math.round((d - TODAY) / 86400000);
+    if(status === "hit") return "came due";
+    if(status === "miss") return "came due";
+    if(days < 0) return "due date passed";
+    if(days === 0) return "due today";
+    if(days < 45) return "in " + days + " days";
+    var months = Math.round(days/30);
+    if(months < 24) return "in ~" + months + " mo";
+    return "in ~" + Math.round(days/365) + " yr";
+  }
+
+  var rowsEl = document.getElementById("rows");
+  var emptyEl = document.getElementById("empty");
+  var qEl = document.getElementById("q");
+  var clrEl = document.getElementById("clr");
+  var state = { status:"all", q:"" };
+
+  // sort: pending/soonest-due first is nice, but a ledger reads chronologically by logged date
+  LEDGER.sort(function(a,b){ return a.logged < b.logged ? -1 : a.logged > b.logged ? 1 : 0; });
+
+  function counts(){
+    var c = { all:LEDGER.length, pending:0, hit:0, miss:0, ongoing:0 };
+    LEDGER.forEach(function(e){ if(c[e.status]!=null) c[e.status]++; });
+    return c;
+  }
+  function paintCounts(){
+    var c = counts();
+    document.getElementById("n-total").textContent = c.all;
+    document.getElementById("n-hit").textContent = c.hit;
+    document.getElementById("n-pending").textContent = c.pending;
+    document.getElementById("n-ongoing").textContent = c.ongoing;
+    ["all","pending","hit","miss","ongoing"].forEach(function(k){
+      var el = document.getElementById("c-"+k); if(el) el.textContent = c[k];
+    });
+  }
+
+  function matches(e){
+    if(state.status !== "all" && e.status !== state.status) return false;
+    if(state.q){
+      var hay = (e.org + " " + e.doc + " " + e.claim + " " + e.logged + " " + e.due + " " + STATUS_LABEL[e.status]).toLowerCase();
+      if(hay.indexOf(state.q) === -1) return false;
+    }
+    return true;
+  }
+
+  function render(){
+    var html = "", shown = 0;
+    LEDGER.forEach(function(e){
+      if(!matches(e)) return;
+      shown++;
+      html += '<tr>'
+        + '<td class="logged">' + fmtDate(e.logged) + '</td>'
+        + '<td class="src"><span class="org">' + e.org + '</span><span class="doc">' + e.doc + '</span></td>'
+        + '<td class="claim">' + e.claim + '</td>'
+        + '<td class="due">' + fmtDate(e.due) + '<span class="rel">' + relDue(e.due, e.status) + '</span></td>'
+        + '<td class="stamp"><span class="st ' + e.status + '">' + STATUS_LABEL[e.status] + '</span></td>'
+        + '</tr>';
+    });
+    rowsEl.innerHTML = html;
+    emptyEl.classList.toggle("show", shown === 0);
+  }
+
+  document.getElementById("filters").addEventListener("click", function(ev){
+    var b = ev.target.closest(".f"); if(!b) return;
+    state.status = b.getAttribute("data-s");
+    Array.prototype.forEach.call(this.querySelectorAll(".f"), function(x){ x.classList.toggle("on", x === b); });
+    render();
+  });
+  qEl.addEventListener("input", function(){
+    state.q = this.value.trim().toLowerCase();
+    clrEl.style.display = this.value ? "block" : "none";
+    render();
+  });
+  clrEl.addEventListener("click", function(){
+    qEl.value = ""; state.q = ""; this.style.display = "none"; qEl.focus(); render();
+  });
+
+  paintCounts();
+  render();
+})();
+</script>
+</body>
+</html>
