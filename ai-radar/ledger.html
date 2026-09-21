@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Prediction Ledger — AI Tech Radar</title>
+<meta name="description" content="A running logbook of the dated, falsifiable forecasts cited across the AI Tech Radar briefs — each with the date it was logged, its due date, and a status stamp (Pending, Hit, Miss, or Ongoing). Filter and search the ledger; every claim carries its source. A brief that cites a dated forecast gets one line added here.">
+<style>
+  :root{
+    --ground:#0a1712; --ground2:#0e2019; --panel:#0f241c; --panel2:#123027;
+    --rule:#1f4436; --rule2:#2a5a48;
+    --ink:#e7efe8; --muted:#8fae9f; --soft:#b9d2c4;
+    --brass:#d8b45a; --brass-dim:#a98d3f;
+    --wax:#c14a3b; --wax-dim:#8f3529;
+    --green:#4bbf85; --green-dim:#2f7d57;
+    --blue:#5aa9d8;
+    --radius:12px; --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);
+    background:
+      radial-gradient(1200px 520px at 78% -8%, rgba(216,180,90,.10), transparent 60%),
+      radial-gradient(900px 480px at 10% 110%, rgba(75,191,133,.08), transparent 60%),
+      linear-gradient(180deg,#081410,#0a1712 55%,#081410 100%);
+    background-color:#081410;
+    font:16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;}
+  a{color:var(--brass);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:44px 0 20px;border-bottom:1px double var(--rule2);margin-bottom:10px}
+  .kicker{letter-spacing:.26em;text-transform:uppercase;font-size:11px;color:var(--brass);font-weight:700;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  h1{font-size:40px;line-height:1.1;margin:.28em 0 .12em;letter-spacing:.01em}
+  .sub{color:var(--soft);font-size:17px;max-width:70ch;margin:.4em 0 0}
+  .meta{color:var(--muted);font-size:13px;margin-top:14px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .backlinks{margin-top:16px;font-size:13px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .backlinks a{margin-right:16px}
+  /* controls */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 8px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .filters{display:flex;flex-wrap:wrap;gap:8px}
+  .fbtn{cursor:pointer;border:1px solid var(--rule2);background:var(--panel);color:var(--soft);
+    border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;letter-spacing:.02em}
+  .fbtn:hover{border-color:var(--brass-dim);color:var(--ink)}
+  .fbtn[aria-pressed="true"]{background:var(--brass);color:#20180a;border-color:var(--brass)}
+  .fbtn .c{opacity:.7;font-weight:700;margin-left:6px}
+  .search{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .search input{background:var(--ground2);border:1px solid var(--rule2);color:var(--ink);
+    border-radius:8px;padding:8px 12px;font-size:14px;min-width:220px;font-family:inherit}
+  .search input::placeholder{color:var(--muted)}
+  .search input:focus{outline:none;border-color:var(--brass-dim)}
+  .count{color:var(--muted);font-size:12px;margin:6px 2px 0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  /* ledger table */
+  .ledger{width:100%;border-collapse:collapse;margin:12px 0 8px;
+    background:linear-gradient(180deg,var(--panel),var(--ground2));
+    border:1px solid var(--rule2);border-radius:var(--radius);overflow:hidden}
+  .ledger thead th{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);
+    font-weight:700;padding:14px 14px;border-bottom:1px solid var(--rule2);background:rgba(216,180,90,.05)}
+  .ledger td{padding:16px 14px;border-bottom:1px solid var(--rule);vertical-align:top;font-size:15px}
+  .ledger tr:last-child td{border-bottom:0}
+  .ledger tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+  .ledger tbody tr:hover{background:rgba(216,180,90,.045)}
+  .col-n{width:36px;color:var(--muted);font-variant-numeric:tabular-nums;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:13px}
+  .col-date{width:104px;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:13px}
+  .col-src{width:150px;color:var(--soft);font-size:13.5px}
+  .claim{color:var(--ink)}
+  .claim .val{color:#fff;font-weight:700}
+  .claim cite{display:block;margin-top:6px;color:var(--muted);font-style:normal;font-size:12px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .claim cite a{color:var(--brass-dim)}
+  .col-due{width:104px;white-space:nowrap;color:var(--soft);font-variant-numeric:tabular-nums;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:13px}
+  .col-status{width:118px}
+  /* wax/brass stamps */
+  .stamp{display:inline-block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    padding:6px 12px;border-radius:6px;transform:rotate(-3deg);border:2px solid;white-space:nowrap}
+  .stamp.pending{color:var(--brass);border-color:var(--brass-dim);background:rgba(216,180,90,.08)}
+  .stamp.hit{color:var(--green);border-color:var(--green-dim);background:rgba(75,191,133,.10)}
+  .stamp.miss{color:var(--wax);border-color:var(--wax-dim);background:rgba(193,74,59,.12)}
+  .stamp.ongoing{color:var(--blue);border-color:#2f6d8f;background:rgba(90,169,216,.10)}
+  .due-soon{color:var(--brass);font-weight:700}
+  .empty{padding:34px 14px;text-align:center;color:var(--muted);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  footer{border-top:1px double var(--rule2);margin-top:34px;padding:24px 0 60px;color:var(--muted);font-size:13px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .note{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--brass-dim);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin:20px 0;color:var(--soft);font-size:14px}
+  @media(max-width:820px){
+    .col-src{display:none}
+    h1{font-size:30px}
+    .ledger td,.ledger thead th{padding:12px 10px}
+    .search{margin-left:0;width:100%}
+    .search input{flex:1;min-width:0}
+  }
+  @media(max-width:520px){
+    .col-n{display:none}
+    .ledger .col-date{width:auto}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The Captain's Log</div>
+  <h1>The Prediction Ledger</h1>
+  <p class="sub">A night-lit logbook of the dated, falsifiable forecasts cited across the daily briefs — each entered with the date it was logged, the date it comes due, and a wax-stamped verdict. When a brief cites a named source, a specific number and a due date, one line is added here. Nothing else changes; the only standing cost is a glance at what is due this week before publishing.</p>
+  <div class="meta">Kept since September 2026 · <span id="tally"></span></div>
+  <div class="backlinks">
+    <a href="index.html">← All editions</a>
+    <a href="feed.xml">RSS feed</a>
+    <a href="2026-09-21/index.html">Today's brief →</a>
+  </div>
+</header>
+
+<div class="note">
+  <strong>How to read a verdict.</strong> <strong style="color:var(--brass)">Pending</strong> — logged, not yet due. <strong style="color:var(--green)">Hit</strong> — came due and was borne out, checked against current sources. <strong style="color:var(--wax)">Miss</strong> — came due and did not hold. <strong style="color:var(--blue)">Ongoing</strong> — a recurring benchmark that is re-read rather than closed. Verdicts are checked against sources, never assumed.
+</div>
+
+<div class="controls">
+  <div class="filters" id="filters">
+    <button class="fbtn" data-filter="all" aria-pressed="true">All <span class="c" data-c="all"></span></button>
+    <button class="fbtn" data-filter="pending" aria-pressed="false">Pending <span class="c" data-c="pending"></span></button>
+    <button class="fbtn" data-filter="hit" aria-pressed="false">Hit <span class="c" data-c="hit"></span></button>
+    <button class="fbtn" data-filter="miss" aria-pressed="false">Miss <span class="c" data-c="miss"></span></button>
+    <button class="fbtn" data-filter="ongoing" aria-pressed="false">Ongoing <span class="c" data-c="ongoing"></span></button>
+  </div>
+  <div class="search">
+    <label for="q" style="color:var(--muted);font-size:12px">Search</label>
+    <input id="q" type="search" placeholder="source, claim, number…" autocomplete="off">
+  </div>
+</div>
+<div class="count" id="count"></div>
+
+<table class="ledger">
+  <thead>
+    <tr>
+      <th class="col-n">#</th>
+      <th class="col-date">Logged</th>
+      <th class="col-src">Source</th>
+      <th>The forecast (falsifiable)</th>
+      <th class="col-due">Due</th>
+      <th class="col-status">Verdict</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+<div class="empty" id="empty" hidden>No entries match this filter.</div>
+
+<footer>
+  <p>The Prediction Ledger records forecasts exactly as their sources stated them, paraphrased and dated; each carries a link to the brief or source that logged it. Figures relayed via secondary coverage are marked "as reported" in the underlying edition's <em>sources.md</em>. A verdict is stamped only after the due date has arrived and been checked against current sources — the ledger never marks a forecast Hit or Miss by assumption. The "Sept 2026" start reflects when the ledger was first kept, not when the forecasts were made.</p>
+  <p>AI Tech Radar · <a href="index.html">all editions</a> · <a href="feed.xml">RSS</a></p>
+</footer>
+</div>
+
+<script id="ledger-data" type="application/json">
+[
+  {
+    "n": 1, "logged": "2026-09-01", "source": "EU AI Act / European Commission",
+    "claim": "The EU AI Act's <span class=\"val\">high-risk-system obligations and Article 50 transparency duties become applicable</span> across the EU (logging, human oversight, risk management), backed by fines up to €35M or 7% of global turnover.",
+    "cite": "Regulation (EU) 2024/1689 · cited in \"The Surety\" (17 Sep) & later briefs",
+    "url": "2026-09-17/index.html",
+    "due": "2026-08-02", "status": "hit"
+  },
+  {
+    "n": 2, "logged": "2026-07-28", "source": "Model Context Protocol",
+    "claim": "The <span class=\"val\">MCP 2026-07-28 specification promotes Enterprise-Managed Authorization to stable</span> and adopts Client ID Metadata Documents — the tool-connection layer beneath enterprise agent governance.",
+    "cite": "blog.modelcontextprotocol.io · cited across the governance briefs",
+    "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+    "due": "2026-07-28", "status": "hit"
+  },
+  {
+    "n": 3, "logged": "2026-09-01", "source": "Gartner",
+    "claim": "<span class=\"val\">40% of enterprise applications will embed task-specific AI agents by year-end 2026</span>, up from less than 5% in 2025.",
+    "cite": "Gartner press release, 26 Aug 2025 · cited across briefs",
+    "url": "https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025",
+    "due": "2026-12-31", "status": "pending"
+  },
+  {
+    "n": 4, "logged": "2026-09-03", "source": "Gartner",
+    "claim": "<span class=\"val\">Over 40% of agentic-AI projects will be cancelled by end of 2027</span>, up from today, on cost, unclear value and inadequate controls.",
+    "cite": "Gartner, via \"The Two Mills\" (3 Sep) & later briefs",
+    "url": "2026-09-03/index.html",
+    "due": "2027-12-31", "status": "pending"
+  },
+  {
+    "n": 5, "logged": "2026-09-16", "source": "Gartner",
+    "claim": "<span class=\"val\">40% of organizations will demote or decommission autonomous agents by 2027</span>, with uniform (rather than tiered) governance a root cause of failure.",
+    "cite": "Gartner, via \"The Steward\" (16 Sep)",
+    "url": "2026-09-16/index.html",
+    "due": "2027-12-31", "status": "pending"
+  },
+  {
+    "n": 6, "logged": "2026-09-18", "source": "Deloitte",
+    "claim": "<span class=\"val\">74% of organizations plan to adopt agentic AI within two years</span>, even as only 21% report a mature governance model for autonomous agents.",
+    "cite": "Deloitte (3,235 leaders), via \"The Second Wage\" (18 Sep)",
+    "url": "2026-09-18/index.html",
+    "due": "2028-09-30", "status": "pending"
+  },
+  {
+    "n": 7, "logged": "2026-09-20", "source": "Juniper Research",
+    "claim": "Agentic commerce grows from <span class=\"val\">~$8B of agentic spend in 2026 toward ~$1.5T by 2030</span>.",
+    "cite": "Juniper (Apr 2026), via \"The Purse\" (20 Sep)",
+    "url": "2026-09-20/index.html",
+    "due": "2030-12-31", "status": "pending"
+  },
+  {
+    "n": 8, "logged": "2026-09-20", "source": "McKinsey QuantumBlack",
+    "claim": "<span class=\"val\">$3–5T of orchestrated retail spend by 2030</span> flows through agentic channels.",
+    "cite": "McKinsey QuantumBlack, via \"The Purse\" (20 Sep)",
+    "url": "2026-09-20/index.html",
+    "due": "2030-12-31", "status": "pending"
+  },
+  {
+    "n": 9, "logged": "2026-09-03", "source": "McKinsey",
+    "claim": "Only <span class=\"val\">~6% of firms are \"AI high performers\"</span> attributing more than 5% of EBIT to AI — a recurring benchmark re-read each State-of-AI cycle.",
+    "cite": "McKinsey State of AI 2026 · recurring benchmark",
+    "url": "2026-09-19/index.html",
+    "due": "recurring", "status": "ongoing"
+  },
+  {
+    "n": 10, "logged": "2026-09-18", "source": "OpenAI",
+    "claim": "OpenAI targets <span class=\"val\">~$2.5B in advertising revenue in 2026 and ~$100B by 2030</span>, after ChatGPT Ads crossed a $1B annualized run rate in under 200 days.",
+    "cite": "OpenAI / CNBC / eMarketer, via \"The Second Wage\" (18 Sep)",
+    "url": "2026-09-18/index.html",
+    "due": "2030-12-31", "status": "pending"
+  },
+  {
+    "n": 11, "logged": "2026-08-17", "source": "Anthropic (Reuters)",
+    "claim": "Anthropic's IPO valuation rests on a <span class=\"val\">2028 revenue forecast of ~$190–200B</span> — against a ~$47B run rate publicized in May 2026.",
+    "cite": "Reuters (14 Aug 2026), via prior briefs",
+    "url": "https://www.usnews.com/news/top-news/articles/2026-08-14/exclusive-anthropic-ipo-valuation-hinges-on-190-200-billion-2028-revenue-forecast-sources-say",
+    "due": "2028-12-31", "status": "pending"
+  },
+  {
+    "n": 12, "logged": "2026-09-21", "source": "OpenAI",
+    "claim": "OpenAI will <span class=\"val\">roll out \"Private Safety Processing\" and publish a technical white paper during September 2026</span>, after the 19–20 August preview.",
+    "cite": "OpenAI / Axios / Gigazine, via \"The Sealed Room\" (21 Sep)",
+    "url": "2026-09-21/index.html",
+    "due": "2026-09-30", "status": "pending"
+  }
+]
+</script>
+<script>
+(function(){
+  var data = [];
+  try { data = JSON.parse(document.getElementById('ledger-data').textContent) || []; } catch(e){ data = []; }
+  var rowsEl = document.getElementById('rows');
+  var emptyEl = document.getElementById('empty');
+  var countEl = document.getElementById('count');
+  var tallyEl = document.getElementById('tally');
+  var qEl = document.getElementById('q');
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var TODAY = '2026-09-21';
+  var state = { filter: 'all', q: '' };
+
+  var STATUS_LABEL = { pending:'Pending', hit:'Hit', miss:'Miss', ongoing:'Ongoing' };
+
+  function fmtDate(d){
+    if(!d || d === 'recurring') return 'recurring';
+    var p = d.split('-'); if(p.length !== 3) return d;
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return (parseInt(p[2],10)) + ' ' + months[parseInt(p[1],10)-1] + ' ' + p[0];
+  }
+  function dueSoon(d, status){
+    if(status !== 'pending' || !d || d === 'recurring') return false;
+    var due = new Date(d + 'T00:00:00Z'), now = new Date(TODAY + 'T00:00:00Z');
+    var diff = (due - now) / 86400000;
+    return diff >= 0 && diff <= 7;
+  }
+  function counts(){
+    var c = { all: data.length, pending:0, hit:0, miss:0, ongoing:0 };
+    data.forEach(function(r){ if(c[r.status] != null) c[r.status]++; });
+    return c;
+  }
+  function setTally(){
+    var c = counts();
+    filters.forEach(function(b){
+      var k = b.getAttribute('data-filter');
+      var el = b.querySelector('.c'); if(el) el.textContent = c[k] != null ? c[k] : '';
+    });
+    tallyEl.textContent = c.all + ' forecasts logged · ' + c.hit + ' hit · ' + c.pending + ' pending · ' + c.ongoing + ' ongoing' + (c.miss ? ' · ' + c.miss + ' miss' : '');
+  }
+  function matches(r){
+    if(state.filter !== 'all' && r.status !== state.filter) return false;
+    if(state.q){
+      var hay = (r.source + ' ' + r.claim + ' ' + r.cite + ' ' + r.due + ' ' + (STATUS_LABEL[r.status]||'')).toLowerCase();
+      if(hay.indexOf(state.q) === -1) return false;
+    }
+    return true;
+  }
+  function render(){
+    var shown = data.filter(matches);
+    rowsEl.innerHTML = shown.map(function(r){
+      var soon = dueSoon(r.due, r.status);
+      var citeHtml = r.url ? '<cite>Logged from: <a href="'+r.url+'"'+(/^https?:/.test(r.url)?' target="_blank" rel="noopener"':'')+'>'+r.cite+'</a></cite>' : '<cite>'+r.cite+'</cite>';
+      return '<tr>'
+        + '<td class="col-n">'+r.n+'</td>'
+        + '<td class="col-date">'+fmtDate(r.logged)+'</td>'
+        + '<td class="col-src">'+r.source+'</td>'
+        + '<td class="claim">'+r.claim+citeHtml+'</td>'
+        + '<td class="col-due'+(soon?' due-soon':'')+'">'+fmtDate(r.due)+(soon?' ·&nbsp;due&nbsp;soon':'')+'</td>'
+        + '<td class="col-status"><span class="stamp '+r.status+'">'+(STATUS_LABEL[r.status]||r.status)+'</span></td>'
+        + '</tr>';
+    }).join('');
+    emptyEl.hidden = shown.length !== 0;
+    countEl.textContent = 'Showing ' + shown.length + ' of ' + data.length + ' forecasts' + (state.filter!=='all' ? ' · filter: '+ (STATUS_LABEL[state.filter]||state.filter) : '') + (state.q ? ' · “'+state.q+'”' : '');
+  }
+  filters.forEach(function(b){
+    b.addEventListener('click', function(){
+      state.filter = b.getAttribute('data-filter');
+      filters.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true':'false'); });
+      render();
+    });
+  });
+  qEl.addEventListener('input', function(){ state.q = qEl.value.trim().toLowerCase(); render(); });
+  setTally(); render();
+})();
+</script>
+</body>
+</html>

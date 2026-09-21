@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 21 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the sealed room' — you named, bonded, waged and funded every agent, but each of those controls governs the servant, not the room it works in. This month both leading labs shipped the answer to enterprise confidentiality: OpenAI's Private Safety Processing (pattern-level misuse detection, no content read, customer-held keys) and Anthropic's Enterprise Frontier Safeguards (zero data retention plus misuse detection with the activity record in the customer's own cloud, flags going only to the customer). The board move: seal the room (zero retention), hold the keys (safety record in your cloud), point the watch at yourself (flags to your people) — and still bar the door, because the room protects secrets, not systems. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant — now govern the room it works in</div>
+  <h1>The Sealed Room</h1>
+  <div class="subhead">All year you named, bonded, waged and funded every agent — but each of those controls governs the servant, not the room it works in. To do the work, your most confidential books must be laid before a rented model. This month both leading labs shipped the answer: zero data retention with the misuse-watcher moved inside your own walls.</div>
+  <div class="meta">Monday, 21 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This month both leading labs shipped enterprise "sealed rooms." OpenAI's <strong>Private Safety Processing</strong> (previewed 19–20 August 2026, rolling out with a technical white paper through September) detects misuse at the <em>pattern</em> level across related interactions without reading the underlying content, with customer content on customer-held keys (OpenAI; Axios; Security Boulevard, as reported). Anthropic's <strong>Enterprise Frontier Safeguards</strong> (~2 September 2026) pairs zero data retention with misuse detection whose activity record lives in the customer's <em>own</em> S3, Azure Blob or Google Cloud Storage, under the customer's keys — flags go directly to the customer, and "nobody at Anthropic reads it" (Anthropic; Help Net Security; CSO Online, as reported). The board question is no longer <em>is our servant named, bonded, waged and funded?</em> — it is: when our private books are worked on with a rented oracle, does anything spoken in that room leave it, who holds the keys to the record, and to whom does the misuse watch answer — us, or the toolmaker?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>All year the radar built the governed house — the livery named every agent, the steward kept one book, the surety put your name on the bond, the second wage asked whose interest it served, the two harvests sent it to reap, the purse funded it like an employee. <strong>Every one of those controls governs the servant.</strong> This morning the frame turns to the <em>room</em> the servant works in — because to do any of that work, your most confidential data (the larder) must be carried onto a rented model (the stove) and read by a rented oracle, and the board can no longer defer the question every regulated house has been quietly carrying: <strong>does the toolmaker keep a copy of everything our agents see and say — and if we seal the room so nothing leaves, how does anyone still catch an agent using it to do harm?</strong></p>
+<p><strong>The reality — the sealed room is now a shipped product, from both leading labs.</strong> The industry answered the confidentiality question in the space of three weeks. <strong>OpenAI previewed "Private Safety Processing" on 19–20 August 2026, rolling out with a technical white paper through September: a zero-data-retention system that spots misuse at the <em>pattern</em> level across related interactions without reading the underlying content, keeping customer prompts and responses opaque to OpenAI personnel and stored either on customer-managed infrastructure or customer-encrypted on OpenAI's, under keys the customer controls</strong> (OpenAI — "Offering Zero Data Retention for frontier models"; Axios; Security Boulevard; Gigazine, as reported). Days later, <strong>Anthropic announced "Enterprise Frontier Safeguards" (EFS, ~2 September 2026): zero data retention <em>plus</em> misuse detection whose activity data sits in the customer's own S3, Azure Blob or Google Cloud Storage, under the customer's own encryption keys, access policies and audit logging. Automated systems analyse a rolling window of traffic for serious-misuse signals — offensive-cyber or biological-capability attempts, stolen or leaked credentials — and the flags go directly to the customer; no Anthropic employee reads the data. Broad availability is targeted for later this fall, with zero data retention on Fable 5 and Fable 5.1 in the interim</strong> (Anthropic; Help Net Security — "lets your Claude logs stay in your cloud"; CSO Online; MarkTechPost, as reported). Both solve the same knot the trade press stated plainly: <em>"we need zero retention, but we also need misuse detection."</em></p>
+<p><strong>The collision — the seal and the watcher have always pulled against each other, and most houses can do neither.</strong> For two years the honest objection to a rented model was: <em>to catch misuse, the vendor must hold your data long enough to correlate it — so "zero retention" and "safety monitoring" could not both be true.</em> The sealed room breaks that trade by moving the watcher inside your own walls: the record lives under your keys, the scan runs without a human at the vendor reading content, and only the flag — not the transcript — reaches anyone. This matters because the same labs are shipping ever more capable models into exactly the sensitive work that makes retention intolerable: <strong>Anthropic opened a Life Sciences Verification Program in beta on 17 September 2026, giving verified teams more permissive access for biology work, and states Claude Mythos 5.1 is its "most robust model to date on an external prompt-injection benchmark"; Google, Anthropic and OpenAI jointly unveiled cyber-capable models with new safeguards</strong> (as reported). Yet the governance floor is not ready to hold the keys: in a 2026 survey of 225 security, IT and risk leaders, <strong>63% of organizations cannot enforce purpose limitations on their AI agents, 60% cannot quickly terminate a misbehaving agent, and 55% cannot isolate AI systems from sensitive networks — even as 100% have agentic AI on the roadmap</strong> (Kiteworks 2026 Data Security Forecast, as reported).</p>
+<p><strong>The stakes — a sealed room is only as good as who holds the keys and who the watcher answers to.</strong> For a board the move is exact, and it re-uses everything you have already built. <strong>First, seal the room</strong> — insist that no prompt or agent transcript sits on the vendor's servers by default (zero data retention), so your larder is not silently copied to the toolmaker's house every time your agent thinks. <strong>Second, hold the keys yourself</strong> — the record that misuse detection needs must live in <em>your</em> cloud, under <em>your</em> encryption keys and audit logging, not the vendor's; a watcher whose notes live in the toolmaker's strongroom is the toolmaker's watcher, not yours. <strong>Third, keep the watcher pointed at you</strong> — a misuse flag must come to your people to act on, with no vendor employee reading the content, and you must still be able to <em>do</em> something when it fires (the 60% who cannot terminate a misbehaving agent have a smoke alarm wired to no one). And remember the through-line: <strong>the room does not move the bond.</strong> Sealing the room changes where the data rests and who watches it; it does not change that, under the EU AI Act's high-risk regime (live since 2 August 2026), your name still answers for what your agent decides in that room. Do it <strong>now</strong> — because the capable models are already being pointed at your most sensitive work, and a house that has not sealed the room is carrying its private books to a rented desk in full view of the market.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the sealed room is shipped product, from both leading labs.</strong> <strong>OpenAI's Private Safety Processing (preview 19–20 Aug, rollout through Sept) and Anthropic's Enterprise Frontier Safeguards (~2 Sep) both deliver zero data retention <em>plus</em> misuse detection — the record under the customer's own keys, the scan without a vendor human reading content, only the flag leaving the room (OpenAI; Anthropic; Axios; Help Net Security; CSO Online, as reported).</strong> Confidentiality and safety monitoring no longer have to trade off.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — capable models are aimed at sensitive work while the governance floor can't hold the keys.</strong> <strong>Anthropic's Life Sciences Verification Program (17 Sep), Mythos 5.1's prompt-injection robustness and the three labs' cyber models raise the stakes of what agents read; yet 63% of organizations cannot enforce purpose limitations, 60% cannot terminate a misbehaving agent, and 55% cannot isolate AI from sensitive networks (Anthropic; Kiteworks 2026, as reported).</strong> The room is being sealed faster than most houses can hold the keys.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — seal the room, hold the keys, keep the watcher pointed at you.</strong> Demand zero data retention by default; keep the misuse-detection record in your own cloud under your own keys; make every flag come to your people with power to act — and remember the room does not move the bond, which is still yours under the EU AI Act.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety signed the bond, the second wage checked its loyalty, the two harvests sent it to reap and the purse funded it — and every one of those controls governed <em>the servant</em>. <strong>This morning the control turns to the <em>room</em>: the confidential larder your agents must carry onto a rented stove to do any work at all.</strong> The old objection was that you could seal the room or watch it, never both. This month both leading labs shipped the room that does both — zero retention with the misuse-watcher inside your own walls — and the discipline for a board is to insist on all three properties at once: <strong>the room is sealed (nothing spoken in it rests on the toolmaker's servers), the keys are yours (the safety record lives in your cloud under your encryption), and the watcher answers to you (flags reach your people, who can still act).</strong> The failure mode is exact and common: a house that has named, bonded, waged and funded its servants perfectly, and then carries its most private books to a rented desk whose owner keeps every page and whose watchman reports to himself. Ask the question a great house has asked of every room where its secrets are handled: <em>what is spoken here — does it stay here, who keeps the record, and does the watch answer to me?</em></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Sealed Room"</h3>
+<p><em>Topic: This morning the frame turns from funding the servant to the confidentiality of the room it works in. This month both leading labs shipped enterprise "sealed rooms": OpenAI's Private Safety Processing (previewed 19–20 August 2026, rolling out through September) detects misuse at the pattern level without reading content, with customer data on customer-held keys; Anthropic's Enterprise Frontier Safeguards (~2 September 2026) pairs zero data retention with misuse detection whose activity record lives in the customer's own cloud, under the customer's keys, with flags going only to the customer and no vendor human reading the data (OpenAI; Anthropic; Axios; Help Net Security; CSO Online, as reported). The sealed-room allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, over a long year, at last done everything right by its servants. It had given every hand a name and a scoped key, kept one honest book, accepted that the master's own name stood surety for what the servants did, learned whose second coin each advising servant took, sent the governed servants into the fields to reap, and — only yesterday — cut each a scoped purse so it might buy and be paid. The servants were named, bonded, waged, funded and diligent. And yet the master, walking his corridors at dawn, stopped at one door he had never properly thought about: the small room where the house's most private books were read.</p>
+<p>For here was the thing no amount of governing the <em>servant</em> had touched. To do any of the clever new work, a servant had to carry the family's most confidential papers — the rent-rolls, the letters, the physician's notes, the half-finished contracts — into that room and lay them open before a <strong>rented oracle</strong>, a marvellous consulting mind the house did not own but hired by the hour. And two fears sat in that room that no passport, bond, wage or purse could answer. The first: <em>does the oracle's true master, the great firm that rents him out, keep a copy of every private page my servant lays open — so that my larder is quietly copied to another man's house each time my servant merely thinks?</em> And the second, its exact opposite: <em>if I seal the room so tightly that nothing spoken in it can ever leave, how will anyone ever catch a servant who uses that private room to plot a poisoning, forge a seal, or smuggle out the family's credentials?</em> For years the wise had said these two could not both be had — <strong>to watch the room, the oracle's master must be allowed to keep and read what passed in it; to keep the room truly private, you must give up the watch.</strong> Seal or watch. Never both.</p>
+<p>This month the market did a subtler thing than anyone expected: it built a room that was <strong>both sealed and watched, by moving the watchman inside the master's own walls.</strong> The wise houses took it and set three conditions on it, and it is worth watching a careful master's hand as he does. <strong>He sealed the room:</strong> he demanded that nothing his servant laid before the oracle should rest, by default, on the oracle-firm's own shelves — the pages were read and let go, retained nowhere in the toolmaker's house. <strong>He kept the keys:</strong> the one record that a watchman <em>must</em> keep — a ledger of patterns, of who asked what shape of thing, enough to catch a plot without copying the plot itself — he insisted be kept in <em>his own</em> strongroom, locked with <em>his own</em> keys, its comings-and-goings written in <em>his own</em> audit-book, so that not even the oracle-firm's people could open it. <strong>And he pointed the watch at himself:</strong> when the watchman, reading only the shapes and never the private pages, saw the signature of real wrongdoing — a servant reaching after the tools of poison or plague, or the marks of a stolen credential — the alarm rang in the <em>master's</em> own hall and nowhere else, and no clerk of the oracle-firm ever read a word of what had passed. A room sealed to the outside, watched from within, with the record and the watch and the alarm all under the master's own hand.</p>
+<p>Here is the part that should make a master set down his cup. <strong>A sealed room is exactly as good as the answer to three plain questions, and no better.</strong> <em>What is spoken here — does it stay here?</em> If the oracle-firm keeps the pages by default, the room is not sealed; it is a room with a copyist behind the arras, and every private thing your servant reads is read twice. <em>Who keeps the record?</em> If the ledger the watchman needs is kept in the oracle-firm's strongroom under the oracle-firm's keys, then the watchman is <em>their</em> watchman, wearing your livery — and the day their interest and yours diverge, the keys are in the wrong hand. <em>And to whom does the watch answer?</em> A watchman who reports a servant's wrongdoing to the oracle-firm, and not to you, has not been hired to protect your house; he has been hired to protect theirs, in your house, at your expense. The three questions are not the same question, and a room that answers two of them and fails the third is not two-thirds safe — it is unsealed, because the weakest of the three is where your secrets leave.</p>
+<p>And the master could not comfort himself that a sealed room made the servant safe. <strong>A sealed, watched room governs what is <em>seen and kept</em>; it does not govern what the servant may <em>reach</em>, nor whether he can be <em>stopped</em>.</strong> It was of little use to keep the family's letters from the oracle-firm's shelves if the same servant, in the same room, could still reach the poison-cabinet and the master had no bar he could throw across the door in time. The market itself had noticed the gap and said so plainly: in a great survey of houses that year, most masters confessed they <em>could not bind a servant to a single errand, could not turn a servant off quickly when it went wrong, and could not keep their servants away from the most sensitive rooms of all</em> — and yet every last house had already resolved to hire more oracles and set more servants loose among its papers. A sealed room with a watchman is a fine thing; a sealed room with a watchman, above a cellar full of poison, whose door has no bar, is a tragedy with good lighting.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now nearly free; your knowledge is the larder; the gate is the one door you guard; the passport names each agent at the door; the census is the roll that counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand is bounding what a clever servant can reach; the bell is ringing the alarm the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you give every hand its own name and key; the steward is why you keep one governed office and its book your own; the surety is why the master's own name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send the governed servant to the fields and weigh what it brings in; the purse is why you fund the servant like an employee and not an heir — and <strong>the sealed room is why, when your most private books must be worked on with a rented oracle, you seal the room so nothing spoken in it rests on the toolmaker's shelves, keep the one record a watchman needs in your own strongroom under your own keys, and point the watch at yourself so the alarm rings in your hall and no clerk of the oracle-firm reads a private page — while never forgetting the room governs only what is seen and kept, not what the servant may reach or whether you can bar the door.</strong> A house that carries its confidential books to a rented desk whose owner keeps every page, and whose watchman reports to himself, has not hired a clever oracle; it has furnished, at its own expense, a beautiful room in which to be robbed.</p>
+<p><strong>The question it forces:</strong> <em>We named every agent, kept one book, signed the bond, checked the wage, sent it to reap and funded it — and to do that work it must lay our most confidential books before a rented oracle. What is spoken in that room — does it stay there, or does the toolmaker keep a copy by default? Who holds the keys to the record the watchman needs — us, in our own cloud, or the vendor, in theirs? And to whom does the watch answer — do the misuse flags ring in our hall, for our people to act on, or in the vendor's? And even sealed and watched, can we still bar the door — bind the servant to its errand and turn it off when it goes wrong — or have we built a private room with no bolt over a cellar full of poison?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Is the room sealed — does anything our agents read rest on the vendor's servers by default?</strong> Both leading labs now offer zero data retention for enterprises (OpenAI Private Safety Processing; Anthropic Enterprise Frontier Safeguards). <strong>For every frontier model our agents use, have we contractually established that prompts and transcripts are retained nowhere on the vendor's infrastructure by default — or are we quietly copying our confidential larder to a toolmaker's house every time an agent thinks?</strong></li>
+  <li><strong>Who holds the keys to the safety record, and to whom does the watcher report?</strong> Misuse detection needs <em>some</em> record; the question is where it lives. <strong>Does the activity data our safety monitoring relies on sit in our own cloud, under our own encryption keys and audit logging, with misuse flags coming to our people — or does the vendor hold the record, the keys and the watch, so the watchman in our livery actually answers to them?</strong></li>
+  <li><strong>Even sealed and watched, can we still bar the door?</strong> A private room does not govern what an agent can reach or whether you can stop it. <strong>Can we enforce purpose limitations on each agent and terminate a misbehaving one in seconds — or are we among the 60% who cannot turn a bad agent off, running a smoke alarm wired to no one?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Client data, positions and correspondence are exactly the confidential larder that makes vendor retention intolerable under supervisory scrutiny. <strong>Have we required zero data retention with a customer-held safety record for every model touching client or market data — and can we show a regulator that no prompt or transcript rests on a third party's servers, and that misuse flags reach our own controls?</strong></li>
+  <li>The same models are being made more capable on sensitive tasks (prompt-injection robustness, cyber-tooling). <strong>Have we tested that a poisoned document or a prompt-injection cannot turn a client-facing agent against us inside the sealed room — and that we can isolate and terminate that agent before it acts?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Anthropic's Life Sciences Verification Program (17 Sep) grants verified teams more permissive access for biology work — precisely where confidentiality and misuse detection both bite hardest. <strong>Where we use frontier models on patient data or research, is the room sealed (PHI retained nowhere on the vendor), the safety record under our own keys, and the misuse watch (including biological-capability signals) reporting to us?</strong></li>
+  <li>Consent and audit obligations are unforgiving. <strong>Can we produce, for any agent interaction touching a patient, proof of what was retained (nothing), where the safety record lives (our cloud), and who was alerted on a flag (us) — and demonstrate we can halt the agent on our own authority?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Designs, process parameters and supplier terms are trade secrets an agent must expose to a model to be useful. <strong>Have we sealed the room for engineering and OT-adjacent agents — zero retention, customer-held safety record — so proprietary designs are not resting on a vendor's shelves, and confirmed the misuse watch does not itself become a data-exfiltration path?</strong></li>
+  <li>55% of organizations cannot isolate AI systems from sensitive networks. <strong>Can we prove our model-using agents are segmented from OT and crown-jewel systems, bound to their errand, and killable in seconds if a sealed-room agent is compromised?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer PII and pricing/strategy data flow through marketing, service and merchandising agents. <strong>Is retention zero and the safety record ours for every model handling customer data — and does a misuse flag (leaked credentials, abuse) reach our security team rather than the vendor's?</strong></li>
+  <li>Consumer-facing agents are prime prompt-injection targets. <strong>Have we hardened our storefront and service agents against injected instructions, and can we bound and terminate a compromised agent before it leaks a basket of customer data?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Citizen data, case files and procurement records are the sharpest possible confidentiality case, under the EU AI Act high-risk duties (live since 2 August 2026). <strong>Before any agent reads public data through a rented model, can we show zero retention, a safety record under public-body keys, misuse flags routed to us, and the ability to halt the agent — and that using the vendor's sealed room does not move our accountability?</strong></li>
+  <li>Public bodies must answer for both leaks and misuse. <strong>Have we confirmed the sealed room gives us the audit trail (what was retained, where the record lives, who was alerted) that a public accountability review will demand — and that the watch answers to us, not the vendor?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Purse to the Sealed Room</h2>
+<p>Read the whole stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, owned, loyal, reaping and funded?</em> and started asking the question that governs not the servant but the room it works in: <em>when our confidential data is carried onto a rented model, does it stay private, who holds the safety record, and to whom does the misuse watch report?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you give it a scoped, revocable identity; the steward is why you keep one governed office; the surety is why your own name is on the bond; the second wage is why you ask whose interest it serves; the two harvests is why you send it to reap; the purse is why you fund it like an employee. <strong>The sealed room sits at the next turn, because every one of those controls governs the <em>agent</em> — and none of them governs the <em>confidentiality of the data the agent must expose to a rented model to do any of it</em>. And this month the market shipped the sealed room: both leading labs delivered zero-data-retention plus misuse detection for enterprises, resolving the two-year-old objection that you could keep your data private <em>or</em> have it watched for misuse, never both.</strong> The point is blunt: <strong>a named, bonded, waged, funded agent working on your most confidential books inside a room the vendor keeps a copy of, watched by a watchman who reports to the vendor, is not a governed agent — it is a beautifully lit data-exfiltration channel with your own name on the lease.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the sealed room is real product, from both leading labs, within three weeks.</strong> <strong>OpenAI previewed "Private Safety Processing" on 19–20 August 2026 (rolling out with a technical white paper through September): a zero-data-retention system that identifies misuse at the <em>pattern</em> level across related interactions without accessing the underlying content, keeping customer prompts and responses opaque to OpenAI personnel, with content stored on customer-managed infrastructure or customer-encrypted on OpenAI's under customer-held keys (OpenAI — "Offering Zero Data Retention for frontier models"; Axios; Security Boulevard; Gigazine, as reported). Anthropic announced "Enterprise Frontier Safeguards" (~2 September 2026): zero data retention plus misuse detection whose activity data lives in the customer's own S3, Azure Blob or Google Cloud Storage, under the customer's encryption keys, access policies and audit logging; automated systems scan a rolling window for serious-misuse signals — offensive-cyber or biological-capability attempts, stolen or leaked credentials — and flags go directly to the customer with no Anthropic human reading the data; broad availability is targeted for later this fall, with ZDR on Fable 5 and Fable 5.1 in the interim (Anthropic; Help Net Security; CSO Online; MarkTechPost, as reported).</strong> Read architecturally, three things matter. First, <em>the sealed room breaks the seal-or-watch trade by relocation, not compromise</em>: the misuse scan runs against a record the <em>customer</em> holds, or against patterns rather than content, so "zero retention" and "safety monitoring" stop being mutually exclusive. Second, <em>the flag is not the transcript</em>: what leaves the room is a signal ("this pattern looks like credential theft"), not the private pages, and it goes to the customer's people, not the vendor's. Third, <em>the design admits the true threat model</em>: the categories watched for — offensive cyber, biological capability, stolen credentials — are exactly the misuse a capable model in a private room makes cheaper, and the same labs are shipping that capability (Life Sciences access, cyber models) in parallel.</li>
+  <li><strong>The collision — capability is rising into sensitive work while most houses cannot hold the keys or bar the door.</strong> The sealed room raises the ceiling on what you can safely feed a model; it does nothing about the floor beneath your own governance. <strong>Anthropic opened a Life Sciences Verification Program (beta, 17 Sep 2026) for more permissive biology work, states Claude Mythos 5.1 is its "most robust model to date on an external prompt-injection benchmark," and joined Google and OpenAI in unveiling cyber-capable models with new safeguards; over 100 firms signed an open letter urging defence against rogue AI (as reported).</strong> Yet a 2026 survey of 225 security, IT and risk leaders across 10 industries and 8 regions found <strong>63% cannot enforce purpose limitations on their agents, 60% cannot quickly terminate a misbehaving agent, and 55% cannot isolate AI from sensitive networks, while 100% have agentic AI on the roadmap (Kiteworks 2026 Data Security Forecast, as reported)</strong> — atop a floor where 88% of organizations reported AI-agent security incidents in the past year and only ~22% treat agents as independent identities (Gravitee/OWASP 2026, as reported). Two engineering realities cut against comfort. <strong>First, a sealed room is only as sealed as its weakest of three answers:</strong> retention (does anything rest on the vendor?), custody (whose keys hold the safety record?), and reporting (to whom does the flag go?) — fail any one and the room leaks. <strong>Second, the room governs what is <em>seen and kept</em>, not what the agent can <em>reach or do</em>:</strong> a private, watched room above an un-segmented network with no kill-switch is a confidentiality control bolted onto an un-contained agent — and prompt-injection is precisely the vector that turns the agent inside the sealed room against you.</li>
+  <li><strong>The answer — seal the room, hold the keys, point the watch at yourself, and still bar the door.</strong> <strong>Require zero data retention by default (nothing your agents read rests on the vendor); insist the misuse-detection record lives in your own cloud under your own encryption keys and audit logging (custody), with flags routed to your people and no vendor human reading content (reporting); and pair the sealed room with the containment you already owe — enforce purpose limitations, segment agents from sensitive networks, and keep a kill-switch that terminates a misbehaving agent in seconds — because the room protects your secrets, not your systems.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now pointed at the one surface every prior control left open: the confidentiality of the data your governed, funded agents must expose to a rented mind to be useful at all.</li>
+</ul></div>
+<p>The strategic core: <strong>once the same governed agent must carry your most confidential data onto a model you rent, your exposure is no longer only what the agent <em>does</em> — it is what the toolmaker <em>keeps</em>, who holds the <em>record</em> that watches for misuse, and whether you can still <em>bar the door</em> — so control migrates out of "is this agent named, scoped, funded and loyal?" and into "is the room sealed, are the keys ours, does the watch answer to us, and can we still stop the agent inside it?"</strong> The market makes the temptation concrete — accept the vendor's default, let them keep the data and hold the watch, because it is easier — and hides the cost in a confidentiality breach and a mis-scoped, un-killable agent you only feel after your larder is on someone else's shelves. The board translation: <strong>seal the room, hold the keys, keep the watch pointed at you — and remember the room does not move the bond, nor bar the door.</strong> The failure mode is exact: <strong>an estate that names, bonds, wages and funds every agent perfectly — and then works its most confidential books in a rented room the vendor copies, watched by a watchman who reports to the vendor, over a network it cannot segment with an agent it cannot kill — will pass every servant-governance review and lose its secrets, its safety, or both.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The sealed room: you governed the servant, now govern the room it works in. Every prior control governs the agent; none governs the confidentiality of the data the agent must expose to a rented model to do any of it. Top left, the open desk, the vendor default: the vendor keeps prompts and transcripts, so your larder is copied off-site; the safety record sits on the vendor's keys; misuse flags go to the vendor; the watchman wears your livery but answers to them. Top right, the sealed room, governed: zero data retention by default, so nothing rests on the vendor; the safety record is on your keys; flags go to you and you act on them; no vendor human reads your content. Between them: a room fails if any of three fail, retention, custody, reporting; and the flag is a signal, never the transcript. Middle: the sealed room is real product now, from both leading labs, as reported. OpenAI Private Safety Processing, previewed 19 to 20 August, rolling out through September, does pattern-level misuse detection with no content read and customer-held keys. Anthropic Enterprise Frontier Safeguards, about 2 September, pairs zero data retention with misuse detection, the activity record in your own S3, Azure or Google Cloud Storage, flags to you, and nobody at Anthropic reads it. Capability is rising into sensitive work: the Life Sciences program on 17 September, Mythos 5.1 prompt-injection robustness, and three-lab cyber models. But the room does not bar the door. Bottom left, stop accepting the vendor default: let them keep the data, let them hold the record, let the watch report to them, and forget the network and the kill-switch. Bottom right, start: seal it, hold the keys, keep the watch. Zero retention by default; the safety record in your cloud under your keys; flags to you with power to act; and segment, purpose-limit and kill in seconds." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE SEALED ROOM — you governed the servant; now govern the ROOM</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Every prior control governs the AGENT. None governs the CONFIDENTIALITY of its data on a RENTED MODEL.</text>
+
+  <!-- the open desk -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE OPEN DESK (vendor default)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">vendor keeps prompts / transcripts</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">your larder copied off-site</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">safety record on the VENDOR's keys</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">flags go to the VENDOR</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a watchman who answers to them</text>
+
+  <!-- the sealed room -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE SEALED ROOM (governed)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">zero data retention by default</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">nothing rests on the vendor</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">safety record on YOUR keys</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">flags go to YOU · no vendor human reads</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the watch moved inside your walls</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a room fails if ANY of three fail: retention · custody · reporting ▼</text>
+
+  <!-- the sealed room is real product -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE SEALED ROOM IS REAL PRODUCT NOW — from both leading labs — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI "Private Safety Processing" (preview 19–20 Aug; rollout through Sept):</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">pattern-level misuse detection · no content read · customer-held keys</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Anthropic "Enterprise Frontier Safeguards" (~2 Sep): ZDR + misuse detection,</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">activity record in YOUR S3/Azure/GCS · flags to you · "nobody at Anthropic reads it"</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">but the room does NOT bar the door ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: accept the vendor default</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· let them keep the data</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· let them hold the record</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· let the watch report to them</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· forget the network + kill-switch</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a beautiful room to be robbed in</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: seal it, hold keys, keep watch</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· zero retention by default</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· safety record in YOUR cloud, YOUR keys</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· flags to YOU + power to act</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· segment · purpose-limit · kill in seconds</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">secrets AND systems protected</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You governed the servant perfectly — now govern the room it lays your private books in.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Seal the room · hold the keys · point the watch at yourself — the room protects secrets, not systems.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The open desk — vendor default</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>The sealed room — governed</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The sealed room is real product now</span>
+</div>
+</div>
+
+<h3>The open desk vs the sealed room — the same governed servant, a very different confidentiality exposure</h3>
+<table>
+<tr><th>Working at the open desk (vendor default)</th><th>Working in the sealed room (governed)</th></tr>
+<tr><td>Vendor retains prompts and transcripts by default</td><td>Zero data retention — nothing your agents read rests on the vendor</td></tr>
+<tr><td>Safety record (if any) lives on the vendor's keys</td><td>Misuse-detection record lives in your cloud, under your encryption keys</td></tr>
+<tr><td>Misuse flags — and content — seen by the vendor</td><td>Only a flag leaves the room; it goes to your people; no vendor human reads content</td></tr>
+<tr><td>"Seal or watch, never both" — pick one</td><td>Sealed <em>and</em> watched: the watch moved inside your walls</td></tr>
+<tr><td>Confidentiality treated as the vendor's promise</td><td>Confidentiality proven by custody: your keys, your audit log</td></tr>
+<tr><td>A private room, but no bar on the door</td><td>Paired with purpose limits, segmentation and a kill-switch you own</td></tr>
+</table>
+
+<h3>Why "the sealed room" is the discipline that matters now</h3>
+<div class="card">
+<p>For a year the worry was whether the agent was named, scoped, logged, owned, loyal, reaping and funded. <strong>This morning the market adds the control that governs not the servant but the room: the confidentiality of the data your agents must expose to a rented model.</strong> OpenAI's Private Safety Processing and Anthropic's Enterprise Frontier Safeguards show the sealed room is shipped, not theoretical — and that you no longer have to choose between keeping your data private and having it watched for misuse. Governance that stopped at the servant will not protect the larder, because none of those controls touch what the toolmaker keeps or who holds the safety record. The estates that keep their standing will seal the room on all three axes — retention, custody, reporting — and remember that a sealed room protects secrets, not systems: it does not bar the door.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to prove where your data rests, who holds the safety record, and to whom the misuse watch reports.</em> On a legacy estate the instinct, after a hard year of governance work, is to accept the model vendor's defaults and move on — let them keep the data, let them hold the watch, because arguing is friction. Under the sealed room that is exactly the wrong reflex: the vendor's default is the open desk, and your most confidential books are on it. The retrofit is <strong>seal, hold, point — and bar. Seal:</strong> require zero data retention by default, so nothing your agents read rests on the vendor's servers. <strong>Hold:</strong> insist the misuse-detection record lives in your own cloud under your own encryption keys and audit logging — custody, not the vendor's promise. <strong>Point:</strong> route every misuse flag to your own people, with no vendor human reading content, and confirm you can act on it. <strong>Bar:</strong> because the room governs only what is seen and kept, pair it with the containment you already owe — purpose limitations, network segmentation, and a kill-switch that stops a misbehaving agent in seconds. And keep the whole refrain: the model is a rented stove, now cheap; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks you to produce it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you give every agent its own name; the steward is why you keep one governed office; the surety is why your own name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and <em>the sealed room is why, when your confidential books must be worked on with a rented oracle, you seal the room, keep the keys, point the watch at yourself and still bar the door, because the room protects your secrets and never your systems, and your name is still on the bond for whatever is decided inside it.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — both leading labs shipped the sealed room.</strong> <strong>OpenAI's Private Safety Processing (preview 19–20 Aug 2026, rollout with a technical white paper through September) and Anthropic's Enterprise Frontier Safeguards (~2 Sep 2026) both pair zero data retention with misuse detection — the record under the customer's own keys, only a flag leaving the room, no vendor human reading content (OpenAI; Anthropic; Axios; Help Net Security; CSO Online; MarkTechPost, as reported).</strong> Confidentiality and safety monitoring no longer trade off.</li>
+  <li><strong>The mechanism.</strong> <strong>OpenAI detects misuse at the pattern level across related interactions without accessing content; Anthropic keeps the activity record in the customer's own S3/Azure/GCS under the customer's encryption keys and audit logging, scanning a rolling window for offensive-cyber, biological-capability and stolen-credential signals (as reported).</strong> The watch moved inside the customer's walls.</li>
+  <li><strong>The rising capability it guards.</strong> <strong>Anthropic's Life Sciences Verification Program (beta, 17 Sep 2026) grants verified teams more permissive biology access; Claude Mythos 5.1 is billed as its "most robust model to date on an external prompt-injection benchmark"; Google, Anthropic and OpenAI jointly unveiled cyber-capable models with safeguards (as reported).</strong> The models entering the room are more capable on exactly the sensitive work that makes the seal matter.</li>
+  <li><strong>The governance floor cannot yet hold the keys or bar the door.</strong> <strong>63% of organizations cannot enforce purpose limitations, 60% cannot quickly terminate a misbehaving agent, and 55% cannot isolate AI from sensitive networks; 100% have agentic AI on the roadmap (Kiteworks 2026 Data Security Forecast, 225 leaders across 10 industries / 8 regions, as reported).</strong> A sealed room over an un-contained agent is confidentiality without safety.</li>
+  <li><strong>The security floor.</strong> <strong>88% of organizations reported confirmed or suspected AI-agent security incidents in the past year, and only ~22% treat agents as independent identities (most rely on shared API keys) (Gravitee State of AI Agent Security 2026; OWASP Agentic AI Security &amp; Governance 2.01, as reported).</strong> The room is being sealed atop weak identity.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>The EU AI Act's high-risk regime has been live since 2 August 2026 (fines up to €35M or 7% of global turnover), MCP 2026-07-28 (stateless core; Enterprise-Managed Authorization stable; Client ID Metadata Documents) is the tool-connection layer beneath it, and Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> The sealed room does not move the deployer's bond.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Anthropic's Enterprise Frontier Safeguards lets your Claude logs stay in your cloud.</div><div class="a">— Help Net Security, headline on Anthropic's zero-retention, in-your-own-cloud misuse detection (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[Misuse] flags go directly to the customer and their people take it from there — no human review by Anthropic employees is required.</div><div class="a">— Anthropic, on Enterprise Frontier Safeguards, ~2 September 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">OpenAI previews zero-retention safety system as Anthropic requires data logs.</div><div class="a">— Axios headline, 19 August 2026, on the two labs' different routes to the same "seal and watch" problem (as reported)</div></blockquote>
+<blockquote><div class="q">"You governed the servant, funded it and sent it to reap — but the room it works in must hold your most private books. So seal the room, keep the keys in your own hand, and point the watch at yourself: what is spoken there must stay there, the record must be yours, and the alarm must ring in your hall — because the room protects your secrets, not your systems, and your name is still on the bond."</div><div class="a">— the radar, on why the confidentiality of the room is the control that now decides your exposure</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The sealed room ships (Anthropic)</td><td><span class="v">Enterprise Frontier Safeguards (~2 Sep 2026): zero data retention + misuse detection with the activity record in the customer's own S3/Azure/GCS under the customer's keys; flags go to the customer; "nobody at Anthropic reads it"; broad availability targeted for later this fall</span></td><td>Anthropic; Help Net Security; CSO Online; MarkTechPost, as reported</td></tr>
+<tr><td>The sealed room ships (OpenAI)</td><td><span class="v">Private Safety Processing (preview 19–20 Aug 2026; rollout + technical white paper through September): pattern-level misuse detection across related interactions without accessing content; customer-held keys; prompts/responses opaque to OpenAI staff</span></td><td>OpenAI; Axios; Security Boulevard; Gigazine, as reported</td></tr>
+<tr><td>Rising capability in the room</td><td><span class="v">Anthropic Life Sciences Verification Program (beta, 17 Sep 2026); Claude Mythos 5.1 billed "most robust model to date on an external prompt-injection benchmark"; Google/Anthropic/OpenAI unveil cyber-capable models with safeguards</span></td><td>Anthropic; The Hacker News, as reported</td></tr>
+<tr><td>Can't hold the keys or bar the door</td><td><span class="v">63% of organizations cannot enforce purpose limitations on AI agents; 60% cannot quickly terminate a misbehaving agent; 55% cannot isolate AI from sensitive networks; 100% have agentic AI on the roadmap</span></td><td>Kiteworks 2026 Data Security Forecast (225 leaders, 10 industries, 8 regions), as reported</td></tr>
+<tr><td>The security floor</td><td><span class="v">88% of organizations reported confirmed or suspected AI-agent security incidents in the past year; only ~22% treat agents as independent identities (most rely on shared API keys)</span></td><td>Gravitee State of AI Agent Security 2026; OWASP Agentic AI Security &amp; Governance 2.01, as reported</td></tr>
+<tr><td>The bond that does not move</td><td><span class="v">EU AI Act high-risk regime live since 2 August 2026 (fines up to €35M or 7% of global turnover); MCP 2026-07-28 the tool-connection layer; Gartner: 40% of enterprise apps embed task-specific agents by 2026</span></td><td>EU AI Act (2024/1689); Model Context Protocol; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Seal the room — require zero data retention by default on every model your agents use.</strong> Both leading labs now offer it (OpenAI Private Safety Processing; Anthropic Enterprise Frontier Safeguards), so the vendor default is no longer the only option. <strong>This month, inventory every frontier model your agents touch and establish, contractually and technically, that prompts and transcripts are retained nowhere on the vendor's infrastructure by default — starting with the workflows that expose regulated or crown-jewel data.</strong> Report one number to the board: the share of agent traffic on confidential data that runs under a zero-retention guarantee, versus the vendor's open default.</li>
+  <li><strong>Hold the keys and point the watch at yourself — keep the safety record in your own cloud, and make every flag come to your people.</strong> Misuse detection needs a record; the control is <em>custody</em>, not the vendor's promise. <strong>This month, require that any activity data your misuse detection relies on lives in your own cloud storage, under your own encryption keys and audit logging, with flags routed to your security team and no vendor employee reading content — and test that a flag actually reaches someone who can act.</strong> Report where the safety record physically lives, whose keys open it, and who receives the alarm.</li>
+  <li><strong>Bar the door — pair the sealed room with the containment it does not provide.</strong> A private, watched room governs what is seen and kept, not what the agent can reach or whether you can stop it — and 60% of organizations cannot terminate a misbehaving agent. <strong>This month, for every agent working in a sealed room, enforce a purpose limitation, segment it from sensitive networks, and wire a kill-switch that terminates it in seconds; then test the kill on a live agent.</strong> Report the measured time-to-terminate and the share of model-using agents that are both purpose-limited and network-segmented. <strong>The model is a rented stove, now cheap; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you give every agent its own name; the steward is why you keep one governed office; the surety is why your own name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and the sealed room is why, when your most confidential books must be worked on with a rented oracle, you seal the room, keep the keys, point the watch at yourself and still bar the door, because the room protects your secrets and never your systems, and the name that answers for whatever is decided inside it is still yours.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — OpenAI, "Offering Zero Data Retention for frontier models" / "Private Safety Processing" (preview 19–20 Aug 2026; rollout + technical white paper through September): pattern-level misuse detection across related interactions without accessing content; customer content on customer-managed infrastructure or customer-encrypted on OpenAI's under customer-held keys; prompts/responses opaque to OpenAI staff (OpenAI; Axios; Security Boulevard; Gigazine) · Anthropic, "Enterprise Frontier Safeguards" (~2 Sep 2026): zero data retention + misuse detection with the activity record in the customer's own S3/Azure Blob/Google Cloud Storage under the customer's encryption keys and audit logging; automated scan of a rolling window for offensive-cyber, biological-capability and stolen/leaked-credential signals; flags to the customer, no Anthropic human review; broad availability targeted for later this fall; ZDR on Fable 5 and Fable 5.1 in the interim (Anthropic; Help Net Security; CSO Online; MarkTechPost) · Rising capability — Anthropic Life Sciences Verification Program (beta, 17 Sep 2026); Claude Mythos 5.1 "most robust model to date on an external prompt-injection benchmark"; Google/Anthropic/OpenAI cyber-capable models with safeguards; 100+ firms' open letter on rogue AI (The Hacker News; TechCrunch) · The governance gap — Kiteworks 2026 Data Security Forecast (225 security/IT/risk leaders, 10 industries, 8 regions): 63% cannot enforce purpose limitations, 60% cannot terminate a misbehaving agent, 55% cannot isolate AI from sensitive networks, 100% have agentic AI on the roadmap · The security floor — Gravitee State of AI Agent Security 2026; OWASP Agentic AI Security &amp; Governance 2.01 (88% reported AI-agent incidents; ~22% treat agents as independent identities) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026), MCP 2026-07-28 (stateless core; EMA stable; CIMD), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "sealed room" framing — that every prior control governs the agent but none governs the confidentiality of the data it must expose to a rented model, that a room is only as sealed as the weakest of retention/custody/reporting, and that the room protects secrets and not systems so it does not move the bond — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages (including anthropic.com) were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Note: OpenAI's Private Safety Processing preview (19–20 Aug) and Anthropic's EFS (~2 Sep) predate this 21 September dateline; they are carried as the anchor because their enterprise rollout and the confidentiality debate they frame are live through September, and the in-window fresh point is Anthropic's Life Sciences Verification Program (17 Sep 2026). Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 21 September 2026 · <a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
