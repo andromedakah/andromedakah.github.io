@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 22 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the foundation' — the model just commoditized in public (Grok 4.7, 21 Sep: ~40% bigger, same $2/$6 price, met with 'late to the frontier party') while the labs move up a floor from selling a model to becoming your 'core infrastructure' (OpenAI). The lock-in has migrated off the swappable stove onto the poured foundation: 81% of leaders fear vendor dependency, 47% say a function stops on an outage, only 6% could switch cleanly (Zapier 2026). The board move: own the floor (an abstraction you control), keep the larder (portable data/evals), light a second fire (a tested alternate). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant — now look at the ground it stands on</div>
+  <h1>The Foundation</h1>
+  <div class="subhead">A year of work went into the servant. This morning the ground shifts: the model just commoditized in public — a 40%-bigger Grok 4.7 at an unchanged price drew a shrug — while the labs quietly move up a floor, from selling you a model to becoming your "core infrastructure." You can swap the stove in an afternoon. Can you swap the foundation?</div>
+  <div class="meta">Tuesday, 22 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday, 21 September 2026, xAI shipped Grok 4.7 — a reported ~2.1-trillion-parameter model (up ~40% from Grok 4.6's ~1.5T) at the same $2/$6 per-million-token price and speed, with real benchmark gains — and the market's verdict was a shrug: "a notable improvement… but <em>late to the AI Frontier Party</em>" (Decrypt/Yahoo Tech; Artificial Analysis; VentureBeat, as reported). A bigger stove arrived and no one gasped, because the model has commoditized (Grok 4.7 at $2/$6 beside Claude Fable 5.1 at a reported $10/$50). In the same window, OpenAI's "The next phase of enterprise AI" reframes the pitch from selling a model to becoming your "core infrastructure" (enterprise &gt;40% of OpenAI revenue, on track to consumer parity by end-2026; Codex 3M WAU; APIs &gt;15B tokens/min; Goldman Sachs, Philips, State Farm named). The board question is no longer <em>which model is best or cheapest</em> — the stove is cheap and swappable — it is: while we shop stoves, is one vendor quietly pouring the foundation our whole estate stands on, and could we ever move off it? A Zapier 2026 survey reports 81% of leaders worried about vendor dependency, 47% saying a key function would stop on an outage or price change, and only 6% confident they could switch cleanly (as reported). That is not a rented stove. That is a foundation already poured.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse). Every one of those disciplines improves the agent. <strong>This morning the axis turns from the servant to the ground the whole house stands on.</strong> Two developments in the same week make the shift plain, and they point in opposite directions on purpose.</p>
+<p><strong>The reality — the model has commoditized; a bigger stove now earns a shrug.</strong> On <strong>21 September 2026 xAI released Grok 4.7</strong>, a reported <strong>~2.1-trillion-parameter</strong> model (up ~40% from Grok 4.6's ~1.5T), at the <strong>same $2/$6 per-million-token price and speed</strong>, with real benchmark gains (a reported <strong>1657 Elo on AA-Briefcase, +111 over 4.6; 1695 on GDPval; 46.3% on CursorBench 4.0 vs 40.4%; 71.0% on DeepSWE v1.1 at high effort vs 65.2%</strong>) — and it was met with "a notable improvement… but <strong>late to the AI Frontier Party</strong>," after Musk reportedly walked the timeline back at least five times since late July (Decrypt/Yahoo Tech; Artificial Analysis; DataCamp; VentureBeat, as reported). VentureBeat's caveat travels with it: the coding gains pair with <strong>high token consumption that threatens real-world ROI</strong>. The signal underneath the launch is bigger than the launch: when a 40%-bigger frontier model at an unchanged low price is greeted with a shrug, <strong>the model is a rented stove — cheap, plentiful, and swappable</strong> (Grok 4.7 at $2/$6 next to Claude Fable 5.1 at a reported $10/$50, DeepSeek and Gemini Flash cheaper still).</p>
+<p><strong>The collision — the same labs are moving up a floor, from model to "core infrastructure."</strong> In the same window, OpenAI's "<strong>The next phase of enterprise AI</strong>" reframes the pitch: not a better brain to rent, but the <strong>"core infrastructure for AI"</strong> an enterprise runs on — reporting <strong>enterprise &gt;40% of OpenAI's revenue and on track to reach parity with consumer by end-2026, Codex at 3M weekly active users, APIs at &gt;15B tokens/minute</strong>, with Goldman Sachs, Philips and State Farm as named customers, and Microsoft's <strong>$2.5B "Frontier" unit embedding 6,000 forward-deployed engineers inside client houses</strong> (OpenAI; Microsoft; CNBC, as reported). This is the quiet part: <strong>you swap the stove; you do not swap the floor.</strong> A Zapier 2026 enterprise survey reports <strong>81% of leaders worried about AI-vendor dependency, 47% saying a key business function would stop on a primary-vendor outage or price change, and only 6% confident they could switch their primary provider without material operational disruption</strong>. Concentration is structural — three hyperscalers held <strong>~63% of global cloud-infrastructure spend in early 2026</strong>, and the foundation models beneath most enterprise AI trace to a handful of labs (CSA; Development Corporate, as reported) — and it turned concrete when <strong>OpenAI (18 Aug 2026) paused reinforcement-learning training on its newest models and put its largest planned frontier run on hold indefinitely</strong>: a supplier's internal decision rippling straight into every house built on it.</p>
+<p><strong>The stakes — keep the foundation yours, so the cheap stove stays swappable.</strong> The board move re-uses the whole year's discipline and points it one level down, at the ground. <strong>First, own the floor between you and any one supplier</strong> — an abstraction/gateway so the model is a swappable component, not a load-bearing wall; the whole point of a rented stove is that you can change it. <strong>Second, keep your knowledge in your own larder</strong> — your data, context, evals and integration logic are the estate; if they live only inside one vendor's proprietary layer, you have poured that vendor into your foundation. <strong>Third, keep a live second supplier, not a slide about one</strong> — the 6% number is the tell: a fallback you have never lit is a foundation, not a stove. And do it <strong>now</strong>, while the stove market is fiercely competitive and cheap, because the vendors are racing to become the floor precisely while you are distracted comparing stoves.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the model commoditized; a 40%-bigger stove earns a shrug.</strong> <strong>Grok 4.7 (21 Sep) — ~2.1T params (+~40%), same $2/$6 price, real benchmark gains — was met with "late to the frontier party"; Grok 4.7 $2/$6 vs Claude Fable 5.1 $10/$50, cheaper models below (Decrypt; Artificial Analysis; General Input, as reported).</strong> Intelligence is now a rented, swappable stove.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the labs move up a floor, from model to "core infrastructure."</strong> <strong>OpenAI's "next phase of enterprise AI" pitches becoming the "core infrastructure" (enterprise &gt;40% of revenue, parity with consumer by end-2026; Codex 3M WAU; &gt;15B tokens/min); Microsoft's $2.5B Frontier unit embeds 6,000 engineers in clients (OpenAI; Microsoft; CNBC, as reported).</strong> You swap the stove; you do not swap the floor.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — own the floor, keep the larder, run a live second source.</strong> Put an abstraction you own between the estate and any one supplier; keep your data, context and evals in your own larder; and light a real fallback — because <strong>81% fear vendor dependence, 47% would see a function stop on an outage, and only 6% believe they could switch cleanly</strong> (Zapier 2026, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it — all work on the <em>servant</em>. <strong>The foundation is about the ground the house itself stands on.</strong> This week the market proved the model is a rented stove: a 40%-bigger Grok 4.7 at an unchanged low price drew a shrug, because stoves are now cheap and interchangeable. In the same breath the labs stopped selling stoves and started offering to <em>be your foundation</em> — "core infrastructure," embedded engineers, an ever-deeper proprietary floor. The trap is elegant: you feel thrifty and modern swapping cheap stoves, and never notice that the company renting them has quietly poured itself into the ground beneath you, until the day it changes a price, pauses a training run, or goes dark — and 94% of houses (only 6% confident) discover they cannot move. The estates that keep their standing will do three unglamorous things: <strong>own the floor</strong> (an abstraction between you and any one model), <strong>keep the larder</strong> (your data, context and evals are yours, portable, not locked in a vendor's layer), and <strong>run a live second source</strong> (a fallback you have actually lit). Shop stoves ruthlessly — they are cheap, and they should be. But never let the stove-seller pour your foundation.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Foundation"</h3>
+<p><em>Topic: This morning the frame turns from improving the servant to the ground the house stands on. On 21 September 2026 xAI shipped Grok 4.7 — a reported ~2.1-trillion-parameter model, ~40% larger than Grok 4.6, at the same $2/$6 price and speed, with real benchmark gains — and it was met with "a notable improvement… but late to the AI Frontier Party" (Decrypt/Yahoo Tech; Artificial Analysis; VentureBeat, as reported): the surest sign yet that the model has commoditized. In the same window OpenAI's "The next phase of enterprise AI" reframed the pitch from selling a model to becoming an enterprise's "core infrastructure" (enterprise &gt;40% of OpenAI revenue, on track to consumer parity by end-2026; Codex 3M WAU; &gt;15B tokens/min), while a Zapier 2026 survey reports 81% of leaders worried about vendor dependence, 47% saying a function would stop on an outage, and only 6% confident they could switch cleanly (as reported). The foundation allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent. It had named every hand and cut it a scoped key, hired a steward to keep one honest book, accepted that the master's own name stood surety for the servants' work, learned to ask whose second coin each advising servant took, sent the governed servants into the fields to reap, and handed each a scoped purse with a drawstring the master could reach. By any fair reckoning it was a well-run house, and the master was proud of his servants — as he should have been.</p>
+<p>Now, the servants cooked on a <strong>rented stove</strong>. This had been the master's shrewdest economy: he did not build a great furnace and marry it, he <em>rented</em> his fire, and when a better stove came along he swapped it in an afternoon and paid a little less. And this very week a merchant wheeled in the newest stove — a great brass thing, near half again the size of last season's, and the master braced for the usual gasp from his kitchen. But the cook only glanced at it and shrugged. <em>"It's bigger,"</em> she said, <em>"and it costs the same, and it's late. The one we have is fine. Wheel it in if you like."</em> The master laughed, because he understood the shrug for what it was: <strong>the stove had become a commodity.</strong> Fire was fire; it was cheap, it was plentiful, and any stove could be swapped for any other before supper. This was not a defeat. This was the master winning the game he had set out to win.</p>
+<p>But here is the thing the master nearly missed, because he was busy admiring stoves. The same great trading company that rented him the cheap stove had, over that same careful year, been doing something quieter in the cellar. It had offered — so helpfully, at so fair a price — to lay the <strong>foundation</strong> the whole house stood on. To run the water and the drains, to hold the deeds and the ledgers, to pour the very floor. <em>"Do not trouble yourself with the ground,"</em> the company had said; <em>"let us be the foundation you build on, and you need only think about the cooking."</em> And the master, delighted to think only about cooking, had said yes, and yes again, and had not noticed that a stove you swap in an afternoon and a foundation you cannot move without razing the house are <strong>not the same kind of thing at all.</strong></p>
+<p>Two roads, as always. The easy road was to keep saying yes — the company was competent and cheap, the floor was excellent, and why would a man dig up a good floor? The wiser road, which the careful houses took, began with a cold question asked of the estate itself: <em>not "which stove is best?" but "if this company doubled its price tomorrow, or shut its gates, or simply changed its mind about a thing in the cellar, how many rooms of my house would go dark — and could I move?"</em> And when the careful houses counted honestly, the answer frightened them. Four houses in five already lay awake over how much they leaned on their supplier; nearly one in two knew a whole room would go dark the day the supplier stumbled; and only <strong>six houses in a hundred</strong> believed they could pack up and build on another company's ground without tearing something load-bearing out of their own walls. That is not the arithmetic of a rented stove. <strong>That is the arithmetic of a foundation already poured.</strong></p>
+<p>So the wise houses learned three plain things, and they cost less to do early than late. <strong>The first: own the floor between the kitchen and any one supplier.</strong> Keep the stove a <em>component</em> — a thing that plugs into a hearth you built and can be pulled out and replaced — never a load-bearing wall. The whole worth of a rented stove is that you can change it; a stove you cannot change is just an expensive furnace you do not own. <strong>The second: keep your own larder.</strong> Your grain, your recipes, your knowledge of your own kitchen — your data, your context, the tests by which you know good work from bad — these are the estate, and they must live in <em>your</em> pantry, portable, and never only inside the company's cellar; for a house whose larder is in another man's cellar does not own its dinner. <strong>And the third: keep a second fire lit.</strong> Not a drawing of a second stove, not a promise from a second merchant — an actual second flame you have cooked on, so that the morning the first goes cold you serve dinner anyway. The six-in-a-hundred are the houses that mistook a slide about a fallback for a fallback.</p>
+<p>Here is the part that should keep a master awake. The stove market was loud, cheap, and wonderful — a new stove every few weeks, each bigger and no dearer — and all that glorious noise was, in part, a kindly distraction. <strong>While every house in the valley happily compared stoves, the companies that rented them were racing, quietly, to become the ground the houses stood on</strong> — for a merchant who has poured your foundation has a hold on you that no stove-seller ever could, and he knows it. One such company, that very season, had paused a great work of its own in the cellar and put another on hold indefinitely — its own affair, entirely — and every house built on its floor felt the tremor without ever having been consulted. The lesson was not that the company was wicked. The lesson was that <strong>when you do not own your foundation, another man's ordinary decisions become earthquakes in your house.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap and plentiful that a stove half again as large draws only a shrug; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee and not an heir — and <strong>the foundation is why, having made your servants excellent, you must now look down at the ground they stand on and refuse to let the company that rents you the cheap, swappable stove quietly pour itself into the floor you cannot leave: own the hearth so the stove stays a component, keep your grain and recipes in your own larder, and keep a second fire actually lit, so that when the model of the month is superseded — and it will be, by supper — you swap the stove and never re-pour the ground.</strong> A house that lets the stove-seller lay its foundation has not been thrifty; it has rented its kitchen and mortgaged its cellar to the same man, and called the arrangement a bargain.</p>
+<p><strong>The question it forces:</strong> <em>We can swap the model in an afternoon — the market just proved it, with a shrug at a stove half again as large. But can we swap the vendor our whole estate now stands on? Do we own the floor between our house and any one supplier — an abstraction, our data and recipes in our own larder, a second fire actually lit — or have we let the company that rents us the cheap stove quietly pour the foundation under us, so that we are among the ninety-four houses in a hundred that could not move without tearing something load-bearing out of our own walls?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we confused the swappable stove with the poured foundation?</strong> The model just commoditized in public — a 40%-bigger Grok 4.7 at an unchanged price drew a shrug, and $2/$6 sits beside $10/$50 across vendors. <strong>For each critical AI capability, can we name what is a swappable component (the model) and what is a load-bearing dependency on one vendor (identity, data gravity, proprietary orchestration, embedded engineers) — and which one is actually holding up the house?</strong></li>
+  <li><strong>If our primary AI vendor doubled its price, went dark, or changed a decision in its own cellar tomorrow, what stops working — and could we move?</strong> A reported 47% say a key function would stop on a primary-vendor outage or price change, and only 6% believe they could switch cleanly (Zapier 2026). <strong>Have we measured our own version of the 6% — a tested, timed cut-over to a second supplier — or do we only have a slide that says "multi-vendor"?</strong></li>
+  <li><strong>Do we own the floor between us and any one model?</strong> <strong>Is there an abstraction/gateway we control so a model is a component we plug in and pull out — or is a specific vendor's proprietary layer wired directly into our load-bearing systems, so that swapping the "cheap, swappable" model means re-pouring the foundation?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Concentration is a supervised risk in your world, and it now includes AI: three hyperscalers held ~63% of cloud spend and a handful of labs supply most foundation models (CSA; Development Corporate, as reported). <strong>Can we produce, for our regulator and our own board, a concentration-risk map of our AI stack — model, inference, data, orchestration — with a tested exit for each single point of failure?</strong></li>
+  <li>OpenAI paused RL training and put its largest planned run on hold indefinitely (18 Aug 2026) — a supplier's internal choice with external tremors. <strong>Have we stress-tested a primary-AI-vendor "stumble" (outage, deprecation, price step, model withdrawal) the way we stress-test a counterparty default — and do our critical workflows degrade gracefully rather than stop?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical, safety and regulatory work is validated against a specific model's behaviour; when that model is deprecated or changed, the validation may not carry. <strong>When the stove is swapped — and it will be, cheaply and often — do our validated workflows and our evals travel with us, or is our validation effectively a bet on one vendor's foundation staying put?</strong></li>
+  <li>Patient data is the ultimate larder. <strong>Is our clinical data, context and knowledge held in a form we own and can move, or does it accrete inside one vendor's proprietary layer such that leaving means leaving the data behind — the truest form of a poured foundation?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run dual-sourcing and supplier-qualification discipline for physical inputs; AI is now a critical input. <strong>Have we applied the same second-source rule to models and AI infrastructure — a qualified, live alternate — or is our AI supply chain single-sourced in a way we would never tolerate for a critical component?</strong></li>
+  <li>Embedded-engineer programs (Microsoft's $2.5B Frontier unit; forward-deployed teams) put a vendor's people inside your operations. <strong>Where a vendor's engineers are embedded, does the resulting system, data and know-how remain ours and portable when they leave — or are we building a foundation only their people can maintain?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your margins depend on cheap, swappable inference — and the good news is that it is now genuinely cheap and swappable. <strong>Are we actively arbitraging the commoditized model market (routing to the best-value model per task) behind an abstraction we own — or are we paying a premium and locked to one vendor because switching would touch load-bearing systems?</strong></li>
+  <li>Peak-season reliability is existential. <strong>If our primary AI provider had an outage on our biggest sales day, does checkout / search / support degrade to a live second source, or go dark — and have we actually run that failover under load?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability and continuity of service make vendor lock-in a governance failure, not just a cost. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show that no critical public service is built on a single AI vendor's foundation with no tested exit — and that our data and models are portable by design?</strong></li>
+  <li>Sovereignty and long horizons matter most here. <strong>Are we procuring AI as a swappable utility on ground we own (open weights where fit, portable data, an abstraction layer) — or are we pouring a foreign or single-vendor foundation under services citizens will still need in a decade?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Purse to the Foundation</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping and funded?</em> and started asking the one question none of those controls touch: <em>what ground does the whole estate stand on, and could I move it?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it. <strong>Every one of those governs the <em>servant</em>. The foundation is about the <em>ground</em> — and this week the market made the distinction impossible to ignore: it proved the model is a swappable stove (a 40%-bigger Grok 4.7 at an unchanged price drew a shrug) in the very week the labs stopped selling stoves and started offering to <em>be your foundation</em> (OpenAI's "core infrastructure"; Microsoft's embedded engineers).</strong> The point is blunt: <strong>the thing that has commoditized (the model) is not the thing that locks you in (the foundation), and confusing the two is how a house that feels thrifty — swapping cheap stoves — ends up unable to move off a floor it never chose to pour.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the model is a rented, swappable stove, and its commoditization is now public.</strong> <strong>On 21 September 2026 xAI shipped Grok 4.7 — a reported ~2.1T parameters (up ~40% from ~1.5T), same $2/$6 per-million-token price and speed, with real gains (1657 Elo AA-Briefcase, +111; 1695 GDPval; 46.3% CursorBench 4.0 vs 40.4%; 71.0% DeepSWE v1.1 high effort vs 65.2%) — and was greeted with "a notable improvement… but late to the AI Frontier Party," with VentureBeat cautioning that high token consumption threatens real-world ROI (Decrypt/Yahoo Tech; Artificial Analysis; DataCamp; VentureBeat, as reported).</strong> Architecturally, three things follow. First, <em>capability parity is arriving at wildly different prices</em> — Grok 4.7 at $2/$6, Claude Fable 5.1 at a reported $10/$50, DeepSeek and Gemini Flash lower still — so the <em>rational</em> posture is to treat models as interchangeable components routed per task on price/quality (General Input: "the stream of intelligence becoming completely commoditized"). Second, <em>a swappable component must sit behind an interface you own</em> — the value of commoditization is captured only if switching is cheap, which requires an abstraction/gateway between your systems and any one model. Third, <em>"bigger" is no longer the story</em> — the shrug at a 40%-larger model, and the ROI caveat on token consumption, say the frontier that matters to enterprises is cost-per-useful-task and fit, not raw scale.</li>
+  <li><strong>The collision — the labs are moving up a floor, from model to "core infrastructure."</strong> <strong>OpenAI's "The next phase of enterprise AI" reframes the offer from a model to the "core infrastructure for AI" — reporting enterprise &gt;40% of OpenAI revenue and on track to consumer parity by end-2026, Codex at 3M WAU and APIs at &gt;15B tokens/minute, with Goldman Sachs, Philips and State Farm named; Microsoft's $2.5B "Frontier" unit embeds 6,000 forward-deployed engineers inside client houses; and OpenAI (18 Aug 2026) paused RL training on its newest models and put its largest planned frontier run on hold indefinitely (OpenAI; Microsoft; CNBC, as reported).</strong> Two engineering realities cut against comfort. <strong>First, the lock-in migrated off the model.</strong> As the model commoditized, the durable lock-in moved to the layers you <em>don't</em> swap in an afternoon: identity and auth, data gravity, proprietary orchestration and memory, embedded human expertise. <strong>The stove got cheap precisely so the foundation could get sticky.</strong> <strong>Second, a fallback you have never lit is not a fallback.</strong> The Zapier numbers are an engineering verdict, not a survey mood: <strong>81% worried about dependency, 47% a function stops on an outage or price change, only 6% confident of a clean switch</strong> — the gap between "we're multi-vendor on a slide" and "we have cut over under load" is the whole risk.</li>
+  <li><strong>The answer — own the floor, keep the larder, run a live second source.</strong> <strong>Put an abstraction/gateway you control between your estate and any one model (so a model is a component you plug in and pull out); keep your data, context, prompts and evals in a portable form you own (not accreted inside one vendor's proprietary layer); and keep a qualified second supplier actually lit and tested under load — reusing the identity, logging and ownership disciplines you already built for the livery, the steward and the purse, now pointed one level down at the ground.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the sharpest axis of all: not what the agent is, serves, harvests or spends, but whether the ground under the whole house is yours to keep or another man's to change.</li>
+</ul></div>
+<p>The strategic core: <strong>the model commoditizing is good news you must actually collect — cheap, swappable intelligence — and you collect it only by owning the floor it plugs into; the danger is that the same vendors, watching the stove commoditize, are racing to become the foundation, where the real lock-in lives.</strong> The market makes the temptation concrete: it feels thrifty and modern to swap cheap stoves, and it feels like friction to build your own hearth and light a second fire — so most houses take the cheap stove and let the seller pour the floor. The board translation: <strong>shop stoves ruthlessly; never let the stove-seller pour your foundation.</strong> The failure mode is exact: <strong>a house that names, governs, funds and perfects its servants — and then wires one vendor's proprietary layer into its load-bearing systems while congratulating itself on cheap models — will pass every governance review and discover, the first time that vendor changes a price or pauses a run, that it is one of the 94% that cannot move.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The foundation: you perfected the servant, now look at the ground. The model has commoditized into a swappable stove; the lock-in has moved to the foundation, core infrastructure, and the two are not the same thing. Top left, the rented stove, commoditized: the model is cheap and swappable; Grok 4.7 is 40 percent bigger at the same 2 dollar / 6 dollar price and was met with a shrug; 2/6 versus 10/50 across labs; you can swap it in an afternoon; it was called late to the frontier party. Top right, the foundation, lock-in: core infrastructure, poured; identity and data gravity; proprietary orchestration; embedded vendor engineers; you cannot move it in an afternoon; a supplier's choice becomes an earthquake. Between them: they are not the same thing, and the stove got cheap so that the foundation could get sticky, so shop stoves ruthlessly but never let the stove-seller pour it. Middle, the arithmetic of a poured foundation, per Zapier 2026 as reported: 81 percent of leaders worried about AI-vendor dependency; 47 percent say a key function stops on a primary-vendor outage or price change; only 6 percent confident they could switch primary provider without material disruption; about 63 percent of cloud spend in three hyperscalers, and OpenAI paused and held its frontier run on 18 August. Bottom left, stop, let the seller pour it: wire one vendor into the walls, keep your larder inside their cellar, rely on a multi-vendor slide, and confuse the cheap stove with the floor. Bottom right, start, keep the ground yours: own the floor with an abstraction or gateway, keep the larder with portable data and evals, keep a second fire actually lit and tested, and route models per task on price and quality." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE FOUNDATION — you perfected the servant; now look at the ground</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The MODEL has commoditized (a swappable stove). The LOCK-IN moved to the FOUNDATION — not the same thing.</text>
+
+  <!-- the rented stove -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE RENTED STOVE (commoditized)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the MODEL — cheap &amp; swappable</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Grok 4.7: +40% size, SAME $2/$6 → a shrug</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">$2/$6 vs $10/$50 across labs</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">swap it in an afternoon</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ "late to the frontier party"</text>
+
+  <!-- the foundation -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE FOUNDATION (lock-in)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">core infrastructure — poured</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">identity · data gravity · orchestration</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">embedded vendor engineers</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">you can't move it in an afternoon</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a supplier's choice = a quake</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the stove got cheap SO THAT the foundation could get sticky ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF A POURED FOUNDATION — (Zapier 2026, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">81% of leaders worried about AI-vendor dependency</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">47% say a key function STOPS on a primary-vendor outage or price change</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 6% confident they could switch primary provider without material disruption</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">~63% of cloud spend in 3 hyperscalers · OpenAI paused/held its frontier run (18 Aug)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: let the seller pour it</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· wire one vendor into the walls</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· larder inside their cellar</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a "multi-vendor" slide</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· confuse cheap stove w/ floor</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one price change from stuck</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep the ground yours</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· own the floor (abstraction/gateway)</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep the larder (portable data/evals)</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a SECOND FIRE actually lit &amp; tested</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· route models per task on value</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheap stove, ground you own</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The model commoditized — collect the good news by owning the floor it plugs into.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Shop stoves ruthlessly · never let the stove-seller pour your foundation.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The rented stove — commoditized</span>
+  <span><i class="dot" style="background:#a5416a"></i>The foundation — where lock-in lives</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of lock-in</span>
+</div>
+</div>
+
+<h3>The rented stove vs the poured foundation — what commoditized, and what locks you in</h3>
+<table>
+<tr><th>The rented stove (commoditized — good news)</th><th>The poured foundation (where lock-in lives)</th></tr>
+<tr><td>The model: Grok 4.7 +40% bigger, same $2/$6 price → a shrug</td><td>Identity, data gravity, orchestration, embedded engineers</td></tr>
+<tr><td>$2/$6 vs $10/$50 across labs — route per task on value</td><td>Proprietary layers wired into load-bearing systems</td></tr>
+<tr><td>Swap in an afternoon behind an interface you own</td><td>Cannot move without razing something load-bearing</td></tr>
+<tr><td>"Late to the frontier party" — scale is no longer the story</td><td>A supplier's internal decision becomes your earthquake</td></tr>
+<tr><td>The value is captured only if switching is cheap</td><td>The lock-in is real only because switching is not</td></tr>
+<tr><td>Your posture: shop ruthlessly</td><td>Your posture: never let the stove-seller pour it</td></tr>
+</table>
+
+<h3>Why "the foundation" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping and funded. <strong>This morning the market moved the question underneath all of that: the model commoditized in public, and the vendors answered by racing to become the foundation.</strong> Grok 4.7's shrug and the $2/$6-vs-$10/$50 spread prove intelligence is now a rented, swappable stove; OpenAI's "core infrastructure" pitch and Microsoft's embedded engineers prove the lock-in has moved to the floor. Governance that stopped at the servant will not protect the ground. The estates that keep their standing will collect the good news (cheap, swappable models) by owning the floor those models plug into — and will refuse, deliberately, to let the company that rents them the stove pour the foundation they cannot leave.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to move the ground your AI stands on.</em> On a legacy estate the instinct, after a hard year of governance work, is to consolidate on the one vendor that already knows the house — it is easier, cheaper this quarter, and the embedded engineers are helpful. Under the foundation that is exactly the reflex to check: consolidation is how a swappable stove quietly becomes a load-bearing wall. The retrofit is <strong>own, keep, light. Own</strong> the floor: put an abstraction/gateway between your systems and any one model, so models are components. <strong>Keep</strong> the larder: hold your data, context, prompts and evals in a portable form you control, never only inside a vendor's proprietary layer. <strong>Light</strong> a second fire: qualify and actually run an alternate supplier under real load, so the 6% number is your reality, not your risk. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and <em>the foundation is why, having perfected the servant, you must look down at the ground and refuse to let the stove-seller pour it: own the hearth, keep the larder, light a second fire, so the cheap stove stays swappable and no vendor becomes the floor you cannot leave.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the model commoditized in public.</strong> <strong>Grok 4.7 (21 Sep): ~2.1T params (+~40%), same $2/$6 price/speed, real gains (1657 AA-Briefcase +111; 46.3% CursorBench vs 40.4%; 71.0% DeepSWE high effort) — met with "late to the frontier party" and an ROI caveat on token consumption (Decrypt; Artificial Analysis; VentureBeat, as reported).</strong> A bigger stove drew a shrug.</li>
+  <li><strong>The price spread.</strong> <strong>Grok 4.7 at $2/$6 vs Claude Fable 5.1 at ~$10/$50 per million tokens, with DeepSeek and Gemini Flash lower — "the stream of intelligence becoming completely commoditized… easier to switch" (General Input; DataCamp, as reported).</strong> Capability parity at very different prices = route per task.</li>
+  <li><strong>The move up a floor.</strong> <strong>OpenAI's "next phase of enterprise AI": becoming "core infrastructure"; enterprise &gt;40% of revenue and on track to consumer parity by end-2026; Codex 3M WAU; APIs &gt;15B tokens/min; Goldman Sachs, Philips, State Farm named (OpenAI, as reported).</strong> From selling a model to being the foundation.</li>
+  <li><strong>The embedded foundation.</strong> <strong>Microsoft's $2.5B "Frontier" unit puts 6,000 forward-deployed engineers inside client operations (Microsoft; CNBC; TechCrunch, as reported).</strong> The vendor moves into the cellar, not just the kitchen.</li>
+  <li><strong>The arithmetic of lock-in.</strong> <strong>81% of enterprise leaders worried about AI-vendor dependency; 47% say a key function stops on a primary-vendor outage or price change; only 6% confident they could switch cleanly (Zapier 2026, as reported).</strong> That is a foundation, not a stove.</li>
+  <li><strong>The concentration underneath.</strong> <strong>~63% of global cloud-infrastructure spend in three hyperscalers in early 2026; foundation models trace to a handful of labs; OpenAI paused RL training and held its largest frontier run indefinitely (18 Aug) (CSA; Development Corporate, as reported).</strong> A supplier's ordinary decision is your earthquake.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Portability and an abstraction layer are how you meet them without a single-vendor floor.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">xAI Launches Grok 4.7. It's Bigger, But Late to the AI Frontier Party.</div><div class="a">— Decrypt / Yahoo Tech, headline on Grok 4.7 (21 September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The stream of intelligence is becoming completely commoditized — competition and innovation drive prices down while making it easier to switch between models.</div><div class="a">— General Input, on model commoditization (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Only 6% [of enterprise leaders] believe they could switch their primary AI provider without material operational disruption.</div><div class="a">— Zapier 2026 enterprise AI survey (as reported; 81% worried about vendor dependency, 47% say a key function would stop on an outage or price change)</div></blockquote>
+<blockquote><div class="q">"You can swap the model in an afternoon — the market just proved it with a shrug at a stove half again as large. The question is whether you can swap the vendor your whole estate stands on. Shop stoves ruthlessly; never let the stove-seller pour your foundation."</div><div class="a">— the radar, on why owning the ground now matters more than choosing the model</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The model commoditized</td><td><span class="v">Grok 4.7 (21 Sep 2026): reported ~2.1T parameters (up ~40% from ~1.5T), same $2/$6 per-million-token price and speed, real benchmark gains — met with "late to the AI Frontier Party"</span></td><td>Decrypt/Yahoo Tech; Artificial Analysis; DataCamp, as reported</td></tr>
+<tr><td>Grok 4.7 benchmarks</td><td><span class="v">1657 Elo AA-Briefcase (+111 vs 4.6); 1695 GDPval; 46.3% CursorBench 4.0 (vs 40.4%); 71.0% DeepSWE v1.1 high effort (vs 65.2%) — but high token consumption threatens ROI</span></td><td>Artificial Analysis; VentureBeat, as reported</td></tr>
+<tr><td>The price spread</td><td><span class="v">Grok 4.7 $2/$6 vs Claude Fable 5.1 ~$10/$50 per million tokens; DeepSeek and Gemini Flash lower — "intelligence completely commoditized, easier to switch"</span></td><td>General Input; DataCamp, as reported</td></tr>
+<tr><td>Up a floor: core infrastructure</td><td><span class="v">OpenAI "next phase of enterprise AI": enterprise &gt;40% of OpenAI revenue and on track to consumer parity by end-2026; Codex 3M weekly active users; APIs &gt;15B tokens/minute; Goldman Sachs, Philips, State Farm named</span></td><td>OpenAI, as reported</td></tr>
+<tr><td>The embedded foundation</td><td><span class="v">Microsoft's $2.5B "Frontier" unit embeds 6,000 forward-deployed engineers inside client operations</span></td><td>Microsoft; CNBC; TechCrunch, as reported</td></tr>
+<tr><td>The arithmetic of lock-in</td><td><span class="v">81% of enterprise leaders worried about AI-vendor dependency; 47% say a key function stops on a primary-vendor outage or price change; only 6% confident they could switch cleanly</span></td><td>Zapier 2026 enterprise AI survey, as reported</td></tr>
+<tr><td>The concentration underneath</td><td><span class="v">~63% of global cloud-infrastructure spend in three hyperscalers (early 2026); OpenAI paused RL training and held its largest frontier run indefinitely (18 Aug 2026)</span></td><td>Cloud Security Alliance; Development Corporate; as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Own the floor — put an abstraction between your estate and any one model, and collect the commoditization dividend.</strong> The model is now a cheap, swappable stove (Grok 4.7 +40% bigger at the same $2/$6 price drew a shrug; $2/$6 vs $10/$50 across labs), and that is good news you capture only if switching is cheap. <strong>This month, route your top few AI workloads through a gateway/abstraction you control, so each model is a component you can plug in and pull out, and start routing per task on price/quality across at least two vendors.</strong> Report one number to the board: the share of critical AI spend that sits behind an abstraction you own versus wired directly into one vendor's proprietary layer.</li>
+  <li><strong>Keep the larder — hold your data, context and evals in a portable form you own.</strong> The lock-in has moved off the model and onto the foundation (identity, data gravity, orchestration, embedded engineers), and 81% already fear that dependency while only 6% believe they could switch cleanly (Zapier 2026). <strong>This month, inventory where your prompts, context, retrieval data and evaluation suites actually live, and move anything load-bearing out of a single vendor's proprietary cellar into a form you can export and re-point at another model.</strong> Report the share of your AI knowledge assets (data, prompts, evals) that are portable by design.</li>
+  <li><strong>Light a second fire — qualify and actually run an alternate supplier under load.</strong> A fallback you have never lit is a foundation, not a stove; 47% say a key function would stop on a primary-vendor outage or price change. <strong>This month, pick one critical AI-dependent workflow and run a timed, under-load cut-over to a second supplier — measure the time-to-switch and what breaks — so the 6% number becomes your tested reality, not your unmeasured risk.</strong> Report the measured time-to-switch for that workflow and a dated plan to extend it to the next two. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and the foundation is why, having perfected the servant, you must own the ground it stands on: own the hearth so the stove stays swappable, keep your grain and recipes in your own larder, and keep a second fire lit, so no company that rents you the cheap stove ever becomes the floor you cannot leave.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — xAI (21 Sep 2026): Grok 4.7, reported ~2.1T parameters (up ~40% from ~1.5T), same $2/$6 per-million-token price/speed, benchmark gains (1657 Elo AA-Briefcase +111; 1695 GDPval; 46.3% CursorBench 4.0 vs 40.4%; 71.0% DeepSWE v1.1 high effort vs 65.2%), "late to the AI Frontier Party," ROI caveat on token consumption (Decrypt/Yahoo Tech; Artificial Analysis; DataCamp; VentureBeat) · The price spread — Grok 4.7 $2/$6 vs Claude Fable 5.1 ~$10/$50; "intelligence completely commoditized, easier to switch" (General Input; DataCamp) · Up a floor — OpenAI "The next phase of enterprise AI": "core infrastructure," enterprise &gt;40% of revenue and on track to consumer parity by end-2026, Codex 3M WAU, APIs &gt;15B tokens/min, Goldman Sachs/Philips/State Farm named (OpenAI) · The embedded foundation — Microsoft's $2.5B "Frontier" unit, 6,000 forward-deployed engineers (Microsoft; CNBC; TechCrunch) · The arithmetic of lock-in — Zapier 2026 enterprise AI survey (81% worried about dependency; 47% a key function stops on an outage/price change; only 6% confident of a clean switch) · The concentration — ~63% of cloud spend in three hyperscalers, foundation-model concentration (Cloud Security Alliance; Development Corporate), OpenAI paused RL training and held its largest frontier run indefinitely (18 Aug 2026) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "foundation" framing — that the model has commoditized into a swappable stove while the durable lock-in has migrated to the foundation (core infrastructure, data gravity, proprietary orchestration, embedded engineers), and that a house must own the floor, keep the larder and light a second fire — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 22 September 2026 · <a href="../index.html">← all editions</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>

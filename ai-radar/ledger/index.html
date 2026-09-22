@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — The Prediction Ledger</title>
+<meta name="description" content="The Prediction Ledger: a captain's log of the dated, falsifiable forecasts cited across the AI Tech Radar — each with the date it was logged, its due date, and a status stamp (Pending, Hit, Miss, or Ongoing). Filter and search the record; nothing is scored on assumption.">
+<style>
+  :root{
+    --bg:#0b1512; --bg2:#0e1a16; --panel:#12211c; --panel2:#16271f; --line:#26382f;
+    --ink:#e9f0ea; --muted:#8fa79a; --soft:#c2d2c8;
+    --brass:#c8a24a; --brassdim:#9c7f3a; --wax:#c24b3a; --wax2:#a5342b;
+    --hit:#3fae7a; --miss:#c24b3a; --pending:#c8a24a; --ongoing:#5aa0d0;
+    --radius:12px; --max:1040px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);
+    background:
+      radial-gradient(1200px 500px at 50% -120px, rgba(200,162,74,.10), transparent 60%),
+      linear-gradient(180deg,#0a1310,#0b1512 40%,#0a120f);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--brass);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:44px 0 22px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--brass);font-weight:700}
+  h1{font-size:34px;line-height:1.12;margin:.3em 0 .1em;
+     font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:.01em}
+  .subhead{font-size:16px;line-height:1.5;color:var(--soft);max-width:70ch;margin:.4em 0 0}
+  .meta{color:var(--muted);font-size:13px;margin-top:12px}
+  .backlink{font-size:13px;color:var(--muted)}
+  .backlink a{color:var(--brass)}
+
+  /* summary stamps */
+  .tally{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
+  .tally .cell{flex:1 1 130px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .tally .n{font-size:26px;font-weight:800;font-family:"Iowan Old Style",Georgia,serif}
+  .tally .l{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:2px}
+  .tally .cell.hit .n{color:var(--hit)} .tally .cell.miss .n{color:var(--miss)}
+  .tally .cell.pending .n{color:var(--pending)} .tally .cell.ongoing .n{color:var(--ongoing)}
+  .tally .cell.total .n{color:var(--ink)}
+
+  /* controls */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 8px}
+  .search{flex:1 1 240px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:8px 14px}
+  .search input{flex:1;background:transparent;border:0;color:var(--ink);font-size:14px;outline:none}
+  .search input::placeholder{color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+    color:var(--soft);background:var(--panel);cursor:pointer;user-select:none}
+  .chip:hover{border-color:var(--brassdim)}
+  .chip[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:#20180a}
+  .chip.hit[aria-pressed="true"]{background:var(--hit);border-color:var(--hit);color:#05130c}
+  .chip.miss[aria-pressed="true"]{background:var(--miss);border-color:var(--miss);color:#1a0605}
+  .chip.pending[aria-pressed="true"]{background:var(--pending);border-color:var(--pending);color:#20180a}
+  .chip.ongoing[aria-pressed="true"]{background:var(--ongoing);border-color:var(--ongoing);color:#05131f}
+
+  /* the ledger */
+  .ledger{width:100%;border-collapse:collapse;margin:14px 0 8px;font-size:14px;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 51px, rgba(200,162,74,.05) 51px, rgba(200,162,74,.05) 52px),
+      var(--bg2);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .ledger thead th{position:sticky;top:0;background:#0f1c17;color:var(--brass);text-align:left;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    padding:12px 14px;border-bottom:2px solid var(--brassdim);z-index:1;cursor:pointer;white-space:nowrap}
+  .ledger thead th .ar{color:var(--muted);font-weight:400;font-size:10px}
+  .ledger tbody td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ledger tbody tr:hover{background:rgba(200,162,74,.04)}
+  .ledger .claim{color:var(--ink);font-weight:600;line-height:1.4}
+  .ledger .claim .src{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:4px}
+  .ledger .claim .src a{color:var(--brassdim)}
+  .ledger .d{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ledger .due{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .due.soon{color:var(--wax);font-weight:700}
+  /* wax/brass stamps */
+  .stamp{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    padding:5px 11px;border-radius:5px;border:2px solid currentColor;transform:rotate(-3deg);white-space:nowrap}
+  .stamp.hit{color:var(--hit);background:rgba(63,174,122,.10)}
+  .stamp.miss{color:var(--miss);background:rgba(194,75,58,.12)}
+  .stamp.pending{color:var(--pending);background:rgba(200,162,74,.10)}
+  .stamp.ongoing{color:var(--ongoing);background:rgba(90,160,208,.10)}
+  .note{display:block;color:var(--muted);font-size:12px;margin-top:6px;font-style:italic}
+  .empty{padding:30px;text-align:center;color:var(--muted)}
+  footer{border-top:1px solid var(--line);margin-top:26px;padding:22px 0 60px;color:var(--muted);font-size:13px;line-height:1.6}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 0;font-size:12px;color:var(--muted)}
+  .legend b{color:var(--soft)}
+  /* mobile: turn rows into cards */
+  @media(max-width:720px){
+    .ledger,.ledger thead,.ledger tbody,.ledger th,.ledger td,.ledger tr{display:block}
+    .ledger thead{display:none}
+    .ledger{background:var(--bg2)}
+    .ledger tbody tr{border-bottom:1px solid var(--line);padding:6px 4px}
+    .ledger tbody td{border-bottom:0;padding:5px 14px}
+    .ledger tbody td::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--brassdim);margin-bottom:2px}
+    h1{font-size:27px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · The Captain's Log</div>
+  <h1>The Prediction Ledger</h1>
+  <p class="subhead">A logbook of the dated, falsifiable forecasts cited across the radar's daily briefs. Each line carries the date it was logged, the source, the claim (paraphrased), its due date, and a status stamp — <b style="color:var(--pending)">Pending</b>, <b style="color:var(--hit)">Hit</b>, <b style="color:var(--miss)">Miss</b>, or <b style="color:var(--ongoing)">Ongoing</b> for recurring benchmarks. Nothing is stamped on assumption; due dates that have arrived are checked against current sources before the wax is set.</p>
+  <div class="meta">Last touched 22 September 2026 · <span id="count-note"></span></div>
+  <div class="meta backlink"><a href="../index.html">← all editions</a> · <a href="../feed.xml">RSS</a></div>
+</header>
+
+<div class="tally" id="tally"></div>
+
+<div class="controls">
+  <label class="search">🔎 <input id="q" type="search" placeholder="Search source, claim, topic…" aria-label="Search the ledger"></label>
+  <div class="chips" id="chips" role="group" aria-label="Filter by status">
+    <span class="chip" data-f="all" aria-pressed="true">All</span>
+    <span class="chip pending" data-f="pending" aria-pressed="false">Pending</span>
+    <span class="chip hit" data-f="hit" aria-pressed="false">Hit</span>
+    <span class="chip miss" data-f="miss" aria-pressed="false">Miss</span>
+    <span class="chip ongoing" data-f="ongoing" aria-pressed="false">Ongoing</span>
+  </div>
+</div>
+
+<table class="ledger" id="ledger">
+  <thead><tr>
+    <th data-sort="logged">Logged <span class="ar">↕</span></th>
+    <th data-sort="claim">Forecast &amp; source <span class="ar">↕</span></th>
+    <th data-sort="due">Due <span class="ar">↕</span></th>
+    <th data-sort="status">Status <span class="ar">↕</span></th>
+  </tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+<div class="empty" id="empty" hidden>No entries match that filter.</div>
+
+<div class="legend">
+  <span><b>Pending</b> — due date is still ahead</span>
+  <span><b>Hit</b> — came true, checked against a current source</span>
+  <span><b>Miss</b> — due date passed and it did not</span>
+  <span><b>Ongoing</b> — a recurring benchmark, re-read each time it recurs</span>
+</div>
+
+<footer>
+  <p><strong>How this ledger is kept:</strong> each daily brief that cites a dated, falsifiable forecast — a named source, a specific number, a due date — adds one line here. Most days nothing else changes; before publishing, the radar glances at what is due this week and resolves anything whose date has arrived, checked against current trackers rather than assumed. Figures are relayed from the sources named in each brief's <em>sources.md</em> and are marked "as reported" where a primary page could not be fetched directly; a status stamp reflects the best current public reading, not a guarantee.</p>
+</footer>
+</div>
+
+<script>
+/* The record. Dates ISO. status: pending | hit | miss | ongoing.
+   'due' may be an ISO date or the string "recurring". */
+var ENTRIES = [
+  { logged:"2026-09-22", source:"OpenAI — “The next phase of enterprise AI”",
+    claim:"OpenAI's enterprise revenue reaches parity with its consumer revenue by the end of 2026 (enterprise already >40% of total).",
+    due:"2026-12-31", status:"pending", topic:"revenue enterprise openai commercialization",
+    url:"https://openai.com/index/next-phase-of-enterprise-ai/", note:"Logged today from the 22 Sep edition, “The Foundation.”" },
+
+  { logged:"2026-09-20", source:"Juniper Research (via the 20 Sep brief)",
+    claim:"Agentic-commerce spend is ~$8B in 2026 and rises toward ~$1.5T by 2030.",
+    due:"2030-12-31", status:"pending", topic:"agentic commerce payments spend market" },
+
+  { logged:"2026-09-20", source:"McKinsey QuantumBlack (via the 20 Sep brief)",
+    claim:"Orchestrated / agent-driven retail spend reaches $3–5T by 2030.",
+    due:"2030-12-31", status:"pending", topic:"retail agentic spend market" },
+
+  { logged:"2026-09-19", source:"McKinsey — State of AI 2026",
+    claim:"Only ~6% of firms are AI “high performers” (attributing >5% of EBIT to AI).",
+    due:"recurring", status:"ongoing", topic:"roi adoption high performers ebit",
+    note:"Recurring benchmark — re-read each time McKinsey restates it." },
+
+  { logged:"2026-09-01", source:"EU AI Office / European Commission",
+    claim:"Providers of GPAI models above the 10^25 FLOP systemic-risk threshold file their first formal systemic-risk evaluations by 15 September 2026.",
+    due:"2026-09-15", status:"hit", topic:"eu ai act gpai systemic risk filing regulation",
+    url:"https://artificialintelligenceact.eu/", note:"Deadline reached; the filing window has passed per current AI Act trackers." },
+
+  { logged:"2026-08-18", source:"Anthropic (revenue projection, as reported)",
+    claim:"Anthropic projects roughly $190–200B in revenue in 2028.",
+    due:"2028-12-31", status:"pending", topic:"anthropic revenue projection commercialization" },
+
+  { logged:"2026-08-01", source:"Deloitte — State of Generative AI in the Enterprise",
+    claim:"~74% of enterprises are meeting or exceeding ROI expectations / scaling GenAI in their most advanced initiatives.",
+    due:"recurring", status:"ongoing", topic:"deloitte adoption roi genai enterprise",
+    note:"Survey snapshot — treated as a recurring adoption benchmark." },
+
+  { logged:"2026-07-20", source:"EU AI Act “Omnibus” (as reported)",
+    claim:"Compliance for most standalone high-risk AI systems (hiring, education, law enforcement) is postponed to 2 December 2027.",
+    due:"2027-12-02", status:"pending", topic:"eu ai act high-risk deadline omnibus regulation",
+    url:"https://artificialintelligenceact.eu/" },
+
+  { logged:"2026-07-15", source:"European Commission — AI Act",
+    claim:"The AI Act's high-risk / GPAI obligations begin active enforcement on 2 August 2026.",
+    due:"2026-08-02", status:"hit", topic:"eu ai act enforcement high-risk regulation gpai",
+    url:"https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+    note:"Enforcement went live on 2 August 2026 as scheduled." },
+
+  { logged:"2026-07-03", source:"Gartner (press release, 2025-08-26)",
+    claim:"40% of enterprise apps will feature task-specific AI agents by year-end 2026 (up from <5% in 2025).",
+    due:"2026-12-31", status:"pending", topic:"gartner agents enterprise apps adoption",
+    url:"https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" },
+
+  { logged:"2026-06-27", source:"Gartner (press release, 2025-06-25)",
+    claim:"Over 40% of agentic-AI projects will be canceled by the end of 2027.",
+    due:"2027-12-31", status:"pending", topic:"gartner agentic projects cancelled roi",
+    url:"https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" },
+];
+
+(function(){
+  var rows = document.getElementById('rows');
+  var empty = document.getElementById('empty');
+  var q = document.getElementById('q');
+  var chips = document.getElementById('chips');
+  var TODAY = new Date('2026-09-22T00:00:00Z');
+  var STATUS_ORDER = { pending:0, ongoing:1, hit:2, miss:3 };
+  var filter = 'all', sortKey = 'logged', sortDir = -1;
+
+  function fmtDue(d){ return d === 'recurring' ? 'recurring' : d; }
+  function dueSoon(e){
+    if(e.due === 'recurring' || e.status !== 'pending') return false;
+    var due = new Date(e.due + 'T00:00:00Z');
+    var days = (due - TODAY) / 86400000;
+    return days >= 0 && days <= 14;
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(){
+    var term = (q.value || '').trim().toLowerCase();
+    var list = ENTRIES.filter(function(e){
+      if(filter !== 'all' && e.status !== filter) return false;
+      if(term){
+        var hay = (e.source + ' ' + e.claim + ' ' + (e.topic||'') + ' ' + e.status + ' ' + e.due).toLowerCase();
+        if(hay.indexOf(term) === -1) return false;
+      }
+      return true;
+    });
+    list.sort(function(a,b){
+      var va, vb;
+      if(sortKey === 'status'){ va = STATUS_ORDER[a.status]; vb = STATUS_ORDER[b.status]; }
+      else if(sortKey === 'claim'){ va = a.source.toLowerCase(); vb = b.source.toLowerCase(); }
+      else if(sortKey === 'due'){ va = a.due === 'recurring' ? '9999' : a.due; vb = b.due === 'recurring' ? '9999' : b.due; }
+      else { va = a.logged; vb = b.logged; }
+      if(va < vb) return -1 * sortDir; if(va > vb) return 1 * sortDir; return 0;
+    });
+
+    rows.innerHTML = list.map(function(e){
+      var src = e.url ? '<a href="'+esc(e.url)+'" target="_blank" rel="noopener">'+esc(e.source)+'</a>' : esc(e.source);
+      var note = e.note ? '<span class="note">'+esc(e.note)+'</span>' : '';
+      var dueCls = 'due' + (dueSoon(e) ? ' soon' : '');
+      var label = { pending:'Pending', hit:'Hit', miss:'Miss', ongoing:'Ongoing' }[e.status];
+      return '<tr>'
+        + '<td class="d" data-l="Logged">'+esc(e.logged)+'</td>'
+        + '<td data-l="Forecast &amp; source"><span class="claim">'+esc(e.claim)+'<span class="src">'+src+'</span></span>'+note+'</td>'
+        + '<td class="'+dueCls+'" data-l="Due">'+esc(fmtDue(e.due))+'</td>'
+        + '<td data-l="Status"><span class="stamp '+e.status+'">'+label+'</span></td>'
+        + '</tr>';
+    }).join('');
+    empty.hidden = list.length > 0;
+  }
+
+  function tally(){
+    var t = { total:ENTRIES.length, pending:0, hit:0, miss:0, ongoing:0 };
+    ENTRIES.forEach(function(e){ t[e.status]++; });
+    var cells = [
+      ['total','Logged'], ['pending','Pending'], ['hit','Hit'], ['miss','Miss'], ['ongoing','Ongoing']
+    ];
+    document.getElementById('tally').innerHTML = cells.map(function(c){
+      return '<div class="cell '+c[0]+'"><div class="n">'+t[c[0]]+'</div><div class="l">'+c[1]+'</div></div>';
+    }).join('');
+    document.getElementById('count-note').textContent = t.total + ' forecasts on the books · ' + t.hit + ' hit · ' + t.pending + ' pending';
+  }
+
+  chips.addEventListener('click', function(ev){
+    var c = ev.target.closest('.chip'); if(!c) return;
+    filter = c.getAttribute('data-f');
+    [].forEach.call(chips.querySelectorAll('.chip'), function(x){ x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+    render();
+  });
+  q.addEventListener('input', render);
+  [].forEach.call(document.querySelectorAll('.ledger thead th'), function(th){
+    th.addEventListener('click', function(){
+      var k = th.getAttribute('data-sort');
+      if(sortKey === k){ sortDir *= -1; } else { sortKey = k; sortDir = (k === 'logged' || k === 'due') ? -1 : 1; }
+      render();
+    });
+  });
+
+  tally();
+  render();
+})();
+</script>
+</body>
+</html>
