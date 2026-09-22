@@ -123,6 +123,14 @@ REQUIRED SECTIONS in every brief, in this order:
   the block between the `EXPLORE:START/END` markers and the `#radar-topics` / `#radar-index`
   JSON blobs). Re-run it after adding a new edition so the new brief is searchable and its
   companies/verticals are indexed. Do NOT hand-edit inside the EXPLORE markers.
+- **"Ask the Radar" retrieval index (required every run).** `ai-radar/ask/index.html` lets a
+  reader ask a free-text question and get an answer composed — client-side, no server, no LLM
+  at query time — from the actual brief text, with citations back to each edition. It reads a
+  prebuilt index at `ai-radar/ask/index.json`. **After creating today's edition, rebuild it:**
+  `python3 scripts/build_ask_index.py` (deterministic; reads every `ai-radar/<date>/ai-radar.md`
+  plus `tags.json` headlines and `verified_facts.json`, and rewrites `ai-radar/ask/index.json`).
+  Commit the regenerated `index.json` with the edition so the new brief is answerable. Do NOT
+  hand-edit `index.json`.
 
 ## Monthly wrap-up (end of each month)
 

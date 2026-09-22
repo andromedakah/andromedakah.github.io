@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — Ask the Radar</title>
+<meta name="description" content="Ask the Radar: put a question to the whole archive of AI Tech Radar briefs and get an answer composed from the actual brief text, with citations back to each dated edition. Runs entirely in your browser — a search over every brief, not a live web lookup.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  h1{font-size:33px;line-height:1.14;margin:.3em 0 .12em}
+  .subhead{font-size:16px;line-height:1.5;color:var(--soft);max-width:72ch;margin:.3em 0 0}
+  .meta{color:var(--muted);font-size:13px;margin-top:12px}
+  .meta a{color:#9d96f0}
+
+  /* ask box */
+  .askbox{display:flex;gap:10px;align-items:stretch;margin:22px 0 10px;flex-wrap:wrap}
+  .askbox .field{flex:1 1 320px;display:flex;align-items:center;gap:10px;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+  .askbox .field:focus-within{border-color:var(--accent)}
+  .askbox input{flex:1;background:transparent;border:0;color:var(--ink);font-size:16px;outline:none}
+  .askbox input::placeholder{color:var(--muted)}
+  .askbtn{background:#7f77dd;color:#fff;border:0;border-radius:12px;padding:0 22px;font-size:15px;font-weight:700;cursor:pointer}
+  .askbtn:hover{background:#6f66d6}
+  .askbtn:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .examples{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+  .ex{font-size:12.5px;color:var(--soft);background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:6px 12px;cursor:pointer}
+  .ex:hover{border-color:var(--accent);color:var(--ink)}
+
+  .status{color:var(--muted);font-size:13px;margin:16px 0 0}
+  section.ans{margin:26px 0}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 16px}
+
+  .lead{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a;border-radius:var(--radius);
+    padding:20px 22px;margin:0 0 18px}
+  .lead .a{font-size:18px;line-height:1.5;color:var(--hi)}
+  .lead .cite{display:block;margin-top:10px;font-size:13px;color:var(--muted)}
+  .lead .cite a{color:#b9b2f5}
+
+  .hit{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .hit .h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+  .hit .ttl{font-weight:700;color:var(--ink)}
+  .hit .ttl a{color:#9d96f0}
+  .hit .d{color:var(--muted);font-size:12.5px;white-space:nowrap}
+  .hit .sec{display:inline-block;font-size:11px;color:var(--soft);background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:2px 9px;margin:6px 0 8px}
+  .hit .snip{color:var(--soft);font-size:14.5px;line-height:1.55}
+  .hit .more{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--accent)}
+  mark{background:rgba(239,159,39,.28);color:inherit;border-radius:3px;padding:0 2px}
+
+  .numbers{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56;border-radius:12px;padding:14px 18px;margin:14px 0}
+  .numbers .t{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5dcaa5;font-weight:700;margin-bottom:6px}
+  .numbers ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:14px}
+  .numbers li{margin:6px 0}
+  .numbers .src{color:var(--muted);font-size:12px}
+
+  .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .related a{font-size:12.5px;color:var(--soft);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+  .related a:hover{border-color:var(--accent);color:var(--ink);text-decoration:none}
+
+  .note{color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+  footer{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 60px;color:var(--muted);font-size:13px}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86)}
+:root[data-theme="light"] .lead{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .lead .a{color:#0b1220}
+:root[data-theme="light"] .lead .cite a{color:#5b52c9}
+:root[data-theme="light"] .numbers{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] mark{background:rgba(184,70,31,.20)}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+  @media(max-width:640px){.wrap{padding:0 16px}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="../index.html">← All editions</a>
+  <a href="../ledger/index.html">Prediction Ledger</a>
+  <a href="../trends/index.html">Trends</a>
+  <a href="../feed.xml">RSS</a>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Ask the Radar</div>
+  <h1>Ask the Radar</h1>
+  <p class="subhead">Put a question to the whole archive of daily briefs. The answer is assembled from the actual text of the editions — every claim links back to the dated brief it came from. This runs entirely in your browser over an index of every brief; it is a search across what the radar has already published, not a live web lookup.</p>
+  <div class="meta" id="corpus-meta">Loading the index…</div>
+</header>
+
+<div class="askbox">
+  <label class="field">🔎 <input id="q" type="search" autocomplete="off" placeholder="e.g. What does the radar say about the EU AI Act?" aria-label="Ask a question"></label>
+  <button class="askbtn" id="ask" disabled>Ask</button>
+</div>
+<div class="examples" id="examples" aria-label="Example questions"></div>
+
+<div class="status" id="status"></div>
+
+<section class="ans" id="answer" hidden></section>
+
+<div class="note" id="how" hidden>
+  <strong>How this works.</strong> Your question is matched (BM25 relevance ranking) against every passage of every published brief, indexed client-side. The answer above is <em>extracted and quoted</em> from the highest-scoring passages — the radar's own words — with a citation to each source edition; it does not generate new claims or fetch anything live. For the full argument and sources, open the cited briefs. Numbers are shown as reported in each edition (see each brief's <code>sources.md</code>).
+</div>
+
+<footer>
+  <p>AI Tech Radar · <a href="../index.html">all editions</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS</a></p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var STOP = new Set(("a an the of to in on for and or but is are was were be been being it its this that these those with as at by from into over under about above below "
+    + "we you they he she i our your their his her them us me my mine ours yours what which who whom whose when where why how do does did done doing "
+    + "will would can could should may might must shall not no nor so than then too very just also more most much many few some any each every all both "
+    + "if because while during before after between out up down off again further here there once only own same such other").split(/\s+/));
+
+  var K1 = 1.5, B = 0.75;
+  var idx = null, docs = [], df = Object.create(null), avgdl = 0, N = 0, ready = false;
+
+  var qEl = document.getElementById('q');
+  var askBtn = document.getElementById('ask');
+  var statusEl = document.getElementById('status');
+  var ansEl = document.getElementById('answer');
+  var metaEl = document.getElementById('corpus-meta');
+  var howEl = document.getElementById('how');
+
+  function stem(t){ return t.length > 4 ? t.replace(/(ations|ation|ing|edly|ed|ies|es|s)$/,'') : t; }
+  function tokenize(s){
+    var out = [];
+    (s.toLowerCase().match(/[a-z0-9][a-z0-9+.#-]*/g) || []).forEach(function(w){
+      w = w.replace(/^[.#+-]+|[.#+-]+$/g,'');
+      if(w.length < 2 || STOP.has(w)) return;
+      out.push(stem(w));
+    });
+    return out;
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function build(data){
+    idx = data;
+    docs = data.passages.map(function(p){
+      var toks = tokenize(p.t);
+      var tf = Object.create(null);
+      toks.forEach(function(t){ tf[t] = (tf[t]||0)+1; });
+      return { p:p, tf:tf, len:toks.length };
+    });
+    N = docs.length;
+    var total = 0;
+    docs.forEach(function(d){
+      total += d.len;
+      var seen = Object.create(null);
+      for(var t in d.tf){ if(!seen[t]){ df[t]=(df[t]||0)+1; seen[t]=1; } }
+    });
+    avgdl = total / (N || 1);
+    ready = true;
+    askBtn.disabled = false;
+    var span = idx.editions.length ? (idx.editions[0].d + ' → ' + idx.editions[idx.editions.length-1].d) : '';
+    metaEl.innerHTML = 'Indexed <strong>' + idx.editions.length + '</strong> briefs · <strong>'
+      + N.toLocaleString() + '</strong> passages · ' + esc(span) + ' · <a href="../index.html">browse editions</a>';
+  }
+
+  function idf(term){
+    var n = df[term] || 0;
+    return Math.log(1 + (N - n + 0.5) / (n + 0.5));
+  }
+  function scoreDoc(d, qterms){
+    var s = 0;
+    for(var i=0;i<qterms.length;i++){
+      var t = qterms[i], f = d.tf[t];
+      if(!f) continue;
+      s += idf(t) * (f * (K1+1)) / (f + K1 * (1 - B + B * d.len / avgdl));
+    }
+    return s * (d.p.w || 1);
+  }
+
+  function bestWindow(text, qset, width){
+    // find the ~width-char window with the most query-term hits, snap to word bounds
+    var sents = text.split(/(?<=[.!?])\s+/);
+    var best = '', bestScore = -1;
+    var acc = '';
+    for(var i=0;i<sents.length;i++){
+      acc = sents[i];
+      // grow to neighbours up to width
+      var j = i+1;
+      while(j < sents.length && (acc.length + sents[j].length + 1) <= width){ acc += ' ' + sents[j]; j++; }
+      var sc = 0, low = acc.toLowerCase();
+      qset.forEach(function(t){ if(low.indexOf(t) !== -1) sc++; });
+      if(sc > bestScore){ bestScore = sc; best = acc; }
+    }
+    if(!best) best = text.slice(0, width);
+    if(best.length > width + 60) best = best.slice(0, width + 60).replace(/\s+\S*$/, '') + '…';
+    return best;
+  }
+
+  function highlight(text, qterms){
+    var out = esc(text);
+    var uniq = qterms.filter(function(v,i){ return qterms.indexOf(v)===i && v.length>=3; });
+    uniq.forEach(function(t){
+      try{
+        var re = new RegExp('\\b(' + t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '[a-z0-9]*)', 'gi');
+        out = out.replace(re, '<mark>$1</mark>');
+      }catch(e){}
+    });
+    return out;
+  }
+
+  function topSentence(text, qset){
+    var sents = text.split(/(?<=[.!?])\s+/), best = text, bestScore = -1;
+    sents.forEach(function(s){
+      if(s.length < 25) return;
+      var low = s.toLowerCase(), sc = 0;
+      qset.forEach(function(t){ if(low.indexOf(t)!==-1) sc++; });
+      if(sc > bestScore){ bestScore = sc; best = s; }
+    });
+    return best.trim();
+  }
+
+  function answer(query){
+    var qterms = tokenize(query);
+    if(!qterms.length){ statusEl.textContent = 'Type a question to search the briefs.'; ansEl.hidden = true; return; }
+    var qset = new Set(qterms);
+    var qlow = qterms.map(function(t){ return t; });
+
+    var scored = [];
+    for(var i=0;i<docs.length;i++){
+      var s = scoreDoc(docs[i], qterms);
+      if(s > 0) scored.push([s, docs[i]]);
+    }
+    scored.sort(function(a,b){ return b[0]-a[0]; });
+
+    if(!scored.length){
+      statusEl.textContent = '';
+      ansEl.hidden = false; howEl.hidden = false;
+      ansEl.innerHTML = '<h2>No match</h2><div class="hit"><div class="snip">The radar hasn’t covered that directly yet. Try different words — topics like the EU AI Act, agentic payments, MCP, model pricing, vendor lock-in, ROI, or security are well covered. You can also <a href="../index.html">browse all editions</a>.</div></div>';
+      return;
+    }
+
+    // top passages, capped per edition for diversity
+    var perEd = {}, picks = [];
+    for(var k=0;k<scored.length && picks.length<7;k++){
+      var d = scored[k][1].p, day = d.d;
+      perEd[day] = (perEd[day]||0);
+      if(perEd[day] >= 2) continue;
+      perEd[day]++;
+      picks.push({sc:scored[k][0], p:d});
+    }
+
+    var top = picks[0].p;
+    var lead = topSentence(top.t, qset);
+
+    // numbers: from "Numbers to Quote" passages in the ranked set, plus matching verified facts
+    var nums = [];
+    for(var m=0;m<scored.length && nums.length<4;m++){
+      var pp = scored[m][1].p;
+      if(/numbers to quote/i.test(pp.s)){
+        nums.push({ text: pp.t, cite: pp.h + ' · ' + pp.d, url: pp.u, src:'' });
+      }
+    }
+    (idx.facts||[]).forEach(function(f){
+      if(nums.length >= 6) return;
+      var low = (f.claim + ' ' + f.source_title).toLowerCase();
+      var hit = qterms.some(function(t){ return low.indexOf(t) !== -1; });
+      if(hit) nums.push({ text: f.claim + ' ✓ verified', cite:'', url: f.source_url, src: f.source_title });
+    });
+
+    // related editions
+    var relSeen = {}, rel = [];
+    picks.forEach(function(x){ if(!relSeen[x.p.d]){ relSeen[x.p.d]=1; rel.push(x.p); } });
+
+    var html = '';
+    html += '<h2>Answer · from ' + rel.length + ' brief' + (rel.length>1?'s':'') + '</h2>';
+    html += '<div class="lead"><div class="a">' + highlight(lead, qlow) + '</div>'
+          + '<span class="cite">— <a href="' + esc(top.u) + '">' + esc(top.h) + '</a> · ' + esc(top.d)
+          + ' · <em>' + esc(top.s) + '</em></span></div>';
+
+    if(nums.length){
+      html += '<div class="numbers"><div class="t">Numbers the radar cites</div><ul>';
+      nums.forEach(function(n){
+        var tail = n.url ? ' <a class="src" href="' + esc(n.url) + '"' + (/^https?:/.test(n.url)?' target="_blank" rel="noopener"':'') + '>' + esc(n.src || (n.cite||'source')) + '</a>' : (n.src?' <span class="src">'+esc(n.src)+'</span>':'');
+        html += '<li>' + highlight(n.text.length>320? n.text.slice(0,317)+'…' : n.text, qlow) + tail + '</li>';
+      });
+      html += '</ul></div>';
+    }
+
+    html += '<h2 style="margin-top:24px">Across the briefs</h2>';
+    picks.forEach(function(x){
+      var snip = bestWindow(x.p.t, qset, 300);
+      html += '<div class="hit"><div class="h"><span class="ttl"><a href="' + esc(x.p.u) + '">' + esc(x.p.h) + '</a></span>'
+            + '<span class="d">' + esc(x.p.d) + '</span></div>'
+            + '<span class="sec">' + esc(x.p.s) + '</span>'
+            + '<div class="snip">' + highlight(snip, qlow) + '</div>'
+            + '<a class="more" href="' + esc(x.p.u) + '">Read the brief →</a></div>';
+    });
+
+    if(rel.length){
+      html += '<h2 style="margin-top:24px">Editions to read</h2><div class="related">';
+      rel.forEach(function(p){ html += '<a href="' + esc(p.u) + '">' + esc(p.d) + ' · ' + esc(p.h) + '</a>'; });
+      html += '</div>';
+    }
+
+    statusEl.textContent = '';
+    ansEl.innerHTML = html;
+    ansEl.hidden = false;
+    howEl.hidden = false;
+    ansEl.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function run(){
+    if(!ready){ statusEl.textContent = 'Still loading the index…'; return; }
+    var q = qEl.value.trim();
+    if(!q){ qEl.focus(); return; }
+    try{ history.replaceState(null,'', '?q=' + encodeURIComponent(q)); }catch(e){}
+    statusEl.innerHTML = '<span class="spin"></span>Searching the briefs…';
+    setTimeout(function(){ answer(q); }, 20);
+  }
+
+  askBtn.addEventListener('click', run);
+  qEl.addEventListener('keydown', function(e){ if(e.key === 'Enter') run(); });
+
+  var EXAMPLES = [
+    'What does the radar say about the EU AI Act?',
+    'How should a board think about agentic payments?',
+    'Is the model commoditizing?',
+    'What are the numbers on agent security incidents?',
+    'How do we avoid vendor lock-in?',
+    'What is MCP and why does it matter?'
+  ];
+  var exWrap = document.getElementById('examples');
+  exWrap.innerHTML = EXAMPLES.map(function(x){ return '<span class="ex">' + esc(x) + '</span>'; }).join('');
+  exWrap.addEventListener('click', function(e){
+    var el = e.target.closest('.ex'); if(!el) return;
+    qEl.value = el.textContent; run();
+  });
+
+  // load index
+  fetch('index.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+    .then(function(data){
+      build(data);
+      var m = /[?&]q=([^&]+)/.exec(location.search);
+      if(m){ try{ qEl.value = decodeURIComponent(m[1].replace(/\+/g,' ')); run(); }catch(e){} }
+    })
+    .catch(function(){
+      metaEl.textContent = 'Could not load the index. Please reload the page.';
+    });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
