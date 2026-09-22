@@ -7,107 +7,136 @@
 <meta name="description" content="The Prediction Ledger: a captain's log of the dated, falsifiable forecasts cited across the AI Tech Radar — each with the date it was logged, its due date, and a status stamp (Pending, Hit, Miss, or Ongoing). Filter and search the record; nothing is scored on assumption.">
 <style>
   :root{
-    --bg:#0b1512; --bg2:#0e1a16; --panel:#12211c; --panel2:#16271f; --line:#26382f;
-    --ink:#e9f0ea; --muted:#8fa79a; --soft:#c2d2c8;
-    --brass:#c8a24a; --brassdim:#9c7f3a; --wax:#c24b3a; --wax2:#a5342b;
-    --hit:#3fae7a; --miss:#c24b3a; --pending:#c8a24a; --ongoing:#5aa0d0;
-    --radius:12px; --max:1040px;
+    --paper:#f7f7f5; --card:#ffffff; --ink:#1a1a1e; --subink:#44464d; --faint:#6b6e76;
+    --line:#e7e7e3; --accent:#059669; --accentdark:#047857; --accentsoft:#ecfdf5;
+    --hit:#059669; --hitbg:#ecfdf5; --miss:#b91c1c; --missbg:#fef2f2;
+    --pending:#a06a00; --pendingbg:#fff8ea; --ongoing:#1d4ed8; --ongoingbg:#eef3ff;
+    --wax:#b91c1c; --radius:14px; --max:1040px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;color:var(--ink);
-    background:
-      radial-gradient(1200px 500px at 50% -120px, rgba(200,162,74,.10), transparent 60%),
-      linear-gradient(180deg,#0a1310,#0b1512 40%,#0a120f);
-    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  a{color:var(--brass);text-decoration:none} a:hover{text-decoration:underline}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.65 Inter,"SF Pro Text",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accentdark);text-decoration:underline}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-  header.top{padding:44px 0 22px;border-bottom:1px solid var(--line);margin-bottom:6px}
-  .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--brass);font-weight:700}
-  h1{font-size:34px;line-height:1.12;margin:.3em 0 .1em;
-     font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:.01em}
-  .subhead{font-size:16px;line-height:1.5;color:var(--soft);max-width:70ch;margin:.4em 0 0}
-  .meta{color:var(--muted);font-size:13px;margin-top:12px}
-  .backlink{font-size:13px;color:var(--muted)}
-  .backlink a{color:var(--brass)}
 
-  /* summary stamps */
-  .tally{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
-  .tally .cell{flex:1 1 130px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-  .tally .n{font-size:26px;font-weight:800;font-family:"Iowan Old Style",Georgia,serif}
-  .tally .l{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:2px}
+  /* shared site header (matches the landing page) */
+  header.site{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);
+    background:rgba(247,247,245,.85);backdrop-filter:blur(8px)}
+  header.site nav{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px}
+  header.site .brand{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  header.site .brand:hover{text-decoration:none}
+  header.site .brand .mark{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:14px}
+  header.site .links{display:flex;align-items:center;gap:2px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  header.site .links a{color:var(--subink);padding:8px 12px;border-radius:8px}
+  header.site .links a:hover{color:var(--ink);text-decoration:none}
+  header.site .links a.active{color:var(--accentdark);background:var(--accentsoft)}
+
+  /* hero */
+  .hero{padding:40px 0 6px}
+  .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:700}
+  h1{font-size:34px;line-height:1.12;margin:.3em 0 .1em;font-weight:800;color:var(--ink);
+     font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:0}
+  .subhead{font-size:16px;line-height:1.6;color:var(--subink);max-width:74ch;margin:.4em 0 0}
+  .subhead b{font-weight:700}
+  .meta{color:var(--faint);font-size:13px;margin-top:12px}
+  .backlink a{color:var(--accent)}
+
+  /* summary tally */
+  .tally{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 6px}
+  .tally .cell{flex:1 1 130px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .tally .n{font-size:26px;font-weight:800;font-family:"Iowan Old Style",Georgia,serif;line-height:1}
+  .tally .l{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-top:5px;font-weight:700}
   .tally .cell.hit .n{color:var(--hit)} .tally .cell.miss .n{color:var(--miss)}
   .tally .cell.pending .n{color:var(--pending)} .tally .cell.ongoing .n{color:var(--ongoing)}
   .tally .cell.total .n{color:var(--ink)}
 
   /* controls */
-  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 8px}
-  .search{flex:1 1 240px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);
-    border-radius:999px;padding:8px 14px}
-  .search input{flex:1;background:transparent;border:0;color:var(--ink);font-size:14px;outline:none}
-  .search input::placeholder{color:var(--muted)}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 10px}
+  .search{flex:1 1 240px;display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--line);
+    border-radius:999px;padding:10px 16px}
+  .search:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(5,150,105,.13)}
+  .search input{flex:1;min-width:0;background:transparent;border:0;color:var(--ink);font-size:14.5px;outline:none}
+  .search input::placeholder{color:#9aa0a6}
   .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
-    color:var(--soft);background:var(--panel);cursor:pointer;user-select:none}
-  .chip:hover{border-color:var(--brassdim)}
-  .chip[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:#20180a}
-  .chip.hit[aria-pressed="true"]{background:var(--hit);border-color:var(--hit);color:#05130c}
-  .chip.miss[aria-pressed="true"]{background:var(--miss);border-color:var(--miss);color:#1a0605}
-  .chip.pending[aria-pressed="true"]{background:var(--pending);border-color:var(--pending);color:#20180a}
-  .chip.ongoing[aria-pressed="true"]{background:var(--ongoing);border-color:var(--ongoing);color:#05131f}
+  .chip{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+    color:var(--subink);background:var(--card);cursor:pointer;user-select:none}
+  .chip:hover{border-color:var(--accent);color:var(--accentdark)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accentdark);color:#fff}
+  .chip.hit[aria-pressed="true"]{background:var(--hit);border-color:var(--hit);color:#fff}
+  .chip.miss[aria-pressed="true"]{background:var(--miss);border-color:var(--miss);color:#fff}
+  .chip.pending[aria-pressed="true"]{background:var(--pending);border-color:var(--pending);color:#fff}
+  .chip.ongoing[aria-pressed="true"]{background:var(--ongoing);border-color:var(--ongoing);color:#fff}
 
   /* the ledger */
   .ledger{width:100%;border-collapse:collapse;margin:14px 0 8px;font-size:14px;
     background:
-      repeating-linear-gradient(180deg, transparent, transparent 51px, rgba(200,162,74,.05) 51px, rgba(200,162,74,.05) 52px),
-      var(--bg2);
-    border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .ledger thead th{position:sticky;top:0;background:#0f1c17;color:var(--brass);text-align:left;
-    font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
-    padding:12px 14px;border-bottom:2px solid var(--brassdim);z-index:1;cursor:pointer;white-space:nowrap}
-  .ledger thead th .ar{color:var(--muted);font-weight:400;font-size:10px}
-  .ledger tbody td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
-  .ledger tbody tr:hover{background:rgba(200,162,74,.04)}
-  .ledger .claim{color:var(--ink);font-weight:600;line-height:1.4}
-  .ledger .claim .src{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:4px}
-  .ledger .claim .src a{color:var(--brassdim)}
-  .ledger .d{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .ledger .due{color:var(--soft);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .due.soon{color:var(--wax);font-weight:700}
-  /* wax/brass stamps */
-  .stamp{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-    padding:5px 11px;border-radius:5px;border:2px solid currentColor;transform:rotate(-3deg);white-space:nowrap}
-  .stamp.hit{color:var(--hit);background:rgba(63,174,122,.10)}
-  .stamp.miss{color:var(--miss);background:rgba(194,75,58,.12)}
-  .stamp.pending{color:var(--pending);background:rgba(200,162,74,.10)}
-  .stamp.ongoing{color:var(--ongoing);background:rgba(90,160,208,.10)}
-  .note{display:block;color:var(--muted);font-size:12px;margin-top:6px;font-style:italic}
-  .empty{padding:30px;text-align:center;color:var(--muted)}
-  footer{border-top:1px solid var(--line);margin-top:26px;padding:22px 0 60px;color:var(--muted);font-size:13px;line-height:1.6}
-  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 0;font-size:12px;color:var(--muted)}
-  .legend b{color:var(--soft)}
+      repeating-linear-gradient(180deg, transparent, transparent 55px, rgba(5,150,105,.045) 55px, rgba(5,150,105,.045) 56px),
+      var(--card);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .ledger thead th{position:sticky;top:0;background:#f3f3f1;color:var(--faint);text-align:left;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+    padding:13px 14px;border-bottom:2px solid var(--line);z-index:1;cursor:pointer;white-space:nowrap}
+  .ledger thead th:hover{color:var(--accentdark)}
+  .ledger thead th .ar{color:#b9bcc0;font-weight:400;font-size:10px}
+  .ledger tbody td{padding:15px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ledger tbody tr:last-child td{border-bottom:0}
+  .ledger tbody tr:hover{background:rgba(5,150,105,.03)}
+  .ledger .claim{color:var(--ink);font-weight:700;line-height:1.45}
+  .ledger .claim .src{display:block;color:var(--faint);font-weight:500;font-size:12.5px;margin-top:5px}
+  .ledger .claim .src a{color:var(--accent)}
+  .ledger .d{color:var(--subink);white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+  .ledger .due{color:var(--subink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .due.soon{color:var(--wax);font-weight:800}
+  /* wax stamps */
+  .stamp{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 11px;border-radius:6px;border:1.5px solid currentColor;transform:rotate(-2.5deg);white-space:nowrap}
+  .stamp.hit{color:var(--hit);background:var(--hitbg)}
+  .stamp.miss{color:var(--miss);background:var(--missbg)}
+  .stamp.pending{color:var(--pending);background:var(--pendingbg)}
+  .stamp.ongoing{color:var(--ongoing);background:var(--ongoingbg)}
+  .note{display:block;color:var(--faint);font-size:12px;margin-top:6px;font-style:italic}
+  .empty{padding:30px;text-align:center;color:var(--faint)}
+  footer{border-top:1px solid var(--line);margin-top:26px;padding:22px 0 60px;color:var(--faint);font-size:13px;line-height:1.6}
+  footer a{color:var(--accent)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 0;font-size:12.5px;color:var(--faint)}
+  .legend b{color:var(--subink)}
   /* mobile: turn rows into cards */
   @media(max-width:720px){
     .ledger,.ledger thead,.ledger tbody,.ledger th,.ledger td,.ledger tr{display:block}
     .ledger thead{display:none}
-    .ledger{background:var(--bg2)}
-    .ledger tbody tr{border-bottom:1px solid var(--line);padding:6px 4px}
+    .ledger{background:var(--card)}
+    .ledger tbody tr{border-bottom:1px solid var(--line);padding:8px 4px}
     .ledger tbody td{border-bottom:0;padding:5px 14px}
-    .ledger tbody td::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.1em;
-      text-transform:uppercase;color:var(--brassdim);margin-bottom:2px}
+    .ledger tbody td::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--accentdark);margin-bottom:2px;font-weight:700}
     h1{font-size:27px}
   }
+  @media(max-width:640px){.wrap{padding:0 16px}header.site .links a{padding:8px 8px}}
 </style>
 </head>
 <body>
+<header class="site">
+  <nav>
+    <a href="../index.html" class="brand"><span class="mark">◎</span> AI Tech Radar</a>
+    <div class="links">
+      <a href="../index.html">Home</a>
+      <a href="../ask/index.html">Ask</a>
+      <a href="index.html" class="active">Ledger</a>
+      <a href="../archive/index.html">Archive</a>
+      <a href="../feed.xml">RSS</a>
+    </div>
+  </nav>
+</header>
+
 <div class="wrap">
-<header class="top">
+<section class="hero">
   <div class="kicker">🛰️ AI Tech Radar · The Captain's Log</div>
   <h1>The Prediction Ledger</h1>
   <p class="subhead">A logbook of the dated, falsifiable forecasts cited across the radar's daily briefs. Each line carries the date it was logged, the source, the claim (paraphrased), its due date, and a status stamp — <b style="color:var(--pending)">Pending</b>, <b style="color:var(--hit)">Hit</b>, <b style="color:var(--miss)">Miss</b>, or <b style="color:var(--ongoing)">Ongoing</b> for recurring benchmarks. Nothing is stamped on assumption; due dates that have arrived are checked against current sources before the wax is set.</p>
   <div class="meta">Last touched 22 September 2026 · <span id="count-note"></span></div>
-  <div class="meta backlink"><a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../feed.xml">RSS</a></div>
-</header>
+</section>
 
 <div class="tally" id="tally"></div>
 

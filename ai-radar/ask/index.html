@@ -2,125 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Tech Radar — Ask the Radar</title>
 <meta name="description" content="Ask the Radar: put a question to the whole archive of AI Tech Radar briefs and get an answer composed from the actual brief text, with citations back to each dated edition. Runs entirely in your browser — a search over every brief, not a live web lookup.">
 <style>
   :root{
-    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
-    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
-    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
-    --radius:14px; --max:860px;
+    --paper:#f7f7f5; --card:#ffffff; --ink:#1a1a1e; --subink:#44464d; --faint:#6b6e76;
+    --line:#e7e7e3; --accent:#059669; --accentdark:#047857; --accentsoft:#ecfdf5;
+    --radius:16px; --max:820px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
-    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.65 Inter,"SF Pro Text",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accentdark);text-decoration:underline}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-  header.top{padding:40px 0 22px;border-bottom:1px solid var(--line);margin-bottom:26px}
-  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
-  h1{font-size:33px;line-height:1.14;margin:.3em 0 .12em}
-  .subhead{font-size:16px;line-height:1.5;color:var(--soft);max-width:72ch;margin:.3em 0 0}
-  .meta{color:var(--muted);font-size:13px;margin-top:12px}
-  .meta a{color:#9d96f0}
+
+  /* shared site header (matches the landing page) */
+  header.site{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);
+    background:rgba(247,247,245,.85);backdrop-filter:blur(8px)}
+  header.site nav{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px}
+  header.site .brand{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  header.site .brand:hover{text-decoration:none}
+  header.site .brand .mark{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:14px}
+  header.site .links{display:flex;align-items:center;gap:2px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  header.site .links a{color:var(--subink);padding:8px 12px;border-radius:8px}
+  header.site .links a:hover{color:var(--ink);text-decoration:none}
+  header.site .links a.active{color:var(--accentdark);background:var(--accentsoft)}
+
+  /* hero */
+  .hero{padding:44px 0 6px}
+  .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:700}
+  h1{font-size:34px;line-height:1.1;letter-spacing:-.025em;margin:.35em 0 .1em;font-weight:900;color:var(--ink)}
+  .subhead{font-size:16.5px;line-height:1.6;color:var(--subink);max-width:66ch;margin:.4em 0 0}
+  .meta{color:var(--faint);font-size:13px;margin-top:14px}
+  .meta a{color:var(--accent)}
 
   /* ask box */
-  .askbox{display:flex;gap:10px;align-items:stretch;margin:22px 0 10px;flex-wrap:wrap}
-  .askbox .field{flex:1 1 320px;display:flex;align-items:center;gap:10px;background:var(--panel);
-    border:1px solid var(--line);border-radius:14px;padding:12px 16px}
-  .askbox .field:focus-within{border-color:var(--accent)}
-  .askbox input{flex:1;background:transparent;border:0;color:var(--ink);font-size:16px;outline:none}
-  .askbox input::placeholder{color:var(--muted)}
-  .askbtn{background:#7f77dd;color:#fff;border:0;border-radius:12px;padding:0 22px;font-size:15px;font-weight:700;cursor:pointer}
-  .askbtn:hover{background:#6f66d6}
-  .askbtn:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
-  .examples{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
-  .ex{font-size:12.5px;color:var(--soft);background:var(--panel);border:1px solid var(--line);
-    border-radius:999px;padding:6px 12px;cursor:pointer}
-  .ex:hover{border-color:var(--accent);color:var(--ink)}
+  .askbox{margin:24px 0 6px}
+  .askbox .field{display:flex;align-items:center;gap:10px;background:var(--card);
+    border:1.5px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .askbox .field:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(5,150,105,.13)}
+  .askbox input{flex:1;min-width:0;background:transparent;border:0;color:var(--ink);font-size:16px;outline:none}
+  .askbox input::placeholder{color:#9aa0a6}
+  .askbtn{margin-top:12px;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:12px 26px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  .askbtn:hover{background:var(--accentdark)}
+  .askbtn:disabled{background:#c7cbc9;color:#fff;cursor:not-allowed}
+  .examples{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;align-items:center}
+  .ex{font-size:12.5px;color:var(--subink);background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:6px 13px;cursor:pointer;font-weight:600}
+  .ex:hover{border-color:var(--accent);color:var(--accentdark)}
 
-  .status{color:var(--muted);font-size:13px;margin:16px 0 0}
+  .status{color:var(--faint);font-size:13.5px;margin:18px 0 0}
   section.ans{margin:26px 0}
-  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;
     border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 16px}
 
-  .lead{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a;border-radius:var(--radius);
-    padding:20px 22px;margin:0 0 18px}
-  .lead .a{font-size:18px;line-height:1.5;color:var(--hi)}
-  .lead .cite{display:block;margin-top:10px;font-size:13px;color:var(--muted)}
-  .lead .cite a{color:#b9b2f5}
+  .lead{background:var(--accentsoft);border:1px solid #c6ead9;border-radius:var(--radius);padding:22px 24px;margin:0 0 18px}
+  .lead .a{font-size:19px;line-height:1.55;color:var(--ink);font-weight:600}
+  .lead .cite{display:block;margin-top:12px;font-size:13px;color:var(--faint);font-weight:500}
+  .lead .cite a{color:var(--accentdark);font-weight:600}
 
-  .hit{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .hit{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:12px 0;
+    box-shadow:0 1px 2px rgba(16,24,40,.04);transition:border-color .15s,box-shadow .15s}
+  .hit:hover{border-color:#cfeadd;box-shadow:0 8px 22px rgba(16,24,40,.07)}
   .hit .h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
-  .hit .ttl{font-weight:700;color:var(--ink)}
-  .hit .ttl a{color:#9d96f0}
-  .hit .d{color:var(--muted);font-size:12.5px;white-space:nowrap}
-  .hit .sec{display:inline-block;font-size:11px;color:var(--soft);background:var(--panel2);border:1px solid var(--line);
-    border-radius:999px;padding:2px 9px;margin:6px 0 8px}
-  .hit .snip{color:var(--soft);font-size:14.5px;line-height:1.55}
-  .hit .more{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--accent)}
-  mark{background:rgba(239,159,39,.28);color:inherit;border-radius:3px;padding:0 2px}
+  .hit .ttl{font-weight:800;color:var(--ink)}
+  .hit .ttl a{color:var(--ink)} .hit .ttl a:hover{color:var(--accentdark)}
+  .hit .d{color:var(--faint);font-size:12.5px;white-space:nowrap;font-weight:600}
+  .hit .sec{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;color:var(--accentdark);background:var(--accentsoft);border:1px solid #c6ead9;
+    border-radius:999px;padding:2px 10px;margin:8px 0 8px}
+  .hit .snip{color:var(--subink);font-size:15px;line-height:1.6}
+  .hit .more{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:700;color:var(--accent)}
+  .hit .more:hover{color:var(--accentdark);text-decoration:none}
+  mark{background:#fef3c7;color:inherit;border-radius:3px;padding:0 2px}
 
-  .numbers{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56;border-radius:12px;padding:14px 18px;margin:14px 0}
-  .numbers .t{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5dcaa5;font-weight:700;margin-bottom:6px}
-  .numbers ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:14px}
-  .numbers li{margin:6px 0}
-  .numbers .src{color:var(--muted);font-size:12px}
+  .numbers{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:16px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .numbers .t{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accentdark);font-weight:800;margin-bottom:8px}
+  .numbers ul{margin:6px 0 0;padding-left:18px;color:var(--subink);font-size:14.5px}
+  .numbers li{margin:7px 0}
+  .numbers .src{color:var(--faint);font-size:12px}
 
   .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .related a{font-size:12.5px;color:var(--soft);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
-  .related a:hover{border-color:var(--accent);color:var(--ink);text-decoration:none}
+  .related a{font-size:12.5px;color:var(--subink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:600}
+  .related a:hover{border-color:var(--accent);color:var(--accentdark);text-decoration:none}
 
-  .note{color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
-  footer{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 60px;color:var(--muted);font-size:13px}
-  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5;font-size:13px}
-  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
-  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .note{color:var(--faint);font-size:13px;line-height:1.65;margin-top:26px;border-top:1px solid var(--line);padding-top:18px}
+  .note code{background:#eeeeec;border-radius:4px;padding:1px 5px;font-size:12px}
+  footer{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 60px;color:var(--faint);font-size:13px}
+  footer a{color:var(--accent)}
   .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
   @keyframes sp{to{transform:rotate(360deg)}}
-
-/*theme*/
-:root{--hi:#fff;color-scheme:dark}
-:root[data-theme="light"]{
-  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
-  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
-  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
-  color-scheme:light;
-}
-:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
-:root[data-theme="light"] a{color:#5b52c9}
-:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86)}
-:root[data-theme="light"] .lead{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
-:root[data-theme="light"] .lead .a{color:#0b1220}
-:root[data-theme="light"] .lead .cite a{color:#5b52c9}
-:root[data-theme="light"] .numbers{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
-:root[data-theme="light"] mark{background:rgba(184,70,31,.20)}
-.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
-  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
-.theme-toggle:hover{border-color:var(--accent)}
-  @media(max-width:640px){.wrap{padding:0 16px}h1{font-size:26px}}
+  @media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}header.site .links a{padding:8px 8px}}
 </style>
 </head>
 <body>
-<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
-
-<nav class="toc"><div class="wrap">
-  <a href="../index.html">← All editions</a>
-  <a href="../ledger/index.html">Prediction Ledger</a>
-  <a href="../trends/index.html">Trends</a>
-  <a href="../feed.xml">RSS</a>
-</div></nav>
+<header class="site">
+  <nav>
+    <a href="../index.html" class="brand"><span class="mark">◎</span> AI Tech Radar</a>
+    <div class="links">
+      <a href="../index.html">Home</a>
+      <a href="index.html" class="active">Ask</a>
+      <a href="../ledger/index.html">Ledger</a>
+      <a href="../archive/index.html">Archive</a>
+      <a href="../feed.xml">RSS</a>
+    </div>
+  </nav>
+</header>
 
 <div class="wrap">
-<header class="top">
+<section class="hero">
   <div class="kicker">🛰️ AI Tech Radar · Ask the Radar</div>
   <h1>Ask the Radar</h1>
   <p class="subhead">Put a question to the whole archive of daily briefs. The answer is assembled from the actual text of the editions — every claim links back to the dated brief it came from. This runs entirely in your browser over an index of every brief; it is a search across what the radar has already published, not a live web lookup.</p>
   <div class="meta" id="corpus-meta">Loading the index…</div>
-</header>
+</section>
 
 <div class="askbox">
   <label class="field">🔎 <input id="q" type="search" autocomplete="off" placeholder="e.g. What does the radar say about the EU AI Act?" aria-label="Ask a question"></label>
@@ -379,6 +376,5 @@
     });
 })();
 </script>
-<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
 </body>
 </html>
