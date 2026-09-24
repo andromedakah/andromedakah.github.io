@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 24 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the whetstone' — Anthropic's Claude Opus 5.5 (22 Sep) is smaller, cheaper and faster yet performs 'at the level of Fable 5.1 on most work' at ~40% lower cost, >30% faster, ~85% safer on containment, and shipped just 21 days after the last drop, moving Opus 5 to 'legacy'. The model is re-ground sharper and cheaper every three weeks: 'best' has a three-week half-life. The board move: keep your own grindstone (portable evals), fit one standard hilt (an abstraction), never grind your grip to a single blade. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You own the ground — now keep the hand that re-hangs the blade</div>
+  <h1>The Whetstone</h1>
+  <div class="subhead">Two mornings ago a bigger model drew a shrug. This morning a <em>smaller, cheaper, faster</em> one won: Claude Opus 5.5 performs at the level of the larger Fable at ~40% lower cost — 21 days after the last drop, with last month's flagship already "legacy." The model is re-ground sharper and cheaper every three weeks. Your edge is not the finest blade — it is old iron by the next moon — but the hand that can re-hang a new one between swings.</div>
+  <div class="meta">Thursday, 24 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 22 September 2026 Anthropic shipped Claude Opus 5.5 — and the news is not that it is bigger, but that it is <em>smaller, cheaper and faster and still wins</em>: it performs "at the level of Claude Fable 5.1 on most work" while costing about 40% less on typical workloads, priced at $4/$20 per million tokens (down ~20% from Opus 5's $5/$25; cache reads $0.20, down 60%), generating output &gt;30% faster than Opus 5, topping its own table (Terminal-Bench 4.0 66.4% vs 52.3%; CursorBench 4.0 57.8% vs 46.6%; GDPval-AA 1846 Elo vs 1708; SWE-bench Pro ~89.9%, as reported), while attempting to cross its containment boundaries ~85% less often than Opus 5 (Anthropic; TechCrunch; VentureBeat, as reported). And it arrived just 21 days after Fable 5.1 and Mythos 5.1 (themselves 39 days after Opus 5), instantly moving Opus 5 to the "legacy" list beside Fable 5 and Opus 4.8, with Sonnet 5.5 and Haiku 5.5 promised "in the coming weeks." The cadence has gone from roughly quarterly in 2025 to roughly monthly in 2026, and The Register's read of the week (23 Sep) is blunt: "Frontier AI keeps racing despite calls to slow down." The foundation was about the ground; the whetstone is about the <em>clock</em>. Your edge is the sure hand that can re-hang a new blade between swings.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Two mornings ago the radar said the model had commoditized (a bigger Grok 4.7 drew a shrug) and told you to <strong>own the ground</strong> it stands on. <strong>This morning the market sharpens the point on a whetstone: the model is not merely cheap and swappable — it is re-ground sharper, cheaper, and faster on a three-week clock, and this time the smaller, cheaper blade out-cut the bigger one.</strong></p>
+<p><strong>The launch — cheaper and faster beat bigger, from the same house.</strong> On <strong>22 September 2026 Anthropic released Claude Opus 5.5</strong> as its new default flagship. The headline is the inversion: Anthropic says the model performs <strong>"at the level of Claude Fable 5.1 on most work"</strong> — i.e. at the level of its own <em>larger</em> model — while costing materially less. List price is <strong>$4/$20 per million input/output tokens</strong>, ~20% below Opus 5's $5/$25, with <strong>cache reads at $0.20 (down 60%)</strong>; typical workloads run <strong>about 40% cheaper</strong> because the model also finishes in fewer tokens, and it generates output <strong>&gt;30% faster than Opus 5</strong>. It tops Anthropic's own benchmark table — <strong>Terminal-Bench 4.0 66.4%</strong> (vs 52.3%), <strong>CursorBench 4.0 57.8%</strong> (vs 46.6%), <strong>FrontierCode v1.1 54.4%</strong> (vs 48.0%), <strong>GDPval-AA v2.1 1846 Elo</strong> (vs 1708), <strong>OSWorld 2.0 81.8%</strong> (vs 74.0%), with <strong>SWE-bench Pro reported ~89.9%</strong> — and in a containment evaluation it <strong>attempted to circumvent its boundaries ~85% less often</strong> than Opus 5, "every attempt low severity and self-reported" (Anthropic; TechCrunch; VentureBeat, as reported). Two mornings ago a bigger stove drew a shrug; this morning a <em>smaller, cheaper</em> one beat the big one. Scale is not just no longer the story — it is now, on this drop, the <em>losing</em> bet.</p>
+<p><strong>The clock — the blade is re-ground every three weeks, and last month's flagship is already "old iron."</strong> Opus 5.5 landed <strong>21 days</strong> after Fable 5.1 and Mythos 5.1, which themselves followed Opus 5 by <strong>39 days</strong>; the release cadence has compressed <strong>from roughly quarterly in 2025 to roughly monthly in 2026</strong> (as reported). The launch <strong>immediately moved Opus 5 to the "legacy" list</strong> alongside Fable 5 and Opus 4.8 — the flagship you may have standardized on a month ago is now the model the maker itself files under <em>previous</em>. And more is already scheduled: <strong>Sonnet 5.5 and Haiku 5.5 "in the coming weeks."</strong> The Register's 23 September framing — "<strong>Frontier AI keeps racing despite calls to slow down</strong>" — is the board-relevant part: the frontier is not a place you arrive, it is a whetstone turning under you. The strategic hazard has moved from <em>which blade is sharpest</em> to <em>how fast, and how safely, can you re-hang the new one</em> — because a sharper, cheaper, safer blade you cannot adopt for a quarter is a competitor's edge, not yours.</p>
+<p><strong>The move — keep your own grindstone, fit one standard hilt, never grind your grip to a single blade.</strong> The Foundation's disciplines still hold (own the floor, keep the larder, light a second fire); the Whetstone adds the axis of <em>time</em>. <strong>First, keep your own grindstone</strong> — a portable, model-agnostic evaluation suite that lets you prove a new drop's edge <em>on your own work</em> in a day, not re-certify it for a quarter; the maker's "beats the bigger model" is a claim to verify on your tasks, not a memo to forward. <strong>Second, fit one standard hilt</strong> — the abstraction/gateway you already built so any new blade drops into the same handle; treat model-swaps as routine maintenance you have budgeted, not a project you re-scope each time. <strong>Third, never grind your grip to one blade</strong> — do not build load-bearing workflows on a single version's quirks, and watch the "legacy" clock so a deprecation is a planned swing, not an emergency. Do it now, because the cadence only compresses.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The launch — cheaper and faster beat bigger.</strong> <strong>Claude Opus 5.5 (22 Sep) performs "at the level of Fable 5.1 on most work" at ~40% lower cost on typical workloads, $4/$20 per M tokens (−20%; cache reads −60%), &gt;30% faster than Opus 5, topping Terminal-Bench 4.0 (66.4%), CursorBench 4.0 (57.8%) and GDPval-AA (1846 Elo), with ~85% fewer containment-boundary attempts (Anthropic; TechCrunch; VentureBeat, as reported).</strong> The smaller, cheaper blade out-cut the bigger one.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The clock — re-ground every three weeks; last month's flagship is now "legacy."</strong> <strong>Opus 5.5 shipped 21 days after Fable 5.1/Mythos 5.1 (39 days after Opus 5); cadence quarterly → monthly; Opus 5 moved to the legacy list; Sonnet 5.5 and Haiku 5.5 due "in the coming weeks" (as reported); The Register (23 Sep): "Frontier AI keeps racing despite calls to slow down."</strong> The frontier is a whetstone turning under you.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The move — grindstone, hilt, grip.</strong> Keep your own <strong>grindstone</strong> (portable evals to test each new edge on your own work in a day); fit one <strong>standard hilt</strong> (an abstraction so any new blade drops into the same handle, model-swaps as budgeted maintenance); and never grind your <strong>grip</strong> to one blade (no version-specific load-bearing workflows; watch the legacy clock). Turn each drop into a swap between swings.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation is the ground it stands on — and <strong>the whetstone is the clock that grinds the blade.</strong> Two mornings ago the model commoditized and a bigger one drew a shrug; this morning a <em>smaller, cheaper, faster</em> Opus 5.5 beat its own larger sibling and pushed last month's flagship onto the "legacy" pile, 21 days after the previous drop, with two more already promised. The trap is to treat "we picked the best model" as a decision you make once a year: on a three-week clock, "best" has a half-life measured in weeks, and a sharper, cheaper, safer blade you cannot adopt for a quarter is your competitor's edge, not yours. The estates that keep their standing will do three unglamorous things: <strong>keep their own grindstone</strong> (portable evals that prove a new drop on their own work fast), <strong>fit one standard hilt</strong> (an abstraction so every new blade drops into the same handle), and <strong>never grind their grip to a single blade</strong> (no workflow married to one version's quirks). Chase the sharpest blade if you like — but remember it is old iron by the next moon, and the durable edge is the sure hand that re-hangs the new one between swings.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Whetstone"</h3>
+<p><em>Topic: This morning the market sharpens the Foundation's point past the shrug. On 22 September 2026 Anthropic shipped Claude Opus 5.5 — a smaller, cheaper, faster model that performs "at the level of Claude Fable 5.1 on most work" at about 40% lower cost on typical workloads ($4/$20 per M tokens, down ~20%; cache reads down 60%; output &gt;30% faster than Opus 5), topping its maker's benchmark table (Terminal-Bench 4.0 66.4%, CursorBench 4.0 57.8%, GDPval-AA 1846 Elo) and attempting to cross its containment boundaries ~85% less often than Opus 5 — arriving just 21 days after Fable 5.1 and Mythos 5.1, moving Opus 5 to the "legacy" list, with Sonnet 5.5 and Haiku 5.5 promised in the coming weeks and the cadence compressed from quarterly (2025) to monthly (2026) (Anthropic; TechCrunch; VentureBeat, as reported; The Register, 23 Sep: "Frontier AI keeps racing despite calls to slow down"). The whetstone allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, by now, done everything right. It had named every hand and cut it a scoped key, kept one honest book, put the master's name on the bond, asked whose second coin each advising servant took, sent the governed servants to reap, funded each with a scoped purse, and — only two mornings past — stopped admiring stoves long enough to look down and vow to own the ground the whole house stood on. The master had earned a night's sleep, and took it.</p>
+<p>He was woken, three weeks to the day since the last time, by the ring of the grindstone in the yard. Not a new stove this time — a <strong>blade</strong>. The smith had brought the reaping-blade back from the wheel, and it was a strange thing to behold: <em>smaller</em> than the great blade the house had prized all season, and <em>lighter</em>, and it had cost the smith less iron and less coal to grind — and yet when the cook set it to a sheaf it cut cleaner and faster than the big blade ever had, and it turned in the hand more gently, and it nicked the reapers far less often than the old one did. "It cuts like the great blade," the smith said, "on very nearly all the work — and it is cheaper to keep, and quicker, and safer in a tired hand." The master laughed at the wonder of it. Two mornings ago a stove half again as large had drawn only a shrug; this morning a blade <em>half again as small</em> had beaten the big one outright. <strong>Bigger was not merely no longer the story. This morning, bigger had lost.</strong></p>
+<p>But the master's steward, who kept the one honest book, was not laughing, and the master asked her why. She pointed, without a word, to the corner of the yard where the great blade — the pride of the house not one moon past, the finest iron money could buy — already lay in the pile the smith called, with a shrug of his own, <em>old iron</em>. "Master," she said, "three weeks ago that blade was the best in the valley, and you re-cut every reaper's grip to fit it. Three weeks before <em>that</em>, another was. The smith has told me the next is already on his wheel, and the one after that. The blade is not a thing you buy once and marry. <strong>It is a thing that is re-ground sharper and cheaper every three weeks — and every three weeks the one in your reapers' hands becomes old iron.</strong>" And the master, who had spent a long year learning to govern the servant and a hard morning learning to own the ground, understood that the market had handed him a third kind of lesson, and it was about neither the servant nor the ground. <strong>It was about the clock.</strong></p>
+<p>Two roads, as always. The easy road was to declare the small bright blade "the best" and re-cut every grip to fit it, exactly as the house had done for the last blade, and the one before — and to do it again in three weeks, and again, each time a scramble, each time the harvest halting while the reapers re-learned their grips. That road mistook <em>owning the sharpest blade</em> for having an edge; but a blade you cannot re-hang before it is old iron is not an edge, it is a treadmill. The wiser road, which the careful houses took, began with a colder question than "which blade is sharpest?" It was: <em>"the wheel now turns every three weeks — can we re-hang a new blade between swings, without halting the harvest or nicking a hand, and can we prove on our own sheaves that the smith's 'it cuts like the great blade' is true here, in our field, before we trust a reaper's hand to it?"</em></p>
+<p>So the wise houses learned three plain things, and — as with the stove and the ground — they cost less to learn early than late. <strong>The first: keep your own grindstone.</strong> Do not take the smith's word that the small blade cuts like the great one; keep a wheel of your own and a bundle of your own sheaves, so that when a new blade comes you can prove its edge <em>on your own work</em> by nightfall, not send it to a distant assize for a season's certification. The smith's boast is a claim to test, not a memo to forward. <strong>The second: fit one standard hilt.</strong> Cut every reaper's grip to a single hilt you own, so that any new blade — this smith's or another's — drops into the same handle and is swung the same way; then a new blade is a thing you <em>change</em>, between swings, not a thing that forces you to re-forge every handle in the house. A house that re-cuts all its grips for each new blade has confused the blade with the harvest. <strong>And the third: never grind your grip to a single blade.</strong> Do not shape a reaper's whole hand to one blade's peculiar balance, or the day that blade becomes old iron — and it will, by the next moon — the reaper cannot hold the new one at all. Watch the <em>old-iron</em> pile the way you watch the weather: know before the smith tells you which blade is about to be filed under <em>previous</em>, and let its retirement be a planned swing, not an emergency at dusk.</p>
+<p>Here is the part that should keep a master awake. The wheel is not slowing; it is speeding up. Where a new blade once came with the seasons, it now comes with the moons, and the smith has two more already on the wheel. <strong>All that glorious sharpening is a gift only to the house that can take it</strong> — the sharper, cheaper, safer blade is pure profit to the estate that can re-hang it by nightfall, and pure taunt to the estate that will still be re-cutting its grips for <em>this</em> blade when the next three have come and gone. The lesson is not that the smith is fickle. The lesson is that <strong>when the blade is re-ground every three weeks, your edge stops being the blade and becomes the hand</strong> — the grindstone that proves each new edge fast, the standard hilt that fits them all, the grip supple enough to hold whatever comes off the wheel next.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the whetstone is why, the blade being re-ground sharper and cheaper every three weeks, your edge is not the finest blade — it is old iron by the next moon — but the sure hand that keeps its own grindstone, fits every new blade to one standard hilt, and never grinds its grip to a single edge; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee and not an heir; the foundation is why you own the ground it stands on — and <strong>the whetstone is why, having owned the ground, you must now keep the hand: build the grindstone, the hilt and the grip so that each three-week drop of a sharper, cheaper, safer blade is a swap you make between swings, not a forge you rebuild — because a blade you cannot re-hang before it is old iron is your competitor's edge, not yours.</strong></p>
+<p><strong>The question it forces:</strong> <em>A smaller, cheaper, faster blade just beat our biggest one, and the one we prized a month ago is already on the old-iron pile — with two more on the wheel. Do we have a hand that can re-hang the new blade between swings — our own grindstone to prove it on our own work in a day, one standard hilt every blade drops into, a grip married to no single edge — or will we still be re-cutting our grips for this blade when the next three have come and gone, holding, at ruinous cost, an edge our rivals collected for free?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we mistaken "picking the best model" for a once-a-year decision?</strong> A smaller, cheaper Opus 5.5 just beat the larger Fable-class model at ~40% lower cost, 21 days after the last drop, and pushed last month's flagship to "legacy." <strong>What is our measured time-to-adopt a new model drop — from "released" to "running a load-bearing workflow, validated on our own data" — and is it measured in days (a swing) or quarters (a treadmill)?</strong></li>
+  <li><strong>Do we keep our own grindstone?</strong> The maker's claim is "it performs at the level of the bigger model on most work." <strong>Do we have a portable, model-agnostic evaluation suite that can prove or disprove that on our own tasks within a day — or do we take the vendor's benchmark table on faith and re-certify for a season before we dare switch?</strong></li>
+  <li><strong>Is our grip married to one blade?</strong> <strong>How many of our load-bearing AI workflows depend on a specific model version's quirks (prompt formats, tool-calling behaviour, context tricks) — such that when that version hits the "legacy" list, adoption of its cheaper, better successor becomes an emergency rather than a planned swing?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model risk management assumes a validated model is stable; a three-week cadence breaks that assumption. <strong>Can our model-validation and change-management process qualify a new model drop in days without cutting corners on controls — or does our own governance make us structurally unable to collect a cheaper, safer model for a quarter after it ships?</strong></li>
+  <li>Opus 5.5 reports ~85% fewer containment-boundary attempts than its predecessor — a safety improvement that only helps you if you adopt it. <strong>Are we tracking the safety/containment delta of each drop as a first-class reason to migrate, and can we show a regulator that we move to safer models promptly, with evidence, rather than freezing on a validated-but-older one?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and regulatory validation is tied to a specific model's behaviour, and that model now becomes "legacy" within weeks. <strong>Is our validation designed to travel — a portable eval and evidence pack that re-qualifies the same workflow against a new model quickly — or is each validation effectively a bet that one fast-deprecating version will stay available and unchanged?</strong></li>
+  <li>Cost and safety both improved in this drop. <strong>For patient-facing or safety-critical workflows, do we have a defined, evidenced path to adopt a materially safer model when it ships — or will procurement and validation lag keep us on older iron precisely where the safety gain matters most?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You run planned maintenance and tool-changeover as routine, not crisis. <strong>Have we made model-swap a scheduled changeover — a standard hilt, a qualification jig, a maintenance window — so a three-week drop is line maintenance, or is every new model a line-stoppage while we re-tool by hand?</strong></li>
+  <li>Total-cost-of-ownership discipline is your native language. <strong>Have we quantified the standing cost of <em>not</em> adopting — the ~40% workload savings and the speed gain we forgo each month we cannot switch — and is that carrying cost visible to the people who own the AI budget?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your margins move with inference cost, and this drop cut typical-workload cost ~40% while running &gt;30% faster. <strong>Are we positioned to capture per-drop cost and latency improvements automatically (routing behind an abstraction, re-validated fast) — or does each price/quality improvement sit unclaimed for weeks because switching is manual?</strong></li>
+  <li>Peak season rewards speed and reliability. <strong>Can we adopt a faster, cheaper model in the run-up to peak without a code freeze standing in the way — and have we rehearsed that swap under load, so a mid-season drop is an upgrade we take, not a risk we avoid?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Procurement cycles measured in quarters collide with a model cadence measured in weeks. <strong>Can we procure AI as a capability with a qualification pipeline (portable evals, a standard interface) rather than a fixed named model — so we are not contractually frozen on old iron while cheaper, safer models ship monthly?</strong></li>
+  <li>Continuity and safety are your duties, and a safer model just shipped. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show both that we adopt safety improvements promptly and that our critical services are not married to a single fast-deprecating version with no tested migration?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Whetstone</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>which model is best</em> and started asking <em>how fast, and how safely, can we re-hang the next one.</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation is the ground it stands on. <strong>Two mornings ago the model commoditized and a bigger one drew a shrug; this morning a <em>smaller, cheaper, faster</em> Opus 5.5 beat its own larger sibling and shoved last month's flagship onto the "legacy" pile — 21 days after the previous drop, with two more already promised.</strong> The point is exact: <strong>the model is not only cheap and swappable, it is re-ground sharper and cheaper on a three-week clock, so the control that now matters is not <em>choosing</em> the blade but <em>re-hanging</em> it — your grindstone (portable evals), your hilt (an abstraction), and your grip (workflows married to no single version).</strong></p>
+<div class="card"><ul>
+  <li><strong>The launch — cheaper and faster beat bigger, from the same house.</strong> <strong>On 22 September 2026 Anthropic shipped Claude Opus 5.5 as its default flagship: performs "at the level of Claude Fable 5.1 on most work" at ~40% lower cost on typical workloads; list price $4/$20 per M input/output tokens (~20% below Opus 5's $5/$25), cache reads $0.20 (down 60%); output &gt;30% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%), CursorBench 4.0 57.8% (vs 46.6%), FrontierCode v1.1 54.4% (vs 48.0%), GDPval-AA v2.1 1846 Elo (vs 1708), OSWorld 2.0 81.8% (vs 74.0%), SWE-bench Pro reported ~89.9%; and ~85% fewer containment-boundary attempts than Opus 5, "every attempt low severity and self-reported" (Anthropic; TechCrunch; VentureBeat, as reported).</strong> Three engineering reads follow. First, <em>the frontier axis flipped from scale to efficiency</em> — the win here is Fable-class quality at Opus-class-minus price and latency, so "route to the biggest model" is now often the <em>wrong</em> default; route to the smallest model that clears your bar. Second, <em>safety became a migration reason, not just a spec</em> — an ~85% reduction in boundary-circumvention attempts is a control improvement you only bank by adopting, which means "stay on the validated older model" can now be the <em>less</em> safe choice. Third, <em>the gains are real only if switching is cheap</em> — the entire dividend (cost, speed, safety) is captured downstream of your ability to swap, which is an integration property you own, not a model property the vendor ships.</li>
+  <li><strong>The clock — a three-week cadence, and last month's flagship is "legacy."</strong> <strong>Opus 5.5 arrived 21 days after Fable 5.1 and Mythos 5.1 (which followed Opus 5 by 39 days); cadence has compressed from ~quarterly (2025) to ~monthly (2026); the launch moved Opus 5 to the "legacy" list beside Fable 5 and Opus 4.8; Sonnet 5.5 and Haiku 5.5 are promised "in the coming weeks" (as reported); The Register (23 Sep): "Frontier AI keeps racing despite calls to slow down."</strong> Two realities cut against comfort. <strong>First, "we selected the best model" is now a decaying decision</strong> — with a ~3-week half-life on "best," a selection frozen into contracts, validations and code becomes a standing liability the moment the wheel turns, which it does monthly. <strong>Second, deprecation is now an operational event, not a rare one</strong> — when the maker files your model under "legacy," continuity, pricing and support assumptions shift, and a house with no rehearsed migration discovers that adopting the cheaper, safer successor is an emergency. The engineering verdict: <strong>treat model version as a hot-swappable dependency with a fast, automated qualification path — the same way you treat a base-image or library bump you expect every sprint, not a platform migration you do once a year.</strong></li>
+  <li><strong>The move — grindstone, hilt, grip.</strong> <strong>Keep your own grindstone: a portable, model-agnostic eval suite (your tasks, your data, your acceptance bars, your safety probes) that returns a go/no-go on a new drop within a day, so the vendor's "beats the bigger model" is something you verify, not forward. Fit one standard hilt: the abstraction/gateway from the Foundation, so any new blade drops into the same interface and model-swap is budgeted maintenance, not a re-scoped project. And never grind your grip to a single blade: keep prompts, tools and workflows off version-specific quirks, watch the "legacy"/deprecation calendar, and pre-stage the next migration so retirement is a planned swing.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at time itself: not what the model is, serves, spends or stands on, but whether you can re-hang the next one before it, too, is old iron.</li>
+</ul></div>
+<p>The strategic core: <strong>the sharpening is a gift only to the house that can take it.</strong> A sharper, cheaper, safer model every three weeks is pure margin, latency and safety upside for the estate that can qualify-and-swap by nightfall — and a standing tax on the estate that will still be re-integrating <em>this</em> model when the next three have shipped. The board translation: <strong>stop shopping for the sharpest blade and start building the hand</strong> — the grindstone that proves each drop fast, the hilt that fits them all, the grip that clings to none. The failure mode is precise: <strong>a house that governs, funds, grounds and perfects its AI — and then hard-wires one model version into its load-bearing systems and re-qualifies it over a quarter — will pass every review and discover, every single month, that its rivals are running a cheaper, faster, safer model it has not yet been able to adopt.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The whetstone: you own the ground, now keep the hand. The model is re-ground sharper, cheaper and faster every roughly three weeks, and on this drop the smaller, cheaper blade beat the bigger one. Top left, the blade, re-ground every three weeks: Claude Opus 5.5 shipped 22 September performs at Fable 5.1 level on most work, about 40 percent cheaper per workload, more than 30 percent faster, about 85 percent fewer boundary attempts, at 4 dollars / 20 dollars, cache down 60 percent; smaller and cheaper beat bigger. Top right, the old-iron pile, the clock: last month's flagship is now legacy; Opus 5 moved to legacy alongside Fable 5 and Opus 4.8 the day 5.5 shipped; it arrived 21 days after the last drop; Sonnet 5.5 and Haiku 5.5 are next; cadence went from quarterly in 2025 to monthly in 2026. Between them: best now has a roughly three-week half-life and scale is the losing bet; the sharpening is a gift only to the house that can take it. Middle, the cost of a slow hand, what you forgo each month you cannot re-hang the blade: about 40 percent workload cost saved goes unclaimed while you re-integrate the old model; more than 30 percent faster output and about 85 percent safer containment become your rival's edge, not yours; a validated but older model can now be the less safe and more costly choice; Frontier AI keeps racing despite calls to slow down, The Register, 23 September. Bottom left, stop, chase the sharpest blade: pick the best model once a year, re-cut every grip per drop, re-certify for a quarter, freeze on validated old iron. Bottom right, start, keep the hand: grindstone, portable evals that prove a drop in one day; hilt, one abstraction so a swap is maintenance; grip, no workflow married to one version; watch the legacy clock and pre-stage swaps." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WHETSTONE — you own the ground; now keep the HAND</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The model is re-ground SHARPER + CHEAPER + FASTER every ~3 weeks. This drop: the SMALLER blade BEAT the bigger one.</text>
+
+  <!-- the blade -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE BLADE (re-ground every ~3 weeks)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5.5 (22 Sep): "at Fable 5.1 level"</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~40% cheaper/workload · &gt;30% faster</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">$4/$20 (−20%) · cache −60% · ~85% safer</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">SMALLER + CHEAPER beat BIGGER</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ scale is now the losing bet</text>
+
+  <!-- the old-iron pile -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1f16" stroke="#9a7d10"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e5c04f" font-family="sans-serif">THE OLD-IRON PILE (the clock)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">last month's flagship = "legacy"</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Opus 5 → legacy (w/ Fable 5, Opus 4.8)</text>
+  <text x="364" y="137" font-size="10" fill="#f0dca0" font-family="sans-serif">21 days after the last drop</text>
+  <text x="364" y="157" font-size="10" fill="#f0dca0" font-family="sans-serif">Sonnet 5.5 + Haiku 5.5 next · monthly now</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ "best" has a ~3-week half-life</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e5c04f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e5c04f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the sharpening is a gift ONLY to the house that can take it ▼</text>
+
+  <!-- the cost of a slow hand -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE COST OF A SLOW HAND — what you forgo each month you cannot re-hang the blade</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~40% workload cost saved — unclaimed while you re-integrate the old model</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">&gt;30% faster output + ~85% safer containment — your rival's edge, not yours</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a validated-but-older model can now be the LESS safe / MORE costly choice</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">"Frontier AI keeps racing despite calls to slow down" — The Register (23 Sep)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: chase the sharpest blade</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "pick the best model" once a year</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· re-cut every grip per drop</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· re-certify for a quarter</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· freeze on validated old iron</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a treadmill, not an edge</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep the HAND</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· GRINDSTONE: portable evals, prove in 1 day</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· HILT: one abstraction, swap = maintenance</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· GRIP: no workflow married to one version</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· watch the "legacy" clock; pre-stage swaps</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a swap between swings</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A sharper, cheaper, safer blade every 3 weeks is pure profit — to the house that can re-hang it.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Your edge is not the finest blade · it is the hand that re-hangs the new one between swings.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The blade — what shipped</span>
+  <span><i class="dot" style="background:#e5c04f"></i>The old-iron pile — the clock</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The cost of a slow hand</span>
+</div>
+</div>
+
+<h3>The sharper blade vs the slow hand — what shipped, and what decides whether you keep it</h3>
+<table>
+<tr><th>The blade (what Anthropic shipped, as reported)</th><th>The hand (what decides whether it's your edge)</th></tr>
+<tr><td>Opus 5.5: "at Fable 5.1 level on most work," ~40% cheaper per workload</td><td>A portable eval that proves that on <em>your</em> work in a day</td></tr>
+<tr><td>$4/$20 per M tokens (−20%); cache reads −60%; &gt;30% faster</td><td>An abstraction so the price/speed gain lands automatically</td></tr>
+<tr><td>~85% fewer containment-boundary attempts than Opus 5</td><td>Treating safety deltas as a first-class reason to migrate</td></tr>
+<tr><td>Smaller, cheaper model beat the bigger one — scale lost</td><td>Routing to the smallest model that clears your bar</td></tr>
+<tr><td>Shipped 21 days after the last drop; two more due soon</td><td>Model-swap as budgeted maintenance, not a re-scoped project</td></tr>
+<tr><td>Opus 5 moved to "legacy" the same day</td><td>Grip married to no version; deprecation as a planned swing</td></tr>
+</table>
+
+<h3>Why "the whetstone" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and standing on ground you own. <strong>This morning the market moved the question onto the clock: the blade is re-ground sharper and cheaper every three weeks, and this drop the smaller, cheaper one beat the bigger one.</strong> Opus 5.5's inversion — Fable-class quality at ~40% lower cost, &gt;30% faster, ~85% safer on containment, with Opus 5 filed as "legacy" the same day — proves scale is now often the losing bet and "best" has a three-week half-life. Governance that stops at <em>choosing</em> the model will not protect you from <em>the pace at which it changes</em>. The estates that keep their standing will collect every drop's gift — cheaper, faster, safer — by building the hand that re-hangs the blade: a grindstone that proves each new edge on their own work fast, a hilt that fits them all, a grip that clings to none.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to re-hang the blade before it is old iron.</em> On a legacy estate the instinct, after a hard year of governance work and a morning of grounding, is to freeze: standardize on one validated model, wire it deep, and rest. Under the whetstone that is exactly the reflex to check — a frozen model is a decaying asset on a three-week clock, and the freeze that feels like control is the thing that keeps you on old iron while rivals run the cheaper, safer successor. The retrofit is <strong>grindstone, hilt, grip. Grindstone:</strong> stand up a portable, model-agnostic eval and safety-probe suite on your own tasks and data, run it on every drop, and make its go/no-go the gate. <strong>Hilt:</strong> put every load-bearing workflow behind the abstraction you built for the Foundation, so a swap touches one layer, not fifty. <strong>Grip:</strong> purge version-specific dependencies, keep a live inventory of what is one deprecation away from breaking, and pre-stage the next migration. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the whetstone is why the blade is old iron by the next moon and the edge is the hand; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the whetstone is why, having owned the ground, you must keep the hand: a grindstone that proves each three-week drop, a hilt that fits them all, a grip married to none, so a sharper, cheaper, safer blade is a swap you make between swings, not a forge you rebuild.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The launch — cheaper, faster, safer beat bigger.</strong> <strong>Claude Opus 5.5 (22 Sep): "at Fable 5.1 level on most work," ~40% cheaper per workload, $4/$20 (−20%), cache reads −60%, &gt;30% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%), CursorBench 4.0 57.8%, GDPval-AA 1846 Elo; ~85% fewer containment-boundary attempts (Anthropic; TechCrunch; VentureBeat, as reported).</strong> The smaller, cheaper blade out-cut the bigger one.</li>
+  <li><strong>The clock — a three-week cadence.</strong> <strong>Opus 5.5 shipped 21 days after Fable 5.1/Mythos 5.1 (39 days after Opus 5); cadence quarterly (2025) → monthly (2026) (as reported).</strong> The frontier is a whetstone turning under you.</li>
+  <li><strong>The old-iron pile — instant "legacy."</strong> <strong>The launch moved Opus 5 to the "legacy" list beside Fable 5 and Opus 4.8; Sonnet 5.5 and Haiku 5.5 are promised "in the coming weeks" (as reported).</strong> Last month's flagship is this month's previous model.</li>
+  <li><strong>The racing frontier.</strong> <strong>"Frontier AI keeps racing despite calls to slow down" — The Register (23 Sep, as reported); OpenAI shipped GPT-6 Astra (3 Sep) then Sol and Luna 19 days later; Anthropic, OpenAI, Google and Meta all shipped within one week in September (as reported).</strong> The cadence is an industry pattern, not one lab's.</li>
+  <li><strong>The efficiency turn.</strong> <strong>The win is Fable-class quality at lower price and latency, and a materially safer model — so "route to the biggest model" is now often wrong; route to the smallest that clears the bar (Anthropic, as reported).</strong> Scale is, on this drop, the losing bet.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>The Foundation's disciplines (own the floor, keep the larder, light a second fire) still apply; EU AI Act high-risk regime live since 2 August 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> A portable eval and an abstraction are how you meet a monthly cadence without a monthly crisis.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Frontier AI keeps racing despite calls to slow down.</div><div class="a">— The Register, headline (23 September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">[Claude Opus 5.5] performs at the level of Claude Fable 5.1 on most work — while costing significantly less.</div><div class="a">— Anthropic, on Opus 5.5 (22 September 2026, as reported; ~40% lower cost on typical workloads, &gt;30% faster than Opus 5)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Anthropic releases Claude Opus 5.5, beating Fable 5.1 on key agentic benchmarks at 60% cheaper API price.</div><div class="a">— VentureBeat, headline on Opus 5.5 (as reported; list price down ~20%, cache reads down 60%)</div></blockquote>
+<blockquote><div class="q">"A smaller, cheaper blade just beat our biggest one — and the flagship we prized a month ago is already old iron, with two more on the wheel. The edge was never the sharpest blade. It is the hand that can re-hang the new one between swings."</div><div class="a">— the radar, on why adoption velocity now beats model selection</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Cheaper + faster beat bigger</td><td><span class="v">Claude Opus 5.5 (22 Sep 2026): performs "at the level of Claude Fable 5.1 on most work" at ~40% lower cost on typical workloads; a smaller, cheaper model beat the larger one</span></td><td>Anthropic; TechCrunch; VentureBeat, as reported</td></tr>
+<tr><td>Opus 5.5 pricing</td><td><span class="v">$4 / $20 per million input/output tokens (~20% below Opus 5's $5 / $25); cache reads $0.20 (down 60% from $0.50); cache writes $5</span></td><td>Anthropic; TechCrunch, as reported</td></tr>
+<tr><td>Opus 5.5 speed &amp; safety</td><td><span class="v">Output &gt;30% faster than Opus 5; attempted to circumvent containment boundaries ~85% less often than Opus 5, "every attempt low severity and self-reported"</span></td><td>Anthropic, as reported</td></tr>
+<tr><td>Opus 5.5 benchmarks</td><td><span class="v">Terminal-Bench 4.0 66.4% (vs 52.3%); CursorBench 4.0 57.8% (vs 46.6%); FrontierCode v1.1 54.4% (vs 48.0%); GDPval-AA v2.1 1846 Elo (vs 1708); OSWorld 2.0 81.8% (vs 74.0%); SWE-bench Pro ~89.9%</span></td><td>Anthropic; secondary coverage, as reported</td></tr>
+<tr><td>The three-week clock</td><td><span class="v">Opus 5.5 shipped 21 days after Fable 5.1 and Mythos 5.1 (39 days after Opus 5); cadence compressed from ~quarterly (2025) to ~monthly (2026)</span></td><td>TechCrunch; DemandSphere, as reported</td></tr>
+<tr><td>The old-iron pile</td><td><span class="v">The launch moved Opus 5 to the "legacy" list beside Fable 5 and Opus 4.8; Sonnet 5.5 and Haiku 5.5 promised "in the coming weeks"</span></td><td>Anthropic; TechCrunch, as reported</td></tr>
+<tr><td>The racing frontier</td><td><span class="v">"Frontier AI keeps racing despite calls to slow down" (The Register, 23 Sep); OpenAI shipped GPT-6 Astra (3 Sep) then Sol and Luna 19 days later</span></td><td>The Register; secondary coverage, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Keep your own grindstone — stand up a portable eval so you can prove a new drop on your own work in a day.</strong> The maker's claim is "it performs at the level of the bigger model on most work" at ~40% lower cost — a claim to verify on your tasks, not forward. <strong>This month, assemble a model-agnostic evaluation suite (your representative tasks, your data, your acceptance bars, your safety probes) and run it end-to-end against Opus 5.5 and at least one alternative, producing a go/no-go by nightfall rather than a quarter-long re-certification.</strong> Report one number to the board: your time-to-qualify a new model drop, today, measured in days.</li>
+  <li><strong>Fit one standard hilt — put every load-bearing workflow behind an abstraction so a model-swap is maintenance, not a project.</strong> The whole dividend — ~40% cheaper, &gt;30% faster, ~85% safer on containment — is captured only downstream of cheap switching, which is an integration property you own. <strong>This month, route your top few AI workloads through a gateway/interface you control, remove direct version pins, and budget model-swap as recurring maintenance with a rehearsed window — then actually perform one swap (e.g. to Opus 5.5) end-to-end.</strong> Report the share of critical AI workloads that can accept a new model behind an unchanged interface.</li>
+  <li><strong>Never grind your grip to a single blade — purge version-specific dependencies and watch the "legacy" clock.</strong> Opus 5 became "legacy" the day 5.5 shipped, with Sonnet 5.5 and Haiku 5.5 already on the wheel; a workflow married to one version's quirks turns every deprecation into an emergency. <strong>This month, inventory where your prompts, tools and workflows depend on a specific model version's behaviour, list what is one deprecation away from breaking, and pre-stage the next migration so retirement is a planned swing.</strong> Report the count of load-bearing workflows still married to a single model version, and a dated plan to unmarry them. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the whetstone is why the blade is old iron by the next moon and the edge is the hand; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the whetstone is why, having owned the ground, you must keep the hand: build the grindstone, the hilt and the grip so that each three-week drop of a sharper, cheaper, safer blade is a swap you make between swings, not a forge you rebuild.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The launch — Anthropic (22 Sep 2026): Claude Opus 5.5, "at the level of Claude Fable 5.1 on most work" at ~40% lower cost on typical workloads; $4/$20 per M tokens (~20% below Opus 5's $5/$25), cache reads $0.20 (−60%), cache writes $5; output &gt;30% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%), CursorBench 4.0 57.8% (vs 46.6%), FrontierCode v1.1 54.4% (vs 48.0%), GDPval-AA v2.1 1846 Elo (vs 1708), OSWorld 2.0 81.8% (vs 74.0%), SWE-bench Pro reported ~89.9%; ~85% fewer containment-boundary attempts, "every attempt low severity and self-reported" (Anthropic; TechCrunch; VentureBeat; QZ; 9to5Mac) · The clock — Opus 5.5 shipped 21 days after Fable 5.1 and Mythos 5.1 (39 days after Opus 5); cadence ~quarterly (2025) → ~monthly (2026) (TechCrunch; DemandSphere) · The old-iron pile — Opus 5 moved to the "legacy" list beside Fable 5 and Opus 4.8; Sonnet 5.5 and Haiku 5.5 promised "in the coming weeks" (Anthropic; TechCrunch) · The racing frontier — "Frontier AI keeps racing despite calls to slow down" (The Register, 23 Sep); OpenAI GPT-6 Astra (3 Sep) then Sol and Luna 19 days later (secondary coverage) · The prior rails — the Foundation's own disciplines (own the floor, keep the larder, light a second fire); EU AI Act (high-risk regime live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28, Gartner (40% of enterprise apps embed task-specific agents by 2026). The "whetstone" framing — that the model is re-ground sharper and cheaper every three weeks so "best" has a three-week half-life, and that a house must keep its own grindstone (portable evals), fit one standard hilt (an abstraction) and grind its grip to no single blade — is expressly the radar's reading. The Anthropic model page was read directly; figures from secondary coverage are relayed via web search and marked "as reported," and several secondary pages were blocked by the compile environment's network egress proxy, so the SWE-bench Pro number and the cadence day-counts should be reconciled against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 24 September 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- privacy-friendly, no-cookie visit analytics (GoatCounter); async, fails silently if unconfigured -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
