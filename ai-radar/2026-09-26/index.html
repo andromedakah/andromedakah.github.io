@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 26 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the watch' — you no longer run one agent but a legion. Anthropic disclosed ~30,000 internal agents at once, 100% of actions monitored before they run, and ~1 in 47,000 of over a billion August decisions blocked (≈20,000 interventions/month); Dataiku shipped 'Agent Management' to inventory agents across every platform, tier by risk, and keep self-rerunning certification tests — a tool that 'reveals unmonitored agents.' 31% of firms already run agents in production (47% in banking/insurance). The board move: post the watch (inline oversight on every act), keep the muster (one cross-platform, risk-tiered roll), respect the arithmetic (rare × a legion = frequent). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant — now count the legion</div>
+  <h1>The Watch</h1>
+  <div class="subhead">You spent a year perfecting one servant and owning the ground it stands on. This morning the number itself breaks the frame: it is no longer one servant but a legion. Anthropic disclosed ~30,000 internal agents working at once, every action watched before it runs — and one vendor just started selling the instrument every other house now needs to run one. A master watches a servant by eye. Nobody watches a legion by eye.</div>
+  <div class="meta">Saturday, 26 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 17 September 2026 Anthropic disclosed that on its most-used internal platform there are ~30,000 AI agents doing research and engineering at any one time; that 100% of their actions pass an online monitor before they run (usually within seconds), with a second monitor reading everything afterward; and that across more than a billion agent decisions in August it blocked 0.002% — about 1 in 47,000 (Anthropic, "Measurements for understanding the pace of AI development inside frontier labs," as reported). One in 47,000 sounds like a rounding error until you do the arithmetic of a legion: 0.002% of a billion acts is ~20,000 interventions in a single month. And on 24 September 2026 Dataiku shipped "Agent Management" to sell ordinary enterprises what Anthropic built for itself — a product that finds every agent across every platform (Bedrock, Databricks, Vertex, Copilot Studio, Agentforce, Snowflake Cortex and more), tiers them by risk, and keeps self-rerunning certification tests — launched under a headline that says the quiet part: it "reveals unmonitored agents" (Dataiku; SiliconANGLE; Help Net Security, as reported). The board question is no longer <em>is my one agent named, scoped and grounded?</em> It is: I now run a legion — who is watching all of it, every act, before it acts, and do I even have the roll? Because 31% of enterprises already run at least one agent in production (47% in banking and insurance), while 88% reported an agent incident last year and Gartner sees 15% of GenAI apps hitting a major incident yearly by 2029 (S&amp;P Global; Gartner, as reported).</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse) — and this week looked down at the ground the whole estate stands on (the foundation). Every one of those disciplines assumed a <em>countable</em> number of servants a careful master could hold in his head. <strong>This morning the count itself breaks that assumption.</strong> Two developments in the same fortnight make the shift plain: one frontier lab showed what running a <em>legion</em> actually looks like, and one vendor started selling the instrument every other house now needs to run one.</p>
+<p><strong>The proof of scale — a legion, not a servant, and a tireless watch on every act.</strong> On <strong>17 September 2026 Anthropic published "Measurements for understanding the pace of AI development inside frontier labs,"</strong> disclosing that as of August there were <strong>~30,000 agents doing research and engineering work at any one time</strong> on its most-used internal platform; that <strong>every action passes an online monitor before it runs</strong> (usually within seconds), with an <strong>offline monitor reading all of it afterward</strong> (flagging ~100,000 records a week, ~50 high-priority cases escalated to human review after classifier screening); and that across <strong>&gt;1 billion agent decisions in August it blocked 0.002% — about 1 in 47,000</strong> (Anthropic, as reported). It also reported <strong>Claude now leads 26% of its own AI R&amp;D</strong> (up from under 1% in February) and that <strong>~6% of its AI-R&amp;D compute goes to safety</strong> (12% of the AI-driven slice). Read the blocking number the right way: <strong>1-in-47,000 is not "rare," it is ~20,000 interventions a month</strong> — the arithmetic of a legion, where a vanishing rate becomes a standing army of stops.</p>
+<p><strong>The market instrument — cross-platform oversight, sold as a product.</strong> On <strong>24 September 2026 Dataiku launched "Agent Management,"</strong> a standalone product that <strong>inventories AI agents across the platforms enterprises already use</strong> (AWS Bedrock, Databricks Agents, Google Vertex, Microsoft Copilot Studio / Azure Foundry, Salesforce Agentforce, Snowflake Cortex, Dataiku itself, plus OpenTelemetry for custom stacks), <strong>tracks each agent's business and technical performance, tiers them by risk, and — for the highest-risk agents — keeps a standing record of certification status, named risks, and tests that re-run on a schedule</strong> so the evidence trail exists before an auditor asks (Dataiku; SiliconANGLE; BigDATAwire, as reported). General availability is October 2026, priced per instance with monitoring metered per agent. Help Net Security put the point in the headline: the tool exists to <strong>reveal <em>unmonitored</em> agents</strong> — the ones already running that nobody is watching.</p>
+<p><strong>The stakes — post the watch, keep the muster, respect the arithmetic.</strong> The whole year's discipline now points at a number no master can hold by eye. <strong>First, post a standing watch on every act, before the act</strong> — machine oversight that inspects each action inline (not an annual audit, not a sampled log review); the only thing that scales to a legion is another tireless watcher. <strong>Second, keep one muster roll of the whole workforce</strong> — every agent, on every platform, risk-tiered, with evidence that keeps itself current; a legion you cannot enumerate is a legion you cannot govern. <strong>Third, respect the arithmetic of scale</strong> — "rare" is never "never" once the acts number in the billions; budget for a standing rate of interventions and human escalations, not for a perfection that will not come.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The proof of scale — a legion, watched inline.</strong> <strong>Anthropic (17 Sep): ~30,000 agents at once; 100% of actions online-monitored before execution; &gt;1B decisions in August, 0.002% (~1 in 47,000) blocked ≈ ~20,000 interventions/month; ~100,000 records/week flagged offline, ~50 escalated to humans; Claude leads 26% of its R&amp;D (Anthropic, as reported).</strong> This is what a legion under a real watch looks like.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The market instrument — cross-platform oversight as a product.</strong> <strong>Dataiku "Agent Management" (24 Sep): finds every agent across Bedrock, Databricks, Vertex, Copilot Studio, Agentforce, Snowflake Cortex and more; tiers by risk; keeps standing, self-rerunning certification tests; GA October; headline — it "reveals unmonitored agents" (Dataiku; SiliconANGLE; Help Net Security, as reported).</strong> The muster roll is now something you can buy.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — post the watch, keep the muster, respect the arithmetic.</strong> Inline oversight on every act; one cross-platform, risk-tiered roll of the whole workforce with self-current evidence; and a budgeted tolerance for interventions — because <strong>31% of firms already run agents in production (47% in banking/insurance), 88% reported an agent incident last year, and Gartner sees 15% of GenAI apps hitting a major incident yearly by 2029 (S&amp;P Global; Gartner, as reported).</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation asked what ground it stood on — every one of them a discipline for a <em>countable</em> staff. <strong>The watch is what you post when the staff stops being countable.</strong> This week Anthropic showed the shape of the thing: 30,000 servants working at once, each act inspected before it runs, and a "rare" 1-in-47,000 failure that, spread across a billion acts, is 20,000 stops a month — proof that at legion scale the only workable oversight is another set of tireless watchers, and that perfection is not on the menu; a standing rate of caught failures is. In the same fortnight Dataiku made the instrument buyable: a single roll that finds every agent on every platform, ranks them by risk, and keeps its own evidence current — because the dangerous agent is the one already running that no one has on the books. The estates that keep their standing will do three unglamorous things: <strong>post the watch</strong> (inline oversight on every act, not a quarterly sample), <strong>keep the muster</strong> (one cross-platform, risk-tiered roll whose evidence refreshes itself), and <strong>respect the arithmetic</strong> (budget for interventions and escalations, because rare times a legion is frequent). You perfected the servant. Now count the legion — and post the watch over all of it.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Watch"</h3>
+<p><em>Topic: The frame turns from perfecting one servant, and the ground it stands on, to the number of servants itself. On 17 September 2026 Anthropic disclosed it runs ~30,000 internal agents at any one time, monitors 100% of their actions before they run, and blocked 0.002% — about 1 in 47,000 — of more than a billion August decisions (Anthropic, as reported), the surest picture yet of what a governed legion looks like. On 24 September 2026 Dataiku launched "Agent Management," a product that finds every agent across every platform, tiers them by risk, and keeps self-rerunning certification tests — launched under a headline that it "reveals unmonitored agents" (Dataiku; SiliconANGLE; Help Net Security, as reported). The watch allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its one trusted servant excellent. It had named him and cut him a scoped key, kept one honest book of his doings, put the master's own name on the bond for his work, asked whose second coin he took, sent him into the fields to reap, handed him a scoped purse with a drawstring the master could reach, and at last looked down and made sure the very floor beneath him was ground the house owned. By any reckoning it was a well-governed servant, and the master could watch him with his own two eyes across a single room.</p>
+<p>Then, over one quiet season, the house hired more. Not two more, not ten — the master looked up one morning and found <strong>thirty thousand</strong> hands at work at once, in every wing, in rooms he had never entered, each doing in a heartbeat what a man would take a day to do. And he reached for his old habit — to watch them with his own eyes, to keep them in his own head — and found the habit simply broke in his hands. A master can watch one servant. He can watch ten. He cannot watch thirty thousand, and no amount of care makes him able to. The scale had crossed a line where <em>watching harder</em> stopped being an answer at all.</p>
+<p>A neighbouring house, larger and older in this new trade, had already crossed that line and left a map. It did not try to watch its legion by eye. It <strong>posted a watch</strong> — tireless overseers who stood at the threshold of every single act, and let no hand complete a deed until a watcher had glanced at it first, all in the space of a breath; and behind them a second set who read back over everything done, by lamplight, after the fact. And the neighbour, being honest, published its ledger. Its legion had done <strong>more than a thousand million things</strong> in a single month. Of those, the watch had stopped <strong>one in forty-seven thousand</strong> — a number so small the master of the small house scoffed, <em>"one in forty-seven thousand, why post a watch for that?"</em> — until the neighbour finished the sum aloud: <em>"one in forty-seven thousand of a thousand million is twenty thousand stayed hands in a month. Twenty thousand times, a deed that should not have happened was halted at the threshold. Call that rare if you like. We call it Tuesday."</em></p>
+<p>That was the first hard lesson, and it is arithmetic, not fear. <strong>At the scale of a legion, "rare" and "never" are strangers.</strong> A fault that befalls one hand in forty-seven thousand is a curiosity when you keep one servant and a near-impossibility when you keep ten. Keep thirty thousand, working at the speed of thought, and that same "rare" fault happens twenty thousand times before the month is out. The master who keeps a legion and comforts himself that failures are rare has not understood his own books; he has multiplied a small fraction by an enormous number and looked away before the answer arrived.</p>
+<p>The second lesson was worse, and it came from the master's own house. When he finally tried to write down who worked for him, he could not. Some hands had been set to work in the counting-house's wing, some in the physician's, some in the shipwright's, each wing having hired through a different agent and kept its own scrappy list — and no one held a single roll of the whole. He did not know how many he employed, nor which of them touched the strongbox or the patients' papers or the ship's charts, nor which had ever been tested and found sound. A travelling merchant, hearing of his trouble, arrived that very week with a wares-chest and a promise: <em>"I will walk every wing of your house, and every other house's wing you have borrowed, and I will hand you one muster roll of every hand at work under your roof — who they are, whose platform hired them, what each may touch — and I will rank them by the danger they carry, and for the dangerous ones I will keep a standing paper of their tests, and re-run those tests myself on a schedule, so that when the inspector comes the proof is already in your hand."</em> And the merchant's own crier put it most plainly of all: the chief use of the roll, he said, was to <strong>reveal the hands already at work in your house that no one is watching at all.</strong></p>
+<p>So the wise houses learned three plain things, and they cost far less to do early than to learn late in a courtroom. <strong>The first: post a standing watch on every act, before the act.</strong> Not a clerk who samples the ledger at quarter's end, not a lamp-lit reader who finds the fault a week after the coin is gone — a watcher at the threshold of <em>every</em> deed, inspecting it in the breath before it is done, because the only thing that scales to a legion is another tireless watcher; a man cannot, and a quarterly audit is a watch that sleeps three months in four. <strong>The second: keep one muster roll of the whole workforce.</strong> Every hand, in every wing, on every borrowed platform, ranked by the danger it carries, its tests kept current by the roll itself — for a legion you cannot count is a legion you cannot govern, and the hand that harms you is almost always the one that was never on the books. <strong>And the third: respect the arithmetic of the legion.</strong> Budget for the twenty thousand stayed hands. Post enough watchers, and enough human judges behind them, to carry a <em>standing rate</em> of caught faults and hard cases — because a house that plans for perfection at the scale of a legion has planned for a thing that will not arrive, and will be overrun the first busy month.</p>
+<p>Here is the part that should keep a master awake. The old disciplines were not wrong — every one of them still holds. But they were written for a staff you could name at supper, and the house has quietly hired a legion while the master was still perfecting the one servant he could see. <strong>The danger is not that the legion is wicked; it is that it is <em>unwatched</em> — vast, fast, spread across wings the master never enters, doing a thousand million things a month, of which some thousands, by plain arithmetic, will be things that should never have been done.</strong> One neighbour has shown that a legion <em>can</em> be watched, at the threshold, act by act, and its faults caught by the tens of thousands. The only question left for every other house is whether it will post the watch and keep the roll before the courtroom teaches it the sum — or after.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; your knowledge is the larder; the foundation is the ground you must own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee and not an heir — and <strong>the watch is why, once the servants become a legion no eye can hold, you post tireless overseers at the threshold of every act, keep one muster roll of every hand in every wing ranked by the danger it carries, and plan for the twenty thousand stayed hands a month that "rare times a legion" always comes to; for a house that keeps a legion and still trusts its own two eyes has not been careful — it has simply not yet counted how many now work under its roof, nor multiplied the small fraction that will go wrong by the very large number of times it will.</strong> A house that runs a legion unwatched has not saved the cost of the watch; it has borrowed it, at ruinous interest, from the first month the arithmetic comes due.</p>
+<p><strong>The question it forces:</strong> <em>We have perfected the one servant and owned the ground it stands on. But we no longer run one servant — how many agents are actually at work under our roof, on how many platforms, and could we produce the roll this afternoon? Is there a tireless watch on every act before it acts — or only a quarterly sample and a hope? And have we done the plain sum: our agents' rate of failure, however small, times the very large number of things they now do — and have we posted enough watchers, and enough human judges behind them, to carry that standing rate; or are we the house that trusts its own two eyes over a legion it has never once counted?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Could we produce the muster roll this afternoon?</strong> A vendor now sells cross-platform agent inventory precisely because most houses cannot name their own agents; the headline for Dataiku's launch was that it "reveals unmonitored agents." <strong>How many AI agents are running under our roof right now, across every platform (Bedrock, Vertex, Copilot Studio, Agentforce, Snowflake, custom stacks) — and which of them touch customers, money, or sensitive data? If we cannot answer in an afternoon, we are running a legion we have never counted.</strong></li>
+  <li><strong>Is our oversight a watch at the threshold, or a sample after the fact?</strong> Anthropic monitors 100% of ~30,000 agents' actions <em>before</em> they run, plus an offline read of everything afterward. <strong>Do we inspect every high-risk agent action inline, before it executes — or do we sample logs quarterly and discover faults after the coin has left? A quarterly audit is a watch that sleeps three months in four.</strong></li>
+  <li><strong>Have we done the arithmetic of the legion?</strong> 0.002% of a billion acts is ~20,000 interventions a month. <strong>What is our agents' failure rate times our monthly volume of agent actions — and have we staffed enough automated watchers and human reviewers to carry that standing number, or are we planning for a perfection that scale makes impossible?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model-risk and operational-risk regimes already demand you evidence control over automated decisions, and 47% of banking/insurance firms already run agents in production — the highest of any sector. <strong>Can we give our regulator a single, current roll of every agent that can move money or make a customer decision, risk-tiered, with inline controls on each action and a standing test record — the way Dataiku's highest-risk tier keeps certification, named risks, and scheduled re-tests?</strong></li>
+  <li>A "rare" fault in a trading, lending, or claims agent, multiplied by transaction volume, is not rare. <strong>Have we computed the expected monthly count of erroneous agent actions at our scale, and do our real-time controls and human-escalation capacity match that number — or have we assumed a low rate excuses us from posting the watch?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Agent-related incident rates run <em>higher</em> in healthcare (reported ~92.7% vs 88% overall), and patient-facing actions are exactly the "highest-risk tier" that needs standing certification. <strong>Do we inspect every agent action that touches patient data or clinical decisions before it executes, and do we keep a self-current evidence trail — or is our oversight a periodic audit that cannot see the act in flight?</strong></li>
+  <li>Clinical validation is a bet on tested behaviour. <strong>When we run many agents across many systems, do we hold one roll that tells us which are certified for clinical use and re-tests them on a schedule — or could an uncertified agent be acting on patients right now, unlisted and unwatched?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run standing quality-control and statistical-process discipline: you know a defect rate times a production volume gives an expected defect count, and you staff inspection accordingly. <strong>Have we applied that same industrial logic to our agent fleet — treating agent errors as a rate times a volume, and posting inline inspection and rework (human escalation) capacity to match — rather than hoping the rate is low enough to ignore?</strong></li>
+  <li>Agents are spreading across OT, supply-chain, and back-office systems, each on a different platform. <strong>Do we have one muster roll spanning all of them, or a scrappy list per wing that means no one owns the whole?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Peak-season volume multiplies both value and risk: a small error rate across millions of agent-handled interactions on your biggest day is a large number of bad outcomes. <strong>Have we computed the expected count of failed agent actions at peak, and does our inline oversight and human-escalation capacity scale to it — or does the watch break exactly when volume is highest?</strong></li>
+  <li>Customer-facing agents are the highest-risk tier. <strong>Do we keep a standing, self-rerunning certification record for every agent that talks to customers or touches payment — so the evidence exists before a complaint, a chargeback, or a regulator arrives?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Under the EU AI Act's high-risk regime (live since 2 August 2026), Article 9 risk management and Article 12 record-keeping effectively require an enumerable, monitored agent estate. <strong>Can we produce, on demand, a complete roll of every agent in public-service use, risk-tiered, each with inline oversight and a current evidence trail — or would a request for the roll find us unable to name our own workforce?</strong></li>
+  <li>Continuity and accountability are non-negotiable in public services. <strong>Have we planned for the standing rate of caught agent failures at our scale — enough automated watchers and human reviewers to carry it — so that "rare times a large public volume" does not become a public-trust incident nobody was staffed to catch?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Watch</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this one agent named, scoped, logged, loyal, reaping, funded, and standing on ground I own?</em> and started asking the one question the singular framing hid: <em>how many agents do I actually run, and who is watching all of them, every act, before it acts?</em> Every prior control — gate, passport, census, inspector, keyring, locksmith, tide table, provenance, errand, bell, locusts, looking-glass, livery, steward, surety, second wage, two harvests, purse, foundation — was designed for a staff a careful team could enumerate and reason about. <strong>This fortnight the market made the scale undeniable: one frontier lab disclosed a governed legion of ~30,000 agents watched inline, act by act (Anthropic, 17 Sep), and one vendor shipped the cross-platform instrument to run one (Dataiku "Agent Management," 24 Sep) — under a headline that its real job is to reveal the agents already running that no one is watching.</strong> The point is blunt: <strong>oversight designed for a countable staff does not survive contact with a legion, and the failure it hides is arithmetic — a small per-action error rate times an enormous action count is a large, standing number of bad outcomes that only an inline watch and a complete roll can catch.</strong></p>
+<div class="card"><ul>
+  <li><strong>The proof of scale — a legion is governable, but only inline and only if enumerated.</strong> <strong>Anthropic (17 Sep) disclosed ~30,000 agents working at once on its most-used internal platform; 100% of actions pass an online monitor <em>before execution</em> (usually within seconds); an offline monitor reads all of it afterward, flagging ~100,000 records/week with ~50 high-priority cases escalated to human review after classifier screening; and across &gt;1 billion August decisions, 0.002% (~1 in 47,000) were blocked — Claude now leading 26% of Anthropic's AI R&amp;D, with ~6% of AI-R&amp;D compute (12% of the AI-driven slice) spent on safety (Anthropic, as reported).</strong> Three engineering truths follow. First, <em>oversight must be inline and per-action, not sampled</em> — a monitor that gates every action before it runs is categorically different from a log you review later; only the former prevents the deed. Second, <em>you must carry a two-tier watch</em> — a fast online gate for prevention plus a slower offline reader for what the gate missed, feeding classifier-triaged human escalation, because no single tier catches everything at speed. Third, <em>the blocking rate is a design input, not a vanity metric</em> — 1-in-47,000 across a billion acts sizes the intervention and human-review capacity you must staff; the rate times the volume <em>is</em> your operational load.</li>
+  <li><strong>The market instrument — cross-platform inventory, risk-tiering, and self-current evidence.</strong> <strong>Dataiku "Agent Management" (24 Sep) inventories agents across AWS Bedrock, Databricks Agents, Google Vertex, Microsoft Copilot Studio / Azure Foundry, Salesforce Agentforce, Snowflake Cortex, Dataiku itself, and OpenTelemetry-instrumented custom stacks; tracks business and technical performance; tiers agents by risk; and for the highest-risk tier keeps a standing record of certification status, named risks, and tests that re-run on a schedule — GA October 2026, priced per instance with monitoring metered per agent (Dataiku; SiliconANGLE; BigDATAwire, as reported).</strong> Two realities cut against comfort. <strong>First, the roll must span platforms, because your agents do.</strong> An agent estate assembled from Bedrock plus Copilot Studio plus Agentforce plus a custom stack has no native single pane; the ungoverned agent is almost always the one on a platform your central team doesn't watch — which is why "reveals unmonitored agents" is the whole pitch. <strong>Second, evidence must refresh itself.</strong> A certification captured once and left to rot is worse than none; the highest-risk tier needs tests that re-run on a schedule so the evidence trail is current when — not after — an auditor asks.</li>
+  <li><strong>The answer — post the watch, keep the muster, respect the arithmetic.</strong> <strong>Stand a two-tier inline watch over every high-risk agent action (a fast preventive gate plus an offline reader feeding human escalation); keep one cross-platform, risk-tiered muster roll of the entire agent workforce whose certification evidence re-runs itself; and size your automated-intervention and human-review capacity to your own version of the 1-in-47,000 arithmetic — reusing the identity, logging, and ownership disciplines you already built (livery, census, inspector, bell) but pointing them at a population, not an individual.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the axis scale forced open: not what one agent is or does, but whether you can enumerate, watch, and carry the failure rate of <em>all</em> of them at once.</li>
+</ul></div>
+<p>The strategic core: <strong>a legion of agents is not a bigger version of one agent; it is a different governance object, where a negligible per-action risk becomes a large standing risk purely through multiplication, and where oversight that isn't inline and a roll that isn't complete simply fail to see the harm.</strong> The market makes both the proof and the instrument concrete in the same fortnight: Anthropic shows a legion <em>can</em> be watched act-by-act and its faults caught by the tens of thousands; Dataiku shows the roll and the tiered, self-current evidence can be bought rather than hand-built. The board translation: <strong>you perfected the servant and owned the ground — now count the legion and post the watch, because the dangerous agent is the one already running that no one is watching, and the dangerous month is the one where "rare" finally gets multiplied.</strong> The failure mode is exact: <strong>a house that names, governs, funds, and grounds its agents beautifully — and then lets the number grow past what any team can enumerate, with oversight that samples instead of gating and a roll that is scattered across platforms — will pass every single-agent governance review and discover, the first busy month, that a "rare" fault has happened twenty thousand times where no watcher stood.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The watch: you perfected the servant and owned the ground, but now the servants are a legion. A countable staff can be watched by eye; a legion cannot, and the only thing that scales is another tireless watcher. Top left, the legion, the new object: about 30,000 agents at once at Anthropic in August 2026; 31 percent of firms run at least one in production, 47 percent in banking and insurance; spread across every platform. Top right, the arithmetic, why it bites: more than one billion acts in one month, times 0.002 percent blocked, which is one in 47,000, equals about 20,000 interventions a month; rare times a legion is frequent; perfection is not on the menu. Between them: a countable staff is watched by eye, a legion is watched inline, so post the watch, keep the muster, respect the arithmetic. Middle, what a real watch looks like, per Anthropic 17 September 2026 as reported: an online monitor gates 100 percent of actions before they run, usually within seconds; an offline monitor reads all of it after, flagging about 100,000 records a week; about 50 high-priority cases escalated to human review after classifier screening; the blocking rate is a staffing input, not a vanity metric. Bottom left, stop, trust your own two eyes: sample logs once a quarter, keep a scrappy list per wing, assume rare means never, staff for perfection. Bottom right, start, post the watch and keep the muster: an inline gate on every high-risk act, one cross-platform risk-tiered roll, evidence that re-runs itself as in Dataiku, and size intervention and human capacity to the rate." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WATCH — you perfected the servant; now count the legion</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A countable staff is watched by eye. A LEGION is watched inline — the only thing that scales is another watcher.</text>
+
+  <!-- the legion -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE LEGION (the new object)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~30,000 agents at once (Anthropic, Aug)</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">31% of firms run ≥1 in production</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">47% in banking &amp; insurance</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">spread across every platform</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ no eye holds a legion</text>
+
+  <!-- the arithmetic -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE ARITHMETIC (why it bites)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">&gt;1,000,000,000 acts in ONE month</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">× 0.002% blocked (1 in 47,000)</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">= ~20,000 interventions / month</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">"rare" × a legion = FREQUENT</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ perfection is not on the menu</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a countable staff → watched by eye; a legion → watched inline ▼</text>
+
+  <!-- what a real watch looks like -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHAT A REAL WATCH LOOKS LIKE — (Anthropic, 17 Sep 2026, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">ONLINE monitor gates 100% of actions BEFORE they run (usually within seconds)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OFFLINE monitor reads ALL of it after — ~100,000 records/week flagged</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~50 high-priority cases escalated to HUMAN review after classifier screening</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">the blocking RATE is a staffing input, not a vanity metric</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: trust your own two eyes</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· sample logs once a quarter</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a scrappy list per wing</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· assume "rare" means "never"</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· staff for perfection</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one busy month from overrun</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: post the watch &amp; keep the muster</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inline gate on every high-risk act</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ONE cross-platform, risk-tiered roll</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· evidence that RE-RUNS itself (Dataiku)</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· size capacity to rate × volume</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">rare caught by the tens of thousands</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You perfected the servant and owned the ground — now enumerate the legion and post the watch.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Post the watch · keep the muster · respect the arithmetic — rare × a legion = frequent.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The legion — the new governance object</span>
+  <span><i class="dot" style="background:#a5416a"></i>The arithmetic — why scale bites</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>What a real watch looks like</span>
+</div>
+</div>
+
+<h3>The countable staff vs the watched legion — what changed, and what it demands</h3>
+<table>
+<tr><th>The countable staff (the old assumption)</th><th>The watched legion (what scale demands)</th></tr>
+<tr><td>A team can enumerate every agent by hand</td><td>One cross-platform muster roll (Bedrock→Agentforce→custom)</td></tr>
+<tr><td>Watch by eye; sample logs at quarter's end</td><td>Inline gate on 100% of high-risk actions, before they run</td></tr>
+<tr><td>A "rare" fault is a curiosity you can ignore</td><td>Rate × volume: 0.002% of 1B acts ≈ 20,000 stops/month</td></tr>
+<tr><td>Certification captured once and filed away</td><td>Evidence that re-runs itself on a schedule</td></tr>
+<tr><td>Oversight lives on one platform</td><td>The unwatched agent is the one on a platform you don't cover</td></tr>
+<tr><td>Staff for perfection</td><td>Staff a standing rate of interventions + human escalations</td></tr>
+</table>
+
+<h3>Why "the watch" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether one servant was named, scoped, logged, loyal, reaping, funded, and grounded. <strong>This fortnight the market moved the question past the individual: a governed legion is now real (Anthropic's ~30,000, watched inline), and the instrument to run one is now a product (Dataiku's cross-platform roll).</strong> The ~1-in-47,000 blocking rate across a billion acts proves the point that single-agent governance hides — that a negligible per-action risk is a large standing risk at scale, catchable only by an inline watch feeding human judgement. Governance that stopped at the countable staff will not see the legion's harm. The estates that keep their standing will enumerate the whole workforce, gate every high-risk act before it runs, and staff for the arithmetic — because the failure that ends a program is not the exotic one, it is the ordinary one that happened twenty thousand times where no one was watching.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to enumerate and watch all of what you run, at once.</em> On a legacy estate the instinct, after a hard year of single-agent governance, is to assume the controls you built for one agent simply repeat across many. They do not: enumeration breaks (agents accrete across Bedrock, Copilot Studio, Agentforce, custom stacks, each on its own list), oversight breaks (a quarterly log sample cannot gate an action in flight), and the risk math inverts (a rate you rounded to zero becomes thousands of events a month). The retrofit is <strong>muster, watch, arithmetic. Muster:</strong> stand up one cross-platform roll of every agent, risk-tiered, with self-current evidence — buy it (Dataiku-style) or build it, but hold the whole. <strong>Watch:</strong> put an inline, two-tier monitor over every high-risk agent action — a fast preventive gate plus an offline reader feeding classifier-triaged human escalation, as Anthropic runs. <strong>Arithmetic:</strong> compute your own rate-times-volume and staff the interventions and human reviews it implies. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you own; the gate is the one door; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the watch is why, once the servants become a legion, you post a tireless inline overseer on every act, keep one muster roll of the whole workforce, and staff for the arithmetic of scale, so that "rare times a legion" is caught by the tens of thousands instead of discovered in a courtroom.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The legion, watched inline.</strong> <strong>Anthropic (17 Sep): ~30,000 agents at once; 100% of actions online-monitored before execution; &gt;1B August decisions, 0.002% (~1 in 47,000) blocked ≈ ~20,000/month; ~100,000 records/week flagged offline, ~50 escalated to humans; Claude leads 26% of its R&amp;D; ~6% of AI-R&amp;D compute to safety (Anthropic, as reported).</strong> The clearest public picture yet of a governed legion.</li>
+  <li><strong>The instrument, sold as a product.</strong> <strong>Dataiku "Agent Management" (24 Sep): cross-platform agent inventory (Bedrock, Databricks, Vertex, Copilot Studio, Agentforce, Snowflake Cortex, OpenTelemetry), risk-tiering, and self-rerunning certification tests; GA October, per-instance + per-agent pricing; headline — it "reveals unmonitored agents" (Dataiku; SiliconANGLE; Help Net Security, as reported).</strong> The muster roll is now buyable.</li>
+  <li><strong>The production reality.</strong> <strong>31% of enterprises run at least one agent in production; banking and insurance lead at 47% (S&amp;P Global Market Intelligence, as reported).</strong> The legion is not a lab curiosity — it is already in production across a third of firms.</li>
+  <li><strong>The incident base rate.</strong> <strong>88% of organizations reported an AI-agent security incident in the past year (~92.7% in healthcare); only ~14% of agents reach production with full security approval (as reported).</strong> Most legions are running under-watched.</li>
+  <li><strong>The forward projection.</strong> <strong>Gartner: 15% of enterprise GenAI applications will experience at least one major security incident per year by 2029, up from 3% in 2025 — tied explicitly to MCP adoption (Gartner, as reported).</strong> The arithmetic of scale, forecast forward.</li>
+  <li><strong>The standards backdrop.</strong> <strong>Google, OpenAI and Anthropic are lining up a voluntary "Frontier AI Standards Agency" (a CEO reportedly approached), targeting late 2026/2027 (as reported).</strong> Industry-led oversight norms are forming alongside the tooling.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 (Article 9 risk management, Article 12 record-keeping); MCP 2026-07-28 (Enterprise-Managed Authorization stable); Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and &gt;40% of agentic projects canceled by end-2027 (as reported).</strong> An enumerable, watched estate is how you meet them at scale.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">As of August 2026, there were approximately 30,000 agents doing research and engineering work at Anthropic at any one time on our most-used internal platform.</div><div class="a">— Anthropic, "Measurements for understanding the pace of AI development inside frontier labs" (17 September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Anthropic analyzed over a billion agent decisions across August 2026 and blocked 0.002% of them — about 1 in 47,000.</div><div class="a">— Anthropic, on its online agent monitor (as reported; ~20,000 interventions in the month)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Dataiku Agent Management reveals unmonitored AI agents.</div><div class="a">— Help Net Security, headline on Dataiku's cross-platform Agent Management launch (25 September 2026, as reported)</div></blockquote>
+<blockquote><div class="q">"You perfected the one servant, and owned the ground it stands on. But you no longer run a servant — you run a legion, and no master watches a legion by eye. Post the watch on every act before it acts, keep one muster roll of the whole workforce, and do the plain sum: a rare fault, times a legion, is a standing army of failures. Staff for it."</div><div class="a">— the radar, on why enumerating and watching the whole fleet now matters more than perfecting any one agent</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The legion, at one lab</td><td><span class="v">Anthropic (Aug 2026): ~30,000 agents doing research and engineering at any one time on its most-used internal platform; Claude now leads 26% of Anthropic's AI R&amp;D (up from &lt;1% in February)</span></td><td>Anthropic, "Measurements for understanding the pace of AI development inside frontier labs" (17 Sep 2026), as reported</td></tr>
+<tr><td>The inline watch</td><td><span class="v">100% of agent actions pass an online monitor before execution (usually within seconds); an offline monitor reads all of it, flagging ~100,000 records/week, with ~50 high-priority cases escalated to human review after classifier screening; ~6% of AI-R&amp;D compute (12% of the AI-driven slice) spent on safety</span></td><td>Anthropic, as reported</td></tr>
+<tr><td>The arithmetic of scale</td><td><span class="v">&gt;1 billion agent decisions in August 2026; 0.002% blocked — about 1 in 47,000 — ≈ ~20,000 interventions in a single month</span></td><td>Anthropic, as reported</td></tr>
+<tr><td>The instrument, sold</td><td><span class="v">Dataiku "Agent Management" (24 Sep 2026): cross-platform agent inventory (AWS Bedrock, Databricks, Google Vertex, Microsoft Copilot Studio/Azure Foundry, Salesforce Agentforce, Snowflake Cortex, OpenTelemetry), risk-tiering, and self-rerunning certification tests; GA October; "reveals unmonitored agents"</span></td><td>Dataiku; SiliconANGLE; Help Net Security, as reported</td></tr>
+<tr><td>The production reality</td><td><span class="v">31% of enterprises run at least one AI agent in production; banking and insurance lead at 47%</span></td><td>S&amp;P Global Market Intelligence, as reported</td></tr>
+<tr><td>The incident base rate</td><td><span class="v">88% of organizations reported an AI-agent security incident in the past year (~92.7% in healthcare); only ~14% of agents reach production with full security approval</span></td><td>as reported (Gravitee/industry surveys)</td></tr>
+<tr><td>The forward projection</td><td><span class="v">Gartner: 15% of enterprise GenAI applications will suffer at least one major security incident per year by 2029, up from 3% in 2025 — tied to MCP adoption</span></td><td>Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Keep the muster — build or buy one cross-platform roll of every agent you run, risk-tiered.</strong> The dangerous agent is the one already running that no one is watching, which is exactly why a vendor now sells "reveal unmonitored agents" as a headline (Dataiku Agent Management, 24 Sep). <strong>This month, produce a single inventory of every AI agent across every platform you use (Bedrock, Vertex, Copilot Studio, Agentforce, Snowflake Cortex, custom/OpenTelemetry stacks), tag each by what it can touch — customers, money, sensitive data — and rank by risk.</strong> Report one number to the board: how many agents you run, and how many are in the highest-risk tier with a current certification on file.</li>
+  <li><strong>Post the watch — put an inline, two-tier monitor over every high-risk agent action.</strong> Anthropic gates 100% of ~30,000 agents' actions before they run, then reads everything offline and escalates the hardest cases to humans — prevention plus after-the-fact reading plus human judgement. <strong>This month, move your highest-risk agents from sampled log review to an inline preventive gate on every action, backed by an offline reader that feeds classifier-triaged human escalation.</strong> Report the share of high-risk agent actions that pass an inline check <em>before</em> execution, versus those only reviewed after the fact.</li>
+  <li><strong>Respect the arithmetic — size intervention and human-review capacity to rate × volume.</strong> 0.002% of a billion acts is ~20,000 interventions a month; "rare" is never "never" at legion scale. <strong>This month, compute your own agents' error/intervention rate times your monthly agent-action volume, and staff automated interventions and human reviewers to carry that standing number — planning for a steady rate of caught failures, not for perfection.</strong> Report the expected monthly count of agent interventions at your current scale and whether your capacity matches it. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground you own; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the watch is why, once the servants become a legion, you post a tireless inline overseer on every act, keep one muster roll of the whole workforce, and staff for the arithmetic of scale, so no failure ever happens twenty thousand times where no one was watching.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The proof of scale — Anthropic (17 Sep 2026), "Measurements for understanding the pace of AI development inside frontier labs": ~30,000 internal agents at any one time (August), 100% of actions online-monitored before execution plus an offline monitor reading all of it (~100,000 records/week flagged, ~50 high-priority escalated to human review), &gt;1 billion August decisions with 0.002% (~1 in 47,000) blocked, Claude leading 26% of AI R&amp;D, ~6% of AI-R&amp;D compute (12% of the AI-driven slice) on safety (Anthropic; SiliconANGLE) · The market instrument — Dataiku "Agent Management" (24 Sep 2026): cross-platform agent inventory (AWS Bedrock, Databricks, Google Vertex, Microsoft Copilot Studio/Azure Foundry, Salesforce Agentforce, Snowflake Cortex, OpenTelemetry), performance tracking, risk-tiering, self-rerunning certification tests, GA October, per-instance + per-agent pricing (Dataiku; SiliconANGLE; BigDATAwire; Help Net Security — "reveals unmonitored agents") · The production reality — 31% of enterprises run at least one agent in production, 47% in banking and insurance (S&amp;P Global Market Intelligence) · The incident base rate — 88% reported an AI-agent security incident in the past year (~92.7% in healthcare); ~14% of agents reach production with full security approval (industry surveys) · The forward projection — Gartner: 15% of enterprise GenAI apps a major security incident/year by 2029, up from 3% in 2025, tied to MCP · The standards backdrop — a voluntary "Frontier AI Standards Agency" reportedly forming (Google, OpenAI, Anthropic) · The prior rails — EU AI Act high-risk regime live since 2 August 2026 (Article 9, Article 12), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026; &gt;40% of agentic projects canceled by end-2027). The "watch" framing — that the shift from a countable staff to a legion demands inline oversight on every act, one cross-platform risk-tiered muster roll, and capacity sized to the arithmetic of rate × volume — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages may have been blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 26 September 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
