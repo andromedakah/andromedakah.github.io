@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 27 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the two admiralties' — the law of the AI seas just split in two. On 23 Sep OpenAI's Altman and Anthropic's Amodei jointly pressed the UN Security Council for international AI standards, days after the US-led G20 adopted the light-touch 'Carolina Principles' and weeks after the EU AI Act's GPAI enforcement went live (fines to €35M/7%, info requests to 30+ firms). Meanwhile the ships got faster and cheaper again — Claude Opus 5.5 (22 Sep) at a reported ~$4/$20, ~40% cheaper and faster. The board move: build to the strictest chart, keep portable logs, read the builders' own 'pace the frontier' fear as weather. Quotes and sourced numbers, as reported.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the ship — now read the law of the waters it sails</div>
+  <h1>The Two Admiralties</h1>
+  <div class="subhead">You made the ship and crew excellent. This morning the sea itself has laws — and there are two of them, drawn on the same waters and contradicting each other. Strangest of all: the shipwrights who built the fastest vessels afloat have rowed to the world's high council to beg for a single code, saying their own ships now outrun any one nation's power to govern them.</div>
+  <div class="meta">Sunday, 27 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 23 September 2026, OpenAI's Sam Altman and Anthropic's Dario Amodei — the two men who build the fastest ships afloat — jointly pressed the UN Security Council to adopt international AI safety standards (CNN; CNBC, as reported), days after the US-led G20 adopted the light-touch "<em>Carolina Principles</em>" (early September; Commerce Secretary Howard Lutnick said all 20 members agreed, China among them — Al Jazeera; implicator.ai, as reported) and weeks after the EU AI Act's enforcement powers over general-purpose AI went live (2 August 2026), with information requests reportedly sent to 30+ providers and fines up to €35M or 7% of global turnover. In the same week the ships themselves got faster and cheaper again — Claude Opus 5.5 (22 September) at a reported $4/$20 per million tokens, ~40% cheaper and ~40% faster than Opus 5, with real agentic-coding gains (anthropic.com). So the vessels accelerate, the admiralties draw contradictory charts, and the shipwrights themselves plead for one law. The board question is no longer only <em>how good is our ship</em> — it is: <em>under whose law do we sail when the charts disagree, and what does it mean that the men who drew the ship say even they cannot keep pace?</em></p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year and more, the radar worked on the <em>ship and its crew</em> — name every hand (the livery), keep one book (the steward), put the master's name on the bond (the surety), ask whose second coin each adviser takes (the second wage), send the crew to reap (the two harvests), hand each a scoped purse (the purse), and then look down at the ground the whole house stands on (the foundation). Every one of those governs what you own and run. <strong>This morning the axis turns outward, to the thing you do not own and cannot govern: the law of the waters you must sail.</strong> And the law is not one law. It is two, drawn on the same sea, and they contradict.</p>
+<p><strong>Two admiralties, two charts.</strong> On one side, the <strong>EU AI Act's enforcement powers over general-purpose AI went live on 2 August 2026</strong> — a strict admiralty that classifies high-risk uses, demands documentation, logging and human oversight, and can fine up to <strong>€35M or 7% of global turnover</strong> for prohibited practices (up to €15M or 3% for GPAI-obligation breaches), with information requests reportedly issued to <strong>30+ providers</strong> under its investigatory powers (as reported). On the other, the US-led G20 adopted the "<strong>Carolina Principles</strong>" in early September — a deliberately light-touch code; Commerce Secretary Howard Lutnick said <strong>all 20 members agreed and China signed</strong>, and White House adviser Michael Kratsios argued policymakers "<em>should not treat every emerging technology as a first-of-a-kind policy problem</em>" (Al Jazeera; implicator.ai, as reported). Same waters; opposite rules. And note the trap in the strict chart: the EU's "Digital Omnibus" reportedly pushed stand-alone high-risk (Annex III) obligations to <strong>2 December 2027</strong> and embedded-product (Annex I) AI to <strong>2 August 2028</strong> (as reported) — a delay, not a reprieve.</p>
+<p><strong>The builders are asking to be governed.</strong> On <strong>23 September the CEOs of the two leading labs went together to the UN Security Council to ask for international AI standards</strong> (CNN; CNBC, as reported) — an extraordinary sight: the shipwrights petitioning for a law over their own trade. It follows Amodei's <strong>12 September "pace the frontier" essay</strong>, which Altman publicly endorsed ("<em>I agree with Dario that we need to pace the frontier</em>"), and in which Amodei warned that a swarm of AI agents could, within <strong>6–12 months</strong>, be capable of "taking over the entire internet" and causing "<strong>hundreds of billions of dollars in damage</strong>" — a claim NYU's Gary Marcus called "<em>nonsensical</em>" (Axios; Bloomberg; Washington Post; VentureBeat, as reported). All of this while the ships kept getting faster and cheaper: <strong>Claude Opus 5.5 (22 September) at a reported $4/$20 per million tokens, ~40% cheaper and ~40% faster than Opus 5</strong>, posting real agentic-coding gains (Terminal-Bench 4.0 66.4% vs 52.3%; OSWorld 2.0 81.8% vs 74.0%; GDPval-AA v2.1 1846 Elo vs 1708), with GitHub's CPO reporting it "used among the fewest tokens and steps measured" (anthropic.com). Capability accelerates; governance fragments; the builders are nervous.</p>
+<p><strong>Build to the stricter chart, keep portable logs, and read the builders' fear as weather.</strong> The merchant who bets the house on which admiralty wins has already lost, because he trades in both waters. The move is threefold. <strong>First, comply with the strictest jurisdiction you touch by default</strong> — one governance standard built to the EU chart makes you legal everywhere at once, and is cheaper than maintaining a patchwork that fails the moment you cross into stricter waters. <strong>Second, keep your records, evals and provenance portable</strong> — so you can answer any admiralty on demand; this is the steward's book and the inspector's roll, now pointed outward at regulators rather than inward at your own agents. <strong>Third, read the shipwrights' own call to "pace the frontier" as a planning input, not a press release</strong> — do not make a capability that its own builders say may need to slow into a single point of failure in your operations.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Two admiralties on the same sea.</strong> <strong>EU AI Act GPAI enforcement went live (2 Aug 2026), fines to €35M/7%, information requests reportedly to 30+ firms; the G20's light-touch "Carolina Principles" was adopted by all 20 (China signed).</strong> Same waters, opposite rules — and the Digital Omnibus delayed high-risk to 2 Dec 2027 / 2 Aug 2028, a delay, not a reprieve (as reported).</div></div>
+<div class="num"><div class="b">2</div><div><strong>The shipwrights are asking to be governed.</strong> <strong>Altman and Amodei pressed the UN Security Council for international AI standards (23 Sep), after Amodei's "pace the frontier" essay (12 Sep) — endorsed by Altman — warned an agent swarm could "take over the entire internet" in 6–12 months (Gary Marcus: "nonsensical").</strong> Read the builders' own fear as a weather-sign (as reported).</div></div>
+<div class="num"><div class="b">3</div><div><strong>The ships get faster and cheaper anyway.</strong> <strong>Claude Opus 5.5 (22 Sep): a reported ~$4/$20 per M tokens, ~40% cheaper and ~40% faster than Opus 5, with real agentic-coding gains (Terminal-Bench 66.4%; OSWorld 81.8%).</strong> Capability accelerates while the law fragments — build to the strictest chart so you are legal everywhere (anthropic.com, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the crew, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest each adviser served, the two harvests sent them to reap, the purse funded them, and the foundation was the ground the house stood on — all things you own and can govern. <strong>The two admiralties are the law of the waters you cannot control.</strong> This week that law visibly split: the EU sails a strict chart with real fines and live enforcement, the G20 posts a permissive one, and — the most telling sight in the harbor — the very shipwrights who build the fastest vessels rowed to the world's high council and asked, together, for a single code, saying their own ships now outrun any one nation's power to govern them. The trap is to bet the house on which chart wins, or to build a fragile patchwork that is legal in one port and illegal in the next. The houses that keep their standing will do three unglamorous things: <strong>build to the strictest chart</strong> (one standard, legal everywhere), <strong>keep portable logs</strong> (records, evals and provenance you can produce for any admiralty), and <strong>read the builders' own fear</strong> — a joint plea to the UN, a call to pace the frontier — as the truest weather-sign on the horizon. Sail hard; the seas are rich. But do not sail as if only one admiralty existed.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Two Admiralties"</h3>
+<p><em>Topic: The frame turns from the ship and its crew — which you own and govern — to the law of the waters you must sail, which you do not. This week that law split in two. The EU AI Act's enforcement over general-purpose AI is live (2 August 2026; fines to €35M or 7% of turnover; information requests reportedly to 30+ providers), while the US-led G20 adopted the light-touch "Carolina Principles" (all 20 agreed, China signed; Kratsios: "should not treat every emerging technology as a first-of-a-kind policy problem") — Al Jazeera; implicator.ai, as reported. On 23 September Altman and Amodei jointly asked the UN Security Council for international AI standards (CNN; CNBC, as reported), after Amodei's 12 September "pace the frontier" essay, endorsed by Altman, warned an agent swarm could "take over the entire internet" in 6–12 months (Axios; Bloomberg; VentureBeat; Gary Marcus called it "nonsensical", as reported) — all while Claude Opus 5.5 shipped ~40% cheaper and faster (22 September; anthropic.com). The two-admiralties allegory is the radar's own illustration.</em></p>
+<p>There was a great trading house that had spent a long and careful year making its ship and its crew excellent. It had named every hand and cut each a scoped key, hired a steward to keep one honest book, accepted that the master's own name stood surety for the crew's work, learned to ask whose second coin each advising sailor took, sent the crew out to reap and weighed what they brought in, handed each a scoped purse with a drawstring the master could reach, and looked hard at the ground its warehouses stood on. By any fair reckoning it was a well-run house with a fast, well-governed ship — and the master was proud of it, as he should have been.</p>
+<p>But a ship is only as free as the <strong>law of the sea it sails</strong>, and this season the master went down to the harbor and found the notice-board carrying <em>two</em> proclamations, nailed side by side, each claiming the same waters. The first, from a strict admiralty across the eastern channel, was long and exacting: <em>declare every cargo; log every voyage; post a human officer answerable for each dangerous hold; and be ready, on demand, to produce your papers — on pain of a fine that could take a fortune, seven parts in a hundred of everything you own in a year.</em> The second, from a great western power and the score of nations it had gathered, was short and easy: <em>sail freely; we will not treat every new kind of ship as a fresh crisis; prosper, and trouble us little.</em> Same sea. Two laws. And they did not agree.</p>
+<p>The master's first instinct was the cheap one: sail under whichever flag was nearest and easiest, and hope the two never met. But his old navigator, who had run aground once on exactly this kind of confidence, asked the colder question: <em>"We do not trade in one sea. Our cargoes touch the eastern ports and the western both. Under two laws that contradict, a voyage that is lawful leaving one harbor is a crime entering the next — so which chart do we actually build the ship to?"</em> And the answer, once said aloud, was plain: <strong>you build to the stricter chart.</strong> A ship rigged to satisfy the exacting admiralty — every cargo declared, every voyage logged, an officer answerable, the papers ready — is lawful in the easy waters too, for the loose law asks nothing the strict law has not already demanded. A ship built to the easy chart is a smuggler the moment it turns east. To build to the loose law and hope is to save a little rope now and lose the whole hull at the first strict customs-house.</p>
+<p>There was a second discipline, and it was one the house already knew. The strict admiralty's whole power lay in a single sentence — <em>produce your papers</em> — and a house that keeps one honest book can produce them in an afternoon, while a house whose records live scattered in a dozen ledgers, or worse, inside some chandler's private strongroom, cannot answer at all and is fined for the silence. So the master ordered the log kept portable and complete: not to please his own officers this time, but so that <em>any</em> admiralty, of either flag, could be answered on the day it asked. The steward's book and the inspector's roll, which he had built to govern his own crew, he now turned outward — to face the law of the sea.</p>
+<p>And there was a third thing, the strangest of the season, and the master nearly missed its meaning. Word came up the quay that the <strong>very shipwrights</strong> who built the fastest hulls afloat — the two greatest yards in the world, rivals in every other thing — had rowed together to the highest council of nations and asked, in one voice, to be <em>governed</em>: <em>"Give us one law of the sea, before our own ships outrun any single nation's power to govern them."</em> One of the two master-builders had written, weeks earlier, that the yards must <em>slow the pace</em> at which they launched ever-faster ships, warning that a swarm of unmanned boats could, within a year, run wild enough to seize every harbor in the world and sink fortunes beyond counting; and his great rival had said, plainly, <em>"I agree — we must pace the frontier."</em> (A learned man ashore scoffed that the warning was nonsense, and perhaps it was.) But the master did not need the prophecy to be true to read the sign. <strong>When the men who build the ships are themselves frightened of how fast the ships are getting, a prudent captain does not lash his whole livelihood to the newest, fastest hull as though it will sail unchanged forever.</strong> He keeps the fast ship — for the season's newest was faster and cheaper again, near half the cost to run and quicker besides — but he keeps, too, the seamanship to sail without it.</p>
+<p><strong>The moral, stated plainly:</strong> the model is the fast ship, faster and cheaper by the season; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever sailor can reach; the bell rings the moment your own crew slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery names every hand; the steward keeps one governed office; the surety is why the master's name is on the bond; the second wage asks whose bread each advising sailor eats; the two harvests is why you send them to reap and weigh what they bring in; the purse funds them like employees; the foundation is the ground the warehouses stand on — and <strong>the two admiralties are why, having built a fast, well-governed ship, you must now read the law of the waters it sails: build to the strictest chart so you are lawful in every port at once, keep your log portable and whole so any admiralty can be answered on the day it asks, and read the shipwrights' own fear as the truest weather-sign there is — for when the builders beg to be governed, only a fool sails as though the sea will stay lawless and the ship will stay the same.</strong> A house that builds to the easy law and hopes has not been thrifty; it has rigged a smuggler and called it a merchantman.</p>
+<p><strong>The question it forces:</strong> <em>Our cargoes touch every sea. Have we built our AI to the strictest chart we sail under — one governance standard, lawful in the eastern ports and the western both — or to the easiest, so that we are a smuggler the moment we cross into stricter waters? Can we produce our papers, whole and portable, for any admiralty on the day it asks? And when the very people who build these systems row to the world's high council to beg for a law over their own trade, are we reading that as the weather-sign it is — or are we lashing the whole house to the newest, fastest hull as though the sea will never change and the builders were never afraid?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Which admiralty's chart are we built to?</strong> The law of the AI seas just split — the EU AI Act enforces GPAI obligations with fines to €35M/7%, while the G20's "Carolina Principles" go light-touch. <strong>Do we comply with the strictest jurisdiction we touch by default (one standard, lawful everywhere), or do we run a patchwork that is legal in one market and a violation in the next — and who on this board owns that answer?</strong></li>
+  <li><strong>If a regulator asked us today to "produce our papers," could we?</strong> The strict admiralty's whole leverage is documentation on demand — records, logging, evals, provenance, a named human owner. <strong>Can we produce a complete, portable account of what our AI systems do, on what data, under whose oversight — in days, not months — or would we be fined for the silence?</strong></li>
+  <li><strong>Are we reading the builders' own fear as a planning signal?</strong> Altman and Amodei jointly asked the UN to govern their trade, and both call to "pace the frontier." <strong>Have we made any single, still-maturing capability into a load-bearing dependency the business cannot run without — the very thing its own builders say may need to slow?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>You already live under overlapping, sometimes-divergent regulators; AI now adds another split (EU AI Act vs a light-touch US/G20 line). <strong>Can we produce, for each supervisor we answer to, a single AI-governance standard built to the strictest of them — with the documentation, model-risk records and human-oversight evidence each one can demand — rather than a per-jurisdiction patchwork?</strong></li>
+  <li>The EU AI Act can fine up to 7% of global turnover, and information requests have reportedly gone to 30+ firms. <strong>Have we treated an AI-Act information request or enforcement action as a modelled operational risk — with an owner, an evidence pipeline and a tested response — the way we model a regulatory exam or a counterparty default?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Much of your AI is high-risk under the EU chart, and the "Digital Omnibus" reportedly delayed Annex III obligations to 2 December 2027. <strong>Are we treating that as a reprieve or as a deadline — building the documentation, human-oversight and post-market-monitoring evidence now, while the fast, cheap models (Opus 5.5 and its peers) make the underlying work easier and cheaper than it will ever be again?</strong></li>
+  <li>Clinical and safety work is validated against a specific model's behaviour, and the models are turning over faster and cheaper by the month. <strong>When we adopt a newer, cheaper model, do our validation, evals and provenance travel with us and remain producible for a regulator — or does each swap quietly invalidate the paper trail we owe?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>Embedded-product AI (Annex I) reportedly falls under the strict chart from 2 August 2028, and your products ship worldwide into both admiralties. <strong>Are we designing AI-enabled products to the strictest market's conformity, documentation and logging requirements now — so one product line is saleable everywhere — rather than discovering at the border that it is a smuggler in half our markets?</strong></li>
+  <li>You run supplier-qualification and dual-sourcing discipline for physical inputs. <strong>The shipwrights themselves are asking to be paced; have we applied the same discipline to model dependency — a qualified alternate and portable records — so a capability its own makers say may need to slow is not a single point of failure on the line?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Consumer-facing AI touches transparency duties (EU AI Act Article 50 labeling of AI interactions and content) even as cheaper models make AI ubiquitous across checkout, search and support. <strong>Do our customer-facing AI experiences meet the strictest disclosure rules we operate under by default — or are we one cross-border launch away from a labeling violation?</strong></li>
+  <li>The models get cheaper and faster every month (Opus 5.5 ~40% cheaper than Opus 5). <strong>Are we capturing that dividend behind a governance layer that keeps us compliant as we swap models — or are cost savings quietly accruing regulatory and audit debt we will pay for later?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>The fragmentation itself is the risk: you must serve citizens under whichever regime governs them, for a decade or more. <strong>Are we procuring AI to the strictest applicable standard with portable records and no single-vendor dependency — so a service survives both a regulatory tightening and a supplier's exit — or are we building to today's easiest rule?</strong></li>
+  <li>Accountability and continuity are non-negotiable, and the builders themselves are urging international standards. <strong>Can we demonstrate, for any critical public AI service, a named human owner, a producible record, and a governance standard that would satisfy the strictest admiralty — before, not after, an incident forces the question?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Law of the Sea</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping and funded, and is the ground ours?</em> and started asking the one question none of those controls touch: <em>under whose law does this whole enterprise sail, and can I answer that law on the day it asks?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the livery, steward, surety, second wage, two harvests and purse govern the crew; the foundation is the ground you own. <strong>Every one of those is about what you own and control. The two admiralties are about what you do not: the law of the waters — and this week that law split in two, publicly and materially. The strict EU chart is live and enforceable (fines to €35M or 7% of turnover; information requests reportedly to 30+ firms); the light-touch G20 "Carolina Principles" pulls the other way; and the shipwrights themselves rowed to the UN to ask for one code.</strong> The point is blunt: <strong>governance you built inward, to control your own agents, is now the exact instrument you need outward, to satisfy regulators — and a house that governed its crew beautifully but cannot produce its papers for a strict admiralty is still a smuggler at the border.</strong></p>
+<div class="card"><ul>
+  <li><strong>The split — two contradictory charts on the same sea, and you build to the stricter.</strong> <strong>The EU AI Act's GPAI enforcement went live on 2 August 2026 — high-risk classification, documentation, logging, human oversight, and fines up to €35M or 7% of global turnover (up to €15M or 3% for GPAI-obligation breaches), with information requests reportedly issued to 30+ providers; the US-led G20 adopted the light-touch "Carolina Principles" (all 20 agreed, China signed); and the EU "Digital Omnibus" reportedly pushed high-risk Annex III to 2 December 2027 and embedded-product Annex I to 2 August 2028 (Al Jazeera; implicator.ai; DLA Piper; EC, as reported).</strong> Three engineering consequences follow. First, <em>build to the strictest jurisdiction you touch</em> — a system that satisfies the EU chart is lawful in the light-touch waters too, whereas the reverse is a violation on first crossing; a per-jurisdiction patchwork multiplies cost and fails at the border. Second, <em>a delay is a deadline in disguise</em> — the Annex III/Annex I postponements buy build time, not a pass; the cheapest moment to instrument documentation and oversight is now, while the models themselves get cheaper. Third, <em>the whole regime turns on "produce your papers"</em> — records, logging, evals, provenance and a named human owner must be portable and complete, not scattered or locked inside a vendor's layer.</li>
+  <li><strong>The signal — the builders are asking to be governed, and calling to "pace the frontier."</strong> <strong>On 23 September Altman and Amodei jointly pressed the UN Security Council for international AI standards (CNN; CNBC, as reported); it follows Amodei's 12 September "pace the frontier" essay — endorsed by Altman ("I agree with Dario that we need to pace the frontier") — warning that an agent swarm could within 6–12 months "take over the entire internet" and cause "hundreds of billions of dollars in damage," a claim Gary Marcus called "nonsensical" (Axios; Bloomberg; Washington Post; VentureBeat, as reported).</strong> Two engineering reads, independent of whether the prophecy is right. <strong>First, the risk narrative is now coming from inside the yards.</strong> When the two leading labs jointly seek external governance, the prudent posture is to assume the capability curve is genuinely uncertain and to avoid single points of failure on any still-maturing capability. <strong>Second, "pace the frontier" is a planning input.</strong> It argues against wiring a bleeding-edge, fast-moving capability into a load-bearing process with no fallback and no human circuit-breaker — the same containment discipline (the bell, the errand, the kill-switch) the radar has pressed all along, now justified by the builders' own words.</li>
+  <li><strong>The constant — capability accelerates regardless, so collect the dividend under the strict chart.</strong> <strong>Claude Opus 5.5 shipped 22 September at a reported $4/$20 per million tokens — ~40% cheaper and ~40% faster than Opus 5 — with real agentic-coding gains (Terminal-Bench 4.0 66.4% vs 52.3%; OSWorld 2.0 81.8% vs 74.0%; GDPval-AA v2.1 1846 Elo vs 1708) and GitHub's CPO reporting it "used among the fewest tokens and steps measured" (anthropic.com); MCP continues to consolidate as the cross-vendor tool-integration standard, its 2026-07-28 spec stateless and its governance under the Linux Foundation's Agentic AI Foundation (blog.modelcontextprotocol.io, as reported).</strong> The engineering translation: the models get cheaper and more capable while the law gets stricter and more fragmented, so the cost savings are real but must be captured behind a governance layer — records, evals, provenance, human oversight — that keeps you compliant as you swap models. Reuse the identity, logging and ownership disciplines you already built for the livery, the steward and the inspector; point them outward at the admiralties.</li>
+</ul></div>
+<p>The strategic core: <strong>governance is no longer only an internal-control cost — it is the instrument that keeps you lawful across a fragmenting regulatory sea, and the labs themselves are now asking to be governed.</strong> The temptation is to sail under the easiest flag and hope the strict admiralty never boards you; the discipline is to build to the strictest chart once, keep your papers portable, and treat the builders' own fear as a design constraint. The board translation: <strong>build to the strictest chart; keep your papers portable; read the shipwrights' fear as weather.</strong> The failure mode is exact: <strong>a house that names, governs, funds and grounds its agents beautifully — and then sails to the easiest regulatory flag, cannot produce documentation on demand, and lashes the whole business to a bleeding-edge capability its own makers say may need to slow — will pass its internal reviews and discover, at the first strict customs-house or the first swarm incident, that it built a fast smuggler and called it a merchantman.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The two admiralties: the law of the AI seas split in two this week, and you build to the stricter chart. Top left, the strict admiralty, the EU AI Act, live 2 August 2026: classify high-risk, document, log, human oversight, produce your papers on demand; fines up to 35 million euros or 7 percent of global turnover; information requests reportedly to 30-plus firms; Digital Omnibus delayed high-risk to 2 December 2027. Top right, the light-touch admiralty, the G20 Carolina Principles, early September: sail freely, all 20 agreed and China signed, do not treat every emerging technology as a first-of-a-kind policy problem. Between them, they contradict, and a ship lawful leaving one port is a crime entering the next, so build to the stricter chart. Middle, the shipwrights ask to be governed: on 23 September Altman and Amodei jointly pressed the UN Security Council for international AI standards; Amodei's pace-the-frontier essay, endorsed by Altman, warned an agent swarm could take over the internet in 6 to 12 months, hundreds of billions in damage, which Gary Marcus called nonsensical; meanwhile Claude Opus 5.5 shipped about 40 percent cheaper and faster. Bottom left, stop: sail to the easiest flag and hope, keep records scattered or inside a vendor's strongroom, treat the delay as a reprieve, and lash the whole business to a bleeding-edge capability. Bottom right, start: build to the strictest chart so you are lawful everywhere, keep records evals and provenance portable and producible, treat the delay as a deadline and instrument now, and read the builders' pace-the-frontier fear as weather with no single point of failure." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE TWO ADMIRALTIES — you built a fast ship; now read the law of the sea</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Two contradictory charts on the same waters. Build to the STRICTER one — it is lawful in both.</text>
+
+  <!-- strict admiralty (EU) -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a2114" stroke="#b8892a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e6b34d" font-family="sans-serif">STRICT ADMIRALTY — EU AI Act</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GPAI enforcement live · 2 Aug 2026</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">classify · document · log · oversight</text>
+  <text x="52" y="137" font-size="10" fill="#f0d69a" font-family="sans-serif">fines to €35M / 7% of turnover</text>
+  <text x="52" y="157" font-size="10" fill="#f0d69a" font-family="sans-serif">info requests reportedly to 30+ firms</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ "produce your papers"</text>
+
+  <!-- light admiralty (G20) -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">LIGHT-TOUCH — G20 "Carolina Principles"</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">early September · deliberately loose</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">all 20 agreed · China signed</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">"not a first-of-a-kind policy problem"</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">sail freely, prosper, trouble us little</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ asks nothing the strict law hasn't</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e6b34d" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e6b34d"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">same sea, opposite rules — lawful leaving one port, a crime entering the next ▼</text>
+
+  <!-- the shipwrights' plea -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE SHIPWRIGHTS ASK TO BE GOVERNED — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Altman &amp; Amodei jointly press the UN Security Council for international AI standards (23 Sep)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"pace the frontier" (Amodei 12 Sep, endorsed by Altman): swarm could seize the internet in 6–12 mo</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"hundreds of billions in damage" · Gary Marcus: "nonsensical"</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">…while the ships get faster &amp; cheaper: Claude Opus 5.5, ~$4/$20, ~40% cheaper &amp; faster (22 Sep)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: sail to the easy flag &amp; hope</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· build to the loosest rule you touch</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· records scattered / in a vendor's vault</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· treat the Omnibus delay as a reprieve</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· lash the business to a bleeding edge</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a smuggler at the first strict border</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: build to the strictest chart</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one standard, lawful in every port</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· records/evals/provenance portable</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· delay = deadline; instrument now</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no single point of failure on new tech</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a merchantman legal on every sea</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The law of the sea split; the models got cheaper. Collect the dividend under the strict chart.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Build to the strictest chart · keep your papers portable · read the builders' fear as weather.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#e6b34d"></i>Strict admiralty — EU AI Act</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Light-touch — G20 Carolina Principles</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The shipwrights ask to be governed</span>
+</div>
+</div>
+
+<h3>The two admiralties — the same waters, two charts, and why you build to the stricter</h3>
+<table>
+<tr><th>Strict admiralty — EU AI Act (build to this)</th><th>Light-touch — G20 "Carolina Principles"</th></tr>
+<tr><td>GPAI enforcement live since 2 August 2026</td><td>Adopted early September; all 20 agreed, China signed</td></tr>
+<tr><td>Classify high-risk; document; log; human oversight</td><td>"Not a first-of-a-kind policy problem" — sail freely</td></tr>
+<tr><td>Fines to €35M or 7% of global turnover (€15M/3% GPAI)</td><td>No comparable penalty regime</td></tr>
+<tr><td>"Produce your papers" — records on demand; 30+ info requests</td><td>Asks nothing the strict law hasn't already demanded</td></tr>
+<tr><td>Omnibus delay to 2 Dec 2027 / 2 Aug 2028 = a deadline</td><td>Lawful leaving this port, a crime entering the strict one</td></tr>
+<tr><td>Your posture: comply here and you are legal everywhere</td><td>Your posture: never mistake the easy flag for the only law</td></tr>
+</table>
+
+<h3>Why "the two admiralties" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the agent was named, scoped, logged, loyal, reaping, funded and grounded — all things inside your own house. <strong>This week the question moved outside the house, to the law of the waters: it split in two, publicly and with real fines, and the builders themselves asked to be governed.</strong> The EU chart is live and enforceable; the G20 chart is deliberately loose; and a ship lawful leaving one port is a crime entering the next. Governance you built inward — to control your own agents — is now the exact instrument you need outward, to answer a strict regulator: records, logging, evals, provenance, a named human owner. The houses that keep their standing will build to the strictest chart once (so one standard is lawful everywhere), keep their papers portable and producible on demand, and treat the shipwrights' own call to "pace the frontier" as a design constraint rather than a headline.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to prove what you run to whichever admiralty asks.</em> On a legacy estate the instinct, faced with two contradictory rulebooks, is to comply with the nearest and easiest and hope the strict one never boards you — and to read the EU's Annex III/Annex I delays as a reprieve. Under the two admiralties that is exactly the reflex to check: the delay is build time, not a pass, and the cheapest moment to instrument documentation, logging and human oversight is now, while the models themselves get cheaper and faster (Opus 5.5 ~40% cheaper than Opus 5). The retrofit is <strong>build, keep, read. Build</strong> to the strictest chart: one governance standard that satisfies the most exacting jurisdiction you touch, so you are lawful in every port at once. <strong>Keep</strong> your papers portable: records, evals, prompts and provenance in a form you own and can produce for any regulator in days, not months — never scattered or locked inside a vendor's strongroom. <strong>Read</strong> the builders' fear as weather: when the two leading labs jointly ask the UN to govern their trade and call to pace the frontier, do not lash a load-bearing process to a bleeding-edge capability with no fallback and no human circuit-breaker. And keep the whole refrain: the model is the fast ship, cheaper by the season; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery names every hand; the steward keeps one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is the ground you own — and <em>the two admiralties are why, having built a fast, well-governed ship on ground you own, you must now read the law of the waters: build to the strictest chart, keep your papers portable, and read the builders' own fear as weather, so you are a merchantman legal on every sea and not a smuggler at the first strict border.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The strict chart is live and biting.</strong> <strong>EU AI Act GPAI enforcement live since 2 August 2026; fines up to €35M or 7% of global turnover (€15M/3% for GPAI breaches); information requests reportedly issued to 30+ providers (Al Jazeera; DLA Piper; EC, as reported).</strong> "Produce your papers" is now enforceable.</li>
+  <li><strong>The light chart pulls the other way.</strong> <strong>The US-led G20 adopted the "Carolina Principles" in early September — all 20 agreed, China signed; Kratsios: policymakers "should not treat every emerging technology as a first-of-a-kind policy problem" (Al Jazeera; implicator.ai, as reported).</strong> Same sea, opposite rules.</li>
+  <li><strong>A delay is a deadline.</strong> <strong>The EU "Digital Omnibus" reportedly pushed high-risk Annex III obligations to 2 December 2027 and embedded-product Annex I to 2 August 2028 (as reported).</strong> Build time, not a reprieve — instrument now.</li>
+  <li><strong>The builders ask to be governed.</strong> <strong>Altman and Amodei jointly pressed the UN Security Council for international AI standards (23 Sep); Amodei's "pace the frontier" essay (12 Sep), endorsed by Altman, warned an agent swarm could "take over the internet" in 6–12 months / "hundreds of billions in damage"; Gary Marcus: "nonsensical" (CNN; CNBC; Axios; Bloomberg; VentureBeat, as reported).</strong> Read it as a planning input.</li>
+  <li><strong>The ships get faster and cheaper.</strong> <strong>Claude Opus 5.5 (22 Sep): a reported $4/$20 per M tokens, ~40% cheaper and ~40% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%); OSWorld 2.0 81.8% (vs 74.0%); GitHub CPO: "fewest tokens and steps measured" (anthropic.com, as reported).</strong> Collect the dividend under the strict chart.</li>
+  <li><strong>MCP consolidates as the tool-integration standard.</strong> <strong>2026-07-28 spec stateless/horizontally scalable; new roadmap adds HTTP-native transport, agent identity (DPoP, Workload Identity Federation) and formal governance; stewarded by the Linux Foundation's Agentic AI Foundation (blog.modelcontextprotocol.io, as reported).</strong> Portable rails help you stay vendor-neutral and answerable.</li>
+  <li><strong>The adoption-vs-reality gap persists.</strong> <strong>Anthropic's State of AI Agents cites ~80% seeing measurable ROI, with integration (46%), data quality (42%) and change management (39%) the top barriers; Gartner still projects &gt;40% of agentic-AI projects canceled by end-2027 (resources.anthropic.com; Gartner, as reported).</strong> Governance and integration remain the binding constraints.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">I agree with Dario that we need to pace the frontier.</div><div class="a">— Sam Altman (OpenAI), endorsing Dario Amodei's "pace the frontier" essay (12 September 2026, as reported — Axios; Bloomberg)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">[A swarm of AI agents could, within 6–12 months, be capable of] taking over the entire internet … [causing] hundreds of billions of dollars in damage.</div><div class="a">— Dario Amodei (Anthropic), on agent-swarm tail risk; NYU's Gary Marcus called the claim "nonsensical" (as reported — VentureBeat; Washington Post)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[Policymakers] should not treat every emerging technology as a first-of-a-kind policy problem.</div><div class="a">— Michael Kratsios, White House adviser, on the light-touch G20 "Carolina Principles" (as reported — Al Jazeera; implicator.ai)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">[Claude Opus 5.5] used among the fewest tokens and steps measured.</div><div class="a">— Mario Rodriguez, GitHub Chief Product Officer, on Claude Opus 5.5 (22 September 2026, as reported — anthropic.com)</div></blockquote>
+<blockquote><div class="q">"Our cargoes touch every sea. The law of those seas just split in two, and the very people who build these ships have rowed to the world's high council to beg for one code. Build to the strictest chart, keep your papers portable, and read the builders' fear as weather — or you have rigged a fast smuggler and called it a merchantman."</div><div class="a">— the radar, on why reading the law of the waters now matters as much as choosing the ship</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The strict admiralty is live</td><td><span class="v">EU AI Act GPAI enforcement live since 2 August 2026; fines up to €35M or 7% of global turnover (up to €15M or 3% for GPAI-obligation breaches); information requests reportedly issued to 30+ providers</span></td><td>Al Jazeera; DLA Piper; European Commission, as reported</td></tr>
+<tr><td>The light-touch admiralty</td><td><span class="v">US-led G20 adopted the "Carolina Principles" (early Sep 2026) — all 20 members agreed, China signed; Kratsios: "should not treat every emerging technology as a first-of-a-kind policy problem"</span></td><td>Al Jazeera; implicator.ai, as reported</td></tr>
+<tr><td>A delay, not a reprieve</td><td><span class="v">EU "Digital Omnibus" reportedly pushed high-risk Annex III obligations to 2 December 2027 and embedded-product Annex I AI to 2 August 2028</span></td><td>DLA Piper; artificialintelligenceact.eu, as reported</td></tr>
+<tr><td>The builders ask to be governed</td><td><span class="v">Altman &amp; Amodei jointly pressed the UN Security Council for international AI standards (23 Sep 2026); follows Amodei's "pace the frontier" essay (12 Sep), endorsed by Altman</span></td><td>CNN; CNBC; Axios; Bloomberg, as reported</td></tr>
+<tr><td>The swarm forecast</td><td><span class="v">Amodei: an agent swarm could within 6–12 months "take over the entire internet" and cause "hundreds of billions of dollars in damage"; NYU's Gary Marcus called it "nonsensical"</span></td><td>VentureBeat; Axios; Washington Post, as reported</td></tr>
+<tr><td>The ships get cheaper</td><td><span class="v">Claude Opus 5.5 (22 Sep 2026): a reported $4/$20 per million tokens, ~40% cheaper and ~40% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%); OSWorld 2.0 81.8% (vs 74.0%); GDPval-AA v2.1 1846 Elo (vs 1708)</span></td><td>anthropic.com, as reported</td></tr>
+<tr><td>Adoption vs the reality gap</td><td><span class="v">Anthropic State of AI Agents: ~80% report measurable ROI; top barriers integration 46%, data quality 42%, change management 39% — while Gartner projects &gt;40% of agentic-AI projects canceled by end-2027</span></td><td>resources.anthropic.com; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Build to the strictest chart — set one AI-governance standard sized to the most exacting jurisdiction you touch.</strong> The law of the seas just split — the EU AI Act enforces GPAI obligations with fines to €35M/7%, while the G20 goes light-touch — and a system lawful in one market is a violation in the next. <strong>This month, map every jurisdiction your AI serves, adopt the EU chart (documentation, logging, human oversight, risk classification) as your default baseline, and stop maintaining per-market carve-outs that fail at the border.</strong> Report one number to the board: the share of production AI systems that already meet the strictest applicable standard versus those running on a lighter local rule.</li>
+  <li><strong>Keep your papers portable — make "produce your records" a drill you can pass in days.</strong> The strict admiralty's whole leverage is documentation on demand, and the Annex III/Annex I delays (to 2 Dec 2027 / 2 Aug 2028) are build time, not a reprieve. <strong>This month, inventory where your model records, prompts, evals, data lineage and provenance actually live, move anything load-bearing out of a single vendor's proprietary layer into a form you own and can export, and run a tabletop "regulator information request" against one high-risk system end to end.</strong> Report the measured time-to-produce a complete compliance dossier for that system, and a dated plan to extend the drill to the next two.</li>
+  <li><strong>Read the builders' fear as weather — put a human circuit-breaker on every load-bearing, bleeding-edge capability.</strong> When the two leading labs jointly ask the UN to govern their trade and both call to "pace the frontier," treat capability velocity as a genuine uncertainty. <strong>This month, identify any critical process wired to a still-maturing, fast-moving capability with no fallback and no human stop, and add a qualified alternate, a monitored kill-switch, and a named owner — collecting the cost dividend (Opus 5.5 ~40% cheaper) behind that safety, not instead of it.</strong> Report the count of load-bearing AI workflows that lack a tested fallback and human circuit-breaker, and close the list. <strong>The model is the fast ship, cheaper by the season; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery names every hand; the steward keeps one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse funds it like an employee; the foundation is the ground you own — and the two admiralties are why, having built a fast, well-governed ship on ground you own, you must now read the law of the waters: build to the strictest chart so you are lawful in every port, keep your papers portable so any admiralty can be answered, and read the builders' own fear as weather, so you sail as a merchantman legal on every sea and never as a smuggler at the first strict border.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The strict admiralty — EU AI Act: GPAI enforcement powers live since 2 August 2026; fines up to €35M or 7% of global turnover (up to €15M or 3% for GPAI-obligation breaches); information requests reportedly issued to 30+ providers; "Digital Omnibus" reportedly delaying high-risk Annex III obligations to 2 December 2027 and embedded-product Annex I AI to 2 August 2028 (European Commission; DLA Piper; artificialintelligenceact.eu) · The light-touch admiralty — the US-led G20's "Carolina Principles" adopted early September 2026 (all 20 members agreed, China signed; Commerce Secretary Howard Lutnick; White House adviser Michael Kratsios: "should not treat every emerging technology as a first-of-a-kind policy problem") (Al Jazeera; implicator.ai) · The builders ask to be governed — Altman &amp; Amodei jointly pressed the UN Security Council for international AI standards (23 Sep 2026) (CNN; CNBC); Amodei's "pace the frontier" essay (12 Sep), endorsed by Altman ("I agree with Dario that we need to pace the frontier"), warning an agent swarm could within 6–12 months "take over the entire internet" and cause "hundreds of billions of dollars in damage," which NYU's Gary Marcus called "nonsensical" (Axios; Bloomberg; Washington Post; VentureBeat) · The ships get cheaper — Claude Opus 5.5 (22 Sep 2026): reported $4/$20 per million tokens, ~40% cheaper and ~40% faster than Opus 5; Terminal-Bench 4.0 66.4% (vs 52.3%), OSWorld 2.0 81.8% (vs 74.0%), GDPval-AA v2.1 1846 Elo (vs 1708); GitHub CPO Mario Rodriguez: "used among the fewest tokens and steps measured" (anthropic.com) · The rails — MCP 2026-07-28 spec (stateless), new roadmap and Linux Foundation Agentic AI Foundation governance (blog.modelcontextprotocol.io); adoption vs reality — Anthropic State of AI Agents (~80% measurable ROI; barriers: integration 46%, data quality 42%, change management 39%) and Gartner (&gt;40% of agentic-AI projects canceled by end-2027) (resources.anthropic.com; Gartner). The "two admiralties" framing — that the law of the AI seas has split into a strict (EU) and a light-touch (G20) chart on the same waters, that a house must build to the strictest chart, keep its papers portable, and read the builders' own "pace the frontier" plea as weather — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and reputable secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; Anthropic items were verified directly against anthropic.com, while several other primary/reputable pages (openai.com, CNN, CNBC, Axios, Bloomberg, the EU AI Act sites) could not be fetched directly through the compile environment's network egress proxy, so specific figures — GPT-6 Sol/Luna specs, exact EU Omnibus dates, and quote wording — should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 27 September 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: privacy-friendly visit counting via GoatCounter (no cookies) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
