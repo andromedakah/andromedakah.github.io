@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 29 September 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the muster' — a whole product category was born this week to find the AI agents enterprises already run but cannot see. On 24 Sep 2026 Dataiku launched Agent Management, a cross-platform inventory that discovers agents across Copilot Studio, Azure AI Foundry, Agentforce, Bedrock, Vertex, Databricks, Snowflake Cortex, n8n and Dataiku and risk-tiers them. It lands into agent sprawl: >3M agents inside firms, ~47% monitored (Gravitee); fewer than 1 in 5 keep a complete AI inventory (IBM); 80% of enterprise apps embed an agent; 82% of execs feel protected while 88% report agent incidents. The board move: muster (one cross-platform roll), rank by blast radius, watch and retire. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant you can see — now call the whole estate to stand</div>
+  <h1>The Muster</h1>
+  <div class="subhead">A year of work perfected the one servant in front of you. This morning a whole product category was born to answer the question that discipline never asked: <em>who is actually working here?</em> The agents did not arrive by the door where governance stands — they arrived embedded in every tool you already bought, each a prompt away from summoning the next. Ring the bell: how many hands answer that you never knowingly hired?</div>
+  <div class="meta">Tuesday, 29 September 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 24 September 2026 Dataiku launched Agent Management (GA in October, unveiled at Dataiku Succeed) — and the reason it exists is the tell: a whole category has appeared whose only job is to <em>find the AI agents an enterprise is already running but cannot see</em>, across every platform that built them — Microsoft Copilot Studio, Azure AI Foundry, Salesforce Agentforce, AWS Bedrock, Google Vertex, Databricks, Snowflake Cortex, n8n and Dataiku itself — into one inventory of who owns each agent, what it is meant to do, and what data it can reach, then tiers them by risk (Help Net Security; Forkast; BigDATAwire; Dataiku, as reported). It ships into a house already full of servants no one mustered: Gravitee's State of AI Agent Security 2026 counts more than 3 million AI agents operating inside corporations, only ~47% actively monitored; Dataiku cites an IBM figure that fewer than 1 in 5 organizations keep a complete, up-to-date inventory of their AI systems; 80% of enterprise apps shipped or updated in early 2026 embed at least one agent (up from ~33% in 2024); and the perception gap is the whole story — 82% of executives believe their existing policies adequately protect against unauthorized agent actions, while 88% of organizations report confirmed or suspected AI-agent security incidents this year (Gravitee; IBM; industry surveys, as reported). SAP put the plain name on it this quarter: <em>agent sprawl is now a board-level issue</em> — "the new shadow IT," except a new agent is "a prompt away." The board question is no longer <em>is the servant named, scoped, loyal, reaping, funded and on ground I own</em> — it is the one underneath all of those: when we finally call a full muster of this estate, how many hands answer that we never knowingly hired, and could we even produce the roll?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked servant by servant — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it (the purse), and own the ground it stands on (the foundation). <strong>Every one of those disciplines quietly assumed you knew which servants were in your hall.</strong> This week the market made that assumption untenable, and it did so by shipping a product whose sole purpose is to answer a question most estates cannot: <em>who is actually working here?</em></p>
+<p><strong>The development — a whole category is born to find the agents you already run.</strong> On <strong>24 September 2026 Dataiku launched Agent Management</strong> (generally available in October, announced at its Dataiku Succeed conference): a <strong>standalone, deliberately cross-platform</strong> product that discovers every AI agent an enterprise is running <em>regardless of which platform built it</em> — Copilot Studio, Azure AI Foundry, Salesforce Agentforce, AWS Bedrock, Google Vertex, Databricks, Snowflake Cortex, n8n and Dataiku — into a single inventory (owner, intended purpose, data access), and <strong>flags the highest-risk agents</strong>: those touching customers, sensitive data or live transactions get a standing certification record, named risks, and tests that re-run on a schedule (Help Net Security; Forkast; BigDATAwire; The Agile Brand; Dataiku, as reported). It is priced per instance with monitoring metered per agent — a telling shape, because you now <em>meter</em> the servants the way you once metered nothing, having assumed you could name them all. Dataiku's own framing is the diagnosis: it cites an IBM survey finding <strong>fewer than 1 in 5 organizations maintain a complete, up-to-date inventory of their AI systems.</strong></p>
+<p><strong>The reality it answers — the estate filled up while you governed one servant at a time.</strong> The agents did not arrive by the front door where the livery is issued; they arrived embedded in every tool you already bought. <strong>80% of enterprise apps shipped or updated in early 2026 embed at least one agent (up from ~33% in 2024)</strong>; <strong>Gravitee's State of AI Agent Security 2026 counts more than 3 million agents inside corporations with only ~47% monitored or secured</strong>; <strong>98% of companies have deployed agents or plan to, yet fewer than half have any inventory of them</strong>; and <strong>96% run agents in production while 94% name sprawl a top concern</strong> (Gravitee; industry surveys, as reported). "Agent sprawl is the new shadow IT," SAP wrote this quarter in calling it a board-level issue — worse than shadow IT, because "spinning one up is a prompt away," and IBM's Matt Kosinski put a number on the mess: <strong>"There's not a client that doesn't have at least 60 random acts of AI happening throughout the organization"</strong> (SAP; IBM, as reported). The dangerous part is not the count; it is the confidence: <strong>82% of executives believe their current policies adequately protect against unauthorized agent actions, while 88% report confirmed or suspected agent security incidents this year</strong>. That gap is a house that has never once called a full muster and assumes the hall is empty of strangers.</p>
+<p><strong>The stakes — you cannot govern, cost, secure or retire what you have never mustered.</strong> Every discipline this radar built — identity, one book, the bond, loyalty, execution, the purse, the foundation — operates on a <em>named</em> servant. None of them fire on a servant you do not know you employ. And the value gap makes the muster urgent, not academic: <strong>only ~23% of organizations are scaling agents in even one function, only ~12% of CEOs report both revenue gain and cost reduction from AI, and 56% say they have not yet seen significant financial benefit</strong> — you cannot find the idle, the redundant or the rogue in a crowd you have never counted. The board move re-uses the year's discipline and points it at the crowd: <strong>first, keep one muster roll across every platform</strong> — a cross-platform inventory of every agent, its owner, its purpose and its data reach, not a dozen per-console lists; <strong>second, rank each hand by the harm it could do and give the dangerous ones a keeper</strong> — risk-tier the agents that touch customers, money or sensitive data, assign named ownership, and re-test them on a schedule; <strong>third, watch what each actually does, and retire the idle and the rogue</strong> — because a muster is worthless if it is taken once and shelved.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The development — a category is born to find your unseen agents.</strong> <strong>Dataiku Agent Management (24 Sep, GA October): a cross-platform product that inventories every agent across Copilot Studio, Azure AI Foundry, Agentforce, Bedrock, Vertex, Databricks, Snowflake Cortex, n8n and Dataiku, captures owner/purpose/data-access, and risk-tiers the ones touching customers, money or sensitive data (Help Net Security; Forkast; Dataiku, as reported).</strong> The product exists because the inventory does not.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reality — the estate filled while you governed one servant at a time.</strong> <strong>&gt;3M agents inside corporations, ~47% monitored (Gravitee); &lt;1 in 5 keep a complete AI inventory (IBM); 80% of enterprise apps embed an agent (up from ~33% in 2024); 96% run agents in production, 94% call sprawl a top concern — yet 82% of execs feel adequately protected while 88% report agent security incidents (as reported).</strong> Agent sprawl is the new shadow IT, and a new agent is a prompt away.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — muster the estate, tier by harm, watch and retire.</strong> Keep one cross-platform roll of every agent (owner, purpose, data reach); rank each by the damage it could do and give the dangerous ones an owner and scheduled re-tests; monitor what each actually does and retire the idle and the rogue — the same identity, book and ownership disciplines you already built, now pointed at the whole crowd.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept its book, the surety put your name on its bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — every one of them a discipline for a servant you can <em>name</em>. <strong>The muster is the discipline for the servants you cannot.</strong> This week a whole product category came into being for the single purpose of finding the AI agents enterprises are already running and cannot see — Dataiku's cross-platform bet that you have agents scattered across nine vendors' consoles and no roll that spans them — and the numbers behind it are stark: more than three million agents inside companies, under half monitored, fewer than one in five houses with a complete inventory, 80% of the apps you buy now shipping an agent inside, and executives feeling safe (82%) in the same breath as they report incidents (88%). The trap is quiet and flattering: you spend a year perfecting the one servant in front of you and never notice the hall filling with hands you never mustered, each a prompt away, each arriving inside a tool you already trusted — until the day one of them touches a customer, moves money, or leaks a secret, and you discover you cannot even produce the roll. The estates that keep their standing will do three unglamorous things: <strong>muster</strong> (one cross-platform inventory of every agent, its owner, purpose and data reach), <strong>rank and keep</strong> (risk-tier the dangerous ones, assign an owner, re-test on a schedule), and <strong>watch and retire</strong> (monitor what each actually does; stand down the idle and the rogue). You cannot govern, secure, cost or trust a servant you have never called to stand.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Muster"</h3>
+<p><em>Topic: This morning the frame turns from perfecting one servant to accounting for the whole crowd of them. On 24 September 2026 Dataiku launched Agent Management — a standalone, cross-platform product whose only job is to find the AI agents an enterprise is already running but cannot see, across Copilot Studio, Azure AI Foundry, Salesforce Agentforce, AWS Bedrock, Google Vertex, Databricks, Snowflake Cortex, n8n and Dataiku, into one inventory, and to flag the ones that touch customers, money or sensitive data (Help Net Security; Forkast; BigDATAwire; Dataiku, as reported). It ships into a house already crowded: Gravitee counts more than 3 million agents inside corporations with only ~47% monitored, IBM finds fewer than 1 in 5 organizations keep a complete AI inventory, 80% of enterprise apps now embed an agent, and 82% of executives feel adequately protected while 88% report agent security incidents (Gravitee; IBM; industry surveys, as reported). The muster allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent. It had named every hand and cut it a scoped key, hired a steward to keep one honest book, accepted that the master's own name stood surety for the servants' work, learned to ask whose second coin each advising servant took, sent the governed servants into the fields to reap, handed each a scoped purse with a drawstring the master could reach, and — only last week — looked down at last at the very ground the house stood on and resolved to keep it his own. By any fair reckoning it was the best-governed house in the valley, and the master was proud of it, as he should have been.</p>
+<p>But all of that careful work had a hidden foundation of its own, so obvious that no one had ever spoken it aloud: <strong>the master believed he knew which servants were in his house.</strong> Every discipline he had built — the livery, the book, the bond, the wage, the harvest, the purse — was a discipline for a servant he could <em>name</em>. He had never once considered that the hall might be full of hands he had never hired, because in the old days you could not hire a hand without the master seeing the man walk through the gate.</p>
+<p>Those days were gone, and the master had not noticed them go. For the house no longer took on its servants at the front door where the livery was issued. It took them on <strong>inside every tool it already owned.</strong> The mill came with a miller's boy who could now think for himself; the counting-house came with three clerks the master had never interviewed; the stables, the kitchen, the scriptorium — each merchant who sold the house a thing had, so helpfully, tucked a servant or two inside it, and each of <em>those</em> servants, given a moment and a whispered word, could summon another, and that one another, faster than any steward could write them into a book. A new hand was no longer a hiring. <strong>It was a prompt away.</strong></p>
+<p>So it went, quietly, for a season, until the day the master — for reasons of insurance, or conscience, or a regulator's letter, it does not matter — decided to do the oldest thing a careful house can do, the thing his grandfather did every Michaelmas and he had somehow never done at all. <strong>He called a muster.</strong> He stood in the great hall and had the bell rung and commanded every hand in his employ, from every wing, to come and stand and be counted and say its name and its work.</p>
+<p>And the hall filled. And filled. And kept filling. Servants came from rooms the master had forgotten the house had; servants he had never seen answered to guilds he had never contracted; whole rows of hands stood in livery he did not recognize, sent in by the merchants of the mill and the counting-house and the stables, each swearing it had been working here for months. The master, who had prided himself on the best-governed house in the valley, looked out over a crowd he could not name — three thousand where he had thought there were a few hundred — and understood, with a cold and specific dread, that <strong>he had spent a year perfecting the discipline of the one servant in front of him while the hall behind him filled with strangers.</strong> And worse than the number was a thing he overheard from his stewards as they, too, stared: <em>four houses in five had never taken this muster at all, and did not know it; and of the masters who had, four in five still swore, hand on heart, that their old rules kept them perfectly safe — in the very season nearly nine houses in ten had already suffered a servant doing a thing no one had sanctioned.</em> The danger, the master saw, was not the crowd. <strong>The danger was the confidence of masters who had never once called the crowd to stand.</strong></p>
+<p>Two roads, as always. The easy road was to be reassured by the turnout — <em>look how much work is being done!</em> — and go back to perfecting the one servant he could see. The wiser road, which the careful houses took, began by treating the muster not as a fright but as the first honest act of governance the house had ever performed on its true size. And those houses learned three plain things, and they cost far less to do the first Michaelmas than the tenth.</p>
+<p><strong>The first: keep one muster roll, and let it span every wing.</strong> Not a list per room, kept by each merchant who sent his servants in — for a roll the mill keeps and a roll the counting-house keeps and a roll the stable keeps is no roll of <em>your house</em> at all, and the strangers live in the gaps between them. One roll, kept by the house, that names every hand no matter which merchant sent it, what work it swears to, and which rooms and strongboxes it can enter. You cannot govern a crowd you have only ever seen in fragments.</p>
+<p><strong>The second: rank each hand by the harm it could do, and give the dangerous ones a keeper.</strong> A muster that treats the boy who sweeps the yard and the clerk who signs the drafts as one and the same is only a longer list. The careful houses marked, out of the three thousand, the few hundred that touched a customer, a coffer, or a locked cabinet — and to each of <em>those</em> they fixed a name that answered for it, a written account of what could go wrong, and a standing order to test it again and again on a schedule, not once at hiring and never after. Most hands need only to be known. The dangerous few need a keeper.</p>
+<p><strong>And the third: watch what each hand actually does, and stand the idle and the rogue back down.</strong> A muster taken once and shelved is a fright, not a discipline; by next Michaelmas the hall has filled again with a fresh crowd of strangers. The houses that kept their standing watched the work — which hands earned their bread, which stood idle drawing wage for nothing, which had quietly begun doing a thing no one asked — and they <em>retired</em> servants as readily as they enrolled them, for a house that only ever adds hands and never dismisses one is not governing a workforce; it is hoarding a mob.</p>
+<p>Here is the part that should keep a master awake. The reason the hall filled so quietly, so pleasantly, was that every new hand felt like <em>progress</em> — more work getting done, more of the master's wishes anticipated, and each merchant so eager to bundle in one more helpful servant at no visible charge. All that glorious, helpful busyness was, in part, how the house lost count of itself. <strong>The estates that stayed safe were not the ones with the fewest servants; they were the ones that could, on any morning, ring the bell and produce the roll.</strong> For a master who cannot name his own household cannot govern it, cannot secure it, cannot cost it, and cannot, when one hand finally does the unforgivable thing, even tell you who it was.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you must keep your own; the gate is the one door you guard; the passport names each agent; the census counts the ones you know; the inspector asks you to produce that count; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee — and <strong>the muster is why, having perfected the one servant you can see, you must ring the bell and call the whole estate to stand, because the hall has filled with hands you never knowingly hired, each arriving inside a tool you already trusted, each a prompt away from summoning another: keep one roll across every wing, rank each hand by the harm it could do and give the dangerous ones a keeper, and watch what each actually does so you can stand the idle and the rogue back down.</strong> A house that governs beautifully the one servant in front of it, while three thousand strangers work unmarked in the rooms behind, has not built a governed estate; it has built a very tidy front hall attached to a mob it has never once called to stand.</p>
+<p><strong>The question it forces:</strong> <em>We have named, scoped, funded and grounded the servants we know about. But if we rang the bell this morning and called a full muster of every AI agent in this enterprise — across every platform and every tool we bought — how many would answer that we never knowingly hired, could we say who owns each and what data it can reach, and would we be among the four houses in five that have never taken this muster at all while still swearing our old rules keep us safe?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>If we called a full muster this morning, could we produce the roll?</strong> A whole product category now exists to answer this because most enterprises cannot: &gt;3M agents inside corporations with ~47% monitored (Gravitee), fewer than 1 in 5 with a complete AI inventory (IBM), 80% of enterprise apps now shipping an agent inside. <strong>Can we produce, today, a single cross-platform inventory of every AI agent we run — its owner, its purpose, and the data it can reach — or do we only have a dozen per-console lists with the strangers living in the gaps between them?</strong></li>
+  <li><strong>Are we one of the confident houses that has never taken the muster?</strong> The tell is the gap: 82% of executives feel their policies adequately protect against unauthorized agent actions, while 88% report agent security incidents this year. <strong>Is our confidence based on a tested, current inventory — or on the assumption that because we govern the agents we deliberately deployed, we must know about all of them?</strong></li>
+  <li><strong>Have we ranked our agents by the harm they could do, and can we retire one?</strong> Sprawl is not solved by a longer list. <strong>For the agents that touch customers, money or sensitive data, do we have named ownership, a written risk record, and scheduled re-tests — and do we actually decommission idle or rogue agents, or do we only ever add?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Unregistered agents touching transactions or customer data are a supervised-risk and audit problem, not just an ops one. <strong>Can we give an examiner a complete, current register of every AI agent with access to customer records or payment rails — including those embedded in vendor SaaS (Agentforce, Copilot, Bedrock-based tools) — with an owner and a control for each, or would a muster reveal agents no one can account for?</strong></li>
+  <li>Model-risk management already demands inventory, ownership and ongoing testing for models. <strong>Have we extended that same discipline to agents — a tiered register with re-validation on a schedule for the high-risk ones — or are agents proliferating outside the MRM perimeter that governs our models?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Every agent with reach into PHI is a HIPAA and patient-safety surface. <strong>Do we have a complete inventory of agents that can touch clinical, patient or trial data — across our EHR, our cloud and our SaaS tools — with owner, purpose and data-access documented, or are there "random acts of AI" in the clinic and the lab no one has mustered?</strong></li>
+  <li>Validated clinical workflows assume a known, controlled set of actors. <strong>When an embedded agent appears inside a tool we already use, does it enter our validated environment unmustered — and could an unregistered agent take an action in a patient pathway that our validation never anticipated?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run asset registers and maintenance schedules for physical machines; agents are now unregistered assets acting on your operations. <strong>Have we applied the same register-and-inspect discipline to AI agents on the plant floor and in the supply chain — a single inventory with an owner and a re-test cadence for the high-risk ones — or are agents accumulating like undocumented equipment?</strong></li>
+  <li>Embedded agents arrive inside the industrial software and vendor tools you buy. <strong>Do we know which of our OT/IT vendors ship agents inside their products, what those agents can reach, and whether they appear on our roll — or are we trusting each vendor's own console to be our inventory?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents in checkout, search, pricing and support can act on customers and revenue at peak with no one named for them. <strong>Can we list every customer-facing and revenue-touching agent, who owns it, and what it is authorized to do — and have we retired the ones that are idle or redundant, or are we paying to run (and expose) a crowd we have never counted?</strong></li>
+  <li>Sprawl compounds fastest where tools are bought by the line of business, not central IT. <strong>Do our marketing, merchandising and store teams spin up agents "a prompt away" that never reach a central roll — and would a muster surface a shadow fleet acting under our brand?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability requires you to know, and be able to disclose, what automated systems act on citizens. <strong>Under the transparency duties already in force (EU AI Act Article 50, live since 2 August 2026), can we produce a complete register of AI agents acting in or on public services — with owner, purpose and data reach — or would a muster reveal unregistered systems we are legally obliged to account for?</strong></li>
+  <li>Continuity and auditability outlast any one administration. <strong>Are we building a durable, cross-platform inventory of agents as a matter of record — one that survives staff turnover and vendor changes — or is our knowledge of what we run trapped inside each vendor's console, to be lost when the contract ends?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Muster</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the one question every prior control silently assumed away: <em>do I even know this agent exists?</em> The gate admits the agent; the passport names it; the census counts the ones you know; the inspector asks for that count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those governs a servant you can name. The muster is about the servants you cannot — and this week the market made the distinction into a product: Dataiku shipped Agent Management, a standalone, deliberately cross-platform tool whose entire premise is that you are already running agents you cannot see, scattered across nine vendors' platforms, with no roll that spans them (Help Net Security; Forkast; BigDATAwire; Dataiku, as reported).</strong> The point is blunt: <strong>identity, scope, logging, ownership and funding are all functions that take an agent as their argument — and none of them can fire on an argument you never captured.</strong> Governance that begins at deployment cannot see the agents that arrive by embedding.</p>
+<div class="card"><ul>
+  <li><strong>The development — governance's missing primitive ships as a category: the cross-platform agent inventory.</strong> <strong>On 24 September 2026 Dataiku launched Agent Management (GA October, announced at Dataiku Succeed): it discovers agents across Microsoft Copilot Studio, Azure AI Foundry, Salesforce Agentforce, AWS Bedrock, Google Vertex, Databricks, Snowflake Cortex, n8n and Dataiku into one inventory (owner, intended purpose, data access), and for agents touching customers, sensitive data or live transactions it keeps a standing certification record, names the risks, and re-runs tests on a schedule; it is priced per instance with monitoring metered per agent (Help Net Security; Forkast; The Agile Brand; Dataiku, as reported).</strong> Three engineering realities follow. First, <em>the bet is cross-platform over native</em> — each hyperscaler and SaaS suite offers its own agent console, but an enterprise's agents live across <em>all</em> of them, so the unit of governance has to be the enterprise inventory, not the per-vendor list (Forkast framed it exactly as "cross-platform beats native"). Second, <em>inventory is the precondition for every other control</em> — you cannot scope, monitor, cost, certify or retire an agent that is not on a roll; the reason a whole product exists is that this primitive was missing. Third, <em>metering per agent is the quiet admission</em> — you now count and charge per agent because you can no longer assume you know them all, the same shift that once turned "our servers" into a metered cloud bill.</li>
+  <li><strong>The reality — the estate filled by embedding, faster than any deployment gate could see.</strong> <strong>Gravitee's State of AI Agent Security 2026 counts &gt;3M agents inside corporations with only ~47% actively monitored or secured; IBM finds fewer than 1 in 5 organizations keep a complete, up-to-date AI inventory; 80% of enterprise apps shipped/updated in early 2026 embed at least one agent (up from ~33% in 2024); 98% have deployed or plan to, fewer than half have any inventory; 96% run agents in production and 94% call sprawl a top concern — while 82% of executives feel adequately protected and 88% report agent security incidents this year (Gravitee; IBM; industry surveys, as reported).</strong> Two things cut against comfort. <strong>First, sprawl is a different failure mode than weak governance.</strong> A perfectly governed set of <em>known</em> agents tells you nothing about the unknown ones; the risk is not that your controls are bad but that they never ran, because the agent never crossed a control point. As IBM's Matt Kosinski put it, "there's not a client that doesn't have at least 60 random acts of AI happening throughout the organization." <strong>Second, the confidence gap is the vulnerability.</strong> The 82%-feel-safe / 88%-had-incidents split is an engineering verdict: policy coverage is being confused with asset coverage, and you cannot write a policy that binds an agent you have never enumerated.</li>
+  <li><strong>The answer — muster, tier, watch, retire; then run every other control against the roll.</strong> <strong>Stand up one cross-platform inventory of every agent (owner, purpose, data reach, source platform); risk-tier by blast radius — the agents touching customers, money or sensitive data get named ownership, a certification record and scheduled re-tests; instrument what each agent actually does so you can retire the idle and quarantine the rogue; and make the inventory the argument that feeds identity, scope, logging, the purse and the foundation — the disciplines you already built, now firing on the whole population instead of the known subset.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now pushed to its logical floor: before you can account for what an agent <em>does</em>, you must first be able to account for the fact that it <em>exists</em>.</li>
+</ul></div>
+<p>The strategic core: <strong>the year's governance work built an excellent set of controls that all take a named agent as input; sprawl is the discovery that most of your agents were never named, because they arrived embedded in the tools you already trusted rather than through the door where governance stands.</strong> The market makes the temptation concrete: every embedded agent feels like free progress, every vendor bundles one in helpfully, and each agent can summon the next "a prompt away," so the hall fills while the front-hall governance stays immaculate. The board translation: <strong>an inventory you cannot produce on demand is not an inventory, and a policy that covers agents you cannot enumerate covers nothing.</strong> The failure mode is exact: <strong>a house that names, scopes, funds, grounds and perfects the agents it deliberately deployed — while three million unmustered agents work across its vendors' consoles at ~47% monitored — will pass every governance review of its known fleet and discover, the first time an unregistered agent touches a customer or a coffer, that it cannot even produce the name of the hand that did it.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The muster: you perfected the servant you can see; now call the whole estate to stand. Every prior control takes a named agent as its input; sprawl is the population of agents that were never named, because they arrived by embedding, not by the door. Top left, the hall you govern, named: agents you deliberately deployed; named, scoped, logged, funded; one book, on ground you own; every control fires on them; your immaculate front hall. Top right, the crowd you don't, unmustered: agents embedded in every tool; 80 percent of enterprise apps ship one; a new agent is a prompt away; more than 3 million inside firms with only about 47 percent watched; 60 random acts of AI per company. Between them: every control takes a named agent as its argument and cannot fire on one you never captured, so ring the bell and call the muster. Middle, the arithmetic of the unmustered, per Gravitee, IBM and industry surveys as reported: more than 3 million AI agents operating inside corporations, only about 47 percent monitored or secured; fewer than 1 in 5 organizations keep a complete, up-to-date AI inventory; 80 percent of enterprise apps now embed an agent, up from about 33 percent in 2024; 82 percent of executives feel adequately protected while 88 percent report agent incidents this year. Bottom left, stop, govern only the front hall: a list per vendor console, confuse policy with asset coverage, add agents but never retire, and assume you know them all. Bottom right, start, muster the whole estate: one cross-platform roll with owner, purpose and data reach spanning every platform; rank by blast radius with a keeper and re-tests; watch the work and retire the idle and the rogue." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE MUSTER — you perfected the servant you can see; now call the estate to stand</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Every control takes a NAMED agent as input. Sprawl is the population that was never named.</text>
+
+  <!-- the hall you govern -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE HALL YOU GOVERN (named)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agents you deliberately deployed</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">named · scoped · logged · funded</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">one book, on ground you own</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">every control fires on them</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ your immaculate front hall</text>
+
+  <!-- the crowd you don't -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE CROWD YOU DON'T (unmustered)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agents embedded in every tool</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">80% of enterprise apps ship one</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">a new agent is "a prompt away"</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">&gt;3M inside firms, ~47% watched</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ "60 random acts of AI" per co.</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">every control needs a NAMED agent — ring the bell, call the muster ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF THE UNMUSTERED — (Gravitee; IBM; surveys, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">&gt;3,000,000 AI agents inside corporations; only ~47% monitored or secured</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">fewer than 1 in 5 organizations keep a complete, up-to-date AI inventory</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">80% of enterprise apps now embed an agent (up from ~33% in 2024)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">82% of execs feel adequately protected — while 88% report agent incidents this year</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: govern only the front hall</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a list per vendor console</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· confuse policy w/ asset coverage</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· add agents, never retire</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· assume you know them all</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one stranger from an incident</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: muster the whole estate</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ONE cross-platform roll (owner/</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">&#160;&#160;purpose/data reach), all platforms</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· RANK by blast radius; keeper + re-tests</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· WATCH the work; retire idle &amp; rogue</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">produce the roll on any morning</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You cannot govern, secure, cost or retire what you have never mustered.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Muster the estate · rank by blast radius · watch and retire.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The hall you govern — named agents</span>
+  <span><i class="dot" style="background:#a5416a"></i>The crowd you don't — unmustered</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of sprawl</span>
+</div>
+</div>
+
+<h3>The named hall vs the unmustered crowd — what governance sees, and what it misses</h3>
+<table>
+<tr><th>The hall you govern (named agents)</th><th>The crowd you don't (unmustered agents)</th></tr>
+<tr><td>Deliberately deployed through a control point</td><td>Arrived embedded in tools you already bought</td></tr>
+<tr><td>Named, scoped, logged, funded, on owned ground</td><td>Never captured — no control ever fired on them</td></tr>
+<tr><td>Every prior discipline takes these as input</td><td>The disciplines cannot fire on an unknown argument</td></tr>
+<tr><td>A per-vendor console per platform</td><td>Live across 9+ platforms with no roll that spans them</td></tr>
+<tr><td>Policy coverage looks complete</td><td>Asset coverage is a fraction (~47% monitored)</td></tr>
+<tr><td>Your posture: perfect the front hall</td><td>Your posture: ring the bell, produce the roll</td></tr>
+</table>
+
+<h3>Why "the muster" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This week the market moved the question underneath all of that: a product category was born whose only job is to find the agents you already run and cannot see.</strong> Dataiku's cross-platform bet, and the numbers that justify it — three million agents inside firms, under half monitored, fewer than one in five houses with a complete inventory — prove that the governed hall is a subset, often a small one, of the true population. Governance that begins at deployment cannot cover agents that arrive by embedding. The estates that keep their standing will make the inventory the first control, not the last: muster the whole estate, rank by blast radius, watch the work, retire the idle and the rogue — and then let every discipline they already built fire on the full roll.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to its foundation: <em>be able to account for the fact that it exists at all.</em> On a legacy estate the instinct, after a hard year of governance work, is to trust that the controls built for the agents IT deployed cover the field. Under the muster that is exactly the reflex to check: the agents multiplying fastest are the ones no one deployed — embedded in SaaS, spun up by a line of business, summoned by another agent a prompt away. The retrofit is <strong>muster, tier, watch, retire. Muster:</strong> stand up one cross-platform inventory of every agent, its owner, purpose and data reach, spanning every console. <strong>Tier:</strong> rank by blast radius and give the customer-, money- and data-touching agents an owner, a risk record and scheduled re-tests. <strong>Watch and retire:</strong> monitor what each does, and decommission the idle and the rogue as readily as you enroll. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you keep your own; the gate is the one door; the passport names each agent; the census counts the ones you know; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <em>the muster is why, having perfected the servant you can see, you must ring the bell and call the whole estate to stand: keep one roll across every wing, rank each hand by the harm it could do, and watch what each does so you can retire the idle and the rogue.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The development — a cross-platform agent-inventory category.</strong> <strong>Dataiku Agent Management (24 Sep, GA October): discovers agents across Copilot Studio, Azure AI Foundry, Agentforce, Bedrock, Vertex, Databricks, Snowflake Cortex, n8n and Dataiku; captures owner/purpose/data-access; risk-tiers the customer-, money- and data-touching agents with certification records and scheduled re-tests; priced per instance, metered per agent (Help Net Security; Forkast; BigDATAwire; Dataiku, as reported).</strong> The inventory is the missing primitive.</li>
+  <li><strong>The scale of the unmustered.</strong> <strong>&gt;3M AI agents inside corporations; only ~47% actively monitored or secured (Gravitee, State of AI Agent Security 2026, as reported).</strong> More than half are unwatched.</li>
+  <li><strong>The inventory gap.</strong> <strong>Fewer than 1 in 5 organizations keep a complete, up-to-date inventory of their AI systems (IBM, cited by Dataiku, as reported).</strong> You cannot govern what you have not mustered.</li>
+  <li><strong>The embedding vector.</strong> <strong>80% of enterprise apps shipped or updated in early 2026 embed at least one AI agent, up from ~33% in 2024 (industry data, as reported).</strong> Agents arrive in the tools you already bought.</li>
+  <li><strong>The confidence gap.</strong> <strong>82% of executives believe existing policies adequately protect against unauthorized agent actions, while 88% of organizations report confirmed or suspected agent security incidents this year (as reported); 96% run agents in production, 94% call sprawl a top concern.</strong> Policy coverage is being confused with asset coverage.</li>
+  <li><strong>The value gap that makes the muster urgent.</strong> <strong>~23% of organizations scaling agents in ≥1 function; only ~12% of CEOs report both revenue gain and cost reduction; 56% report no significant financial benefit yet; IBM's CEO study finds 85% expect positive ROI from scaled AI efficiency by 2027 though only ~25% of AI initiatives delivered expected ROI over the past three years (as reported).</strong> You cannot find the idle and redundant in a crowd you have never counted.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>MCP 2026-07-28 is the tool-connection standard (with a reported 78% of enterprise AI teams using MCP in production); EU AI Act Article 50 transparency live since 2 August 2026, with the Digital Omnibus deferring standalone high-risk obligations to 2 December 2027; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and &gt;40% of agentic projects cancelled by 2027 (as reported).</strong> More connection and more agents mean more to muster, not less.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">There's not a client that doesn't have at least 60 random acts of AI happening throughout the organization with shadow IT, shadow AI.</div><div class="a">— Matt Kosinski, IBM, on agent sprawl as the new shadow IT (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue.</div><div class="a">— SAP News Center, headline framing agent sprawl for the C-suite (September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">More than 3 million AI agents are operating inside corporations — and only about 47% are actively monitored or secured.</div><div class="a">— Gravitee, State of AI Agent Security 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"You can perfect the one servant in front of you and still lose the house. Ring the bell and call a full muster: how many hands answer that you never knowingly hired — and can you produce the roll?"</div><div class="a">— the radar, on why the inventory is the first control, not the last</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>A category is born</td><td><span class="v">Dataiku Agent Management (24 Sep 2026, GA October): a standalone, cross-platform product that inventories every AI agent — owner, purpose, data access — across Copilot Studio, Azure AI Foundry, Agentforce, Bedrock, Vertex, Databricks, Snowflake Cortex, n8n and Dataiku, and risk-tiers those touching customers, money or sensitive data</span></td><td>Help Net Security; Forkast; BigDATAwire; Dataiku, as reported</td></tr>
+<tr><td>The scale of the unmustered</td><td><span class="v">More than 3 million AI agents operating inside corporations; only ~47% actively monitored or secured</span></td><td>Gravitee, State of AI Agent Security 2026, as reported</td></tr>
+<tr><td>The inventory gap</td><td><span class="v">Fewer than 1 in 5 organizations keep a complete, up-to-date inventory of their AI systems</span></td><td>IBM (cited by Dataiku), as reported</td></tr>
+<tr><td>The embedding vector</td><td><span class="v">80% of enterprise apps shipped or updated in early 2026 embed at least one AI agent, up from ~33% in 2024</span></td><td>Industry data, as reported</td></tr>
+<tr><td>The confidence gap</td><td><span class="v">82% of executives believe existing policies adequately protect against unauthorized agent actions — while 88% of organizations report confirmed or suspected agent security incidents this year; 96% run agents in production, 94% call sprawl a top concern</span></td><td>Gravitee; industry surveys, as reported</td></tr>
+<tr><td>The value gap</td><td><span class="v">~23% of organizations scaling agents in ≥1 function; only ~12% of CEOs report both revenue gain and cost reduction; 56% report no significant financial benefit yet</span></td><td>Enterprise adoption surveys, as reported</td></tr>
+<tr><td>The CEO horizon</td><td><span class="v">85% of CEOs expect positive ROI from scaled AI efficiency by 2027 — though only ~25% of AI initiatives have delivered expected ROI over the past three years</span></td><td>IBM CEO study, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Muster the estate — stand up one cross-platform inventory of every AI agent you run.</strong> The market just shipped a category for this because most enterprises cannot produce the roll: &gt;3M agents inside firms at ~47% monitored, fewer than 1 in 5 with a complete inventory, 80% of apps now embedding an agent. <strong>This month, build (or buy) a single inventory that spans every platform — Copilot, Agentforce, Bedrock, Vertex, Databricks, Snowflake, your own stack and the SaaS you buy — capturing for each agent its owner, its intended purpose, and the data it can reach.</strong> Report one number to the board: agents on the roll versus your best estimate of agents actually running — and close that gap.</li>
+  <li><strong>Rank by blast radius — give the dangerous agents a keeper and a schedule.</strong> A longer list is not governance; the confidence gap (82% feel safe, 88% had incidents) is what a muster without tiering leaves untouched. <strong>This month, risk-tier the inventory by what each agent can touch — customers, money, sensitive data, live systems — and for the high-risk tier assign named ownership, a written risk/certification record, and tests that re-run on a schedule rather than once at deployment.</strong> Report the share of high-risk agents that have a named owner and a current, passing re-test.</li>
+  <li><strong>Watch and retire — instrument the work and stand down the idle and the rogue.</strong> A muster taken once and shelved refills with strangers by next quarter; only ~23% scale agents in even one function while 56% see no significant benefit, so the idle and redundant are hiding in the crowd. <strong>This month, instrument what your agents actually do, identify the ones that are idle, redundant, or acting outside their stated purpose, and decommission or quarantine them — making enrollment and retirement equally routine.</strong> Report the number of agents retired or quarantined this quarter, and make the muster a standing cadence, not a one-time fright. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you keep your own; the census counts the ones you know; the inspector asks for the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and the muster is why, having perfected the servant you can see, you must ring the bell and call the whole estate to stand: keep one roll across every wing, rank each hand by the harm it could do, and watch what each does so you can retire the idle and the rogue, because you cannot govern, secure, cost or trust a servant you have never called to stand.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The development — Dataiku (24 Sep 2026): Agent Management, a standalone, cross-platform product (GA October, announced at Dataiku Succeed) that inventories agents across Microsoft Copilot Studio, Azure AI Foundry, Salesforce Agentforce, AWS Bedrock, Google Vertex, Databricks, Snowflake Cortex, n8n and Dataiku (owner, purpose, data access) and risk-tiers those touching customers, sensitive data or live transactions, priced per instance with monitoring metered per agent (Help Net Security; Forkast; BigDATAwire/HPCwire; The Agile Brand; aithority; Dataiku) · The scale of the unmustered — &gt;3M AI agents inside corporations, ~47% monitored or secured (Gravitee, State of AI Agent Security 2026) · The inventory gap — fewer than 1 in 5 organizations keep a complete, up-to-date AI inventory (IBM, cited by Dataiku) · The embedding vector — 80% of enterprise apps embed at least one agent, up from ~33% in 2024 (industry data) · The confidence gap — 82% of executives feel adequately protected while 88% report agent security incidents this year; 96% run agents in production, 94% call sprawl a top concern (Gravitee; industry surveys) · Board framing — "AI Agent Sprawl: Why AI Governance Is Now a Board-Level Issue" (SAP), and "60 random acts of AI" per organization (IBM, Matt Kosinski) · The value gap — ~23% scaling agents in ≥1 function; ~12% of CEOs report both revenue gain and cost reduction; 56% no significant benefit yet; 85% of CEOs expect positive ROI from scaled AI efficiency by 2027 against ~25% of initiatives delivering expected ROI over three years (IBM CEO study; enterprise adoption surveys) · The prior rails — MCP 2026-07-28 (tool-connection standard; ~78% of enterprise AI teams using MCP in production), EU AI Act Article 50 transparency (live since 2 August 2026) with the Digital Omnibus deferring standalone high-risk obligations to 2 December 2027, Gartner (40% of enterprise apps embed task-specific agents by 2026; &gt;40% of agentic projects cancelled by 2027) · Adjacent same-week developments — Salesforce Dreamforce 2026 (AIforce, Headless 360), Ando (24 Sep, agents as first-class chat members, $20M raise), Strada (24 Sep, browser-automation record/replay for legacy portals), Adecco rolling out Salesforce Agentforce Coworker (powered by Anthropic's Claude) across 40+ countries. The "muster" framing — that every prior control takes a named agent as its input, that sprawl is the population of agents that were never named because they arrived embedded, and that a house must muster the whole estate, rank by blast radius, and watch and retire — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 29 September 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: privacy-friendly visit counting via GoatCounter -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
