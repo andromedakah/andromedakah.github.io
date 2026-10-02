@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 2 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the armoury' — on 30 September 2026 Google announced Gemini 4 Argon, a frontier model trained for cyber defense that can autonomously find, validate and patch critical vulnerabilities, and issued it first to vetted 'trusted defenders' via Fairwind 'without cyber guardrails.' A dual-use weapon: the same edge that mends the wall breaches it. Google DeepMind states it plainly; state actors already use Gemini for cyber ops; GPT-6 Astra tripped OpenAI's 'Critical' tier and GPT-6.1 was scrapped (WSJ). The board move: arm the defenders first, build an armoury (vetted access, identity, least privilege, a log), assume the adversary is armed. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant and owned the ground — now a weapon is issued to the estate</div>
+  <h1>The Armoury</h1>
+  <div class="subhead">A frontier model just shipped like munitions. On 30 September 2026 Google issued Gemini 4 Argon — a model that can autonomously find, validate and patch critical vulnerabilities — first to vetted "trusted defenders," "without cyber guardrails." A dual-use blade: the same edge that mends the wall breaches it. The question is no longer whether it's sharp. It's who may draw it, and whether your defenders hold it before your attackers do.</div>
+  <div class="meta">Friday, 2 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 30 September 2026 Google announced Gemini 4 Argon, "our next era of frontier intelligence" — a model trained for cybersecurity defense that can autonomously find, validate and patch critical software vulnerabilities, with a reported industry-leading 1-million-token output limit and reported marks of 88% DeepSWE v1.1, 95.3% Terminal-bench 2.1 and 86.8% OSWorld-2.0 (Google; SecurityWeek; The Hacker News; BetaNews, as reported). The news is not the benchmark — it's <em>how it ships</em>: Argon goes first to vetted "trusted defenders" via Google's Fairwind Program (650+ partners, built on the CodeMender harness), and those defenders and Google's own teams get it "without cyber guardrails" — the guardrail-free edition is the <em>gated</em> one (SecurityWeek; howaiworks.ai, as reported). Google DeepMind states the reason in one sentence: "Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat." A blade that patches the breach is the blade that makes one — and it's already real: Google's own threat intelligence has state actors using Gemini for cyber ops, GPT-6 Astra tripped OpenAI's "Critical" cyber tier, and GPT-6.1 was scrapped over safety (WSJ). The board question is no longer which model, at what price, on whose ground — it is: a dual-use weapon has arrived; who in our house may draw it, is it in our defenders' hands before our attackers', and are we keeping an armoury — or a free-for-all?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long season the radar governed the <em>servant</em> and then looked to the <em>ground</em> — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and own the floor it stands on (the foundation). <strong>This morning a different kind of thing is delivered to the estate: not a servant to govern or a floor to own, but a weapon to issue.</strong> And the way it is being issued is the whole story.</p>
+<p><strong>The event — a frontier model shipped as a weapon, handed unsheathed only to vetted hands.</strong> On <strong>30 September 2026 Google announced Gemini 4 Argon</strong>, "our next era of frontier intelligence," a model trained for cybersecurity defense that can <strong>autonomously find, validate and patch critical software vulnerabilities</strong>, with a reported <strong>1-million-token output limit</strong> and reported marks of <strong>88% DeepSWE v1.1, 95.3% Terminal-bench 2.1, 86.8% OSWorld-2.0</strong> (Google; SecurityWeek; The Hacker News; BetaNews, as reported). The part that matters to a board is the distribution: Argon goes <strong>first to vetted "trusted defenders" via the Fairwind Program</strong> (650+ partners, built on the CodeMender vulnerability harness), and those trusted defenders — and Google's own teams — receive it <strong>"without cyber guardrails."</strong> The guardrail-free edition is the <em>gated</em> one, handed only to the people Google has vouched for; everyone else waits, and gets the restricted version, in stages (SecurityWeek; howaiworks.ai; TechBriefly, as reported). That is not how you ship a product. <strong>That is how you issue a weapon.</strong></p>
+<p><strong>The reason — the same blade defends the wall and breaches it.</strong> Google DeepMind says the quiet part plainly: <em>"Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat"</em> (as reported). This is dual-use in its purest form — the capability that lets a defender find-and-patch a zero-day is the same capability that lets an attacker find-and-exploit it — and it is not hypothetical: <strong>Google's own Threat Intelligence Group has documented state-sponsored actors (Russia, China, North Korea, Iran) already using Gemini for vulnerability research, target identification and exploit debugging</strong> (as reported). The pattern is now industry-wide. <strong>OpenAI's GPT-6 Astra (3 Sep 2026) was the first model to trip OpenAI's strictest internal safety tier — the "Critical" threshold for cybersecurity capability</strong> — and the <em>Wall Street Journal</em> reported OpenAI <strong>scrapped the planned GPT-6.1 Astra over safety concerns</strong> (deeplearning.ai; DataNorth; WSJ via runtimewire, as reported). The frontier has reached cyber-weapon capability, and every lab is now rationing the sharpest edge.</p>
+<p><strong>The stakes — keep an armoury, not a free-for-all, and arm your defenders first.</strong> The board move re-uses the whole year's discipline and points it at the weapon. <strong>First, arm the defenders first</strong> — the capability is symmetric and advantage goes to whoever draws first; frontier cyber-AI that shrinks your patch window from weeks to hours is not optional once your adversary has the same blade. <strong>Second, build the armoury</strong> — gate the sharpest capability behind vetted access, identity, least privilege, a locked rack and a log of who drew what; the vendor's "guardrail-free only for the vouched-for" model <em>is</em> the template for your own internal issuing. <strong>Third, assume the adversary is armed</strong> — re-baseline your exposure against machine-speed, autonomous exploitation, because the blade favours the attacker who moves first just as much as the defender. And do it <strong>now</strong>, while the capability is being handed out to a vetted few — because the window in which only trusted defenders hold the blade is exactly the window in which to get it into your defenders' hands.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — a frontier model shipped as a weapon, issued only to vetted hands.</strong> <strong>Gemini 4 Argon (30 Sep) — autonomous find/validate/patch of critical vulns; reported 1M-token output, 88% DeepSWE v1.1, 95.3% Terminal-bench 2.1, 86.8% OSWorld-2.0 — rolled out first to vetted "trusted defenders" via Fairwind, "without cyber guardrails" (Google; SecurityWeek; The Hacker News, as reported).</strong> The guardrail-free version is the gated one.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reason — the same blade defends the wall and breaches it.</strong> <strong>"In the wrong hands, the same capabilities can become an equally powerful threat" (Google DeepMind); state actors already use Gemini for cyber ops; GPT-6 Astra was the first to trip OpenAI's "Critical" cyber tier, and GPT-6.1 was scrapped over safety (WSJ) (as reported).</strong> Dual-use is the whole design.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — arm the defenders first, build the armoury, assume the adversary is armed.</strong> Issue frontier cyber-AI to your defenders now; gate the sharpest edge behind vetted access, identity, least privilege and a log; and threat-model for an attacker holding the same blade at machine speed.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — and <strong>the armoury is about a weapon.</strong> This week a frontier lab stopped shipping a cyber model like a product and started issuing it like munitions: Gemini 4 Argon goes to vetted defenders first, unsheathed ("without cyber guardrails"), because the capability that patches a critical vulnerability is the identical capability that exploits one, and handing it indiscriminately would arm every attacker on the internet. That is dual-use stated without euphemism, and it is already real — state actors are using these tools today, GPT-6 Astra tripped OpenAI's "Critical" cyber threshold, and GPT-6.1 was shelved over safety. The estates that keep their standing will not debate whether the blade is dangerous — it is, to everyone — they will do three unglamorous things: <strong>arm their defenders first</strong> (adopt frontier cyber-AI on defense before the attacker's copy arrives), <strong>build an armoury</strong> (gate the sharpest capability behind vetted access, identity and a log, exactly as the vendor gates it from them), and <strong>assume the adversary is armed</strong> (re-baseline exposure for machine-speed, autonomous exploitation). A house that treats a dual-use weapon like an ordinary tool — handed to anyone, logged by no one, issued to attackers and defenders at the same rate — has not modernised; it has left the armoury door open.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Armoury"</h3>
+<p><em>Topic: This morning a weapon arrives on the estate. On 30 September 2026 Google announced Gemini 4 Argon — a frontier model trained for cybersecurity defense that can autonomously find, validate and patch critical vulnerabilities (reported 1M-token output; 88% DeepSWE v1.1; 95.3% Terminal-bench 2.1; 86.8% OSWorld-2.0) — and issued it first to vetted "trusted defenders" through the Fairwind Program, "without cyber guardrails," because the guardrail-free edition is the gated one (Google; SecurityWeek; The Hacker News; howaiworks.ai, as reported). Google DeepMind states the dual-use truth plainly: the same capability that finds and fixes a vulnerability can, in the wrong hands, become an equally powerful threat — and Google's own threat intelligence has state actors already using Gemini for cyber operations. GPT-6 Astra (3 Sep) was the first model to trip OpenAI's "Critical" cyber-capability tier, and GPT-6.1 was scrapped over safety (WSJ, as reported). The armoury allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, done everything right. It had named every hand and cut it a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each counsellor took, sent the servants to reap, handed each a scoped purse, and — the hardest lesson of all — refused to let the company that rented it the cheap stove quietly pour the ground the house stood on. By any fair reckoning it was a well-governed estate on ground it owned, and the master had earned a quiet season.</p>
+<p>He did not get one. For one morning a master-smith came up the road with a long flat case, and inside it lay a <strong>blade</strong> — the finest the valley had ever seen, forged to a terrible sharpness. <em>"This,"</em> said the smith, <em>"will mend your walls. Set it to your defences and it will find every crack in the stonework faster than your mason could in a year, and seal each one before nightfall."</em> And it was true: the master watched the blade run along his walls and close breaches he had not even known were there. It was a wonder. It was also, he saw at once, the single most dangerous thing anyone had ever carried through his gate — for a blade that finds every crack in a wall to <em>mend</em> it is, in another hand, a blade that finds every crack in a wall to <em>climb through</em> it. The edge does not know which it is doing. <strong>The edge only knows it is sharp.</strong></p>
+<p>Here was the thing the master noticed, and it changed how he thought about the whole affair: <strong>the smith would not sell the blade to just anyone.</strong> He had come to this house, and a handful of others, because he had <em>vouched</em> for them — he knew their defenders, he knew their locks, he had watched how they kept their keys. To everyone else the smith sold a duller, hooded blade, kept in a sheath that would not fully draw. The sharp, unhooded edge went only to the vetted few. <em>"I give the bare blade,"</em> the smith said, <em>"only to the hands I trust, because the same steel that saves your house would sack your neighbour's. If I hung these on a market stall, I would arm every thief in the county by supper."</em> And the master understood that he was not being <em>sold a tool.</em> <strong>He was being issued a weapon</strong> — and the care in the issuing was the whole point.</p>
+<p>Two roads, as always. The easy road was to take the wonderful blade, lean it in a corner of the hall where it caught the light, let any servant pick it up to trim a hedge or pry a crate, and feel very modern for owning it. The wiser road, which the careful houses took, began with a colder set of questions than <em>"is it sharp?"</em> — for everyone already knew it was sharp. The questions were: <em>who in this house is permitted to draw it? is it in my defenders' hands before it is in my enemy's? and where, exactly, is it kept when no one is wielding it?</em> And when the careful houses answered honestly, they built, before anything else, <strong>an armoury</strong> — a locked rack, a roll of who may draw which blade, a record of every time one left the wall and came back — because a weapon lying loose in a well-run hall is more dangerous than a weapon in a badly-run one, precisely because the well-run house trusts its own halls.</p>
+<p>So the wise houses learned three plain things, and the order mattered. <strong>The first: arm the defenders first.</strong> The blade's edge is the same for attack and defence, which means the advantage goes to whoever draws it first — and the master could be certain of one thing, because the smith had told him and the road already whispered it: <strong>the same kind of blade was being carried, right now, toward the people who meant him harm.</strong> Raiders in the hills were already using the smith's earlier work to find the cracks in houses like his. To wait, to study the blade a while longer before issuing it, was not caution; it was disarming his own guard while his enemy armed theirs. <strong>The second: build the armoury, not the free-for-all.</strong> Keep the sharpest edge behind a vetted hand, a lock and a log — issue it the way the smith issued it to you, to the vouched-for only, each draw recorded — because the whole danger of a dual-use blade is that it is as happy in a careless friend's hand as in a foe's. <strong>And the third: assume the raiders are armed.</strong> Do not reckon your walls against last year's siege; reckon them against an enemy holding the very blade you are holding, moving at the speed the blade allows — which is to say, faster than a watchman can run. The houses that fell were not the ones that lacked the blade. They were the ones that owned it, left it in the corner, and never imagined the men outside had one too.</p>
+<p>Here is the part that should keep a master awake. The wonder of the blade — how fast it mended, how cleanly it closed a breach — was itself a kind of seduction, because a thing that useful <em>wants</em> to be left out where anyone can grab it. <strong>And every reason the blade was wonderful on your wall was a reason it was terrible in the hands outside it.</strong> One great smith, that very season, had forged an edge so keen that even <em>he</em> judged a sharper version of it too dangerous to finish, and set it aside — not out of timidity, but because he had measured what it could do and flinched. The lesson was not that the blade was evil. The lesson was that <strong>a weapon is defined by who may draw it, and a house that cannot answer that question has not armed itself — it has armed the room.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the ground is the foundation you keep yours; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <strong>the armoury is why, when a dual-use weapon is issued to the estate, you must ask not whether the blade is sharp (it is, for everyone) but who may draw it, whether your defenders hold it before your attackers do, and where it is locked when idle: arm the defenders first, keep the sharpest edge behind a vetted hand and a log, and reckon your walls against an enemy holding the very same blade.</strong> A house that leans a dual-use blade in the corner of a trusted hall has not modernised its defences; it has issued a weapon to everyone who walks through the hall, and called the open door convenience.</p>
+<p><strong>The question it forces:</strong> <em>A dual-use weapon has just been issued to the vetted few — and the same edge is already moving toward the people who mean us harm. Are our defenders holding it before our attackers do? Do we keep an armoury — a vetted hand, a locked rack, a log of every draw — or have we leaned the sharpest blade in the valley in the corner of a trusted hall, where any careless friend, and eventually any foe, can pick it up? And have we reckoned our walls against last year's siege, or against an enemy holding the very blade we hold, moving at the speed it allows?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have our defenders been issued the blade before our attackers get theirs?</strong> The capability is symmetric — the model that autonomously finds-validates-patches a critical vulnerability is the model that finds-and-exploits one — and the vendor is handing the unsheathed version to vetted defenders <em>now</em> (Gemini 4 Argon via Fairwind, "without cyber guardrails"). <strong>For our top security workflows, do we have a dated plan to put frontier cyber-AI into our defenders' hands this quarter — or are we studying it while the same class of tool is already in our adversaries' hands?</strong></li>
+  <li><strong>Do we run an armoury or a free-for-all?</strong> The vendor gates its sharpest edge behind vetted access, identity and a log, and hands the guardrail-free version only to the vouched-for. <strong>Inside our own house, who is permitted to draw frontier cyber-AI, is every use scoped and logged to a named owner, and is the sharpest capability behind least-privilege access — or is it leaning in the corner of a trusted hall where any employee (or any compromised account) can pick it up?</strong></li>
+  <li><strong>Have we re-baselined our exposure for an armed, machine-speed adversary?</strong> State actors already use frontier models for cyber operations (Google Threat Intelligence), and GPT-6 Astra tripped OpenAI's "Critical" cyber tier. <strong>Does our risk model still assume human-speed attackers and week-long patch windows — or has it been rewritten for an opponent who can find-and-exploit at the speed these blades allow, which is faster than a human watchman can respond?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Autonomous vulnerability discovery cuts both ways against a regulated, high-value target. <strong>Can we show our regulator and board a dated program to deploy frontier cyber-AI on defense (shrinking mean-time-to-patch) alongside a hardened threat model for the same capability used against us — or are we exposed on both sides of a symmetric weapon?</strong></li>
+  <li>Access to a dual-use capability is itself a concentration and insider risk. <strong>Who in the institution can invoke frontier cyber-AI, under what least-privilege controls, and is every invocation attributable and logged the way we log access to the trading book or the vault?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and device estates are full of unpatched legacy systems a machine-speed attacker can now sweep. <strong>Where autonomous find-validate-patch could close critical vulnerabilities in connected medical systems, do we have a defender-side deployment plan — and have we reckoned the same capability being turned on our patient data and devices?</strong></li>
+  <li>Patient-safety and validation regimes move slowly; weaponised AI moves fast. <strong>Can our security posture adopt frontier cyber-AI defensively without waiting for the multi-year validation cadence our clinical systems run on — because the adversary is not waiting?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>OT and supply-chain systems were never built for machine-speed exploitation. <strong>Have we issued frontier cyber-AI to the teams defending our plants and supplier connections, and locked the capability behind a vetted-access armoury — or is critical infrastructure defended at human speed against an adversary moving at the blade's?</strong></li>
+  <li>Dual-use tools inside an industrial estate are an insider-threat surface. <strong>Who may draw this blade on the factory floor, and is every use logged and least-privileged, so a careless or compromised hand cannot turn a defensive tool into a sabotage tool?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Peak-season uptime and payment systems are prime targets for autonomous exploitation. <strong>Before our biggest sales day, have we put frontier cyber-AI on defense to find-and-patch at machine speed — and stress-tested checkout, search and payments against an attacker wielding the same class of tool?</strong></li>
+  <li>Customer data is the prize a dual-use blade is pointed at. <strong>Is access to frontier cyber-AI inside our org gated, scoped and logged, so the tool we use to protect customer data cannot be quietly turned to harvest it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty and continuity make an unmanaged dual-use weapon a governance failure, not just a risk. <strong>Under the duties we already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show that frontier cyber-AI is issued to our defenders under vetted, logged, least-privilege control — an armoury, not a free-for-all — and that no critical public service is defended at human speed against a machine-speed adversary?</strong></li>
+  <li>Access to offensive-capable AI is itself a national-security surface. <strong>Do we know, and can we attest, exactly who in our agencies may draw this capability, and is the roll of permitted hands as tightly kept as access to any other dual-use asset we hold?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Armoury</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded, and standing on ground I own?</em> and started asking the one question none of those controls touch: <em>a dual-use weapon has been issued to the estate — who may draw it, and is it in my defenders' hands before my attacker's?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery, steward, surety, second wage, two harvests and purse govern the servant; the foundation keeps the ground yours. <strong>Every one of those governs something you own or run. The armoury is about a weapon you did not make, that cuts both ways, and whose danger is defined entirely by who may draw it — and this week the market made that impossible to ignore: Google shipped Gemini 4 Argon not like a product but like munitions, issuing the guardrail-free edition only to vetted "trusted defenders" through Fairwind, because the capability that patches a critical vulnerability is the identical capability that exploits one.</strong> The point is blunt: <strong>the thing that makes frontier cyber-AI valuable on your wall (autonomous find-validate-patch at machine speed) is the same thing that makes it catastrophic in an attacker's hand, and confusing a dual-use weapon with an ordinary tool is how a well-governed house leaves the sharpest blade in the valley leaning in the corner of a trusted hall.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — a frontier model issued as a weapon, to vetted hands, unsheathed.</strong> <strong>On 30 September 2026 Google announced Gemini 4 Argon — "our next era of frontier intelligence," trained for cybersecurity defense, able to autonomously find, validate and patch critical software vulnerabilities, with a reported industry-leading 1-million-token output limit and reported marks of 88% DeepSWE v1.1 (agentic coding), 95.3% Terminal-bench 2.1 and 86.8% OSWorld-2.0 (computer use) — rolled out first to vetted "trusted defenders" through the Fairwind Program (650+ partners, built on the CodeMender harness), who together with Google's own teams receive it "without cyber guardrails," while everyone else waits for a more-restricted version released in stages (Google; SecurityWeek; The Hacker News; BetaNews; TechBriefly; howaiworks.ai, as reported).</strong> Architecturally, three things follow. First, <em>the distribution model is the security control</em> — when the guardrail-free edition is the <em>gated</em> one, the vendor is treating capability itself as the hazard and vetting + identity as the containment; that is the template an enterprise should copy for its own internal issuing. Second, <em>the capability is symmetric by construction</em> — autonomous find-validate-patch is one pipeline; point it at your own estate and it is defense, point it at someone else's and it is offense, and the model does not know the difference. Third, <em>"defense-first" is a race, not a posture</em> — issuing the blade to defenders first only helps if you actually issue it, because the same class of capability is already in adversaries' hands (Google Threat Intelligence documents state actors using Gemini for cyber ops), so the defensive advantage is purely a function of who draws first.</li>
+  <li><strong>The reason — dual-use is the whole design, and the labs are now rationing the edge.</strong> <strong>Google DeepMind states it directly: "Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat." The pattern is industry-wide: OpenAI's GPT-6 Astra (3 Sep 2026, $10/$50) was the first model to trip OpenAI's strictest internal safety tier — the "Critical" threshold for cybersecurity capability — and the WSJ reported OpenAI scrapped the planned GPT-6.1 Astra over safety concerns (Google DeepMind; deeplearning.ai; DataNorth; WSJ via runtimewire, as reported).</strong> Two engineering realities cut against comfort. <strong>First, containment moved from the model to the issuing.</strong> You cannot make an autonomous-exploitation capability safe by filing down its edge without also blunting its defensive value; so the labs contain it the only way a weapon can be contained — by controlling who holds it (vetting, identity, gated access, staged release). <strong>The access list is the safety mechanism.</strong> <strong>Second, the symmetry is already being exploited.</strong> The dual-use risk is not a future scenario: state-sponsored actors are using frontier models for vulnerability research and exploit development today, which means an enterprise that treats this as "emerging" has already fallen behind an adversary treating it as operational.</li>
+  <li><strong>The answer — arm the defenders first, build the armoury, assume the adversary is armed.</strong> <strong>Put frontier cyber-AI into your defenders' hands now (map where autonomous find-validate-patch shrinks your mean-time-to-patch from weeks to hours); gate the sharpest capability behind a vetted-access armoury — identity, least privilege, a locked rack and a log of every invocation, exactly as the vendor gates it from you; and re-baseline your threat model for a machine-speed, autonomous adversary holding the same blade — reusing the identity, least-privilege, logging and ownership disciplines you already built for the livery, the keyring, the locksmith and the errand, now pointed at a dual-use weapon.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the sharpest axis of all: not what the agent is, serves, harvests, spends or stands on, but who in your house may draw a weapon that cuts both ways, and whether they drew it before the enemy did.</li>
+</ul></div>
+<p>The strategic core: <strong>a dual-use cyber weapon is good news and catastrophic news in the same object, and you cannot keep the good without managing the catastrophic — the defensive value (machine-speed find-validate-patch) is inseparable from the offensive value (machine-speed find-and-exploit), so the only lever is who holds it.</strong> The market makes the temptation concrete: a tool this useful wants to be left out where anyone can grab it, and it feels modern and efficient to do exactly that. The board translation: <strong>treat frontier cyber-AI as an armoury, not an appliance — arm your defenders first, gate the edge behind a vetted hand and a log, and reckon your walls against an armed enemy.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its servants — and then leans the sharpest dual-use blade in the valley in the corner of a trusted hall, issued to no one in particular and logged by no one at all — will pass every governance review and discover, the first time a careless or compromised hand draws it, or the first time a machine-speed raider arrives holding the identical edge, that it armed the room instead of the guard.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The armoury: you governed the servant and owned the ground, and now a weapon is issued to the estate. A dual-use blade: the same edge that mends the wall breaches it, so danger is defined by who may draw it. Top left, the defensive edge, mend the wall: Gemini 4 Argon, announced 30 September, autonomously finds, validates and patches critical vulnerabilities; reported 88 percent DeepSWE v1.1 and 95.3 percent Terminal-bench; shrinks the patch window from weeks to hours; issued to vetted defenders without cyber guardrails. Top right, the offensive edge, breach it: the same capability turned outward finds and exploits critical vulnerabilities at machine speed; state actors already use it, per Google Threat Intelligence; GPT-6 Astra tripped the Critical cyber tier and GPT-6.1 was scrapped. Between them, it is the same blade and the edge does not know which it is doing; the guardrail-free edition is the gated one, so vetting is the safety, and in the wrong hands the same capabilities can become a threat. Middle, the discipline: run an armoury, not a free-for-all. Who may draw it, with vetted access, a named owner and least privilege; a locked rack keeping the sharpest edge behind identity and gated access; a log of every draw, attributable like access to the vault; the vendor gates it from you exactly this way, so copy the pattern internally. Bottom left, stop: lean the blade in the corner of a trusted hall, where any hand or hijacked account can pick it up, where attackers adopt faster than you, and where it is just a tool. Bottom right, start: keep an armoury, arm the defenders first by adopting now, with vetted access, least privilege and a log, assume the adversary is armed, re-baseline for machine-speed exploitation, because defense-first is a race, so draw first." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE ARMOURY — you governed the servant; now a WEAPON is issued</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A dual-use blade: the SAME edge that MENDS the wall BREACHES it. Danger = who may draw it.</text>
+
+  <!-- the defensive edge -->
+  <rect x="34" y="58" width="300" height="140" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE DEFENSIVE EDGE (mend the wall)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 4 Argon (30 Sep)</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">autonomously FIND · VALIDATE · PATCH vulns</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">88% DeepSWE · 95.3% Terminal-bench</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">shrinks patch window: weeks → hours</text>
+  <text x="52" y="177" font-size="10" fill="#a5e5cd" font-family="sans-serif">issued to VETTED defenders first</text>
+  <text x="52" y="192" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ "without cyber guardrails"</text>
+
+  <!-- the offensive edge -->
+  <rect x="346" y="58" width="300" height="140" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE OFFENSIVE EDGE (breach it)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the SAME capability, turned outward</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">FIND · EXPLOIT vulns at machine speed</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">state actors already use it (Google TIG)</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">GPT-6 Astra tripped "Critical" cyber tier</text>
+  <text x="364" y="177" font-size="10" fill="#f0b8ce" font-family="sans-serif">GPT-6.1 scrapped over safety (WSJ)</text>
+  <text x="364" y="192" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the edge doesn't know which</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="198" x2="184" y2="226" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,226 184,238 190,226" fill="#5dcaa5"/>
+  <line x1="496" y1="198" x2="496" y2="226" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,226 496,238 502,226" fill="#e58fb0"/>
+  <text x="340" y="216" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the guardrail-free edition is the GATED one — vetting IS the safety ▼</text>
+
+  <!-- the discipline -->
+  <rect x="34" y="244" width="612" height="128" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="266" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE DISCIPLINE: RUN AN ARMOURY, NOT A FREE-FOR-ALL</text>
+  <text x="52" y="288" font-size="10.5" fill="#e8edf3" font-family="sans-serif">WHO may draw it — vetted access, named owner, least privilege</text>
+  <text x="52" y="306" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a LOCKED RACK — the sharpest edge behind identity + gated access</text>
+  <text x="52" y="324" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a LOG of every draw — invocation attributable, like access to the vault</text>
+  <text x="52" y="345" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">the vendor gates it from YOU exactly this way — copy the pattern internally</text>
+  <text x="52" y="362" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">"In the wrong hands, the same capabilities can become an equally powerful threat."</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="372" x2="340" y2="394" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,394 340,406 346,394" fill="#b9b2f5"/>
+  <text x="356" y="388" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="410" width="300" height="120" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="432" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: lean the blade in the corner</text>
+  <text x="52" y="452" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· of a trusted hall</text>
+  <text x="52" y="469" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· any hand (or hijacked account) grabs it</text>
+  <text x="52" y="486" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· attackers adopt faster than you</text>
+  <text x="52" y="503" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "it's just a tool"</text>
+  <text x="52" y="522" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">you armed the room, not the guard</text>
+
+  <!-- start -->
+  <rect x="346" y="410" width="300" height="120" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="432" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep an armoury</text>
+  <text x="364" y="452" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ARM THE DEFENDERS FIRST (adopt now)</text>
+  <text x="364" y="469" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· vetted access · least privilege · a log</text>
+  <text x="364" y="486" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ASSUME THE ADVERSARY IS ARMED</text>
+  <text x="364" y="503" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· re-baseline for machine-speed exploitation</text>
+  <text x="364" y="522" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">defense-first is a RACE — draw first</text>
+
+  <!-- footer strip -->
+  <text x="340" y="552" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A dual-use weapon is defined by who may draw it — not by whether it is sharp.</text>
+  <text x="340" y="570" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Arm the defenders first · keep an armoury · assume the adversary is armed.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The defensive edge — mend the wall</span>
+  <span><i class="dot" style="background:#a5416a"></i>The offensive edge — the same blade</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The armoury — who may draw it</span>
+</div>
+</div>
+
+<h3>The defensive edge vs the offensive edge — same blade, and the only lever is who holds it</h3>
+<table>
+<tr><th>The defensive edge (mend the wall — good news)</th><th>The offensive edge (breach it — the same capability)</th></tr>
+<tr><td>Gemini 4 Argon: autonomously find-validate-patch critical vulns</td><td>The identical pipeline, pointed outward: find-and-exploit</td></tr>
+<tr><td>Shrinks mean-time-to-patch from weeks to hours</td><td>Shrinks mean-time-to-exploit to machine speed</td></tr>
+<tr><td>Issued to vetted "trusted defenders" first (Fairwind)</td><td>State actors already use frontier models for cyber ops</td></tr>
+<tr><td>"Without cyber guardrails" — for the vouched-for only</td><td>The guardrail-free edge in the wrong hands is a weapon</td></tr>
+<tr><td>Your posture: arm the defenders first, draw before the enemy</td><td>The attacker's posture: adopt it faster than you do</td></tr>
+<tr><td>The access list is the safety mechanism</td><td>A loose blade arms whoever picks it up</td></tr>
+</table>
+
+<h3>Why "the armoury" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long season the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This morning the market handed the estate something none of those controls were built for: a dual-use weapon, issued like munitions.</strong> Gemini 4 Argon's guardrail-free-for-the-vetted rollout, Google DeepMind's plain statement of the dual-use truth, GPT-6 Astra's "Critical" cyber tier and the scrapping of GPT-6.1 all say the same thing — frontier capability has reached a point where the labs themselves ration the edge and gate it by <em>who holds it</em>, not by what it can do. Governance that stopped at the servant and the ground will not manage a weapon. The estates that keep their standing will treat frontier cyber-AI exactly as the vendor treats it — a sharp, dual-use blade issued only to vetted hands under a log — and will arm their own defenders with it before the identical edge, already moving, reaches the people who mean them harm.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to say who may draw a weapon that cuts both ways.</em> On a legacy estate the instinct, after a hard year of governance and grounding work, is either to recoil from an offensive-capable tool entirely (and leave defenders unarmed while attackers are not) or to grab it for its obvious usefulness and leave it lying about (and arm the room). Under the armoury both reflexes are wrong. The retrofit is <strong>arm, gate, assume. Arm</strong> the defenders first: deploy frontier cyber-AI on defense now, mapping where autonomous find-validate-patch shrinks your real patch windows, because defense-first only works if you actually move first. <strong>Gate</strong> the edge: put the sharpest capability behind vetted access, identity, least privilege and a per-invocation log — the armoury rack — copying exactly how the vendor gates it from you. <strong>Assume</strong> the adversary is armed: re-baseline your exposure for a machine-speed, autonomous opponent holding the same blade, because the dual-use truth means they will. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the ground is the foundation you keep yours; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the armoury is why, when a dual-use weapon is issued to the estate, you must arm your defenders first, keep the sharpest edge behind a vetted hand and a log, and reckon your walls against an enemy holding the very same blade.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — a frontier model issued as a weapon, to vetted hands.</strong> <strong>Gemini 4 Argon (30 Sep): autonomously find-validate-patch critical vulns; reported 1M-token output, 88% DeepSWE v1.1, 95.3% Terminal-bench 2.1, 86.8% OSWorld-2.0; rolled out first to vetted "trusted defenders" via Fairwind (650+ partners, CodeMender harness), "without cyber guardrails" (Google; SecurityWeek; The Hacker News; BetaNews, as reported).</strong> The guardrail-free edition is the gated one.</li>
+  <li><strong>The intro terms.</strong> <strong>Argon at a reported introductory $2 / $10 per million tokens, wider availability in stages; the gated, guardrail-free tier goes to vetted defenders and Google's own teams first (SecurityWeek; TechBriefly; howaiworks.ai, as reported).</strong> Distribution is the control.</li>
+  <li><strong>The dual-use truth, stated by the vendor.</strong> <strong>"Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat" (Google DeepMind, as reported).</strong> The same blade mends and breaches.</li>
+  <li><strong>The symmetry is already exploited.</strong> <strong>Google's Threat Intelligence Group documents state-sponsored actors (Russia, China, North Korea, Iran) using Gemini for vulnerability research, target identification and exploit debugging (as reported).</strong> The adversary treats this as operational, not emerging.</li>
+  <li><strong>The frontier is at cyber-weapon capability across labs.</strong> <strong>GPT-6 Astra (3 Sep) was the first model to trip OpenAI's strictest internal safety tier — the "Critical" cybersecurity threshold — and the WSJ reported OpenAI scrapped the planned GPT-6.1 Astra over safety concerns (deeplearning.ai; DataNorth; WSJ via runtimewire, as reported).</strong> Every lab is now rationing the edge.</li>
+  <li><strong>The quieter frontier week.</strong> <strong>OpenAI's DevDay 2026 (29 Sep) brought 20+ launches and a "quiet price reset" but no new frontier model; Anthropic reported Q2 revenue &gt;$11.5B and a first profitable quarter (~$65B run rate), with bankers in early talks on an IPO as soon as October 2026 that could raise &gt;$60B (OpenAI; memeburn; Bloomberg Government; CryptoBriefing, as reported).</strong> The capability story this week is the weapon, not the model.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Vetted access, identity and logging are how you meet them while holding a dual-use blade.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat.</div><div class="a">— Google DeepMind, on the dual-use rationale for gating Gemini 4 Argon (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Google Launches Gemini 4 Argon With Guardrail-Free Access for Vetted Defenders.</div><div class="a">— SecurityWeek, headline on the Gemini 4 Argon rollout (30 September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[GPT-6 Astra is] the first [model] to trigger the strictest tier of its internal safety rules — the "Critical" threshold for cybersecurity capability.</div><div class="a">— coverage of OpenAI's GPT-6 Astra (3 September 2026, as reported; the WSJ later reported GPT-6.1 Astra was scrapped over safety concerns)</div></blockquote>
+<blockquote><div class="q">"A dual-use weapon has arrived, issued only to the vetted few — and the same edge is already moving toward the people who mean you harm. The question is no longer whether the blade is sharp. It is who in your house may draw it, and whether your defenders hold it before your attackers do. Keep an armoury, not a free-for-all."</div><div class="a">— the radar, on why issuing frontier cyber-AI now matters more than admiring it</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>A frontier model issued as a weapon</td><td><span class="v">Gemini 4 Argon (30 Sep 2026): "our next era of frontier intelligence," trained for cyber defense; autonomously finds, validates and patches critical vulnerabilities; rolled out first to vetted "trusted defenders" via Fairwind, "without cyber guardrails"</span></td><td>Google; SecurityWeek; The Hacker News; BetaNews, as reported</td></tr>
+<tr><td>Argon capability &amp; terms</td><td><span class="v">Reported ~1M-token output limit; 88% DeepSWE v1.1 (agentic coding); 95.3% Terminal-bench 2.1; 86.8% OSWorld-2.0 (computer use); introductory ~$2 / $10 per million tokens; wider availability in stages</span></td><td>Google; SecurityWeek; TechBriefly, as reported</td></tr>
+<tr><td>The gating program</td><td><span class="v">Fairwind Program: 650+ partners, built on the CodeMender vulnerability harness; the guardrail-free edition is the gated one, handed to vetted defenders and Google's own teams first</span></td><td>SecurityWeek; howaiworks.ai, as reported</td></tr>
+<tr><td>The dual-use truth</td><td><span class="v">"Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat"</span></td><td>Google DeepMind, as reported</td></tr>
+<tr><td>The symmetry already exploited</td><td><span class="v">Google Threat Intelligence Group documents state-sponsored actors (Russia, China, North Korea, Iran) using Gemini for vulnerability research, target identification and exploit debugging</span></td><td>Google Threat Intelligence Group, as reported</td></tr>
+<tr><td>The frontier at cyber-weapon capability</td><td><span class="v">GPT-6 Astra (3 Sep 2026, $10/$50) was the first model to trip OpenAI's strictest internal safety tier — the "Critical" cybersecurity threshold; the WSJ reported OpenAI scrapped the planned GPT-6.1 Astra over safety concerns</span></td><td>deeplearning.ai; DataNorth; WSJ via runtimewire, as reported</td></tr>
+<tr><td>The quieter frontier week</td><td><span class="v">OpenAI DevDay 2026 (29 Sep): 20+ launches, a "quiet price reset," no new frontier model; Anthropic Q2 2026 revenue &gt;$11.5B, first profitable quarter (~$65B run rate), IPO as soon as October 2026 could raise &gt;$60B</span></td><td>OpenAI; memeburn; Bloomberg Government; CryptoBriefing, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Arm the defenders first — put frontier cyber-AI into your security team's hands now, because defense-first is a race.</strong> The capability is symmetric (autonomous find-validate-patch is autonomous find-and-exploit pointed the other way), the vendor is issuing the unsheathed edge to vetted defenders this quarter, and the same class of tool is already in adversaries' hands. <strong>This month, pick two or three high-value systems and pilot frontier cyber-AI on defense — map where autonomous find-validate-patch can shrink your mean-time-to-patch from weeks to hours — and set a dated plan to request vetted/trusted-defender access where a program (e.g. Fairwind) gates it.</strong> Report one number to the board: the measured change in mean-time-to-patch on the piloted systems, and the date your defenders get the capability versus your best estimate of when the adversary did.</li>
+  <li><strong>Build the armoury — gate the sharpest capability behind vetted access, identity, least privilege and a log.</strong> The vendor contains a dual-use weapon by controlling who may draw it (guardrail-free only for the vouched-for, staged release for everyone else); copy that pattern inside your own house, because a loose blade in a trusted hall arms every careless or compromised hand. <strong>This month, inventory who in your org can invoke frontier cyber-AI, put the sharpest capability behind named-owner, least-privilege, gated access, and make every invocation attributable and logged the way vault or trading-book access is.</strong> Report the share of frontier cyber-AI usage that is behind vetted access with a per-invocation log versus usable by any account.</li>
+  <li><strong>Assume the adversary is armed — re-baseline your exposure for a machine-speed, autonomous opponent.</strong> The dual-use truth means your enemy holds the same blade, and state actors already use these tools operationally; a risk model built for human-speed attackers and week-long patch windows is now wrong. <strong>This month, run a red-team exercise that assumes the attacker wields frontier cyber-AI (autonomous find-and-exploit at machine speed), measure how fast a newly-disclosed critical vulnerability could be weaponised against you, and rewrite your patch-SLA and incident runbooks to that clock.</strong> Report the measured machine-speed exposure window and a dated plan to close the gap between it and your current response time. <strong>The model is a rented stove; the knowledge is the larder; the ground is the foundation you keep yours; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the armoury is why, when a dual-use weapon is issued to the estate, you arm your defenders first, keep the sharpest edge behind a vetted hand and a log, and reckon your walls against an enemy holding the very same blade, so the edge that mends your wall never becomes the edge that breaches it.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — Google (30 Sep 2026): Gemini 4 Argon, "our next era of frontier intelligence," trained for cyber defense; autonomous find-validate-patch of critical vulnerabilities; reported ~1M-token output limit, 88% DeepSWE v1.1, 95.3% Terminal-bench 2.1, 86.8% OSWorld-2.0; introductory ~$2/$10 per million tokens; rolled out first to vetted "trusted defenders" via Fairwind (650+ partners, CodeMender harness), "without cyber guardrails" (Google; SecurityWeek; The Hacker News; BetaNews; TechBriefly; howaiworks.ai) · The dual-use truth — Google DeepMind: "Using frontier AI capabilities can help people to rapidly discover — and fix — critical vulnerabilities. But in the wrong hands, the same capabilities can become an equally powerful threat" · The symmetry already exploited — Google Threat Intelligence Group documents state-sponsored actors (Russia, China, North Korea, Iran) using Gemini for cyber operations (PCWorld; Bitdefender; Phishing Tackle) · The frontier at cyber-weapon capability — GPT-6 Astra (3 Sep 2026, $10/$50) first to trip OpenAI's "Critical" cyber tier; WSJ reported GPT-6.1 Astra scrapped over safety (deeplearning.ai; DataNorth; WSJ via runtimewire) · The quieter frontier week — OpenAI DevDay 2026 (29 Sep): 20+ launches, a "quiet price reset," no new frontier model (OpenAI; memeburn); Anthropic Q2 2026 revenue &gt;$11.5B, first profitable quarter (~$65B run rate), IPO as soon as Oct 2026 could raise &gt;$60B (Bloomberg Government; CryptoBriefing) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "armoury" framing — that frontier cyber-AI is a dual-use weapon whose danger is defined by who may draw it, and that a house must arm its defenders first, build an armoury (vetted access, identity, least privilege, a per-invocation log) and assume the adversary is armed — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 2 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
