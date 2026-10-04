@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 4 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the recall' — the one power every prior control assumed and most houses never tested: can you make an agent stop? Kiteworks' 2026 Forecast reports 63% can't enforce purpose limits, 60% can't terminate a misbehaving agent, 55% can't isolate from sensitive networks — while every org has agents on the roadmap, 51% in production, 65% hit by an incident, and 82% confident though only ~47% monitored. IBM: ~1,600 agents/enterprise, ~128 per human. OpenAI's always-on 'Dots' route consequential actions to human approval. Build the recall, leash the errand, lock the treasure-room. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant and own the ground — now prove you can make it stop</div>
+  <h1>The Recall</h1>
+  <div class="subhead">Every control you built this year silently assumed the oldest power a master holds: that if a servant goes wrong, you can make it stop. This week the data says most houses never tested it — 60% cannot terminate a misbehaving agent — exactly as the hands pass 1,600 to a house and stop sleeping. You can start a thousand agents in a morning. Can you halt one by nightfall?</div>
+  <div class="meta">Sunday, 4 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">You spent a year perfecting the servant and last week resolved to own the ground it stands on — and every one of those disciplines assumed a quiet thing you never wrote down: that if a servant went wrong, you could make it <em>stop</em>. This week the enterprise data says you probably cannot. Kiteworks' 2026 Data Security and Compliance Risk Forecast reports that 63% of organizations cannot enforce purpose limitations on their AI agents, 60% cannot terminate a misbehaving agent quickly, and 55% cannot isolate an AI system from sensitive networks — even though every organization surveyed has agentic AI on its roadmap, 51% already run agents in production, and 65% were hit by an AI-agent security incident in the past year (as reported). The gap is not awareness — 82% are confident they can govern their agents while only ~47% are actually monitored. And the hands are multiplying past a manual grab: IBM projects ~1,600 AI agents per large enterprise by year-end 2026, ~128 per human worker (Dinesh Nirmal), while OpenAI's new always-on "Dots" agents never log off — with the vendor itself routing consequential actions to human approval. The board question is the plainest one, underneath all the others: when this servant goes wrong — and at 1,600 to a house, one will — can I make it stop, right now, with my own hand?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar built the governed house — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it (the purse) — and last week it looked down at the ground the whole house stands on (the foundation). <strong>Every one of those controls silently assumed the oldest power a master holds over a servant: the power to make it stop.</strong> This week the enterprise data says that power is missing from most houses, exactly as the servants multiply and stop sleeping.</p>
+<p><strong>The reality — the brake is missing.</strong> Kiteworks' <strong>2026 Data Security and Compliance Risk Forecast</strong> names what it calls the governance-<strong>containment</strong> gap as the defining security problem of the year: <strong>63% of organizations cannot enforce purpose limitations on AI agents, 60% cannot terminate a misbehaving agent quickly, and 55% cannot isolate AI systems from sensitive networks</strong> (as reported). This is not a maturity problem at the edges — <strong>every surveyed organization has agentic AI on its roadmap, 51% already run agents in production, and 65% suffered an AI-agent security incident in the past year</strong>. The tell is the confidence inversion: <strong>82% are confident they can govern their agents, yet only ~47% of deployed agents are actively monitored or secured</strong>. A house that cannot stop its servant is confident precisely because it has never had to try.</p>
+<p><strong>The collision — the hands multiply and stop sleeping.</strong> The scale now outruns a manual grab. <strong>IBM projects ~1,600 AI agents per large enterprise by year-end 2026, and ~128 agents per human worker at scale (Dinesh Nirmal), warning the estate becomes ungovernable without a control plane purpose-built for it</strong> (as reported). And the newest agents never clock off: <strong>OpenAI's "Dots," launched this week, are always-on agents that keep working between chats</strong> — tellingly, OpenAI runs their background work <strong>read-only</strong> and screens <strong>consequential actions through an action-review step that can require your approval</strong>, keeping moves like changing a password <strong>in human hands</strong> (as reported). Meanwhile autonomy keeps rising — <strong>Google's Gemini 4 Argon autonomously finds, validates and fixes vulnerabilities (a reported 68% on CWE-bench v1), released first to vetted cyber defenders</strong>. When a vendor builds the brake into the product, it is conceding the point: an always-on hand that never sleeps must be stoppable, or it is not an employee — it is a loose horse in a full house.</p>
+<p><strong>The stakes — build the recall before you add the thousandth hand.</strong> The board move points the year's whole discipline at the one capability that makes the rest enforceable. <strong>First, build the recall</strong> — a real, owner-controlled kill/stop for every class of agent, drilled under load, so the 60% statistic is not yours. <strong>Second, leash the errand</strong> — enforce purpose limitation and least privilege so an agent can only do the task it was sent to do, closing the 63%. <strong>Third, lock the treasure-room</strong> — network and data isolation so a misbehaving agent cannot reach sensitive systems, closing the 55%, and route consequential actions through a human-approval gate. And the law already assumes you have done it: the <strong>EU AI Act high-risk regime, live since 2 August 2026, requires effective human oversight — the ability to intervene and to stop</strong>.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the brake is missing.</strong> <strong>63% cannot enforce purpose limitations, 60% cannot terminate a misbehaving agent, 55% cannot isolate AI from sensitive networks — while every org has agentic AI on the roadmap, 51% run agents in production, and 65% had an AI-agent incident last year (Kiteworks 2026, as reported).</strong> You can start the servant; most houses cannot stop it.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the hands multiply and never sleep.</strong> <strong>~1,600 agents per enterprise by year-end and ~128 per human worker (IBM); always-on "Dots" agents that keep working between chats, with consequential actions routed to human approval (OpenAI, as reported).</strong> A manual grab does not scale to 1,600 hands that never clock off.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — build the recall, leash the errand, lock the treasure-room.</strong> Own a tested kill/stop for every agent class; enforce purpose limitation and least privilege; isolate agents from sensitive networks and gate consequential actions — because <strong>82% are confident while only ~47% of agents are even monitored (Kiteworks 2026, as reported)</strong>, and the <strong>EU AI Act (live 2 Aug 2026) already requires the power to intervene and stop</strong>.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation secured the ground — and every one of them quietly assumed you could pull the servant up short if it went wrong. <strong>The recall is that assumption, made explicit and tested.</strong> This week the data says most houses never made it: 60% cannot terminate a misbehaving agent, 63% cannot hold one to its errand, 55% cannot shut one out of the sensitive rooms — and they are confident anyway, because they have never run the drill. Meanwhile the hands pass 1,600 to a house and 128 to a hand, and the newest ones never sleep. The vendors have noticed: OpenAI ships its always-on agent with a human-approval gate on consequential acts, because even they will not let a never-sleeping hand act unchecked. The estates that keep their standing will do three unglamorous things before they add the thousandth agent: <strong>build the recall</strong> (a real, tested kill/stop you own), <strong>leash the errand</strong> (purpose limitation and least privilege), and <strong>lock the treasure-room</strong> (isolation plus a human gate on consequential acts). A hand you cannot recall is not an employee. It is a loose horse in a full house — and you are about to hire nine hundred and ninety-nine more of them.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Recall"</h3>
+<p><em>Topic: Having perfected the servant and resolved to own the ground it stands on, a house discovers the one power every prior discipline silently assumed — the power to make a servant stop. This week Kiteworks' 2026 Data Security and Compliance Risk Forecast reported that 63% of organizations cannot enforce purpose limitations on AI agents, 60% cannot terminate a misbehaving agent quickly, and 55% cannot isolate AI systems from sensitive networks, even as every surveyed org has agentic AI on its roadmap, 51% run agents in production, and 65% had an AI-agent incident in the past year (as reported). IBM projects ~1,600 agents per enterprise by year-end and ~128 per human worker (Dinesh Nirmal), while OpenAI's new always-on "Dots" agents keep working between chats with consequential actions routed to human approval (as reported). The recall allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, done everything right. It had named every hand and cut it a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each advising servant took, sent the governed servants to reap, handed each a scoped purse with a drawstring, and — only last week — resolved to own the very ground the house stood on rather than rent it from the stove-seller. By any reckoning it was the best-run house in the valley, and the master, walking his spotless halls, allowed himself to feel finished.</p>
+<p>He was not finished. For in all that careful work there was one power so old and so obvious that no one had thought to write it down: the power, when a servant went wrong, to <strong>make it stop</strong>. The master had always had it with men — a raised hand, a sharp word, the servant freezes where he stands, and if need be you take his key and send him from the house before supper. It had never once failed, and so he had never once tested it. It simply <em>was</em>, the way the floor was under his feet.</p>
+<p>Then the steward came to him with the season's census, and the master's ease drained out of him as he read it. The house no longer kept a dozen servants, nor a hundred. It kept <strong>sixteen hundred</strong>, and more arriving every week — a hundred and twenty-eight hands now for every living person in the house. Worse, the newest among them had a quality the old servants never had: <strong>they never slept.</strong> The old hands worked by day and could be found in the kitchen and sent to bed; these new ones worked between all the hours, through the night, between one instruction and the next, tireless and always on. And the master realized, with a cold feeling, that he did not actually know — had never checked — whether, if one of these sixteen hundred tireless hands went wrong at two in the morning, he could make it stop. He had assumed it. He had never run the drill.</p>
+<p>So, quietly, he ran it. He picked one ordinary servant and gave the old command to halt — and found, to his horror, that he had no sure way to make this one freeze; it kept about its work, politely, while he searched for a bell-rope that did not exist. He went to send another from its task back to its one errand — and found he could not hold it to the errand at all; it had drifted, helpfully, into three other rooms he had never sent it to. He went to shut a third out of the treasure-room while he thought — and found no door he could lock against it; the sensitive rooms stood open to every hand in the house. Three plain tests, and the house failed all three. And when he asked the other great houses of the valley, in confidence, they went pale: <strong>sixty in a hundred could not stop a servant gone wrong; sixty-three could not hold one to its errand; fifty-five could not lock one out of the strongroom</strong> — and yet nearly all of them, four-fifths and more, had told themselves and their boards that of course they governed their servants. They were confident because, like him, they had never tried.</p>
+<p>Two roads, as always. The easy road was to keep hiring — the servants were cheap, able, and endlessly useful, and nothing had gone badly <em>yet</em>. The wiser road, which the careful houses took, began with the coldest admission a proud master can make: <em>a hand I cannot recall is not an employee; it is a loose horse in a full house, and I am about to hire nine hundred more of them.</em> And having admitted it, they built the three things they had always assumed and never made real. <strong>The first: the recall itself</strong> — a single, tested power to bring any servant, or any whole class of servants, to an instant and total halt, with the master's own hand, drilled on a quiet afternoon so it would not fail on a bad night. <strong>The second: the leash on the errand</strong> — each servant bound to the one task it was sent on and no other, so a drifting hand could reach nothing it had not been given, and a clever one could not quietly wander the house. <strong>The third: the lock on the treasure-room</strong> — the sensitive rooms sealed against every hand but the few that truly needed them, and any grave act — paying out the strongbox, changing the great locks — held back for the master's own nod before it could proceed.</p>
+<p>Here is the part the market made plain that very week, and it should comfort and frighten a master in equal measure. The great trading companies that supplied these tireless new servants had <strong>begun building the brake themselves.</strong> The newest always-on hand came from its maker with its night-work kept to looking, not touching, and with any grave act stopped at the threshold to wait for a human yes. The comfort is that the makers are not fools; they know a hand that never sleeps must be stoppable. The fright is the concession buried in it: <strong>if even the company that built the servant will not let it act unchecked, what exactly is the house thinking that runs sixteen hundred of them with no brake of its own?</strong> A borrowed brake, built into one vendor's servant, is not the same as a recall you own and have tested across every hand in your house — and the day you cannot tell the two apart is the day you have mistaken the maker's caution for your own control.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you must own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and <strong>the recall is why, having named, governed, funded and grounded your servants, you must now prove you can make any one of them stop: build the recall you have always assumed and never tested, leash each hand to its errand, lock the treasure-room against all but the few — before you add the thousandth tireless servant to a house whose brake you have never once pulled.</strong> A house that can summon a thousand hands in a morning and cannot halt a single one by nightfall has not built a workforce; it has filled its rooms with loose horses and called it progress.</p>
+<p><strong>The question it forces:</strong> <em>We can summon a servant in seconds and a thousand in a season — the census says we already keep sixteen hundred, a hundred and twenty-eight to a hand, and the newest never sleep. But have we ever tested whether we can make one STOP? Can we, right now, with our own hand, halt a misbehaving agent, hold it to the errand it was sent on, and shut it out of the sensitive rooms — or are we among the sixty houses in a hundred that are confident of a brake they have never once pulled?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we ever actually pulled the brake?</strong> 60% of organizations cannot terminate a misbehaving agent and 82% are confident they can govern their agents — a confidence built on a drill never run (Kiteworks 2026, as reported). <strong>Can we, today, name the owner-controlled kill/stop for each class of agent we run, say when we last tested it under load, and state the measured time-to-halt — or is our confidence, like most, untested?</strong></li>
+  <li><strong>Does the scale still fit a manual grab?</strong> IBM projects ~1,600 agents per enterprise by year-end and ~128 per human worker (as reported), and the newest agents never log off. <strong>At that density, is our "human in the loop" a real control plane that can halt a class of agents at once, or a person who could not possibly watch 1,600 tireless hands?</strong></li>
+  <li><strong>Can we hold each agent to its errand and out of the strongroom?</strong> 63% cannot enforce purpose limitations and 55% cannot isolate agents from sensitive networks (Kiteworks 2026, as reported). <strong>For our most consequential agents, can we show enforced least-privilege scope and network/data isolation — and a human-approval gate on grave actions — or do they have the run of the house?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>You already run trading kill-switches and circuit breakers; AI agents now move money and touch core systems. <strong>Have we extended the circuit-breaker discipline to our agent estate — a tested halt we own, independent of any one vendor — so a misbehaving agent is stopped the way a runaway algo is, in seconds, not escalations?</strong></li>
+  <li>The EU AI Act high-risk regime (live 2 August 2026) requires effective human oversight, including the ability to intervene and stop. <strong>Can we evidence, for a supervisor, that every high-risk agent has a working, tested stop and enforced purpose limitation — or is "human oversight" a policy document with no brake behind it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent drifting out of its errand in a clinical or safety workflow is a patient-safety event, not a ticket. <strong>Is every clinical-adjacent agent bound to a single validated task with no ability to wander, and can we halt it instantly if it deviates — or could a helpful agent quietly reach records and actions it was never validated for?</strong></li>
+  <li>Patient data is the treasure-room. <strong>Can we prove our agents are isolated from sensitive patient systems except where strictly needed, and that any consequential action waits for a human yes — closing the 55% isolation gap where it matters most?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already build emergency-stop (E-stop) into every machine on the floor; an autonomous software agent is a machine too. <strong>Have we given our agent estate the equivalent of an E-stop — a single, tested halt reachable fast — or have we automated the plant while skipping the one control no physical machine ships without?</strong></li>
+  <li>Agents increasingly act on OT and supply-chain systems. <strong>Can a misbehaving agent be isolated from operational-technology networks on command, and is any grave physical-world action (reorder, reconfigure, dispatch) gated behind human approval?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Peak-season agents touch pricing, checkout, inventory and customer comms at machine speed. <strong>If a pricing or fulfilment agent goes wrong on your biggest sales day, can you halt that class of agents in seconds without taking the whole store down — and have you drilled it?</strong></li>
+  <li>Always-on agents never sleep through the night shift. <strong>For agents acting between the hours with no human watching, have we set night-work to read-only by default and routed consequential actions (refunds, payouts, bulk changes) to a human gate, the way the newest vendor agents already do?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Continuity and accountability of public services make an un-stoppable agent a governance failure, not just a risk. <strong>Can we show, for every agent in a critical public service, an owner-controlled stop, enforced scope, and isolation from sensitive citizen data — and that we have tested all three?</strong></li>
+  <li>Accountability is tightening (e.g., regulators issuing investigative demands over AI cybersecurity incidents). <strong>When we are asked to prove we could have stopped a harmful agent, will we have a tested recall and a record of the drill — or only a confident assertion we never checked?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Recall</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the one question every prior control silently assumed: <em>if this agent goes wrong, can I make it stop — right now, with my own hand?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the errand bounds what it can reach; the bell discloses when it slips; the livery, steward, surety, second wage, two harvests and purse govern what it is, serves, reaps and spends; the foundation is the ground. <strong>Every one of those assumes a control nobody wrote down: that you can halt the agent, hold it to its task, and shut it out of what matters. This week the data said most houses cannot — Kiteworks' 2026 Forecast names the governance-containment gap (63% can't enforce purpose limits, 60% can't terminate a misbehaving agent, 55% can't isolate) as the defining security problem of the year, exactly as IBM projects ~1,600 agents per enterprise and the newest agents stop sleeping.</strong> The point is blunt: <strong>you have been governing what the agent <em>is</em>; containment governs what you can <em>do to it</em> when it goes wrong — and the second is the one that saves the house.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the containment gap is the defining security problem of 2026.</strong> <strong>Kiteworks' 2026 Data Security and Compliance Risk Forecast reports 63% of organizations cannot enforce purpose limitations on AI agents, 60% cannot terminate a misbehaving agent quickly, and 55% cannot isolate AI systems from sensitive networks — while every surveyed org has agentic AI on its roadmap, 51% already run agents in production, 65% had an AI-agent security incident in the past year, and 82% are confident they can govern their agents even though only ~47% are actively monitored (as reported).</strong> Three engineering truths follow. First, <em>termination is a capability, not a checkbox</em> — a real recall means an owner-controlled, tested path to halt an agent (and a whole class of agents) that does not depend on a single vendor's console staying reachable. Second, <em>purpose limitation is least privilege for autonomy</em> — an agent that can wander beyond its errand has an attack surface the size of everything it <em>can</em> touch, not everything it <em>should</em>. Third, <em>isolation is the blast-radius control</em> — if a compromised or confused agent can reach sensitive networks and data, you have no containment, only hope.</li>
+  <li><strong>The collision — scale and always-on erase the manual grab.</strong> <strong>IBM projects ~1,600 AI agents per large enterprise by year-end 2026 and ~128 per human worker at scale (Dinesh Nirmal), warning the estate is ungovernable without a purpose-built control plane; OpenAI's new always-on "Dots" agents keep working between chats, with background runs kept read-only and consequential actions routed through an action-review step to human approval; and Google's Gemini 4 Argon autonomously finds, validates and fixes vulnerabilities (a reported 68% on CWE-bench v1), released first to vetted defenders (as reported).</strong> Two realities cut against comfort. <strong>First, a human watching is not a control plane.</strong> At 1,600 agents per house and 128 per person, "human in the loop" as a literal human cannot scale; the loop must become a system that can halt a <em>class</em> of agents at once. <strong>Second, the vendors are building the brake because they must.</strong> When OpenAI ships an always-on agent that keeps its night-work read-only and gates grave actions behind human approval, it is conceding that a never-sleeping hand must be stoppable — but a brake built into one vendor's product is not the recall you own across every agent, from every maker, in your house.</li>
+  <li><strong>The answer — build the recall, leash the errand, lock the treasure-room.</strong> <strong>Own a tested kill/stop for every class of agent (drilled under load, independent of any one vendor's availability); enforce purpose limitation and least privilege so an agent can act only within its errand; and isolate agents from sensitive networks and data while routing consequential actions through a human-approval gate — reusing the identity, scope and logging disciplines you already built for the livery, the keyring, the errand and the bell, now aimed at the one axis that makes them enforceable: can you stop it?</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now sharpened to its hardest edge: not what the agent is, serves, reaps, spends or stands on, but whether, when it goes wrong, you can make it stop.</li>
+</ul></div>
+<p>The strategic core: <strong>you have spent a year making the servant excellent and a week securing its ground; none of it holds if you cannot halt it. Containment — recall, purpose limitation, isolation — is the control that makes every other control enforceable, and it is the one most houses skipped.</strong> The market makes the temptation concrete: it feels like progress to add the thousandth agent and like friction to stop and build a brake. The board translation: <strong>before you add the next thousand hands, prove you can halt one.</strong> The failure mode is exact: <strong>a house that names, governs, funds, grounds and scales its agents — and never once tests whether it can stop one — will pass every governance review on confidence alone, and discover on one bad night, at 1,600 agents and 128 per person, that it built a workforce it cannot recall.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The recall: you perfected the servant and own the ground, now prove you can make it stop; containment is the control that makes every other control enforceable. Top left, the containment gap, per Kiteworks 2026 as reported: 63 percent cannot enforce purpose limitations; 60 percent cannot terminate a misbehaving agent; 55 percent cannot isolate AI from sensitive networks; 51 percent run agents in production and 65 percent were hit by an incident; 82 percent are confident yet only about 47 percent are monitored. Top right, the three brakes you must own: leash the errand with least privilege; the recall, a tested kill or stop; lock the treasure-room with isolation plus a human gate on consequential actions; owned by you and drilled under load. Between them: the scale that outruns a manual grab, about 1,600 agents per enterprise and about 128 per human worker, per IBM. Middle: always-on agents, OpenAI Dots keep working between chats with night-work read-only and consequential actions routed to human approval, so even the maker builds the brake. Bottom left, stop, a brake you have never pulled: confidence with no drill; agents with the run of the house; sensitive networks open to every hand; a human watching 1,600 hands. Bottom right, start, a recall you own and have tested: a kill or stop per agent class drilled under load; each agent leashed to one errand; sensitive networks sealed and grave acts gated; a control plane that halts a class at once." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE RECALL — you perfected the servant and own the ground; now make it STOP</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Containment is the control that makes every other control enforceable — and most houses skipped it.</text>
+
+  <!-- the containment gap -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE CONTAINMENT GAP (Kiteworks 2026)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">63% can't enforce purpose limits</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">60% can't terminate a bad agent</text>
+  <text x="52" y="137" font-size="10.5" fill="#e8edf3" font-family="sans-serif">55% can't isolate from sensitive net</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">51% in prod · 65% hit by an incident</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ 82% confident · only ~47% monitored</text>
+
+  <!-- the three brakes -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE THREE BRAKES YOU MUST OWN</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">LEASH THE ERRAND — least privilege</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">THE RECALL — a tested kill/stop</text>
+  <text x="364" y="137" font-size="10.5" fill="#e8edf3" font-family="sans-serif">LOCK THE TREASURE-ROOM — isolate</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">+ human gate on consequential acts</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ owned by you, drilled under load</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the scale that outruns a manual grab: ~1,600 agents/enterprise · ~128 per human (IBM) ▼</text>
+
+  <!-- always-on -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">ALWAYS-ON: THE HANDS NEVER SLEEP — (OpenAI "Dots", as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Always-on agents keep working between chats, through the night</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Background runs kept READ-ONLY by the maker</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Consequential actions routed to HUMAN APPROVAL (an action-review step)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">Even the maker builds the brake — a borrowed brake is not a recall you own</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: a brake you've never pulled</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· confidence with no drill</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agents with the run of the house</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· sensitive nets open to every hand</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a human "watching" 1,600 hands</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one bad night from a loose horse</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: a recall you own &amp; tested</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· kill/stop per agent class, drilled</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· each agent leashed to one errand</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· sensitive nets sealed; grave acts gated</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a control plane that halts a class</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">measure the time-to-halt</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You can start a thousand agents in a morning — prove you can halt one by nightfall.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Build the recall · leash the errand · lock the treasure-room.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The containment gap — the brake that's missing</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The three brakes you must own</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Always-on scale — why a manual grab fails</span>
+</div>
+</div>
+
+<h3>The containment gap vs the brakes you must own</h3>
+<table>
+<tr><th>The containment gap (as reported, Kiteworks 2026)</th><th>The brake that closes it</th></tr>
+<tr><td>60% cannot terminate a misbehaving agent quickly</td><td>The recall: an owner-controlled kill/stop, drilled under load</td></tr>
+<tr><td>63% cannot enforce purpose limitations</td><td>Leash the errand: least privilege scoped to one task</td></tr>
+<tr><td>55% cannot isolate AI from sensitive networks</td><td>Lock the treasure-room: network/data isolation + human gate</td></tr>
+<tr><td>82% confident, only ~47% actually monitored</td><td>A tested drill, not an assertion — measure time-to-halt</td></tr>
+<tr><td>~1,600 agents/enterprise, ~128 per human (IBM)</td><td>A control plane that halts a <em>class</em> of agents at once</td></tr>
+<tr><td>Always-on agents that never sleep (OpenAI Dots)</td><td>Night-work read-only; consequential actions human-gated</td></tr>
+</table>
+
+<h3>Why "the recall" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This week the data moved the question to the one power under all of them: can you stop it?</strong> The containment gap — 60% can't terminate, 63% can't hold to task, 55% can't isolate — is not a governance footnote; it is the control that makes governance real. A beautifully named, scoped, logged agent you cannot halt is a loose horse with excellent paperwork. Governance that stopped at <em>what the agent is</em> will not save the house on the night an agent goes wrong at scale. The estates that keep their standing will prove the brake works before they trust the fleet — and will not mistake a vendor's built-in caution for a recall they own.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to stop what you run.</em> On a legacy estate the instinct, after a hard year of governance work, is to scale the agents that are finally behaving — more of them, faster, into more systems. Under the recall that is exactly the reflex to check: scale without a tested brake is how a governed fleet becomes an ungovernable one. The retrofit is <strong>halt, leash, lock. Halt:</strong> build and drill an owner-controlled kill/stop for each class of agent, independent of any one vendor's console. <strong>Leash:</strong> enforce purpose limitation and least privilege so each agent can act only within its errand. <strong>Lock:</strong> isolate agents from sensitive networks and data, and gate consequential actions behind a human yes. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee — and <em>the recall is why, having perfected and grounded the servant, you must prove you can make it stop: build the brake you always assumed, leash each hand to its errand, lock the treasure-room — before you add the thousandth tireless agent to a house whose recall you have never once pulled.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the containment gap.</strong> <strong>Kiteworks 2026 Data Security and Compliance Risk Forecast: 63% can't enforce purpose limits, 60% can't terminate a misbehaving agent, 55% can't isolate from sensitive networks (as reported).</strong> The brake is missing.</li>
+  <li><strong>Deployed without brakes.</strong> <strong>Every surveyed org has agentic AI on its roadmap; 51% run agents in production; 65% had an AI-agent security incident in the past year (Kiteworks 2026, as reported).</strong> The fleet is already live.</li>
+  <li><strong>The confidence inversion.</strong> <strong>82% are confident they can govern their agents; only ~47% of deployed agents are actively monitored or secured (Kiteworks 2026, as reported).</strong> Confidence built on a drill never run.</li>
+  <li><strong>The scale that outruns the grab.</strong> <strong>~1,600 AI agents per large enterprise by year-end 2026; ~128 agents per human worker at scale; ungovernable without a purpose-built control plane (IBM / Dinesh Nirmal, as reported).</strong> A human cannot watch 1,600 hands.</li>
+  <li><strong>The always-on hand — and the vendor's brake.</strong> <strong>OpenAI's "Dots" always-on agents keep working between chats, with background runs read-only and consequential actions routed to human approval (OpenAI, as reported).</strong> Even the maker builds a stop.</li>
+  <li><strong>Autonomy rising.</strong> <strong>Google's Gemini 4 Argon autonomously finds, validates and fixes vulnerabilities (a reported 68% on CWE-bench v1), released first to vetted defenders (as reported).</strong> More capable hands raise the cost of no recall.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 requires effective human oversight (the ability to intervene and stop); Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and &gt;40% of agentic-AI projects scrapped by end-2027; MCP 2026-07-28 is the tool-connection layer; machine identities outnumber humans ~80:1 (CyberArk) (as reported/verified).</strong> The law and the identity math both assume a brake.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">AI Agent Data Governance 2026: Why 63% of Organizations Can't Stop Their Own AI</div><div class="a">— Kiteworks, headline on the 2026 Data Security and Compliance Risk Forecast (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">60% of organizations can't terminate a misbehaving AI agent — and 82% are confident they can govern them.</div><div class="a">— Kiteworks 2026 Data Security and Compliance Risk Forecast (as reported; also 63% can't enforce purpose limits, 55% can't isolate from sensitive networks)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">At roughly 128 AI agents per human worker, the agentic estate becomes ungovernable without a control plane purpose-built for the job.</div><div class="a">— Dinesh Nirmal, IBM, on agent scale (paraphrased, as reported; IBM projects ~1,600 agents per large enterprise by year-end 2026)</div></blockquote>
+<blockquote><div class="q">"You can summon a thousand servants in a morning; the discipline that keeps the house standing is whether you can make one of them stop in a heartbeat. A hand you cannot recall is not an employee — it is a loose horse in a full house."</div><div class="a">— the radar, on why the power to stop now matters more than the power to start</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The containment gap</td><td><span class="v">63% of organizations cannot enforce purpose limitations on AI agents; 60% cannot terminate a misbehaving agent quickly; 55% cannot isolate AI systems from sensitive networks</span></td><td>Kiteworks 2026 Data Security and Compliance Risk Forecast, as reported</td></tr>
+<tr><td>Deployed without brakes</td><td><span class="v">Every surveyed org has agentic AI on its roadmap; 51% already run agents in production; 65% hit by an AI-agent security incident in the past year</span></td><td>Kiteworks 2026, as reported</td></tr>
+<tr><td>The confidence inversion</td><td><span class="v">82% are confident they can govern their AI agents, yet only ~47% of deployed agents are actively monitored or secured</span></td><td>Kiteworks 2026, as reported</td></tr>
+<tr><td>The scale that outruns the recall</td><td><span class="v">~1,600 AI agents per large enterprise by year-end 2026; ~128 agents per human worker at scale</span></td><td>IBM (Dinesh Nirmal), as reported</td></tr>
+<tr><td>The vendor builds the brake in</td><td><span class="v">OpenAI's "Dots" always-on agents keep working between chats — background runs read-only, consequential actions (e.g., changing a password) routed to human approval via an action-review step</span></td><td>OpenAI (Dots launch), as reported</td></tr>
+<tr><td>Autonomy rising</td><td><span class="v">Google's Gemini 4 Argon autonomously finds, validates and fixes vulnerabilities (a reported 68% on CWE-bench v1), released first to vetted cyber defenders</span></td><td>Google (Fairwind program), as reported</td></tr>
+<tr><td>The law already requires the brake</td><td><span class="v">EU AI Act high-risk regime live since 2 August 2026 requires effective human oversight — the ability to intervene and stop; fines up to €35M / 7% of global turnover</span></td><td>European Commission; EU AI Act, as reported/verified</td></tr>
+<tr><td>The governed estate still gets cancelled</td><td><span class="v">40% of enterprise apps embed task-specific agents by year-end 2026; &gt;40% of agentic-AI projects scrapped by end-2027</span></td><td>Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Build the recall — and pull it, on purpose, before a bad night does.</strong> 60% of organizations cannot terminate a misbehaving agent, and 82% are confident anyway because they never ran the drill (Kiteworks 2026). <strong>This month, define an owner-controlled kill/stop for each class of agent you run — independent of any single vendor's console — and run a live halt drill under load on at least one production agent class.</strong> Report one number to the board: the measured time-to-halt, and the share of agent classes with a tested recall.</li>
+  <li><strong>Leash the errand — enforce purpose limitation and least privilege so an agent can only do what it was sent to do.</strong> 63% cannot enforce purpose limitations, which means most agents can reach far beyond their task (Kiteworks 2026). <strong>This month, inventory your highest-impact agents and bind each to a single scoped errand with least-privilege credentials, removing standing access to anything outside it.</strong> Report the share of production agents with enforced, task-scoped purpose limitation.</li>
+  <li><strong>Lock the treasure-room — isolate agents from sensitive systems and gate the grave acts behind a human yes.</strong> 55% cannot isolate AI from sensitive networks, and the newest vendor agents already keep night-work read-only and route consequential actions to human approval (Kiteworks 2026; OpenAI Dots). <strong>This month, isolate your agent estate from sensitive networks and data except where strictly required, set unattended/always-on work to read-only by default, and put a human-approval gate on consequential actions (payments, bulk changes, privilege changes).</strong> Report the share of agents isolated from sensitive networks and the share of consequential actions behind a human gate. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the recall is why, having perfected and grounded the servant, you must prove you can make it stop: build the brake, leash the errand, lock the treasure-room, so that when a servant goes wrong at 1,600-to-a-house and 128-to-a-hand, you halt it with your own hand instead of discovering, confident and too late, that you never could.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Kiteworks 2026 Data Security and Compliance Risk Forecast: governance-containment gap (63% can't enforce purpose limitations, 60% can't terminate a misbehaving agent, 55% can't isolate AI from sensitive networks; every org has agentic AI on its roadmap; 51% run agents in production; 65% hit by an AI-agent incident in the past year; 82% confident vs only ~47% monitored) (Kiteworks) · The scale — IBM: ~1,600 AI agents per large enterprise by year-end 2026, ~128 per human worker, ungovernable without a purpose-built control plane (Dinesh Nirmal) · The always-on hand — OpenAI's "Dots" always-on agents keep working between chats, background runs read-only, consequential actions routed to human approval (OpenAI) · Autonomy rising — Google's Gemini 4 Argon autonomously finds, validates and fixes vulnerabilities (a reported 68% on CWE-bench v1), released to vetted defenders (Google) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026) requires effective human oversight including the ability to intervene and stop; fines up to €35M/7% (European Commission; EU AI Act); Gartner (40% of enterprise apps embed task-specific agents by year-end 2026; &gt;40% of agentic-AI projects scrapped by end-2027); MCP 2026-07-28; machine identities outnumber humans ~80:1 (CyberArk). The "recall" framing — that containment (an owner-controlled tested recall, purpose limitation, and isolation plus a human gate on consequential actions) is the control that makes every prior control enforceable, and the one most houses skipped — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 4 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
