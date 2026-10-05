@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 5 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the warrant' — capability is not permission. Around 30 Sep 2026 Google unveiled Gemini 4 Argon (cyber-capable frontier model, $2/$10, 1M-token window, reported 68% CWE-bench) and then refused to sell it freely, issuing it under warrant to vetted cyber defenders via the Fairwind Program; Google Cloud rebuilt the enterprise stack around an Agent Identity and Registry. With the average Fortune 500 projected to run >150,000 agents by 2028 and 65% of enterprises already reporting an AI-agent security incident, the board move is to issue keen, dual-use capability under warrant: don't shelf it openly, keep the register, keep the recall. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You owned the ground — now look at the edge of the keenest tool on it</div>
+  <h1>The Warrant</h1>
+  <div class="subhead">You perfected the servant and owned the ground it stands on. This morning the vendors teach the next discipline by example: the keenest new model is dual-use — it mends and breaches by the same edge — so its own maker won't sell it freely. He issues it under warrant. Capability, it turns out, is not permission.</div>
+  <div class="meta">Monday, 5 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Around 30 September 2026 Google unveiled Gemini 4 Argon — a frontier model for software engineering, enterprise knowledge work and <em>cyber defense</em>, at a reported $2/$10 per-million-token price with a 1-million-token output window, claimed to top GPT-6 Astra and Opus 5.5 on 12 of 18 tests (reported 77.9% DeepSWE v1.1; 68% CWE-bench v1, tying for first on autonomous vulnerability remediation; 51.3% AutomationBench) (blog.google; CNBC; Yahoo Tech; IBTimes, as reported). Then Google did the thing that matters more than any benchmark: it <em>did not put the blade on the open shelf</em>. Argon's first rollout, over early October, goes only to trusted cyber defenders through the Fairwind Program (launched 2 September 2026 for governments and vetted partners), with wider public access restricted. In the same breath, Google Cloud's Gemini Enterprise Agent Platform rebuilt the stack around an Agent Identity and Registry — a register of which hand holds which warrant. The board question is no longer <em>how capable is the model</em>; it is keen enough that its own maker won't sell it freely. It is: do we still believe capability is the same thing as permission? Because a blade that patches a flaw at 68% can find and work one by the same edge, 65% of enterprises already report an AI-agent security incident, and Gartner projects the average Fortune 500 will run more than 150,000 agents by 2028 — 150,000 blades, and the only question that matters is which are held under warrant.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar perfected the <em>servant</em> — named it (the livery), kept one book (the steward), signed the bond (the surety), checked its wage (the second wage), sent it to reap (the two harvests), funded it (the purse) — and then looked down at the <em>ground</em> it stood on and said <strong>own the floor</strong> (the foundation). <strong>This morning the vendors themselves teach the next discipline, by example: the keenest capability is not sold on the open shelf; it is issued under warrant.</strong></p>
+<p><strong>The reality — the most capable new model is dual-use, and its own maker won't release it freely.</strong> Around <strong>30 September 2026 Google unveiled Gemini 4 Argon</strong>, a frontier model purpose-built for software engineering, enterprise knowledge work and <strong>cyber defense</strong>, at a reported <strong>$2/$10 per-million-token</strong> price with a <strong>1M-token</strong> output window, claiming it tops GPT-6 Astra and Opus 5.5 on <strong>12 of 18 tests</strong> (reported <strong>77.9% DeepSWE v1.1</strong>; <strong>68% CWE-bench v1</strong>, tying for first on autonomous vulnerability remediation; <strong>51.3% AutomationBench</strong>) — authored by Chief AI Architect Koray Kavukcuoglu and teased by Sundar Pichai (blog.google; CNBC; Yahoo Tech, as reported). The headline underneath the benchmarks: Google <strong>held the blade back</strong>. Argon's first access, over early October, goes <strong>only to vetted cyber defenders via the Fairwind Program</strong> (launched 2 Sep 2026 for governments and trusted partners), with <strong>wider public access restricted</strong> (IBTimes; Winbuzzer, as reported). A model that remediates vulnerabilities at 68% is, by the same edge, a model that can <em>find and exploit</em> them — so the maker treats raw access as a thing to grant, not to publish.</p>
+<p><strong>The collision — the enterprise stack is being rebuilt around the register of warrants.</strong> In the same window, Google Cloud launched the <strong>Gemini Enterprise Agent Platform</strong> (the evolution of Vertex AI), built on four pillars — Build, Scale, <strong>Govern</strong>, Optimize — whose governing primitive is an <strong>Agent Identity and Registry</strong> and an <strong>Agent Observability and Evaluation</strong> layer (Google Cloud, as reported). This is the vendors telling you where the control plane now lives: not in the model, but in <em>who holds a warrant to wield it, recorded and watched</em>. And the scale is the point: Gartner projects the average Fortune 500 will operate <strong>more than 150,000 AI agents by 2028</strong>, with <strong>40% of enterprise apps embedding task-specific agents by end-2026</strong> (up from &lt;5% in 2025) and the AI-governance-platform market reaching <strong>$492M in 2026, &gt;$1B by 2030</strong> (as reported). 150,000 keen, dual-use blades is not a fleet you <em>publish</em> access to — it is a fleet you <em>warrant</em>.</p>
+<p><strong>The stakes — issue the keen capability under warrant: named, registered, time-bound, recallable.</strong> The board move re-uses the whole year's discipline and sharpens it to one blade's edge: <strong>capability is not permission.</strong> <strong>First, don't put the keenest capability on the open shelf</strong> — the agent that can patch (or breach), pay (or drain), read every record (or leak it) is issued to specific, vetted hands, not switched on for all. <strong>Second, keep the register</strong> — an Agent Identity and Registry of every warrant: who holds it, what it may touch, until when, and who signed it; the vendors just made the register the centerpiece, so make it yours. <strong>Third, keep the recall</strong> — every warrant is time-bound and revocable, and you have actually pulled one back under load, because <strong>65% of enterprises already report an AI-agent security incident</strong> and a warrant you cannot revoke is not a warrant, it is a gift. And remember the crown's own warrant still binds you: the <strong>EU AI Office's 38-person enforcement team</strong> can order corrective measures and <strong>revoke EU market access</strong>, with fines to <strong>€15M or 3% of global turnover</strong>.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the keenest model is dual-use, and its maker won't release it freely.</strong> <strong>Gemini 4 Argon (~30 Sep): $2/$10, 1M-token window, reported 77.9% DeepSWE v1.1 / 68% CWE-bench v1 / 51.3% AutomationBench, claimed to top Astra and Opus 5.5 on 12/18 tests — yet released first only to vetted cyber defenders via the Fairwind Program, wider public access restricted (blog.google; CNBC; IBTimes, as reported).</strong> Capability is not permission — even for its maker.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the stack is rebuilt around the register of warrants.</strong> <strong>Google Cloud's Gemini Enterprise Agent Platform (evolution of Vertex AI): Build / Scale / Govern / Optimize, with an Agent Identity and Registry and Agent Observability as the governing primitive; Gartner projects the average Fortune 500 runs &gt;150,000 AI agents by 2028 (Google Cloud; Gartner, as reported).</strong> The control plane moved from the model to who holds the warrant.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — issue the keen capability under warrant.</strong> Don't shelf it openly; keep the register (who holds what, until when, signed by whom); keep the recall (time-bound, revocable, actually pulled) — because <strong>65% of enterprises already report an AI-agent security incident</strong>, and the EU AI Office can itself revoke your market access (fines to €15M / 3% of turnover) (as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety signed the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation owned the ground — all discipline aimed at the <em>servant</em> and its <em>ground</em>. <strong>The warrant is about the blade's edge: that capability and permission are not the same thing.</strong> This week the maker of the keenest new model proved it by refusing to sell that model freely — Gemini 4 Argon, good enough to remediate vulnerabilities at 68% and therefore good enough to work them, went not to the open market but under seal to vetted cyber defenders through the Fairwind Program, while Google Cloud rebuilt the enterprise stack around an Agent Identity and Registry. The trap is the opposite reflex: capability is exciting, democratizing it feels generous and modern, and so the keen, dual-use agent gets switched on for everyone — until one of the 150,000 blades, held by a hand no one registered, patches the wrong thing or pays the wrong party. The estates that keep their standing will do three unglamorous things: <strong>don't shelf the keenest capability openly</strong> (issue it to named, vetted hands), <strong>keep the register</strong> (an identity-and-registry of every warrant), and <strong>keep the recall</strong> (time-bound, revocable, tested). The vendor just modeled all three for you. Capability is cheap and getting cheaper; <strong>permission is the thing you must still issue, record, and be able to take back.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Warrant"</h3>
+<p><em>Topic: This morning the frame turns from the ground the house stands on to the edge of the keenest tool in it. Around 30 September 2026 Google unveiled Gemini 4 Argon — a frontier model for software engineering, enterprise knowledge work and cyber defense, at a reported $2/$10 per-million-token price with a 1M-token window, claimed to top GPT-6 Astra and Opus 5.5 on 12 of 18 tests (reported 77.9% DeepSWE v1.1; 68% CWE-bench v1, tying first on autonomous vulnerability remediation; 51.3% AutomationBench) — and then declined to sell it on the open market, releasing it first only to vetted cyber defenders through its Fairwind Program, wider public access restricted (blog.google; CNBC; IBTimes; Winbuzzer, as reported). In the same window Google Cloud's Gemini Enterprise Agent Platform rebuilt the stack around an Agent Identity and Registry (Google Cloud, as reported), while Gartner projects the average Fortune 500 will run more than 150,000 AI agents by 2028 and 65% of enterprises already report an AI-agent security incident (as reported). The warrant allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, done the slow work right. It had named every hand and cut it a scoped key, kept one honest book, put the master's name on the bond, asked whose second coin each counsellor took, sent the servants to reap, handed each a scoped purse, and — most lately, and most wisely — stopped renting its foundation and poured its own floor. It was, by any fair reckoning, a well-governed estate, and the master had earned a night's sleep.</p>
+<p>Then the finest armory in the valley forged a new blade, and the whole county came to see it. It was a wondrous thing — keen enough to pick any lock in an evening, mend any gate, and (the smith said quietly) keen enough to find the flaw in a wall no mason had noticed and seal it before a thief ever could. Every steward in the valley wanted one for the night-watch. And the master waited for the armory to name its price and wheel a cartload to the market square, as it had always done with its stoves and its tools.</p>
+<p><strong>But the armory did not wheel the blade to the market.</strong> The master rode over to ask why, and the old smith wiped his hands and said the thing that changed the master's whole year: <em>"This blade is not a stove. A stove only ever cooks. This blade mends a wall and breaches one with the very same edge — the hand decides, not the steel. So I will not sell it on the open shelf to any man with coin. I will issue it under a sealed warrant, to sworn hands I have vetted, each named in my register, each warrant marked with what it may touch and the day it expires — and I keep the cord to call every blade home."</em> And he showed the master his book: not an inventory of blades, but a <strong>register of warrants</strong> — this blade to the harbor-watch until Michaelmas, that one to the keep's own guard, this one recalled last Tuesday when its bearer left service.</p>
+<p>The master rode home troubled, because he kept, in his own newly-governed house, a growing armory of exactly this kind of blade. Not steel — <em>servants</em> keen enough to mend or breach with the same edge: one that could settle an invoice or drain an account, one that could read every patient's record or leak it, one that could patch the estate's own walls or quietly open a door in them. He had named them, scoped them, funded them, stood surety for them — all true. But he had done the exciting thing with the keenest of them: he had been <em>generous</em>. He had switched them on for everyone who asked, because capability felt like a gift to hand around, and to withhold a useful tool felt like meanness. He had confused <strong>what a blade could do</strong> with <strong>who should be permitted to wield it</strong> — and those, the smith had just taught him, are not the same thing at all.</p>
+<p>Two roads, as always. The easy road was the generous one: a keen blade is wonderful, so give everyone a keen blade, and trust that good people do good things. The wiser road, which the careful houses took, began with the smith's cold distinction: <strong>capability is not permission.</strong> The careful master counted his keenest servants and found he could not say, for most of them, <em>who</em> was permitted to set them to the dangerous work, <em>until when</em>, or <em>on whose signature</em> — and when he asked how many had been set loose with a hand no one had written down, the honest answer frightened him, for two in three houses in the valley had already had a night when a blade turned in an unregistered hand. That is not the arithmetic of a tool. <strong>That is the arithmetic of an armory with no register.</strong></p>
+<p>So the wise houses learned three plain things, and they cost less to do early than late. <strong>The first: do not put the keenest blade on the open shelf.</strong> The servant that can pay or drain, mend or breach, read every record or leak it, is <em>issued</em> — to named, vetted hands, for a stated purpose — never merely switched on for all because it is useful. Generosity with a dual-use edge is not kindness; it is an unlocked armory. <strong>The second: keep the register.</strong> Not a count of blades, a <strong>register of warrants</strong> — who holds which keen capability, what it may touch, until when, and whose name signed the grant; the great armory had just made its register the heart of the whole enterprise, and so must you. <strong>And the third: keep the cord.</strong> Every warrant is marked with the day it ends and can be called home before then, and you have actually pulled one back while a blade was still in the field — for a warrant you cannot revoke is not a warrant, it is a gift, and the house that cannot recall its keenest tools has merely armed the valley and hoped.</p>
+<p>Here is the part that should keep a master awake. The whole county was dazzled by the <em>keenness</em> — a sharper blade every season, cheaper than the last — and all that dazzle made it feel backward, even ungrateful, to ask the quiet question the smith asked: <em>not "how keen is it?" but "whose hand holds it, by what warrant, and can I take it back?"</em> The armory itself, the very maker of the keenest blade, had answered that question before any customer thought to — it refused to sell its sharpest steel on the open shelf and issued it only under warrant to vetted hands. If the smith who <em>profits</em> from the blade will not put it on the open market, the master thought, what exactly am I doing switching my own keenest servants on for everyone who asks? The lesson was not that the blade was wicked. The lesson was that <strong>a keen, dual-use edge is a thing you grant, record, and can recall — or it is a thing that eventually turns in a hand you never wrote down.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee and not an heir; the foundation is why you own the ground the house stands on — and <strong>the warrant is why, when the capability is keen and cuts both ways, you do not put it on the open shelf but issue it under seal, to named and vetted hands, each written in a register, each grant time-bound and recallable: because the maker of the keenest blade this week refused to sell it freely, and if capability were the same as permission he would have.</strong> A house that hands its sharpest, dual-use servants to everyone who asks has not been generous; it has unlocked its armory and called the open door a gift.</p>
+<p><strong>The question it forces:</strong> <em>The newest, keenest model is good enough that its own maker won't put it on the open market — he issues it under warrant to vetted hands and keeps the register. So in our own house, for the servants keen enough to mend or breach with the same edge — pay or drain, heal or leak, patch or open a door — can we still tell ourselves that capability is permission? Do we issue the keen capability under warrant (named, registered, time-bound, recallable), or have we been "generous," switching our sharpest blades on for everyone who asked — and if a blade turned tonight, could we even name the hand that held it?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we confused capability with permission?</strong> The maker of the keenest new model this week refused to sell it on the open market — Gemini 4 Argon went under warrant to vetted cyber defenders, not to everyone with coin. <strong>For each of our most powerful, dual-use AI capabilities (an agent that can pay or drain, read every record or leak it, patch our systems or open a door in them), can we name who is <em>permitted</em> to wield it, until when, and on whose signature — or did we simply switch it on because it was useful?</strong></li>
+  <li><strong>Do we keep a register of warrants?</strong> The vendors just made an Agent Identity and Registry the governing primitive of the enterprise stack, and Gartner projects the average Fortune 500 will run &gt;150,000 agents by 2028. <strong>Can we produce, today, a register of every agent that holds a keen capability — what it may touch, who signed the grant, and when it expires — or do we have an armory with no book?</strong></li>
+  <li><strong>Can we pull the cord?</strong> 65% of enterprises already report an AI-agent security incident. <strong>For our most dangerous agent capability, have we actually revoked a live warrant under load — proven we can call the blade home mid-field — or is "we could turn it off" a belief we have never tested?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>An agent that can move money can move it the wrong way; the purse and the warrant now stack. <strong>Have we issued payment, trading and account-access capabilities under explicit, named, time-bound warrants with a tested recall — and can we show our supervisor a register of exactly which agents hold which financial powers, signed by whom?</strong></li>
+  <li>The crown's warrant binds you too: the EU AI Office (38-person enforcement team) can order corrective measures and revoke market access, with fines to €15M or 3% of turnover. <strong>Do we treat our own permission to operate as a revocable warrant — stress-testing the loss of a critical AI capability the way we stress-test a license or charter risk?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical AI is the sharpest dual-use edge you hold: the model that reads every record to help a clinician can, by the same reach, expose every record. <strong>Is access to patient-scale reading and action issued under warrant — named roles, stated purpose, an expiry, an auditable register — rather than granted broadly because it speeds the ward?</strong></li>
+  <li>A vulnerability-remediation model (Argon at a reported 68% on CWE-bench) finds flaws in order to fix them — and finding is the dangerous half. <strong>Where we deploy cyber-capable or record-scale AI, have we restricted it to vetted hands under a Fairwind-style warrant, or is the keen tool simply available to anyone with a login?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already issue warrants for dangerous physical tools — lockout/tagout, keyed access to the line, certified operators only. <strong>Have we applied the same discipline to dangerous digital tools — an agent that can reconfigure a controller, halt a line, or touch OT — issuing it under a named, registered, recallable warrant rather than a broad enablement?</strong></li>
+  <li>Embedded-vendor and partner agents now operate inside your plant. <strong>Does every external or partner agent that holds a keen capability appear in our own Agent Identity and Registry with a warrant we signed and can revoke — or do we trust a vendor's switch we do not control?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents that can issue refunds, change prices, or act on customer accounts are keen, dual-use blades at scale. <strong>Are those powers issued under warrant with per-capability limits and a register, so a compromised or confused agent cannot drain margin across the fleet — and can we recall the capability instantly on the biggest sales day?</strong></li>
+  <li>Customer-facing AI must disclose it is AI (EU AI Act Article 50, now enforceable). <strong>Is the warrant for each customer-facing agent tied to the transparency and conduct duties it must meet — so permission to act and duty to disclose are granted and revoked together?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public power demands accountable grants of authority. <strong>Is every AI capability that touches citizens' records or decisions issued under a named, time-bound, revocable warrant recorded in a register the public's auditors can inspect — or have we switched on dual-use capability without a chain of permission?</strong></li>
+  <li>The Fairwind model — a maker restricting a cyber-capable frontier model to vetted government and partner hands — is now the reference pattern. <strong>For our most sensitive AI, are we procuring and deploying it under warrant (vetted access, register, recall) rather than broad availability, as the vendors themselves now do with their keenest tools?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Warrant</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded, and on ground I own?</em> and started asking the one question none of those controls settles: <em>this capability is keen enough to cut both ways — who is permitted to wield it, by what warrant, and can I take it back?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety signs the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those governs what the servant <em>is</em>, <em>does</em>, <em>serves</em>, <em>produces</em>, or <em>stands on</em>. The warrant governs the <em>edge</em>: that a dual-use capability is a thing you grant, record, and can recall — and this week the maker of the keenest new model proved the distinction by refusing to sell that model freely.</strong> The point is blunt: <strong>capability is not permission, and confusing the two is how a well-governed house with 150,000 keen agents arms its own valley and calls it generosity.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the frontier is now explicitly dual-use, and the maker gates access rather than publishing it.</strong> <strong>Around 30 September 2026 Google unveiled Gemini 4 Argon — a frontier model for software engineering, enterprise knowledge work and cyber defense, at a reported $2/$10 per-million-token price with a 1M-token output window, claimed to top GPT-6 Astra and Opus 5.5 on 12 of 18 tests (reported 77.9% DeepSWE v1.1; 68% CWE-bench v1, tying for first on autonomous vulnerability remediation; 51.3% AutomationBench), authored by Chief AI Architect Koray Kavukcuoglu and teased by Sundar Pichai — and released first only to vetted cyber defenders via the Fairwind Program (launched 2 Sep 2026 for governments and trusted partners), with wider public access restricted (blog.google; CNBC; Yahoo Tech; IBTimes; Winbuzzer, as reported).</strong> Architecturally, three things follow. First, <em>remediation and exploitation share an edge</em> — a model that scores 68% on remediating vulnerabilities has, by construction, learned to <em>find</em> them, so raw access is a capability to grant, not a feature to ship. Second, <em>the maker chose a warrant over a market</em> — Fairwind is an access-control decision (vetted hands, stated purpose) layered on top of the model, the exact pattern an enterprise must apply to its own dual-use agents. Third, <em>"how capable" has stopped being the interesting question</em> — Argon's benchmark lead matters less than the fact that its maker won't release it freely; the control that matters has moved from the model to the grant of permission to use it.</li>
+  <li><strong>The collision — the enterprise stack is being rebuilt around the register of warrants.</strong> <strong>Google Cloud's Gemini Enterprise Agent Platform (the evolution of Vertex AI) is organized around Build, Scale, Govern and Optimize, with an Agent Identity and Registry and an Agent Observability and Evaluation layer as the governing primitives; Gartner projects the average Fortune 500 will run &gt;150,000 AI agents by 2028, 40% of enterprise apps embed task-specific agents by end-2026 (up from &lt;5% in 2025), and the AI-governance-platform market reaches $492M in 2026 and &gt;$1B by 2030 (Google Cloud; Gartner, as reported).</strong> Two engineering realities cut against comfort. <strong>First, identity is the new control plane.</strong> When the fleet is 150,000 agents deep and many hold dual-use capability, you cannot govern by reviewing models; you govern by issuing, recording and revoking <em>warrants</em> against agent identities — which is precisely why the vendors put an Agent Identity and Registry at the center. <strong>Second, a warrant you cannot revoke is not a warrant.</strong> The register is only half the control; the other half is the cord — time-bound grants and a tested, under-load recall — because <strong>65% of enterprises already report an AI-agent security incident</strong> and a keen blade with no recall is a standing liability.</li>
+  <li><strong>The answer — issue the keen capability under warrant: don't shelf it openly, keep the register, keep the recall.</strong> <strong>For every dual-use capability (pay/drain, read-all/leak, patch/open), grant it to named, vetted agent identities for a stated purpose and a bounded time; record each grant in an Agent Identity and Registry (who, what it may touch, until when, signed by whom); watch the warranted hands with observability; and keep a revocation you have actually exercised under load — reusing the identity, logging and ownership disciplines you already built for the livery, the steward and the foundation, now pointed at the sharpest edge in the house.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the one axis the year's controls never settled: not what the agent is, serves, harvests, spends or stands on, but <strong>who is permitted to wield its dangerous edge, and whether you can take that permission back.</strong></li>
+</ul></div>
+<p>The strategic core: <strong>capability has commoditized and keeps getting keener and cheaper; permission is the scarce, deliberate thing you must still issue, record, and be able to revoke — and the vendors just proved it by refusing to sell their keenest model on the open shelf.</strong> The market makes the temptation concrete: a keen tool feels like a gift, democratizing it feels generous and modern, and withholding it feels like meanness — so the sharpest, most dual-use agents get switched on broadly, with no warrant and no register. The board translation: <strong>don't put the keenest blade on the open shelf; issue it under warrant.</strong> The failure mode is exact: <strong>a house that names, governs, funds, grounds and perfects its servants — and then, feeling generous, hands its most dual-use capabilities to everyone who asks — will pass every governance review and discover, the first time one of its 150,000 blades turns in a hand no one registered, that it armed its own valley and kept no cord to call the steel home.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The warrant: you perfected the servant and owned its ground; now look at the edge. A dual-use capability cuts both ways, so it is granted, not published — capability is not permission. Top left, the keen blade, a dual-use capability: Gemini 4 Argon mends and breaches by the same edge; 68% on CWE-bench means patch equals find; 2 dollar / 10 dollar pricing with a 1 million token window; tops Astra and Opus on 12 of 18 tests; it can pay or drain, read every record or leak it, patch a wall or open a door. Top right, the warrant, permission: issued under seal, not sold; to named, vetted hands only; recorded in an Agent Identity and Registry; time-bound and recallable; Fairwind issues it to cyber defenders; the maker itself won't shelf it. Between them: these are not the same thing; if capability were permission, the maker would sell it freely, but he doesn't — he issues it under warrant to vetted hands. Middle, the arithmetic of an armory with no register, as reported: 65 percent of enterprises already report an AI-agent security incident in the past year; the average Fortune 500 is projected to run more than 150,000 AI agents by 2028; 40 percent of enterprise apps embed task-specific agents by end-2026, up from under 5 percent in 2025; the EU AI Office, a 38-person team, can revoke market access, with fines to 15 million euros or 3 percent of turnover. Bottom left, stop, be generous: switch keen tools on for all; keep no register of who holds what; treat capability as permission; hope good hands do good things. Bottom right, start, issue it under warrant: grant to named, vetted hands only; keep the register of who, what, until when, and signed by whom; make it time-bound with a recall you have pulled; watch the warranted hands with observability." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WARRANT — you owned the ground; now look at the EDGE</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A dual-use capability cuts both ways — so it is GRANTED, not published. Capability is NOT permission.</text>
+
+  <!-- the keen blade -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE KEEN BLADE (dual-use)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 4 Argon — mends &amp; breaches</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">68% CWE-bench: patch = find</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">$2/$10 · 1M-token window · 12/18 tests</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">pay/drain · read-all/leak · patch/open</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the maker won't shelf it</text>
+
+  <!-- the warrant -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE WARRANT (permission)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">issued under seal — not sold</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">named, vetted hands only</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">Agent Identity &amp; Registry</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">time-bound + recallable (Fairwind)</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ to vetted cyber defenders</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">if capability WERE permission, the maker would sell it freely — he doesn't ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF AN ARMORY WITH NO REGISTER — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">65% of enterprises already report an AI-agent security incident (past year)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">avg Fortune 500 projected to run &gt;150,000 AI agents by 2028 (Gartner)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">40% of enterprise apps embed task-specific agents by end-2026 (from &lt;5% in '25)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">EU AI Office (38-person team) can REVOKE market access · fines €15M / 3% turnover</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: "be generous"</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· switch keen tools on for all</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no register of who holds what</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· capability = permission</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· hope good hands do good things</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">an unlocked armory</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: issue it under warrant</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· grant to named, vetted hands only</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep the register (who/what/until/signed)</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· time-bound + a recall you've pulled</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· watch the warranted hands</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">permission, recorded &amp; recallable</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Capability is cheap and getting cheaper — permission is the thing you must still issue and take back.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Don't put the keenest blade on the open shelf · issue it under warrant.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The keen blade — dual-use capability</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The warrant — permission, granted</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of no register</span>
+</div>
+</div>
+
+<h3>The keen blade vs the warrant — what commoditized, and what you must still grant</h3>
+<table>
+<tr><th>The keen blade (capability — commoditized, dual-use)</th><th>The warrant (permission — scarce, deliberate)</th></tr>
+<tr><td>Gemini 4 Argon: patches vulnerabilities at 68% → therefore finds them</td><td>Issued under seal to vetted hands, not sold on the open shelf</td></tr>
+<tr><td>$2/$10, 1M-token window, tops Astra/Opus on 12/18 tests</td><td>Named identity, stated purpose, recorded in a register</td></tr>
+<tr><td>Pay or drain · read every record or leak it · mend or breach</td><td>Time-bound and revocable — a recall you have actually pulled</td></tr>
+<tr><td>Keener and cheaper every season</td><td>Who holds it, what it may touch, until when, signed by whom</td></tr>
+<tr><td>The maker itself won't release it freely (Fairwind)</td><td>Watched by observability — the warranted hand is audited</td></tr>
+<tr><td>Your posture: welcome the capability</td><td>Your posture: never confuse it with permission</td></tr>
+</table>
+
+<h3>Why "the warrant" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and on ground you own. <strong>This morning the vendors moved the question to the blade's edge: the keenest new model is dual-use, and its own maker issued it under warrant rather than selling it freely.</strong> Argon's Fairwind-gated release and Google Cloud's Agent Identity and Registry prove the control plane has moved from the model to the grant of permission to wield it. Governance that stopped at <em>what the agent is and does</em> will not protect a house full of dual-use blades. The estates that keep their standing will welcome the cheap, keen capability and refuse, deliberately, to confuse it with permission — issuing the dangerous edge under warrant, recording every grant, and keeping a cord they have actually pulled.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to say who is permitted to wield each dangerous capability, and to take that permission back.</em> On a legacy estate the instinct, after a hard year of governance work, is to reward the team with access: the new agent is powerful and helpful, so switch it on broadly and let people get on. Under the warrant that is exactly the reflex to check: broad enablement of a dual-use capability is an unlocked armory, however well-named the hands. The retrofit is <strong>don't-shelf, register, recall. Don't shelf</strong> the keenest capabilities openly: issue pay/drain, read-all/leak and patch/open powers to specific vetted identities for a stated purpose. <strong>Register</strong> every grant: stand up an Agent Identity and Registry recording who holds which capability, what it may touch, until when, and whose signature authorized it. <strong>Recall:</strong> make every warrant time-bound and prove, under load, that you can revoke it mid-task. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the warrant is why, when a capability is keen and cuts both ways, you issue it under seal to named and registered hands, time-bound and recallable, rather than switching it on for all: because the maker of the keenest blade this week would not sell it freely, and capability is not permission.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the keenest model is dual-use and gated, not published.</strong> <strong>Gemini 4 Argon (~30 Sep): $2/$10, 1M-token window, reported 77.9% DeepSWE v1.1 / 68% CWE-bench v1 (ties #1 on vuln remediation) / 51.3% AutomationBench, claimed to top Astra and Opus 5.5 on 12/18 tests — released first only to vetted cyber defenders via the Fairwind Program, wider public access restricted (blog.google; CNBC; IBTimes; Winbuzzer, as reported).</strong> The maker chose a warrant over a market.</li>
+  <li><strong>The register at the center.</strong> <strong>Google Cloud's Gemini Enterprise Agent Platform (evolution of Vertex AI): Build / Scale / Govern / Optimize, with an Agent Identity and Registry and Agent Observability and Evaluation as the governing primitives (Google Cloud, as reported).</strong> The control plane moved from the model to who holds the warrant.</li>
+  <li><strong>The scale that forces it.</strong> <strong>Gartner: the average Fortune 500 will run &gt;150,000 AI agents by 2028; 40% of enterprise apps embed task-specific agents by end-2026 (up from &lt;5% in 2025); AI-governance-platform market $492M in 2026, &gt;$1B by 2030 (as reported).</strong> 150,000 keen blades is a fleet you warrant, not one you publish access to.</li>
+  <li><strong>The arithmetic of no register.</strong> <strong>65% of enterprises report at least one AI-agent security incident in the past year; prompt-injection against tool-calling agents rising through the year (as reported).</strong> An unregistered dual-use hand is the incident waiting to happen.</li>
+  <li><strong>The crown's own warrant.</strong> <strong>EU AI Office's 38-person enforcement team can order corrective measures and revoke EU market access; fines to €15M or 3% of global turnover; Article 50 transparency (chatbot disclosure, content marking, deepfake labeling) now enforceable; 180+ organizations signed the GPAI Code of Practice (as reported).</strong> Your permission to operate is itself a revocable warrant.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>The model commoditized (Grok 4.7's shrug; $2/$6–$10/$50 spread); own the floor (the foundation); EU AI Act high-risk regime live since 2 August 2026; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer (as reported).</strong> The warrant rides on the identity, logging and ownership you already built.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Google Unveils Gemini 4 Argon, Claims Benchmark Lead Over OpenAI And Anthropic — then restricts wider access to the public.</div><div class="a">— Yellow / IBTimes, headlines on Gemini 4 Argon's launch and limited rollout (≈30 September 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">This blade mends a wall and breaches one with the very same edge — the hand decides, not the steel. So I will not sell it on the open shelf; I will issue it under warrant, to sworn hands I have vetted, and I keep the cord to call every blade home.</div><div class="a">— the radar's smith, on why a maker gates a dual-use tool instead of selling it</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">65% of enterprises report at least one AI-agent security incident in the past year.</div><div class="a">— Enterprise AI security reporting, 2026 (as reported; prompt-injection against tool-calling agents rising through the year)</div></blockquote>
+<blockquote><div class="q">"The newest, keenest model is good enough that its own maker won't put it on the open market. If capability were the same as permission, he would have. It isn't — so in your own house, issue the keen capability under warrant, keep the register, and keep the cord."</div><div class="a">— the radar, on why permission, not capability, is now the scarce discipline</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The keen, dual-use model</td><td><span class="v">Gemini 4 Argon (~30 Sep 2026): frontier model for software engineering, enterprise knowledge work and cyber defense; reported $2/$10 per-million-token price; 1M-token output window</span></td><td>blog.google; CNBC; Yahoo Tech, as reported</td></tr>
+<tr><td>Argon benchmarks</td><td><span class="v">Reported 77.9% DeepSWE v1.1; 68% CWE-bench v1 (ties for first on autonomous vulnerability remediation); 51.3% AutomationBench; claimed to top GPT-6 Astra and Opus 5.5 on 12 of 18 tests</span></td><td>Yellow; IBTimes; Winbuzzer, as reported</td></tr>
+<tr><td>Capability ≠ permission (the warrant)</td><td><span class="v">Argon released first only to vetted cyber defenders via the Fairwind Program (launched 2 Sep 2026 for governments and trusted partners); wider public access restricted</span></td><td>IBTimes ("restricts wider access"); Winbuzzer; Free Press Journal, as reported</td></tr>
+<tr><td>The register at the center</td><td><span class="v">Google Cloud Gemini Enterprise Agent Platform (evolution of Vertex AI): Build / Scale / Govern / Optimize, with an Agent Identity and Registry and Agent Observability and Evaluation</span></td><td>Google Cloud, as reported</td></tr>
+<tr><td>The scale that forces warrants</td><td><span class="v">Average Fortune 500 projected to run &gt;150,000 AI agents by 2028; 40% of enterprise apps embed task-specific agents by end-2026 (up from &lt;5% in 2025); AI-governance-platform market $492M in 2026, &gt;$1B by 2030</span></td><td>Gartner, as reported</td></tr>
+<tr><td>The arithmetic of no register</td><td><span class="v">65% of enterprises report at least one AI-agent security incident in the past year; prompt-injection against tool-calling agents rising through 2026</span></td><td>Enterprise AI security reporting 2026, as reported</td></tr>
+<tr><td>The crown's own warrant</td><td><span class="v">EU AI Office 38-person enforcement team can order corrective measures and revoke EU market access; fines to €15M or 3% of global turnover; 180+ orgs signed the GPAI Code of Practice; Article 50 transparency now enforceable</span></td><td>European Commission / EU AI Office, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Don't shelf the keenest capability openly — issue it under warrant.</strong> The maker of the week's keenest model refused to sell it freely (Gemini 4 Argon went under warrant to vetted cyber defenders via Fairwind, not to the open market), because a tool that patches at 68% can breach by the same edge. <strong>This month, inventory your most dual-use agent capabilities — pay/drain, read-all/leak, patch/open, reconfigure/halt — and convert each from a broad enablement into a grant to named, vetted agent identities for a stated purpose.</strong> Report one number to the board: the share of dangerous AI capabilities that are issued under an explicit warrant versus switched on broadly.</li>
+  <li><strong>Keep the register — stand up an Agent Identity and Registry of every warrant.</strong> The vendors just made the register the governing primitive of the enterprise stack, and Gartner projects the average Fortune 500 will run &gt;150,000 agents by 2028 — you cannot govern that fleet by reviewing models. <strong>This month, create (or adopt) a register that records, for every agent holding a keen capability: who holds it, what it may touch, until when, and whose signature authorized the grant — and wire observability to watch the warranted hands.</strong> Report the share of your keen-capability agents that appear in a register with a named owner and an expiry.</li>
+  <li><strong>Keep the cord — make every warrant time-bound and prove you can recall it under load.</strong> A warrant you cannot revoke is a gift, and 65% of enterprises already report an AI-agent security incident; the EU AI Office can revoke even <em>your</em> market access. <strong>This month, pick your single most dangerous agent capability and actually revoke its warrant mid-task under load — measure the time-to-revoke and what breaks — so "we could turn it off" becomes a tested fact, not a belief.</strong> Report the measured time-to-revoke and a dated plan to extend time-bound, recallable warrants to the next two capabilities. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the warrant is why, when the capability is keen and cuts both ways, you issue it under seal to named and registered hands, time-bound and recallable: because the maker of the keenest blade this week would not sell it freely, and capability is not permission.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Google / blog.google (≈30 Sep 2026): Gemini 4 Argon, frontier model for software engineering, enterprise knowledge work and cyber defense, reported $2/$10 per-million-token price, 1M-token output window, benchmark claims (77.9% DeepSWE v1.1; 68% CWE-bench v1, tying first on autonomous vulnerability remediation; 51.3% AutomationBench; tops GPT-6 Astra and Opus 5.5 on 12/18 tests), authored by Koray Kavukcuoglu, teased by Sundar Pichai (CNBC; Yahoo Tech; Yellow) · The warrant — Argon released first only to vetted cyber defenders via the Fairwind Program (launched 2 Sep 2026 for governments and trusted partners), wider public access restricted (IBTimes — "restricts wider access to the public"; Winbuzzer; Free Press Journal) · The register — Google Cloud's Gemini Enterprise Agent Platform (evolution of Vertex AI): Build / Scale / Govern / Optimize, with an Agent Identity and Registry and Agent Observability and Evaluation (Google Cloud) · The scale — average Fortune 500 projected to run &gt;150,000 AI agents by 2028; 40% of enterprise apps embed task-specific agents by end-2026 (up from &lt;5% in 2025); AI-governance-platform market $492M in 2026, &gt;$1B by 2030 (Gartner) · The incident rate — 65% of enterprises report at least one AI-agent security incident in the past year, prompt-injection against tool-calling agents rising (enterprise AI security reporting 2026) · The crown's warrant — EU AI Office's 38-person enforcement team can order corrective measures and revoke EU market access, fines to €15M or 3% of global turnover, Article 50 transparency enforceable, 180+ orgs signed the GPAI Code of Practice (European Commission / EU AI Office) · The prior rails — the model's commoditization (Grok 4.7; $2/$6–$10/$50 spread), the foundation (own the floor), EU AI Act high-risk regime live since 2 August 2026, MCP 2026-07-28. The "warrant" framing — that capability has commoditized while permission is the scarce discipline, so a dual-use capability is issued under warrant (named, registered, time-bound, recallable) rather than switched on broadly, exactly as a model's own maker chose a warrant over an open market — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages (including blog.google) were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 5 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
