@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 7 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the lodger' — the vendor's agent now runs inside your own house. On 5 Oct 2026 AWS and OpenAI shipped Bedrock Managed Agents powered by OpenAI: OpenAI agents run entirely inside your AWS account, 'data never leaves AWS', each with its own identity, scoped permissions and full logs. That answers the larder worry (72% now rank data sovereignty their top AI challenge, up from 49%) — but a resident with the master key is worse than a stranger at the gate. The board move: bring the work to the data, give the lodger a badge, scoped keys and a book, and don't mistake your landlord's floor for your own. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You kept the larder — now the vendor's cook moves into your kitchen</div>
+  <h1>The Lodger</h1>
+  <div class="subhead">A fortnight ago the order was: keep the larder — your data in a form you own. The catch was that using the frontier servant meant shipping your grain out every day. This morning the vendor answers it: its agent now runs inside your own house, and the data never leaves. Real progress — but a worker who lives in your walls and holds your keys is worse than a stranger at the gate the moment you stop watching.</div>
+  <div class="meta">Wednesday, 7 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 5 October 2026, at OpenAI's DevDay, AWS and OpenAI shipped "Bedrock Managed Agents, powered by OpenAI" (public preview) — OpenAI's agents now run entirely inside your own AWS account, where, in the vendors' own words, "<em>data never leaves AWS</em>" (The Next Web; AWS Weekly Roundup, 5 Oct; OpenAI, as reported). The managed runtime does the inference, memory and skills inside your environment; each agent gets its own AWS identity and defined permissions and logs every action for auditing. Salesforce's Joe Inzerillo put the board case in one line: "Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next." This is the larder kept: the skilled stranger no longer takes your grain to his kitchen — he comes to live and cook in yours. But a worker who lodges inside your walls is a different risk from a visitor at your gate, and the question turns with it: now that the vendor's agent lives in our house, is it still in our livery, on our scoped keys, and written in our book — or have we handed a resident the run of the estate because it sleeps under our roof? And one catch rides underneath: the house the lodger moves into is itself rented from a single landlord — the larder is yours, but the floor it sits on is still another man's.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the only way to use the frontier servant was to ship your data out to the vendor's cloud. The radar's answer was the larder: <em>keep your knowledge in a form you own, and never let it live only inside a vendor's distant cellar.</em> <strong>This morning the pattern inverts. Instead of your grain going to the servant, the servant comes to your grain</strong> — and that changes the shape of the risk, for the better in one way and for the worse in another.</p>
+<p><strong>The reality — the vendor's agent now runs inside your own house, and your data never leaves it.</strong> On <strong>5 October 2026, at OpenAI's DevDay 2026, AWS and OpenAI launched "Bedrock Managed Agents, powered by OpenAI" in public preview</strong> — a customized, AWS-native build of OpenAI's Agents API that lets an enterprise run OpenAI agents <strong>entirely inside its own AWS account, so that "data never leaves AWS"</strong> (The Next Web; AWS Weekly Roundup, 5 Oct; OpenAI, as reported). The managed runtime handles <strong>inference, memory and skills inside the customer's environment</strong>; each agent <strong>has its own AWS identity and defined permissions and logs every action for auditing</strong>; model inference and the agent runtime <strong>remain inside AWS</strong>. It rides the newly cheap engine: <strong>GPT-6.1 Sol (29 Sep)</strong> reaches near-flagship quality at roughly <strong>one-fifth the cost</strong> — $2/$10 per million input/output tokens, within <strong>2.1 points</strong> of GPT-6 Astra on OSWorld 2.0 computer-use at about <strong>one-seventh the cost per task ($1.30 vs $9.30)</strong> (Vellum; AWS, as reported). The larder worry the radar raised a fortnight ago — <em>your data accreting inside a vendor's proprietary cellar</em> — this directly answers: the grain stays home.</p>
+<p><strong>The collision — a lodger in the house is a different risk from a visitor at the gate.</strong> For the whole year, the disciplines this radar built — name every agent (the livery), keep one book (the steward), cut each a scoped key (the keyring), hand it a scoped purse (the purse) — governed a servant that worked at arm's length, out in the vendor's kitchen. <strong>A resident changes the stakes in both directions.</strong> It is <em>safer</em> in that the data no longer crosses your gate — and <strong>72% of IT leaders now rank data sovereignty and regulatory compliance their top AI challenge, up from 49% a year ago</strong> (Info-Tech Research Group, AI Trends 2026, as reported) — which is exactly why "data never leaves" is the headline. But it is <em>more dangerous</em> if you relax: <strong>a worker who lives in your walls, holding your own keys, is worse than a stranger at your door if you give him the run of the house.</strong> The Bedrock design is honest about this — it gives each agent its own identity, scoped permissions, and a complete log — which is to say it hands you back the livery, the keyring and the steward and asks you to actually use them on the lodger. And the pilots that die prove the point: <strong>only about 11–25% of enterprise agentic pilots reach sustained production, the rest stalling on identity, audit and access-control gaps</strong> (multiple 2026 surveys, as reported). The lodger does not remove those controls; it moves them inside your house, where skipping them is now your omission, not the vendor's.</p>
+<p><strong>The stakes — welcome the lodger, but keep him in livery, on scoped keys, in the book — and don't mistake your landlord's floor for your own.</strong> Three moves. <strong>First, bring the work to the data, not the data to the work</strong> — for your most sensitive workloads, adopt the pattern where the agent runs inside your own boundary and the data never leaves it. <strong>Second, give the lodger a badge, scoped keys, and a place in the book</strong> — every resident agent gets its own identity, least-privilege permissions, and complete audit logs; a lodger with the master key is worse than a stranger at the gate. <strong>Third, don't confuse "runs in my cloud" with "I own the ground"</strong> — the house the lodger lives in is rented from one landlord; keeping the grain home is progress, but the foundation question from a fortnight ago still stands, so keep the abstraction, the portability and a second hearth.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the vendor's agent moves into your house; the data never leaves it.</strong> <strong>AWS + OpenAI "Bedrock Managed Agents, powered by OpenAI" (5 Oct, public preview): OpenAI agents run entirely inside your AWS account — "data never leaves AWS"; inference, memory and skills inside your environment; each agent gets its own AWS identity, scoped permissions, and full audit logs (TNW; AWS; OpenAI, as reported), riding GPT-6.1 Sol's near-flagship quality at ~1/5 the cost (Vellum, as reported).</strong> The larder stays home.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — a lodger is a different risk from a visitor.</strong> <strong>Safer: 72% now rank data sovereignty their top AI challenge, up from 49% (Info-Tech, as reported) — "data never leaves" answers that. More dangerous if you relax: a resident holding your keys with the run of the house beats a stranger at the gate; ~11–25% of pilots reach production, stalling on identity/audit/access gaps (2026 surveys, as reported).</strong> The controls move inside your walls.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — bring the work to the data, keep the lodger in livery, don't rent your ground.</strong> Run the agent inside your boundary; give every resident agent its own identity, scoped keys and a complete log; and keep the abstraction, portability and a second hearth — because <strong>"runs in my cloud" is not "I own the ground."</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the keyring cut its keys, the purse funded it, the foundation told you to keep the larder — your data in a form you own. <strong>The lodger is the morning the vendor stops asking for your grain and offers to send its cook to your kitchen instead.</strong> On 5 October AWS and OpenAI made it product: OpenAI's agents run inside your own AWS account, "data never leaves AWS," each with its own identity and a full log. For the sovereignty worry that 72% of leaders now rank first, this is real progress — the grain stays home. But do not let a resident lull you: a worker who lives in your walls and holds your keys is the most dangerous servant you have, not the safest, the moment you decide that because he lodges with you he can be trusted with the run of the house. So keep the lodger exactly as governed as the stranger at the gate — his own badge, only the keys his errand needs, every act in your book — and remember that the house he moves into is still rented: keeping the larder home does not yet make the floor yours. Welcome the cook into your kitchen. Do not hand him the keys to every room, and do not mistake your landlord's floor for your own.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Lodger"</h3>
+<p><em>Topic: A fortnight ago the radar told the house to keep its larder — its data, context and evals in a form it owns, never left to accrete inside a vendor's distant cellar. The hard part was that for a year the only way to use the vendor's brilliant servant was to cart your grain out of your gates to his kitchen. On 5 October 2026, at OpenAI's DevDay, AWS and OpenAI shipped "Bedrock Managed Agents, powered by OpenAI" (public preview): OpenAI's agents now run entirely inside the customer's own AWS account, where "data never leaves AWS," with each agent holding its own identity and scoped permissions and logging every action (TNW; AWS; OpenAI, as reported), riding GPT-6.1 Sol's near-flagship quality at about a fifth of the cost (Vellum, as reported). Salesforce's Joe Inzerillo: "Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next." Meanwhile 72% of IT leaders now rank data sovereignty their top AI challenge, up from 49% a year ago (Info-Tech, as reported). The lodger allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at last, learned to keep its own larder. It had been told — rightly — that its grain and its recipes were the estate itself, and that a house whose larder sat in another man's cellar did not truly own its dinner. But there was a hard truth in that counsel the house had never been able to answer. The finest cook in the valley did not work in the house's kitchen. To use his genius, the house had for a year loaded its grain onto a cart each morning, sent it out through its own gates to the cook's distant kitchen, and waited, trusting, for the bread to come back — and trusting, too, that nothing of its grain stayed behind in the cook's stores. The counsel said <em>keep your larder</em>, and the house wanted to; but every supper, its grain left the estate.</p>
+<p>Then this week the cook's own master came to the door with a different offer, and it was a clever and a generous one. <em>"You need not send your grain out any longer,"</em> he said. <em>"Keep every sack behind your own walls. I will send my cook to live and work in <strong>your</strong> kitchen. He will bake with your grain, on your hearth, inside your gates — and not a single ear of it will ever leave your land."</em> And this was no small thing, for the whole valley had grown fearful of its grain travelling: three houses in four now lay awake at night more over where their grain slept than over almost anything else. So the house was glad, and rightly glad. Here at last was the larder kept not in spite of the great cook but <strong>with</strong> him: the servant come to the grain, instead of the grain sent to the servant. <em>"Your data never leaves your land,"</em> the master said, <em>"and the old worry stops being the thing that holds you back."</em> The house believed him, and it was telling the truth.</p>
+<p>But a wise steward, watching the cook carry his knives in through the front door, felt a second thing stir beneath the first — because <strong>a man who lodges in your house is not the same risk as a man you meet at your gate.</strong> The visitor you search at the door, watch while he works, and send home at dusk. The lodger you stop searching, because he lives here now; you stop watching, because he is always here; and one evening you find yourself handing him the ring with every key on it, because — surely — a man who sleeps under your roof can be trusted with the pantry, the strongroom and the deed-box alike. <em>That</em> is the danger the generous offer hides. <strong>A stranger at the gate with no key can do little harm. A resident with the master key, whom you have stopped watching because he is family now, can empty the house.</strong> The lodger is not more dangerous than the visitor because he is wickeder. He is more dangerous because he is <em>closer</em>, and because closeness tempts you to drop every guard you built.</p>
+<p>So the careful houses took the cook in — gladly — and then did the unglamorous thing: they treated the lodger exactly as strictly as they had treated the stranger, and in some ways more. They gave him <strong>his own badge</strong>, cut in the house's own livery, so that every loaf and every spill could be traced to his hand and not confused with the family's. They cut him <strong>only the keys his baking needed</strong> — the flour-store and the oven, not the strongroom and not the deed-box — and they did not widen that ring by an inch simply because he now slept down the hall. And they kept <strong>the steward's one book open on him most of all</strong>, writing down every door he opened and every sack he drew, precisely because a resident is the hardest servant to remember to watch. The generous master had, to his credit, offered all three: the cook came wearing a badge, carrying only the keys he was given, and trailed by a clerk who wrote down his every move. The careful houses understood what that meant — <em>the master had handed them back the livery, the keyring and the book, and was asking them, politely, to actually use them.</em> The foolish houses took the same cook, saw the badge and the clerk, and concluded the watching was now someone else's job.</p>
+<p>And there was one last thing the wisest houses saw, standing in their own kitchens watching the lodger knead their grain. <strong>The kitchen he was cooking in was not, in fact, theirs.</strong> The walls, the hearth, the very floor — all of it was rented from a single great landlord, the one who had arranged the whole happy meeting. Keeping the grain home was real and good; the larder truly no longer travelled. But the house it now never left was still another man's house, on another man's ground, and the rent on that ground could rise, and the lease could change, and the landlord could decide one morning to rearrange the kitchens of every tenant in the valley at once. The foundation question the radar had asked a fortnight before had not gone away merely because the grain stopped moving. It had only moved <strong>underfoot</strong>: you had kept your larder, and set it down on a floor you still did not own.</p>
+<p><strong>The moral, stated plainly:</strong> the larder is your data, kept home at last; the lodger is the vendor's servant come to live and cook in your own kitchen so your grain never leaves your land — real progress, and worth welcoming. But a resident is not a visitor: give the lodger his own badge (his own identity), cut him only the keys his errand needs (least privilege), and keep the steward's book open on him most of all (full, owned logs), because <strong>a worker who lives in your walls and holds your keys is worse than a stranger at your gate the moment you stop watching him for being family.</strong> And do not let the kept larder blind you to the rented floor: the kitchen the lodger cooks in is still another man's house, so keep the abstraction, keep a way to leave, keep a second hearth — the gate is the one door you guard; the livery names each hand; the keyring is which key each holds; the steward keeps the one book; the purse funds it like an employee; the foundation keeps the larder home — and <strong>the lodger is why, having brought your grain home, you must treat the servant who now lives with it as the most governed worker in the house, not the least, and must not mistake your landlord's floor for your own ground.</strong></p>
+<p><strong>The question it forces:</strong> <em>The vendor's agent now lives in our house and our data never leaves it — genuine progress, and we should take it. But have we kept treating that resident as strictly as the stranger at the gate — its own identity, only the keys its task needs, every action in a log we own — or have we quietly handed a lodger the run of the estate because it sleeps under our roof now? And have we remembered that the kitchen it cooks in is still rented — that keeping the larder home is not the same as owning the floor it sits on?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>We can now run the vendor's agent inside our own walls so the data never leaves — are we treating that resident as strictly as a stranger at the gate, or more loosely because it "lives with us"?</strong> The AWS/OpenAI pattern hands back the three controls (own identity, scoped permissions, full logs) and asks us to use them. <strong>For each in-house agent, can we show its own identity, a least-privilege key ring, and a complete log we own — or have we relaxed the guard because the agent now runs on our side of the gate?</strong></li>
+  <li><strong>Have we confused "runs in our cloud" with "we own the ground"?</strong> Keeping the data home is real progress — 72% now rank sovereignty their top AI challenge — but the environment the agent runs in is still rented from one landlord. <strong>Does our abstraction, our portability and our second-source plan still hold when the grain stays home, or did "data never leaves" quietly let us stop worrying about the floor it sits on?</strong></li>
+  <li><strong>Which of our sensitive workloads should move to a bring-the-agent-to-the-data pattern this quarter, and which cannot?</strong> <strong>Can we name the specific high-sensitivity workflows where the data must never leave our boundary, and do we have a dated plan to run those agents inside it — rather than continuing to ship regulated data out to a vendor's cloud by default?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Data residency, supervised-outsourcing and audit obligations make "where does the data physically run?" a board-level control. <strong>Can we certify, for each AI workflow touching customer or market data, whether the data leaves our boundary — and are we moving the ones that must not onto an in-environment pattern where inference and memory stay inside our own account?</strong></li>
+  <li>A resident agent with its own identity and scoped permissions is exactly the model risk management framework you already run for human access. <strong>Have we applied our least-privilege, segregation-of-duties and full-logging standards to in-house agents as rigorously as to privileged employees — or is an agent that "lives inside AWS" quietly over-permissioned because it feels internal?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>PHI and trial data are the ultimate larder, and "data never leaves our environment" is a genuine compliance unlock. <strong>Are we using the in-boundary agent pattern to let regulated data stay put while we still get frontier capability — and have we confirmed the runtime, memory and logs for those agents actually remain inside our controlled environment, not just the storage?</strong></li>
+  <li>A resident agent is harder to remember to watch than a visiting one. <strong>For agents operating on clinical or safety data inside our walls, do we have the same identity, scoping and immutable audit discipline we require of any system touching patient data — so a lodger cannot quietly accrete access it was never granted?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already control which contractors get badged, which doors their badge opens, and keep a gate log. <strong>Have we applied that same badge-keys-log discipline to in-house AI agents — each with its own identity, only the systems its task needs, and a complete record — rather than treating an agent that runs on our infrastructure as implicitly trusted?</strong></li>
+  <li>On-prem and in-VPC execution keeps proprietary process data from leaving the estate. <strong>Are we routing agents over sensitive operational and IP data through an in-boundary pattern — and have we checked that "runs in our environment" does not still leave us single-sourced on one cloud landlord for the floor it runs on?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer and payment data carry residency and PCI obligations, and keeping it in-boundary removes a real bottleneck. <strong>Are we moving our highest-sensitivity customer-data agents to an in-environment pattern — and are those resident agents scoped so a single over-permissioned agent cannot reach across checkout, loyalty and support at once?</strong></li>
+  <li>Peak-season reliability is existential, and a resident agent in your cloud still depends on that cloud. <strong>If our single cloud landlord had an outage, does our in-house agent fleet degrade to a second hearth, or does keeping the grain home mean we are now wholly dependent on one provider's floor?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Sovereignty is non-negotiable here, and "data never leaves our environment" is close to the whole point. <strong>Can we show that citizen data processed by AI agents stays inside our controlled boundary end-to-end — runtime, memory and logs — and that each agent is identified, scoped and logged to the standard we already owe the public?</strong></li>
+  <li>The EU AI Act's high-risk conformity deadline was deferred to <strong>2 December 2027</strong> by the Digital Omnibus (in force 27 July 2026) — a reprieve on enforcement, not on the requirements. <strong>Are we using the extra runway to build in-boundary, identified, scoped and logged agents by design — or treating the delay as a reason to defer the very controls a resident agent makes more urgent, not less?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Lodger</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>should we dare send our data out to the vendor's cloud at all?</em> and started asking the question the new pattern forces: <em>now that the vendor's agent runs inside our own walls, is it the most-governed worker in the house or the least?</em> The gate admits the agent; the livery names it; the keyring is which key it holds; the steward keeps one book; the purse funds it; the foundation keeps the larder home. <strong>Every one of those was built for a servant that worked at arm's length, out in the vendor's kitchen. The lodger is the morning that servant moves in — and the controls do not disappear, they relocate inside your house, where using them is now your job and skipping them is your omission.</strong> The point is blunt: <strong>"data never leaves AWS" is a real and welcome answer to the larder worry, but it converts an external trust problem into an internal governance one — and an internal resident you have stopped watching is more dangerous than an external visitor you never stopped searching.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the agent comes to the data; the data never leaves your boundary.</strong> <strong>On 5 October 2026, at OpenAI's DevDay, AWS and OpenAI launched "Bedrock Managed Agents, powered by OpenAI" in public preview — a customized, AWS-native build of OpenAI's Agents API that runs OpenAI agents entirely inside the customer's own AWS account, where "data never leaves AWS"; the managed runtime handles inference, memory and skills inside the customer's environment, and each agent has its own AWS identity and defined permissions and logs every action for auditing; execution runs on self-hosted compute or Bedrock AgentCore Runtime, and model inference and the agent runtime remain inside AWS (The Next Web; AWS Weekly Roundup, 5 Oct; OpenAI, as reported).</strong> Three things follow architecturally. First, <em>the data-gravity problem flips</em>: for sensitive workloads you move the (now cheap) model to the data rather than the data to the model, which is why <strong>GPT-6.1 Sol's near-flagship quality at ~1/5 the cost</strong> (within 2.1 points of Astra on OSWorld 2.0 at ~1/7 the cost per task, $1.30 vs $9.30; $2/$10 per M tokens; 1.05M context — Vellum, as reported) matters: it makes running a strong agent <em>inside your own account</em> economically ordinary. Second, <em>the design is identity-first</em>: each agent is a first-class principal with its own identity, scoped permissions and an action log — this is the livery, the keyring and the steward, implemented. Third, <em>in-boundary is not automatically well-governed</em> — the runtime staying in your account is necessary, not sufficient; an over-permissioned resident agent is now <em>your</em> over-permissioned principal.</li>
+  <li><strong>The collision — a resident changes the threat model in both directions.</strong> <strong>Safer on data: 72% of IT leaders now rank data sovereignty and regulatory compliance their top AI challenge, up from 49% a year ago (Info-Tech, AI Trends 2026, as reported), and "data never leaves" is the direct answer. More dangerous on access if you relax: the pilots that die do so on exactly the controls a resident makes easy to skip — only ~11–25% of enterprise agentic pilots reach sustained production, the rest stalling on identity, audit and access-control gaps (2026 surveys, as reported).</strong> Two engineering realities cut against comfort. <strong>First, proximity erodes vigilance.</strong> A visiting agent is sandboxed and searched at the boundary by default; a resident agent inherits your internal network, your service accounts and your trust, and the temptation is to grant it broad standing access because it "runs inside." A lodger with the master key is the worst principal you have. <strong>Second, the floor is still rented.</strong> Running inside your AWS account keeps the <em>data</em> home but deepens dependence on one cloud landlord for the <em>environment</em> — the foundation question from the 22 September edition, moved underfoot. MCP remains the connective tissue (Anthropic, OpenAI, Google, Microsoft all support it), which is good for portability — but portability is a property you keep deliberately, not one "runs in my cloud" grants you.</li>
+  <li><strong>The answer — bring the work to the data, keep the lodger in livery, don't rent your ground.</strong> <strong>For high-sensitivity workloads, adopt the in-boundary pattern so inference, memory and logs stay inside your account; give every resident agent its own identity, a least-privilege key ring and a complete, owned audit log (reuse the livery, keyring and steward you already built); and keep the abstraction, the portability and a second hearth, because keeping the larder home is not the same as owning the floor it sits on.</strong> This is the seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the agent that has moved in: the resident is only an asset if it is the most-governed worker in the house, and only a liability if you trusted it with the run of the estate for sleeping under your roof.</li>
+</ul></div>
+<p>The strategic core: <strong>"data never leaves AWS" is a genuine larder-keeping win you should take — and it quietly moves the whole burden of governance from the vendor's side of the gate to yours.</strong> The market makes the temptation concrete: a resident agent feels internal, trusted, safe — so the reflex is to over-permission it and stop watching it, which is precisely how a kept larder becomes an emptied house. The board translation: <strong>welcome the cook into your kitchen; do not hand him the ring with every key.</strong> The failure mode is exact: <strong>a house that brings the agent in-house, congratulates itself that the data never leaves, and then grants that resident broad standing access with thin logging will pass its sovereignty review and discover, the first time the lodger reaches a room it was never meant to enter, that a resident with the master key is worse than any stranger it ever turned away at the gate.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The lodger: you kept the larder, now the vendor's cook moves into your kitchen. 'Data never leaves AWS' answers the data worry and relocates every control from the vendor's side of the gate to yours. A resident is not a visitor. Top left, the visitor at the gate, the old way: data sent out to the vendor's distant kitchen; grain leaves your gates; searched and sandboxed at the door; sent home at dusk; an external trust problem. Top right, the lodger in the house, 5 October: the agent runs inside your own AWS account; data never leaves AWS; inference, memory and logs stay; own identity and scoped keys; every action logged; an internal governance problem. Between them: the problem flips — safer on data, with 72 percent now ranking sovereignty number one, up from 49; more dangerous on access if you relax the guard. Middle, why a resident is the hardest servant to watch, per 2026 surveys as reported: a lodger with the master key beats a stranger at the gate; proximity erodes vigilance, you stop searching, stop watching, hand over the ring; only about 11 to 25 percent of agentic pilots reach production, stalling on identity, audit and access; the floor is still rented, so data home is not ground owned, the foundation moved underfoot. Bottom left, stop, trust the lodger: broad standing access, 'it's internal it's fine', thin logging on a resident, and 'data home so stop worrying'. Bottom right, start, govern the resident most of all: bring the work to the data in-boundary; own identity and least-privilege keys; a complete owned audit log; and keep abstraction, portability and a second hearth." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE LODGER — you kept the larder; now the vendor's cook moves in</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">"Data never leaves AWS" answers the data worry — and relocates every control to YOU.</text>
+
+  <!-- the visitor -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE VISITOR AT THE GATE (old way)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">data SENT OUT to the vendor's kitchen</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">grain leaves your gates</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">searched &amp; sandboxed at the door</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">sent home at dusk</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ an external trust problem</text>
+
+  <!-- the lodger -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE LODGER IN THE HOUSE (5 Oct)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agent runs INSIDE your account</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"data never leaves AWS"</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">inference/memory/logs stay · own identity</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">scoped keys · every action logged</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ an INTERNAL governance problem</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the problem FLIPS: safer on data, more dangerous on access if you relax ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHY A RESIDENT IS THE HARDEST SERVANT TO WATCH — (2026 surveys, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a lodger with the master key beats a stranger at the gate</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">proximity erodes vigilance: stop searching, stop watching, hand over the ring</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~11–25% of agentic pilots reach production — stall on identity/audit/access</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">the floor is still RENTED: data home ≠ ground owned (the foundation, underfoot)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: trust the lodger</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· broad standing access</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "it's internal, it's fine"</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· thin logging on a resident</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· data home ⇒ stop worrying</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one open door from emptied</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: govern the resident most of all</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· bring the work to the data (in-boundary)</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· own identity · least-privilege keys</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a complete, OWNED audit log</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep abstraction/portability/2nd hearth</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">grain home, and well-watched</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Welcome the cook into your kitchen — do not hand him the ring with every key.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Keeping the larder home is not the same as owning the floor it sits on.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The visitor — data sent out</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>The lodger — agent runs in your house</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Why a resident is hardest to watch</span>
+</div>
+</div>
+
+<h3>The visitor at the gate vs the lodger in the house</h3>
+<table>
+<tr><th>The visitor at the gate (data sent out)</th><th>The lodger in the house (5 Oct: agent runs in your account)</th></tr>
+<tr><td>Grain leaves your gates to the vendor's kitchen</td><td>"Data never leaves AWS" — inference, memory, logs stay in your account</td></tr>
+<tr><td>Searched and sandboxed at the door by default</td><td>Inherits your internal network, service accounts and trust</td></tr>
+<tr><td>An external trust problem</td><td>An internal governance problem — your omission if skipped</td></tr>
+<tr><td>Sent home at dusk</td><td>Lives in your walls — the hardest servant to remember to watch</td></tr>
+<tr><td>Risk: can it be trusted with our data at all?</td><td>Risk: have we given a resident the run of the house?</td></tr>
+<tr><td>The larder travels</td><td>The larder stays home — on a floor you still rent</td></tr>
+</table>
+
+<h3>Why "the lodger" is the discipline that matters now</h3>
+<div class="card">
+<p>A fortnight ago the counsel was <em>keep the larder</em> — your data in a form you own. The honest objection was that using the frontier servant meant shipping your grain out every day. <strong>This morning that objection is answered: the servant comes to the grain.</strong> AWS and OpenAI made it product — OpenAI's agents running inside your own account, "data never leaves AWS," each with its own identity, scoped keys and a full log. Take the win; 72% of leaders rank the worry it solves as their top challenge. But understand what you have accepted along with it: the whole apparatus of governance has moved inside your house, where it is yours to run, and a resident you stop watching is more dangerous than a visitor you never stopped searching. Govern the lodger as the most-watched worker in the house, not the least.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>the servant who has moved in must be the most governed, not the least.</em> On a legacy estate the instinct, once the data stays home, is to exhale and grant the in-house agent broad standing access to the internal systems it sits beside — it is internal now, after all. That is exactly the reflex to check: an in-boundary agent is a first-class principal, and it needs the same least-privilege, segregation and logging you give a privileged human, applied harder because it is easy to forget to watch. The retrofit is <strong>house, badge, book — and a kept floor. House</strong> the work: move sensitive workloads to the in-boundary pattern so the data never leaves. <strong>Badge</strong> the lodger: every resident agent gets its own identity and only the keys its task needs. <strong>Book</strong> it: a complete, owned log of every action. <strong>And keep the floor in view:</strong> running in one landlord's cloud keeps the grain home but not the ground, so hold the abstraction, the portability and a second hearth. And keep the whole refrain: the gate is the one door; the livery names each hand; the census is the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the looking-glass is why you measure by an honest outside light; the steward is why you keep one governed book; the surety is why your name is on the bond; the purse is why you fund it like an employee; the foundation is why you keep the larder home — and <em>the lodger is why, having brought the grain home, you govern the servant that now lives with it hardest of all, and do not mistake your landlord's floor for your own ground.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the agent moves into your house.</strong> <strong>AWS + OpenAI "Bedrock Managed Agents, powered by OpenAI" (5 Oct, public preview): OpenAI agents run entirely inside your AWS account — "data never leaves AWS"; inference, memory and skills inside your environment; each agent with its own AWS identity, scoped permissions and full audit logs (The Next Web; AWS Weekly Roundup; OpenAI, as reported).</strong> The servant comes to the grain.</li>
+  <li><strong>The cheap engine under it.</strong> <strong>GPT-6.1 Sol (29 Sep): near-flagship quality at ~1/5 the cost — within 2.1 pts of GPT-6 Astra on OSWorld 2.0 at ~1/7 the cost per task ($1.30 vs $9.30); $2/$10 per M tokens; DeepSWE v1.1 high 75.2; AutomationBench 36.0% at $0.30/task; 1.05M context (Vellum; AWS, as reported).</strong> Running a strong agent inside your own account is now economically ordinary.</li>
+  <li><strong>The executive case.</strong> <strong>Salesforce's Joe Inzerillo: "Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next" (as reported).</strong> The pitch is explicitly: keep the grain home, and stop letting the data worry hold you back.</li>
+  <li><strong>The sovereignty surge.</strong> <strong>72% of IT leaders now rank data sovereignty and regulatory compliance their top AI challenge, up from 49% a year ago (Info-Tech Research Group, AI Trends 2026, as reported).</strong> Why "data never leaves" is the headline feature.</li>
+  <li><strong>The production gap the lodger inherits.</strong> <strong>Only ~11–25% of enterprise agentic pilots reach sustained production, the rest stalling on identity, audit and access-control gaps (multiple 2026 surveys, as reported).</strong> The resident does not remove those controls; it moves them inside your walls.</li>
+  <li><strong>The rails still hold.</strong> <strong>MCP remains the connective standard across Anthropic, OpenAI, Google and Microsoft; the EU AI Act high-risk conformity deadline was deferred to 2 December 2027 by the Digital Omnibus (in force 27 July 2026) — enforcement delayed, requirements not (as reported).</strong> Portability and in-boundary, identified, scoped, logged agents are how you meet them.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--teal)"><div class="q">Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next.</div><div class="a">— Joe Inzerillo, President of Enterprise &amp; AI Technology, Salesforce, on Bedrock Managed Agents powered by OpenAI (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">'Data never leaves AWS': OpenAI agents move into Amazon's cloud.</div><div class="a">— The Next Web, headline on the AWS/OpenAI Bedrock Managed Agents launch (5 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">72% of IT leaders now rank data sovereignty and regulatory compliance as their top AI-related challenge — up from 49% the previous year.</div><div class="a">— Info-Tech Research Group, AI Trends 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"You can bring the vendor's agent into your own house now, and your data never leaves it — a real win. But a worker who lives in your walls and holds your keys is worse than a stranger at your gate the moment you stop watching him for being family. Welcome the cook into your kitchen; do not hand him the ring with every key."</div><div class="a">— the radar, on why a resident agent must be governed hardest of all</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agent moves in-house</td><td><span class="v">AWS + OpenAI "Bedrock Managed Agents, powered by OpenAI" (5 Oct 2026, public preview): OpenAI agents run entirely inside the customer's own AWS account — "data never leaves AWS"; inference, memory and skills inside the customer's environment; each agent has its own AWS identity, scoped permissions, and logs every action</span></td><td>The Next Web; AWS Weekly Roundup (5 Oct); OpenAI, as reported</td></tr>
+<tr><td>The cheap engine under it</td><td><span class="v">GPT-6.1 Sol (29 Sep): near-flagship quality at ~1/5 the cost — within 2.1 pts of GPT-6 Astra on OSWorld 2.0 computer-use (Astra 73.5%) at ~1/7 the cost per task ($1.30 vs $9.30); $2/$10 per M input/output tokens; DeepSWE v1.1 high 75.2; AutomationBench 36.0% at $0.30/task; 1.05M-token context</span></td><td>Vellum; AWS, as reported</td></tr>
+<tr><td>The executive case</td><td><span class="v">Salesforce's Joe Inzerillo: "Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next"</span></td><td>as reported</td></tr>
+<tr><td>The sovereignty surge</td><td><span class="v">72% of IT leaders rank data sovereignty and regulatory compliance their top AI challenge, up from 49% a year earlier</span></td><td>Info-Tech Research Group, AI Trends 2026, as reported</td></tr>
+<tr><td>The production gap the lodger inherits</td><td><span class="v">Only ~11–25% of enterprise agentic pilots reach sustained production; the rest stall on identity, audit and access-control gaps</span></td><td>Multiple 2026 enterprise surveys, as reported</td></tr>
+<tr><td>The rails still in force</td><td><span class="v">MCP remains the connective standard (Anthropic, OpenAI, Google, Microsoft); EU AI Act high-risk conformity deadline deferred to 2 December 2027 by the Digital Omnibus (in force 27 July 2026) — enforcement delayed, requirements not</span></td><td>Model Context Protocol; EU Digital Omnibus (Reg (EU) 2026/1744), as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Bring the work to the data — move your most sensitive workloads to an in-boundary agent pattern.</strong> The servant now comes to the grain: OpenAI agents run inside your own AWS account, "data never leaves," and the cheap engine (GPT-6.1 Sol at ~1/5 the cost) makes it ordinary to do. <strong>This month, name your top few high-sensitivity AI workflows (regulated, PHI, payment, IP) and pilot running their agents inside your own boundary — confirming inference, memory and logs all stay in your account, not just the storage.</strong> Report one number to the board: the share of sensitive AI workloads where data provably never leaves your boundary.</li>
+  <li><strong>Give the lodger a badge, scoped keys, and a place in the book.</strong> A resident agent is a first-class principal, and the in-boundary design hands you back the livery, keyring and steward to use on it. <strong>This month, require that every in-house agent has its own distinct identity, a least-privilege permission set scoped to its task (not broad standing access because it "runs inside"), and a complete audit log you own and retain — and run an access review that treats resident agents as strictly as privileged humans.</strong> Report the share of in-house agents with their own identity, least-privilege scope and complete logging — and the count of any with broad standing access, as a defect list.</li>
+  <li><strong>Don't mistake your landlord's floor for your own.</strong> Keeping the grain home is real progress, but the kitchen the lodger cooks in is still rented from one cloud landlord — the foundation question, moved underfoot. <strong>This month, confirm that moving agents in-boundary has not quietly single-sourced you: keep the abstraction between your systems and any one provider, keep your data, context and evals portable, and keep a second hearth you have actually lit.</strong> Report whether your in-boundary agents could be re-pointed to a second environment, and the measured time-to-switch for one. <strong>The gate is the one door you guard; the livery names each hand; the keyring is which key each agent holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the looking-glass measures by an honest outside light; the steward keeps one book; the surety puts your name on the bond; the purse funds it like an employee; the foundation keeps the larder home — and the lodger is why, having brought the grain home, you must govern the servant that now lives with it hardest of all: give it a badge, cut it only the keys its errand needs, keep its every act in your own book, and never mistake your landlord's floor for the ground you own.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — AWS + OpenAI (5 Oct 2026, at OpenAI's DevDay): "Bedrock Managed Agents, powered by OpenAI" (public preview), a customized AWS-native build of OpenAI's Agents API running OpenAI agents entirely inside the customer's own AWS account so that "data never leaves AWS," with inference, memory and skills inside the customer's environment and each agent holding its own AWS identity and defined permissions and logging every action for auditing (The Next Web; AWS Weekly Roundup, 5 Oct; OpenAI) · The cheap engine — GPT-6.1 Sol (29 Sep): near-flagship quality at ~1/5 the cost; within 2.1 points of GPT-6 Astra on OSWorld 2.0 (Astra 73.5%) at ~1/7 the cost per task ($1.30 vs $9.30); $2/$10 per M input/output tokens; DeepSWE v1.1 high 75.2; AutomationBench 36.0% at $0.30/task; 1.05M-token context (Vellum; AWS) · The executive case — Salesforce's Joe Inzerillo: "Data never leaves AWS, and security stops being the bottleneck between our customers and what comes next" · The sovereignty surge — 72% of IT leaders rank data sovereignty and regulatory compliance their top AI challenge, up from 49% a year earlier (Info-Tech Research Group, AI Trends 2026) · The production gap — only ~11–25% of enterprise agentic pilots reach sustained production, stalling on identity/audit/access-control gaps (multiple 2026 surveys) · The rails — MCP remains the connective standard (Anthropic, OpenAI, Google, Microsoft); EU AI Act high-risk conformity deadline deferred to 2 December 2027 by the Digital Omnibus (Reg (EU) 2026/1744, in force 27 July 2026), enforcement delayed not requirements. The "lodger" framing — that the vendor's agent now comes to live and cook in your own kitchen so the grain never leaves, that a resident with the master key is worse than a stranger at the gate, and that a rented kitchen is still another man's floor — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 7 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies). Added to the per-edition template so every future edition inherits it. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
