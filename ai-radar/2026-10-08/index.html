@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 8 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the night watch' — the market just shipped the servant that never sleeps. Anthropic's Claude Haiku 5.5 (7 Oct) is a 1M-context model at a reported $0.10/$0.50 per M tokens built for subagents and automation — the tireless engine-room worker too cheap to turn off — while OpenAI's Dots and Microsoft's Scout make always-on agents the default (own cloud computers, own identities, read-only until tasked). A control you only check by day does not govern a servant that works by night. The board move: post the watch, keep the night servant read-only until told, and leash the engine-room worker. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant that works by day — now watch the one that never sleeps</div>
+  <h1>The Night Watch</h1>
+  <div class="subhead">A year of controls governed a servant you set a task and then watch. This week the market shipped the servant that never sleeps: a tireless engine-room worker too cheap to turn off (Claude Haiku 5.5, 7 Oct) and always-on agents that no longer wait for a prompt (OpenAI's Dots; Microsoft's Scout). A control you only check by day does not govern a servant that works by night.</div>
+  <div class="meta">Thursday, 8 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday, 7 October 2026, Anthropic shipped Claude Haiku 5.5 — a small, fast model with a 1M-token context window at a reported $0.10/$0.50 per million tokens, its first Haiku with an adjustable "effort" dial, built for the engine-room work of always-on agents: routing, context compaction, parallel subagents and browser/desktop automation (Anthropic; MarkTechPost; Artificial Analysis, as reported). At a tenth of a cent per thousand input tokens, the tireless night-worker is now too cheap to turn off — and it lands into a market that just put the servant on a permanent watch. Days earlier OpenAI unveiled "Dots" (DevDay, 29 Sep): always-on agents, each with their own cloud computer and browser across 4,000+ apps, that run proactive research while you sleep but keep their app connections read-only until you assign a task, with consequential actions gated behind an auto-review (SiliconANGLE; AIWeekly). And Microsoft's "Scout" opens a category of always-on "Autopilots" — a digital coworker that runs continuously on schedules, triggers and observed events, each with its own Entra identity and task-scoped credentials redacted from logs, of which Microsoft's own executive says trust is "the most critical and unknown" problem (Help Net Security; The Neuron). The servant no longer waits for you. It works the night shift. The board question is no longer what may the servant do — it is who keeps the watch while the whole house sleeps.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and own the ground it stands on (the foundation). Every one of those disciplines assumes a servant that <strong>acts on a task and then goes still</strong> — one you supervise during business hours and that waits, idle, the rest of the time. <strong>This morning the market shipped the servant that never sleeps</strong>, and three developments in the same window make the shift plain.</p>
+<p><strong>The reality — the tireless night-worker is now too cheap to turn off.</strong> On <strong>7 October 2026 Anthropic released Claude Haiku 5.5</strong>, a small, fast model with a <strong>1M-token context window</strong> and a reported <strong>$0.10 / $0.50 per-million-token price</strong> (rising to $0.50 / $2.50 above a 100K-token prompt), its <strong>first Haiku with an adjustable "effort" control</strong>, available across the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry (Anthropic; MarkTechPost; Artificial Analysis, as reported). Anthropic positions it precisely for the engine-room work of autonomy — <strong>summarization, routing, context compaction, parallel subagents, and browser/desktop automation</strong> — the grunt labor an always-on agent does continuously in the background. At a tenth of a cent per thousand input tokens, with a comparison field that now includes GPT-6 Luna at the same $0.10/$0.50 and Gemini 3.5 Flash-Lite at $0.30/$2.50 (MarkTechPost, as reported), the economics of leaving an agent <em>running</em> — not invoking it, running it — have crossed a line.</p>
+<p><strong>The collision — the market just put the servant on a permanent watch.</strong> The cheap tireless worker arrives into a product cycle that has made "always-on" the default. <strong>OpenAI's "Dots"</strong> (unveiled at DevDay, <strong>29 September 2026</strong>) are <strong>always-on personal agents, each with its own cloud computer and browser</strong>, connected to <strong>more than 4,000 apps</strong>; when no task is assigned they run <strong>"proactive research," but their connections to your apps stay read-only</strong> during that time, and any action that could touch an account or share information <strong>must pass an auto-review check first</strong> (rollout limited to ChatGPT Pro and Business Premium, Enterprise beta off by default, not for Pro users in the EEA/Switzerland/UK) (SiliconANGLE; AIWeekly; T2Online, as reported). <strong>Microsoft's "Scout,"</strong> its first <strong>"Autopilot,"</strong> opens the same category from the work side: a digital coworker that <strong>operates continuously on schedules, triggers and observed events</strong> rather than waiting for a prompt, where <strong>each agent gets its own Entra identity</strong>, its <strong>credentials are scoped to the task and redacted from logs and diagnostics</strong>, and sensitive actions can require a human to sign off — and of which Microsoft's Omar Shahine says trust is <strong>"the most critical and unknown"</strong> problem to solve (Help Net Security; The Neuron, as reported).</p>
+<p><strong>The stakes — a control you only check by day does not govern a servant that works by night.</strong> Every prior discipline was built for a servant you watch while you are at your desk. An always-on agent acts in the background, overnight, over days, unattended — and so cheaply that you leave it on. The board move re-uses the whole year's work and adds the one control the night requires: <strong>the watch.</strong> <strong>First, post the watch</strong> — stand up automated, always-on monitoring that runs while your people are off, not a business-hours dashboard. <strong>Second, keep the night servant read-only until it is told</strong> — default idle and "proactive" agents to observe-only, no writes and no sends, until a scoped task authorizes action, exactly as Dots and Scout do by design. <strong>Third, give the engine-room worker its own identity and a leash you can reach at 3 a.m.</strong> — even the cheap, high-volume subagent gets a scoped, revocable identity, a budget, and a kill-switch, because a servant that never sleeps needs a watch that never sleeps.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the tireless night-worker is too cheap to turn off.</strong> <strong>Claude Haiku 5.5 (7 Oct): 1M-token context, reported $0.10/$0.50 per M tokens, first Haiku with an "effort" dial, built for routing, context compaction, parallel subagents and browser/desktop automation (Anthropic; MarkTechPost; Artificial Analysis, as reported).</strong> The grunt labor of autonomy now costs a tenth of a cent per thousand tokens.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the market made "always-on" the default.</strong> <strong>OpenAI's Dots (29 Sep): always-on agents, own cloud computer + browser, 4,000+ apps, proactive but read-only until tasked, consequential actions auto-reviewed; Microsoft's Scout "Autopilot": continuous on schedules/triggers, own Entra identity, task-scoped credentials redacted from logs (SiliconANGLE; Help Net Security, as reported).</strong> The servant no longer waits for you.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — post a watch over the servant that works by night.</strong> Stand up always-on monitoring, keep idle agents read-only until a scoped task authorizes action, and give even the cheap engine-room worker its own revocable identity, budget and kill-switch — because the house now runs while everyone sleeps, and an unwatched night is where the incident happens.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, and the foundation held the ground — all of it designed for a servant you set a task and then watch. <strong>The night watch is about the hours no one is watching.</strong> This week the market made the tireless worker cheap enough to leave running (Claude Haiku 5.5 at $0.10/$0.50, built for subagents and automation) and made "always-on" the shape of the product (OpenAI's Dots with their own cloud computers; Microsoft's Scout running on triggers). The trap is quiet: autonomy that is cheap and always-on feels like pure productivity — the work gets done overnight — right up until the night a proactive agent, or a swarm of subagents, does something no one saw because no one was watching. The estates that keep their standing will do the unglamorous night-shift work: <strong>post the watch</strong> (automated monitoring that runs when people don't), <strong>keep the night servant read-only until it is told</strong> (observe-only by default, consequential actions gated), and <strong>leash the engine-room worker</strong> (its own identity, budget and kill-switch). The servant now works while the house sleeps. See that the house is never unwatched.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Night Watch"</h3>
+<p><em>Topic: This morning the frame turns from governing the servant that works by day to the servant that never sleeps. On 7 October 2026 Anthropic shipped Claude Haiku 5.5 — a small, fast model with a 1M-token context window at a reported $0.10/$0.50 per million tokens, its first Haiku with an "effort" dial, built for routing, context compaction, parallel subagents and browser/desktop automation (Anthropic; MarkTechPost; Artificial Analysis, as reported) — the tireless engine-room worker made too cheap to turn off. It lands into a market that has made autonomy always-on: OpenAI's "Dots" (29 Sep), always-on agents with their own cloud computers that run proactive research but stay read-only until tasked and auto-review consequential actions (SiliconANGLE; AIWeekly), and Microsoft's "Scout" Autopilot, a continuous digital coworker with its own Entra identity and task-scoped credentials redacted from logs, of which Microsoft's own executive says trust is "the most critical and unknown" problem (Help Net Security; The Neuron). The night-watch allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent. It had named every hand and cut it a scoped key, kept one honest book, stood surety for the work, asked whose second coin each servant took, sent them into the fields to reap, handed each a scoped purse, and at last looked down and made sure it owned the very ground the house stood on. And every one of those disciplines, good as they were, had been built around a single quiet habit: the master watched his servants <strong>work by day, and sent them to their beds at night.</strong> The house did its labor while the master's eye was on it, and when the master slept, the house slept too.</p>
+<p>Now, this week, three things happened in the space of a few days, and together they ended that habit forever. First, a merchant brought the master a <strong>new under-servant</strong> — small, quick, tireless, and so astonishingly cheap to keep that the master could hardly believe the price: a tenth of a penny for a thousand errands, and it never tired, never complained, and could hold a whole library in its head at once. <em>"Keep it running,"</em> the merchant said. <em>"It costs you almost nothing. Set it to tidy, to sort, to fetch, to run a dozen little hands at once — and simply leave it going."</em> And the master, doing the sum, saw that it was cheaper to leave this servant working than to stop and start it, and so for the first time in the history of the house, <strong>a servant was set to work that would not be sent to bed.</strong></p>
+<p>Second, and in the same week, two of the great trading companies brought the master a new kind of upper-servant entirely. Not a hand that waits by the door for an errand, but a <strong>steward that never sleeps</strong> — one that wakes on its own to a bell, a date on the calendar, a thing it notices in the yard, and sets to work without being asked. <em>"It is always on,"</em> they said, proudly. <em>"While you sleep, it watches your affairs, and when something needs doing, it does it."</em> The master was delighted — and then, being a careful man after a careful year, he asked the colder question. <em>"While I sleep,"</em> he said slowly, <em>"and it is awake and about the house with my keys — who is watching it?"</em></p>
+<p>And here the two companies, to their credit, had already thought of the thing the master was only now reaching. The first had built its always-waking steward so that, when no task was set, it was permitted only to <strong>look, never to touch</strong> — it could wander the house and read what it found, but it could not send a letter, move a coin, or open a door until the master had actually set it an errand; and even then, anything that touched the master's accounts or carried word outside the walls had to <strong>pass a second eye</strong> before it was allowed. The second had given each of its always-waking stewards <strong>its own name and seal</strong> — not the master's, its own, so that every deed done in the dark traced back to a known hand on the house roll — and had <strong>scoped its keys to the one task and wiped them from the ledger</strong> after, and still, the wisest man in that company had said the honest thing aloud: that the hardest problem, the one not yet solved, was simply this — <em>can you trust a servant that works while you are not watching?</em></p>
+<p>So the master, who had governed the servant that works by day, now had to learn the one discipline a year of good work had never needed: <strong>the night watch.</strong> And it came down to three plain things. <strong>The first: post a watch that keeps the hours you do not.</strong> It is no use having a sharp-eyed steward who checks the books at nine in the morning if the house does its living at three in the night; the watch must keep the servant's hours, not the master's — an eye, and a bell to a waking man, for the dark. <strong>The second: let the night servant only look until it is told.</strong> A servant that wakes on its own and roams the house must, by default, be allowed to <em>observe and report</em> and nothing more — no writing, no sending, no spending — until a real errand, with its bounds, puts a tool in its hand; and the errands that touch money or carry word past the gate must pass a second eye even then. <strong>The third: give even the cheap tireless under-servant its own name and a leash the master can reach in the dark.</strong> For it is precisely the servant too cheap to turn off, running a dozen little hands at once while everyone sleeps, that no one thinks to watch — and so it must carry its own seal, a purse it cannot exceed, and a cord the master can pull from his own bed to stop the whole of it at once.</p>
+<p>Here is the part that should keep a master awake — which is, this week, exactly the point. The danger of the servant that never sleeps is not that it is wicked; it is that it is <strong>useful, cheap, and unwatched,</strong> and those three together are how the quiet catastrophe is made. The work gets done overnight. The ledger looks fuller each morning. And the master, pleased, watches less — until the night a tireless hand, or a dozen of them at once, does a thing no one saw, because the whole architecture of the house was built to watch servants that worked by day and slept by night, and this one does neither. The two great companies had seen it clearly enough to build the look-don't-touch rule and the second eye and the named seal into their newest servants from the first day — which tells you how real the risk is, not how small.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the small tireless model is the under-servant too cheap to send to bed; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment one slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <strong>the night watch is why, having governed the servant that works by day, you must now set a watch over the servant that works by night: post a watch that keeps the hours no one else does, let the always-waking servant only look until it is told, and give even the cheap tireless hand its own seal and a cord you can pull in the dark — so that the house which now runs while everyone sleeps is never, for a single hour, a house unwatched.</strong></p>
+<p><strong>The question it forces:</strong> <em>Our agents no longer wait for us — the newest are always on, working in the background on their own clocks, and the tireless ones are now too cheap to turn off. So: who is watching them at three in the morning? Do idle and proactive agents default to observe-only until a scoped task puts a tool in their hand? Does every always-on agent carry its own identity, a budget it cannot exceed, and a kill-switch we can reach when no one is at a desk? Or have we let the house run all night on servants we only know how to watch by day?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Which of our agents are now always-on — and who watches them while no one is at a desk?</strong> The market just made autonomy continuous (OpenAI's Dots run on their own cloud computers; Microsoft's Scout runs on schedules and triggers) and the engine-room model cheap enough to leave running (Claude Haiku 5.5 at a reported $0.10/$0.50). <strong>Can we produce a list of every agent that can act unprompted — on a schedule, a trigger, or its own initiative — and show the monitoring and escalation path that covers the overnight hours, not just business hours?</strong></li>
+  <li><strong>Do our idle and "proactive" agents default to observe-only until a task authorizes action?</strong> The vendors shipping always-on agents built this in — Dots stay read-only until tasked and auto-review consequential actions. <strong>Is our posture the same: no writes, no sends, no spend from an agent acting on its own initiative until a scoped errand puts a specific tool in its hand — and are account-touching or outbound actions gated behind a second check?</strong></li>
+  <li><strong>Can we stop an agent we can't see at 3 a.m.?</strong> A servant that never sleeps needs a leash that never sleeps. <strong>Does every always-on agent carry its own revocable identity, a hard budget, and a kill-switch an on-call human can reach without a daytime approval chain — and have we tested pulling it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Continuous, unattended agents acting overnight are exactly the pattern your supervisors worry about. <strong>Can we show, for every always-on agent with market- or money-touching reach, a task-scoped identity, pre-trade/pre-payment controls that hold without a human in the loop, and an immutable overnight audit trail — or are we running autonomous activity in the hours our controls were never designed to cover?</strong></li>
+  <li>The cheap engine-room model (Claude Haiku 5.5) makes it economical to run swarms of subagents continuously. <strong>Have we set per-agent and aggregate budgets, rate limits and anomaly alarms for background agent activity, so a runaway overnight loop is capped and alerted rather than discovered in the morning's bill?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An always-on agent with standing access to clinical systems can act on patient data while no clinician is watching. <strong>Do our continuous agents default to read-only, require a scoped task and a human sign-off before any write to a record, and log every overnight action to an identity we can trace — the "look until told" and "named seal" disciplines the vendors built in?</strong></li>
+  <li>Microsoft's own executive called trust the "most critical and unknown" problem for always-on agents. <strong>In regulated clinical workflows, have we drawn the bright line where an autonomous agent may <em>observe and prepare</em> but a human must <em>authorize and act</em> — and does that line hold in the hours the ward is quiet?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You run physical processes around the clock, so always-on agents are a natural fit — and a natural hazard. <strong>For agents that can touch scheduling, procurement or control systems unattended, do we have a scoped identity, a bounded authority, and a monitored kill-switch per agent, and does the night shift have a human escalation path when an agent does something unexpected?</strong></li>
+  <li>Parallel subagents on a cheap model can now run continuously across the plant. <strong>Have we bounded what a swarm of background agents may reach (the errand), and posted the watch (anomaly detection, per-agent logs) that keeps the overnight hours — or is unattended agent activity our least-watched surface?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Always-on agents acting on your storefront, pricing or inventory overnight can compound a small error into a large one by morning. <strong>Do our continuous agents operate observe-only until a scoped task authorizes a change, with consequential actions (price, order, customer message) gated behind a review — and do we monitor their activity on the same clock they run?</strong></li>
+  <li>The economics just changed: Claude Haiku 5.5 makes it cheap to leave agents running through peak and off-peak alike. <strong>Have we set hard budgets and kill-switches so background agent activity can't run away on our biggest nights, and is there a human who can pull the cord during a 2 a.m. surge?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Accountability does not sleep, so neither can oversight of an always-on agent. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show that every autonomous, unattended agent carries a named owner, a scoped and logged identity, and human authorization for consequential action — the record an auditor will ask for about the hours no official was watching?</strong></li>
+  <li>Continuity and public trust make an unwatched autonomous system a governance failure. <strong>Are our always-on agents built "look until told" by default, with a monitored kill-switch and an overnight escalation path — or have we deployed continuous autonomy into services citizens depend on without a watch that keeps its hours?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Night Watch</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the one question none of those controls was built to answer: <em>when this agent acts on its own, in the background, at an hour no one is watching — who holds the watch?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those governs a servant that acts on a task and then stops — a servant you supervise while you are at your desk. This week the market shipped the servant that never stops: the tireless engine-room worker made too cheap to turn off (Claude Haiku 5.5 at a reported $0.10/$0.50, built for subagents and automation) and the always-on upper-servant made the default product (OpenAI's Dots on their own cloud computers; Microsoft's Scout Autopilots on schedules and triggers).</strong> The point is blunt: <strong>the thing that changed is not what the agent can do but <em>when</em> it does it — unattended, overnight, continuously — and a governance architecture built to watch servants by day has no eye for the hours they now work.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the engine-room worker is now too cheap to turn off.</strong> <strong>On 7 October 2026 Anthropic shipped Claude Haiku 5.5 — a small, fast model with a 1M-token context window and up to 128K output, its first Haiku with an adjustable "effort" control, at a reported $0.10/$0.50 per million tokens up to a 100K-token prompt (rising to $0.50/$2.50 above it), available on the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry — positioned for summarization, routing, context compaction, parallel subagents, and browser/desktop automation (Anthropic; MarkTechPost; Artificial Analysis; Roo, as reported).</strong> Three engineering consequences follow. First, <em>the economics of running (not invoking) an agent crossed a line</em> — at a tenth of a cent per thousand input tokens, with GPT-6 Luna at the same $0.10/$0.50 and Gemini 3.5 Flash-Lite at $0.30/$2.50 (MarkTechPost, as reported), the cost of leaving a fleet of subagents working continuously in the background is now negligible, so they will proliferate. Second, <em>a cheap, high-context small model is the natural engine of autonomy</em> — summarization, context compaction and parallel subagents are exactly the always-on housekeeping that makes an agent run for hours or days, and that is what this model is sold to do. Third, <em>cheap and continuous means unwatched by default</em> — the very affordability that makes it attractive is what makes each instance beneath notice, and a fleet of beneath-notice workers is a governance surface no one is looking at.</li>
+  <li><strong>The collision — the market made autonomy always-on, and the serious builders shipped the watch with it.</strong> <strong>OpenAI's Dots (DevDay, 29 Sep): always-on agents, each with its own cloud computer and browser, across 4,000+ apps; idle agents run "proactive research" but their app connections stay read-only until a task is assigned, and any account-touching or information-sharing action must pass an auto-review check first (rollout limited to ChatGPT Pro/Business Premium; Enterprise beta off by default; excluded for Pro users in the EEA/Switzerland/UK). Microsoft's Scout, its first "Autopilot," runs continuously on schedules, triggers and observed events rather than on a prompt; each agent gets its own Entra identity, its credentials are scoped to the task and redacted from logs and diagnostics, and sensitive actions can require human sign-off — with Microsoft's Omar Shahine calling trust "the most critical and unknown" problem to solve (SiliconANGLE; AIWeekly; Help Net Security; The Neuron, as reported).</strong> Read those two designs as a specification, not a pair of press releases. <strong>Both vendors, building the most autonomous consumer-and-work agents yet, chose the same three defenses from day one: observe-only until tasked, a second check on consequential actions, and a scoped, named, logged identity per agent.</strong> That convergence is the engineering signal — the people closest to always-on autonomy do not trust an always-on agent with standing write access and no watch, and neither should you.</li>
+  <li><strong>The answer — post the watch, keep it read-only until told, and leash the engine-room worker.</strong> <strong>Stand up monitoring that runs on the agents' clock, not your staff's (per-agent activity logs, anomaly alarms, an overnight human escalation path); default idle and proactive agents to observe-only — no writes, no sends, no spend — until a scoped task authorizes a specific tool, and gate consequential or outbound actions behind an auto-review or human sign-off; and give every always-on agent, down to the cheapest background subagent, its own revocable identity, a hard budget, and a kill-switch an on-call human can reach without a daytime approval chain — reusing the livery (identity), the errand (bounded authority), the bell (disclosure) and the purse (budget) you already built, now pointed at the hours no one is watching.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the one axis a year of day-shift governance never covered: not what the agent is, serves, harvests, spends or stands on, but who holds the watch when it acts alone in the dark.</li>
+</ul></div>
+<p>The strategic core: <strong>the servant that never sleeps is the most useful and the most dangerous shape autonomy has taken, because its value — work done overnight, cheaply, at scale — is exactly what makes it unwatched, and unwatched is where the incident lives.</strong> The market makes the temptation concrete: a tireless worker at a tenth of a cent, and always-on agents that proudly run your affairs while you sleep, feel like pure productivity — and the night-shift disciplines (monitoring that keeps the agents' hours, observe-only defaults, per-agent leashes) feel like friction on a good thing. The board translation: <strong>let the house run all night if you like — but never let it run unwatched.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its servants — and then lets a fleet of cheap, always-on agents act unattended through the night with standing write access and a business-hours dashboard — will pass every daytime review and discover the incident in the morning, in the one window its whole architecture was built never to watch.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The night watch: you governed the servant that works by day; this week the market shipped the servant that never sleeps, and a day-shift governance architecture has no eye for the night. Top left, the tireless worker, too cheap to stop: Claude Haiku 5.5, shipped 7 October, a 1M-context model at $0.10/$0.50 per million tokens, built for subagents, routing, context compaction and browser automation; leave it running, don't just invoke it; cheap means unwatched by default. Top right, always-on by default, never waits: OpenAI Dots and Microsoft Scout; each with its own cloud computer or Entra identity; they run on schedules and triggers; proactive research while idle; read-only until a task is set; consequential actions go to review. Between them: it is the same servant all night, and the serious builders shipped the watch with the autonomy, observe-only until tasked, a second eye, and a named scoped identity. Middle, why the night is the risk: the value is work done overnight cheaply at scale, so you watch it less; a fleet of beneath-notice subagents is a surface no one is looking at; Microsoft's Omar Shahine calls trust the most critical and unknown problem; governance built for day-shift servants has no eye for the hours they now work. Bottom left, stop, run the house unwatched: always-on with standing writes, a business-hours dashboard only, shared credentials with no per-agent identity, no budget and no kill-switch. Bottom right, start, post the night watch: monitor on the agents' clock not staff's; observe-only until a scoped task tasks it; a second eye on consequential or outbound actions; a per-agent identity, budget and 3 a.m. kill-switch." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE NIGHT WATCH — you governed the servant that works by day</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">This week the market shipped the servant that NEVER SLEEPS — a day-shift architecture has no eye for the night.</text>
+
+  <!-- the tireless worker -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE TIRELESS WORKER (too cheap to stop)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude Haiku 5.5 (7 Oct) — 1M ctx, $0.10/$0.50</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">built for subagents, routing, compaction, browser</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">leave it RUNNING, not invoke</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">a tenth of a cent per 1,000 tokens</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ cheap → unwatched by default</text>
+
+  <!-- always-on by default -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#132439" stroke="#2f6fae"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#7fb6ea" font-family="sans-serif">ALWAYS-ON BY DEFAULT (never waits)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">OpenAI Dots · Microsoft Scout</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">own cloud computer / own Entra identity</text>
+  <text x="364" y="137" font-size="10" fill="#bcd8f3" font-family="sans-serif">run on schedules &amp; triggers</text>
+  <text x="364" y="157" font-size="10" fill="#bcd8f3" font-family="sans-serif">read-only UNTIL a task is set</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ consequential action → review</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#7fb6ea" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#7fb6ea"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">same servant, all night — the serious builders shipped the WATCH with the autonomy ▼</text>
+
+  <!-- why the night is the risk -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHY THE NIGHT IS THE RISK</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">value = work done overnight, cheaply, at scale → so you watch it LESS</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a fleet of beneath-notice subagents is a surface no one is looking at</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Microsoft (Omar Shahine): trust is "the most critical and unknown" problem</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">governance built for day-shift servants has no eye for the hours they now work</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: run the house unwatched</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· always-on + standing writes</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· business-hours dashboard only</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· shared creds, no per-agent ID</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no budget, no kill-switch</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the incident lands in the morning</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: post the night watch</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· monitor on the AGENTS' clock</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· observe-only until a scoped task</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· 2nd eye on consequential/outbound</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· per-agent ID + budget + kill-switch</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a watch that keeps the agents' hours</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The servant now works while the house sleeps — collect the productivity by posting the watch.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Let the house run all night · never let it run unwatched.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The tireless worker — too cheap to stop</span>
+  <span><i class="dot" style="background:#2f6fae"></i>Always-on by default — never waits</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Why the night is the risk</span>
+</div>
+</div>
+
+<h3>The tireless worker vs the night watch — what changed, and what it demands</h3>
+<table>
+<tr><th>What the market shipped this week (the servant that never sleeps)</th><th>What governance must add (the night watch)</th></tr>
+<tr><td>Claude Haiku 5.5: 1M context at $0.10/$0.50 → leave subagents running</td><td>Monitoring that keeps the agents' hours, not business hours</td></tr>
+<tr><td>OpenAI Dots: always-on, own cloud computer, proactive while idle</td><td>Idle/proactive agents default to observe-only until tasked</td></tr>
+<tr><td>Dots auto-review consequential or account-touching actions</td><td>A second eye (auto-review or human) on consequential/outbound acts</td></tr>
+<tr><td>Microsoft Scout: own Entra identity, task-scoped creds redacted from logs</td><td>Per-agent revocable identity + immutable overnight audit trail</td></tr>
+<tr><td>Scout runs on schedules, triggers, observed events (no prompt)</td><td>A hard budget and a kill-switch an on-call human can reach at 3 a.m.</td></tr>
+<tr><td>Trust is "the most critical and unknown" problem (Microsoft)</td><td>Assume unwatched autonomy is the risk; watch it on its own clock</td></tr>
+</table>
+
+<h3>Why "the night watch" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and standing on owned ground — all of it supervised by day. <strong>This morning the market moved the question into the hours no one was watching: it made the tireless worker too cheap to turn off and made always-on the default shape of an agent.</strong> Claude Haiku 5.5's price and purpose prove the engine-room worker will now run continuously; Dots' own cloud computers and Scout's schedule-driven Autopilots prove the upper-servant no longer waits for a prompt. Governance that keeps business hours will not see the night. The estates that keep their standing will post a watch that keeps the agents' clock, default autonomy to observe-only until tasked, and leash even the cheapest background worker — because the house now does its living while everyone sleeps.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to watch what runs while no one is watching.</em> On a legacy estate the instinct, after a hard year of governance work, is to treat the new always-on agents as just more agents and point the existing business-hours dashboard at them. Under the night watch that is exactly the reflex to check: the whole architecture was built to supervise servants that work by day and go idle at night, and the new servants invert it. The retrofit is <strong>post, gate, leash. Post</strong> the watch: monitoring, anomaly alarms and a human escalation path that keep the agents' hours, not your staff's. <strong>Gate</strong> the action: idle and proactive agents observe-only by default, consequential and outbound actions behind a second check — the "look until told" and "second eye" the serious vendors already ship. <strong>Leash</strong> the worker: every always-on agent, down to the cheapest subagent, gets its own revocable identity, a hard budget, and a kill-switch an on-call human can reach without a daytime approval chain. And keep the whole refrain: the model is a rented stove; the small tireless model is the under-servant too cheap to send to bed; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the night watch is why, having governed the servant that works by day, you must set a watch over the servant that works by night: post a watch on the agents' clock, let the always-waking servant only look until it is told, and leash even the cheap tireless hand, so the house that now runs while everyone sleeps is never a house unwatched.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the tireless worker made cheap.</strong> <strong>Claude Haiku 5.5 (7 Oct): 1M-token context, up to 128K output, first Haiku with an "effort" dial, reported $0.10/$0.50 per M tokens (→ $0.50/$2.50 above 100K), on the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry; built for summarization, routing, context compaction, parallel subagents and browser/desktop automation (Anthropic; MarkTechPost; Artificial Analysis, as reported).</strong> The grunt labor of autonomy now costs a tenth of a cent per thousand tokens.</li>
+  <li><strong>The small-model field.</strong> <strong>GPT-6 Luna at the same $0.10/$0.50 (1.05M context) and Gemini 3.5 Flash-Lite at $0.30/$2.50 (MarkTechPost, as reported).</strong> Cheap, high-context small models are now a competitive category built for always-on work.</li>
+  <li><strong>Always-on agents, consumer/work side.</strong> <strong>OpenAI's Dots (DevDay, 29 Sep): always-on agents with their own cloud computer and browser, 4,000+ apps, proactive-but-read-only until tasked, auto-review on consequential actions; ChatGPT Pro/Business Premium, Enterprise beta off by default, excluded for Pro in the EEA/Switzerland/UK (SiliconANGLE; AIWeekly; T2Online, as reported).</strong> The agent no longer waits for a prompt.</li>
+  <li><strong>Always-on agents, enterprise side.</strong> <strong>Microsoft's Scout — its first "Autopilot" — runs continuously on schedules, triggers and observed events; each agent gets its own Entra identity, task-scoped credentials redacted from logs, and sensitive actions can require human sign-off; Microsoft calls trust the "most critical and unknown" problem (Help Net Security; The Neuron, as reported).</strong> Identity and gating shipped with the autonomy.</li>
+  <li><strong>The open-weight field keeps pace.</strong> <strong>Mistral Large 4 previewed (6 Oct): a reported ~1-trillion-parameter, ~49B-active open-weight mixture-of-experts in a guardrailed preview, with weights promised before month-end (martech.org; Kingy, as reported).</strong> More capable models, including open-weight, feeding the same autonomy.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk/GPAI regime live and enforceable since 2 August 2026 (fines up to the higher of €15M or 3% of worldwide turnover), with further obligations reported to enter application 2 December 2026; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Named ownership, scoped identity and logging are how you meet them — now extended to the hours no one is watching.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Anthropic Releases Claude Haiku 5.5: A Small Model With 1M Context Priced at $0.10 per Million Input Tokens.</div><div class="a">— MarkTechPost, headline on Claude Haiku 5.5 (7 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">OpenAI launches Dots, always-on AI agents that work in the background across more than 4,000 apps.</div><div class="a">— coverage of OpenAI DevDay (29 September 2026, as reported); when idle, a dot's connections to your apps stay read-only, and consequential actions must pass an auto-review check first</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Trust is the most critical and unknown problem Microsoft has to solve.</div><div class="a">— Omar Shahine, Microsoft, on always-on "Autopilot" agents such as Scout (as reported)</div></blockquote>
+<blockquote><div class="q">"The servant no longer waits for you — it works the night shift. A control you only check by day does not govern a servant that works by night. Let the house run all night if you like; never let it run unwatched."</div><div class="a">— the radar, on why the discipline has moved to the hours no one is watching</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The tireless worker made cheap</td><td><span class="v">Claude Haiku 5.5 (7 Oct 2026): 1M-token context, up to 128K output, first Haiku with an adjustable "effort" control; reported $0.10/$0.50 per M tokens up to a 100K prompt, $0.50/$2.50 above; on Claude API, Amazon Bedrock, Google Cloud, Microsoft Foundry</span></td><td>Anthropic; MarkTechPost; Artificial Analysis, as reported</td></tr>
+<tr><td>What it is built for</td><td><span class="v">Summarization, routing, context compaction, parallel subagents, and browser/desktop automation — the always-on engine-room work of autonomous agents</span></td><td>Anthropic; MarkTechPost, as reported</td></tr>
+<tr><td>The small-model field</td><td><span class="v">GPT-6 Luna at the same $0.10/$0.50 (≈1.05M context); Gemini 3.5 Flash-Lite at $0.30/$2.50 per M tokens</span></td><td>MarkTechPost, as reported</td></tr>
+<tr><td>Always-on agents (consumer/work)</td><td><span class="v">OpenAI's Dots (29 Sep): always-on agents, each with its own cloud computer and browser, 4,000+ apps; proactive-but-read-only until tasked; consequential/account-touching actions auto-reviewed; ChatGPT Pro/Business Premium, Enterprise beta off by default; excluded for Pro in the EEA/Switzerland/UK</span></td><td>SiliconANGLE; AIWeekly; T2Online, as reported</td></tr>
+<tr><td>Always-on agents (enterprise)</td><td><span class="v">Microsoft's Scout, its first "Autopilot": continuous on schedules/triggers/observed events; own Entra identity; task-scoped credentials redacted from logs; sensitive actions can require human sign-off; trust called the "most critical and unknown" problem</span></td><td>Help Net Security; The Neuron, as reported</td></tr>
+<tr><td>The open-weight field</td><td><span class="v">Mistral Large 4 preview (6 Oct): reported ~1T parameters, ~49B active open-weight MoE in a guardrailed preview; weights promised before month-end</span></td><td>martech.org; Kingy, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk/GPAI regime enforceable since 2 Aug 2026 (fines up to the higher of €15M or 3% of worldwide turnover); MCP 2026-07-28 (EMA stable); Gartner: 40% of enterprise apps embed task-specific agents by year-end 2026</span></td><td>European Commission; Model Context Protocol; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Post the watch — stand up monitoring that keeps the agents' clock, not your staff's.</strong> The market just made autonomy always-on (OpenAI's Dots on their own cloud computers; Microsoft's Scout on schedules and triggers) and the engine-room worker too cheap to turn off (Claude Haiku 5.5 at a reported $0.10/$0.50), so your agents now act in hours your dashboards were never watching. <strong>This month, inventory every agent that can act unprompted — on a schedule, a trigger, or its own initiative — and put per-agent activity logging, anomaly alarms, and an overnight human escalation path behind them.</strong> Report one number to the board: the share of always-on agents covered by monitoring that runs when your people don't.</li>
+  <li><strong>Keep the night servant read-only until it is told.</strong> The serious builders shipped this as a default — Dots stay read-only until tasked and auto-review consequential actions; Scout scopes credentials to the task. <strong>This month, set idle and "proactive" agents to observe-only — no writes, no sends, no spend — until a scoped task authorizes a specific tool, and gate consequential or outbound actions (payments, external messages, record changes) behind an auto-review or human sign-off.</strong> Report the share of autonomous agents that cannot take a consequential action without a scoped task and a second check.</li>
+  <li><strong>Leash the engine-room worker — its own identity, a budget, and a kill-switch you can reach at 3 a.m.</strong> It is precisely the cheap, high-volume subagent running continuously in the background that no one thinks to watch. <strong>This month, give every always-on agent — down to the cheapest background subagent — its own revocable identity, a hard per-agent and aggregate budget, and a kill-switch an on-call human can trigger without a daytime approval chain; then test pulling the cord.</strong> Report the share of always-on agents with a named identity, a budget cap, and a tested kill-switch. <strong>The model is a rented stove; the small tireless model is the under-servant too cheap to send to bed; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the night watch is why, having governed the servant that works by day, you must set a watch over the servant that works by night: post a watch on the agents' clock, let the always-waking servant only look until it is told, and leash even the cheap tireless hand, so the house that now runs while everyone sleeps is never, for a single hour, a house unwatched.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Anthropic (7 Oct 2026): Claude Haiku 5.5, 1M-token context, up to 128K output, first Haiku with an adjustable "effort" control, reported $0.10/$0.50 per million tokens up to a 100K-token prompt (→ $0.50/$2.50 above), on the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry, positioned for summarization, routing, context compaction, parallel subagents and browser/desktop automation (Anthropic platform docs; MarkTechPost; Artificial Analysis; Roo; llm-stats) · The small-model field — GPT-6 Luna at the same $0.10/$0.50 (≈1.05M context); Gemini 3.5 Flash-Lite at $0.30/$2.50 (MarkTechPost) · Always-on agents (consumer/work) — OpenAI's Dots (DevDay, 29 Sep): always-on agents with their own cloud computer and browser, 4,000+ apps, proactive-but-read-only until tasked, auto-review on consequential actions, ChatGPT Pro/Business Premium, Enterprise beta off by default, excluded for Pro in the EEA/Switzerland/UK (SiliconANGLE; AIWeekly; T2Online; BetaNews) · Always-on agents (enterprise) — Microsoft's Scout "Autopilot": continuous on schedules/triggers/observed events, own Entra identity, task-scoped credentials redacted from logs, sensitive actions can require human sign-off, trust called the "most critical and unknown" problem by Omar Shahine (Help Net Security; The Neuron; Let's Data Science) · The open-weight field — Mistral Large 4 preview (6 Oct): reported ~1T parameters, ~49B active open-weight MoE, weights promised before month-end (martech.org; Kingy) · The prior rails — EU AI Act high-risk/GPAI regime enforceable since 2 August 2026 (fines up to the higher of €15M or 3% of worldwide turnover), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "night watch" framing — that the market has shipped the servant that never sleeps (a tireless engine-room worker too cheap to turn off and always-on agents that no longer wait for a prompt), that day-shift governance has no eye for the hours they now work, and that an estate must post the watch, keep the night servant read-only until told and leash the engine-room worker — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst/tracker coverage and secondary reporting by the named outlets, surfaced via web search, and are marked "as reported"; several figures should be re-verified against the primary publications before republishing, and one tracker still listed Haiku 5.5 as unreleased on 7 October even as the official docs and most trackers dated the launch to that day. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 8 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+</body>
+</html>
