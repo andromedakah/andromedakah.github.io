@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 10 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the scullery hand' — the cheap model tier just collapsed in price and got good at once (Claude Haiku 5.5, 7 Oct: a reported $0.10/$0.50 per M tokens, ~1/10 of before; computer-use 15.7%→72.4%, vendor-reported). The costly question moved from 'which model?' to 'which tier, for which task?' Most enterprise token-volume is routine 'scullery' work; running it on a frontier model is paying a master's wage for scullery work, and the AI bill is now $2.59T in 2026, +47% (Gartner). The board move: sort the work (scullery vs master), route each to the cheapest capable tier, measure cost-per-useful-task (not the sticker). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You own the floor the model stands on — now check the wage you pay each task</div>
+  <h1>The Scullery Hand</h1>
+  <div class="subhead">The cheap model tier just did two things at once: it collapsed in price and, for the first time, got good at real work. So the costly question is no longer "which model?" — it is "which tier, for which task?" Are we paying a master's wage to scrub our pots?</div>
+  <div class="meta">Saturday, 10 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 7 October 2026 Anthropic shipped Claude Haiku 5.5 — "our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work" (Anthropic, primary). The small tier's price fell roughly tenfold — a reported $0.10 / $0.50 per million input/output tokens for prompts up to 100K, one-tenth of Haiku 4.5's $1 / $5 — and the cheap hand finally got good at agent work: vendor-reported computer-use (OSWorld 2.1 offline) leapt from 15.7% to 72.4%. Two honest caveats travel with it: the headline "~75% cheaper" is <em>blended</em> (a new tokenizer counts ~30% more tokens), and the benchmarks are vendor-reported (no independent lab yet; the API default is medium effort). The board question is no longer which stove is best or cheapest — it is: are we paying a master's wage for scullery work? Most enterprise token-volume is plain, high-volume labour, and Gartner puts 2026 worldwide AI spend at $2.59 trillion, up 47%. The estate that matches the hand to the task keeps far more of it.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked through the governed house — name the servant (the livery), keep one book (the steward), sign the bond (the surety), check the wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse) — and last turned to the ground the whole house stands on (the foundation: the model is a cheap, swappable stove; own the floor, keep the larder, light a second fire). <strong>This morning the stove-seller does the sharpest thing yet: it hands the kitchen a cheap, fast scullery hand that is, at last, good enough to do the mass of the day's work.</strong></p>
+<p><strong>The event — the small tier collapsed in price and, for the first time, got good.</strong> On <strong>7 October 2026 Anthropic released Claude Haiku 5.5</strong>, "our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work" (Anthropic, primary). List price is a reported <strong>$0.10 / $0.50 per million input/output tokens for prompts up to 100K</strong> — about <strong>one-tenth</strong> of Haiku 4.5's $1 / $5 (rising to $0.50 / $2.50 above 100K) — and the capability of the cheap tier jumped where it matters for agents: vendor-reported <strong>OSWorld 2.1 offline computer-use 15.7% → 72.4%</strong> and <strong>SWE-bench Multilingual 67.4% → 83.7%</strong> (Anthropic launch table, via secondary coverage, as reported). Two honest caveats travel with it: the headline "<strong>~75% cheaper</strong>" is a <em>blended</em> number — Anthropic says the lower tier covers ~90% of prior-Haiku requests, but a new tokenizer counts ~30% more tokens, so the per-task saving is smaller than the per-token cut; and the benchmarks are <strong>vendor-reported</strong> (medium is the API default, with lower scores than the max-effort launch table; no independent lab has published yet).</p>
+<p><strong>The shift — the expensive question moved from "which model?" to "which tier, for which task?"</strong> When intelligence was scarce and dear, you sent every task to the best brain you could afford. Now the brain is cheap at the bottom and the bottom is capable: the mistake is running the whole estate on a master's wage — routing routine, high-volume work (classification, extraction, routing, retrieval, first-pass drafting) to a frontier model when a hand at a tenth of the cost does it well. This is where the spend actually is. Gartner forecasts <strong>worldwide AI spending of $2.59 trillion in 2026, up 47% year-over-year, rising toward ~$3.49 trillion in 2027</strong>, with AI infrastructure the single largest segment (Gartner, 19 May 2026, as reported). The estate's AI bill is now a board-level line, and most of it rides on plain, repeatable tasks.</p>
+<p><strong>The stakes — match the hand to the task, and build the routing, not just pick a model.</strong> The move re-uses last month's discipline and points it at the wage bill. <strong>First, tier your work:</strong> sort your AI tasks into "scullery" (high-volume, well-specified, verifiable) and "master" (genuine difficulty, judgement, ambiguity), and route each to the cheapest hand that does it well. <strong>Second, measure cost-per-useful-task, not model prestige</strong> — a cheaper token that needs three retries is not cheaper, and the tokenizer caveat means you measure the bill, not the sticker. <strong>Third, build the routing on the floor you already own</strong> — the abstraction/gateway from the foundation is exactly what lets you send scullery work to the cheap tier and escalate only what needs the master. Do it now, while the small tier is collapsing in price and the savings compound over every agent you run.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — the small tier collapsed in price and got good.</strong> <strong>Claude Haiku 5.5 (7 Oct): "fastest, cheapest, most capable small model yet," a reported $0.10/$0.50 per M tokens (~1/10 of Haiku 4.5's $1/$5); computer-use (OSWorld) 15.7%→72.4%, SWE-bench Multilingual 67.4%→83.7% (Anthropic, primary + secondary, as reported).</strong> The cheap hand got skilled — caveats: "~75% cheaper" is blended (new tokenizer ~+30% tokens), benchmarks vendor-reported.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The shift — the costly question is the tier, not the model.</strong> <strong>Most enterprise token-volume is routine, high-volume work; running it on a frontier model is paying a master's wage for scullery work, and the AI bill is now $2.59T in 2026, +47% (Gartner, 19 May 2026, as reported).</strong> Overpaying the wrong tier is a self-inflicted cost.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — match the hand to the task; build the routing, not just pick a model.</strong> Tier your work (scullery vs master), route each to the cheapest capable hand, measure cost-per-useful-task (not prestige), and build it on the floor you already own.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant; the steward kept the book; the surety signed the bond; the second wage checked its loyalty; the two harvests sent it to reap; the purse funded it; the foundation said own the ground it stands on. <strong>The scullery hand is about the wage you pay each task.</strong> This week the stove-seller stopped merely cutting the stove's price and handed the kitchen a cheap, fast hand — a tenth of last year's wage — that is finally skilled enough to do the plain mass of the day's work (the computer-use score going 15.7%→72.4% is the tell). The elegant trap is the opposite of last month's: there, you risked letting the cheap stove quietly lock you in; here, you risk the simple waste of running your whole estate on a master's wage when most of the work is scullery work. The estates that keep their margin will do three unglamorous things: <strong>tier the work</strong> (scullery vs master), <strong>route each task to the cheapest hand that does it well</strong>, and <strong>measure the bill, not the benchmark</strong> — honest about the tokenizer and the vendor's numbers. Hire the master for mastery. But never pay a master's wage to scrub a pot.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Scullery Hand"</h3>
+<p><em>Topic: The series moved from the servant to the ground the house stands on; this morning it turns to the wage paid for each task. On 7 October 2026 Anthropic shipped Claude Haiku 5.5 — "our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work" (Anthropic, primary) — at a reported $0.10/$0.50 per million tokens, roughly a tenth of the prior small model, with the cheap tier's computer-use score leaping from 15.7% to 72.4% (vendor-reported, as reported). Gartner puts 2026 worldwide AI spend at $2.59 trillion, up 47% (19 May 2026, as reported). The honest caveats — a blended "~75% cheaper," a new tokenizer that counts ~30% more tokens, vendor-reported benchmarks — are kept in view. The scullery-hand allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, over a long and careful year, done everything right by its servants. It had named every hand and cut it a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each advising servant took, sent the governed servants out to reap, handed each a scoped purse, and learned at last to look down and own the very ground the kitchen stood on. The master was, justly, proud. And the kitchen cooked on a rented stove that grew cheaper and better every season — his shrewdest economy.</p>
+<p>Now, the master had a habit he had never thought to question. <strong>Whatever the task — be it carving the feast-day roast or merely scrubbing the breakfast pots — he sent his finest cook to do it.</strong> His finest cook was a marvel, and expensive, and the master reasoned, not unreasonably, that the best hand could do any work best. So the master cook spent her morning scrubbing pots, fetching water, sorting lentils, and copying out the day's orders in a fair hand — and the master paid a master's wage for every hour of it, and thought himself well served because the pots were, indeed, very clean.</p>
+<p>This week a hiring-agent came to the gate with a <strong>scullery hand</strong> — young, quick, tireless, and astonishingly cheap, asking roughly <strong>a tenth</strong> of the master cook's wage. The master had turned such hands away before, for a simple reason: in years past the cheap hands could not be trusted with real work. They scorched the simple things and had to be done over, and a hand you must follow and correct is dearer than one you pay well. But the agent said, <em>"Try this one at the plain work — the scrubbing, the sorting, the fetching, the fair copying."</em> And to the master's surprise, the scullery hand did the plain, high-volume work of the kitchen not passably but <em>well</em> — where last year's cheap hands had got it right scarcely one time in six, this one got the ordinary tasks right most of the time, and at a tenth of the wage. The cheap hand had, at last, become good enough for the plain work.</p>
+<p>Here is where two roads opened, as they always do. The easy road — the road the proud, well-run house was already on — was to shrug and keep sending the master cook to scrub the pots, because she was the best and the house could afford her and changing the arrangement was a bother. The wiser road began with a cold question the master had never asked of his own kitchen: <em>not "who is my best cook?" but "for each task in this kitchen, what is the least skilled hand that can do it well — and am I paying a master's wage for scullery work?"</em> And when the careful houses counted honestly, they found the answer expensive: the great bulk of a kitchen's labour is plain, repeatable work — scrubbing, sorting, fetching, fair copies — and they had been paying their very best, at a master's wage, to do nearly all of it. The whole valley's kitchen-bill was swelling by near half again this year; most of that coin was being spent on exactly the plain work a cheap, capable hand could now do.</p>
+<p>So the wise houses learned three plain things, and each saved more than the last. <strong>The first: sort the work before you assign it.</strong> Divide the day's tasks into scullery work — plain, high-volume, easy to check — and master's work — the carving, the saucing, the judgement calls — and send each to the least costly hand that does it well. <strong>The second: weigh the true cost of the hand, not the sticker on the door.</strong> A cheap hand that scorches the dish and must be done over is dearer than it looks; and this particular hand's wage, the master noticed, was quoted cleverly — it counted its hours by a new clock that ticked faster, so a "tenth the wage" was nearer a quarter saved once the day's bill was tallied honestly. A wise master pays by the finished dish, not the advertised rate, and checks the bill himself. <strong>And the third: do not take the hiring-agent's word for the hand's skill.</strong> The agent's own testimonials glowed, but no neighbour had yet watched the hand work a full week; so the wise house tried it on its own pots, at the ordinary effort it would actually use day to day, before it trusted it with the dinner.</p>
+<p>And here is the part that should steady a master's nerve, because it is the mirror of last month's warning. <strong>Last month the danger was letting the cheap stove quietly pour the foundation you could not leave; this month the danger is the plain, daily waste of running the whole estate on a master's wage.</strong> They are the two faces of the same coin: when intelligence is cheap, the house that thrives is not the one that always buys the best, nor the one that always buys the cheapest, but the one that <strong>matches the hand to the task</strong> — hires the master for mastery, sets the scullery hand to the scullery, keeps the floor it routes them across in its own hands, and pays, always, by the finished work. The proud house that sends its master cook to scrub every pot will have the cleanest pots in the valley and the thinnest purse, and will never understand why.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now cheap enough that a cheap, capable hand comes with it; your knowledge is the larder; the foundation is the ground the house stands on; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery names every hand; the steward keeps one book; the surety puts your name on the bond; the second wage asks whose bread it eats; the two harvests sends it to reap; the purse funds it like an employee; the foundation keeps the ground yours — and <strong>the scullery hand is why, now that the cheap tier is at last skilled enough to do the plain work, you must stop paying a master's wage for scullery work: sort the day's tasks, send each to the least costly hand that does it well, pay by the finished dish and not the advertised rate, and hire the master only for mastery.</strong> A house that sends its finest cook to scrub every pot has not been thorough; it has simply never counted what the scrubbing costs.</p>
+<p><strong>The question it forces:</strong> <em>The cheap hand just got good — a tenth of last year's wage, and finally skilled enough for the plain work. So: are we matching the hand to the task, or paying a master's wage to scrub our pots? Have we sorted our AI work into scullery and master, routed each to the cheapest hand that does it well across a floor we own, and do we pay by the finished task — honest about the new clock and the hiring-agent's glowing testimonials — or are we running the whole estate on our most expensive model and calling the clean pots a success?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Are we paying a master's wage for scullery work?</strong> The small tier just fell ~tenfold in price and got genuinely capable (Haiku 5.5, 7 Oct: a reported $0.10/$0.50 per M tokens; computer-use 15.7%→72.4%, vendor-reported). <strong>For our top few AI workloads, can we show what fraction of token-volume is plain, high-volume, verifiable "scullery" work still being routed to a frontier-priced model — and what moving it to the cheapest capable tier would save?</strong></li>
+  <li><strong>Do we measure cost-per-useful-task, or per-token sticker price?</strong> The headline "~75% cheaper" is blended — a new tokenizer counts ~30% more tokens, so the per-task saving is smaller than the per-token cut. <strong>Do we track the fully-loaded cost of a completed task (including retries and the tokenizer), or are we comparing advertised rates on a slide?</strong></li>
+  <li><strong>Have we built the routing, or just picked a model?</strong> With AI spend at $2.59T in 2026, up 47% (Gartner), tiering is now a margin lever. <strong>Is there an abstraction/gateway we own that routes each task to the right tier and escalates only genuine difficulty to the frontier — or does every request hit the same expensive model by default?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>High-volume, well-specified work (transaction classification, KYC document extraction, first-pass dispute triage, reconciliation) is the archetypal scullery task. <strong>Have we quantified how much of our AI inference bill rides on such tasks, and modelled routing them to a small, cheap tier with the frontier reserved for judgement calls — under the same model-risk and validation controls?</strong></li>
+  <li>A new, vendor-reported model is not a validated one. <strong>Before we route regulated workflows to the cheaper tier, do we re-run our own validation at the effort level we will actually use in production (the default is medium, below the max-effort launch benchmarks), rather than trusting the launch table?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Much clinical and operational AI work is high-volume triage, coding, and summarisation — plain work where a cheap, capable tier now excels. <strong>Can we tier our clinical-adjacent tasks so routine, verifiable work runs on the cheap hand while diagnostic-grade judgement stays on the frontier — and is each tier validated for its specific use, not assumed from the headline?</strong></li>
+  <li>Cost-sensitive, high-volume settings are where a tenfold price cut matters most. <strong>Does switching the bulk of our documentation and intake workload to the small tier free budget for the harder clinical problems — and have we proven the cheap tier's quality on our own data before trusting it with patients?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already match the tool to the job on the shop floor; AI is the same discipline. <strong>Have we applied right-sizing to our AI stack — a cheap, fast model for high-volume sensor-log parsing, inventory and first-pass quality notes, with the frontier reserved for genuinely hard planning — or are we over-provisioning model capability like buying a precision machine to drive a nail?</strong></li>
+  <li>Agentic, computer-use work (navigating interfaces, filling systems) just got cheap and capable (OSWorld 15.7%→72.4%, vendor-reported). <strong>Where we automate routine system-to-system tasks, can the cheap tier now do them at a fraction of the cost — and have we tested it on our actual interfaces?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your margins live and die on cost-per-interaction, and the bulk of retail AI work (product tagging, review triage, search, first-line support) is scullery work. <strong>Are we routing that high-volume work to the cheapest capable tier behind an abstraction we own — and reserving the frontier for the hard, high-value conversations — or paying premium rates for routine traffic?</strong></li>
+  <li>Peak-season volume multiplies any per-task overpayment. <strong>If we moved routine support and catalogue work to the small tier before the peak, what would it save at peak volume — and have we load-tested the cheap tier's quality so savings don't cost us the customer experience?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public budgets make overpaying for routine automation a stewardship failure. <strong>Can we show that high-volume, low-complexity public-service tasks (form processing, routing, FOIA triage) run on the most cost-effective capable tier, with the frontier reserved for genuine complexity — and that the choice is documented and defensible?</strong></li>
+  <li>Procurement must right-size, not gold-plate. <strong>Are we procuring AI capability tiered to the task (a cheap tier for the mass of work, a frontier tier for the hard cases), on a floor we own — under the duties already owed (EU AI Act high-risk regime, live since 2 August 2026) — or buying one expensive model for everything?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Scullery Hand</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the question that decides the AI bill: <em>for each task, what is the least costly hand that does it well — and am I paying a master's wage for scullery work?</em> Every prior control governs what the agent is, may do, serves, produces, or stands on. <strong>The scullery hand is about the wage you pay each task — and this week the market made the question unavoidable, because the cheap tier both collapsed in price and, for the first time, got good.</strong> The point is blunt: <strong>the thing that changed is not that the frontier got better; it is that the bottom got cheap and capable at once, so the expensive mistake is now running routine work on a premium model — and the fix is routing, not model-shopping.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — the small tier collapsed in price and crossed into real capability.</strong> <strong>On 7 October 2026 Anthropic released Claude Haiku 5.5, "our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work" (Anthropic, primary) — a reported $0.10 / $0.50 per million input/output tokens for prompts up to 100K (about one-tenth of Haiku 4.5's $1 / $5; $0.50 / $2.50 above 100K; batch ~$0.05 / $0.25; cache reads ~$0.01), a 1M-token context, and vendor-reported capability jumps where agents live: OSWorld 2.1 offline computer-use 15.7% → 72.4%, SWE-bench Multilingual 67.4% → 83.7% (Anthropic launch table, via secondary coverage, as reported).</strong> Three engineering realities follow. First, <em>the cheap tier is now good enough for the mass of real work</em> — the computer-use leap (15.7%→72.4%) is the signal: last year's small model failed routine agentic tasks ~5 times in 6; this one largely succeeds, so the economic case for keeping routine work on a frontier model has collapsed. Second, <em>the sticker price is not the bill</em> — Anthropic's "~75% cheaper" is blended (the lower tier covers ~90% of prior-Haiku requests, but the Claude 4.7 tokenizer counts ~30% more tokens, and the API defaults to <em>medium</em> effort, below the max-effort launch scores). Third, <em>a vendor's launch table is a hypothesis, not a validation</em> — no independent lab has published Haiku 5.5 results yet, so you prove it on your own tasks, at the effort you will actually run.</li>
+  <li><strong>The shift — the costly decision moved from "which model?" to "which tier, for which task?"</strong> <strong>The bulk of enterprise token-volume is plain, high-volume work (classification, extraction, routing, retrieval, first-pass drafting), and worldwide AI spend is now $2.59 trillion in 2026, up 47% year-over-year, rising toward ~$3.49 trillion in 2027 with AI infrastructure the largest segment (Gartner, 19 May 2026, as reported).</strong> Two realities cut against the proud-house instinct. <strong>First, over-provisioning capability is the default waste.</strong> When intelligence was scarce you sent everything to the best brain; now the best brain for a pot-scrub is a cheap one, and sending routine work to a frontier model is paying a master's wage for scullery work — invisible on any one request, enormous across the fleet. <strong>Second, the saving is only captured if you can route.</strong> A tenfold price cut on the small tier does nothing for you if every request hits the same expensive default; the dividend is unlocked by tiering and routing, not by swapping one default model for another.</li>
+  <li><strong>The answer — match the hand to the task; build the routing on the floor you own.</strong> <strong>Sort your AI tasks into "scullery" (high-volume, well-specified, cheaply verifiable) and "master" (ambiguity, judgement, genuine difficulty); route each to the cheapest tier that does it well, with explicit escalation to the frontier only when a task needs it; measure fully-loaded cost-per-useful-task (retries and tokenizer included), not per-token sticker; and build the routing on the abstraction/gateway you already own from the foundation.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the wage bill: not what the agent is, serves, harvests, spends or stands on, but whether each task is done by the least costly hand that does it well.</li>
+</ul></div>
+<p>The strategic core: <strong>the cheap tier getting both cheaper and capable is good news you only collect by routing — tier the work, send the scullery work to the cheap hand, keep the master for mastery, and pay by the finished task.</strong> The market makes the temptation concrete: it is easy and safe-feeling to route everything to the best model and never think about it again, and it feels like fiddly engineering to tier and route — so most houses quietly run their whole estate on a master's wage. The board translation: <strong>hire the master for mastery; never pay a master's wage to scrub a pot.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its agents — and then routes every routine task to a frontier model while congratulating itself on quality — will pass every governance review and discover, when the AI bill lands, that it has been paying its finest cook, by the hour, to scrub the breakfast pots.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The scullery hand: the cheap model tier got cheap and capable at once, so the costly question moved from which model to which tier for which task — match the hand to the task, hire the master for mastery, never pay a master's wage to scrub a pot. Top left, the scullery work to route to the cheap hand: plain, high-volume, verifiable tasks — classify, extract, route, retrieve, first-pass draft; Claude Haiku 5.5 at about 10 cents / 50 cents per million tokens, roughly one-tenth of last year's small tier; computer-use rose from 15.7% to 72.4%. Top right, the master's work to reserve for the frontier: ambiguity, judgement, real difficulty — hard reasoning and planning, high-stakes calls, the frontier priced accordingly, escalate here only when needed, hire the master for mastery. Between them: match the hand to the task; the cheap hand is finally good enough for the plain work, but pay by the finished dish, not the advertised rate. Middle, the arithmetic: worldwide AI spend 2.59 trillion dollars in 2026, up 47 percent, rising toward 3.49 trillion in 2027 per Gartner 19 May; most enterprise token-volume is routine, high-volume work; the 75 percent cheaper headline is blended because a new tokenizer counts about 30 percent more tokens; benchmarks are vendor-reported, the API default effort is medium, and no independent lab has published yet. Bottom left, stop: run everything on the master — every task hits the frontier model, compare per-token stickers, trust the launch table, clean pots and a thin purse. Bottom right, start: match the hand to the task — tier work into scullery versus master, route each to the cheapest capable hand, measure cost-per-useful-task not the rate, route on the floor you already own." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE SCULLERY HAND — the cheap tier got cheap AND capable at once</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The costly question moved from "which model?" to "which tier, for which task?" — match the hand to the task.</text>
+
+  <!-- the scullery work -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE SCULLERY WORK → cheap hand</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">plain, high-volume, verifiable</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">classify · extract · route · first-draft</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">Haiku 5.5: ~$0.10/$0.50 per M (~1/10)</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">computer-use 15.7% → 72.4%</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the cheap hand is good enough now</text>
+
+  <!-- the master's work -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a2016" stroke="#a5792f"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e5c07f" font-family="sans-serif">THE MASTER'S WORK → frontier</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">ambiguity, judgement, real difficulty</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">hard reasoning · planning · high-stakes</text>
+  <text x="364" y="137" font-size="10" fill="#f0d8a8" font-family="sans-serif">the frontier, priced accordingly</text>
+  <text x="364" y="157" font-size="10" fill="#f0d8a8" font-family="sans-serif">escalate here ONLY when needed</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ hire the master for mastery</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e5c07f" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e5c07f"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">match the hand to the task — pay by the finished dish, not the rate ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC — most of the bill is scullery work</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Worldwide AI spend $2.59T in 2026, +47% → ~$3.49T in 2027 (Gartner, 19 May)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Most enterprise token-volume is routine, high-volume work</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"~75% cheaper" is BLENDED — new tokenizer counts ~30% more tokens</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">Benchmarks vendor-reported · API default effort is MEDIUM · no independent lab yet</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: run everything on the master</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· every task hits the frontier model</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· compare per-token stickers</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· trust the launch table</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· confuse "best model" with value</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">clean pots, thin purse</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: match the hand to the task</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· tier work: scullery vs master</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· route each to the cheapest capable hand</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· measure cost-per-useful-task (the bill)</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· route on the floor you already own</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">right hand, right task, right wage</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The cheap hand got good — collect the saving by routing, not by model-shopping.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Hire the master for mastery · never pay a master's wage to scrub a pot.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The scullery work — route to the cheap hand</span>
+  <span><i class="dot" style="background:#a5792f"></i>The master's work — reserve the frontier</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of the bill</span>
+</div>
+</div>
+
+<h3>The scullery hand vs the master — what to route where</h3>
+<table>
+<tr><th>The scullery work (route to the cheap tier)</th><th>The master's work (reserve the frontier)</th></tr>
+<tr><td>Plain, high-volume, cheaply verifiable</td><td>Ambiguity, judgement, genuine difficulty</td></tr>
+<tr><td>Classify · extract · route · retrieve · first-draft</td><td>Hard reasoning, planning, high-stakes calls</td></tr>
+<tr><td>Haiku 5.5: a reported ~$0.10/$0.50 per M tokens (~1/10)</td><td>The frontier, priced for the work it does</td></tr>
+<tr><td>Computer-use 15.7% → 72.4% — now good enough</td><td>Escalate here only when the task needs it</td></tr>
+<tr><td>The bulk of your token-volume and your bill</td><td>The minority of tasks that truly need mastery</td></tr>
+<tr><td>Your posture: route it to the cheapest capable hand</td><td>Your posture: hire the master for mastery</td></tr>
+</table>
+
+<h3>Why "the scullery hand" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and standing on ground you own. <strong>This morning the market moved the question to the wage bill: the cheap tier collapsed in price and, for the first time, got good at the plain work.</strong> Haiku 5.5 at a reported $0.10/$0.50 and a computer-use score going 15.7%→72.4% prove the bottom is now both cheap and capable; Gartner's $2.59T, +47% proves the bill is now a board-level number. Governance that stopped at "is the model good?" will not protect the margin. The estates that keep it will collect the good news (a cheap, capable hand) by routing — tiering the work, sending scullery work to the cheap tier, keeping the master for mastery, and paying by the finished task.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to route each task to the least costly hand that does it well.</em> On a legacy estate the instinct, after a year of governance work, is to standardise on one capable model and send everything to it — it is simple, it is safe, and it works. Under the scullery hand that is exactly the reflex to check: a single premium default is how a kitchen quietly pays a master's wage to scrub every pot. The retrofit is <strong>sort, route, measure. Sort</strong> the work: tier your tasks into scullery (high-volume, verifiable) and master (judgement, difficulty). <strong>Route</strong> each to the cheapest capable tier across the abstraction you already own, escalating only genuine difficulty to the frontier. <strong>Measure</strong> the fully-loaded cost-per-useful-task — retries, the tokenizer, the medium-effort default — not the per-token sticker, and prove the cheap tier on your own work before you trust it. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay; the provenance is the papers; the errand bounds the reach; the bell discloses the slip; the locusts are why you be whole before the swarm; the looking-glass is the honest outside light; the livery names every hand; the steward keeps one book; the surety is your name on the bond; the second wage is whose bread it eats; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and <em>the scullery hand is why you must now match the hand to the task: sort the work, route each to the cheapest hand that does it well, pay by the finished dish, and hire the master only for mastery.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — the small tier got cheap and capable.</strong> <strong>Claude Haiku 5.5 (7 Oct): a reported $0.10/$0.50 per M tokens (~1/10 of Haiku 4.5's $1/$5), 1M context; vendor-reported OSWorld computer-use 15.7%→72.4%, SWE-bench Multilingual 67.4%→83.7% (Anthropic, primary + secondary, as reported).</strong> The cheap hand crossed into real work.</li>
+  <li><strong>The caveats that keep you honest.</strong> <strong>"~75% cheaper" is blended — Anthropic says the lower tier covers ~90% of prior-Haiku requests, but the Claude 4.7 tokenizer counts ~30% more tokens; the API defaults to medium effort (below the max-effort launch scores); no independent lab has published results (as reported).</strong> Measure the bill, not the sticker.</li>
+  <li><strong>The companion cuts.</strong> <strong>Anthropic also shipped Sonnet 5.5 (28 Sep), "30% faster and up to 30% cheaper" for most work, and cut Sonnet 5.5 cache-read pricing from $0.20 to $0.10 per M tokens (Anthropic, as reported).</strong> The whole ladder is getting cheaper, not just the bottom rung.</li>
+  <li><strong>The arithmetic of the bill.</strong> <strong>Worldwide AI spending $2.59T in 2026, +47% YoY, rising toward ~$3.49T in 2027; AI infrastructure the largest segment (&gt;45%), ~$1.43T in 2026 from ~$976B in 2025 (Gartner, 19 May 2026, as reported).</strong> Most of this rides on routine, high-volume work.</li>
+  <li><strong>Enterprise momentum underneath.</strong> <strong>Anthropic: Barclays scales Claude across operations (1 Oct); a $100M program to train 10,000 engineers for the enterprise AI talent gap (2 Oct) (Anthropic, primary).</strong> The demand that makes the wage bill a board number.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 (the Digital Omnibus defers stand-alone high-risk obligations toward 2 December 2027); MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and &gt;40% of agentic projects scrapped by end-2027 (as reported).</strong> Tiering is how you meet them without over-provisioning cost.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work.</div><div class="a">— Anthropic, introducing Claude Haiku 5.5 (7 October 2026, primary)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Anthropic Releases Claude Haiku 5.5 With Lower Prices and Effort Controls.</div><div class="a">— Let's Data Science, headline on the Haiku 5.5 release (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Worldwide AI spending is forecast to total $2.59 trillion in 2026, a 47% increase from 2025.</div><div class="a">— Gartner, worldwide AI spending forecast (19 May 2026, as reported)</div></blockquote>
+<blockquote><div class="q">"You can hire the finest cook in the valley and still lose money — if you send her to scrub the pots. The cheap hand just got good enough for the plain work. Hire the master for mastery; never pay a master's wage to scrub a pot."</div><div class="a">— the radar, on why matching the model tier to the task now matters more than choosing the model</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The small tier collapsed in price</td><td><span class="v">Claude Haiku 5.5 (7 Oct 2026): a reported $0.10 / $0.50 per M input/output tokens for prompts ≤100K — about one-tenth of Haiku 4.5's $1 / $5 ($0.50 / $2.50 above 100K; batch ~$0.05 / $0.25); 1M-token context</span></td><td>Anthropic (primary); secondary coverage, as reported</td></tr>
+<tr><td>…and the cheap tier got capable</td><td><span class="v">OSWorld 2.1 offline computer-use 15.7% → 72.4%; SWE-bench Multilingual 67.4% → 83.7% (vendor-reported, max effort; API default is medium; no independent lab yet)</span></td><td>Anthropic launch table, via secondary coverage, as reported</td></tr>
+<tr><td>The honest caveat</td><td><span class="v">"~75% cheaper" is a blended figure — the lower tier covers ~90% of prior-Haiku requests, but the Claude 4.7 tokenizer counts ~30% more tokens, shrinking the per-task saving</span></td><td>DataScience; braindetox; metricnexus, as reported</td></tr>
+<tr><td>The companion cuts</td><td><span class="v">Sonnet 5.5 (28 Sep): "30% faster and up to 30% cheaper" for most work; Sonnet 5.5 cache-read pricing cut from $0.20 to $0.10 per M tokens</span></td><td>Anthropic, as reported</td></tr>
+<tr><td>The arithmetic of the bill</td><td><span class="v">Worldwide AI spending $2.59 trillion in 2026, +47% YoY, rising toward ~$3.49 trillion in 2027; AI infrastructure the largest segment (&gt;45%), ~$1.43T in 2026 from ~$976B in 2025</span></td><td>Gartner, 19 May 2026, as reported</td></tr>
+<tr><td>Enterprise momentum</td><td><span class="v">Anthropic: Barclays scales Claude across operations (1 Oct); $100M to train 10,000 engineers for the enterprise AI talent gap (2 Oct)</span></td><td>Anthropic, primary</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 Aug 2026 (Digital Omnibus defers stand-alone high-risk obligations toward 2 Dec 2027); Gartner: 40% of enterprise apps embed task-specific agents by end-2026; &gt;40% of agentic projects scrapped by end-2027</span></td><td>European Commission; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Sort the work — tier every AI task into "scullery" and "master."</strong> The small tier just fell ~tenfold and got genuinely capable (Haiku 5.5, 7 Oct: a reported $0.10/$0.50 per M tokens; computer-use 15.7%→72.4%), so the mass of routine work no longer belongs on a frontier model. <strong>This month, inventory your top AI workloads and classify each task as scullery (high-volume, well-specified, cheaply verifiable) or master (ambiguity, judgement, genuine difficulty).</strong> Report one number to the board: the share of your AI token-volume that is scullery work still being routed to a frontier-priced model.</li>
+  <li><strong>Route it — send scullery work to the cheapest capable tier, and measure the bill, not the sticker.</strong> The dividend is captured only by routing, and the honest cost is fully-loaded (the "~75% cheaper" headline is blended; the API defaults to medium effort; the tokenizer counts ~30% more tokens). <strong>This month, route one high-volume workload to the cheap tier behind the abstraction you already own, with explicit escalation to the frontier for hard cases, and prove the quality on your own tasks at the effort you will actually run — then measure cost-per-useful-task, retries included.</strong> Report the measured before/after cost-per-task and the quality delta.</li>
+  <li><strong>Keep the master for mastery — and make tiering a standing discipline.</strong> Over-provisioning is the default waste; a single premium default is how a kitchen pays a master's wage to scrub every pot, and with AI spend at $2.59T in 2026 (+47%, Gartner) the leak compounds. <strong>This month, set a routing default of "cheapest capable tier, escalate on need," make model-tier choice a reviewed decision per workload, and schedule a quarterly re-tiering as prices and capabilities move.</strong> Report the projected annual saving from right-sizing your top workloads, and a dated plan to extend tiering to the next three. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay; the provenance is the papers; the errand bounds the reach; the bell discloses the slip; the locusts are why you be whole before the swarm; the looking-glass is the honest outside light; the livery names every hand; the steward keeps one book; the surety is your name on the bond; the second wage is whose bread it eats; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and the scullery hand is why, now that the cheap tier is skilled enough to do the plain work, you must match the hand to the task: sort the work, route each to the cheapest hand that does it well, pay by the finished dish, and hire the master only for mastery.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — Anthropic (7 Oct 2026): Claude Haiku 5.5, "our fastest, cheapest, and most capable small model yet… designed for high-volume, cost-sensitive work," a reported $0.10 / $0.50 per M input/output tokens for prompts ≤100K (~1/10 of Haiku 4.5's $1 / $5; $0.50 / $2.50 above 100K; batch ~$0.05 / $0.25), 1M-token context, vendor-reported OSWorld 2.1 offline 15.7%→72.4% and SWE-bench Multilingual 67.4%→83.7% (Anthropic; Let's Data Science; ComputingForGeeks; VKTR; braindetox; metricnexus; apidog) · The caveats — "~75% cheaper" blended, Claude 4.7 tokenizer ~+30% tokens, medium default effort, no independent lab yet (as reported) · The companion cuts — Sonnet 5.5 (28 Sep) "30% faster and up to 30% cheaper," cache-read cut $0.20→$0.10 (Anthropic) · The arithmetic — worldwide AI spending $2.59T in 2026 (+47% YoY), ~$3.49T in 2027, AI infrastructure largest segment ~$1.43T in 2026 from ~$976B in 2025 (Gartner, 19 May 2026) · Enterprise momentum — Barclays scales Claude (1 Oct), $100M to train 10,000 engineers (2 Oct) (Anthropic) · The prior rails — EU AI Act (high-risk live since 2 Aug 2026; Digital Omnibus defers stand-alone high-risk obligations toward 2 Dec 2027) (European Commission), MCP 2026-07-28, Gartner (40% of enterprise apps embed task-specific agents by 2026; &gt;40% of agentic projects scrapped by 2027). The "scullery hand" framing — that the cheap tier collapsed in price and crossed into real capability at once, so the costly question moved from "which model?" to "which tier, for which task?", and a house must match the hand to the task, route each to the cheapest capable tier on a floor it owns, and measure fully-loaded cost-per-useful-task — is expressly the radar's reading. Figures are relayed from Anthropic's announcement, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; benchmark figures are vendor-reported and should be re-verified against the primary publications and proven on your own tasks before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 10 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
