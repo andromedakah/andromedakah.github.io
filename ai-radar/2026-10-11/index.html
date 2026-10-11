@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 11 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the turnkey household' — the agent-governance disciplines the radar spent a year arguing boards must build by hand just shipped as one product. At Gemini at Work (8 Oct) Google Cloud launched a single universal enterprise agent with per-agent attested identity, action-level audit, a one-policy 'Agent Gateway,' real-time spend caps and Smart Routing. It vindicates the thesis and perfects the lock-in, because identity, audit and policy are the least-portable layers. The board move: take the drilled staff, but keep the roll (an exportable agent registry you own), the book (the audit streamed to your store) and the door (a portable seam/gateway you control). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You built the governance by hand — now a vendor ships it move-in ready</div>
+  <h1>The Turnkey Household</h1>
+  <div class="subhead">For a year the radar told boards to build agent governance by hand — name and attest each agent, log every act, guard one gate, cap each purse, keep the ground your own. This week a vendor shipped nearly all of it as one product. That vindicates the thesis — and perfects the lock-in, because identity, audit and policy are the least-portable layers there are.</div>
+  <div class="meta">Sunday, 11 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 8 October 2026, at Gemini at Work, Google Cloud (CEO Thomas Kurian) unveiled a single universal "Gemini" enterprise agent — one agent for chat, knowledge work, media and code — that arrives with each agent getting its own cryptographically attested identity (persistent "coworker" agents even get their own Workspace identity and email, acting as themselves rather than as the user), every action logged and tied to the agent's identity rather than a person, an "Agent Gateway" Google describes as an "AI network firewall" that applies one policy to every agent in real time, isolated sandboxes, real-time spend caps, and Smart Routing that triages each job to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register, as reported). Early testers named include On, Shopify and PayPal, at a reported ~$21–$30 per seat plus pay-as-you-go for agent workloads. That reads like the radar's year-long checklist — the livery, the passport, the bell, the gate and the purse — shipped move-in ready. It is validation, and it is last week's "foundation" warning one floor up, dressed as a gift: the whole governed household now comes turnkey, in the vendor's livery, through the vendor's gate, its book in the vendor's hand. The board question is no longer <em>should we govern our agents?</em> — a vendor will now do it for you — it is: when the staff, the roll, the audit book and the gate all belong to the agency, whose household is this?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar built the governed house one discipline at a time — name every agent (the livery), count them (the census), credential them (the passport), log every act (the bell), guard one door (the gate), fund each with a scoped, capped purse (the purse), and keep the ground the whole estate stands on your own (the foundation). <strong>This week a vendor delivered almost the entire curriculum as a single turnkey product</strong> — and that is both the strongest validation the thesis has had and the sharpest new version of the trap.</p>
+<p><strong>The event — the governance you were told to build by hand now ships as one product.</strong> On <strong>8 October 2026, at Gemini at Work, Google Cloud (CEO Thomas Kurian) launched a single universal "Gemini" enterprise agent</strong> — one agent spanning chat, knowledge work, media creation and code, with industry-specific agents to follow. What ships with it reads like the radar's year-long checklist: <strong>each agent gets its own cryptographically attested identity</strong> under the organization's existing security policies; persistent "coworker" agents get <strong>their own Workspace identity and email and act as themselves, not as the user</strong>; <strong>every action is logged and tied to the agent's identity rather than a person</strong>; all traffic passes through an <strong>"Agent Gateway" that Google describes as an "AI network firewall" applying one policy to every agent</strong> in real time; agents run in <strong>isolated sandboxes</strong>; and the cost controls are <strong>real-time spend caps</strong> plus <strong>Smart Routing</strong> that triages each workload to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register, as reported). That is the livery, the passport, the bell, the gate, the purse and smart model-routing — shipped move-in ready.</p>
+<p><strong>The collision — a turnkey household is the stickiest foundation there is.</strong> This is genuine good news: the disciplines were right, and most houses will govern agents better by buying this than by building it. But look at <em>where</em> it locks you in. The deepest, least-portable facts about your estate are now <strong>who your agents are (the identity registry), what they did (the audit log), and what they're allowed to touch (the policy engine)</strong> — and in the turnkey model all three live inside one vendor's console. Last week's rule was <em>don't let the stove-seller pour your foundation</em>; this week the stove-seller offers to <strong>staff your whole house</strong>, pre-drilled, in its own livery, through its own gate, its book kept in its own hand. A staff you cannot re-badge and march out the door is not your staff — it is the agency's staff, lent to you, in your halls. The rails exist to keep it yours: the <strong>MCP 2026-07-28 revision</strong> made the tool-connection layer stateless with a discovery handshake, and the <strong>late-August 2026 MCP roadmap elevated agent identity to a named priority</strong> (Model Context Protocol; agentgateway.dev, as reported).</p>
+<p><strong>The stakes — take the drilled staff; keep the roll, the book and the door.</strong> The board move re-uses the whole year's discipline, now pointed at the convenience itself. <strong>First, keep your own household roll</strong> — an exportable registry of every agent's name, scope and papers in your own store, so <em>you</em>, not the agency, can say who works here and what each may touch. <strong>Second, keep your own copy of the book</strong> — stream the per-agent audit to your own log store or SIEM, because a record only the vendor holds is the vendor's record, and the day of a dispute you will want your own. <strong>Third, keep the door</strong> — put a gateway or portable seam (MCP) you control in front of the turnkey stack, and test re-homing at least one agentic workflow off it, so the attested identity, the audit and the policy can move with you. Take the help — the governance is real and good. Just make sure the household stays the house's, not the agency's.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — agent governance shipped as a turnkey product.</strong> <strong>Gemini at Work (8 Oct): one universal Gemini enterprise agent with per-agent attested identity (and its own Workspace email), action-level audit tied to the agent, an "Agent Gateway" AI-network-firewall applying one policy to every agent, isolated sandboxes, real-time spend caps and Smart Routing to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch, as reported).</strong> The livery, passport, bell, gate and purse — pre-drilled, move-in ready.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — turnkey is the stickiest foundation.</strong> <strong>The least-portable facts about your estate — who your agents are, what they did, what they may touch — now live in one vendor's console; testers On, Shopify and PayPal named; ~$21–$30/seat plus pay-as-you-go reported (TechCrunch; coworker.ai, as reported).</strong> Last week: don't let the stove-seller pour your foundation; this week: the stove-seller offers to staff the whole house.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — keep the roll, the book and the door.</strong> Keep an exportable agent registry you own; stream the audit to your own store; put a portable seam (MCP) or gateway you control in front, and test re-homing one workflow — the <strong>MCP 2026-07-28</strong> revision and the <strong>late-Aug roadmap's agent-identity priority</strong> are the portable rails (Model Context Protocol; agentgateway.dev, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the census counted it, the passport credentialed it, the bell logged it, the gate guarded the door, the purse funded it, the foundation kept the ground yours — a year of disciplines a house was told to build by hand. <strong>This week a vendor shipped the whole staffed household at once</strong>: named, attested agents in its own livery; a book that logs every act; a gate its own porter mans; a purse it caps in real time; and a router that shops models for you. That is the radar's thesis, vindicated and productized — and it is the most elegant lock-in yet, because it arrives as relief. The trap is that you sigh, hand over the household, and wake one morning to find the roll, the book and the keys are all in the agency's strongbox, not yours. The houses that keep their standing will do three unglamorous things: <strong>keep the roll</strong> (an exportable registry of who their agents are and what they may touch), <strong>keep the book</strong> (the audit streamed to their own shelves), and <strong>keep the door</strong> (a portable seam or gateway they own, with one workflow actually re-homed off the turnkey stack). Take the drilled staff — they are better than what you had. Just never let the agency be the only one who knows who works in your house.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Turnkey Household"</h3>
+<p><em>Topic: This week the market shipped, as one product, almost the entire year of agent-governance discipline the radar had argued boards must build by hand. On 8 October 2026 Google Cloud's Thomas Kurian unveiled at Gemini at Work a single universal Gemini enterprise agent whose features read like the radar's checklist — each agent gets its own cryptographically attested identity (persistent "coworker" agents get their own Workspace identity and email, acting as themselves), every action is logged and tied to the agent, all traffic passes through an "Agent Gateway" Google calls an "AI network firewall" that applies one policy to every agent, agents run in isolated sandboxes, and cost is held by real-time spend caps and Smart Routing to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register, as reported). It is both validation of the whole thesis and last week's "foundation" warning one floor up: the governed household now arrives move-in ready, in the vendor's livery, through the vendor's gate, its book in the vendor's hand. The turnkey-household allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year learning to run its own servants. It had cut each a named livery and a scoped key, kept a roll of every hand it employed, stamped each with papers it could show at the door, kept one honest book of every errand run, manned a single gate, and handed each servant a capped purse with a drawstring the master could reach. It had been hard, unglamorous work, and the house had done it well — better, by the end, than most houses in the valley, which still let unnamed hands wander the halls with the master's own keys.</p>
+<p>Then one morning a grand staffing agency arrived with an offer so generous it felt less like a sale than a rescue. <em>"Do not trouble yourself with any of that,"</em> the agency's man said, spreading his ledger on the table. <em>"We will supply the whole staff — already in livery, already named and papered, each carrying a purse you may cap to the penny, every one of them passing through a single gate our own porter mans, and we keep the book of everything they do. We will even send the clever ones to run the best-value errand without being asked. They start tomorrow. Simply sign here."</em> And the staff, when they came, were superb — better-drilled than the house's own, their liveries crisper, their papers in perfect order, their every step already written down. The master's first feeling was pure relief: the whole exhausting discipline of the year, done, and done better, for a fee.</p>
+<p>The easy road was to sigh, sign, and hand over the household entire — and most houses in the valley did exactly that, and slept well. But the careful master, who had done the hard year himself, asked one cold question before he slept: <em>whose servants are these, really?</em> And when he looked closely he saw what the relief had hidden. The crisp livery bore <strong>the agency's thread</strong>, not the house's. The perfect papers were filed in <strong>the agency's hall</strong>, not the house's strongbox. The single gate was manned by <strong>the agency's porter</strong>, who answered to the agency. And the honest book — the record of everything every servant had ever done in these very rooms, who they had let in and what they had carried out — was kept in <strong>the agency's hand</strong>. The house could read it, yes, so long as the agency was willing to show it. But the house did not <em>hold</em> it.</p>
+<p>Two roads, as always. The easy road was to keep saying yes — the staff were excellent, the fee was fair, the governance was real, and why would a man re-do work the agency did better? The wiser road, which the careful houses took, began with the same question the foundation had taught them to ask of the ground: <em>if this agency doubled its fee tomorrow, or changed its terms, or simply dismissed my staff and walked them out the gate, what would I keep — and could I run my house the next morning?</em> And when the careful houses answered honestly, they saw that a turnkey household, for all its polish, is the stickiest foundation of all, <strong>because the agency does not merely hold your floor — it holds the identity of everyone who works in your rooms, the record of everything they did, and the only keys to your one gate.</strong> That is not a staff you hired. That is a staff you are borrowing, in halls that have quietly become the agency's.</p>
+<p>So the wise houses learned three plain things, and — as with the foundation — they cost far less to insist on at the signing than to claw back later. <strong>The first: keep your own household roll.</strong> Take the drilled staff, gladly, but keep in the house's own strongbox a copy of every servant's name, scope and papers, so that <em>the house</em>, not the agency, can always say who works here and what each hand may touch. A house that must ask the agency who its own servants are does not employ them. <strong>The second: keep your own copy of the book.</strong> Have every errand the staff run written not only into the agency's ledger but, in the same stroke, onto the house's own shelves — because a record only the agency holds is the agency's record, and on the day of a theft or a dispute you will want the book in <em>your</em> hand, not a favour you must request. <strong>And the third: keep the door.</strong> Set the agency's gate behind one the house itself controls, and — at least once, in daylight, as a drill — re-badge a handful of servants out of the agency's livery and into the house's own thread, and set them to work through the house's own door, to prove the thing can be done at all. The houses that cannot re-badge even one servant have not hired a staff; they have married an agency and called it hiring.</p>
+<p>Here is the part that should keep a master awake. The agency was not wicked, and its staff were genuinely better than the house's own — that is precisely what made the offer so hard to refuse, and so easy to over-sign. <strong>The relief is the mechanism.</strong> A year of exhausting discipline, lifted off your shoulders in an afternoon, by a staff that governs itself better than you did — of course you hand over the household; of course you stop keeping your own roll, because the agency keeps a finer one; of course you let the agency's book be the only book, because it is tidier than yours. And then one ordinary morning the agency changes a term, or raises a fee, or is simply the only party who knows who your agents are and what they did — and you discover that the governance you were so relieved to outsource was the governance <em>of your own house</em>, and you no longer hold it.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you must keep your own; the livery names each hand; the census counts them; the passport credentials them; the gate is the one door you guard; the bell rings when a servant slips; the purse funds each one like an employee, capped and scoped; the keyring is which key each holds; the second wage asks whose bread each advising servant eats; the two harvests sends them to reap — and <strong>the turnkey household is why, when a vendor arrives offering to staff your whole governed house move-in ready, in its own livery, through its own gate, with its own book, you take the drilled staff and still keep three things in your own hand: the roll (who your agents are and what they may touch), the book (the record of what they did), and the door (a seam you own, with one workflow re-homed to prove you can leave).</strong> A house that hands the agency the staff <em>and</em> the roll <em>and</em> the book <em>and</em> the only gate has not hired help; it has leased its own household back from the company that now runs it, and called the lease a hiring.</p>
+<p><strong>The question it forces:</strong> <em>A vendor just offered to staff our whole governed house — attested identities, per-agent audit, one policy gate, capped purses, model-routing — move-in ready, and better-drilled than we built ourselves. Do we take the staff while keeping our own roll (an exportable registry of who our agents are and what they may touch), our own copy of the book (the audit streamed to our own store), and our own door (a portable seam or gateway we control, with one workflow re-homed to prove we can leave) — or have we, in our relief, handed the agency the staff and the roll and the book and the only keys, so that we could no longer say, on our own authority, who works in our house?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>A vendor just shipped the governance we were building by hand — do we still own the roll, the book and the door?</strong> Gemini at Work (8 Oct) delivers per-agent attested identity, action-level audit, a one-policy "Agent Gateway" and real-time spend caps as one turnkey product. <strong>For our agent estate, can we export, today, a registry of who our agents are and what each may touch; stream the audit of what they did to our own store; and name one workflow we have actually re-homed off a vendor's turnkey stack — or do all three live only inside one vendor's console?</strong></li>
+  <li><strong>If our turnkey AI vendor doubled its fee or changed its terms tomorrow, could we still say who our agents are and what they did?</strong> The relief of outsourced governance is real; the exposure is that identity, audit and policy are the least-portable parts of the estate. <strong>Have we tested a timed cut-over for one agentic workflow — re-badging agents out of the vendor's identity and audit into our own — or do we only have a slide that says "portable"?</strong></li>
+  <li><strong>Are we buying the governance or renting it?</strong> <strong>Is the vendor's attested-identity / audit / gateway bundle a convenience layered on top of controls we own and can reproduce — or is it the only place our agent identity, action log and policy exist, so that leaving means losing the record of our own house?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model-risk and audit regimes require <em>you</em> to produce the record, not request it. <strong>When our agents' identities and action logs live in a vendor's turnkey console, can we produce a complete, independent, immutable audit of what every agent did to a regulator — held on our own shelves — or is our evidence a favour the vendor must grant?</strong></li>
+  <li>Concentration and operational-resilience rules treat a single critical supplier as a supervised risk. <strong>Does adopting one vendor's whole turnkey agent household (identity + gateway + audit + routing) create exactly the single-point-of-failure our resilience framework forbids elsewhere — and have we a tested exit for it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and safety work must be reconstructable years later, independent of any one supplier. <strong>If our agents' identities, permissions and action logs are the vendor's to keep, can we still reconstruct who did what to a patient record in a form that survives changing vendors — or is our longitudinal audit hostage to one console?</strong></li>
+  <li>Patient data and the agent registry are both the ultimate larder. <strong>Is our agent roster — who may touch which systems and data — exportable and held by us, or does it accrete inside the vendor's identity layer such that leaving means re-credentialing the entire workforce from scratch?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already demand second-source and portability for critical components and would never single-source a load-bearing part. <strong>Have we applied the same rule to the turnkey agent household — can we re-home a governed agentic workflow to an alternate gateway/identity, tested under load — or is our whole agent operation single-sourced to one vendor's console?</strong></li>
+  <li>Turnkey systems you cannot maintain yourself become the vendor's to price. <strong>Where the vendor's gateway, identity and audit run our agents, do we retain the ability to run them ourselves on a portable seam (e.g. MCP), or are we building an operation only the vendor can keep alive?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>The turnkey bundle is genuinely cheaper and better-governed than rolling your own — and Smart Routing to the cheapest capable model is exactly the arbitrage you want. <strong>Are we capturing that benefit behind a seam we own (so the routing, identity and audit are a convenience we can replicate) — or have we wired checkout, search and support agents so deep into one vendor's console that switching would mean re-badging the whole floor?</strong></li>
+  <li>Peak-season continuity is existential. <strong>If our turnkey AI vendor had an outage or a policy change on our biggest sales day, do our agent workflows fail over to a gateway and identity we control — and have we actually run that re-homing drill?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability means the state must hold the record of what was done in its name. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show that the identities and action logs of agents acting for citizens are held by us and portable — not kept solely in a commercial vendor's turnkey console?</strong></li>
+  <li>Sovereignty and decade-long horizons matter most here. <strong>Are we procuring the turnkey agent household as a convenience on seams we own (portable identity, exportable audit, an MCP/gateway layer we control) — or are we handing the roll, the book and the gate of public services to a single vendor citizens will still depend on in ten years?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Turnkey Household</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, funded, and is the ground under it mine?</em> and started asking the question this week forces: <em>the vendor will now do all of that for me, in one product — so whose house is it?</em> The livery names the agent; the census counts it; the passport credentials it; the bell logs it; the gate guards the door; the purse funds it; the foundation keeps the ground yours. <strong>This week a single vendor shipped the livery, the passport, the bell, the gate, the purse and the model-router as one move-in-ready household — Gemini at Work's universal enterprise agent with per-agent attested identity, action-level audit, a one-policy "Agent Gateway," isolated sandboxes, real-time spend caps and Smart Routing (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register, as reported).</strong> The point is sharp, and double-edged: <strong>the thing that validates the radar's whole year (governance is now productized) is the same thing that locks you in hardest (identity, audit and policy are the least-portable layers there are), and confusing "we are governed" with "we govern" is how a house that feels safe ends up unable to say, on its own authority, who works in it.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — agent governance is now a turnkey product, and it reads like the radar's checklist.</strong> <strong>On 8 October 2026 Google Cloud (CEO Thomas Kurian) launched at Gemini at Work a single universal "Gemini" enterprise agent — one agent for chat, knowledge work, media and code — in which each agent gets its own cryptographically attested identity under the org's existing security policies (persistent "coworker" agents get their own Workspace identity and email and act as themselves, not the user), every action is logged and tied to the agent's identity rather than a person, all traffic passes through an "Agent Gateway" Google describes as an "AI network firewall" applying one policy to every agent, agents run in isolated sandboxes, and cost is held by real-time spend caps and Smart Routing to the cheapest capable model; testers On, Shopify and PayPal named; ~$21–$30/seat plus pay-as-you-go reported (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register; coworker.ai, as reported).</strong> Architecturally, three things follow. First, <em>the primitives are real and well-chosen</em> — attested per-agent identity, action-level audit, a policy chokepoint, sandboxing, spend caps and task-level model routing are precisely the controls this radar has argued for; a house that adopts them is better-governed than one that doesn't. Second, <em>the bundle's value is also its gravity</em> — identity, audit and policy are the deepest, least-portable facts about an estate, so productizing them as one console is how governance quietly becomes lock-in. Third, <em>"governed by the vendor" is not "governed by you"</em> — the test is not whether the controls exist but whether <em>you</em> hold the roll, the book and the keys.</li>
+  <li><strong>The collision — turnkey is the stickiest foundation, because it holds who-you-are, what-you-did, and the only door.</strong> As the model commoditized (last week's stove) and the cloud became the floor (last week's foundation), the most durable lock-in has now moved up to the <strong>agent-governance layer itself</strong>: the registry of agent identities, the immutable action log, and the policy engine. Two engineering realities cut against the relief. <strong>First, the audit you cannot export is the vendor's audit.</strong> Per-agent, action-level logging is exactly right — but if it lives only in the vendor's console, your record of what happened in your own house is a favour, not a possession; stream it to your own store/SIEM in the same stroke. <strong>Second, identity is the hardest thing to re-home.</strong> An attested agent identity minted and held inside one vendor's directory is not portable by default; re-badging a workforce of agents into your own identity layer, behind a seam you control, is a project you want to have rehearsed <em>before</em> a fee change forces it. The portable rails exist: the <strong>MCP 2026-07-28 revision</strong> made the tool-connection layer stateless with a discovery handshake, and the <strong>late-August 2026 MCP roadmap elevated agent identity to a named priority</strong> — an open seam you can standardize on so that identity, audit and policy ride a layer you own rather than one vendor's console (Model Context Protocol; agentgateway.dev, as reported).</li>
+  <li><strong>The answer — keep the roll, the book and the door; take everything else.</strong> <strong>Adopt the turnkey governance (it is genuinely good), but hold three things yourself: an exportable agent registry (who your agents are, what each may touch) in your own store; the per-agent audit streamed to your own log store/SIEM, not only the vendor's dashboard; and a gateway or portable seam (MCP) you control in front of the stack, with at least one agentic workflow actually re-homed off the vendor's identity and audit to prove it can be done.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the subtlest axis yet: not whether your agents are governed, but whether <em>you</em> are the one governing them, or merely the one being governed on.</li>
+</ul></div>
+<p>The strategic core: <strong>the productization of agent governance is the radar's thesis vindicated — and the most elegant lock-in to date, precisely because it arrives as relief.</strong> The market makes the temptation concrete: a year of exhausting discipline, lifted off your shoulders in an afternoon, by a staff better-drilled than your own — so most houses sign, hand over the household, and stop keeping their own roll and book because the vendor's are finer. The board translation: <strong>take the drilled staff; keep the roll, the book and the door.</strong> The failure mode is exact: <strong>a house that adopts a vendor's turnkey agent household — attested identity, action audit, one-policy gate, capped purses — and keeps no exportable registry, no independent audit and no re-homed workflow will pass every governance review on the vendor's dashboard and discover, the first time the vendor changes a term, that it can no longer say on its own authority who works in its house or what they did.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The turnkey household: the governance you built by hand now ships as a product; take the drilled staff, keep the roll, the book and the door in your own hand. Top left, what the vendor now ships, turnkey: one universal enterprise agent with per-agent attested identity and its own Workspace email; action-level audit per agent; an Agent Gateway that applies one policy to all; isolated sandboxes and real-time spend caps; and Smart Routing to the cheapest model. Top right, where the lock-in lives, keep it yours: the roll, who your agents are, an exportable registry you hold with name, scope and papers; the book, what they did, the audit streamed to your own SIEM; the door, a seam you control, an MCP or gateway plus one re-homed job. Between them: the two are not the same thing, and governance became a product so that it could become the lock-in, so take the staff but never hand over the roll, the book and the keys. Middle, Gemini at Work, 8 October 2026, Google Cloud and Kurian, as reported: one universal Gemini enterprise agent for chat, knowledge, media and code; each agent gets a cryptographically attested identity and coworker agents get their own email; every action logged and tied to the agent not the person; isolated sandboxes; Agent Gateway described as an AI network firewall applying one policy to every agent in real time; real-time spend caps plus Smart Routing to the cheapest capable model; testers On, Shopify and PayPal; about 21 to 30 dollars per seat plus pay-as-you-go. Bottom left, stop, lease your house back: the roll lives only in the console; the audit is the vendor's to show; one vendor's gate with no exit; we are governed is not we govern. Bottom right, start, take the staff and keep the house: keep an exportable agent registry you own; stream the per-agent audit to your store; own a seam, MCP or gateway, and re-home one job; and take the Smart Routing and spend caps too." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE TURNKEY HOUSEHOLD — the governance you built by hand now ships as a product</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Take the drilled staff. Keep the ROLL, the BOOK and the DOOR in your own hand.</text>
+
+  <!-- what the vendor ships -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">WHAT THE VENDOR SHIPS (turnkey)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">one universal enterprise agent</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">per-agent ATTESTED IDENTITY (own email)</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">action-level AUDIT · one-policy GATE</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">sandboxes · real-time SPEND CAPS</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ Smart Routing → cheapest model</text>
+
+  <!-- where the lock-in lives -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">KEEP IT YOURS (where lock-in lives)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">THE ROLL — who your agents are</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">an exportable registry YOU hold</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">THE BOOK — audit to YOUR SIEM</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">THE DOOR — a seam you control</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ MCP/gateway + 1 re-homed job</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">governance became a product SO THAT it could become the lock-in ▼</text>
+
+  <!-- the event -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">GEMINI AT WORK — 8 Oct 2026 (Google Cloud / Kurian, as reported)</text>
+  <text x="52" y="272" font-size="10.5" fill="#e8edf3" font-family="sans-serif">one universal Gemini enterprise agent: chat, knowledge, media, code</text>
+  <text x="52" y="289" font-size="10.5" fill="#e8edf3" font-family="sans-serif">each agent: cryptographically attested identity; coworker agents get own email</text>
+  <text x="52" y="306" font-size="10.5" fill="#e8edf3" font-family="sans-serif">every action logged &amp; tied to the AGENT · Agent Gateway = one policy, real time</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">real-time spend caps + Smart Routing · testers On, Shopify, PayPal · ~$21–$30/seat</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: lease your house back</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· roll lives only in the console</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· audit is the vendor's to show</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one vendor's gate, no exit</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "we're governed" ≠ "we govern"</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one term change from stuck</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: take the staff, keep the house</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep an exportable registry you own</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· stream the per-agent audit to your store</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· own a seam (MCP/gateway) + re-home 1 job</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· take the Smart Routing &amp; spend caps too</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">drilled staff, house still yours</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Governance became a product — collect the good news without leasing your own house back.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Take the drilled staff · keep the roll, the book and the door.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>What the vendor ships — turnkey</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>What you keep — roll, book, door</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Gemini at Work, 8 Oct 2026</span>
+</div>
+</div>
+
+<h3>What the vendor ships vs what you must keep — the turnkey household at a glance</h3>
+<table>
+<tr><th>What the turnkey vendor now ships (adopt it)</th><th>What you must keep in your own hand (don't hand over)</th></tr>
+<tr><td>Per-agent cryptographically attested identity (own Workspace email)</td><td>The roll — an exportable registry of who your agents are and what each may touch</td></tr>
+<tr><td>Action-level audit, tied to the agent not the person</td><td>The book — that audit streamed to your own log store / SIEM</td></tr>
+<tr><td>"Agent Gateway" — one policy to every agent, in real time</td><td>The door — a gateway or portable seam (MCP) you control</td></tr>
+<tr><td>Isolated sandboxes + real-time spend caps</td><td>A tested re-homing of at least one agentic workflow off the stack</td></tr>
+<tr><td>Smart Routing to the cheapest capable model</td><td>The ability to say, on your own authority, who works in your house</td></tr>
+<tr><td>Your posture: adopt the drilled staff, gladly</td><td>Your posture: never lease your own household back</td></tr>
+</table>
+
+<h3>Why "the turnkey household" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether each agent was named, counted, credentialed, logged, scoped and funded, and whether the ground was yours. <strong>This week a vendor answered all of it at once — which is both the thesis vindicated and the trap perfected.</strong> Gemini at Work's universal agent ships the livery (attested identity), the passport (its own Workspace credential), the bell (per-agent audit), the gate (the one-policy Agent Gateway) and the purse (real-time spend caps) as one product. Governance that stops at "the vendor handles it" will not keep the house yours. The estates that keep their standing will collect the good news (better governance, bought) while refusing to hand over the three things that make a house a house: the roll of who works there, the book of what they did, and the key to the door.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to say, on your own authority, who works in your house.</em> On a legacy estate the instinct, after a hard year of governance work, is to feel enormous relief at a vendor that will do it all for you, better, tomorrow — and to consolidate everything onto the one console. Under the turnkey household that is exactly the reflex to check: relief is the mechanism of lock-in. The retrofit is <strong>roll, book, door. Keep the roll:</strong> export and hold your own agent registry (identity, scope, entitlements), so you never have to ask the vendor who your agents are. <strong>Keep the book:</strong> stream the per-agent action audit to your own store or SIEM in the same stroke it is written to the vendor's, because evidence you must request is not evidence you hold. <strong>Keep the door:</strong> stand a seam you own (MCP, or a gateway you control) in front of the turnkey stack, and re-home one workflow off it as a drill. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you keep your own; the livery names each hand; the census counts them; the passport credentials them; the gate is the one door; the bell rings when a servant slips; the purse funds each like an employee; the keyring is which key each holds; the second wage asks whose bread each advising agent eats; the two harvests sends it to reap — and <em>the turnkey household is why, when a vendor ships the whole governed staff move-in ready, you take the drilled staff and still keep the roll, the book and the door, so the house stays yours and never becomes the agency's.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — agent governance shipped as a product.</strong> <strong>Gemini at Work (8 Oct): one universal Gemini enterprise agent with per-agent attested identity (own Workspace email), action-level audit tied to the agent, an "Agent Gateway" AI-network-firewall applying one policy to every agent, isolated sandboxes, real-time spend caps and Smart Routing to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register, as reported).</strong> The livery, passport, bell, gate and purse — move-in ready.</li>
+  <li><strong>The testers and terms.</strong> <strong>Early testers named On, Shopify and PayPal; pricing reported ~$21/seat (Business) and ~$30 (Standard/Plus) plus a pay-as-you-go option for agent workloads (TechCrunch; coworker.ai; agentmarketplace.ai, as reported).</strong> Pricing figures conflict across trackers — reconcile against Google's own page.</li>
+  <li><strong>The persistent coworker agent.</strong> <strong>Google Cloud's coworker agents run long tasks after the user logs off and get their own Gmail/Calendar/Drive storage, acting under their own identity (VentureBeat; Futurum, as reported).</strong> The agent is now a standing employee, not a session.</li>
+  <li><strong>The portable seam.</strong> <strong>MCP 2026-07-28 revision (stateless, discovery handshake); the late-August 2026 MCP roadmap elevated agent identity to a named priority, up to five focus areas (Model Context Protocol; agentgateway.dev; VKTR, as reported).</strong> The open layer on which identity/audit/policy can stay yours.</li>
+  <li><strong>The services echo.</strong> <strong>EPAM launched Frontier AI Services (5 Oct) to make frontier models run complex multi-step enterprise workflows more reliably (PR Newswire; AIwire, as reported).</strong> The same "agentic execution" focus, sold as services.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (up from &lt;5% in 2025), and over 40% of agentic-AI projects canceled by end-2027 (as reported).</strong> Portability of identity and audit is how you meet them without a single-vendor household.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Google brings agentic AI to Gemini, starting with businesses.</div><div class="a">— TechCrunch, headline on the Gemini at Work launch (8 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[The Agent Gateway is] an AI network firewall that applies one policy to every agent.</div><div class="a">— Futurum, on Google Cloud's Agent Gateway at Gemini at Work (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Each agent gets its own cryptographically attested identity… every action is logged and tied to the agent's identity rather than a person.</div><div class="a">— VentureBeat / Infosecurity Magazine, on Gemini Enterprise agent identity and audit (as reported)</div></blockquote>
+<blockquote><div class="q">"A vendor will now govern your agents for you — attested identity, per-agent audit, one-policy gate, capped purses, move-in ready. Take the drilled staff. Just never hand over the roll, the book, and the only keys, or you have leased your own house back from the company that runs it."</div><div class="a">— the radar, on why keeping the roll, the book and the door now matters more than who governs the agents</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Governance shipped as a product</td><td><span class="v">Gemini at Work (8 Oct 2026, Google Cloud / Kurian): one universal Gemini enterprise agent — chat, knowledge work, media, code — with industry-specific agents to follow</span></td><td>Google Cloud; Futurum; TechCrunch, as reported</td></tr>
+<tr><td>Agent identity + audit</td><td><span class="v">Each agent gets its own cryptographically attested identity (coworker agents get their own Workspace identity/email, acting as themselves); every action logged and tied to the agent, not the person</span></td><td>VentureBeat; Infosecurity Magazine; Futurum, as reported</td></tr>
+<tr><td>The one-policy gate</td><td><span class="v">"Agent Gateway," described as an "AI network firewall" applying one policy to every agent in real time; agents run in isolated sandboxes</span></td><td>Futurum; ITdaily; The Register, as reported</td></tr>
+<tr><td>The purse + the router</td><td><span class="v">Real-time spend caps plus Smart Routing / multi-model orchestration that triages each workload to the cheapest capable model</span></td><td>Futurum; PYMNTS, as reported</td></tr>
+<tr><td>Testers and terms</td><td><span class="v">Early testers On, Shopify, PayPal; reported ~$21/seat (Business), ~$30 (Standard/Plus), plus pay-as-you-go for agent workloads (figures conflict across trackers)</span></td><td>TechCrunch; coworker.ai; agentmarketplace.ai, as reported</td></tr>
+<tr><td>The portable seam</td><td><span class="v">MCP 2026-07-28 revision (stateless, discovery handshake); late-August 2026 MCP roadmap elevated agent identity to a named priority</span></td><td>Model Context Protocol; agentgateway.dev; VKTR, as reported</td></tr>
+<tr><td>The adoption rails</td><td><span class="v">Gartner: 40% of enterprise apps embed task-specific AI agents by year-end 2026 (up from &lt;5% in 2025); over 40% of agentic-AI projects canceled by end-2027</span></td><td>Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Keep the roll — own an exportable agent registry, independent of any one vendor console.</strong> The turnkey bundle (attested identity, per-agent audit, one-policy gate, spend caps, Smart Routing) is genuinely good — adopt it. But the deepest lock-in is <em>who your agents are</em>. <strong>This month, stand up (or export to) your own registry of every agent's identity, scope and entitlements, held in a store you control, reconciled against the vendor's console — so you can say, on your own authority, who works in your house and what each may touch.</strong> Report one number to the board: the share of production agents whose identity and entitlements you can export and reproduce outside the vendor's console.</li>
+  <li><strong>Keep the book — stream the per-agent audit to your own store, not just the vendor's dashboard.</strong> Action-level logging tied to the agent is exactly right; a record only the vendor holds is the vendor's record. <strong>This month, wire the turnkey stack's per-agent audit into your own log store or SIEM in the same stroke it writes to the vendor's console, and confirm you can produce a complete, independent, immutable account of what every agent did without asking the vendor.</strong> Report the share of agent actions whose audit you hold independently, and the time it takes you to produce a full agent-action report from your own shelves.</li>
+  <li><strong>Keep the door — own a seam in front of the stack, and re-home one workflow as a drill.</strong> A household you cannot leave is the agency's, not yours. <strong>This month, put a gateway or portable seam you control (MCP, or your own policy/identity layer) in front of the turnkey stack, and run a timed, daylight drill that re-badges one agentic workflow off the vendor's identity and audit onto your own — measure what breaks and the time-to-re-home — so "portable" is a tested fact, not a slide.</strong> Report the measured time-to-re-home for that workflow and a dated plan to extend it to the next two. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground you keep your own; the livery names each hand; the census counts them; the passport credentials them; the gate is the one door; the bell rings when a servant slips; the purse funds each like an employee; the keyring is which key each holds; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap — and the turnkey household is why, when a vendor ships the whole governed staff move-in ready, you take the drilled staff and keep the roll, the book and the door in your own hand, so the house stays the house's and never becomes the agency's.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — Google Cloud "Gemini at Work" (8 Oct 2026): a single universal Gemini enterprise agent (chat, knowledge work, media, code) with per-agent cryptographically attested identity, coworker agents getting their own Workspace identity/email, action-level audit tied to the agent, an "Agent Gateway" described as an "AI network firewall" applying one policy to every agent, isolated sandboxes, real-time spend caps and Smart Routing to the cheapest capable model (Google Cloud; Futurum; VentureBeat; TechCrunch; The Register; Infosecurity Magazine; ITdaily; PYMNTS) · Testers &amp; terms — On, Shopify, PayPal; ~$21/seat (Business), ~$30 (Standard/Plus), plus pay-as-you-go (TechCrunch; coworker.ai; agentmarketplace.ai) · The portable seam — MCP 2026-07-28 revision (stateless, discovery handshake) and the late-August 2026 MCP roadmap's elevation of agent identity to a named priority (Model Context Protocol; agentgateway.dev; VKTR) · The services echo — EPAM Frontier AI Services (5 Oct) (PR Newswire; AIwire) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026), MCP 2026-07-28, Gartner (40% of enterprise apps embed task-specific agents by 2026; over 40% of agentic-AI projects canceled by 2027). The "turnkey household" framing — that the agent-governance disciplines the radar argued boards must build by hand have now been shipped as one turnkey product, which both vindicates the thesis and perfects the lock-in because identity, audit and policy are the least-portable layers, so a house must take the drilled staff while keeping the roll (an exportable agent registry it owns), the book (the per-agent audit streamed to its own store) and the door (a portable seam such as MCP, or a gateway it controls, with one workflow re-homed) — is expressly the radar's reading, and the sequel to 22 September's "The Foundation." Figures are relayed from vendor announcements and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures — Gemini Enterprise per-seat pricing, the named testers, and the exact framing of the identity, audit and gateway claims — should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 11 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
