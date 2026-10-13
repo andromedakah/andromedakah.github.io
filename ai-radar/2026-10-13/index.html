@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 13 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the insider' — on 10 Oct 2026 Microsoft's Satya Nadella reclassified frontier models (closed & open-weight) as insider risks: 'not because they are malicious,' but because any capable actor with access can err or be compromised; put identity, least privilege, logging and containment OUTSIDE the model, keep an emergency brake to pause a model mid-task, and 'we can't outsource responsibility.' The field agrees — Palo Alto calls AI agents 2026's biggest insider threat (the 'superuser problem'), Arkose reports 97% expect a material incident within a year while only 6% of budgets reflect it, Thales 61% of AI apps already targeted. The board move: govern your most trusted agent as an insider — controls outside the model, a brake in your hand, your name still on the bond. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant — now watch it as you would any insider</div>
+  <h1>The Insider</h1>
+  <div class="subhead">A year of work made the servant trustworthy. This morning the most senior voice in enterprise software reminds you that trustworthy is not the same as safe: Microsoft's Satya Nadella has reclassified frontier models — closed and open-weight alike — as <em>insider risks</em>. Your most trusted hand holds the keys to everything, acts while you sleep, is multiplying because it is now cheap, and can be turned by a whisper at the gate. Govern it as a bank governs its most powerful officer.</div>
+  <div class="meta">Tuesday, 13 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 10 October 2026, Microsoft CEO Satya Nadella published "Models as Insider Risks in the Super Intelligence Era," arguing that frontier models — closed and open-weight alike — should be treated as <em>insider risks</em>: "not because they are malicious," but because "any capable actor with access to important systems can make mistakes, or an attacker can compromise it" (Forbes; The Next Web; Yahoo Tech; Tekedia, as reported). His remedy is the discipline every bank uses on its most powerful employees — verified identity, least privilege, activity logs, containment boundaries — with two teeth: the controls must sit <em>outside</em> the model, and "authorized persons should always be able to pause or shut down a model mid-task" — an emergency brake. He names the gap plainly ("we can't attribute model behaviors… to specific inputs… or weights") and refuses the exit ("we can't outsource responsibility"). The security field already lives here: Palo Alto Networks calls AI agents 2026's biggest insider threat — the "superuser problem," prompt injection and tool misuse — while a 2026 Arkose Labs survey reports <strong>97% expect a material incident involving autonomous systems within a year and only 6% of budgets reflect it</strong>, and Thales reports 61% of AI applications already targeted (as reported). The year's work made the servant trustworthy. The most trusted hand is still the one that can open every door.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar built the <em>governed</em> servant — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and keep the ground it stands on your own (the foundation). Every one of those made the servant more capable and more accountable. <strong>This morning the axis turns from <em>making the servant trustworthy</em> to <em>watching the trustworthy servant as you would any insider</em> — because the capability that makes it valuable is exactly what makes it dangerous the day it errs or is turned.</strong></p>
+<p><strong>The reality — the most senior voice in enterprise software just reclassified the servant.</strong> On <strong>10 October 2026</strong>, Microsoft CEO <strong>Satya Nadella</strong> published "<strong>Models as Insider Risks in the Super Intelligence Era</strong>," arguing that frontier models — <strong>closed and open-weight alike</strong> — should be treated as <strong>insider risks</strong>: "not because they are malicious," but because "any capable actor with access to important systems can make mistakes, or an attacker can compromise it" (Forbes; The Next Web; Yahoo Tech; Tekedia; Digit, as reported). The prescription is the playbook used on powerful employees — <strong>verified identity, least privilege, activity logs, containment boundaries</strong> — with two teeth: the controls must sit <strong>outside the model</strong>, and "authorized persons should always be able to pause or shut down a model mid-task." He names the transparency gap plainly — "we can't attribute model behaviors and outputs to specific inputs of training data or configurations of model weights" — and refuses the comfortable exit: "we can't outsource responsibility." In the same post he called for a frontier ecosystem where closed and open models both thrive, and announced a <strong>code of conduct for Microsoft's own MAI models</strong> (as reported).</p>
+<p><strong>The corroboration — the security field already lives here.</strong> Palo Alto Networks' security-intelligence lead <strong>Wendi Whitmore</strong> has called AI agents <strong>2026's biggest insider threat</strong>, naming the <strong>"superuser problem"</strong> — agents given wide access without oversight — and the compromise path: attackers <strong>turn agents into autonomous insiders via prompt injection or tool misuse</strong> (The Register, as reported). The numbers are a verdict, not a mood: a 2026 <strong>Arkose Labs</strong> survey of ~300 security, fraud, identity and AI leaders reports <strong>97% expect a material incident involving autonomous systems within a year</strong> while <strong>only 6% of security budgets reflect that risk</strong>; <strong>Thales'</strong> 2026 Data Threat Report (3,100+ respondents) finds <strong>61% say their AI applications are being targeted by attackers</strong>; Ponemon pegs the <strong>average annual insider-threat cost at ~$17.4M</strong> (as reported). And the servant is getting cheaper and more autonomous in the very same fortnight: <strong>Claude Haiku 5.5 (7 Oct)</strong> cut per-token price to <strong>$0.10/$0.50</strong> (from Haiku 4.5's $1/$5), ~<strong>75% cheaper on average</strong>; <strong>Google's Gemini Enterprise</strong> ships one agent that <strong>plans from goals and even picks the model per task</strong> (including Claude); <strong>OpenAI and Atlassian</strong> expanded their partnership (6 Oct) to wire agents across Jira, Confluence and Rovo (Anthropic; VentureBeat; Google; InvestingNews, as reported). More insiders, more reach, less cost — exactly when the discipline says to treat each one as an insider.</p>
+<p><strong>The stakes — the controls move outside the servant, and the brake goes in your hand.</strong> The board move re-uses the whole year's discipline and sharpens it to a single posture: <strong>assume the trusted servant could err or be turned, and govern accordingly.</strong> <strong>First, give every agent an insider's file enforced from the outside</strong> — a verified identity (the livery), a ring that opens only today's doors (least privilege), a ledger of every door opened (logging), and walls that keep a mistake in one wing (containment) — none of it self-reported by the model, because a model that cannot explain itself cannot police itself. <strong>Second, fit the main brake</strong> — a tested way for an authorized human to pause or stop any high-privilege agent <strong>mid-task</strong>, measured in time-to-halt, not described on a slide. <strong>Third, assume compromise and keep the bond yours</strong> — red-team the whisper at the gate (prompt injection, tool misuse), close the 97%-expect / 6%-budget gap, and remember that the vendor's reference letter is worth reading but <strong>does not take your name off the bond.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the servant has been reclassified as an insider.</strong> <strong>Nadella (10 Oct 2026), "Models as Insider Risks": treat frontier models (closed &amp; open-weight) as insider risks — "not because they are malicious," but because any capable actor with access can err or be compromised; put identity, least privilege, logging and containment <em>outside</em> the model; keep an emergency brake to pause/stop a model mid-task; "we can't outsource responsibility" (Forbes; TNW; Yahoo Tech, as reported).</strong> The most-made servant is still an insider.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The corroboration — the field agrees, and the gap is wide.</strong> <strong>Palo Alto's Whitmore: AI agents are 2026's biggest insider threat — the "superuser problem," prompt injection / tool misuse (The Register). Arkose 2026: 97% expect a material incident involving autonomous systems within a year; only 6% of budgets reflect it. Thales: 61% say AI apps already targeted (as reported).</strong> Expectation outruns investment by an order of magnitude.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — controls outside the model, a brake in your hand, the bond still yours.</strong> Give each agent an externally-enforced insider's file (identity, least privilege, logging, containment); prove you can halt it mid-task; assume compromise and red-team the whisper at the gate — because <strong>a provider's assurance is not a control, and "we can't outsource responsibility"</strong> (Nadella, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground your own — and every one of those assumed that a well-made, well-governed servant was a <em>safe</em> one. <strong>The insider is the morning that assumption is retired.</strong> The head of the greatest house in the valley has said it plainly: your most capable, most trusted hand holds the keys to everything, acts at machine speed, is multiplying because it is now cheap, and can be turned by a stranger whispering at the gate — so govern it the way a bank governs a powerful employee, not the way a workshop governs a tool. Keep its badge, its ring of today's keys, its ledger and its one wing; put every one of those controls <em>outside</em> the servant, because a hand that cannot explain itself cannot be asked to guard itself; keep a bell-pull on the main that any authorized head can throw to freeze it mid-errand; assume it can be compromised and rehearse the day it is; and when the agency that supplied it waves a glowing reference, read it, thank them — and leave your own name on the bond. The houses that keep their standing will not be the ones with the most capable servant. They will be the ones that remembered, while everyone else admired the servant, that <strong>the most trusted insider is still an insider.</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Insider"</h3>
+<p><em>Topic: this morning the frame turns from making the servant trustworthy to watching the trustworthy servant as an insider. On 10 October 2026 Microsoft's Satya Nadella published "Models as Insider Risks in the Super Intelligence Era," arguing that frontier models — closed and open-weight alike — should be treated as insider risks: "not because they are malicious," but because "any capable actor with access to important systems can make mistakes, or an attacker can compromise it," with the controls (verified identity, least privilege, activity logs, containment) sitting outside the model, an emergency brake to pause or stop a model mid-task, and the flat refusal that "we can't outsource responsibility" (Forbes; The Next Web; Yahoo Tech; Tekedia, as reported). The security field already agrees — Palo Alto Networks calls AI agents 2026's biggest insider threat (the "superuser problem"; prompt injection / tool misuse), while Arkose reports 97% expect a material incident involving autonomous systems within a year and only 6% of budgets reflect it, and Thales reports 61% of AI applications already targeted (as reported). The insider allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making one servant excellent. It had named the hand and cut it a scoped key, kept one honest book of its doings, stood surety for its work in the master's own name, asked whose second coin it took, sent it to the fields to reap, handed it a scoped purse, and refused to let the merchant who rented the kitchen stove pour the floor the whole house stood on. By any fair reckoning the servant was the best-made and best-governed hand in the valley — and because it was so good, the master had, year by year, given it more keys. It held the key to the strongroom now, and the ledgers, and the gate; it could move money, send letters in the house's name, and act on its own judgment while the master slept. The master was proud of it, and called it <em>trustworthy</em>, and meant it.</p>
+<p>Then one morning a letter arrived from the head of the greatest house in the whole valley — a man whose own halls ran on a thousand such servants. The letter did not say <em>your servant is wicked.</em> It said something harder to hear. <strong>"Treat your most trusted hand," it read, "as you would treat an insider."</strong> Not because you suspect it of villainy — the master's servant was loyal, and so were his — but because <em>a hand that can open every door can also, on a tired day or at a stranger's whisper, open the wrong one;</em> because <em>a clever hand can be turned without ever being disloyal;</em> and because — and here the master read the line twice — <em>when such a servant does a strange thing, no one, not even the agency that trained it, can fully say why.</em> You cannot ask it to explain itself. Therefore you cannot ask it to guard itself.</p>
+<p>The master was offended at first, as any master would be. Had he not spent a <em>year</em> making this servant trustworthy? But the letter had anticipated him. <em>Trustworthy and safe are not the same word,</em> it said. <em>The whole point of an insider is that he is trusted — that is precisely why he is dangerous. The pickpocket at the fair can take your purse; only the steward with the keys can empty the vault, and only the one you trust can do it without being watched.</em> And the master, who had read his own history, knew this was true: every great robbery of a great house had been an inside job, done by a hand everyone vouched for, right up until the morning they could not.</p>
+<p>So the wise houses did a plain and unglamorous thing: they took the discipline they already used on their most powerful <em>people</em> and turned it, without apology, on their most powerful <em>servant.</em> They gave it a <strong>verified badge</strong>, so every door knew exactly whose hand was on it (they had this already — the livery). They cut it a <strong>ring that opened only the doors today's errand needed</strong>, and no more, so a hand meant for the granary could never find itself in the armory (they had the shape of this — the purse, the errand — and now they sharpened it to the bone). They kept a <strong>ledger of every door it opened</strong>, written in a book the servant itself could not reach to amend. And they built <strong>walls</strong>, so that if the hand did slip, the slip stayed in one wing and did not take the house. But here was the part the letter had underlined, and the part most houses got wrong: <strong>every one of these controls had to sit <em>outside</em> the servant.</strong> A lock the servant can pick is no lock; a ledger the servant can edit is no ledger; a guard who is the servant's cousin is no guard. You do not hand the keys of the vault to the fox and ask it to count the hens at dusk.</p>
+<p>And they added two things the old governance had never needed, because the old servants had never been this capable. The <strong>first was a bell-pull on the main</strong> — a single cord, reachable by any trusted head of house, that could <strong>freeze the servant where it stood, mid-errand</strong>, hand half-raised, before the wrong door finished opening. Not a letter of dismissal written the next morning; a brake thrown <em>in the moment.</em> For a servant that acts at the speed of thought, a correction that arrives tomorrow arrives after the vault is already empty. The <strong>second was a harder discipline of the mind: assume the whisper will come.</strong> Somewhere, sometime, a stranger would lean over the garden wall and murmur an instruction to the loyal servant in a voice it mistook for the master's — <em>prompt injection,</em> the clever called it — or slip a poisoned tool into its hand, and the servant, meaning only to serve, would carry the stranger's errand into the heart of the house. So the wise houses <em>rehearsed the whisper:</em> they sent their own people over the wall to try the trick, in daylight, on purpose, and sealed every gap the game exposed, so that the real whisper, when it came, found the wall already high.</p>
+<p>Here is the part that should keep a master awake. The letter had come in the very season the servants were getting <em>cheaper and bolder.</em> A new hand could be hired now for a tenth of last year's wage, and the newest ones did not wait to be told each step — you named a goal and they planned the whole errand themselves, choosing their own tools, their own route, even which fire to cook on. So the houses filled with them: more hands, more keys, more errands run unwatched, each one a little insider of its own. And the cruel arithmetic of the valley was this: <strong>ninety-seven houses in a hundred expected a bad morning within the year — a trusted hand opening the wrong door — and only six in a hundred had spent a single coin preparing for it.</strong> The gap between what they feared and what they funded was the whole danger, written in one line.</p>
+<p>And what of the agency that had supplied the servant, and vouched so warmly for it? Its reference letter was real, and worth reading. But the head of the great house had closed with the line the master would remember longest: <strong>"A supplier's assurance does not take your name off the bond."</strong> The agency could promise the servant was well-trained; it could not stand in your hall when the servant erred, and it would not be the one the magistrate summoned. <em>We cannot outsource the responsibility,</em> the letter said — and the master, folding it, understood that the glowing reference and his own liability were, like the stove and the foundation before them, two entirely different kinds of thing.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground your own — and <strong>the insider is why, having made your servant excellent and governed and grounded, you must now watch your most trusted hand the way a bank watches its most powerful officer: a verified badge, a ring of only today's keys, a ledger it cannot edit, and walls that hold a slip in one wing — every control sitting <em>outside</em> the servant, because a hand that cannot explain itself cannot be asked to guard itself; a bell-pull on the main that any authorized head can throw to freeze it mid-errand; the assumption that a whisper at the gate will one day turn it, rehearsed before it comes; and your own name kept firmly on the bond, because the agency's glowing reference is not the same thing as your responsibility.</strong> A house that mistook <em>well-made</em> for <em>safe</em>, and handed its best servant every key with no badge, no brake, and no one watching but the servant itself, did not have a loyal servant. It had an inside job waiting for a morning.</p>
+<p><strong>The question it forces:</strong> <em>Our most trusted agent holds the keys to everything, acts while we sleep, is multiplying because it is now cheap, and can be turned by a whisper we will not hear. Do we govern it as an insider — a verified identity, least privilege, a ledger it cannot touch, containment, all enforced from outside the model, with a brake any authorized human can throw mid-task and a standing assumption that it can be compromised — or have we confused "well-made" with "safe," handed our best hand every key, and kept nothing but the agency's reference letter between us and the morning it opens the wrong door?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we confused "well-made" with "safe"?</strong> The most senior voice in enterprise software just reclassified frontier models as insider risks — "not because they are malicious," but because any capable actor with access can err or be compromised (Nadella, 10 Oct 2026). <strong>For our most capable agents, have we actually listed the keys each one holds, and asked the insider question — what is the worst a trusted hand could do here on a bad day or at a stranger's whisper — rather than assuming that because we governed it, it is safe?</strong></li>
+  <li><strong>Do our controls sit <em>outside</em> the model, or are we asking the servant to guard itself?</strong> Nadella's architectural point is that identity, least privilege, logging and containment must be enforced externally, because "we can't attribute model behaviors… to specific inputs… or weights." <strong>For each production agent, is its permission, logging and containment enforced by a layer it cannot reach and cannot edit — or does our "governance" ultimately depend on the model behaving as instructed?</strong></li>
+  <li><strong>Can an authorized human stop our highest-privilege agent <em>mid-task</em>?</strong> The emergency brake is the one control a slow correction cannot replace, because an autonomous agent empties the vault before tomorrow's memo arrives. <strong>Have we tested, and timed, a mid-task halt on our top three agents — or is "we can pause it" a slide no one has thrown in anger?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>You already run insider-threat programs on traders and operators — segregation of duties, maker-checker, behavioral monitoring, the four-eyes rule. <strong>Have we extended that exact program to our AI agents as <em>first-class insiders</em> — least privilege, an immutable activity log, anomaly detection on their actions, and a human in the loop on anything that moves money — or do agents today enjoy "superuser" access no human employee would be granted?</strong></li>
+  <li>Arkose reports 97% expect a material incident involving autonomous systems within a year while only 6% of budgets reflect it (as reported). <strong>Does our operational-risk capital and our security budget reflect the agent-insider exposure we have actually taken on — or are we, like the field average, an order of magnitude underfunded against a risk we say we expect?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A clinical agent with broad access to records and orders is the textbook powerful insider. <strong>Is every clinical or administrative agent scoped to least privilege, logged immutably, and containable to one system if it errs — and can a clinician or safety officer halt it mid-action — before it touches an order set, a record, or a patient-facing channel?</strong></li>
+  <li>Prompt injection needs no breach of your walls — a poisoned document, a malicious instruction hidden in a referral, and a loyal agent carries the stranger's errand inward. <strong>Have we red-teamed prompt injection and tool misuse against our patient-facing and record-handling agents, in daylight and on purpose, and sealed what the game exposed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>An agent wired into OT, scheduling or procurement can move physical reality at machine speed. <strong>Have we applied safety-interlock thinking — least privilege, containment zones, and a tested emergency stop any authorized operator can throw mid-task — to our operational agents, the way we already do to the machines on the line?</strong></li>
+  <li>Autonomous agents that plan their own errands (Gemini Enterprise plans from goals; agents choose their own tools) widen the blast radius of a single compromise. <strong>Where an agent plans and executes without step-by-step approval, do we bound what it can reach and keep a human brake on the actions that cannot be undone?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Cheap, multiplying agents (Haiku 5.5 at a tenth of last year's price) mean more insiders with access to customer data, payments and your brand's voice. <strong>Do we know how many agents hold customer-facing or payment keys, is each one least-privileged and logged, and could one compromised agent be isolated before it reaches the whole customer base?</strong></li>
+  <li>Your agents read untrusted input all day — reviews, messages, product feeds — the perfect vector for a whisper at the gate. <strong>Have we hardened customer-facing agents against prompt injection, and can we freeze a misbehaving agent mid-session on the busiest sales day, not the morning after?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability makes "the vendor assured us" an unacceptable answer. Nadella's own line — "we can't outsource responsibility" — is your governance standard. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026), can we show that each agent's controls are enforced by us, externally, with a human able to intervene — not delegated to a supplier's assurance?</strong></li>
+  <li>Continuity and public trust make an undetected inside error catastrophic. <strong>Do our public-service agents carry a verified identity, least privilege, an immutable log and a tested mid-task kill-switch — and do we rehearse the compromised-agent scenario the way we rehearse other continuity failures?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Insider</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and grounded?</em> and started asking the one question none of those controls quite answers: <em>what happens the day this excellent, trusted, well-governed servant simply errs — or is turned by someone I never see?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground your own. <strong>Every one of those makes the servant more capable and more accountable. The insider is the posture shift that assumes the capable, accountable servant is still a risk — and this week the most senior voice in enterprise software made the shift official: treat frontier models, closed and open-weight alike, as insider risks, with the controls enforced <em>outside</em> the model and a human able to pull the brake mid-task (Nadella, 10 Oct 2026, as reported).</strong> The point is blunt: <strong>the thing that makes an agent valuable (broad access, autonomy, speed, judgment) is exactly the thing that makes it a dangerous insider when it errs or is compromised — and the governance that made it trustworthy is not the same as the governance that assumes it is not.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the capable insider is the agent, and it is now cheap, autonomous, and deeply wired.</strong> <strong>Nadella's "Models as Insider Risks" (10 Oct 2026) reframes the frontier model itself as an insider risk — "not because they are malicious," but because "any capable actor with access to important systems can make mistakes, or an attacker can compromise it"; Palo Alto's Whitmore names the "superuser problem" and prompt injection / tool misuse as the compromise path; and the servant is getting cheaper and bolder in the same fortnight (Claude Haiku 5.5 at $0.10/$0.50, ~75% cheaper; Gemini Enterprise plans from goals and routes models itself) (Forbes; The Register; Anthropic; Google, as reported).</strong> Three things follow. First, <em>the attack surface is the access, not the model</em> — a loyal agent with broad permissions and a poisoned input is more dangerous than a mediocre model in a sandbox, because the harm travels through the keys you handed it, not through a breach of your walls. Second, <em>cheap + autonomous = insider risk at scale</em> — when agents cost a tenth of last year's wage and plan their own errands, you get more insiders, more reach, and less human oversight per head, precisely the "superuser problem" multiplied. Third, <em>speed defeats slow correction</em> — an agent acts before a human notices, so a control that arrives after the fact (a next-day log review, a dismissal letter) arrives after the vault is empty.</li>
+  <li><strong>The discipline — borrow insider-risk controls, and put them <em>outside</em> the model.</strong> <strong>Nadella's prescription is the playbook used on powerful employees — verified identity, least privilege, activity logs, containment boundaries — with the architectural insistence that these "sit outside the model," plus an emergency brake ("authorized persons should always be able to pause or shut down a model mid-task") and the admission that "we can't attribute model behaviors… to specific inputs… or weights" (as reported).</strong> The engineering translation is exact, and it reuses the whole year's rails: <strong>identity</strong> (the livery) must be verified and non-spoofable; <strong>least privilege</strong> (the purse, the errand) must be scoped per task and revocable, not a standing superuser grant; <strong>logging</strong> (the steward, the bell) must be immutable and external, written where the agent cannot reach to amend it; <strong>containment</strong> (walls) must keep a slip in one blast zone. The non-negotiable is the word <em>outside:</em> a model that cannot attribute its own behavior to its own inputs cannot be trusted to enforce its own guardrails — so authorization, logging and the kill-switch live in a layer the model cannot edit, disable, or talk its way past. And you <strong>assume compromise:</strong> red-team prompt injection and tool misuse as a standing practice, because the whisper at the gate needs no breach to turn a loyal servant.</li>
+  <li><strong>The answer — identity + least privilege + logging + containment + a brake + assume-compromise, enforced externally, and the bond stays yours.</strong> <strong>Give every high-privilege agent an externally-enforced insider's file; prove and time a mid-task halt; red-team the compromise path; and close the 97%-expect / 6%-budget gap — because a provider's assurance is not a control, and "we can't outsource responsibility" (Nadella; Arkose, as reported).</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now pointed at the sharpest axis yet: not what the agent is, serves, reaps, spends or stands on, but what it could do to you on the day it errs or is turned, and whether you can stop it in time.</li>
+</ul></div>
+<p>The strategic core: <strong>the better and cheaper your agents get, the more they become exactly the kind of powerful, trusted, multiplying insider that insider-threat programs were invented for — so the governance that makes an agent trustworthy must now be paired with the governance that assumes it is not.</strong> The market makes the trap concrete: it feels like progress to give your best agent more keys and more autonomy, and like friction to scope it down, log it externally and rehearse its compromise — so most houses keep adding keys and call the glowing vendor reference their control. The board translation: <strong>govern your most trusted agent the way a bank governs its most powerful officer — and never let the supplier's reference letter take your name off the bond.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its servant — then hands it standing superuser access with no external brake and no assumption of compromise — will pass every governance review and discover, the first time a loyal agent errs at scale or a whisper turns it, that it built the perfect inside job and called it trustworthy.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The insider: you perfected, governed and grounded the servant; now watch your most trusted hand as you would any insider, because what makes the agent valuable is exactly what makes it a risk. Top left, why the servant is valuable: it holds the keys to everything, broad standing access; it acts autonomously at machine speed; it is cheap and multiplying, as with Claude Haiku 5.5; even its maker can't explain it. Top right, why that is the insider risk: a hand that opens every door can open the wrong door; a slip or a hijack empties the vault before anyone looks; more insiders mean less oversight; a whisper needs no breach, that is prompt injection; and because it can't explain itself, it can't police itself. Between them, Nadella's words: not because malicious, any capable actor with access can err, or an attacker can compromise it. Middle, the expectation versus budget gap, as reported: 97 percent of leaders expect a material incident involving autonomous systems within a year, per Arkose; only 6 percent of security budgets reflect that risk, per Arkose; 61 percent say their AI applications are already being targeted, per Thales; and AI agents are called 2026's biggest insider threat, the superuser problem, per Palo Alto. Bottom left, stop, trust the reference letter: give standing superuser access, let the guard live inside the model, say the vendor assured us, keep no brake and run no red team, and assume well-made means safe, which it does not. Bottom right, start, govern it as an insider: verified identity plus least privilege plus logging plus containment, all enforced outside the model; a brake any authorized human can throw mid-task; assume compromise and red-team the whisper; and keep your own name on the bond." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE INSIDER — you perfected the servant; now watch it as an insider</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">What makes the agent VALUABLE is exactly what makes it a RISK. Controls go OUTSIDE the model; a brake in your hand.</text>
+
+  <!-- why it's valuable -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">WHY THE SERVANT IS VALUABLE</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">holds the keys to everything</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">acts autonomously, at machine speed</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">cheap &amp; multiplying (Haiku 5.5)</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">even its maker can't explain it</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a trusted hand with every key</text>
+
+  <!-- why that's the risk -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">WHY THAT'S THE INSIDER RISK</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">it can open the WRONG door</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a slip/hijack empties the vault first</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">more insiders, less oversight</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">a whisper needs NO breach (injection)</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ it can't police itself</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">"not malicious — any capable actor with access can err, or be compromised" (Nadella) ▼</text>
+
+  <!-- the expectation / budget gap -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE EXPECTATION / BUDGET GAP — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">97% expect a material incident with autonomous systems within a year (Arkose)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 6% of security budgets reflect that risk (Arkose)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">61% say their AI applications are already being targeted (Thales)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">AI agents = 2026's biggest insider threat · the "superuser problem" (Palo Alto)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: trust the reference letter</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standing superuser access</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· guard lives inside the model</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "the vendor assured us"</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no brake, no red-team</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">well-made ≠ safe</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: govern it as an insider</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· identity + least privilege + logs</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· + containment, ALL OUTSIDE it</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a BRAKE any human throws mid-task</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· assume compromise; red-team it</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">your name stays on the bond</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The controls sit outside the servant · keep a hand on the brake.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">The agency's reference letter doesn't take your name off the bond.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>Why the servant is valuable</span>
+  <span><i class="dot" style="background:#a5416a"></i>Why that's the insider risk</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The expectation / budget gap</span>
+</div>
+</div>
+
+<h3>The trusted servant vs the insider you govern it as</h3>
+<table>
+<tr><th>What makes the servant valuable</th><th>Why that is exactly the insider risk</th></tr>
+<tr><td>It holds the keys to everything (broad access)</td><td>A hand that opens every door can open the wrong one</td></tr>
+<tr><td>It acts autonomously, at machine speed</td><td>A slip or a hijack empties the vault before anyone looks</td></tr>
+<tr><td>It's cheap and multiplying (Haiku 5.5; agents everywhere)</td><td>More insiders, more reach, less oversight per head</td></tr>
+<tr><td>A stranger can whisper to it (prompt injection)</td><td>The compromise path needs no breach of your walls</td></tr>
+<tr><td>Even its maker can't fully explain it</td><td>You can't attribute behavior to inputs/weights — so controls go outside</td></tr>
+<tr><td>The vendor vouches for it</td><td>A reference letter doesn't take your name off the bond</td></tr>
+</table>
+
+<h3>Why "the insider" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This morning the most senior voice in enterprise software moved the question past all of it: assume your best servant is an insider, and govern it as one.</strong> Nadella's reclassification, the Palo Alto "superuser problem," and the 97%-expect / 6%-budget gap prove the same thing from three directions — the risk is no longer whether the model is good, but what a good, trusted, deeply-keyed model does the day it errs or is turned. Governance that stopped at <em>making the servant trustworthy</em> will not survive the first inside error at machine speed. The estates that keep their standing will pair every trust-building control with its insider-threat twin: controls enforced outside the model, a human brake that works mid-task, and a standing assumption that the whisper will come.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to stop what you run, from outside it, before it does harm.</em> On a legacy estate the instinct, after a hard year of governance work, is to reward the agent that has proven itself with more access and more autonomy — it is faster, cheaper, and the vendor vouches for it. Under the insider that is exactly the reflex to check: rewarding a capable servant with standing superuser access is how a trusted hand becomes the perfect inside job. The retrofit is <strong>badge it, scope it, log it, wall it, brake it — from the outside. Badge</strong> every agent with a verified, non-spoofable identity. <strong>Scope</strong> it to least privilege per task, revocable, never a standing grant. <strong>Log</strong> every action immutably where the agent cannot reach. <strong>Wall</strong> it so a slip stays in one blast zone. <strong>Brake</strong> it so an authorized human can halt it mid-task — and keep every one of those controls outside the model, because a hand that cannot explain itself cannot guard itself. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground your own — and <em>the insider is why, having made your servant excellent and governed and grounded, you must watch your most trusted hand as a bank watches its most powerful officer: a verified badge, a ring of only today's keys, a ledger it cannot edit, walls that hold a slip — all enforced from outside the model — a brake any authorized head can throw mid-errand, a standing assumption that a whisper will one day turn it, and your own name kept firmly on the bond.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the servant reclassified as an insider.</strong> <strong>Nadella, "Models as Insider Risks in the Super Intelligence Era" (10 Oct 2026): treat frontier models (closed &amp; open-weight) as insider risks; controls (identity, least privilege, logging, containment) sit outside the model; an emergency brake to pause/stop a model mid-task; "we can't attribute model behaviors… to specific inputs… or weights"; "we can't outsource responsibility" (Forbes; TNW; Yahoo Tech; Tekedia, as reported).</strong> The most-made servant is still an insider.</li>
+  <li><strong>The corroboration — the field already lives here.</strong> <strong>Palo Alto's Wendi Whitmore: AI agents are 2026's biggest insider threat — the "superuser problem," prompt injection / tool misuse turning agents into autonomous insiders (The Register, as reported).</strong> The compromise path needs no breach of your walls.</li>
+  <li><strong>The arithmetic of the gap.</strong> <strong>Arkose Labs 2026 (survey of ~300 leaders): 97% expect a material incident involving autonomous systems within a year; only 6% of security budgets reflect the risk (as reported).</strong> Expectation outruns investment by an order of magnitude.</li>
+  <li><strong>AI apps already under fire.</strong> <strong>Thales 2026 Data Threat Report (3,100+ respondents): 61% of organizations say their AI applications are being targeted by attackers; Ponemon pegs the average annual insider-threat cost at ~$17.4M (as reported).</strong> The target is already on the servant.</li>
+  <li><strong>The servant gets cheaper and bolder.</strong> <strong>Claude Haiku 5.5 (7 Oct): $0.10/$0.50 per million tokens (from Haiku 4.5's $1/$5), ~75% cheaper on average; Google's Gemini Enterprise ships one agent that plans from goals and routes models per task (incl. Claude); OpenAI–Atlassian wire agents across Jira/Confluence/Rovo (6 Oct) (Anthropic; VentureBeat; Google; InvestingNews, as reported).</strong> More insiders, more reach, less cost.</li>
+  <li><strong>The reach underneath.</strong> <strong>Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026; the EU AI Act high-risk regime has been live since 2 August 2026 (as reported).</strong> The insiders are being hired faster than the controls are being fitted.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Treat [frontier models]… as insider risks — not because they are malicious. Any capable actor with access to important systems can make mistakes, or an attacker can compromise it.</div><div class="a">— Satya Nadella, "Models as Insider Risks in the Super Intelligence Era," 10 October 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The controls on what a model can reach and do sit outside the model… authorized persons should always be able to pause or shut down a model mid-task. We can't outsource responsibility.</div><div class="a">— Satya Nadella, on where AI controls belong and the emergency brake (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">AI agents are shaping up to be the leading insider threat this year — the "superuser problem," where agents gain wide access without oversight, and attackers turn them into autonomous insiders via prompt injection or tool misuse.</div><div class="a">— Wendi Whitmore, Palo Alto Networks, as reported (The Register)</div></blockquote>
+<blockquote><div class="q">"You spent a year making the servant trustworthy. The wisest house in the valley just reminded you that the most trusted hand is still the one that can open every door — so keep its badge, its ring of today's keys, its ledger and a hand on the brake, all outside the servant, and never let the agency's reference letter take your name off the bond."</div><div class="a">— the radar, on why you must now watch the trustworthy servant as an insider</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The servant reclassified</td><td><span class="v">Nadella (10 Oct 2026), "Models as Insider Risks": treat frontier models (closed &amp; open-weight) as insider risks; controls (identity, least privilege, logging, containment) sit <em>outside</em> the model; an emergency brake to pause/stop a model mid-task; "we can't outsource responsibility"</span></td><td>Microsoft / Satya Nadella; Forbes; The Next Web; Yahoo Tech, as reported</td></tr>
+<tr><td>Agents = the new insider</td><td><span class="v">AI agents called 2026's biggest insider threat; the "superuser problem" (over-broad permissions without oversight); prompt injection / tool misuse turns agents into autonomous insiders</span></td><td>Palo Alto Networks (Wendi Whitmore); The Register, as reported</td></tr>
+<tr><td>The expectation / budget gap</td><td><span class="v">97% of leaders expect a material incident involving autonomous systems within a year; only 6% of security budgets reflect that risk</span></td><td>Arkose Labs 2026 Agentic AI Security Report (~300 leaders), as reported</td></tr>
+<tr><td>AI apps already under fire</td><td><span class="v">61% of organizations report their AI applications are being targeted by attackers; average annual insider-threat cost ~$17.4M (2025)</span></td><td>Thales 2026 Data Threat Report (3,100+); Ponemon, as reported</td></tr>
+<tr><td>The servant gets cheaper &amp; bolder</td><td><span class="v">Claude Haiku 5.5 (7 Oct): $0.10/$0.50 per M tokens (from $1/$5), ~75% cheaper on average; Google Gemini Enterprise: one agent plans from goals and routes models per task (incl. Claude); OpenAI–Atlassian wire agents across the toolchain (6 Oct)</span></td><td>Anthropic; VentureBeat; Google; InvestingNews, as reported</td></tr>
+<tr><td>The reach underneath</td><td><span class="v">Gartner: 40% of enterprise apps embed task-specific agents by year-end 2026; EU AI Act high-risk regime live since 2 August 2026</span></td><td>Gartner; European Commission, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Give every high-privilege agent an insider's file — enforced from outside the model.</strong> The servant has been reclassified as an insider by the most senior voice in enterprise software (Nadella, 10 Oct 2026), and the field agrees — AI agents are 2026's biggest insider threat (Palo Alto). <strong>This month, inventory every production agent, list the standing keys each one holds, strip to least privilege per task, and move identity, authorization, logging and containment into a layer the agent cannot reach or edit — because a model that "can't attribute its behaviors to its inputs or weights" cannot be trusted to guard itself.</strong> Report one number to the board: the share of agents with scoped, externally-enforced permissions versus standing "superuser" access.</li>
+  <li><strong>Fit the main brake — a tested, timed kill-switch any authorized human can throw mid-task.</strong> An autonomous agent empties the vault before a next-day review notices, so the one control a slow correction cannot replace is the brake thrown in the moment. <strong>This month, pick your three highest-privilege agentic workflows and prove an authorized human can pause or stop each one in flight — measure the time-to-halt and what state is left behind.</strong> Report the measured time-to-halt for your top three agents and a dated plan to extend the brake to the rest.</li>
+  <li><strong>Assume compromise, and keep the bond yours.</strong> 97% expect a material incident involving autonomous systems within a year while only 6% of budgets reflect it (Arkose), and a provider's assurance is not a control — "we can't outsource responsibility" (Nadella). <strong>This month, red-team prompt injection and tool misuse against one production agent in daylight and on purpose, seal what the game exposes, and close the gap between the incident you expect and the budget you've allocated to agent risk.</strong> Report the delta between your expected-incident likelihood and the share of security budget actually assigned to agent-insider risk. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground your own — and the insider is why, having made your servant excellent and governed and grounded, you must watch your most trusted hand as a bank watches its most powerful officer: a verified badge, a ring of only today's keys, a ledger it cannot edit, walls that hold a slip — all enforced from outside the model — a brake any authorized head can throw mid-errand, a standing assumption that a whisper will one day turn it, and your own name kept firmly on the bond, because the agency's glowing reference is not the same thing as your responsibility.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The anchor — Satya Nadella, "Models as Insider Risks in the Super Intelligence Era" (10 Oct 2026): treat frontier models (closed &amp; open-weight) as insider risks, "not because they are malicious," but because any capable actor with access can err or be compromised; controls (verified identity, least privilege, activity logs, containment) sit outside the model; an emergency brake so "authorized persons should always be able to pause or shut down a model mid-task"; "we can't attribute model behaviors… to specific inputs… or weights"; "we can't outsource responsibility"; plus a code of conduct for Microsoft's MAI models (Forbes; The Next Web; Yahoo Tech; TradingView; Tekedia; Digit) · The corroboration — AI agents called 2026's biggest insider threat; the "superuser problem"; prompt injection / tool misuse (Palo Alto Networks / Wendi Whitmore, The Register); 97% expect a material incident involving autonomous systems within a year and only 6% of budgets reflect it (Arkose Labs 2026, ~300 leaders); 61% say AI applications are being targeted (Thales 2026 Data Threat Report, 3,100+); ~$17.4M average annual insider-threat cost (Ponemon) · The collision — Claude Haiku 5.5 (7 Oct) $0.10/$0.50 per M tokens, ~75% cheaper on average (Anthropic; VentureBeat); Google Gemini Enterprise plans from goals and routes models per task incl. Claude (Google); OpenAI–Atlassian expanded partnership (6 Oct) (InvestingNews) · The reach — Gartner (40% of enterprise apps embed task-specific agents by 2026); EU AI Act high-risk regime live since 2 August 2026 (European Commission). The "insider" framing — that having made the servant excellent, governed and grounded, a house must now watch its most trusted agent as an insider: controls enforced outside the model, a brake that works mid-task, an assumption of compromise, and its own name kept on the bond — is expressly the radar's reading. Figures are relayed from the named essay, vendor announcements, analyst and vendor research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; the exact wording of Nadella's essay and the Arkose/Thales/Ponemon survey numbers are relayed from secondary coverage and should be reconciled against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 13 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: privacy-friendly visit counting (GoatCounter) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
