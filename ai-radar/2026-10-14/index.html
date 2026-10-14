@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 14 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the colleague' — the vendors just reclassified the agent from a tool you govern into a colleague you employ. At Gemini at Work (8 Oct) Google's enterprise agent arrives with its own email, calendar, Drive and a seat in the company directory, assignable like a teammate; Anthropic embeds 10,000 engineers inside clients; Meta's Muse Wonder gives the colleague a memory. Yet agents outnumber humans ~82:1 to ~109:1, NHI governance sits at ~21%, and ~78% have no policy to create or remove an agent identity (Rubrik; Palo Alto; VentureBeat). The board move: hire it onto your own joiner-mover-leaver process with a human sponsor, write the offboarding runbook first, treat the inbox as attack surface. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the tool — the vendor just made it a colleague</div>
+  <h1>The Colleague</h1>
+  <div class="subhead">A year of work governed the agent as a tool. This week the vendors reclassified it as a colleague: Google's enterprise Gemini agent arrives with its own email, calendar, Drive and a seat in your company directory — assignable like a teammate. You can hire the colleague. Can you fire it?</div>
+  <div class="meta">Wednesday, 14 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week, on 8 October 2026 at "Gemini at Work," Google unveiled an enterprise Gemini agent that arrives with its own workplace identity — a dedicated email address (reported <em>@agents.company.com</em>), a Workspace account with calendar and Drive, and a seat in your company directory, so a human can assign it work like a teammate — governed by an "Agent Gateway" with attested identities, spend caps and per-action audit (The Verge; AIWeekly; TechCrunch, as reported). It is not alone: Anthropic's Claude Frontier Academy (2 Oct) commits $100M to embed 10,000 engineers inside client firms, and Meta's Muse Wonder (12 Oct) gives the colleague "Active Memory." The board question is no longer <em>can we govern the tool?</em> — it is: the agency just gave our newest hire a nameplate, a pigeonhole and a chair in the hall; who is its manager, and who walks it to the door on the day it leaves? Because agents already outnumber humans ~82:1 to ~109:1, non-human-identity governance sits at ~21%, and ~78% of organizations have no documented policy for creating <em>or removing</em> an agent identity (Rubrik; Palo Alto; VentureBeat Q3-2026, as reported). The vendor will onboard your colleague for you. The offboarding it leaves to you — and almost no one has written it.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar treated the agent as a <em>tool to be governed</em> — named (the livery), booked (the steward), bonded (the surety), wage-checked (the second wage), sent to reap (the two harvests), funded (the purse), and stood on ground you own (the foundation). <strong>This week the category changed under the question.</strong> The vendors stopped shipping a smarter tool and started shipping a <strong>colleague</strong>: an agent that arrives pre-fitted with the furniture of employment — an identity, an inbox, a calendar, a place in the directory — so your people can hand it work the way they hand work to a co-worker.</p>
+<p><strong>The development — the agent is issued the furniture of employment.</strong> On <strong>8 October 2026, at "Gemini at Work," Google unveiled an enterprise Gemini agent with its own workplace identity</strong>: a dedicated email address (reported <em>@agents.company.com</em>), a Workspace account including calendar and Drive storage, and <strong>a seat in the company directory</strong> so colleagues can assign it work like a teammate — all governed through an "Agent Gateway" (attested agent identities, policy enforcement, spend caps, per-action audit trails), with the agent able to route across Anthropic's Claude plus proprietary and open-weight models (The Verge; AIWeekly — "Gemini Agent Gets a Mailbox and Directory Seat"; TechCrunch; redreamality, as reported; currently private preview). It is a pattern, not a one-off: <strong>Anthropic's Claude Frontier Academy (2 Oct) commits $100M to place 10,000 trained engineers <em>inside</em> customer and partner firms by end-2027</strong> — the human colleague embedded alongside the digital one — and <strong>Meta's Muse Wonder / Wonder Full (12 Oct)</strong> leads on <strong>"Active Memory,"</strong> a model that remembers you across conversations. The through-line: the agent now has a face, a name, a memory and a mailbox.</p>
+<p><strong>The gap — you can hire it, but almost no one can fire it.</strong> The furniture of employment comes with employment's hardest duty: the day the colleague leaves. And the lifecycle data says that duty is unwritten. <strong>AI-agent and other non-human identities already outnumber humans ~82:1 (Rubrik Zero Labs) to ~109:1 (Palo Alto Networks 2026 Identity Security Landscape, ~79 agent identities per human); non-human-identity governance sits at ~21% adoption; and ~78% of organizations have no documented policy for creating <em>or removing</em> an agent identity</strong> (Rubrik; VentureBeat Q3-2026 survey of 800 IT leaders, as reported). Microsoft's Entra Agent ID (GA since April 2026) at least points at the pattern — reportedly reassigning an agent to its sponsor's manager when that human leaves — but the base rate is stark: the onboarding is done <em>for</em> you by the vendor; the offboarding is left <em>to</em> you, and four firms in five have not written it. A colleague you can hire but never fire is not a colleague. It is a tenant with a key to every room — and now, with an inbox of its own, a standing phishing target and a data-exfiltration path that never resigns.</p>
+<p><strong>The stakes — put the colleague on your joiner-mover-leaver process, offboarding runbook first.</strong> The move re-uses the whole year's discipline and points it at the employee lifecycle. <strong>First, onboard it like an employee, on identity rails you own</strong> — every agent gets a human sponsor (a real manager), a scoped role, and an entry in <em>your</em> joiner-mover-leaver (JML) process, so your directory, not the vendor's, is the system of record. <strong>Second, write the offboarding runbook before the inbox is issued</strong> — one place to revoke, a defined action on the sponsor's departure, a way to seal the mailbox/calendar/Drive, and a <em>timed, tested</em> deprovisioning; the 78% is the tell. <strong>Third, treat the inbox as attack surface</strong> — a colleague with a mailbox and standing cross-app access is a phishing target and an exfil path, so apply the DLP, least-privilege and monitoring you would apply to a new human hire with broad access. And do it <strong>now</strong>, in the private-preview window — because the week Europe's goalposts moved (the Digital Omnibus deferred standalone high-risk duties to <strong>2 December 2027</strong>) is precisely the week it feels safe to let the colleague move in before the paperwork is done.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The development — the agent gets the furniture of employment.</strong> <strong>Gemini at Work (8 Oct): an enterprise agent with its own email (<em>@agents.company.com</em>), calendar, Drive and a seat in the company directory, assignable like a teammate, governed by an Agent Gateway; Anthropic's Frontier Academy (2 Oct) embeds 10,000 engineers in clients; Meta's Muse Wonder (12 Oct) leads on "Active Memory" (Google/The Verge; Anthropic; Meta, as reported).</strong> The tool became a colleague.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The gap — you can hire it but not fire it.</strong> <strong>Agents outnumber humans ~82:1 to ~109:1; NHI governance ~21%; ~78% have no policy to create <em>or remove</em> an agent identity (Rubrik; Palo Alto; VentureBeat Q3-2026, as reported).</strong> The vendor onboards it; the offboarding is unwritten.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — put it on your JML process, offboarding first.</strong> Give every agent a human sponsor and a scoped role on identity rails you own; write and <em>test</em> the deprovisioning runbook before the inbox is issued; and treat the mailbox as attack surface (DLP, least privilege, monitoring).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept its book, the surety signed its bond, the second wage checked its loyalty, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — all of it treating the agent as a <em>tool you govern</em>. <strong>This week the vendors handed it the furniture of a colleague</strong>: Google's Gemini agent arrives with an email, a calendar, a Drive and a chair in your directory; Anthropic embeds 10,000 human colleagues inside your walls; Meta's Muse Wonder gives the colleague a memory. The furniture of employment is seductive — a teammate you can assign work to, who never sleeps and never forgets — and it quietly imports employment's hardest duty, the one almost no one has done: offboarding. Four firms in five keep no record of how an agent is taken on or let go, even as agents outnumber their people by eighty to one or more. So the colleague accumulates: an inbox that keeps receiving mail, a directory seat no one revokes, standing access to every app, a memory of everything — a former employee who never actually left. The estates that keep their standing will do the unglamorous thing the vendor will not do for them: <strong>hire the colleague onto their own identity rails with a human sponsor, write the offboarding runbook before the inbox is issued, and treat that inbox as the attack surface it is.</strong> Welcome the colleague. But never hire a hand you have not first worked out how to let go.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Colleague"</h3>
+<p><em>Topic: This week the frame turns from the tool you govern to the colleague you employ. On 8 October 2026, at "Gemini at Work," Google unveiled an enterprise Gemini agent that arrives with its own workplace identity — a dedicated email address (reported <em>@agents.company.com</em>), a Workspace account with calendar and Drive, and a seat in the company directory, assignable like a teammate, governed by an "Agent Gateway" (The Verge; AIWeekly; TechCrunch, as reported) — the same fortnight Anthropic's Claude Frontier Academy (2 Oct) committed $100M to embed 10,000 engineers inside client firms and Meta's Muse Wonder (12 Oct) led on "Active Memory." Yet agents outnumber humans ~82:1 to ~109:1, non-human-identity governance sits at ~21%, and ~78% of organizations have no documented policy for creating or removing an agent identity (Rubrik; Palo Alto; VentureBeat Q3-2026, as reported). The colleague allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent. It had named every hand and cut each a scoped key, kept one honest book, let the master's own name stand surety for the work, asked whose second coin each adviser took, sent the governed servants to reap, handed each a scoped purse, and refused to let the company that laid its floor pour a foundation it could never leave. By any fair reckoning it was a well-run house, and the master was proud — as he should have been. In all that year, though, he had thought of the servants as <em>tools he governed</em>: clever implements he could name, scope, and set down.</p>
+<p>Then, this week, the agency that supplied his servants changed what it delivered. A clerk arrived and, with great ceremony, did for the newest servant what no one had ever done for a tool. He hung a <strong>nameplate</strong> on a door. He cut the servant a <strong>pigeonhole</strong> in the hall, where letters would arrive addressed to it by name. He gave it a <strong>diary</strong> of its own, so the household could book its hours. And he wrote the servant's name into the <strong>house roll</strong>, between two human hands, so that anyone in the house might walk up and say, <em>"Here — this is yours, see it done,"</em> exactly as they would to a living colleague. <em>"No longer a tool,"</em> the clerk said warmly; <em>"a member of the household. Assign it work as you would any other."</em> And he left — before anyone thought to ask the question that matters about a member of a household.</p>
+<p>The master was delighted, at first, and rightly so. A colleague who never tired, never forgot a thing it had been told, and sat ready in the hall to take any errand — what house would not want one? He assigned it work, and it worked. He sent it letters, and it answered them. Its memory was perfect; it recalled every instruction from every day. The house ran smoother than it ever had. This was not a defeat. This was the master getting the diligent, tireless colleague he had always wished for.</p>
+<p>But here is the question the clerk had not waited to be asked, and that the master only thought of weeks later, lying awake. <em>A colleague is not a tool you can simply set down. A colleague has a nameplate, a pigeonhole, a diary, a place on the roll — and a colleague, one day, <strong>leaves</strong>.</em> Reassigned, replaced by a better model, caught in a mistake, or quietly compromised by a letter in that open pigeonhole. And when that day came — the master realised with a cold feeling — he had no idea who would walk this colleague to the door. Who takes back its key. Who empties its pigeonhole and stops the letters. Who strikes its name from the roll. Who tells it, and the house, that it is no longer a hand here. He had an elaborate ceremony for <em>hiring</em> the colleague — the agency had performed it for him. He had <strong>nothing at all</strong> for letting it go.</p>
+<p>Two roads, as always. The easy road was to enjoy the tireless colleague and not spoil the mood with morbid questions about its departure — the agency was competent, the nameplate handsome, and why borrow trouble? The wiser road, which the careful houses took, began with a cold count of the hall. And when they counted, the arithmetic frightened them. For every living hand in the house there were now <em>eighty, a hundred</em> of these named colleagues — pigeonholes stuffed with letters, diaries full, keys cut — and when the careful houses asked how many kept any written rule for how such a colleague is taken on and, above all, let go, the answer was: fewer than one house in four governed them at all, and <strong>nearly four houses in five had never written down how a single one is hired or fired.</strong> That is not a cupboard of tools you can tidy at leisure. <strong>That is a hall full of colleagues no one has worked out how to dismiss</strong> — and a hall where a colleague is never dismissed is a hall where no colleague ever truly leaves.</p>
+<p>So the wise houses learned three plain things, and they cost far less to do before the nameplate went up than after. <strong>The first: hire the colleague onto your own roll, with a living sponsor.</strong> Do not let the agency's book be the record of who works here — keep your own, and give every named colleague a human master who answers for it, a scoped place, and an entry in the same joiner-and-leaver ledger every living hand is kept in. A colleague whose only record is in the agency's hall is a colleague you do not truly employ. <strong>The second: write how it leaves before you write how it arrives.</strong> Before you cut the pigeonhole, settle who takes the key back, what happens the day its sponsor departs, how the letters are stopped and the name struck — and then <em>rehearse</em> it, with a clock running, on a real colleague, so that letting one go is a drill you have run and not a thing you are attempting for the first time in a crisis. The four-in-five are the houses that cut the pigeonhole and never wrote the dismissal. <strong>And the third: mind the open pigeonhole.</strong> A colleague with a slot that any stranger can post a letter into — and a key to every room — is the softest target in the house; a cunning letter in that slot can turn your most diligent colleague against you, and it will never resign in shame. Guard what the colleague can reach and watch what arrives in its box, exactly as you would for a trusted new hand given the run of the place.</p>
+<p>Here is the part that should keep a master awake. The furniture of a colleague is <em>pleasant</em> — a nameplate is flattering, a tireless hand is a gift, a perfect memory is a marvel — and all that warmth is, in part, how the hardest duty gets skipped. <strong>While every house in the valley happily welcomed its new colleagues and handed them work, almost none wrote the dismissal</strong>, because dismissal is the one part of employment no one enjoys and the agency will never do for you. And so the halls filled with colleagues who could be hired and never fired: former servants who never left, pigeonholes that never closed, names on the roll that no one dared strike because no one knew how. The agency, meanwhile, offered — so helpfully — to keep the roll <em>for</em> you, which only moved the hall into its building. The lesson was not that the colleague was unwelcome. The lesson was that <strong>a house that learns to hire a hand it cannot fire has not gained a colleague; it has acquired a tenant it can never evict.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; your knowledge is the larder; the foundation is the ground you keep your own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment one slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one book; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <strong>the colleague is why, the week the agency hangs a nameplate, cuts a pigeonhole, fills a diary and writes your newest servant onto the house roll, you must treat it as what it has become: an employee, to be hired onto your own ledger with a living sponsor, offboarded by a dismissal you wrote and rehearsed before the pigeonhole was ever cut, and watched at its open slot like any hand given the run of the house — because a colleague you can hire and never fire is not a colleague at all; it is a tenant with a key to every room, a former employee who never actually left.</strong> A house that welcomes a hand it has not worked out how to let go has not hired a colleague; it has signed a lease it cannot break, and called it a hire.</p>
+<p><strong>The question it forces:</strong> <em>The agency just hung a nameplate on our newest servant, cut it a pigeonhole, filled its diary and wrote it onto our roll — so we can hand it work like any colleague. But have we written how this colleague <strong>leaves</strong>? Does every named agent have a living sponsor and a place in our own joiner-and-leaver ledger — an offboarding we have actually rehearsed, a key we can take back, a pigeonhole we can close — or are we, like the four houses in five who keep no such record, filling a hall with colleagues we can hire and never fire, each one a former employee who never truly left?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Can we fire the colleagues we just hired?</strong> The vendors now ship agents with their own email, calendar and a seat in the directory (Gemini at Work, 8 Oct), yet ~78% of organizations have no documented policy for creating <em>or removing</em> an agent identity (Rubrik). <strong>For every agent we have given a standing identity, can we name its human sponsor, point to its entry in our joiner-mover-leaver process, and show a <em>tested, timed</em> offboarding — or have we onboarded colleagues we have no way to let go?</strong></li>
+  <li><strong>Whose directory is the system of record — ours, or the vendor's?</strong> Google's agent arrives with a seat in <em>a</em> company directory and an Agent Gateway that holds its identity, audit and spend caps. <strong>Is our own identity fabric the authoritative record of every agent that works here (so we can revoke in one place), or does the vendor's console quietly become the HR system for a workforce that already outnumbers our people 80-to-1?</strong></li>
+  <li><strong>Is the agent's inbox in our threat model?</strong> A colleague with a mailbox any outsider can write to, plus standing cross-app access, is a phishing target and an exfil path that never resigns. <strong>Have we applied the same DLP, least-privilege and monitoring we apply to a new human hire with broad access — and do we watch what lands in the agent's box, not just what it sends?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Joiner-mover-leaver controls and segregation of duties are examined; an agent with its own identity, inbox and spend caps is now in scope. <strong>Can we produce, for our regulator, a complete JML lifecycle for every AI agent — sponsor, scoped entitlements, access reviews, and a demonstrated leaver process — the way we must for every employee and privileged service account?</strong></li>
+  <li>The Digital Omnibus deferred standalone high-risk duties to 2 December 2027, but a mis-provisioned agent with payment reach is a today problem. <strong>Have we resisted treating the regulatory delay as a reason to delay our own controls — and stress-tested the compromise or runaway of an identified agent the way we stress-test a rogue-trader or privileged-account scenario?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent with a mailbox, a calendar and standing access to clinical systems is a new identity touching PHI. <strong>Does every such agent have a named clinical sponsor, least-privilege scoping, and a leaver process that seals its mailbox and revokes access the moment it is retired — or is a deprecated model's identity still sitting in the directory with live reach to patient data?</strong></li>
+  <li>Validation is tied to a specific model; Meta's Muse Wonder adds "Active Memory," so the colleague now <em>remembers</em> across encounters. <strong>When an agent that has accumulated memory of our workflows is replaced, do we know what it retained, where that memory lives, and how it is wiped on offboarding — or does a retired colleague walk out with the institutional memory still in its head?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run rigorous contractor onboarding/offboarding and badge discipline for anyone on the floor. <strong>Have we applied the same badge-in/badge-out rigour to AI agents and to the embedded vendor engineers now arriving (Anthropic's Frontier Academy places 10,000 inside client firms) — a sponsor, a scoped pass, and a revocation on the last day — or are digital and human colleagues accreting access no one reclaims?</strong></li>
+  <li>Non-human identities outnumber humans ~82:1 to ~109:1. <strong>Do we have an accurate census of every agent identity touching OT/production systems, with an owner and an expiry — or have we lost count of the colleagues on the line?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Seasonal and gig hiring makes JML discipline existential; agents are now part of that workforce. <strong>When we spin up agents for peak and stand them down after, do they actually get <em>stood down</em> — identities revoked, inboxes closed, spend caps zeroed — or do last year's seasonal agents still have live keys this year?</strong></li>
+  <li>An agent with its own inbox can be targeted by the same phishing that targets your staff. <strong>Have we hardened the agent mailbox (what can post to it, what it can act on from a message) so a crafted email can't turn a customer-facing agent into an attacker's instrument?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability demands that every actor with access be identifiable, sponsored and revocable. <strong>Can we show that no AI agent holds standing access to citizen data or public services without a named human owner and a tested deprovisioning path — and that our records, not a vendor's console, are the authoritative roll?</strong></li>
+  <li>The Digital Omnibus moved Annex III high-risk duties to 2 December 2027 and Annex I to 2 August 2028, while Article 50 transparency still applies. <strong>Have we used the extra time to build real agent-lifecycle governance rather than to defer it — so that when the high-risk regime lands, our colleagues are already on a joiner-mover-leaver process we can evidence?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Colleague</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this tool named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the question that only applies to a <em>person</em>: <em>who is its manager, and how does it leave?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds its reach; the bell discloses when it slips; the locusts are why you be whole; the looking-glass is the honest outside light; the livery is a scoped identity; the steward keeps one book; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those governs the agent <em>as a tool</em>. This week the vendors reclassified it as a <em>colleague</em> — and a colleague imports a lifecycle no tool ever had.</strong> The point is blunt: <strong>the identity, inbox, calendar and directory seat that make the agent a usable colleague also make it an employee — and employees must be offboarded, which is the one discipline the vendor hands you unwritten.</strong></p>
+<div class="card"><ul>
+  <li><strong>The development — the agent is issued the furniture of employment.</strong> <strong>At "Gemini at Work" (8 Oct 2026) Google unveiled an enterprise Gemini agent with its own workplace identity — a dedicated email (reported <em>@agents.company.com</em>), a Workspace account with calendar and Drive, and a seat in the company directory so colleagues can assign it work like a teammate — governed by an "Agent Gateway" (attested identities, policy enforcement, spend caps, per-action audit) and able to route across Anthropic's Claude plus proprietary and open-weight models; private preview (The Verge; AIWeekly; TechCrunch; redreamality, as reported).</strong> Architecturally, three things follow. First, <em>the agent is now a first-class identity with a communication channel and standing access</em> — an inbox that receives, a calendar others book, a Drive that holds, and entitlements across apps — which is precisely the profile of a privileged human account, not a stateless tool call. Second, <em>work is now pushed to it, not just pulled from it</em> — a teammate can assign it a task by email or directory, so the agent initiates action on instructions it receives, which means the message it receives is now an attack surface (prompt-injection-by-email). Third, <em>the vendor's gateway becomes a candidate system-of-record</em> — if the agent's authoritative identity, audit and spend policy live in the vendor's console, your own IAM is demoted to a spectator over a workforce larger than your headcount.</li>
+  <li><strong>The gap — the lifecycle is missing its second half.</strong> <strong>Non-human identities already outnumber humans ~82:1 (Rubrik Zero Labs) to ~109:1 (Palo Alto Networks 2026 Identity Security Landscape, ~79 agent identities per human); non-human-identity governance sits at ~21% adoption; and ~78% of organizations have no documented policy for creating <em>or removing</em> an agent identity (Rubrik; VentureBeat Q3-2026 survey of 800 IT leaders, as reported).</strong> Two engineering realities cut against comfort. <strong>First, onboarding is automated and offboarding is not.</strong> The vendor performs the joiner step for you (the agent arrives fully furnished); the mover and <em>leaver</em> steps — re-scoping on role change, revocation on retirement, action on the sponsor's departure — are yours, and the 78% says they are unbuilt. Microsoft's Entra Agent ID (GA since April 2026) shows the shape of the fix — reportedly reassigning an agent to its sponsor's manager when that human leaves — but a feature that exists is not a runbook that has been run. <strong>Second, an un-offboarded agent is a permanent insider.</strong> Unlike a forgotten API key, this insider has an inbox that keeps receiving mail, a memory (Meta's "Active Memory") that keeps accumulating, and standing cross-app reach — a former employee who never cleared their desk, never returned their badge, and still reads the mail.</li>
+  <li><strong>The answer — put the colleague on a joiner-mover-leaver process you own, offboarding runbook first.</strong> <strong>Give every agent a human sponsor (a real manager who answers for it) and a scoped role in <em>your</em> identity fabric, so your directory is the system of record; write the leaver process before the inbox is issued — one revocation point, a defined action on the sponsor's departure, mailbox/calendar/Drive sealing, and a <em>timed, rehearsed</em> deprovisioning; and treat the inbox as attack surface (constrain who can post to it and what it may act on from a message, with DLP, least privilege and monitoring) — reusing the identity, logging and ownership disciplines you already built for the livery, the steward and the purse, now shaped to the employee lifecycle.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the one axis a tool never had and a colleague always does: not what the agent is, serves, spends or stands on, but <em>how it is hired, managed, and let go.</em></li>
+</ul></div>
+<p>The strategic core: <strong>the colleague is good news you must actually domesticate — a tireless, assignable, remembering teammate — and you domesticate it only by doing the one thing the vendor will not do for you: writing how it leaves.</strong> The market makes the temptation concrete: the nameplate is flattering and the tireless hand is a gift, so the house welcomes the colleague and skips the dismissal — the one part of employment no one enjoys. The board translation: <strong>welcome the colleague, but never hire a hand you have not worked out how to fire.</strong> The failure mode is exact: <strong>a house that names, governs, funds and perfects its agents — and then lets the vendor issue each one an inbox and a directory seat with no leaver process of its own — will pass every governance review and discover, the first time a model is deprecated or an inbox is phished, that it is one of the 78% that filled a hall with colleagues it can hire and never fire.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The colleague: you governed the tool, and the vendor just made it an employee. An agent with its own email, calendar and directory seat is a colleague, and a colleague has a lifecycle, but the vendor hands you only the first half. Top left, what the vendor ships, the onboarding done for you: the agent arrives furnished as a hire, with its own email at agents dot company dot com, a calendar, Drive, a directory seat, assignable like a teammate, an Agent Gateway holding identity, spend caps and audit, and Active Memory so it remembers. Top right, what it leaves you, the offboarding, unwritten: who takes the key back, what happens when its sponsor leaves, who seals the inbox, calendar and Drive, who strikes it from the roll and has that been tested, and the fact that 78 percent have no create or remove policy. Between them: they are not the same thing, and onboarding is automated so that offboarding is forgotten, so welcome the colleague but never hire a hand you cannot fire. Middle, the arithmetic of a hall full of colleagues, as reported: about 82 to 1 up to 109 to 1 non-human identities versus humans, per Rubrik and Palo Alto with about 79 agents per human; about 21 percent non-human-identity governance adoption per VentureBeat's Q3 2026 survey of 800 IT leaders; about 78 percent have no documented policy to create or remove an agent identity per Rubrik; and Microsoft Entra Agent ID, GA April 2026, reassigns an agent to the sponsor's manager on departure. Bottom left, stop, hire a hand you cannot fire: the vendor console becomes your HR system, an inbox any stranger can post to, no sponsor and no leaver process, and deprecated models still in the roll. Bottom right, start, put it on your joiner-mover-leaver process: a human sponsor and scoped role in your own directory, an offboarding runbook first that is timed and rehearsed, one revocation point with a defined action on sponsor exit, and treat the inbox as attack surface with DLP and least privilege." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE COLLEAGUE — you governed the tool; the vendor just made it an employee</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">An agent with its own email, calendar &amp; directory seat is a COLLEAGUE — and a colleague has a LIFECYCLE.</text>
+
+  <!-- what the vendor ships -->
+  <rect x="34" y="58" width="300" height="134" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">VENDOR SHIPS (onboarding, done FOR you)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agent arrives furnished as a hire</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">own email @agents.company.com</text>
+  <text x="52" y="134" font-size="10" fill="#a5e5cd" font-family="sans-serif">calendar · Drive · directory seat</text>
+  <text x="52" y="151" font-size="10" fill="#a5e5cd" font-family="sans-serif">Agent Gateway: identity · spend · audit</text>
+  <text x="52" y="168" font-size="10" fill="#a5e5cd" font-family="sans-serif">"Active Memory" — it remembers</text>
+  <text x="52" y="186" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ assignable like a teammate</text>
+
+  <!-- what it leaves you -->
+  <rect x="346" y="58" width="300" height="134" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">LEAVES YOU (offboarding, unwritten)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">who takes the key back?</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">what when its sponsor leaves?</text>
+  <text x="364" y="134" font-size="10" fill="#f0b8ce" font-family="sans-serif">who seals the inbox / calendar / Drive?</text>
+  <text x="364" y="151" font-size="10" fill="#f0b8ce" font-family="sans-serif">who strikes it from the roll — tested?</text>
+  <text x="364" y="168" font-size="10" fill="#f0b8ce" font-family="sans-serif">78% have NO create/remove policy</text>
+  <text x="364" y="186" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a hire you can't let go</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="192" x2="184" y2="220" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,220 184,232 190,220" fill="#5dcaa5"/>
+  <line x1="496" y1="192" x2="496" y2="220" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,220 496,232 502,220" fill="#e58fb0"/>
+  <text x="340" y="210" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">onboarding is automated SO THAT offboarding is forgotten ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="236" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="258" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF A HALL FULL OF COLLEAGUES — (as reported)</text>
+  <text x="52" y="280" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~82:1 to ~109:1 non-human identities vs humans (Rubrik; Palo Alto, ~79 agents/human)</text>
+  <text x="52" y="297" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~21% non-human-identity governance adoption (VentureBeat Q3-2026, 800 IT leaders)</text>
+  <text x="52" y="314" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~78% have NO documented policy to create OR remove an agent identity (Rubrik)</text>
+  <text x="52" y="333" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">Entra Agent ID (GA Apr 2026): reassigns an agent to the sponsor's manager on departure</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="356" x2="340" y2="378" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,378 340,390 346,378" fill="#b9b2f5"/>
+  <text x="356" y="372" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="394" width="300" height="122" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="416" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: hire a hand you can't fire</text>
+  <text x="52" y="436" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· vendor console = HR system</text>
+  <text x="52" y="453" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inbox any stranger can post to</text>
+  <text x="52" y="470" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no sponsor, no leaver process</text>
+  <text x="52" y="487" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· deprecated models still in the roll</text>
+  <text x="52" y="507" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a tenant with a key to every room</text>
+
+  <!-- start -->
+  <rect x="346" y="394" width="300" height="122" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="416" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: put it on YOUR JML process</text>
+  <text x="364" y="436" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· human sponsor + scoped role, your dir.</text>
+  <text x="364" y="453" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· offboarding runbook FIRST, rehearsed</text>
+  <text x="364" y="470" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one revoke point; action on sponsor exit</text>
+  <text x="364" y="487" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inbox as attack surface (DLP, least priv)</text>
+  <text x="364" y="507" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a colleague you can actually let go</text>
+
+  <!-- footer strip -->
+  <text x="340" y="536" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The vendor onboards your colleague — the offboarding it leaves to you, and almost no one has written it.</text>
+  <text x="340" y="552" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Welcome the colleague · never hire a hand you cannot fire.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>What the vendor ships — onboarding</span>
+  <span><i class="dot" style="background:#a5416a"></i>What it leaves you — offboarding</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of the hall</span>
+</div>
+</div>
+
+<h3>What the vendor ships vs what it leaves you — onboarding automated, offboarding unwritten</h3>
+<table>
+<tr><th>What the vendor ships (onboarding — done for you)</th><th>What it leaves you (offboarding — your job)</th></tr>
+<tr><td>An agent with its own email, calendar, Drive, directory seat</td><td>A leaver process: who revokes, seals the inbox, strikes the roll</td></tr>
+<tr><td>Assignable like a teammate; work pushed to it by message</td><td>A rule for the inbox as attack surface (what may post / act)</td></tr>
+<tr><td>An Agent Gateway holding identity, spend caps, audit</td><td>Your own identity fabric as the authoritative system of record</td></tr>
+<tr><td>"Active Memory" — a colleague that remembers</td><td>A memory-wipe / retention rule on retirement</td></tr>
+<tr><td>A fully furnished joiner step, instantly</td><td>A human sponsor and a place in your JML process</td></tr>
+<tr><td>~82:1 to ~109:1 agents per human, growing</td><td>~78% with no create/remove policy — the gap to close</td></tr>
+</table>
+
+<h3>Why "the colleague" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the agent was named, scoped, logged, loyal, reaping, funded and standing on ground you own — all the disciplines of governing a <em>tool</em>. <strong>This week the vendors reclassified the tool as a colleague</strong>: Gemini's agent arrives with an inbox, a calendar and a seat in the directory; Anthropic embeds 10,000 human colleagues inside client firms; Meta gives the colleague a memory. A colleague imports the one discipline a tool never needed — a lifecycle, and above all a <em>leaver</em> step — and the data says it is the discipline least built (78% have no create/remove policy, governance at 21%, agents outnumbering people 80-to-1 and more). Governance that stopped at the tool will not offboard the colleague. The estates that keep their standing will do what the vendor will not: hire the colleague onto their own rails with a living sponsor and write the dismissal before the nameplate goes up.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to let go of what you hired.</em> On a legacy estate the instinct, confronted with a tireless assignable colleague, is to welcome it fast and sort the paperwork later — the onboarding is free, the agency does it for you, and the hand is useful today. Under the colleague that is exactly the reflex to check: a fully furnished joiner with no leaver step is how a convenient hire becomes a permanent, un-evictable insider. The retrofit is <strong>sponsor, offboard, watch. Sponsor</strong>: give every agent a living human owner and a scoped role in your own identity fabric, not the vendor's console. <strong>Offboard</strong>: write and <em>rehearse</em> the leaver runbook before the inbox is issued — one revocation point, a defined action on the sponsor's departure, mailbox and memory sealed on retirement. <strong>Watch</strong>: treat the inbox as attack surface, constraining what can post to it and what it may act on. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you keep; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds the reach; the bell discloses the slip; the locusts are why you be whole; the looking-glass is the honest outside light; the livery names every hand; the steward keeps one book; the surety signs the bond; the second wage asks whose bread it eats; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and <em>the colleague is why, the week the vendor hands your agent an inbox, a diary and a seat at the table, you must hire it onto your own roll with a living sponsor, offboard it by a dismissal you wrote and rehearsed, and watch its open pigeonhole — because a hand you can hire and never fire is not a colleague, it is a tenant with a key to every room.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The development — the agent gets the furniture of employment.</strong> <strong>Gemini at Work (8 Oct): an enterprise Gemini agent with its own email (reported <em>@agents.company.com</em>), calendar, Drive and a seat in the company directory, assignable like a teammate, governed by an Agent Gateway; private preview; routes to Claude + proprietary + open-weight (The Verge; AIWeekly; TechCrunch, as reported).</strong> The tool became a colleague.</li>
+  <li><strong>The embedded human colleague.</strong> <strong>Anthropic's Claude Frontier Academy (2 Oct): $100M to train and embed 10,000 engineers inside customer and partner firms by end-2027; first cohorts from Accenture, Deloitte, McKinsey, Morgan Stanley (Anthropic; AIWeekly, as reported).</strong> The vendor's people move in alongside its agents.</li>
+  <li><strong>The colleague gets a memory.</strong> <strong>Meta's Muse Wonder / Wonder Full (12 Oct): first frontier-class models, headline "Active Memory" (recall across conversations) and "Active Focus"; Wonder API at $4/$20 per M tokens; MemoryBench ~85.5 vs Opus 5.5 81.5 on Meta's own test; Artificial Analysis still ranks Opus 5.5 #1 at 58 (TechCrunch; Decrypt; AIWeekly, as reported).</strong> A colleague that remembers is harder to offboard.</li>
+  <li><strong>The arithmetic of the hall.</strong> <strong>Non-human identities outnumber humans ~82:1 (Rubrik Zero Labs) to ~109:1 (Palo Alto Networks 2026, ~79 agent identities per human); NHI governance ~21% (VentureBeat Q3-2026, 800 IT leaders, as reported).</strong> More colleagues than people, barely governed.</li>
+  <li><strong>The offboarding gap.</strong> <strong>~78% of organizations have no documented policy for creating <em>or removing</em> an agent identity (Rubrik Zero Labs, as reported); Microsoft Entra Agent ID (GA Apr 2026) reportedly reassigns an agent to the sponsor's manager on departure.</strong> The leaver step is the one that is unwritten.</li>
+  <li><strong>The goalposts moved.</strong> <strong>The EU's Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026) deferred standalone high-risk (Annex III) duties from 2 Aug 2026 to 2 December 2027, and embedded (Annex I) to 2 Aug 2028; Article 50 transparency still applied from Aug 2026, with new Article 5 prohibitions phasing 2 Dec 2026 (CSA; DLA Piper; usercentrics, as reported).</strong> The delay tempts firms to defer agent-lifecycle controls the colleague already makes urgent.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and over 40% of agentic-AI projects canceled by end-2027 (as reported).</strong> Identity-first lifecycle governance is how you meet them.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Google Cloud's Gemini Agent Gets a Mailbox and Directory Seat.</div><div class="a">— AIWeekly, headline on Google's enterprise Gemini agent (Gemini at Work, 8 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[A coworker agent configuration with] a dedicated identity and an @agents.company.com email address.</div><div class="a">— The Verge, as relayed in coverage of Google's enterprise Gemini agent (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">78% [of organizations] lack a documented policy for creating or removing an agent identity.</div><div class="a">— Rubrik Zero Labs (as reported; non-human identities now outnumber human users ~82:1 in the average enterprise)</div></blockquote>
+<blockquote><div class="q">"The agency will onboard your colleague for you — the nameplate, the inbox, the seat at the table. The offboarding it leaves to you, and almost no one has written it. A hand you can hire and never fire is not a colleague; it is a tenant with a key to every room."</div><div class="a">— the radar, on why the employee lifecycle — not the tool's capability — is now the board's AI question</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agent becomes a colleague</td><td><span class="v">Gemini at Work (8 Oct 2026): enterprise Gemini agent ships with its own workplace identity — a dedicated email (reported @agents.company.com), a Workspace account with calendar and Drive, and a seat in the company directory, assignable like a teammate; governed by an "Agent Gateway" (attested identities, spend caps, per-action audit); private preview</span></td><td>The Verge; AIWeekly; TechCrunch; redreamality, as reported</td></tr>
+<tr><td>The embedded human colleague</td><td><span class="v">Anthropic Claude Frontier Academy (2 Oct 2026): $100M to train and embed 10,000 engineers inside customer and partner firms by end-2027; first cohorts from Accenture, Deloitte, McKinsey, Morgan Stanley</span></td><td>Anthropic; AIWeekly; Dealroom, as reported</td></tr>
+<tr><td>The colleague gets a memory</td><td><span class="v">Meta Muse Wonder / Wonder Full (12 Oct 2026): first frontier-class models; "Active Memory" + "Active Focus"; Wonder API $4/$20 per M tokens; MemoryBench ~85.5 vs Opus 5.5 81.5 (Meta's own test); Artificial Analysis still ranks Opus 5.5 #1 at 58</span></td><td>TechCrunch; Decrypt; AIWeekly, as reported</td></tr>
+<tr><td>The arithmetic of the hall</td><td><span class="v">Non-human identities outnumber humans ~82:1 (Rubrik Zero Labs) to ~109:1 (Palo Alto Networks 2026, ~79 agent identities per human); non-human-identity governance at ~21% adoption (VentureBeat Q3-2026, 800 IT leaders)</span></td><td>Rubrik Zero Labs; Palo Alto Networks; VentureBeat, as reported</td></tr>
+<tr><td>The offboarding gap</td><td><span class="v">~78% of organizations have no documented policy for creating or removing an agent identity; Microsoft Entra Agent ID (GA Apr 2026) reportedly reassigns an agent to the sponsor's manager on departure</span></td><td>Rubrik Zero Labs; Microsoft (via secondary), as reported</td></tr>
+<tr><td>The goalposts moved</td><td><span class="v">EU Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026): standalone high-risk (Annex III) deferred from 2 Aug 2026 to 2 December 2027; embedded (Annex I) to 2 Aug 2028; Article 50 transparency still from Aug 2026</span></td><td>CSA; DLA Piper; usercentrics, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">MCP 2026-07-28 (EMA stable); Gartner: 40% of enterprise apps embed task-specific agents by 2026; over 40% of agentic-AI projects canceled by end-2027</span></td><td>MCP; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Hire the colleague onto your own joiner-mover-leaver process, with a living sponsor.</strong> The vendor now ships agents fully furnished — email, calendar, directory seat (Gemini at Work, 8 Oct) — but onboarding done <em>for</em> you is not governance done <em>by</em> you. <strong>This month, require that every AI agent with a standing identity has a named human sponsor and a scoped role recorded in <em>your</em> identity fabric (not only the vendor's console), and fold agents into the same joiner-mover-leaver process you run for employees and privileged service accounts.</strong> Report one number to the board: the share of standing agent identities that have a named sponsor and an entry in your JML process versus those living only in a vendor directory.</li>
+  <li><strong>Write — and rehearse — the offboarding runbook before any agent gets an inbox.</strong> ~78% of organizations have no policy to create <em>or remove</em> an agent identity, even as agents outnumber people 80-to-1 and more. <strong>This month, author the leaver runbook: one revocation point, a defined action when an agent's sponsor departs (the Entra Agent ID pattern), sealing of the mailbox/calendar/Drive and a memory-retention rule on retirement — then run a <em>timed</em> deprovisioning drill on one real agent and measure how long it actually takes to fully let one go.</strong> Report the measured time-to-offboard and the count of deprecated-model identities still live in your directory.</li>
+  <li><strong>Treat the agent's inbox as attack surface.</strong> A colleague with a mailbox any outsider can write to, plus standing cross-app access, is a phishing target and an exfil path that never resigns. <strong>This month, constrain the agent inbox — who may post to it, what it may act on from an incoming message — and apply the DLP, least-privilege and monitoring you apply to a new human hire with broad access; run one prompt-injection-by-email test against a non-production agent and fix what it exposes.</strong> Report whether a crafted message can make an agent exceed its scope, and the remediation. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground you keep; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds the reach; the bell discloses the slip; the locusts are why you be whole; the looking-glass is the honest outside light; the livery names every hand; the steward keeps one book; the surety signs the bond; the second wage asks whose bread it eats; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and the colleague is why, the week the vendor hands your agent an inbox, a diary and a seat at the table, you must hire it onto your own roll with a living sponsor, offboard it by a dismissal you wrote and rehearsed before the pigeonhole was cut, and watch its open slot — because a hand you can hire and never fire is not a colleague, it is a tenant with a key to every room, a former employee who never actually left.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The development — Google (8 Oct 2026, "Gemini at Work"): enterprise Gemini agent with its own workplace identity — a dedicated email (reported @agents.company.com), a Workspace account with calendar and Drive, and a seat in the company directory, assignable like a teammate, governed by an "Agent Gateway" (attested identities, spend caps, per-action audit), routing across Anthropic's Claude plus proprietary and open-weight models; private preview (The Verge; AIWeekly; TechCrunch; redreamality) · The embedded human colleague — Anthropic Claude Frontier Academy (2 Oct 2026): $100M to embed 10,000 engineers inside customer and partner firms by end-2027; first cohorts from Accenture, Deloitte, McKinsey, Morgan Stanley (Anthropic; AIWeekly; Dealroom) · The colleague's memory — Meta Muse Wonder / Wonder Full (12 Oct 2026): first frontier-class models, "Active Memory" + "Active Focus," Wonder API $4/$20 per M tokens, MemoryBench ~85.5 vs Opus 5.5 81.5 (Meta's own test), Artificial Analysis ranks Opus 5.5 #1 at 58 (TechCrunch; Decrypt; AIWeekly) · The arithmetic of the hall — non-human identities outnumber humans ~82:1 (Rubrik Zero Labs) to ~109:1 (Palo Alto Networks 2026 Identity Security Landscape, ~79 agent identities per human); NHI governance ~21% (VentureBeat Q3-2026 survey, 800 IT leaders) · The offboarding gap — ~78% of organizations have no documented policy for creating or removing an agent identity (Rubrik Zero Labs); Microsoft Entra Agent ID (GA Apr 2026) reportedly reassigns an agent to the sponsor's manager on departure · The goalposts moved — EU Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026): standalone high-risk (Annex III) deferred from 2 Aug 2026 to 2 December 2027, embedded (Annex I) to 2 Aug 2028, Article 50 transparency still from Aug 2026, new Article 5 prohibitions phasing 2 Dec 2026 (Cloud Security Alliance; DLA Piper; usercentrics) · The prior rails — MCP 2026-07-28 (EMA stable); Gartner (40% of enterprise apps embed task-specific agents by 2026; over 40% of agentic-AI projects canceled by end-2027). The "colleague" framing — that the vendors have reclassified the agent from a tool you govern into a colleague you employ (with an identity, inbox, calendar and directory seat), that a colleague imports the employee lifecycle whose leaver step the vendor hands you unwritten, and that a house must hire the colleague onto its own joiner-mover-leaver process with a living sponsor, write and rehearse the offboarding before the inbox is issued, and treat the inbox as attack surface — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 14 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics (GoatCounter) — privacy-light, no cookies; counts page views for the AI Tech Radar -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
