@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 18 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the chalkboard price' — in ten days three frontier labs shipped at once (Meta Muse Wonder 12 Oct; Gemini 4 Argon GA 13 Oct; Anthropic's reported $16.8B Q3 and $2T+ IPO plan 14–15 Oct), and the prices are designed to be misread. Gemini 4 Argon's $2/$10 is an introductory rate that doubles to $4/$20 on 30 Nov; the model that topped the Vals index 'using fewer tokens' still cost ~$15.68 per task. The board move: buy by the meal not the board (cost-per-task, not price-per-token), never let a doubling date on a vendor's calendar set your margin, and keep the hearth hot. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You kept the ground — now read the stall</div>
+  <h1>The Chalkboard Price</h1>
+  <div class="subhead">Three weeks ago the model commoditized in public. This morning the market shows you what a commoditized stove-market looks like up close — a loud fair of loss-leaders and doubling dates, where three frontier labs shipped in ten days and the prices are designed to be misread. The board question is no longer which stove is cheapest. It is: are we reading the chalkboard price, or the bill?</div>
+  <div class="meta">Sunday, 18 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">In ten days the whole caravan arrived at once: Meta shipped its first frontier model, Muse Wonder (12 Oct); Google made Gemini 4 Argon generally available (13 Oct); and Anthropic, fresh off Haiku 5.5 and a cache-price cut (~7 Oct), told investors its Q3 revenue hit a reported $16.8B, up ~45%, at an adjusted profit, ahead of a targeted $2T+ IPO (14–15 Oct) (TechCrunch; InfoWorld; Reuters/FT, as reported). And the prices on the stalls are no longer simple. Google chalked Gemini 4 Argon at a cheerful $2/$10 per-million-token "introductory" rate — that doubles to $4/$20 after 30 November (cached input $0.10, a reported 95% discount). Meta hung two price tags on Wonder — a standard $4/$20 API model and a "Full" variant reachable only through a $50–$200/month Muse Code subscription. And the headline per-token price turns out not to be the bill: on the Vals index Gemini 4 Argon topped 41 models at 68.90% "using fewer tokens" — yet still cost an estimated $15.68 per task (Vals; alphasignal; beri; eesel, as reported). Are we reading the chalkboard price, or the bill — and is one vendor's doubling date quietly setting our margin?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>Three weeks ago, in "The Foundation," the radar watched a 40%-bigger Grok 4.7 draw a shrug and concluded the model had commoditized into a cheap, swappable stove — and warned that the durable lock-in had migrated to the ground the house stands on. <strong>This morning the market shows you the stove-stall up close, and the lesson is the next one down: in a commoditized market the price on the board is not the price of the meal.</strong> A ten-day burst of frontier launches arrived wearing prices designed to be misread.</p>
+<p><strong>The reality — the caravan arrived all at once, and intelligence is now sold like a market fair.</strong> In ten days: <strong>Meta shipped Muse Wonder (12 Oct)</strong>, its first frontier-class model, pricing the standard model at a reported <strong>$4/$20 per million tokens</strong> (the GPT-6 Sol / Claude Opus 5.5 range) and gating a "Full" variant behind a <strong>$50–$200/month Muse Code subscription</strong> with no public API; <strong>Google made Gemini 4 Argon generally available (13 Oct)</strong> for long-horizon agentic work, chalking an <strong>introductory $2/$10 that doubles to $4/$20 after 30 November</strong> (cached input $0.10, a reported 95% cut); and <strong>Anthropic</strong>, after Haiku 5.5 and a Sonnet cache-price halving (~7 Oct), told investors <strong>Q3 revenue reached a reported $16.8B (up ~45% from ~$11.6B), at an adjusted — not GAAP — profit, against &gt;$8B of operating losses, ahead of a targeted $2T+ IPO in November</strong> (TechCrunch; eesel; InfoWorld; Reuters/FT, as reported). A commoditized market does not get quieter; it gets louder, with loss-leaders, intro rates and doubling dates.</p>
+<p><strong>The collision — the chalkboard price is not the bill.</strong> The per-token sticker, the number every procurement deck quotes, has decoupled from the cost of getting a unit of work done. Gemini 4 Argon <strong>topped the Vals index at 68.90% across 41 models "using fewer tokens"</strong> — and the <em>same</em> index put its <strong>estimated cost at $15.68 per task</strong> at ~46 minutes each (Vals; alphasignal; beri, as reported), while Grok 4.7's cheap $2/$6 still carried a VentureBeat caveat that <strong>high token consumption threatens real-world ROI</strong> (as reported). Two different headline prices ($2/$10 vs $2/$6) say almost nothing about which model is cheaper <em>for your task</em>, because cost-per-task is price-per-token × tokens-per-task × retries — and only the first number is on the chalkboard. Worse, some of the cheapest chalk is temporary on purpose: <strong>Argon's $2/$10 is a date-stamped promotion that doubles on 30 November</strong>, a cliff on Google's calendar, not yours.</p>
+<p><strong>The stakes — buy by the meal, not the board, and keep the hearth hot.</strong> The move re-uses "The Foundation" one level up, at the price tag. <strong>First, buy by the meal, not the board</strong> — budget and compare on measured cost-per-useful-task (tokens and retries included), not headline price-per-token; the sticker is per-token, the bill is per-task. <strong>Second, never let a doubling date on another man's calendar set your margin</strong> — architect and price your business case to the <em>standard</em> rate, treat the intro rate as a windfall, and put every vendor's promo-expiry and deprecation date on your own risk calendar. <strong>Third, keep the hearth hot</strong> — the whole point of a fair of loss-leaders is that you can walk to the next stall when the chalk changes, which only works if you kept the abstraction and the lit second fire the last edition told you to build.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the caravan arrived at once; the market is now a fair.</strong> <strong>Meta Muse Wonder (12 Oct, $4/$20 + a $50–$200/mo gated "Full"); Gemini 4 Argon GA (13 Oct, intro $2/$10 → $4/$20 on 30 Nov); Anthropic Q3 reported $16.8B, +45%, adjusted profit, $2T+ IPO target (14–15 Oct) (TechCrunch; eesel; Reuters/FT, as reported).</strong> Three frontier labs shipped in ten days.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the chalkboard price is not the bill.</strong> <strong>Gemini 4 Argon topped Vals at 68.90% "using fewer tokens" yet cost an estimated $15.68/task; Grok 4.7's cheap $2/$6 still "threatens ROI" on token consumption (Vals; alphasignal; VentureBeat, as reported).</strong> Price-per-token has decoupled from cost-per-task.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — buy by the meal, price to the standard rate, keep the hearth hot.</strong> Compare on measured cost-per-useful-task; build the business case on the post-promo price and track every doubling/deprecation date; and keep the abstraction + live second fire that let you switch stalls when the chalk changes.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety signed the bond, the second wage checked its loyalty, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — and <strong>the chalkboard price is about reading the stall honestly once the ground is yours.</strong> This week proved a commoditized stove market is not a calm one: three frontier labs wheeled in stoves in ten days, and the cleverest trick on the lot was the pricing. A cheerful $2/$10 chalked on Argon's board doubles to $4/$20 on a date Google chose; Meta hung two tags on Wonder and hid the best one behind a subscription; and the model that topped the independent index "using fewer tokens" still ran $15.68 a task. None of that is fraud — it is simply what a fair looks like, and the houses that get hurt are the ones that budget off the biggest number on the board and wake up on 1 December with the bill. The estates that keep their standing will do three unglamorous things: <strong>buy by the meal</strong> (cost-per-task, measured, not price-per-token quoted), <strong>refuse to let a doubling date on another man's calendar set their margin</strong> (price to the standard rate, track every cliff), and <strong>keep the hearth hot</strong> (the abstraction and second fire that make walking to the next stall a Tuesday, not a project). Shop the fair ruthlessly — it has never been cheaper. Just read the bill, not the board.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Chalkboard Price"</h3>
+<p><em>Topic: Three weeks after the model commoditized in public, the market shows what a commoditized stove-market looks like up close — a loud fair of loss-leaders and doubling dates. In ten days Meta shipped Muse Wonder (12 Oct, $4/$20 standard plus a subscription-gated "Full"), Google made Gemini 4 Argon generally available (13 Oct) at an introductory $2/$10 that doubles to $4/$20 after 30 November, and Anthropic disclosed a reported $16.8B Q3 (up ~45%, adjusted profit) ahead of a targeted $2T+ IPO (TechCrunch; eesel; InfoWorld; Reuters/FT, as reported). The headline per-token price has decoupled from cost-per-task: Gemini 4 Argon topped the Vals index at 68.90% "using fewer tokens" yet cost an estimated $15.68 per task (Vals; alphasignal; beri, as reported). The chalkboard allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, got the ground right. It had named every hand, kept one honest book, put the master's name on the bond, asked whose coin each adviser took, sent its servants to reap, funded them from a scoped purse, and — most lately, and most wisely — refused to let the stove-seller pour the foundation, keeping the hearth its own so that any stove could be wheeled in and out before supper. The master was proud, and he had earned it. He walked down to the fair that morning the way a man walks who believes he has finally learned the game.</p>
+<p>And what a fair it was. Where last season a new stove had come every few weeks, <strong>this week the whole caravan arrived at once</strong> — three great merchants in ten days, each wheeling a gleaming new stove onto the green, each crying its wares. One merchant, new to the stove trade and eager, unveiled a handsome model and a grander one he kept behind his own counter for members only. Another, the largest house in the valley, had just announced to its backers that it had finally turned coin — a fortune in a single quarter — and used the moment to roll out a stove built for the long, patient jobs. The air was loud and wonderful and cheap, and the master's first thought was the right one: <em>the stove has truly become a commodity; I shall never pay dearly for fire again.</em></p>
+<p>Then he looked at the boards. Each stall had a chalkboard, and on the chalkboards were prices, and the prices were the loveliest things the master had ever seen. The long-jobs merchant had chalked a number so low the master blinked — half what he paid now. He very nearly signed on the spot. But the master had been burned into caution by a hard year, and he leaned in to read the small line chalked beneath the big one. <em>"Introductory,"</em> it said, in a neat clerk's hand, <em>"until the turn of the month. Thereafter, twice."</em> The merchant had not lied. He had simply written tomorrow's price small and today's price large, and trusted the master to budget off the large one and forget the small.</p>
+<p>This was the first thing the master learned, and it cost nothing to learn and a fortune to miss: <strong>the price on the board is not the price of the meal.</strong> For there was a second trick, subtler than the doubling date, and it was not written on any board at all. The master had always reckoned the cost of fire by the price of the coal — so much a sack, and the cheaper the sack the cheaper the dinner, surely. But a travelling cook who had eaten at many stalls took him aside. <em>"Reckon it by the meal, not the sack,"</em> she said. <em>"I have cooked on the stove at the stall you admire. It took the top prize in the fair's own blind tasting — and it did it burning less coal than its rivals, which is why its board looks cheap. And yet a full dinner on it cost me more than on a plainer stove, because of how long it ran and how often a dish had to be sent back. The cheap sack is not the cheap dinner. Ask always what one finished meal costs — coal, and time, and the dishes you had to cook twice — and never what a sack of coal costs, for no guest has ever eaten a sack of coal."</em></p>
+<p>Two roads, then, as always. The easy road was the one the whole valley took: read the biggest, lowest number on the brightest board, sign the merchant's paper, and feel clever and thrifty walking home. The wiser road, which the careful houses took, was slower and duller and saved them from grief. They did three plain things. <strong>The first: they bought by the meal, not the board.</strong> Before they moved the kitchen to a new stove, they cooked a real dinner on it — a true day's work — and counted the whole cost: the coal, the hours, the dishes sent back. The board's number went into the ledger as a curiosity; the meal's number went in as the truth. <strong>The second: they refused to let another man's calendar set their household budget.</strong> When a merchant chalked a price that doubled at the turn of the month, the careful house wrote its accounts against the <em>doubled</em> price from the first day, and treated the cheap introductory month as a windfall to be enjoyed and never, ever as the floor to be built on. And they kept a little almanac of every merchant's dates — this one's price doubles at month's end, that one's favourite stove will be carted off and retired by spring — so that no merchant's private calendar ever became an earthquake in their kitchen. <strong>And the third, which was only the last edition's wisdom held one inch higher: they kept the hearth hot.</strong> The entire worth of a fair full of cheap, shouting merchants is that you can walk from a stall whose chalk has turned dear to the stall next door — but only if your kitchen was built to take any stove in an afternoon. A house that had married one stall's plumbing could read every board in the fair and still could not move; for it, the doubling date was not a nuisance but a ransom note.</p>
+<p>Here is the part that should sober a master who thinks the cheap fair is simply a gift. <strong>The noise and the cheapness and the loss-leaders were not generosity; they were the sound of great houses racing to buy the valley's custom while the custom was still cheap to buy.</strong> The largest merchant had just told his backers he had, for the first time, turned a profit — and in the same breath priced a new stove to be given away, because the prize was not this month's coal-money but next year's kitchens, and the year after's, and the lock that a kitchen built around one stall becomes. The introductory price was an invitation to build your kitchen around his counter before the turn of the month, when the price — and your freedom — both changed. The lesson was not that the merchants were wicked. The merchants were doing exactly what merchants do at a fair. The lesson was that <strong>a cheap fair is the most expensive place in the world for a house that cannot read a board or move a kitchen.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now sold at a loud fair of loss-leaders and doubling dates; your knowledge is the larder; the hearth is the ground you kept your own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one book; the surety is why your name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you kept the ground yours — and <strong>the chalkboard price is why, having kept the ground and standing at a fair that has never been cheaper, you must read the board as a merchant wrote it and not as you wish it read: buy by the meal and not the board (cost-per-task, measured, not price-per-token quoted), refuse to let a doubling date on another man's calendar set your margin (budget to the standard price, keep an almanac of every cliff), and keep the hearth hot (so walking to the next stall is a Tuesday, not a ransom), for the cheapest-looking stove at the loudest stall is very often the dearest dinner in the valley.</strong> A house that budgets off the biggest number on the brightest board has not shopped shrewdly; it has read a merchant's advertisement as if it were its own ledger, and called the advertisement a plan.</p>
+<p><strong>The question it forces:</strong> <em>The fair has never been cheaper or louder — three stoves in ten days and prices that make us feel clever. But are we budgeting off the chalkboard or the bill? Do we know what one finished task actually costs us on each model — coal, time, and the work redone — or only the per-token price the merchant chalked largest? Have we built our business case on the price that doubles at the turn of the month, or on the price we will actually pay in December? And if the chalk on our favourite stall turns dear overnight, can we walk to the next one by Tuesday — or did we, for all our talk of a swappable stove, quietly build the kitchen around one counter?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Are we budgeting off the chalkboard or the bill?</strong> Gemini 4 Argon topped the independent Vals index "using fewer tokens" yet cost an estimated $15.68 per task; Grok 4.7's cheap $2/$6 still "threatens ROI" on token consumption (Vals; VentureBeat, as reported). <strong>For our top AI workloads, do we know the measured cost-per-finished-task on each model we use — tokens, retries and latency included — or do our vendor comparisons quote only the headline price-per-token?</strong></li>
+  <li><strong>Whose calendar sets our margin?</strong> Argon's $2/$10 is an introductory rate that doubles to $4/$20 on 30 November (eesel; FourWeekMBA, as reported). <strong>Is our AI business case built on a promotional price with an expiry date on the vendor's calendar — and do we keep an almanac of every provider's promo-expiry, price-step and model-deprecation dates, so none of them is a surprise?</strong></li>
+  <li><strong>If the chalk turns dear overnight, can we walk to the next stall by Tuesday?</strong> The whole value of a cheap, crowded fair is the ability to switch. <strong>Having said we want a swappable stove, have we actually kept the abstraction and the live second supplier that make a price change a routing decision rather than a migration project?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>You price optionality for a living. <strong>Have we valued the option to switch models — and priced the cost of <em>not</em> having it — the way we'd price any embedded option, so the "cheap" single-vendor path is compared against the post-promo, all-in, switching-cost-adjusted number, not the intro sticker?</strong></li>
+  <li>Model risk management already demands you understand cost and behaviour under stress. <strong>When a primary model's introductory price doubles, or the model is deprecated, does our cost base and our validated behaviour survive the change — and have we modelled the 30 November-style cliff as a scheduled risk event, not a surprise?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Validation is expensive and model-specific, so the <em>true</em> cost of a model includes re-validation when it changes or is retired. <strong>Do our model-selection economics include the re-validation cost of a deprecation or forced upgrade — or do we compare only per-token stickers and ignore the largest line item we'll actually pay?</strong></li>
+  <li>A subscription-gated "Full" model (as with Muse Wonder) can't be called from your own pipeline. <strong>Before we design a clinical or research workflow around a model, have we confirmed it's reachable by API on terms we can audit and reproduce — not locked behind a consumer subscription we can't govern?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You cost a part by total landed cost, not the quoted unit price. <strong>Are we costing AI the same way — landed cost-per-task across token use, retries, latency and integration — rather than by the merchant's chalkboard price-per-token?</strong></li>
+  <li>You already run introductory-price and supplier-promotion discipline on physical inputs. <strong>Have we applied it to AI: budget to the standard rate, treat the intro rate as a temporary rebate, and qualify a second source before the promotion expires — so a doubling date never catches a production line?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your margins live and die on unit economics, and inference is now a unit cost. <strong>Do we track cost-per-resolved-interaction (not price-per-token) by model, and route each task to the genuinely cheapest <em>per outcome</em> — which is frequently not the one with the lowest chalkboard price?</strong></li>
+  <li>Loss-leaders are your own trade; you know the move. <strong>Are we reading the labs' introductory pricing for exactly what it is — a loss-leader to win custom before a price step — and enjoying it without building the Black-Friday business case on a rate that doubles on 30 November?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Procurement and continuity rules make a hidden price step a governance problem, not just a budget one. <strong>Can we show that no critical public service is budgeted on a promotional AI rate with a vendor-set expiry, and that total cost-of-ownership — post-promo price, switching cost, exit — is in the contract, not the sales deck?</strong></li>
+  <li>Multi-year services outlive this month's fair. <strong>Are we procuring AI on total-cost-over-the-term with a tested exit, so a merchant's doubling date or a model's retirement is a planned transition — not an unbudgeted emergency paid from the public purse?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Chalkboard Price</h2>
+<p>Read the stack once more, now from the seat of the executive who has kept the ground their own and walked down to a fair that has never been cheaper — and who has stopped asking <em>which stove is cheapest?</em> to ask the question the chalkboard is designed to stop you asking: <em>what does one finished unit of work actually cost me on this model, and for how long will that price hold?</em> The gate admits the agent; the passport names it; the census counts it; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds it; the bell discloses its slips; the looking-glass measures it by an honest outside light; the livery, steward, surety, second wage, two harvests and purse govern the servant; the foundation keeps the ground yours. <strong>The chalkboard price is about the one number everyone quotes and almost no one validates: price-per-token — and this week a ten-day burst of frontier launches made its decoupling from cost-per-task impossible to ignore.</strong> The point is blunt: <strong>in a commoditized market the sticker is engineered to be read, and the bill is engineered to be discovered later, so the discipline that matters is measuring the bill before you sign the sticker.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the caravan arrived at once, and the market is now priced like a fair.</strong> <strong>In ten days: Meta shipped Muse Wonder (12 Oct), its first frontier model — standard at a reported $4/$20 per million tokens (the GPT-6 Sol / Claude Opus 5.5 range), 1M-token context, multimodal, with Meta claiming parity to Fable 5.1 and GPT-6 Astra while independent reviews of its own 14-row table scored it roughly level with Opus 5.5 and flagged an incomplete CBRN safety report, and a "Full" variant reachable only through a $50–$200/month Muse Code subscription with no public API; Google made Gemini 4 Argon generally available (13 Oct) for long-horizon agentic work with a unified 1,048,576-token budget shared across input, thinking and output, at an introductory $2/$10 that doubles to $4/$20 after 30 November (cached input $0.10, a reported 95% cut); and Anthropic, after Haiku 5.5 and a Sonnet-5.5 cache-read price halving (~7 Oct), told investors Q3 revenue reached a reported $16.8B, up ~45% from ~$11.6B, at an adjusted — not GAAP — profit against &gt;$8B of operating losses, ahead of a targeted $2T+ November IPO (TechCrunch; eesel; pasqualepillitteri; InfoWorld; aicybr; Reuters/FT, as reported).</strong> Architecturally, three things follow. First, <em>capability has clustered and the differentiation has moved to price structure, not price level</em> — $4/$20 here, an intro $2/$10 there, a subscription tier somewhere else — so the comparison that matters is no longer "which is cheaper?" but "cheaper for <em>my</em> task, at <em>my</em> token profile, after the promotion ends?" Second, <em>a subscription-gated model is not an enterprise component</em> — if the best variant has no API (as with Wonder Full), it cannot sit behind your gateway or your governance, and should be scored as unavailable for production, not as a cheap option. Third, <em>a vendor turning its first profit while pricing a new model as a loss-leader tells you the land-grab is deliberate</em>: the cheap chalk is customer-acquisition spend, and the bill arrives after you've built.</li>
+  <li><strong>The collision — the chalkboard price has decoupled from the cost-per-task.</strong> <strong>Gemini 4 Argon topped the Vals index at 68.90% across 41 models and reportedly did it "using fewer tokens," yet the same index put its estimated cost at $15.68 per task at ~46 minutes each; Grok 4.7's much lower $2/$6 sticker still carried a VentureBeat caveat that high token consumption threatens real-world ROI (Vals; alphasignal; beri; VentureBeat, as reported).</strong> Two engineering realities cut against the sticker. <strong>First, cost-per-task = price-per-token × tokens-per-task × (1 + retry rate), and only the first factor is on the board.</strong> A model that is twice as expensive per token but needs a third of the tokens and half the retries is cheaper per finished task — and a cheap-per-token model that is verbose, slow, or often wrong can be the dearest dinner in the valley. The only honest comparison is a measured one: run your real workload on each candidate and count the bill. <strong>Second, some of the cheapest stickers have an expiry you don't control.</strong> Argon's $2/$10 is a dated promotion that doubles on 30 November; a business case built on it is a business case with a cliff on someone else's calendar. Treat promotional pricing as a temporary rebate, model the standard rate, and track every provider's promo-expiry and deprecation dates as scheduled risk events.</li>
+  <li><strong>The answer — buy by the meal, price to the standard rate, keep the hearth hot.</strong> <strong>Build a standing evaluation harness that reports cost-per-useful-task (tokens, retries and latency included) per model on your actual workloads, not price-per-token from a pricing page; write every business case against the post-promotion standard rate and keep an almanac of promo-expiry, price-step and deprecation dates; and keep the abstraction/gateway and the live second supplier from "The Foundation" so a price change is a routing decision, not a migration — reusing the same instinct the radar keeps returning to: measure what you actually run, and stay able to act on it.</strong> This is "The Foundation" held one inch higher: there, keep the ground yours so the stove stays swappable; here, now that you can switch, switch on the true bill rather than the merchant's board.</li>
+</ul></div>
+<p>The strategic core: <strong>a cheaper, louder model market is a gift you collect only if you can read the board and move the kitchen — and this week's pricing proves both skills are now the differentiators.</strong> The temptation is exactly engineered: the biggest, lowest number sits on the brightest board, the doubling date is chalked small, and the best model hides behind a subscription — so the thrifty-feeling move (sign the low sticker) is the expensive one. The board translation: <strong>shop the fair ruthlessly; buy by the meal, not the board.</strong> The failure mode is precise: <strong>a house that kept its ground, built its abstraction, and then chose its model off the chalkboard price — budgeting on an intro rate that doubles on 30 November and a per-token sticker that ignores its own token-hungry, retry-heavy workload — will congratulate itself on a cheap fair and discover, on 1 December, that it bought the dearest dinner in the valley and timed the purchase to the one day the price went up.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The chalkboard price: you kept the ground, now read the stall. The fair has never been cheaper, with three frontier stoves in ten days, but the number on the board, price-per-token, is not the bill, cost-per-task. Top left, the chalkboard, what's advertised: price-per-token, the sticker; Gemini 4 Argon introductory 2 dollars / 10 dollars that doubles to 4 dollars / 20 dollars on 30 November; Meta Muse Wonder 4 dollars / 20 dollars plus a gated Full variant; it looks cheapest at the loudest stall. Top right, the bill, what you actually pay: cost-per-task, the meal; Gemini 4 Argon about 15 dollars 68 per task on Vals; cost equals price times tokens times retries; fewer tokens does not mean a cheaper meal; token hunger threatens ROI. Between them: not the same thing, and the low sticker is a loss-leader while the bill arrives later, so shop the fair ruthlessly but buy by the meal, not the board. Middle, the fair in ten days, as reported: Meta Muse Wonder on 12 October, first frontier model, 4 dollars / 20 dollars plus a 50 to 200 dollar a month gated Full; Gemini 4 Argon generally available on 13 October, introductory 2 dollars / 10 dollars to 4 dollars / 20 dollars on 30 November, 1.05 million token context, number one on Vals; Anthropic on 14 to 15 October, Q3 about 16.8 billion dollars, up 45 percent, adjusted profit, 2 trillion dollar plus IPO targeted; cost-per-task equals price-per-token times tokens-per-task times one plus retries, and the board shows only the first. Bottom left, stop, budget off the board: quote price-per-token only, build the case on the intro rate, design around a gated model, marry one stall's plumbing. Bottom right, start, buy by the meal: measure cost-per-task on your own workload, price to the standard rate and track the cliffs, use API-only models behind your gateway, and keep the hearth hot so you can switch by Tuesday." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE CHALKBOARD PRICE — you kept the ground; now read the stall</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The BOARD (price-per-token) is NOT the BILL (cost-per-task). The fair is cheap — read it right.</text>
+
+  <!-- the chalkboard -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a2416" stroke="#8a6d1f"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e3c35d" font-family="sans-serif">THE CHALKBOARD (advertised)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">price-per-token — the sticker</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Argon intro $2/$10 → $4/$20 on 30 Nov</text>
+  <text x="52" y="137" font-size="10" fill="#ecd9a0" font-family="sans-serif">Wonder $4/$20 + a gated "Full"</text>
+  <text x="52" y="157" font-size="10" fill="#ecd9a0" font-family="sans-serif">looks cheapest at the loudest stall</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the number every deck quotes</text>
+
+  <!-- the bill -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE BILL (what you pay)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">cost-per-TASK — the meal</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Argon ≈ $15.68 / task (Vals)</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">= price × tokens × (1 + retries)</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">"fewer tokens" ≠ cheaper meal</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ token hunger "threatens ROI"</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e3c35d" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e3c35d"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the low sticker is a loss-leader; the bill arrives later ▼</text>
+
+  <!-- the fair -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE FAIR, IN TEN DAYS — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Meta Muse Wonder (12 Oct): first frontier model, $4/$20 + $50–$200/mo gated Full</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Gemini 4 Argon GA (13 Oct): intro $2/$10 → $4/$20 on 30 Nov; 1.05M ctx; #1 Vals</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Anthropic (14–15 Oct): Q3 ≈ $16.8B, +45%, adjusted profit, $2T+ IPO targeted</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">cost-per-task = price-per-token × tokens-per-task × (1 + retries) — the board shows only the first</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: budget off the board</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· quote price-per-token only</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· build the case on the intro rate</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· design around a gated model</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· marry one stall's plumbing</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheap board, dear dinner</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: buy by the meal</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· measure cost-per-task on YOUR work</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· price to the STANDARD rate; track cliffs</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· API-only, behind your gateway</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep the hearth hot — switch by Tuesday</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheap board, cheap dinner</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The fair has never been cheaper — collect the gift by reading the bill, not the board.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Buy by the meal · never let a doubling date set your margin · keep the hearth hot.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#e3c35d"></i>The chalkboard — what's advertised</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>The bill — what you actually pay</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The fair, in ten days</span>
+</div>
+</div>
+
+<h3>The chalkboard price vs the bill — what's advertised, and what you pay</h3>
+<table>
+<tr><th>The chalkboard (advertised)</th><th>The bill (what you actually pay)</th></tr>
+<tr><td>Price-per-token — the number every deck quotes</td><td>Cost-per-task = price × tokens-per-task × (1 + retries)</td></tr>
+<tr><td>Argon intro $2/$10 — looks cheapest on the board</td><td>Argon ~$15.68/task on Vals, ~46 min/task (#1 of 41)</td></tr>
+<tr><td>"Uses fewer tokens" — a marketing line</td><td>Fewer tokens ≠ cheaper meal if the task runs long or retries</td></tr>
+<tr><td>Grok 4.7 cheap $2/$6 sticker</td><td>Token hunger "threatens real-world ROI" (VentureBeat)</td></tr>
+<tr><td>Intro rate chalked large; "doubles 30 Nov" chalked small</td><td>A cliff on the vendor's calendar, paid from your budget</td></tr>
+<tr><td>A gated "Full" model with no API</td><td>Not an enterprise component — unreachable by your gateway</td></tr>
+</table>
+
+<h3>Why "the chalkboard price" is the discipline that matters now</h3>
+<div class="card">
+<p>For three weeks the worry was whether you'd kept the ground — the foundation under the swappable stove. <strong>This morning the market moved the question up one level, to the price tag on the stove itself: when intelligence is sold at a loud fair of loss-leaders and doubling dates, reading the board correctly is a board-level skill.</strong> Argon's intro-that-doubles, Wonder's two price tags, and the $15.68-per-task-at-the-top-of-the-index all say the same thing: the headline price-per-token is an advertisement, and the cost-per-task is the ledger. Governance that priced AI off a pricing page will overpay precisely while feeling thrifty. The estates that keep their standing will collect the cheap fair's gift by pricing the meal, not the sack — and will refuse to let a merchant's calendar, or a merchant's largest chalk number, do their budgeting for them.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to price what you run, truthfully, before you commit to it.</em> On a legacy estate the instinct is to let procurement pick the model with the lowest quoted token price and move on; it looks disciplined and it is fast. Under the chalkboard that is exactly the reflex to check: the lowest quoted token price is frequently the highest cost-per-task, and sometimes a promotional rate with a December cliff. The retrofit is <strong>meal, margin, hearth. Meal:</strong> stand up an evaluation harness that reports measured cost-per-useful-task per model on your real workloads, and make <em>that</em> the number procurement compares. <strong>Margin:</strong> write every AI business case against the standard (post-promo) rate, keep an almanac of promo-expiry and deprecation dates, and treat a doubling date as a scheduled risk event. <strong>Hearth:</strong> keep the abstraction and live second fire from "The Foundation" so acting on the true bill — routing a task to the genuinely cheapest model per outcome, or walking away from a stall whose chalk turned dear — is a configuration change, not a quarter's project. And keep the whole refrain: the model is a rented stove sold at a fair of loss-leaders; the knowledge is the larder; the hearth is the ground you kept; the gate is the one door; the passport names each agent; the census is the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds it; the bell discloses its slips; the looking-glass measures it by an honest light; the livery names every hand; the steward keeps one book; the surety signs the bond; the second wage checks its loyalty; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and <em>the chalkboard price is why, standing at the cheapest fair there has ever been, you must read the board as the merchant wrote it: buy by the meal, price to the standard rate, keep the hearth hot, so the cheap stove is also the cheap dinner and no merchant's calendar ever sets your margin.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The caravan — three frontier stoves in ten days.</strong> <strong>Meta Muse Wonder (12 Oct, first frontier model); Gemini 4 Argon GA (13 Oct); Anthropic Haiku 5.5 + Sonnet cache cut (~7 Oct) and Q3 financials (14–15 Oct) (TechCrunch; InfoWorld; Reuters/FT, as reported).</strong> A commoditized market got louder, not quieter.</li>
+  <li><strong>The doubling date.</strong> <strong>Gemini 4 Argon: introductory $2/$10 per M tokens, doubling to $4/$20 after 30 November; cached input $0.10 (a reported 95% cut); 1,048,576-token shared budget (eesel; FourWeekMBA; aicybr, as reported).</strong> A cliff on Google's calendar.</li>
+  <li><strong>The bill vs the board.</strong> <strong>Gemini 4 Argon topped Vals at 68.90% across 41 models "using fewer tokens," yet cost an estimated $15.68/task at ~46 min/task; Grok 4.7's cheap $2/$6 "threatens ROI" on token consumption (Vals; alphasignal; beri; VentureBeat, as reported).</strong> Price-per-token ≠ cost-per-task.</li>
+  <li><strong>The two price tags.</strong> <strong>Meta Muse Wonder: standard $4/$20 per M tokens (GPT-6 Sol / Opus 5.5 range), 1M context, multimodal; a "Full" variant gated behind a $50–$200/mo Muse Code subscription with no public API; independent reviews scored its own table roughly level with Opus 5.5 and flagged an incomplete CBRN safety report (eesel; pasqualepillitteri; TechCrunch, as reported).</strong> The best variant isn't an enterprise component.</li>
+  <li><strong>The economics underneath the loss-leaders.</strong> <strong>Anthropic Q3 revenue a reported $16.8B (up ~45% from ~$11.6B; ~$4.7B in Q1), at an adjusted — not GAAP — profit against &gt;$8B of operating losses, targeting a $2T+ IPO in November (Reuters/FT; AFP; Devdiscourse, as reported).</strong> Cheap chalk is customer-acquisition spend; the land-grab is deliberate.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>"The Foundation" (22 Sep): own the floor, keep the larder, light a second fire; EU AI Act high-risk regime live since 2 August 2026 and Article 50 transparency duties in force; MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> The hearth you kept is what lets you act on the true bill.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--amber)"><div class="q">Gemini 4 Argon pricing: the $2/$10 promo, the $4/$20 bill, and what a task really costs.</div><div class="a">— eesel, headline on Gemini 4 Argon pricing (as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">Google's Gemini 4 Argon Tops Vals Index at 68.9% Using Fewer Tokens.</div><div class="a">— alphasignal, on Gemini 4 Argon's benchmark result (as reported; the same index estimates ~$15.68 per task)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Muse Wonder launches at Opus 5.5 prices but trails it in benchmarks.</div><div class="a">— headline on Meta Muse Wonder (as reported; standard $4/$20, a "Full" tier gated behind a Muse Code subscription)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">Anthropic revenue jumps to $16.8 billion in third quarter.</div><div class="a">— Reuters / Financial Times, on Anthropic's Q3 (as reported; up ~45%, an adjusted profit ahead of a targeted $2T+ IPO)</div></blockquote>
+<blockquote><div class="q">"The fair has never been cheaper or louder — three stoves in ten days. But the price on the board is not the price of the meal. Buy by the meal, not the board; never let a doubling date on another man's calendar set your margin; and keep the hearth hot, so the cheap stove is also the cheap dinner."</div><div class="a">— the radar, on reading a commoditized market by the bill, not the sticker</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The caravan arrived at once</td><td><span class="v">Three frontier stoves in ten days: Meta Muse Wonder (12 Oct, first frontier model), Gemini 4 Argon GA (13 Oct), Anthropic Haiku 5.5 + Sonnet cache cut (~7 Oct) and Q3 financials (14–15 Oct)</span></td><td>TechCrunch; InfoWorld; Reuters/FT, as reported</td></tr>
+<tr><td>The doubling date</td><td><span class="v">Gemini 4 Argon: introductory $2/$10 per M tokens, doubling to $4/$20 after 30 November 2026; cached input $0.10 (a reported 95% cut); 1,048,576-token shared budget</span></td><td>eesel; FourWeekMBA; aicybr, as reported</td></tr>
+<tr><td>The bill vs the board</td><td><span class="v">Gemini 4 Argon topped the Vals index at 68.90% across 41 models "using fewer tokens," yet cost an estimated $15.68 per task at ~46 min/task; Grok 4.7's cheap $2/$6 still "threatens ROI" on token consumption</span></td><td>Vals; alphasignal; beri; VentureBeat, as reported</td></tr>
+<tr><td>The two price tags</td><td><span class="v">Meta Muse Wonder: standard $4/$20 per M tokens (GPT-6 Sol / Opus 5.5 range), 1M context, multimodal; a "Full" variant gated behind a $50–$200/mo Muse Code subscription, no public API; independent table ≈ level with Opus 5.5; incomplete CBRN safety report</span></td><td>eesel; pasqualepillitteri; TechCrunch, as reported</td></tr>
+<tr><td>The economics underneath</td><td><span class="v">Anthropic Q3 revenue a reported $16.8B (up ~45% from ~$11.6B; ~$4.7B in Q1), at an adjusted — not GAAP — profit against &gt;$8B of operating losses; targeting a $2T+ IPO in November</span></td><td>Reuters/FT; AFP; Devdiscourse, as reported</td></tr>
+<tr><td>The cost-per-task formula</td><td><span class="v">Cost-per-task = price-per-token × tokens-per-task × (1 + retry rate) — only the first factor is on the chalkboard; the other two decide the bill</span></td><td>the radar's own framing</td></tr>
+<tr><td>The prior rail</td><td><span class="v">"The Foundation" (22 Sep): own the floor, keep the larder, light a second fire; EU AI Act high-risk regime live since 2 Aug 2026; MCP 2026-07-28; Gartner 40% of enterprise apps embed task-specific agents by 2026</span></td><td>AI Tech Radar; EU AI Act; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Buy by the meal, not the board — stand up a cost-per-task harness before you pick a model.</strong> The headline price-per-token has decoupled from the bill: Gemini 4 Argon topped the Vals index "using fewer tokens" yet cost an estimated $15.68 per task, while Grok 4.7's cheap $2/$6 still "threatens ROI" on token consumption (Vals; VentureBeat, as reported). <strong>This month, run your top three AI workloads on each candidate model and report measured cost-per-finished-task — tokens, retries and latency included — then make <em>that</em> number, not the pricing-page sticker, the one procurement compares.</strong> Report to the board the cost-per-task (not price-per-token) of each production workload on its current model versus the best-measured alternative.</li>
+  <li><strong>Never let a doubling date on another man's calendar set your margin.</strong> Argon's $2/$10 is an introductory rate that doubles to $4/$20 on 30 November; a business case built on it has a cliff you don't control (eesel; FourWeekMBA, as reported). <strong>This month, re-base every AI business case on the standard (post-promotion) rate, treat any intro discount as a temporary rebate, and build an almanac of every provider's promo-expiry, price-step and model-deprecation dates — each entered as a scheduled risk event with an owner.</strong> Report the share of AI spend currently budgeted on promotional pricing, and the next three dates on which a provider's price or model availability changes.</li>
+  <li><strong>Keep the hearth hot — make acting on the true bill a routing decision, not a project.</strong> A cheap, crowded fair only rewards the house that can walk to the next stall; that is the abstraction and live second fire "The Foundation" told you to build, now earning its keep. <strong>This month, confirm that at least your top workloads can be routed to a second model behind your own gateway, and run one real cut-over driven by cost-per-task — switch a workload to the genuinely cheapest model per outcome and measure what it saved and what broke.</strong> Report the measured time-to-switch and the cost-per-task saving from one real re-route. <strong>The model is a rented stove sold at a fair of loss-leaders; the knowledge is the larder; the hearth is the ground you kept; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds it; the bell discloses its slips; the looking-glass measures it by an honest light; the livery names every hand; the steward keeps one book; the surety signs the bond; the second wage checks its loyalty; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours — and the chalkboard price is why, at the cheapest fair there has ever been, you must buy by the meal and not the board, price to the standard rate and keep an almanac of every cliff, and keep the hearth hot, so the cheap-looking stove is also the cheap dinner and no merchant's calendar ever sets your margin.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The caravan — Meta Muse Wonder (12 Oct 2026), its first frontier model (TechCrunch; ProPakistani); open weights going frontier-class in the same window (DEV Community) · The two price tags — Meta Muse Wonder: standard $4/$20 per M tokens, 1M context, multimodal, a "Full" variant gated behind a $50–$200/mo Muse Code subscription with no public API, independent table ≈ level with Opus 5.5, incomplete CBRN safety report (eesel; pasqualepillitteri; YourStory) · The doubling date — Gemini 4 Argon GA (13 Oct 2026) for long-horizon agentic work, introductory $2/$10 doubling to $4/$20 after 30 November, cached input $0.10, 1,048,576-token shared budget (InfoWorld; eesel; FourWeekMBA; aicybr; Daniel Vaughan) · The bill vs the board — Gemini 4 Argon topped the Vals index at 68.90% across 41 models "using fewer tokens," estimated $15.68 per task at ~46 min/task (Vals; alphasignal; beri); Grok 4.7's cheap $2/$6 "threatens real-world ROI" on token consumption (VentureBeat) · The economics underneath — Anthropic Q3 revenue a reported $16.8B (up ~45% from ~$11.6B; ~$4.7B in Q1), an adjusted — not GAAP — profit against &gt;$8B of operating losses, targeting a $2T+ November IPO (Reuters/FT; Khaleej Times; Devdiscourse; NewsBytes) · The prior rails — AI Tech Radar "The Foundation" (22 Sep 2026); EU AI Act (high-risk regime live since 2 August 2026; Article 50 transparency in force); MCP 2026-07-28; Gartner (40% of enterprise apps embed task-specific agents by 2026). The "chalkboard price" framing — that a commoditized model market is a loud fair of loss-leaders and doubling dates in which the headline price-per-token has decoupled from the true cost-per-task, and that a house must buy by the meal (cost-per-task, not price-per-token), refuse to let a vendor's doubling date set its margin, and keep the hearth hot — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 18 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies). Infrastructure only — see ai-radar/ROUTINE_PROMPT.md -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
