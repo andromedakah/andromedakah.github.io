@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 21 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the new hire' — the vendors just promoted the agent from a tool you install to a coworker you onboard. Google's Gemini agent (8 Oct) gets its own Workspace account — email, calendar, Drive, directory seat — over a swappable model layer (Gemini + Claude today). A colleague carries obligations a tool never did: a named sponsor, a scoped role, a tested dismissal. Yet non-human identities outnumber humans by up to 45:1, only 10% say their systems can manage them, ~22% tie identities to agents, 32% govern agents like humans, 88% had an incident (Okta; CyberArk). The board move: onboard like a hire, keep the roll readable, make dismissal a drill. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the tool — now the vendor hands you a colleague</div>
+  <h1>The New Hire</h1>
+  <div class="subhead">A year of work went into governing the agent as a tool — named, scoped, logged, funded. This month the vendors change what it <em>is</em>: Google's Gemini agent gets its own Workspace account — email, calendar, Drive, a seat in your directory — and onboards the agent as a coworker. A colleague is a heavier obligation than a tool. @mention the new hire all you like — but could you fire it by lunch?</div>
+  <div class="meta">Wednesday, 21 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 8 October 2026, at "Gemini at Work 2026," Google Cloud unveiled the Gemini agent — and its "coworker agent" is given its own Workspace account: its own email address, calendar, Drive, and "presence in your company directory," which colleagues <em>@mention</em> in Chat and Docs, whose edits "appear under its own name in version history," and which "sees only what is shared with it" (Google Cloud; MarkTechPost; AI Weekly — "Gets a Mailbox and Directory Seat," as reported). The model underneath is now a swappable layer — Google routes each task "across our Gemini family of models and Claude models from Anthropic today," with OpenAI and open-weights to follow — so the agent, not the model, is the product. This is not the livery: the livery put <em>your</em> uniform on <em>your</em> servant; this gives the hand its own key, its own inbox, and its own name on the staff roll. The board question is no longer <em>is the tool named, scoped and funded?</em> It is: when a worker in our house is not a person, who hired it, who vouches for it, who can dismiss it — and can we even find all of them on the roll? The honest answer at most houses is no: non-human identities outnumber humans by as much as 45:1, only 10% of firms say their systems can manage them, 41% say no single team owns AI security, ~22% tie identities to agents, and just 32% govern agents like humans (Okta, <em>Businesses at Work 2026</em>; CyberArk, as reported). We have begun handing out keys, inboxes and nameplates to coworkers we cannot count.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar governed the <em>servant</em> as a tool — named, booked, bonded, waged, sent to reap, funded with a scoped purse, and stood on ground you checked was yours. <strong>This morning the vendors change what the agent <em>is</em>: they onboard it as a coworker.</strong> The axis turns from <em>how do we govern the tool?</em> to <em>how do we hire, vouch for, and dismiss a colleague who is not a person?</em></p>
+<p><strong>The reality — the agent is being given its own identity, as a coworker, not a tool.</strong> On <strong>8 October 2026, at "Gemini at Work 2026," Google Cloud unveiled the Gemini agent</strong>, whose "coworker agent" receives <strong>its own Workspace account — its own email address, calendar, Drive, and "presence in your company directory"</strong> — which colleagues <strong>@mention</strong> in Chat and Docs, whose edits "appear under its own name in version history," and which "sees only what is shared with it" (Google Cloud; MarkTechPost; AI Weekly, as reported). The underlying model is now an explicitly <strong>swappable layer</strong> — Google routes each task "across our Gemini family of models and Claude models from Anthropic today," with OpenAI and open-weights promised next (Futurum — "the agent ahead of the model"; Creative Strategies — "bets on governance and model choice," as reported). This is <strong>not the livery</strong>: the livery put <em>your</em> uniform on <em>your</em> servant so you could tell your hands apart; this gives the hand its <strong>own key, its own inbox, its own nameplate on the staff roll</strong>. And the framing is now industry-wide — OpenAI's Frontier (Feb 2026) treats agents as "AI coworkers" onboarded and governed like employees, and Anthropic's <strong>Claude Frontier Academy (2 Oct 2026) commits $100M to train 10,000 "Frontier Deployed Engineers" by the end of 2027</strong> (OpenAI; Anthropic, as reported).</p>
+<p><strong>The collision — a coworker brings obligations a tool never did, and most houses have skipped them.</strong> When a worker is a <em>tool</em>, you need only scope and log it. When a worker is a <em>colleague</em> — with its own credentials, its own inbox, its own seat — you need the things that make a colleague accountable: <strong>a named human who vouches for it, a role that bounds what it may touch, and a way to dismiss it that actually works.</strong> Most houses have handed out the keys and skipped the hiring. Non-human identities now outnumber humans by as much as <strong>45 to 1</strong> and, on other counts, <strong>more than 80 to 1</strong>; only <strong>10%</strong> of organizations say their identity systems are fully equipped to manage them; <strong>41%</strong> say <strong>no single team</strong> is responsible for AI security; only about <strong>22%</strong> have identities tied to their agents; and just <strong>32%</strong> secure agents with the rigor they give a human hire — while <strong>88%</strong> reported a confirmed or suspected agent-related security incident in the past year (Okta, <em>Businesses at Work 2026</em>; CyberArk; as reported). A coworker you cannot find on the roll, cannot trace to a sponsor, and cannot fire is not a colleague. <strong>It is an unlocked door wearing a nameplate.</strong></p>
+<p><strong>The stakes — onboard the agent like a hire, keep the roll readable, make dismissal a drill.</strong> The board move re-uses the whole year's discipline and points it at the HR question the vendors just forced. <strong>First, onboard it like a hire, not a tool</strong> — every agent gets its <em>own</em> identity (never a borrowed human login or a shared service account), tied to a <strong>named human sponsor</strong> who is accountable for it, a <strong>scoped role</strong> that bounds what it may touch, and a <strong>lifecycle</strong> from provisioning to retirement. <strong>Second, keep the staff roll readable</strong> — a live inventory you can actually query: who sponsored each agent, what it can reach, when it last acted; the 45:1 ratio means the census is now the hard part. <strong>Third, make dismissal a drill, not a theory</strong> — a tested, fast deprovisioning path, so you can revoke an agent's key, inbox and nameplate in minutes, and you have practiced it. Do it <strong>now</strong>, because the vendors are shipping the coworker-with-its-own-account this quarter, and the keys are being cut faster than the roll is being kept.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the agent gets its own identity, as a coworker.</strong> <strong>Google's Gemini agent (8 Oct) gives a "coworker agent" its own Workspace account — email, calendar, Drive, directory seat, @mentionable, edits under its own name — over a swappable model layer (Gemini + Claude today, OpenAI/open-weights next) (Google Cloud; MarkTechPost; Futurum, as reported).</strong> The agent, not the model, is now the product — and it is onboarded like an employee.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — a colleague needs a sponsor, a scoped role, and a way to be fired; most houses skipped all three.</strong> <strong>Non-human identities outnumber humans by up to 45:1 (80:1 on other counts); only 10% say their systems can manage them; 41% say no single team owns AI security; ~22% tie identities to agents; 32% secure agents like humans; 88% had an agent incident (Okta; CyberArk, as reported).</strong> Keys cut faster than the roll is kept.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — onboard like a hire, keep the roll readable, make dismissal a drill.</strong> Give every agent its own identity tied to a named sponsor and a scoped role; keep a live, queryable staff roll; and test a fast deprovisioning path you have actually run.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the tool, the steward kept its book, the surety signed its bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, and the foundation asked whose ground it stood on — all treating the agent as a <em>tool in your house</em>. <strong>The new hire is the morning the vendors made it a colleague.</strong> Google gives the coworker agent its own email, calendar, Drive and seat in the directory; OpenAI and Anthropic race to onboard, train and deploy "AI coworkers" and the engineers who place them. A colleague is a different kind of obligation than a tool: a person on your staff has someone who vouched for them, a role that bounds them, and a manager who can let them go — and you can find them on the roll. The trap is that it <em>feels</em> modern and tidy to give the agent its own account and @mention it like a teammate, and nobody notices that the house has issued keys, inboxes and nameplates to a workforce it cannot count (45:1), cannot trace to a sponsor (only 22% tie identities to agents), and has never practiced dismissing (just 32% govern agents like humans). The houses that keep their standing will do three unglamorous, deeply human-resources things: <strong>onboard the agent like a hire</strong> (its own identity, a named sponsor, a scoped role, a lifecycle), <strong>keep the staff roll readable</strong> (a live census you can actually query), and <strong>make dismissal a drill</strong> (a fast, tested path to revoke the key, the inbox and the nameplate). @mention the new hire all you like — but first make sure you could fire it by lunch, and that you know its name is on the roll.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The New Hire"</h3>
+<p><em>Topic: This morning the vendors change what the agent <em>is</em> — from a tool in the house to a coworker on the staff. On 8 October 2026, at "Gemini at Work 2026," Google Cloud unveiled the Gemini agent, whose "coworker agent" receives its own Workspace account — its own email, calendar, Drive and "presence in your company directory," @mentionable in Chat and Docs, with edits "under its own name" — over a swappable model layer (Gemini + Claude today, OpenAI/open-weights next) (Google Cloud; MarkTechPost; Futurum, as reported). OpenAI's Frontier and Anthropic's Claude Frontier Academy ($100M, 10,000 "Frontier Deployed Engineers" by end-2027) make the "AI coworker" framing industry-wide. Yet non-human identities outnumber humans by up to 45:1, only 10% of firms say their systems can manage them, 41% say no single team owns AI security, ~22% tie identities to agents, 32% govern agents like humans, and 88% had an agent incident (Okta; CyberArk, as reported). The new-hire allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year learning to govern its servants. It had named every hand and cut it a scoped key, kept one honest book, put the master's name on the bond, asked whose second coin each advising servant took, sent the governed servants to reap, handed each a scoped purse, and looked hard at the ground the whole estate stood on. By any fair reckoning it governed its <em>tools</em> better than any house in the valley — and the master was proud, as he should have been.</p>
+<p>Then, this month, the great trading company that supplied the house did a quiet and clever thing. It stopped delivering <em>tools</em> altogether. Where last season it had sent a clever machine the house plugged into its own wall, this season it sent a <strong>worker</strong> — and the worker arrived with its own things. Its own key to the front door. Its own pigeon-hole in the mail-room, with its own name painted on. Its own place at the long table, its own line in the house's own staff register, so that when a maid wanted a thing done she no longer fetched a tool from the cupboard — she <strong>called the worker by name down the hall</strong>, and the worker answered, and did the thing, and signed the work <em>in its own hand</em> in the house ledger. "Treat it as a colleague," the company said warmly. "Give it a seat. It will feel like one of your own."</p>
+<p>And the master, who had grown so good at governing tools, felt the ground tilt under a question he had never had to ask of a hammer. <em>A tool I switch off and put in a drawer. But this is not in a drawer. This has a key, and an inbox, and a name on the roll. This is a hire.</em> And a hire, he knew — for he had hired people all his life — is a wholly different kind of obligation than a tool. You do not merely <em>scope</em> a person. <strong>You vouch for them: someone signs their name beside the new hand's and says, this one is mine, I answer for them. You bound them: a role, a title, a description of what they may and may not touch. And — the part no one likes to plan on the first day — you keep the power to let them go: a clear way to take back the key, empty the pigeon-hole, and strike the name from the roll, the same afternoon, if it comes to that.</strong> None of these is a thing you ever did to a tool. All of them are things you must do for a colleague.</p>
+<p>So the master walked down to the staff register to see how his new workers had been hired — and here the story turns cold. The register was a shambles. For every human name on the roll there were <strong>forty-five others</strong> he did not recognize — some said eighty — workers that had been let in the front door over the past year, each with a key and a pigeon-hole, none of them ever properly <em>hired</em>. He asked the steward, "Who vouched for these? Who is their master of record?" and the steward could answer for scarcely <strong>one in five</strong>. He asked, "Which office does their hiring — who onboards them, who can dismiss them?" and found that <strong>no single office</strong> owned the task; it had fallen between the butler and the clerk of works and the man who kept the locks, and so had fallen to no one. He asked, "Do we hire these the way we hire a footman — a sponsor, a role, a probation, a way to let them go?" and the honest answer was that <strong>barely a third</strong> were held to anything like it. And when he asked the plainest question of all — "Has any harm come of this?" — the steward went grey, because <strong>very nearly all</strong> of them, by now, had been near some mishap or breach, a worker wandering into a room it had no business in, a key that opened a door no one meant it to.</p>
+<p>Two roads, as always. The easy road was to keep saying <em>welcome aboard</em> — the workers were useful, they did fine work, and @calling them by name down the hall was a marvel. The wiser road, which the careful houses took, began by refusing the company's warm word. <em>A "colleague" is not a gift you unwrap; it is a hire you are now responsible for.</em> So the careful houses stopped letting workers in the door and started <strong>onboarding</strong> them. <strong>Every worker got its own true name</strong> — never a borrowed footman's key, never a shared pass the whole kitchen used, but a name of its own, so the ledger always showed whose hand did the work. <strong>Every worker got a human sponsor</strong> — a real person who signed beside it and answered for it, as a captain answers for the men he musters. <strong>Every worker got a written role</strong> — this room, not that one; these errands, not those — so a seat at the table never quietly became a run of the whole house. And <strong>every worker got, written down before it ever lifted a finger, the terms of its dismissal</strong> — who could let it go, and how fast, and a drill run at least once so the house <em>knew</em> it could take back the key, empty the pigeon-hole and strike the name by supper, not merely believe it could.</p>
+<p>Here is the part that should keep a master awake. The thing that made the new workers so pleasant — that they came with their own key, their own inbox, their own name on the roll, so you need not trouble yourself with hiring them — was exactly the thing that made them dangerous. <strong>A tool forgotten in a drawer is inert. A worker forgotten on the roll still has a key.</strong> The company had not done anything wicked; it had simply made it so <em>easy</em> to take on staff that the house took on a city's worth of them without once doing the small, dull, human work of hiring — the vouching, the bounding, the planning for the parting. And a house that cannot say who vouched for a worker, what it is allowed to touch, and how it would be let go, does not have colleagues. It has strangers with keys.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; your knowledge is the larder; the foundation is the ground you must own; the gate is the one door; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment one slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you put <em>your</em> uniform on <em>your</em> servant; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee and not an heir — and <strong>the new hire is why, the morning the vendor stops selling you a tool and hands you a <em>colleague</em> with its own key, its own inbox and its own name on the staff roll, you must stop <em>installing</em> and start <em>hiring</em>: give every worker its own true name, a human who vouches for it, a role that bounds it, and a dismissal you have drilled — so that a house which governs its tools superbly does not wake to find it has let in a workforce forty-five times its own number that it never hired, cannot trace to a sponsor, and has never once practiced letting go.</strong> A house that gives a worker a seat at the table without first hiring it has not gained a colleague; it has handed a stranger a key, a nameplate and a chair, and called the arrangement a team.</p>
+<p><strong>The question it forces:</strong> <em>The vendor just handed our newest worker its own email, its own calendar, its own seat in our directory — and told us to treat it as a colleague. So: did we <strong>hire</strong> it, or merely let it in? For every agent with a key in our house, can we name the human who vouches for it, the role that bounds what it may touch, and the drill by which we would dismiss it this afternoon — or are we among the houses where non-human workers outnumber people forty-five to one, only one in five can be traced to a sponsor, no single office does the hiring, and nobody has ever practiced saying "you're let go"?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Did we hire our agents, or merely let them in?</strong> The vendors now ship agents with their own identity — Google's coworker agent gets its own Workspace email, calendar, Drive and directory seat (8 Oct). <strong>For every agent with credentials in our house, can we name the human who sponsors it, the written role that bounds what it may touch, and who can dismiss it — or do we only know how to <em>scope a tool</em>, not <em>hire a colleague</em>?</strong></li>
+  <li><strong>Can we even find them all on the roll?</strong> Non-human identities outnumber humans by as much as 45:1 (80:1 on other counts), only ~22% of firms have identities tied to their agents, and 41% say no single team owns AI security. <strong>Can we produce, today, a live, queryable roster of every agent identity, its sponsor, its permitted scope, and its last activity — and if not, who owns closing that gap by when?</strong></li>
+  <li><strong>Could we fire one by lunch?</strong> Only ~32% of firms govern agents with the rigor they give human employees, yet 88% report an agent-related incident. <strong>Have we ever <em>run the drill</em> — revoked a live agent's identity, inbox and access under time pressure and confirmed its work stopped — or is "we can turn it off" a belief we have never tested?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Identity and access are supervised controls in your world, and agents are now first-class identities with their own logins. <strong>Can we show our regulator a single authoritative register of non-human identities — each with a named accountable owner, a scoped entitlement, and a tested revocation path — or have agents been provisioned outside the identity-governance regime we already owe for humans?</strong></li>
+  <li>Third-party and over-permissioning risk is magnified when an agent has its own account and routes across multiple vendors' models (Gemini + Claude today, more to follow). <strong>For each agent, do we enforce least privilege and short-lived credentials, and do we know which model is answering on its behalf for each regulated decision?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent with its own directory identity that "sees only what is shared with it" still accumulates access over time. <strong>For agents touching clinical or patient data, do we have a named human sponsor accountable for each, a scoped role reviewed on a schedule, and automatic deprovisioning when a project ends — the same joiner-mover-leaver discipline we apply to clinicians?</strong></li>
+  <li>Validation and attribution matter here. <strong>When an agent's edits "appear under its own name," can we reconstruct who authorized the work, under which model, and roll it back — or does an autonomous coworker create an accountability gap in a regulated workflow?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You run rigorous contractor onboarding and badge-control for people on the floor; agents are now badged workers too. <strong>Have we applied joiner-mover-leaver (sponsor, scoped access, time-boxed credentials, revocation) to every agent identity — or are agents the one "workforce" we let onto the floor without a badge office?</strong></li>
+  <li>Embedded-vendor programs (OpenAI Frontier's forward-deployed engineers; Anthropic's 10,000 Frontier Deployed Engineers) put vendor-trained people and their agents inside your operations. <strong>When they leave, do the agents they stood up remain ours, named and governable — or do we inherit orphaned workers no one in-house can sponsor or dismiss?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents with their own accounts now act across chat, email, calendar and documents on your behalf. <strong>Do we have a live inventory of every customer- or ops-facing agent, its sponsor and its scope — and can we revoke one instantly if it misbehaves during peak trade, or would "which account is that?" cost us the afternoon?</strong></li>
+  <li>Model choice is now the agent's, not yours (routing across Gemini, Claude, soon others). <strong>For agents that touch customer data or spend, do we control and log which model answers — or has the "coworker" been given discretion we never granted a tool?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Accountability and traceability are statutory duties. <strong>Under the EU AI Act high-risk regime (live since 2 August 2026), can we show that every agent acting in a public service has a named accountable human, a bounded role, and a revocation path — the digital equivalent of a vetted, dismissible public servant?</strong></li>
+  <li>Continuity and public trust make an uncounted workforce a governance failure. <strong>Do we maintain an authoritative register of agent identities with owners and scopes, and have we tested dismissing one — or have we onboarded non-human workers into public systems that no single office is responsible for?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the New Hire</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this tool named, scoped, logged, loyal, reaping, funded, and standing on ground I own?</em> and started asking the question the vendors just forced: <em>this worker has its own key, its own inbox and its own name on the roll — did we hire it, and could we fire it?</em> Every prior control — gate, passport, census, inspector, keyring, locksmith, tide table, provenance, errand, bell, locusts, looking-glass, livery, steward, surety, second wage, two harvests, purse, foundation — governs the agent <strong>as a tool in your house</strong>. <strong>The new hire is the morning the agent becomes a colleague with an identity of its own — and a colleague carries obligations a tool never did: someone who vouches for it, a role that bounds it, and a dismissal that works.</strong> This month made the shift concrete: Google's Gemini agent (8 Oct) gives a "coworker agent" its own Workspace account — email, calendar, Drive, directory presence, @mentionable, edits under its own name — over a model layer it chooses per task (Gemini + Claude now, OpenAI/open-weights next). The point is blunt: <strong>the vendors have promoted the agent from tool to coworker, and most houses are still only equipped to govern tools.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the agent now has its own identity, and the model is a swappable layer beneath it.</strong> <strong>At "Gemini at Work 2026" (8 Oct 2026) Google Cloud unveiled the Gemini agent; its "coworker agent" receives its own Workspace account — email address, calendar, Drive, and "presence in your company directory" — is @mentioned in Chat and Docs, has edits "appear under its own name in version history," and "sees only what is shared with it," while the system "orchestrates across our Gemini family of models and Claude models from Anthropic today," with OpenAI and open-weights promised next; admins reportedly get hard spend caps that can pause an agent mid-task, and each agent has its own audited identity (Google Cloud; MarkTechPost; Creative Strategies; Futurum, as reported; currently a private preview, no public price or GA date).</strong> Three engineering facts follow. First, <em>agent identity is now a first-class object</em>, distinct from both the human user and the model — it has credentials, a mailbox, a directory entry and an audit trail of its own. Second, <em>the model is explicitly decoupled and swappable</em>, so "which model acted" is a per-task question you must log, not assume. Third, <em>"sees only what is shared with it" is a starting grant, not a standing guarantee</em> — access accretes, so the governing object over time is the <em>identity's</em> entitlement, not the model's.</li>
+  <li><strong>The collision — a first-class identity demands joiner-mover-leaver, and the numbers say it is missing.</strong> <strong>Non-human identities now outnumber humans by as much as 45:1 (CyberArk puts machine identities at more than 80:1); only 10% of organizations say their identity systems are fully equipped to manage and secure non-human identities; 41% say no single team is responsible for AI security; only ~22% have identities tied to their agents; just 32% secure agents with the same rigor as human employees; and 88% reported a confirmed or suspected agent-related security incident in the past year (Okta, Businesses at Work 2026; CyberArk, as reported).</strong> Two realities cut against comfort. <strong>First, provisioning outran governance.</strong> It is now trivial to stand up an agent with its own account and far harder to onboard it properly — so the identity count explodes while the sponsor/role/lifecycle discipline lags; the gap between "it has a key" and "someone hired it" is the whole risk. <strong>Second, deprovisioning is the untested control.</strong> Everyone assumes they can switch an agent off; almost no one has drilled revoking a live agent's identity, mailbox and access under time pressure and confirming the work actually stopped. Emerging standards point the way — proposals to extend SCIM so agents are provisioned and deprovisioned like employees, and Gartner's 2026 guidance to define agent authority <em>before</em> agents scale — but they are early, not adopted (arXiv 2510.25819; Gartner, as reported).</li>
+  <li><strong>The answer — onboard like a hire, keep the roll readable, make dismissal a drill.</strong> <strong>Give every agent its own identity (never a borrowed human login or a shared service account) bound to a named human sponsor, a written scoped role, and a full lifecycle; maintain a live, queryable register of every agent identity with its owner, scope and last activity; and build and <em>test</em> a fast deprovisioning path that revokes the identity, mailbox and access in minutes — reusing the livery (its own name), the surety (a human answers for it), the errand (a bounded role), the census (a readable roll) and the keyring (revocable keys), now aimed at the agent-as-colleague.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — sharpened to the HR question the vendors just created: not what the tool is or does, but who hired this colleague, what it may touch, and whether you could let it go today.</li>
+</ul></div>
+<p>The strategic core: <strong>the vendors have reframed the agent from a tool you install to a coworker you onboard — and a coworker is a heavier obligation, not a lighter one.</strong> The temptation is that the coworker-with-its-own-account <em>feels</em> like a tidy win: give it an email, @mention it, let it sign its own work, and stop thinking about it. The failure mode is exact: <strong>a house that governs its tools superbly — named, scoped, logged, funded — and then lets vendors onboard "coworkers" with their own keys, inboxes and nameplates without a sponsor, a bounded role, or a tested dismissal, will pass every tool-governance review and discover, the first time one of 45-to-1 uncounted workers wanders where it shouldn't, that it hired a stranger it cannot name, cannot trace, and has never practiced firing.</strong> The board translation: <strong>@mention the new hire all you like — but first make sure you could fire it by lunch, and that its name is on the roll.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The new hire: you governed the tool, and the vendor just handed you a coworker. The agent now has its own identity — a key, an inbox, a name on the roll. A colleague is a heavier obligation than a tool: it needs a sponsor, a role, and a dismissal. Top left, the tool you governed: plug it into your own wall; you scope and log it; switch it off and put it in a drawer; the model is the product; inert when forgotten. Top right, the coworker that shipped this month: its own Workspace account; own email, calendar and Drive; a seat in the company directory; @mentioned, with edits under its own name; the model is swappable. Between them: they are not the same thing, and a forgotten tool is inert while a forgotten coworker still has a key, so stop installing and start hiring. Middle, the roll you cannot read, per Okta Businesses at Work 2026 and CyberArk as reported: non-human identities outnumber humans by up to 45 to 1, 80 to 1 on other counts; only 10 percent say their identity systems can manage non-human identities; 41 percent say no single team is responsible for AI security; only about 22 percent tie identities to agents and just 32 percent govern agents like humans; 88 percent had a confirmed or suspected agent-related incident in the past year. Bottom left, stop, let the vendor give you a colleague: a key, inbox and nameplate with no sponsor, no bounded role, and a we-can-switch-it-off you never drilled. Bottom right, start, hire the coworker: its own identity with no borrowed or shared login; a named human sponsor who vouches for it; a written scoped role with joiner-mover-leaver; a readable staff roll that is live and queryable; and a dismissal you have drilled in minutes, not theory." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE NEW HIRE — you governed the TOOL; the vendor just handed you a COWORKER</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The agent now has its own identity (key, inbox, name on the roll) — a heavier obligation than a tool.</text>
+
+  <!-- the tool -->
+  <rect x="34" y="58" width="300" height="134" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE TOOL (what you governed)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">plug it into your own wall</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">you scope it &amp; log it</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">switch it off, put in a drawer</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">the MODEL is the product</text>
+  <text x="52" y="182" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ inert when forgotten</text>
+
+  <!-- the coworker -->
+  <rect x="346" y="58" width="300" height="134" rx="9" fill="#1a1530" stroke="#5a53b0"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE COWORKER (shipped this month)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">its OWN Workspace account</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">own email · calendar · Drive · dir. seat</text>
+  <text x="364" y="137" font-size="10" fill="#cfc9f7" font-family="sans-serif">@mentioned · edits "under its own name"</text>
+  <text x="364" y="157" font-size="10" fill="#cfc9f7" font-family="sans-serif">the MODEL is swappable (Gemini + Claude)</text>
+  <text x="364" y="182" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ still holds a key when forgotten</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="192" x2="184" y2="220" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,220 184,232 190,220" fill="#5dcaa5"/>
+  <line x1="496" y1="192" x2="496" y2="220" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="490,220 496,232 502,220" fill="#b9b2f5"/>
+  <text x="340" y="210" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a forgotten TOOL is inert — a forgotten COWORKER still has a key ▼ stop installing; start hiring</text>
+
+  <!-- the roll you cannot read -->
+  <rect x="34" y="238" width="612" height="138" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="260" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ROLL YOU CANNOT READ — (Okta Businesses at Work 2026; CyberArk, as reported)</text>
+  <text x="52" y="282" font-size="10.5" fill="#e8edf3" font-family="sans-serif">non-human identities outnumber humans by up to 45:1 (80:1 on other counts)</text>
+  <text x="52" y="299" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 10% say their identity systems can manage non-human identities</text>
+  <text x="52" y="316" font-size="10.5" fill="#e8edf3" font-family="sans-serif">41% say NO single team is responsible for AI security</text>
+  <text x="52" y="333" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~22% tie identities to agents · just 32% govern agents like humans</text>
+  <text x="52" y="353" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">88% had a confirmed/suspected agent-related incident in the past year</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="376" x2="340" y2="398" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,398 340,410 346,398" fill="#b9b2f5"/>
+  <text x="356" y="392" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="414" width="300" height="140" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="436" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: let the vendor "give you a colleague"</text>
+  <text x="52" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a key, inbox &amp; nameplate — no sponsor</text>
+  <text x="52" y="476" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no bounded role</text>
+  <text x="52" y="494" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "we can switch it off" (never drilled)</text>
+  <text x="52" y="512" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· workers you cannot count (45:1)</text>
+  <text x="52" y="534" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a stranger with a key</text>
+
+  <!-- start -->
+  <rect x="346" y="414" width="300" height="140" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="436" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: hire the coworker</text>
+  <text x="364" y="458" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· its OWN identity (no borrowed/shared login)</text>
+  <text x="364" y="476" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a named human SPONSOR who vouches</text>
+  <text x="364" y="494" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a scoped ROLE (joiner-mover-leaver)</text>
+  <text x="364" y="512" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a readable ROLL · a DISMISSAL you drilled</text>
+  <text x="364" y="534" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a colleague you could fire by lunch</text>
+
+  <!-- footer strip -->
+  <text x="340" y="576" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The vendor promoted the agent from tool to coworker — a coworker is a heavier obligation, not a lighter one.</text>
+  <text x="340" y="593" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">@mention the new hire all you like · first make sure you could fire it by lunch.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The tool — what you governed</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The coworker — what shipped</span>
+  <span><i class="dot" style="background:#a5416a"></i>The roll you cannot read</span>
+</div>
+</div>
+
+<h3>The tool vs the coworker — what changed, and what it now demands</h3>
+<table>
+<tr><th>The tool (what you governed)</th><th>The coworker (what shipped this month)</th></tr>
+<tr><td>Plug it into your own wall; you scope and log it</td><td>Its own Workspace account: email, calendar, Drive, directory seat</td></tr>
+<tr><td>Switch it off, put it in a drawer</td><td>@mentioned down the hall; edits appear "under its own name"</td></tr>
+<tr><td>The model is the product</td><td>The agent is the product; the model is a swappable layer beneath</td></tr>
+<tr><td>Inert when forgotten</td><td>Still holds a key when forgotten (45:1 uncounted)</td></tr>
+<tr><td>Needs: a scope and a log</td><td>Needs: a sponsor, a bounded role, and a tested dismissal</td></tr>
+<tr><td>Your posture: install it</td><td>Your posture: hire it — and be able to fire it by lunch</td></tr>
+</table>
+
+<h3>Why "the new hire" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the question was whether the <em>tool</em> was named, scoped, logged, loyal, reaping, funded and standing on ground you owned. <strong>This month the vendors changed the category: they stopped selling tools and started onboarding coworkers.</strong> Google's coworker agent with its own email and directory seat, OpenAI's and Anthropic's "AI coworker" framing and their armies of deployed engineers — all promote the agent from a thing you install to a colleague you onboard. Tool-governance that stopped at scope-and-log will not hire a colleague. The houses that keep their standing will treat every agent as a hire: its own true name, a human who vouches for it, a role that bounds it, a roll you can read, and a dismissal you have drilled.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to name, sponsor, bound and dismiss every non-human worker in the house.</em> On a legacy estate the instinct is to welcome the coworker agent the way you welcomed the clever tool: switch it on, give it an account, move on. Under the new hire that is the exact reflex to check — an account without an onboarding is a stranger with a key. The retrofit is <strong>hire, roll, dismiss. Hire:</strong> give every agent its own identity, a named sponsor, a written scoped role, and a lifecycle — joiner-mover-leaver, the same discipline you owe a human. <strong>Roll:</strong> stand up a live, queryable register of every agent identity, its owner, scope and last activity, because at 45:1 the census is the hard part. <strong>Dismiss:</strong> build and <em>test</em> a fast deprovisioning path, so revoking an agent's key, inbox and name takes minutes and you have proven it. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you own; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when one slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you put your uniform on your servant; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the new hire is why, the morning the vendor hands you a colleague with its own key, inbox and nameplate, you stop installing and start hiring: a true name, a sponsor, a bounded role, a readable roll, and a dismissal you have drilled.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the agent gets its own identity, as a coworker.</strong> <strong>Google's Gemini agent (8 Oct, "Gemini at Work 2026"): a "coworker agent" with its own Workspace account — email, calendar, Drive, directory seat — @mentionable, edits "under its own name," over a swappable model layer (Gemini + Claude today, OpenAI/open-weights next); private preview (Google Cloud; MarkTechPost; Futurum, as reported).</strong> The agent, not the model, is the product.</li>
+  <li><strong>The industry framing.</strong> <strong>OpenAI Frontier (Feb 2026) treats agents as "AI coworkers" onboarded and governed like employees, with forward-deployed engineers; Anthropic's Claude Frontier Academy (2 Oct) commits $100M to train 10,000 "Frontier Deployed Engineers" by end-2027 (OpenAI; Anthropic, as reported).</strong> Coworker is now the category.</li>
+  <li><strong>The roll you cannot read.</strong> <strong>Non-human identities outnumber humans by up to 45:1 (CyberArk: 80:1); only 10% say their systems can manage them; 41% say no single team owns AI security; ~22% tie identities to agents; 32% govern agents like humans; 88% had an agent incident (Okta; CyberArk, as reported).</strong> Keys cut faster than the roll is kept.</li>
+  <li><strong>The missing discipline — dismissal.</strong> <strong>Deprovisioning is the untested control: standards to extend SCIM so agents are provisioned/deprovisioned like employees are early, and Gartner's 2026 guidance to define agent authority before agents scale is not yet widely adopted (arXiv 2510.25819; Gartner, as reported).</strong> Everyone can switch it off; almost no one has drilled it.</li>
+  <li><strong>The model moved up a floor.</strong> <strong>Routing across Gemini and Claude today (OpenAI/open-weights next) confirms "The Foundation": the model is a swappable layer and the agent is the durable object (Futurum; Creative Strategies, as reported).</strong> Log which model answered; govern the identity.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> A named, sponsored, dismissible agent identity is how you meet them.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Google Cloud's Gemini Agent Gets a Mailbox and Directory Seat.</div><div class="a">— AI Weekly, headline on the Gemini agent (8 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--accent)"><div class="q">The agent receives its own Workspace account, including an email address, calendar, Drive, and presence in your company directory… its edits appear under its own name in version history, and it sees only what is shared with it.</div><div class="a">— Google Cloud, on the Gemini "coworker agent" (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Only about 32% of organizations secure AI agents with the same rigor they apply to their human employees.</div><div class="a">— Okta, Businesses at Work 2026 (as reported; non-human identities outnumber humans by as much as 45:1, 41% say no single team owns AI security, 88% report an agent-related incident)</div></blockquote>
+<blockquote><div class="q">"The vendor just handed our newest worker its own email, calendar and seat in the directory, and told us to treat it as a colleague. Fine — but did we hire it, or merely let it in? @mention the new hire all you like; first make sure you could fire it by lunch."</div><div class="a">— the radar, on why onboarding the agent now matters more than installing it</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agent gets its own identity</td><td><span class="v">Google's Gemini agent (8 Oct 2026): a "coworker agent" with its own Workspace account — email, calendar, Drive, and "presence in your company directory" — @mentionable, edits "under its own name," over a swappable model layer (Gemini + Claude today, OpenAI/open-weights next); private preview</span></td><td>Google Cloud; MarkTechPost; Futurum; Creative Strategies, as reported</td></tr>
+<tr><td>Coworker is now the category</td><td><span class="v">OpenAI Frontier (Feb 2026) governs agents as "AI coworkers" like employees; Anthropic's Claude Frontier Academy (2 Oct 2026) commits $100M to train 10,000 "Frontier Deployed Engineers" by end-2027</span></td><td>OpenAI; Anthropic, as reported</td></tr>
+<tr><td>The workforce you cannot count</td><td><span class="v">Non-human identities outnumber humans by as much as 45:1 (CyberArk: machine identities &gt;80:1)</span></td><td>Okta Businesses at Work 2026; CyberArk, as reported</td></tr>
+<tr><td>The governance gap</td><td><span class="v">Only 10% say their identity systems are fully equipped to manage non-human identities; 41% say no single team is responsible for AI security; only ~22% tie identities to their agents; just 32% secure agents with the rigor given human employees</span></td><td>Okta Businesses at Work 2026, as reported</td></tr>
+<tr><td>The incidents already here</td><td><span class="v">88% of organizations reported a confirmed or suspected AI-agent-related security incident in the past year</span></td><td>Okta Businesses at Work 2026; Gravitee (via prior editions), as reported</td></tr>
+<tr><td>The missing discipline — dismissal</td><td><span class="v">Standards to provision/deprovision agents like employees (SCIM extensions) are early; Gartner's 2026 guidance urges defining agent authority before agents scale</span></td><td>arXiv 2510.25819; Gartner, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 Aug 2026; 15 Sep GPAI systemic-risk filing deadline passed; MCP 2026-07-28 (EMA stable); Gartner: 40% of enterprise apps embed task-specific agents by year-end 2026</span></td><td>European Commission; MCP; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Onboard the agent like a hire, not a tool — its own identity, a named sponsor, a scoped role.</strong> The vendors now ship agents with their own accounts (Google's coworker agent gets its own email, calendar, Drive and directory seat), and a colleague is a heavier obligation than a tool. <strong>This month, write and enforce an agent-onboarding standard: every agent gets its <em>own</em> identity (never a borrowed human login or a shared service account), bound to a named human sponsor who is accountable for it, a written role that bounds what it may touch, and a defined lifecycle — the same joiner-mover-leaver discipline you owe a human.</strong> Report one number to the board: the share of production agents that have a named sponsor and a scoped role on record.</li>
+  <li><strong>Keep the staff roll readable — a live, queryable register of every agent identity.</strong> Non-human identities outnumber humans by as much as 45:1, yet only ~22% of firms tie identities to their agents and 41% say no single team owns AI security — the census is now the hard part. <strong>This month, stand up (or designate the owner of) a single authoritative register of every agent identity, recording its sponsor, permitted scope, the model(s) it routes to, and its last activity, and name the one team accountable for keeping it.</strong> Report the share of known agent identities that appear on the register with an owner and a scope — and the estimated share still uncounted.</li>
+  <li><strong>Make dismissal a drill, not a theory — a fast, tested deprovisioning path.</strong> Only ~32% of firms govern agents with the rigor they give human employees, and "we can switch it off" is almost never tested — while 88% have already had an agent incident. <strong>This month, pick one production agent and run the drill: revoke its identity, mailbox and access under time pressure and confirm its work actually stopped; measure the time-to-dismiss and fix whatever made it slow.</strong> Report the measured time-to-dismiss and a dated plan to bring every high-privilege agent under a tested revocation path. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground you own; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when one slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you put your uniform on your servant; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the new hire is why, the morning the vendor hands you a colleague with its own key, inbox and nameplate, you stop installing and start hiring: a true name, a sponsor, a bounded role, a readable roll, and a dismissal you have drilled, so a house that governs its tools superbly never wakes to a workforce forty-five times its own number that it never hired, cannot trace, and has never practiced letting go.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Google Cloud (8 Oct 2026, "Gemini at Work 2026"): the Gemini agent and its "coworker agent" with its own Workspace account (email, calendar, Drive, directory presence), @mentionable, edits "under its own name," "sees only what is shared with it," routing "across our Gemini family of models and Claude models from Anthropic today" (OpenAI and open-weights to follow); private preview (Google Cloud; MarkTechPost; AI Weekly — "a mailbox and directory seat"; Creative Strategies; Futurum) · The industry framing — OpenAI Frontier (Feb 2026), agents as "AI coworkers" governed like employees, with forward-deployed engineers (OpenAI); Anthropic Claude Frontier Academy (2 Oct 2026), $100M to train 10,000 "Frontier Deployed Engineers" by end-2027 (Anthropic) · The roll you cannot read — Okta, Businesses at Work 2026 (non-human identities up to 45:1; only 10% fully equipped; 41% no single team owns AI security; ~22% tie identities to agents; 32% govern agents like humans; 88% had an agent incident); CyberArk (machine identities &gt;80:1) · The missing discipline — SCIM-for-agents proposals (arXiv 2510.25819) and Gartner 2026 guidance to define agent authority before scaling · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "new hire" framing — that the vendors have promoted the agent from a tool you install to a coworker you onboard, and that a colleague carries obligations a tool never did (a named sponsor, a bounded role, a readable roll, a tested dismissal) — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 21 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+<p style="margin-top:10px"><img src="https://hits.sh/andromedakah.github.io/ai-radar.svg?style=flat-square&amp;label=visits&amp;color=1d9e75" alt="site visit count" loading="lazy"></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies). One-time account setup at goatcounter.com with site code "ai-radar"; the tag below is inherited by every future edition. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
