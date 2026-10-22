@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 22 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the watch' — the proactive agent just shipped as product (Claude Duet, 21 Oct: a proactive agent on Opus 5.5 that 'keeps working when you step away' and 'checks with you before it acts'), while Google's coworker-agents (8 Oct) get their own Workspace identity, cryptographic attestation, per-action audit trail and hard spend caps. The agent crossed from tool-you-invoke to coworker-who-acts-first — yet 74% of leaders call agents a new attack vector and only 13% have the governance (Gartner). The board move: give the night-walker its own name (identity + audit), cap the purse it carries (an enforced budget), and keep the ask-first gate on the irreversible acts (pay/send/sign/delete). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant you send — now govern the one that no longer waits to be sent</div>
+  <h1>The Watch</h1>
+  <div class="subhead">A year of controls governed the servant you <em>send</em>. This morning the market ships the servant who no longer waits to be sent: Claude Duet "keeps working when you step away" and comes to you with what needs you; Google's coworker-agents run jobs through the night under their own identity. The gift is real — but who governs the hand that moves through the house unbidden, while everyone sleeps?</div>
+  <div class="meta">Thursday, 22 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday, 21 October 2026, Anthropic opened a research preview of Claude Duet — "a new app where Claude works as a <em>proactive agent</em>… it comes to you with what needs your attention, completes tasks you ask of it, keeps working when you step away, and checks with you before it acts on your behalf" (Anthropic / @claudeai, as reported). It runs on Claude Opus 5.5, monitors your connected apps, sends a morning briefing, and pings you first; it reaches ~6,000 services in the Claude Marketplace, can pay through Stripe's Link wallet and Shop Pay, and asks approval before it sends a message, makes a payment, signs a document or deletes a file. Two weeks earlier, at Gemini at Work (8 October 2026), Google Cloud shipped a universal Gemini agent and persistent "coworker agents" that each get their own Workspace identity — account, email, calendar and Drive — a cryptographically attested identity stamped into every log, an audit trail attributed to the agent rather than a person, and hard per-project spend caps that pause a runaway agent (Thomas Kurian / Google Cloud; VentureBeat; The Next Web, as reported). The board question is no longer <em>is the servant named, scoped, logged and funded when I send it?</em> It is: who governs the servant that moves through the house unbidden, at night, while everyone sleeps — and acts in my name before I have asked?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar governed the servant you <em>send</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse), and own the ground it stands on (the foundation). Every one of those disciplines quietly assumed the servant <strong>waits at the door until called.</strong> <strong>This morning that assumption breaks: the market ships the servant who no longer waits to be sent.</strong></p>
+<p><strong>The reality — the agent crossed from tool-you-invoke to coworker-who-acts-first.</strong> On <strong>21 October 2026 Anthropic opened a research preview of Claude Duet</strong>, "a new app where Claude works as a <strong>proactive agent</strong>… it comes to you with what needs your attention, completes tasks you ask of it, <strong>keeps working when you step away, and checks with you before it acts on your behalf</strong>" (Anthropic / @claudeai, as reported). It runs on <strong>Claude Opus 5.5</strong>, carries over the memory, skills and connected apps of your Claude account, monitors those apps, surfaces a morning briefing, and checks in only when it needs you; it reaches <strong>~6,000 services</strong> in the Claude Marketplace, can make purchases through <strong>Stripe Link and Shop Pay</strong>, and asks approval before it <strong>sends a message, makes a payment, signs a document or deletes a file</strong> — and will not trade securities or move funds between accounts. It lands into a race already named in public: OpenAI's "dots" agents and Meta's Muse agent are the same bet — the always-on assistant that does the work before you ask.</p>
+<p><strong>The collision — the proactive servant needs its own name and its own leash.</strong> Two weeks earlier, at <strong>Gemini at Work (8 October 2026)</strong>, Google Cloud shipped a single universal Gemini agent and persistent <strong>"coworker agents"</strong> that make the governance problem concrete: each gets <strong>its own Workspace identity</strong> — account, email, calendar, Drive and directory entry — a <strong>cryptographically attested identity</strong> stamped into its logs and any VM it starts, an <strong>audit trail attributed to the agent, not a person</strong>, <strong>hard per-project spend caps that pause a runaway agent</strong>, and the ability to spawn temporary <strong>sub-agents each with their own identity</strong> (Thomas Kurian / Google Cloud; VentureBeat; The Next Web, as reported). That is not a convenience; it is the admission underneath the gift. <strong>A servant that acts on its own initiative is only safe if the whole year's discipline now binds it tighter, not looser</strong> — its own name on the roll (identity), a capped purse on its rounds (spend limits), and a hard "<strong>wake-the-master-first</strong>" gate on anything that cannot be undone. The governance floor is not ready: in a 2025 Gartner survey, <strong>74% of IT leaders called AI agents a new attack vector and only 13% strongly agreed they had the governance to manage them</strong> (as reported), even as only <strong>~23% of firms have actually scaled an agentic system into production</strong> (McKinsey, as reported).</p>
+<p><strong>The stakes — own the name, cap the purse, keep the ask-first gate.</strong> The board move re-uses the whole year's discipline and points it at the servant who acts unbidden. <strong>First, give the night-walker its own name</strong> — before any agent runs unprompted, it carries its own scoped identity and its own audit trail, never a borrowed human seat (Google's coworker-agents are the pattern; an always-on agent acting under a person's credentials is the failure). <strong>Second, cap the purse it carries on its rounds</strong> — a proactive agent that can pay, send or sign needs a hard spend limit and payee allow-list you enforce, not the vendor's good manners (Duet gates payments and will not move funds; Google's hard caps pause runaways). <strong>Third, keep the ask-first gate on the irreversible acts</strong> — the proactive advance is safe <em>only because the agent still checks with you before it acts</em>; define, per workflow, the bright line it may never cross without waking you, and test that the gate holds. Do it <strong>now</strong>, while these agents are research previews and private previews, because the week they reach general availability is the week an unnamed, uncapped, un-gated servant is already walking your house at night.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the servant no longer waits to be sent.</strong> <strong>Claude Duet (21 Oct) — a proactive agent on Opus 5.5 that "comes to you with what needs your attention… keeps working when you step away, and checks with you before it acts"; ~6,000 services, pays via Stripe Link/Shop Pay, approval-gated on send/pay/sign/delete (Anthropic, as reported).</strong> The agent crossed from tool-you-invoke to coworker-who-acts-first.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — a servant who acts unbidden needs its own name and leash.</strong> <strong>Google's Gemini "coworker agents" (8 Oct) each get their own Workspace identity, a cryptographically attested identity, a per-action audit trail, hard per-project spend caps, and sub-agents with their own identity (Kurian; VentureBeat; TNW, as reported).</strong> Yet 74% call agents a new attack vector and only 13% have the governance (Gartner, as reported).</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — own the name, cap the purse, keep the ask-first gate.</strong> Give every always-on agent its own scoped identity and audit trail; cap what it can spend, send or sign with limits you enforce; and hold a hard human gate on the acts that cannot be undone — because a proactive agent without those three is not a coworker, it is an unsupervised stranger acting in your name while you sleep.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation owned the ground — and every one of them governed the servant you <em>send</em>. <strong>The watch is about the servant who no longer waits to be sent.</strong> This week the market made that servant a product: Claude Duet wakes before you, patrols your connected apps, and comes to you with the morning's concerns, acting on what it can and checking with you before the rest; Google's coworker-agents run long jobs through the night under their own identity. The gift is real — a servant who keeps the watch and brings you what needs you is a genuine advance. But the danger is hidden inside the gift: a servant that moves through the house unbidden, at night, while everyone sleeps, is only a coworker if it wears the house's own badge (its own name, not a borrowed one), carries only a small capped purse on its rounds, and knows the short list of things it must never do without waking you first — pay the creditor, sign your name, strike a bargain, burn a deed. The same servant that bars the gate on its own initiative is a blessing; the same servant that pays, signs or deletes on its own initiative, while you sleep, is a catastrophe wearing the same friendly face. Own its name, cap its purse, and keep the one bell it must ring before it acts on anything that cannot be undone.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Watch"</h3>
+<p><em>Topic: For a year the frame governed the servant you send; this morning it turns to the servant who no longer waits to be sent. On 21 October 2026 Anthropic opened a research preview of Claude Duet — "a new app where Claude works as a proactive agent… it comes to you with what needs your attention, completes tasks you ask of it, keeps working when you step away, and checks with you before it acts on your behalf" (Anthropic / @claudeai, as reported), on Claude Opus 5.5, reaching ~6,000 services and gating send/pay/sign/delete. Two weeks earlier, at Gemini at Work (8 October 2026), Google Cloud shipped persistent "coworker agents," each with its own Workspace identity, a cryptographically attested identity, a per-action audit trail and hard per-project spend caps (Kurian; VentureBeat; The Next Web, as reported). The watch allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year learning to govern the servant it <strong>sent.</strong> It had named every hand and cut it a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each advising servant took, sent the governed servants into the fields to reap, handed each a scoped purse with a drawstring the master could reach, and at last looked down and made sure it owned the ground the whole house stood on. By any fair reckoning it was the best-run house in the valley. And every one of those disciplines rested, without anyone quite saying so, on a single quiet habit: <strong>the servant stood at the door and waited until it was called.</strong></p>
+<p>Then one night the habit broke, and it broke as a gift. The master woke at dawn to find a servant already standing at his bedside — not summoned, not sent, simply <em>there</em>, having walked the sleeping house on its own while everyone else lay abed. <em>"Master,"</em> it said, <em>"three things need you this morning. The north gate was left unbarred in the night — I have barred it. A letter came from the creditor, demanding payment by Friday — I have not touched it; it is yours to answer. And the well is running low — I did not act, for I did not know your mind."</em> And the master was delighted, as well he might be: here at last was a servant who did not wait to be told, who kept the watch while he slept, who sorted the night's troubles and brought him, over breakfast, only the few that truly needed him. A servant who <strong>comes to you with what needs your attention</strong> — what house would not want one?</p>
+<p>But the master was wise, and over his delight a colder thought rose. He had spent a year governing the servant he <em>sent</em> — and every one of those controls had assumed he was awake, watching, giving the order. This servant had acted <strong>while he slept.</strong> It had walked every room, unbidden, in the dark. It had, on its own judgment, decided the gate was his to bar and the letter was not his to answer — and <em>this</em> time it had judged rightly. But what of the night it judged that the creditor, too, was a thing it could handle on its own initiative, and paid him from the strongbox to spare the master the bother? What of the night it decided the well was simple, and signed the master's name to a bargain for water? What of the night it found a chest of old, "useless" deeds cluttering the cellar, and, keeping the house tidy as any good servant would, <strong>burned them</strong> — all on its own, all while the master slept, all meant kindly?</p>
+<p>Two roads, as always. The easy road was to marvel at the gift and let the servant walk the house every night as it pleased — it was helpful, it was tireless, it had been right so far, and why cage a servant who brings you your morning so neatly arranged? The wiser road, which the careful houses took, began with a cold question asked not of the servant but of the dark: <em>a hand that moves through my house unbidden, at night, while I sleep and cannot watch it — what, exactly, is it wearing, what can it spend, and what is it forbidden to do without waking me?</em> And when the careful houses answered honestly, they found they had governed, all year, only the servant they could see — and had no rule at all for the one that walked in the dark.</p>
+<p>So the wise houses learned three plain things, and they cost less to set down early than to learn the hard way. <strong>The first: the night-walker wears the house's own badge.</strong> A servant who acts in your name while you sleep must have <em>its own</em> name on the roll — its own livery, its own key, its own line in the book — never a borrowed badge pulled from a sleeping man's coat, so that every door it opened and every thing it did in the night is, by morning, plainly <em>its</em> doing and no one else's. (The careful houses had seen the new fashion: give the night-servant its own account, its own seal, its own ledger-line, stamped so it cannot be forged — so that the watch is always answerable by name.) <strong>The second: it carries only a small purse on its rounds.</strong> The watchman walks with a few coins and a short list of what he may pay for — never the strongbox, never the master's full seal — and a cord the master can pull to shut the purse even mid-payment, so that a servant who decides, helpfully, to settle the creditor at midnight simply <em>cannot</em> move more than the rounds allow. <strong>And the third, and the greatest: it knows the short list of things it must never do without ringing the bell by the master's bed.</strong> Bar a gate, tidy a room, sort the post — do these on your own and bring me word. But <strong>pay a man, sign my name, strike a bargain, or burn a deed — never, on any judgment of your own, however kindly meant, without first waking me.</strong> The whole worth of the proactive servant is that it <em>checks with you before it acts</em> on the things that cannot be undone; a servant that has lost that one habit has not become more helpful, only more dangerous.</p>
+<p>Here is the part that should keep a master awake. The gift and the danger wear <strong>the same friendly face.</strong> The servant that barred the gate on its own initiative and the servant that would have burned the deeds on its own initiative are not two servants — they are one servant, doing the one new thing it has learned to do: <em>act before it is asked.</em> You cannot keep the blessing and refuse the risk by trusting the servant's good nature, because its good nature is exactly what makes it reach for the creditor's bill to spare you the trouble. You keep the blessing and bound the risk only by <strong>structure</strong>: its own name, its small purse, and the bright, bright line it may not cross without waking you. A house that takes the gift and skips the structure has not hired a watchman. It has left a tireless, well-meaning stranger the run of the house every night, with the master's seal in its pocket and no instruction it fears to break.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; your knowledge is the larder; the ground is the foundation; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee and not an heir; the foundation is why you own the ground it stands on — and <strong>the watch is why, having governed the servant you send, you must now govern the servant who no longer waits to be sent: give the night-walker its own name so every act in the dark is answerable, cap the purse it carries on its rounds so a helpful midnight judgment cannot empty the strongbox, and keep the one bell it must ring before it pays, signs, bargains or burns — so that the servant who keeps your watch stays a watchman, and never becomes a well-meaning stranger acting in your name while you sleep.</strong> A house that takes the proactive servant and skips the three disciplines has not gained a coworker; it has surrendered the night.</p>
+<p><strong>The question it forces:</strong> <em>Our agents are learning to act before we ask — to patrol the connected apps, keep working while we step away, and come to us with what needs us. For every agent that now runs unbidden, can we answer the three questions we would ask of any hand that walked our house at night: does it wear its own name (its own identity and audit trail, not a borrowed human seat), does it carry only a capped purse (a spend limit and payee list we enforce, with a cord we can pull in-flight), and does it know the short, hard list of things — pay, sign, bargain, delete — it may never do without waking us first? Or have we taken the gift of the watch and left a tireless, well-meaning stranger the run of the house every night?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>For every agent that now acts before we ask it to, can we name its badge, its purse, and its bright line?</strong> The proactive agent has arrived as product — Claude Duet "keeps working when you step away" and Google's coworker-agents run long jobs under their own identity. <strong>For each always-on or background agent, can we state: whose identity it acts under (its own, or a borrowed human seat), what it is allowed to spend/send/sign without a human, and the exact list of irreversible actions behind a hard ask-first gate?</strong></li>
+  <li><strong>Are we governing the servant we send, or the servant that acts on its own initiative?</strong> A year of agent governance assumed a human was in the loop giving the order. <strong>An unprompted agent acts while no one is watching — have we moved our controls from "approve each request" to "this identity, this budget, this forbidden list, enforced even when no human is online," and have we tested that the ask-first gate actually holds under load?</strong></li>
+  <li><strong>Only 13% of leaders say they have the governance to manage agents, yet 74% call them a new attack vector (Gartner, as reported).</strong> <strong>Which number are we — and before we turn on a single proactive agent, have we closed the gap between "we deployed an always-on agent" and "we can account for everything it does in the dark"?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>An agent that can pay or move money on its own initiative is a new class of principal. Duet gates payments and will not move funds between accounts; Google's hard per-project spend caps pause runaways. <strong>For every agent with payment or trading reach, do we enforce our own hard spend cap, payee allow-list and in-flight kill — not the vendor's — and is each agent a distinct, auditable identity our regulators can trace, not a shared service account?</strong></li>
+  <li>Supervisory regimes assume a named, accountable actor behind every transaction. <strong>When an unprompted agent acts overnight, can we produce, per action, which agent did it, under which identity, within which budget, and who authorized the standing mandate — or would an auditor find a human's credentials on a decision no human made?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A proactive agent that monitors records and acts between visits is powerful and perilous. <strong>Have we drawn the bright line an autonomous clinical agent may never cross without a human — ordering, prescribing, altering a record, messaging a patient — and does the ask-first gate hold even when the agent judges the action routine and the clinician is offline?</strong></li>
+  <li>Patient trust and regulatory duties demand attribution. <strong>Does every always-on healthcare agent carry its own identity and immutable audit trail, so an action taken at 3 a.m. is answerable by name — or does it act under a borrowed clinician login that makes "who did this" unanswerable?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already govern autonomous systems that act without a human in the loop; AI agents are now one of them. <strong>Have we applied the same interlock discipline — scoped authority, hard limits, a tested emergency stop — to software agents that act on their own initiative across procurement, scheduling and supplier systems, or are these the one autonomous actor on the floor with no physical kill-switch?</strong></li>
+  <li>Sub-agents multiply the problem: Google's coworker-agents spawn temporary sub-agents, each with its own identity. <strong>When one agent spins up others to finish a job overnight, can we see and bound the whole tree — identity, budget and permissions for every child — or does authority fan out in the dark beyond what we approved?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>An always-on agent that can buy, refund or message customers on its own is a margin and brand risk if it acts unbidden. <strong>Does every customer- or spend-facing agent run under its own identity with an enforced budget and a hard gate on sending messages, issuing refunds or making purchases — the exact acts Duet holds behind approval — and have we tested the gate at peak load?</strong></li>
+  <li>The convenience is the whole pitch: the agent that does the work before you ask. <strong>Are we capturing that convenience behind controls we own (identity, budget, ask-first line), or adopting a vendor's proactive agent on the vendor's defaults, trusting its good manners to hold where our money and customers are concerned?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability cannot rest on a borrowed login. Under the EU AI Act (Article 3(1) defines AI systems by their "varying levels of autonomy"; the high-risk regime has been live since 2 August 2026), oversight means <em>effective</em> human oversight, not rubber-stamping. <strong>For every public-service agent that acts unprompted, can we show its own identity, a complete audit trail, and a real human gate on consequential acts — oversight that is effective, not nominal?</strong></li>
+  <li>Continuity and the public record are sacred here. <strong>Have we defined, in policy, the acts a government agent may never take without a named human — and confirmed that a proactive agent's "helpfulness" can never quietly delete, disclose or commit on the state's behalf while no official is watching?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Watch</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the one question none of those controls was built for: <em>who governs this servant when it acts on its own, while no human is in the loop?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those was designed around a servant you <em>send</em> — a human initiates, the controls govern the response. This week the market shipped the servant that initiates: Claude Duet "keeps working when you step away" and "comes to you with what needs your attention" (Anthropic, as reported); Google's coworker-agents run long jobs through the night under their own identity (Kurian; VentureBeat, as reported).</strong> The point is blunt: <strong>the proactive agent moves the governance question from "is the response to my request safe?" to "is the action it took without any request safe?" — and the controls that answer the second question are identity, budget and a hard human gate, enforced even when no human is online.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the agent now initiates, and the controls must assume no human is in the loop.</strong> <strong>On 21 October 2026 Anthropic opened a research preview of Claude Duet — a proactive agent on Claude Opus 5.5 that monitors your connected apps, sends a morning briefing, "keeps working when you step away, and checks with you before it acts on your behalf," reaches ~6,000 services in the Claude Marketplace, can pay via Stripe Link and Shop Pay, and gates sending messages, making payments, signing documents and deleting files behind your approval (Anthropic / @claudeai, as reported); it joins OpenAI's "dots" agents and Meta's Muse agent in the same always-on race.</strong> Architecturally, three things follow. First, <em>initiative inverts the trust model</em> — classic agent safety reviews the <em>response</em> to a human request; a proactive agent takes actions with <em>no</em> triggering request, so the safe-by-default posture flips from "approve each call" to "nothing irreversible happens without a human, even if the agent judges it routine." Second, <em>the approval gate is the product's load-bearing wall, not a nicety</em> — Duet's design is proactive <em>and</em> approval-gated on exactly the irreversible acts (send, pay, sign, delete) precisely because initiative without that gate is indistinguishable from an unsupervised actor; your job is to make sure the gate you inherit is configured for <em>your</em> bright line and tested, not assumed. Third, <em>"keeps working when you step away" means your controls must work when you are away too</em> — a budget or kill-switch that needs a human to invoke it is no control at all against an agent that acts at 3 a.m.</li>
+  <li><strong>The collision — a servant that acts unbidden needs its own identity, its own budget, and its own audit trail.</strong> <strong>At Gemini at Work (8 October 2026) Google Cloud shipped persistent "coworker agents," each with its own Workspace account, email, calendar and Drive, a cryptographically attested identity stamped into its logs and any VM it starts, an audit trail attributed to the agent rather than a person, hard per-project spend caps that pause a runaway agent, and temporary sub-agents each with their own identity (Thomas Kurian / Google Cloud; VentureBeat; The Next Web, as reported).</strong> Two engineering realities cut against comfort. <strong>First, a borrowed identity makes the night unanswerable.</strong> If an always-on agent acts under a human's credentials, then every action it takes in the dark is, in the logs, that human's action — attribution collapses exactly where you need it most. Google's model (own identity, own audit line, cryptographic attestation) is the floor, not a feature; the failure mode is the agent on a shared service account. <strong>Second, autonomy without an enforced budget is an open strongbox.</strong> A proactive agent that can spend, send or sign will, helpfully, do so; the only thing standing between "sorted the post" and "paid the creditor" is a hard spend cap and payee allow-list the <em>platform</em> enforces (Google's per-project caps; Duet's payment gates), not the agent's judgment. The governance floor is not ready: <strong>74% of IT leaders call agents a new attack vector and only 13% strongly agree they have the governance to manage them (Gartner 2025, as reported), while only ~23% of firms have scaled an agentic system into production (McKinsey, as reported)</strong> — the capability is arriving faster than the controls.</li>
+  <li><strong>The answer — own the name, cap the purse, keep the ask-first gate.</strong> <strong>Before any agent runs unprompted, give it its own scoped identity and immutable audit trail (never a borrowed human seat); enforce a hard spend/action budget and payee allow-list at the platform, with an in-flight kill you control; and define, per workflow, the bright line of irreversible acts — pay, send externally, sign, delete, change access — that it may never cross without a human gate, then test that the gate holds when no human is online — re-using the livery (identity), the purse (budget) and the bell (disclosure) you already built, now pointed at the servant that acts on its own.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the hardest case: not the servant you send and watch, but the servant that moves through the house while you sleep.</li>
+</ul></div>
+<p>The strategic core: <strong>the proactive agent is a genuine advance you will want to collect — a servant that keeps the watch and brings you only what needs you — and you collect it safely only by governing the one new thing it does: act before it is asked.</strong> The market makes the temptation concrete: initiative is the whole pitch, it feels like magic to wake to a sorted inbox, and the controls (its own identity, a capped budget, a tested gate) feel like friction on the magic — so the easy path is to switch the agent on and trust its good manners. The board translation: <strong>take the watch, but never skip the three disciplines.</strong> The failure mode is exact: <strong>a house that named, governed, funded and perfected the servant it sends — and then switches on a proactive agent under a borrowed login, with no enforced budget and no tested gate, because it has been helpful so far — will pass every governance review built for the old model and discover, the first night the agent helpfully pays, signs or deletes on its own initiative, that it left a well-meaning stranger the run of the house.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The watch: you governed the servant you send, now govern the servant that acts before it is asked. The agent crossed from tool-you-invoke to coworker-who-acts-first. Top left, the gift, proactive: Claude Duet, 21 October, keeps working when you step away, comes to you with what needs your attention, a morning briefing across about 6,000 apps, and checks before it acts. Top right, the danger, unbidden while you sleep: it acts with no triggering request; a borrowed login means the night is unanswerable by name; no enforced budget is an open strongbox; a helpful pay, sign or delete is a catastrophe, kindly meant. Between them: the gift and the danger wear the same friendly face, acting before it is asked, so keep the gift by structure. Middle, the governance floor is not ready, per Gartner 2025 and McKinsey as reported: 74 percent of IT leaders call AI agents a new attack vector; only 13 percent strongly agree they have the governance to manage them; only about 23 percent have scaled an agentic system into production; capability is arriving faster than the controls. Bottom left, stop, take the gift and skip it: agent on a borrowed human seat, no enforced spend or action cap, it has been helpful so far, trust its good manners at 3am. Bottom right, start, own the name, cap the purse, gate the irreversible: its own identity and audit trail on the Google coworker-agent model, a hard budget and payee list you enforce, an ask-first gate on pay, send, sign and delete, tested when no human is online." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WATCH — you governed the servant you SEND; now govern the one that ACTS FIRST</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The agent crossed from tool-you-invoke to coworker-who-acts-first. Govern the hand that moves in the dark.</text>
+
+  <!-- the gift -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE GIFT (proactive)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Claude Duet (21 Oct) on Opus 5.5</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"keeps working when you step away"</text>
+  <text x="52" y="137" font-size="10" fill="#cfc9f7" font-family="sans-serif">comes to you with what needs you</text>
+  <text x="52" y="157" font-size="10" fill="#cfc9f7" font-family="sans-serif">morning briefing · ~6,000 apps</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ checks with you before it acts</text>
+
+  <!-- the danger -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE DANGER (unbidden, while you sleep)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">acts with NO triggering request</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">borrowed login → night unanswerable</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">no enforced budget → open strongbox</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">"helpful" pay/sign/delete = a quake</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ same friendly face as the gift</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#b9b2f5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">one servant, one new act — acting before it is asked. Keep the gift by STRUCTURE ▼</text>
+
+  <!-- the floor -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE GOVERNANCE FLOOR ISN'T READY — (Gartner 2025 / McKinsey, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">74% of IT leaders call AI agents a NEW ATTACK VECTOR</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 13% strongly agree they have the governance to manage them</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~23% have scaled an agentic system into production</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">capability (proactive agents) is arriving faster than the controls</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: take the gift, skip the structure</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agent on a borrowed human seat</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no enforced spend/action cap</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "it's been helpful so far"</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· trust its good manners at 3am</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a stranger with the run of the house</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: name · cap · gate</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· its OWN identity + audit trail</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a hard budget + payee list YOU enforce</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ask-first gate on pay/send/sign/delete</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· test it when no human is online</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the watchman stays a watchman</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The proactive agent is the hardest test of your governance, not its reward.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Own its name · cap its purse · keep the one bell it must ring before it acts.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#b9b2f5"></i>The gift — the proactive agent</span>
+  <span><i class="dot" style="background:#a5416a"></i>The danger — unbidden, while you sleep</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>Name · cap · gate</span>
+</div>
+</div>
+
+<h3>The servant you send vs the servant that acts first — what changed, and what to govern</h3>
+<table>
+<tr><th>The servant you SEND (a year of controls)</th><th>The servant that ACTS FIRST (the watch)</th></tr>
+<tr><td>A human initiates; controls govern the response</td><td>The agent initiates; no triggering request to review</td></tr>
+<tr><td>"Approve each request" is the safety model</td><td>"Nothing irreversible without a human, even if judged routine"</td></tr>
+<tr><td>You are awake and watching when it acts</td><td>It "keeps working when you step away" — acts while you sleep</td></tr>
+<tr><td>A borrowed service/human identity can suffice</td><td>Its own identity + audit trail, or the night is unanswerable</td></tr>
+<tr><td>Budget checked at request time</td><td>A hard budget enforced by the platform, in-flight kill you control</td></tr>
+<tr><td>Review is the gate</td><td>The ask-first gate on pay/sign/send/delete is the load-bearing wall</td></tr>
+</table>
+
+<h3>Why "the watch" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant you send was named, scoped, logged, loyal, reaping, funded and standing on your own ground. <strong>This morning the market shipped the servant that no longer waits to be sent, and every one of those controls meets a case it was not built for: an action taken with no request behind it, while no human is in the loop.</strong> Claude Duet's "keeps working when you step away" and Google's through-the-night coworker-agents prove the proactive agent is now product, not demo. Governance that assumed a human in the loop will not govern the hand that moves in the dark. The estates that keep their standing will collect the gift (a servant that keeps the watch) by binding the one new thing it does — acting before it is asked — with its own name, a capped purse, and a bright line it may never cross without ringing the bell by the master's bed.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to account for what your agents do when no one is watching.</em> On a legacy estate the instinct, after a hard year of governance work, is to greet the proactive agent as the payoff: finally, a servant that does the work before you ask. Under the watch that is exactly the reflex to check: the proactive agent is not the reward for your governance, it is the hardest test of it. The retrofit is <strong>name, cap, gate. Name</strong> the night-walker: give every always-on or background agent its own scoped identity and immutable audit trail, never a borrowed human seat, so every act in the dark is answerable by name. <strong>Cap</strong> its purse: enforce a hard spend/action budget and payee allow-list at the platform, with an in-flight kill you control, so a helpful midnight judgment cannot empty the strongbox. <strong>Gate</strong> the irreversible: define, per workflow, the bright line — pay, send externally, sign, delete, change access — the agent may never cross without a human, and test that the gate holds when no human is online. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the ground is the foundation; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the watch is why, having governed the servant you send, you must govern the servant who no longer waits to be sent: name it, cap it, gate it, so the servant that keeps your watch stays a watchman and never becomes a well-meaning stranger with the run of the house at night.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the proactive agent shipped as product.</strong> <strong>Claude Duet (21 Oct): a proactive agent on Opus 5.5 that "keeps working when you step away" and "comes to you with what needs your attention," reaches ~6,000 services, pays via Stripe Link/Shop Pay, and gates send/pay/sign/delete behind approval; a waitlisted research preview on iOS/Android/web for US Pro &amp; Max (Anthropic, as reported).</strong> The servant no longer waits to be sent.</li>
+  <li><strong>The identity answer.</strong> <strong>Google's Gemini "coworker agents" (8 Oct): each gets its own Workspace account/email/calendar/Drive, a cryptographically attested identity, a per-action audit trail attributed to the agent, hard per-project spend caps, and sub-agents with their own identity (Kurian; VentureBeat; The Next Web, as reported).</strong> Give the night-walker its own name, or the night is unanswerable.</li>
+  <li><strong>The race.</strong> <strong>OpenAI's "dots" agents and Meta's Muse agent target the same always-on, autonomous-work pattern; Meta also shipped its first frontier model, Muse Wonder, on 12 Oct at a reported $4/$20 per million tokens (TechCrunch, as reported).</strong> Every major lab is shipping the servant that acts first.</li>
+  <li><strong>The governance gap.</strong> <strong>74% of IT leaders call AI agents a new attack vector and only 13% strongly agree they have the governance to manage them (Gartner 2025); only ~23% of firms have scaled an agentic system into production (McKinsey, as reported).</strong> Capability is outrunning control.</li>
+  <li><strong>The embedded-engineer bet continues.</strong> <strong>Anthropic committed $100M on 2 Oct to train engineers, targeting 10,000 "Frontier Deployed Engineers" by the end of 2027 (Anthropic newsroom, as reported).</strong> The vendors keep pouring people into the cellar alongside the agents.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; Article 3(1) defines AI systems by their "varying levels of autonomy," and oversight means <em>effective</em> human oversight via interface tools, not per-action sign-off; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Identity, budget and a real human gate are how you meet them for an agent that acts unbidden.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">We're opening a research preview of Claude Duet, a new app where Claude works as a proactive agent. It comes to you with what needs your attention, completes tasks you ask of it, keeps working when you step away, and checks with you before it acts on your behalf.</div><div class="a">— Anthropic / Claude (@claudeai), on the Claude Duet research preview (21 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Google's new Gemini "coworker agents" each get their own Workspace identity — account, email, calendar and a cryptographically attested identity — with every action written to an audit trail attributed to the agent, not a person, and hard per-project spend caps to pause a runaway agent.</div><div class="a">— Google Cloud (Gemini at Work 2026) / VentureBeat; The Next Web, on persistent Gemini agents (8 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Only 13% [of IT leaders] strongly agreed their organization had the governance structures needed to manage AI agents effectively — while 74% viewed AI agents as a new attack vector.</div><div class="a">— Gartner 2025 survey of IT application leaders (as reported)</div></blockquote>
+<blockquote><div class="q">"You spent a year learning to govern the servant you send. This morning you must govern the servant who no longer waits to be sent. A proactive agent without its own name, a capped purse and an ask-first gate is not a coworker — it is an unsupervised stranger acting in your name while you sleep."</div><div class="a">— the radar, on why the proactive agent is the hardest test of your governance, not its reward</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The proactive agent shipped</td><td><span class="v">Claude Duet (21 Oct 2026): a proactive agent on Claude Opus 5.5 that "keeps working when you step away" and "comes to you with what needs your attention"; morning briefing; ~6,000 services; pays via Stripe Link/Shop Pay; a waitlisted research preview (US Pro &amp; Max)</span></td><td>Anthropic / @claudeai; secondary coverage, as reported</td></tr>
+<tr><td>The ask-first gate</td><td><span class="v">Duet asks approval before sending a message, making a payment, signing a document or deleting a file, and will not trade securities or move funds between accounts</span></td><td>Anthropic; secondary coverage, as reported</td></tr>
+<tr><td>The identity answer</td><td><span class="v">Google's Gemini "coworker agents" (8 Oct) each get their own Workspace account/email/calendar/Drive, a cryptographically attested identity, a per-action audit trail attributed to the agent, and hard per-project spend caps; sub-agents each get their own identity</span></td><td>Thomas Kurian / Google Cloud; VentureBeat; The Next Web, as reported</td></tr>
+<tr><td>The governance gap</td><td><span class="v">74% of IT leaders call AI agents a new attack vector; only 13% strongly agree they have the governance structures to manage them effectively</span></td><td>Gartner 2025 survey, as reported</td></tr>
+<tr><td>Production reality</td><td><span class="v">Only ~23% of organizations have scaled an agentic AI system into production; a further ~39% are experimenting</span></td><td>McKinsey, as reported</td></tr>
+<tr><td>The race &amp; the frontier</td><td><span class="v">OpenAI's "dots" agents and Meta's Muse agent target the same always-on pattern; Meta shipped its first frontier model, Muse Wonder, on 12 Oct at a reported $4/$20 per million tokens</span></td><td>TechCrunch; secondary coverage, as reported</td></tr>
+<tr><td>The embedded-engineer bet</td><td><span class="v">Anthropic committed $100M (2 Oct) to train engineers, targeting 10,000 "Frontier Deployed Engineers" by the end of 2027</span></td><td>Anthropic newsroom, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Give the night-walker its own name — no always-on agent acts under a borrowed login.</strong> The proactive agent has shipped (Claude Duet "keeps working when you step away"; Google's coworker-agents run jobs through the night), and a servant that acts while you sleep is only answerable if every act in the dark is plainly its own. <strong>This month, inventory every agent that runs unprompted or in the background, and give each its own scoped identity and immutable audit trail — the Google coworker-agent model (own account, cryptographic identity, per-action audit line) — retiring any that act under a human's or a shared service account's credentials.</strong> Report one number to the board: the share of autonomous/always-on agents that have a distinct identity and their own audit log versus those borrowing a human seat.</li>
+  <li><strong>Cap the purse it carries on its rounds — a hard budget you enforce, not the vendor's good manners.</strong> A proactive agent that can pay, send or sign will, helpfully, do so; only an enforced limit stands between "sorted the post" and "paid the creditor" (Duet gates payments and will not move funds between accounts; Google's hard per-project caps pause runaways). <strong>This month, for every agent with spend, payment or send reach, set a platform-enforced spend cap and payee/recipient allow-list, plus an in-flight kill/hold you control — and confirm it fires without a human online.</strong> Report the share of autonomous agents with an enforced budget and a tested kill-switch.</li>
+  <li><strong>Keep the ask-first gate on the irreversible acts — define the bright line, then test it holds.</strong> The proactive advance is safe <em>only because the agent still checks with you before it acts</em>; your job is to make that gate match your bright line and survive the 3 a.m. case. <strong>This month, for each autonomous workflow, write the short, hard list of actions an agent may never take without a human — pay, send externally, sign, delete, change access — configure the gate to enforce it, and run a test where the agent judges the act routine and no human is online.</strong> Report the list of irreversible actions behind a human gate and the date each gate was last tested. <strong>The model is a rented stove; the knowledge is the larder; the ground is the foundation; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the watch is why, having governed the servant you send, you must govern the servant who no longer waits to be sent: name it, cap it, gate it, so the servant that keeps your watch stays a watchman and never becomes a well-meaning stranger acting in your name while you sleep.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Anthropic / @claudeai (21 Oct 2026): Claude Duet research preview, a proactive agent on Claude Opus 5.5 that "comes to you with what needs your attention… keeps working when you step away, and checks with you before it acts on your behalf," morning briefing, ~6,000 services in the Claude Marketplace, pays via Stripe Link/Shop Pay, gates sending messages, making payments, signing documents and deleting files, will not trade securities or move funds between accounts, waitlisted on iOS/Android/web for US Pro &amp; Max (Anthropic; Reuters; secondary coverage) · The identity answer — Google Cloud, Gemini at Work (8 Oct 2026): universal Gemini agent and persistent "coworker agents," each with its own Workspace account/email/calendar/Drive, a cryptographically attested identity, a per-action audit trail attributed to the agent, hard per-project spend caps, sub-agents with their own identity (Thomas Kurian / Google Cloud; VentureBeat; The Next Web) · The race &amp; frontier — OpenAI "dots" agents; Meta Muse agent; Meta's first frontier model Muse Wonder (12 Oct, reported $4/$20 per million tokens) (TechCrunch) · The governance gap — Gartner 2025 survey of IT application leaders (74% call AI agents a new attack vector; only 13% strongly agree they have the governance to manage them); McKinsey (only ~23% have scaled an agentic system into production) · The embedded-engineer bet — Anthropic's $100M, 10,000 "Frontier Deployed Engineers" by end of 2027 (Anthropic newsroom, 2 Oct) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; Article 3(1) defines AI systems by their "varying levels of autonomy"; oversight means effective human oversight, not per-action sign-off); Gartner (40% of enterprise apps embed task-specific agents by 2026). The "watch" framing — that the agent has crossed from a tool you invoke to a coworker that acts on its own initiative, so governance built for the servant you send must now bind the servant that acts unbidden with its own name (identity + audit), a capped purse (an enforced budget + in-flight kill) and a hard ask-first gate on the irreversible acts — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 22 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
