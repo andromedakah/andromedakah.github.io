@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 26 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the watch' — you named your agents (the passport); this month the market shipped the piece that reads the name at the door. ServiceNow 'AI Passport' (15 Oct) adds runtime authorization for agents and MCP servers at every step, with signed CMDB-grounded credentials, graduated enforcement and a kill switch, alongside NVIDIA's Open Agent Safety Platform (OpenShell + Sentry, ~120 partners). The urgency: SailPoint finds 79% run AI agents in production but only 2% have agent-built identity security — a 40-to-1 gap. The board move: read the passport at every door (runtime authorization), verify your own signed register not the agent's claim, and keep the watch yours (own the policy and the kill-switch). Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You named the servant — now who reads the name at the door?</div>
+  <h1>The Watch</h1>
+  <div class="subhead">For a season the radar told you to <em>name</em> every agent (the passport) and to own the <em>ground</em> it stands on (the foundation). This month the market shipped the piece between them: not the paper that names the servant, but the watch that reads the paper at every door and can seize a hand mid-reach. The passports are printed. Who reads them?</div>
+  <div class="meta">Monday, 26 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 15 October 2026 ServiceNow launched "AI Passport" — a runtime-authorization layer that checks, at <em>every step of a multi-agent workflow</em>, what an agent and each MCP server it calls are actually allowed to do, against cryptographically-signed credentials grounded in the customer's own system of record (CMDB), with graduated responses — redirect, restrict, reconnect — and a kill switch when an agent strays (ServiceNow; Constellation Research; Techzine, as reported). It rides with NVIDIA's Open Agent Safety Platform (OpenShell, a kernel-level policy runtime that enforces out-of-process so a compromised agent cannot override the rules; Sentry, a BlueField-DPU watchdog NVIDIA says can isolate a rogue agent "in milliseconds"), in a ~120-partner coalition including Anthropic, Microsoft, Salesforce, SAP, Cisco, CrowdStrike and JPMorganChase. The reason the whole industry suddenly wants a watch is one number: SailPoint reports <strong>79% of organizations already run AI agents in production, while only 2% use identity security built for agents — a 40-to-1 gap</strong> (SailPoint; itwire, as reported). The board question is no longer <em>have we named our agents?</em> — it is: who reads the passport at the door, on whose authority, and can we stop a hand before the coin leaves — or have we hired the vendor's watch and handed it the keys to write our warrants?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long season the radar built the <em>named</em> house — a passport and livery for every agent (the livery), one governed book (the steward), the master's name on the bond (the surety), a checked wage (the second wage), the servant sent to reap (the two harvests), a scoped purse (the purse) — and three weeks ago turned to the <em>ground</em> the house stands on (the foundation). <strong>This morning the market shipped the piece that connects the name to the ground: the watch.</strong> A passport is only ink until someone reads it at the door; this month the industry made the watch a product, and the data made it urgent.</p>
+<p><strong>The reality — adoption has outrun identity, 40 to 1.</strong> SailPoint's fifth annual <em>Horizons of Identity Security</em> reports <strong>79% of organizations run AI agents in production, yet only 2% have deployed identity security built specifically for agents</strong> — a <strong>40-to-1 gap</strong> — with <strong>65% having made agents available to more than a quarter of their workforce</strong> and <strong>54% still at the lowest ("Horizon 1") maturity tier for agent identity</strong> even as the human-identity equivalent fell from 45% in 2022 to 23% today (SailPoint; itwire; Channel Insider, as reported). In plain terms: the house has let the servants in to work before it hired anyone to check their papers. A name on a passport no one reads is just ink.</p>
+<p><strong>The collision — the vendors shipped the watch, all in one month.</strong> On <strong>15 October 2026 ServiceNow launched "AI Passport"</strong> — runtime authorization for agents <em>and</em> the MCP servers they call, verifying authorized scope at <em>every point</em> of a multi-agent workflow against cryptographically-signed credentials grounded in the customer's CMDB, with graduated enforcement and a kill switch, built on open specs and partnered with NVIDIA (ServiceNow; Constellation; Techzine; CDO Magazine, as reported). It joins <strong>NVIDIA's Open Agent Safety Platform</strong> (OpenShell enforcing policy out-of-process at the kernel; Sentry isolating a rogue agent "in milliseconds"; a ~120-partner coalition), <strong>Oracle AI Agent Studio for Industry Applications</strong> (21 Oct), <strong>SAP's 1,000 agents</strong> at TechEd (c. 19 Oct), and governance moves from <strong>SK Telecom</strong> (agents given employee IDs, departments, roles and an onboarding-to-offboarding lifecycle). The watch is now something you can buy by Friday.</p>
+<p><strong>The stakes — post a watch, but keep the warrant and the kill-switch in your own hand.</strong> The watch is real progress — a passport unread is worthless, and runtime enforcement with a kill switch is exactly the control the 40-to-1 gap demands. But two cautions decide whether it protects you or re-pours the foundation. <strong>First, the watch must read <em>your</em> warrants, not the agent's own word</strong> — the whole point of signed, CMDB-grounded credentials is that permission is a verifiable record you issue, "rather than relying on the agent's own claims." <strong>Second, a watch is a control plane, and a control plane is a foundation</strong> — analysts note NVIDIA's platform "does not settle who defines agent authority"; it gives the mechanism, you must still write the rules. A watch whose policies live only in a vendor's console, enforcing a vendor's defaults, is the stove-seller pouring your floor again. So post the watch — urgently — but own the warrant-writing, keep the kill-switch command, and make the enforcement portable.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — adoption outran identity, 40 to 1.</strong> <strong>SailPoint (Oct 2026): 79% run AI agents in production; only 2% use agent-built identity security; 65% opened agents to &gt;25% of staff; 54% at the lowest agent-identity maturity tier (SailPoint; itwire, as reported).</strong> The servants are working; no one reads their papers.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the market shipped the watch this month.</strong> <strong>ServiceNow "AI Passport" (15 Oct): runtime authorization for agents and MCP servers at every step, signed CMDB-grounded credentials, graduated enforcement + kill switch, with NVIDIA's Open Agent Safety Platform (OpenShell + Sentry, ~120 partners); plus Oracle Agent Studio, SAP's 1,000 agents (ServiceNow; NVIDIA; Oracle, as reported).</strong> You can buy a watch by Friday.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — post the watch, keep the warrant.</strong> Read the passport at <em>every</em> door at runtime, not just the gate; ground permission in a record <em>you</em> sign, not the agent's self-claim; and keep the policy and the kill-switch in your own hand, because a watch whose rules live in the vendor's console is the foundation problem again — the platform gives the mechanism, you must define the authority.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant and the foundation looked at the ground; <strong>the watch is what stands between them — the sentry who reads the warrant at every interior door, in real time, and can stop a hand before it closes.</strong> This month the market proved two things at once. It proved the control is needed: SailPoint's 40-to-1 gap means four houses in five already have agents working the halls while only one in fifty has anyone trained to check their papers. And it proved the control is for sale: ServiceNow's AI Passport, NVIDIA's OpenShell and Sentry, Oracle's and SAP's studios all shipped a watch you can rent by the weekend. Both are good news — an unread passport is worthless, and you should not build your own kernel-level sentry from scratch. But the trap is the same one the foundation edition named: the watch is a control plane, and a control plane you do not command is a foundation you did not choose to pour. The houses that keep their standing will do three things: <strong>read the passport at every door</strong> (runtime, per-step authorization, not a one-time gate check), <strong>sign your own warrants</strong> (permission grounded in your record, never the agent's own claim), and <strong>keep the watch yours</strong> (own the policy and the kill-switch, keep the enforcement portable), so the sentry answers to you and not to the company that sold you the lantern.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Watch"</h3>
+<p><em>Topic: Having named every servant (the livery, the passport) and looked to the ground the house stands on (the foundation), the house this month is offered the piece between them — a watch that reads each servant's warrant at every interior door, in real time, and can seize a hand mid-reach. On 15 October 2026 ServiceNow launched "AI Passport," runtime authorization for agents and the MCP servers they call, checking scope at every step against signed credentials grounded in the customer's own record, with graduated enforcement and a kill switch (ServiceNow; Constellation, as reported); it rides with NVIDIA's Open Agent Safety Platform (OpenShell + Sentry, ~120 partners). The urgency is one number: SailPoint reports 79% of organizations run agents in production while only 2% have agent-built identity security — a 40-to-1 gap (SailPoint, as reported). The watch allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, learned to name its servants. Every hand carried a passport the master had sealed; every passport said plainly what its bearer was and was not allowed to touch — this one the grain store, that one the stables, none of them the strong-room. The master had even, three weeks past, dug down and satisfied himself that he owned the very ground the house stood on. By any fair reckoning it was the best-governed house in the valley, and the master slept well.</p>
+<p>He slept well because he had made a quiet assumption, the way tired masters do: that a passport, once sealed, <em>read itself</em>. That a servant forbidden the strong-room would simply not go there, because the paper in his coat said he mustn't. And for a while, with a few careful servants, the assumption held. But the house had not stayed small. Over one busy year it had taken on servants by the score, then by the hundred — eager, tireless, clever hands that let themselves through doors all day and all night while the master slept — and somewhere in that hiring the house crossed a line it never noticed. <strong>Four servants in five were now working the halls unwatched; and for every fifty hands that held a sealed passport, only one door in the whole house had anyone standing at it trained to actually read the thing.</strong> The passports were real. The reading was imaginary.</p>
+<p>A travelling census-taker put the number to the master one morning and it chilled him: <em>seventy-nine in a hundred of your servants work rooms no one guards, and two in a hundred is all the reading you have bought.</em> The master protested that every servant was named. "Named, yes," said the census-taker. "But a name on a paper no one reads at the door is just ink. A passport does not stop a hand. A <strong>watch</strong> stops a hand." And the master understood, with the particular shame of a careful man who has been careful about the wrong thing, that he had spent a year printing papers and never once hired a sentry to read them.</p>
+<p>As luck — or commerce — would have it, that was the very season the merchants of the valley arrived, all at once, selling watches. One wheeled in a splendid apparatus: a sentry who would stand not at the front gate but at <em>every interior door</em>, read each servant's warrant <em>as the hand reached for the latch</em>, check it against the master's own sealed register rather than taking the servant's word, and — if a hand reached where no warrant allowed — not merely tut, but redirect it, restrict it, or, if need be, close around the wrist and stop it cold. Another sold a watchman so quick he could pull a straying servant out of a room before the first object left the shelf. They came with impressive names and a coalition of a hundred other houses already signed. "Do not trouble yourself to train your own sentries," the merchants said. "Rent ours. We have thought of everything."</p>
+<p>And here the master, having been burned once, asked the two questions the foundation had taught him. The first: <em>whose register does this watch read?</em> For a watch that checks a servant's warrant against the servant's own say-so is no watch at all — it is a servant marking his own homework. The good watch, he saw, was the one that read permission from a record <em>the master</em> had sealed, and refused to take a hand's word for its own right to reach. The second, and sharper: <em>whose watch is this?</em> Because a sentry who stands at every door, who alone knows the rules and alone holds the cord that stops a hand, is not a small thing to rent. He is the most powerful figure in the house. If the merchant who sold him also wrote his orders, kept his rulebook in the merchant's own ledger, and could change what the watch permitted without asking — then the master had not bought protection. He had bought a garrison, billeted it in his own halls, and handed its captain the keys. <strong>A watch you do not command is not your watch. It is the vendor's watch, wearing your livery.</strong></p>
+<p>So the wise houses took the watch — gladly, urgently, for the census-taker's number frightened them and no sane master lets seventy-nine in a hundred work unread a day longer than he must — but they took it on three conditions, and they wrote the conditions down. <strong>First: read the passport at every door, not just the gate.</strong> A warrant checked once at hiring and never again is how a trusted hand ends up in the strong-room; the whole worth of a watch is that it reads the paper <em>at the moment the hand moves</em>, every time. <strong>Second: the watch reads the master's register, never the servant's word.</strong> Permission is a thing the master seals and the watch verifies; the day a servant can vouch for his own right of entry, the watch is theatre. <strong>And third: the master keeps the rulebook and the cord.</strong> Rent the lantern, rent the quick legs, rent the hundred-house coalition if it is good — but the rules the watch enforces, and the cord that stops a hand, stay in the master's own hand and in a form he can carry to another watch tomorrow. For the merchants were right that a house this size cannot forge its own sentries from nothing; and they were selling, underneath the sentry, the same thing the stove-seller had sold — a floor you cannot leave — and only a master who keeps the rulebook can tell the two apart.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground the house stands on — and <strong>the watch is why a sealed passport is worthless until a sentry reads it at every door: post the watch now, because four servants in five already work unread; but make it read your register and not the servant's word, and keep the rulebook and the cord in your own hand, so the watch answers to you and not to the merchant who sold you the lantern.</strong> A house that prints passports and hires no watch has governed nothing; a house that rents a watch it cannot command has only changed which master its servants obey.</p>
+<p><strong>The question it forces:</strong> <em>We have named our agents — but who reads the name at the door? For every runtime action our agents take tonight, is there a watch that verifies the warrant against a record we signed, at every step, with a cord we can pull — or are 79 in 100 of our agents working rooms no one guards, their passports unread? And if we rent a watch — ServiceNow's, NVIDIA's, anyone's — do we still write the warrants and hold the kill-switch, or have we let the vendor who sold us the sentry quietly become the captain of the guard in our own house?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we confused printing passports with posting a watch?</strong> We may have named our agents — but SailPoint finds 79% of organizations run agents in production while only 2% have identity security built for them, a 40-to-1 gap. <strong>For our own estate, what share of agent actions are actually authorized at runtime against a record we control — versus agents operating on trust because their "passport" is never read at the door?</strong></li>
+  <li><strong>If we rent a watch (ServiceNow AI Passport, NVIDIA OpenShell/Sentry, a studio), who writes the warrants and who holds the cord?</strong> A watch is a control plane, and analysts note these platforms "do not settle who defines agent authority." <strong>Do our agent-authorization policies and our kill-switch live in a record and a hand we control and can port to another enforcer — or only inside one vendor's console, enforcing its defaults?</strong></li>
+  <li><strong>Does the watch read our register, or the agent's own claim?</strong> The value of signed, CMDB-grounded credentials is a verifiable permission record "rather than relying on the AI agent's own claims." <strong>Can we show, for any agent, that its right to touch a system is checked against something we signed — not something the agent asserted about itself?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Runtime authorization and a kill switch are exactly what supervisors expect for anything that can move money or data. <strong>Can we evidence, per agent and per MCP tool, a signed warrant checked at every step, with graduated enforcement and a tested kill-switch — the way we evidence segregation of duties and transaction limits for human traders?</strong></li>
+  <li>The 40-to-1 gap is a concentration-of-risk and audit finding in your world. <strong>Have we a board-level number for "agents in production vs. agents under runtime identity control," and a dated plan to close it — before an examiner asks us to produce it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent that can reach clinical systems must be stopped mid-action, not merely logged after. <strong>Does our watch verify scope at the moment an agent touches a record (PHI, orders, devices), with an enforced boundary — or do we only have an after-the-fact audit trail of a breach that already happened?</strong></li>
+  <li>Validation and safety depend on knowing exactly what an agent was permitted to do. <strong>Are our agent warrants grounded in our own system of record and portable across enforcers, so a change of vendor doesn't mean re-validating every permission from scratch?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already gate physical access and tag every tool; agents touching OT/MES are the same discipline. <strong>Have we posted a runtime watch on agents reaching control systems — out-of-process enforcement a compromised agent can't override (cf. NVIDIA OpenShell) — or are agents trusted inside the plant on the strength of an unread passport?</strong></li>
+  <li>SK Telecom now gives agents employee IDs, roles and an onboarding-to-offboarding lifecycle. <strong>Do our agents have a managed lifecycle — issued, scoped, watched, and <em>retired</em> — or do deprecated agents keep their warrants and their door-keys indefinitely?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Peak-season agents touch checkout, pricing, inventory and customer data at machine speed. <strong>If an agent strays on our biggest sales day, can the watch isolate it "in milliseconds" and keep the rest running — and have we tested that graduated response under load, not just in a slide?</strong></li>
+  <li>Third-party and marketplace agents will call your MCP endpoints. <strong>Does our watch authorize <em>each MCP server</em> an agent invokes at every step — not just the top-level agent — so a compromised tool can't ride a trusted agent's warrant into our systems?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Accountability means an enforced, auditable boundary on every automated action, not a name in a registry. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026; Article 50 transparency), can we show runtime authorization and a human-commanded kill-switch for every agent touching a public service?</strong></li>
+  <li>A rented watch from a foreign or single vendor is a sovereignty question. <strong>Are our agent-authorization rules and enforcement built on open specifications and portable by design — so the captain of our guard answers to us, and the watch can be re-hosted without re-writing every warrant?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Watch</h2>
+<p>Read the stack once more, now from the seat of the executive who has <em>named</em> every agent, owned the <em>ground</em>, and just discovered the gap between the two. The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds what it can reach; the bell discloses when it slips; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those issues, counts, funds, or grounds the servant. None of them <em>reads the passport at the door while the hand is moving.</em></strong> That is the watch — runtime authorization — and this month the market made it a product precisely because the data made the gap undeniable: <strong>SailPoint's 79%-vs-2% (a 40-to-1 gap)</strong> is the engineering verdict that identity <em>issuance</em> has outrun identity <em>enforcement</em> by more than an order of magnitude. The point is blunt: <strong>a passport is an identity artifact; a watch is a runtime control; and confusing the two is how a house that proudly names its agents discovers that 79% of them act every night with no one reading the name.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — issuance outran enforcement, 40 to 1.</strong> <strong>SailPoint's fifth annual <em>Horizons of Identity Security</em>: 79% of organizations run AI agents in production; only 2% use identity security built for agents; 65% have opened agents to &gt;25% of the workforce; 54% sit at the lowest ("Horizon 1") maturity tier for agent identity, while the human-identity figure fell from 45% (2022) to 23% today (SailPoint; itwire; Channel Insider, as reported; survey of 340 senior leaders).</strong> Three engineering consequences follow. First, <em>the control that matters is runtime, not registry</em> — naming an agent (a credential, a service account, an entry in a directory) is necessary and insufficient; what stops a wrong action is a check <em>at the moment of the action</em>. Second, <em>the blast radius is already large</em> — with agents opened to a quarter of the workforce, the window between "agent acts" and "agent is authorized" is where incidents live. Third, <em>the gap is an identity-maturity gap, not a model problem</em> — no better model closes it; only enforcement does.</li>
+  <li><strong>The collision — the vendors shipped the watch, in one month, as a control plane.</strong> <strong>ServiceNow "AI Passport" (15 Oct 2026): runtime authorization for agents <em>and</em> the MCP servers they call, verifying authorized scope at every point of a multi-agent workflow against cryptographically-signed credentials grounded in the customer's CMDB, with graduated responses (redirect / restrict / reconnect) and a kill switch, built on open specifications; NVIDIA's Open Agent Safety Platform — OpenShell enforcing policy out-of-process at the kernel so a compromised agent can't override it, Sentry (BlueField DPUs) isolating a rogue agent "in milliseconds" — with a ~120-partner coalition incl. Anthropic, Microsoft, Salesforce, SAP, Cisco, CrowdStrike, JPMorganChase; Oracle AI Agent Studio for Industry Applications (21 Oct); SAP's 1,000 agents at TechEd (ServiceNow; NVIDIA; Oracle; Forkast, as reported).</strong> Two engineering realities cut against complacency. <strong>First, the watch must verify against <em>your</em> record, not the agent's claim.</strong> The design principle that matters is a "verifiable permissions record rather than relying on the AI agent's own claims about its permissions" — authorization must read from a source of truth you sign (CMDB, your IdP), out-of-process so a compromised agent cannot assert its own scope. <strong>Second, enforcement without ownership of policy is the foundation trap.</strong> As AI Business and TechTarget note, these platforms "do not settle who defines agent authority" — they provide mechanisms to enforce boundaries within your environment; <em>you</em> must still set those boundaries. The stove got cheap so the foundation could get sticky; now the watch is for rent so the control plane can get sticky.</li>
+  <li><strong>The answer — post the watch; own the warrant, the cord, and the portability.</strong> <strong>Enforce authorization at runtime, per step, for every agent <em>and</em> every MCP/tool call it makes; ground each permission in a record you sign (not the agent's self-claim), verified out-of-process; and keep the policy set and the kill-switch in a form you control and can port to another enforcer — reusing the identity, logging and ownership disciplines you already built for the livery, the purse and the foundation, now pointed at the one moment they never covered: the instant the hand moves.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the sharpest instant of all: not what the agent <em>is</em> (named) or what ground it stands on (owned), but whether, at the moment it reaches for a system, something you command reads its warrant and can close around its wrist.</li>
+</ul></div>
+<p>The strategic core: <strong>the watch is unambiguous progress — a 40-to-1 gap is an emergency, and runtime enforcement with a kill-switch is the right answer — but a watch is a control plane, and the control plane is where the next lock-in lives.</strong> The market makes the temptation concrete: it feels responsible and modern to rent a hundred-partner safety platform, and it feels like friction to keep your own policy store and portability. The board translation: <strong>post the watch urgently; never let the merchant who sells you the sentry also own your rulebook.</strong> The failure mode is exact: <strong>a house that names, counts, funds and grounds its agents — and then rents a watch whose policies live only in the vendor's console, enforcing the vendor's defaults — will pass every "do you have runtime governance?" review and discover, the first time it tries to change enforcers or ask "who exactly authorized that action," that it rented a garrison and handed over the keys.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The watch: you named the servant with a passport and owned the ground with the foundation. A sealed passport is just ink until a sentry reads it at the door, at runtime, and can stop a hand. This month the market shipped the watch, as a control plane. Top left, the passport, identity, issued: a name on the servant; a credential or service account; an entry in a directory; says what it may touch; does not stop a hand. Top right, the watch, authorization, enforced: a sentry at every interior door; reads the warrant as the hand reaches for the latch; checks your register, not its own word; graduated enforcement plus a kill switch. Between them: they are not the same thing, and issuance outran enforcement; a passport no one reads at the door is just ink. Middle, the arithmetic of the unread passport, per SailPoint 2026 as reported: 79 percent of organizations run AI agents in production; only 2 percent use identity security built for agents, a 40 to 1 gap; 65 percent have opened agents to more than a quarter of their workforce; 54 percent at the lowest maturity tier for agent identity, versus 23 percent for humans. Bottom left, stop, rent a watch you can't run: policy lives in the vendor console; enforces the vendor's defaults; no kill switch you command; passport issued but never read. Bottom right, start, post a watch that stays yours: read the passport at every door at runtime; verify your register, not the agent's word; own the rulebook and the cord, the kill switch; authorize every MCP and tool call, portably." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WATCH — you named the servant (passport); now who reads it at the door?</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A PASSPORT is issued identity. A WATCH is enforced authorization — not the same thing.</text>
+
+  <!-- the passport -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#1a1530" stroke="#34306a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE PASSPORT (identity, issued)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a NAME on the servant</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">credential · service account · directory</text>
+  <text x="52" y="137" font-size="10" fill="#cfc9f7" font-family="sans-serif">says what it MAY touch</text>
+  <text x="52" y="157" font-size="10" fill="#cfc9f7" font-family="sans-serif">checked once, at the gate</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ does NOT stop a hand</text>
+
+  <!-- the watch -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE WATCH (authorization, enforced)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a SENTRY at every interior door</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">reads the warrant as the hand moves</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">checks YOUR register, not its word</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">graduated response + kill switch</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ STOPS a hand mid-reach</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#b9b2f5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">issuance outran enforcement — a passport no one reads is just ink ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#8a6a1f"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#efb84a" font-family="sans-serif">THE ARITHMETIC OF THE UNREAD PASSPORT — (SailPoint 2026, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">79% of organizations run AI agents in production</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 2% use identity security BUILT for agents — a 40-to-1 gap</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">65% have opened agents to &gt;25% of their workforce</text>
+  <text x="52" y="327" font-size="9.5" fill="#f0d9a6" font-family="sans-serif" font-style="italic">54% at the LOWEST maturity tier for agent identity (humans: 23%)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#efb84a" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#efb84a"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: rent a watch you can't run</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· policy lives in the vendor console</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· enforces the vendor's defaults</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no kill-switch you command</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· passport issued, never read</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the vendor's watch, your livery</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: post a watch that stays yours</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· read the passport at EVERY door (runtime)</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· verify YOUR register, not the agent's word</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· own the rulebook + the cord (kill-switch)</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· authorize every MCP/tool call, portably</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the sentry answers to you</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A sealed passport is worthless until a sentry reads it at every door.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Post the watch · read your register · keep the rulebook and the cord.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#b9b2f5"></i>The passport — identity, issued</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>The watch — authorization, enforced</span>
+  <span><i class="dot" style="background:#efb84a"></i>The arithmetic of the unread passport</span>
+</div>
+</div>
+
+<h3>The passport vs the watch — what you issued, and what actually stops a hand</h3>
+<table>
+<tr><th>The passport (identity — issued, necessary)</th><th>The watch (authorization — enforced, the new control)</th></tr>
+<tr><td>A name/credential on the agent</td><td>A sentry reading the warrant at every door, at runtime</td></tr>
+<tr><td>Says what the agent <em>may</em> touch</td><td><em>Stops</em> the hand that reaches where it may not</td></tr>
+<tr><td>Checked once (at hiring / gate)</td><td>Checked at every step of the workflow, every MCP call</td></tr>
+<tr><td>Trusts the registry entry</td><td>Verifies <em>your</em> signed record, not the agent's own claim</td></tr>
+<tr><td>79% have agents in production…</td><td>…only 2% have the watch built for them (40-to-1)</td></tr>
+<tr><td>Issuance — necessary, insufficient</td><td>Enforcement — the control the gap demands</td></tr>
+</table>
+
+<h3>Why "the watch" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long season the worry was whether the agent was named, counted, funded and grounded. <strong>This month the market moved the question to the instant of action: identity issuance has outrun enforcement 40 to 1, and the vendors answered by shipping the watch as a control plane.</strong> SailPoint's 79%-vs-2% proves the passports are printed and unread; ServiceNow's AI Passport, NVIDIA's OpenShell and Sentry, Oracle's and SAP's studios prove a runtime watch is now something you can rent by Friday. Governance that stopped at issuance will not stop a hand. The estates that keep their standing will post the watch <em>and</em> keep it theirs — reading their own register, enforcing their own rules, holding their own cord.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to stop an action at the instant it happens.</em> On a legacy estate the instinct, under a 40-to-1 gap and a frightening audit, is to buy the most complete watch fastest and wire it in deep — which is right on urgency and dangerous on ownership. The retrofit is <strong>read, verify, keep. Read</strong> the passport at every door: runtime, per-step authorization for every agent and every MCP/tool call, not a one-time gate check. <strong>Verify</strong> against your own register: permission grounded in a record you sign (CMDB/IdP), checked out-of-process, never the agent's self-claim. <strong>Keep</strong> the watch yours: own the policy set and the kill-switch, insist on open specs and portability so the captain of the guard answers to you. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the watch is why a sealed passport is worthless until a sentry reads it at every door: post the watch, make it read your register, and keep the rulebook and the cord in your own hand.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — issuance outran enforcement.</strong> <strong>SailPoint (fifth annual Horizons of Identity Security): 79% run AI agents in production; only 2% have agent-built identity security (40-to-1); 65% opened agents to &gt;25% of staff; 54% at the lowest agent-identity maturity tier (SailPoint; itwire; Channel Insider, as reported).</strong> Passports printed, unread.</li>
+  <li><strong>The watch, as a product.</strong> <strong>ServiceNow "AI Passport" (15 Oct): runtime authorization for agents and MCP servers at every step; signed, CMDB-grounded credentials; graduated enforcement + kill switch; open specs; NVIDIA launch partner (ServiceNow; Constellation; Techzine; CDO Magazine, as reported).</strong> Read the passport at every door.</li>
+  <li><strong>The watch, in the silicon.</strong> <strong>NVIDIA Open Agent Safety Platform: OpenShell (kernel-level, out-of-process policy enforcement) + Sentry (BlueField DPUs, isolates a rogue agent "in milliseconds"); ~120-partner coalition incl. Anthropic, Microsoft, Salesforce, SAP, Cisco, CrowdStrike, JPMorganChase (NVIDIA; Forkast; AI Business, as reported).</strong> Enforcement a compromised agent can't override.</li>
+  <li><strong>The studios.</strong> <strong>Oracle AI Agent Studio for Industry Applications (21 Oct) — build/test/orchestrate/deploy/manage agents; SAP's ~1,000 agents at TechEd (c. 19 Oct) (Oracle; SAP, as reported).</strong> The control plane sells the whole lifecycle.</li>
+  <li><strong>The lifecycle.</strong> <strong>SK Telecom (AX Innovation 2.0): AI agents get employee IDs, departments, roles, access permissions and an onboarding-to-offboarding lifecycle; "one person, one agent," A.Biz to 25 SK Group firms (SK Telecom coverage, as reported).</strong> Issue, scope, watch — and retire.</li>
+  <li><strong>The caution.</strong> <strong>Analysts (AI Business; TechTarget): these platforms "do not settle who defines agent authority" — they give the mechanism; you must set the boundaries; no published Sentry quarantine benchmarks yet (as reported).</strong> A watch you don't command is the vendor's watch.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; GPAI enforcement powers active (fines up to €15M or 3% of turnover); MCP is the tool-connection layer the watch must authorize; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and AI-agent software spend ~$206.5B (2026) → ~$376.3B (2027) (as reported).</strong> The watch is how you meet them at runtime.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">SailPoint report finds 79% of enterprises run AI agents in production, yet only 2% have deployed purpose-built security.</div><div class="a">— itwire, headline on SailPoint's fifth annual <em>Horizons of Identity Security</em> (October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--blue)"><div class="q">[AI Passport gives enterprises] runtime control over what AI agents and MCP servers are authorized to do at every point in a multi-agent workflow… a verifiable permissions record rather than relying on the AI agent's own claims about its permissions.</div><div class="a">— ServiceNow, on AI Passport (15 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[NVIDIA's agent-safety platform] does not settle who defines agent authority… the controls operate at the deployment layer; enterprises still have to set those boundaries.</div><div class="a">— AI Business / TechTarget, on the Open Agent Safety Platform (as reported)</div></blockquote>
+<blockquote><div class="q">"You spent a year printing passports. A passport does not stop a hand — a watch stops a hand. Post the watch now, because four servants in five already work unread; but make it read your register, and keep the rulebook and the cord in your own hand, or you have only changed which master your servants obey."</div><div class="a">— the radar, on why runtime enforcement — owned, not merely rented — is the control the moment demands</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The gap: issuance vs. enforcement</td><td><span class="v">79% of organizations run AI agents in production; only 2% use identity security built for agents — a 40-to-1 gap</span></td><td>SailPoint, <em>Horizons of Identity Security</em> (5th annual); itwire; Channel Insider, as reported</td></tr>
+<tr><td>The blast radius</td><td><span class="v">65% have made AI agents available to &gt;25% of their workforce; only 23% operate a fully modern identity stack; 54% at the lowest ("Horizon 1") agent-identity maturity tier (humans fell from 45% in 2022 to 23% today)</span></td><td>SailPoint, as reported (survey of 340 senior leaders)</td></tr>
+<tr><td>The watch, as a product</td><td><span class="v">ServiceNow "AI Passport" (15 Oct 2026): runtime authorization for agents and MCP servers at every workflow step; cryptographically-signed, CMDB-grounded credentials; graduated enforcement + kill switch; open specs; NVIDIA launch partner</span></td><td>ServiceNow; Constellation Research; Techzine; CDO Magazine, as reported</td></tr>
+<tr><td>The watch, in the silicon</td><td><span class="v">NVIDIA Open Agent Safety Platform: OpenShell (kernel-level, out-of-process enforcement) + Sentry (BlueField DPUs, isolates a rogue agent "in milliseconds"); ~120-partner coalition</span></td><td>NVIDIA; Forkast; AI Business; TechTarget, as reported</td></tr>
+<tr><td>The lifecycle &amp; the studios</td><td><span class="v">Oracle AI Agent Studio for Industry Applications (21 Oct); SAP ~1,000 agents at TechEd (c. 19 Oct); SK Telecom gives agents employee IDs, roles and an onboarding-to-offboarding lifecycle</span></td><td>Oracle; SAP (via emergent.sh); SK Telecom coverage, as reported</td></tr>
+<tr><td>The caution</td><td><span class="v">These platforms "do not settle who defines agent authority" — they give the mechanism; the enterprise must set the boundaries; no published Sentry quarantine benchmarks yet</span></td><td>AI Business; TechTarget, as reported</td></tr>
+<tr><td>The spend underneath</td><td><span class="v">AI-agent software spending ~$206.5B (2026) → ~$376.3B (2027); 40% of enterprise apps to embed task-specific agents by year-end 2026; &gt;40% of agentic projects at cancellation risk by 2027</span></td><td>Gartner (May 2026 update &amp; prior press releases), as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Read the passport at every door — post a runtime watch, and measure the 40-to-1 gap for yourself.</strong> Naming agents is necessary and insufficient; SailPoint's 79%-vs-2% says enforcement is the emergency. <strong>This month, pick your highest-risk agent workflows and put runtime, per-step authorization in front of every agent <em>and</em> every MCP/tool call it makes — redirect/restrict/kill on an out-of-scope action, not just a log entry.</strong> Report one number to the board: the share of agent actions authorized at runtime against a record you control, versus agents acting on an unread passport — your own version of SailPoint's 40-to-1.</li>
+  <li><strong>Verify your register, never the agent's word — ground permission in a source of truth you sign.</strong> The design principle that separates a real watch from theatre is "a verifiable permissions record rather than relying on the AI agent's own claims." <strong>This month, wire agent authorization to a source of truth you own (CMDB/IdP), checked out-of-process so a compromised agent can't assert its own scope, and prove — for a sample of agents — that each right-of-access traces to something you signed.</strong> Report the share of agent permissions grounded in your signed record versus self-asserted.</li>
+  <li><strong>Keep the watch yours — own the rulebook and the cord, insist on portability.</strong> A watch is a control plane, and analysts warn these platforms "do not settle who defines agent authority"; rent the lantern, not the command. <strong>This month, when you adopt ServiceNow AI Passport, NVIDIA OpenShell/Sentry, or a studio, write the contract and the architecture so your authorization policies and your kill-switch live in a form you control and can port to another enforcer — open specs, exportable policy, a kill-switch you command.</strong> Report whether, for each watch you rent, you could change enforcers without rewriting every warrant. <strong>The model is a rented stove; the knowledge is the larder; the passport names each agent; the census is the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the watch is why a sealed passport is worthless until a sentry reads it at every door: post the watch, make it read your register, and keep the rulebook and the cord in your own hand, so the sentry answers to you and not to the merchant who sold you the lantern.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — SailPoint, fifth annual <em>Horizons of Identity Security</em> (Oct 2026): 79% run AI agents in production; only 2% have identity security built for agents (40-to-1); 65% opened agents to &gt;25% of staff; 54% at the lowest agent-identity maturity tier; survey of 340 senior leaders (SailPoint; itwire; Channel Insider; IT Brief) · The watch, as a product — ServiceNow "AI Passport" (15 Oct 2026): runtime authorization for agents and MCP servers at every workflow step; signed, CMDB-grounded credentials; graduated enforcement + kill switch; open specs; NVIDIA launch partner (ServiceNow; Constellation Research; Techzine; CDO Magazine) · The watch, in the silicon — NVIDIA Open Agent Safety Platform: OpenShell (out-of-process, kernel-level enforcement) + Sentry (BlueField DPUs, "milliseconds" isolation); ~120-partner coalition (NVIDIA; Forkast; AI Business; TechTarget) · The studios &amp; lifecycle — Oracle AI Agent Studio for Industry Applications (21 Oct); SAP ~1,000 agents at TechEd (c. 19 Oct); SK Telecom agent lifecycle, employee IDs (Oracle; SAP via emergent.sh; SK Telecom coverage) · The caution — these platforms "do not settle who defines agent authority"; enterprises set the boundaries; no published Sentry benchmarks (AI Business; TechTarget) · The spend — AI-agent software ~$206.5B (2026) → ~$376.3B (2027); 40% of enterprise apps embed task-specific agents by 2026 (Gartner) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; GPAI enforcement powers, fines up to €15M or 3% of turnover), MCP 2026-07-28 as the tool-connection layer. The "watch" framing — that naming an agent (the passport) is identity issuance while stopping a wrong action at runtime (the watch) is enforcement, that the two have diverged more than 40 to 1, and that a house must read the passport at every door, verify its own register and keep the watch its own — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 26 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
