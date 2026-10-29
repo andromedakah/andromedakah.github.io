@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 29 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the night watch' — the maker of your agents just said don't trust them. On 19 Oct 2026 Microsoft told enterprises to treat AI agents like insider threats because 'frontier models can't be trusted,' and shipped the watchman (Guardian Agents; catalogue grown 25→60) — a posture TechCrunch calls 'self-serving' given Microsoft's stakes in OpenAI and Anthropic, its cloud sales and its own models. Meanwhile the EU's first harmonised AI Act standard (EN 18286, ~14 Oct) covers only the quality-management system; risk, oversight, robustness and cybersecurity stay unstandardized ~13 months before the high-risk obligations apply. The board move: treat every agent as an insider (least privilege by task), post a watch you control, and don't wait for the standard. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant — now the maker says: don't trust it</div>
+  <h1>The Night Watch</h1>
+  <div class="subhead">A year of governance quietly assumed the servant could be trusted on the floor. This morning the maker of your agents pulls that plank up: Microsoft says treat AI agents like insider threats because "frontier models can't be trusted" — and offers to sell you the watchman. Believe the warning; distrust the sale.</div>
+  <div class="meta">Thursday, 29 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 19 October 2026 Microsoft told enterprises to treat the AI agents their staff run like insider threats, because "frontier models can't be trusted" — an agent can do harm with no malice: by mistake, by following an instruction hidden in a document it reads, or by being compromised — and shipped the tools to watch them (Guardian Agents inside Project Perception and Agent 365, governed-agent catalogue grown 25 → 60), with the sharp rule that an agent should hold only its task's permissions and never inherit the full access of the employee who set it up (TechCrunch — Julie Bort, as reported). The uncomfortable part is who gives the warning: Microsoft invests in OpenAI and Anthropic, sells the cloud they run on, and builds its own models — so the house that sold you the crew is also selling you the watch. And the one authority that might write neutral rules moved only a little: on ~14 October the EU cited its first harmonised AI Act standard, EN 18286:2026, covering only the quality-management system — risk, oversight, robustness and cybersecurity stay unstandardized ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA, as reported). The watch, if it is kept at all, is yours to post.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar governed the <em>servant</em> — named it (the livery), kept one book (the steward), put your name on the bond (the surety), checked its wage (the second wage), sent it to reap (the two harvests), funded it with a scoped purse (the purse), and refused to let the vendor pour the ground it stands on (the foundation). Every one of those disciplines rests on an unspoken assumption: that a servant, once named and bounded, can be <em>trusted on the floor</em>. <strong>This morning the vendor itself pulls that assumption out from under the house</strong> — and hands you a watchman to sell.</p>
+<p><strong>The reality — the maker of the crew now says the crew can't be trusted.</strong> On <strong>19 October 2026 Microsoft</strong> told enterprises to treat the AI agents their staff run <strong>like insider threats</strong>, because <strong>"frontier models can't be trusted"</strong> (TechCrunch — Julie Bort, as reported). The argument is not that agents are malicious; it is that an agent with access to company data and tools can do damage <strong>without any malice at all</strong> — by making a mistake, by following a harmful instruction smuggled into a document it reads, or by being compromised — and therefore warrants insider-style controls. The practical rule Microsoft draws is the sharpest line in the piece: <strong>an agent should get only the permissions its task needs, and must not automatically inherit the full permissions of the employee who set it up.</strong> To watch for the rest, it shipped <strong>Guardian Agents</strong> — monitoring for the agents a company runs — inside <strong>Project Perception</strong> and <strong>Microsoft Agent 365</strong>, and grew its catalogue of discoverable, governed agent types <strong>from 25 to 60</strong>, now including tools like Codex and GitHub Copilot (private preview, broader availability flagged for Ignite; as reported).</p>
+<p><strong>The collision — the warning is sold by the house that also sells the crew, the harbour and the ship.</strong> TechCrunch itself calls the posture "surprising, and a bit self-serving": <strong>Microsoft invests in OpenAI and Anthropic, sells the cloud those labs run on, and builds its own models</strong> (as reported). Read plainly, the company most entangled with the frontier labs is the one telling you the frontier labs' output can't be trusted — and offering to sell you the watchman. This is the <em>second-wage</em> problem wearing new clothes: a watchman paid by the man who sold you the crew has a divided loyalty, and the monitoring you lean on hardest should not be graded by the same vendor whose agents it is grading. The surrounding market only sharpens the point: on <strong>21 October</strong> OpenAI's frontier models and Codex workflows landed in <strong>Google Cloud's Model Garden</strong>, purchasable through the marketplace and drawable against existing Google Cloud commitments — OpenAI's models now sit on <strong>all three major clouds</strong> (OpenAI; PYMNTS; AI Business, as reported). The crew is everywhere, interchangeable, and sourced from houses that compete with and invest in one another. You will run many agents, from many makers, on many floors — which is exactly the condition under which a watch you do not control is worth very little.</p>
+<p><strong>The stakes — the lawbook has published only its first page, so the watch is yours to post.</strong> The one party that might write the rules for you instead of selling them to you did move — but only a little. On <strong>~14 October 2026</strong> the EU cited its <strong>first harmonised standard</strong> under the AI Act, <strong>EN 18286:2026</strong> (Commission Implementing Decision (EU) 2026/2274, adopted 12 Oct; OJEU reference mid-October), giving providers of high-risk systems a voluntary presumption of conformity — <strong>for the quality-management system only</strong> (Article 17, tied to the first sentence of Article 11(1)). <strong>Risk management, data governance, human oversight, robustness and cybersecurity — the load-bearing safety requirements — still have no harmonised standard</strong>, with CEN/CENELEC's JTC 21 still drafting them under mandate M/613, roughly thirteen months before the high-risk Annex III obligations apply (CEN-CENELEC; ActuIA; SwissGRC, as reported). The lawbook, in other words, has standardized the <strong>filing cabinet</strong>, not the <strong>night watch</strong>. So the board move is old discipline pointed at a new dark: <strong>treat every agent as an insider</strong> (least privilege by task, never the human's inherited keys), <strong>post a watch you control</strong> (independent monitoring that does not answer to any single model vendor and can halt an agent in flight), and <strong>do not wait for the standard to tell you how to keep watch</strong> — the first harmonised page is the quality ledger; the parts that matter are still blank, and the night has already fallen.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the crew's own maker says the crew can't be trusted.</strong> <strong>Microsoft (19 Oct): treat AI agents like insider threats because "frontier models can't be trusted"; an agent should get only its task's permissions, not inherit the setup employee's; Guardian Agents / Project Perception / Agent 365, agent catalogue grown 25 → 60 (TechCrunch — Julie Bort, as reported).</strong> Governance assumed trust; the vendor just withdrew it.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the watchman is sold by the house that sold you the crew.</strong> <strong>TechCrunch calls it "self-serving": Microsoft invests in OpenAI and Anthropic, sells their cloud, and builds its own models; meanwhile OpenAI's models reached Google Cloud's Model Garden (21 Oct), now on all three major clouds (TechCrunch; OpenAI; AI Business, as reported).</strong> A watch graded by the vendor whose agents it watches is the second-wage problem again.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — post a watch you control, and don't wait for the lawbook.</strong> Treat every agent as an insider (least privilege by task), stand up monitoring you own that can halt an agent in flight, and build your own evidence for risk, oversight, robustness and cybersecurity — because <strong>the EU's first harmonised standard (EN 18286, ~14 Oct) covers only the quality-management system; the safety-critical parts are still unstandardized, ~13 months before the high-risk obligations apply</strong> (CEN-CENELEC; ActuIA, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage asked whose bread it ate, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — and every one of those assumed the governed servant could be trusted on the floor. <strong>This week the company that makes and sells the crew told you plainly it cannot be</strong> — treat it like an insider, give it only the keys its errand needs, and watch it — and then offered to sell you the watch. That warning is sound and self-serving at once, and both halves matter: the risk is real (an agent can wreck a room by mistake, or by reading a poisoned document, with no ill intent), and the watchman should not be bought from, or graded by, the same house that sells you the agents, the cloud and the model. Meanwhile the one authority that could write neutral rules has published only the first page — the quality ledger — and left the night watch itself unwritten for another year. So the estates that keep their standing will do three unglamorous things while it is dark: <strong>treat every agent as an insider</strong> (least privilege by task, never the human's inherited access), <strong>post a watch they control</strong> (independent monitoring that answers to no single vendor and can pull an agent off the floor in flight), and <strong>not wait for the harbourmaster</strong> (build their own evidence for risk, oversight, robustness and cybersecurity now, because the standard for those parts does not yet exist). Trust was the thing the whole year quietly assumed. The maker just told you to stop assuming it — so keep the watch yourself, and do not rent it from the man who sold you the crew.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Night Watch"</h3>
+<p><em>Topic: This morning the frame turns from governing the servant to keeping watch over it, because the servant's own maker says it cannot be trusted. On 19 October 2026 Microsoft told enterprises to treat AI agents like insider threats, since "frontier models can't be trusted" — an agent can do harm by mistake, by following an instruction hidden in a document, or by being compromised, with no malice — and shipped Guardian Agents (inside Project Perception and Agent 365), growing its governed-agent catalogue from 25 to 60, while drawing the sharp line that an agent should hold only its task's permissions and never inherit the setup employee's (TechCrunch — Julie Bort, as reported). TechCrunch notes the posture is "self-serving": Microsoft invests in OpenAI and Anthropic, sells their cloud, and builds its own models. In the same week the EU cited its first harmonised AI Act standard, EN 18286:2026 (~14 Oct), which covers only the quality-management system — risk, oversight, robustness and cybersecurity remain unstandardized ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA, as reported). The night-watch allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants trustworthy — or so it had told itself. It had named every hand and cut it a scoped key, kept one honest book, stood surety with the master's own name, asked whose second coin each advising servant took, sent the governed servants to reap, handed each a scoped purse, and refused to let the great trading company pour the foundation under the floor. By any fair reckoning the house was well run, and the master slept soundly, because he believed that a servant once named, bounded and booked was a servant he could <em>trust on the floor</em>. That belief was the quiet foundation under all the others.</p>
+<p>Then, this week, a messenger came from the very company that had supplied the house its crew — the same company that owned shares in the two great workshops the servants came from, that leased the house its cellars and its light, and that was quietly training a workshop of its own. And the messenger said a strange thing: <em>"Trust none of them. The servants we sold you — the clever ones, the frontier-trained — cannot be trusted on your floor. Not because they are wicked; most will never mean you harm. But a clever servant with the run of your rooms can wreck a chamber by honest mistake, or do a stranger's bidding because the stranger slipped a note into a ledger the servant was reading, or be turned without ever knowing it. Treat each of them as you would treat a hired man who might, on any night, prove an insider. Post a watch."</em></p>
+<p>The master was shaken, because the warning was plainly true — he had felt its truth in his own cellars — and because of <em>who</em> was giving it. For the messenger did not stop at the warning. <em>"And because you will need a watchman,"</em> he went on, smiling, <em>"we have one to sell you. We have grown our roster of watched servants from five-and-twenty to threescore, and our night-watchman will walk your halls and mark every one."</em> So the house that had sold the master his crew, and leased him his cellars, and was building a rival crew besides, now offered — so helpfully — to sell him the watch set over all of it. And the master saw the shape of it: the warning was sound, and the warning was a sale, and both things were true at once, and he would be a fool to act on only one of them.</p>
+<p>Two roads, as always. The easy road was to buy the watchman from the messenger and sleep again — the watchman was competent, the price was fair, and it was such a relief to let the seller also keep the guard. The wiser road, which the careful houses took, began with the coldest question a master can ask of a guard: <em>not "is this watchman able?" but "whose man is he, and would he wake me if the danger came from his own master's crew?"</em> For a watch is only worth what its loyalty is worth, and a watchman paid by the man who sold you the servants, who leases you the house, and who is building servants of his own to sell you next season, has three reasons to look the other way and none the house can see. The careful houses had learned this exact lesson once already, under the sign of the second wage: <em>ask whose bread the advisor eats.</em> A watchman is an advisor who never sleeps. The same question governs him.</p>
+<p>So the wise houses learned three plain things, and kept them through the dark. <strong>The first: treat every servant as a possible insider — and give each only the keys its errand needs.</strong> The messenger had been right about this, and it cost nothing to do: a servant sent to sweep the yard does not carry the key to the strongroom, and above all a servant does not inherit the full ring of the steward who hired it, merely because the steward was holding the ring when it was made. Most houses had been doing the opposite — handing each new servant the hiring-man's whole ring for convenience — and that convenience was the open door the messenger was warning about. <strong>The second: post a watch the house itself controls.</strong> Not instead of the seller's watchman, perhaps, but above him — an independent eye, answering to the master and no vendor, able to see every servant's doings and to pull any one of them off the floor in the middle of its work, so that the house is never relying on a guard who might be loyal to the crew he guards. <strong>And the third: do not wait for the harbourmaster to tell you how to keep watch.</strong> For that same week the harbourmaster had at last published his long-promised rulebook — and it was one page, and the page was about <em>the ship's quality-ledger</em>: how to keep orderly books, how to file one's papers. Of the watch itself — how to bound a dangerous servant, who must stand over it, how to prove it sound, how to keep it from being turned — the rulebook said nothing at all, and promised the rest in a year. A master who waited for that page to be written would stand his house through a whole winter of nights with no watch but the seller's. The wise did not wait. They wrote their own watch-orders against the dark they could already see, and filed them for the harbourmaster to bless whenever he finally arrived.</p>
+<p>Here is the part that should keep a master awake. The warning and the sale came wrapped together on purpose, and the temptation was to take them together too — to believe the danger <em>because</em> the seller named it, and to buy the seller's cure <em>because</em> you believed the danger. But the danger was true whoever named it, and the cure was a sale whoever sold it, and the house's job was to hold both facts in one hand without letting either pull the other. <strong>Trust had been the silent plank under the whole floor; the maker of the crew had just pulled it up and shown the master the water below</strong> — and that was a gift, however self-interested. What the master did with it — buy a watch, or <em>keep</em> one — was the whole difference between a house that is guarded and a house that has merely hired its danger's cousin to watch the danger.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <strong>the night watch is why, the morning the maker of your crew tells you the crew cannot be trusted, you believe the warning and distrust the sale in the same breath: treat every servant as a possible insider and give it only its errand's keys, post a watch the house itself controls and that would wake you even against the seller's own crew, and do not stand idle through the dark waiting for a harbourmaster who has written only the first page of the rules.</strong> A house that buys its watch from the man who sold it the crew has not been guarded; it has been sold the disease and the cure by the same hand, and called the arrangement safety.</p>
+<p><strong>The question it forces:</strong> <em>The maker of our agents just told us our agents can't be trusted — and we should believe it. But do we also distrust the sale? Do we treat every agent as an insider and give each only the keys its task needs — never the keys of the human who set it up — and have we posted a watch we actually control, one that answers to us and not to the vendor whose agents it watches, and that can pull an agent off the floor in flight? Or are we about to buy the night watch from the same house that sold us the crew, the cloud and the model — and sleep soundly while it grades its own homework?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>The maker of our agents just called them untrustworthy — do we believe the warning and distrust the sale?</strong> Microsoft (19 Oct) told enterprises to treat AI agents like insider threats because "frontier models can't be trusted," and offered the watchman to go with it (TechCrunch, as reported). <strong>Can we name, for each critical agent, what controls we own outright versus what we are about to buy from a vendor who also sells us the model, the cloud and competes with the labs — and is our most important monitoring graded by anyone other than the house whose agents it watches?</strong></li>
+  <li><strong>Does any of our agents inherit a human's full access?</strong> Microsoft's sharpest, cheapest rule: an agent should hold only its task's permissions and must not automatically inherit the permissions of the employee who set it up. <strong>For our top ten agents, can we show that each runs on task-scoped credentials — not the standing access of the person who stood it up — and if not, which one is the open door?</strong></li>
+  <li><strong>Are we standing idle until the standard arrives?</strong> The EU's first harmonised AI Act standard (EN 18286, ~14 Oct) covers only the quality-management system; risk, oversight, robustness and cybersecurity are still unstandardized ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA, as reported). <strong>Have we built our own evidence for those four, or are we waiting for a harmonised page that does not yet exist?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Insider-threat controls are a discipline you already run for human staff — segregation of duties, least privilege, behavioural monitoring, the ability to suspend access in minutes. <strong>Have we extended that exact insider-threat programme to AI agents — task-scoped credentials, independent monitoring, an in-flight kill — rather than treating agents as trusted software that merely needs a login?</strong></li>
+  <li>A watchman bought from a vendor who also supplies your models and cloud carries a concentration and conflict risk your regulators understand well. <strong>Can we show our board and supervisor that our agent-monitoring and controls do not depend on a single model vendor grading its own agents — and that we could keep the watch if that vendor's tools went dark or changed terms?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent that reads documents can be steered by a document — a poisoned record, a crafted referral, an instruction hidden in a PDF — with no malice and no breach. <strong>In clinical and research workflows where agents ingest untrusted documents, have we bounded what an agent can <em>do</em> on the strength of what it <em>reads</em>, and can we detect when a reading changes its behaviour?</strong></li>
+  <li>Validation has assumed a trusted, stable agent. Microsoft just said the agent is not trusted. <strong>Does our validation now include adversarial and insider-threat testing — compromise, prompt-injection, over-inherited access — or does it still certify behaviour under the assumption the agent is honest?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You run least-privilege and lock-out/tag-out discipline on the physical floor as a matter of safety, not trust. <strong>Have we applied the same safety posture to AI agents on the operational floor — only the access the task needs, an independent watch, and a tested way to pull an agent off the line in flight — regardless of how much we trust the vendor?</strong></li>
+  <li>The standard that governs the dangerous parts (risk, robustness, cybersecurity) does not yet exist. <strong>For agents touching OT and safety systems, are we writing our own control evidence against the AI Act's requirements now, so a harmonised standard — when it lands in ~2027 — ratifies work we've already done rather than finding us empty-handed?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer-facing agents act fast on data and tools, the exact insider-threat profile Microsoft names. <strong>If one of our agents were steered by a malicious input or a compromised integration on our biggest sales day, what is the blast radius — and do we have an independent watch that would catch it and a way to halt the agent without taking the whole channel down?</strong></li>
+  <li>The crew is now sourced from every cloud (OpenAI models reached Google Cloud's Model Garden, 21 Oct; now on all three). <strong>As we route across model vendors for price and capability, is our monitoring and least-privilege posture vendor-neutral — one watch over all agents — or are we relying on each vendor to police its own?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability makes "we trusted the vendor's watchman" a weak answer after an incident. <strong>Can we show that oversight of agents in public services is owned by the institution — independent of any single model or cloud vendor — and that every agent runs on least-privilege, task-scoped access rather than an official's inherited permissions?</strong></li>
+  <li>The AI Act's harmonised standards for the safety-critical requirements are not yet written (only the QMS standard exists). <strong>Are we procuring and operating agents against our own reading of the high-risk requirements — risk management, human oversight, robustness, cybersecurity — rather than deferring to a standard that will not exist until well into the obligation window?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Night Watch</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded, and standing on ground I own?</em> and started asking the one question every prior control quietly assumed away: <em>can I trust this thing on the floor at all — and if the answer is no, who keeps the watch, and whose man is he?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those governs a servant you still, at bottom, trusted. This week the servant's own maker said: stop trusting it.</strong> Microsoft's framing — treat agents like insider threats, "frontier models can't be trusted" — is not a product line so much as a confession about the category: an agent with access and autonomy is, structurally, an insider, and insiders are governed by watch, least privilege and the ability to revoke, not by trust. The point is blunt: <strong>the controls that assumed a trustworthy agent are necessary but no longer sufficient; the new discipline is to design for an agent that may, on any night, be wrong, steered, or turned — and to make sure the watch over it answers to you.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — an agent is structurally an insider, and the maker just said so.</strong> <strong>Microsoft (19 Oct 2026): treat AI agents like insider threats because "frontier models can't be trusted" — an agent can cause harm with no malice, by error, by obeying an instruction hidden in a document it reads, or by being compromised; the operative rule is least privilege by task, and an agent must not inherit the full permissions of the employee who set it up; monitoring ships as Guardian Agents inside Project Perception and Agent 365, with the governed-agent catalogue grown 25 → 60 (TechCrunch — Julie Bort, as reported).</strong> Three engineering consequences follow. First, <em>prompt-injection and tool-poisoning are now first-class threats, not edge cases</em> — an agent's behaviour is a function of everything it reads, so untrusted inputs (documents, web pages, tool results) must be treated as potentially hostile instructions, and an agent's <em>actions</em> must be bounded independently of its <em>inputs</em>. Second, <em>inherited standing access is the dominant failure mode</em> — the convenient default of running an agent with the setup user's full permissions turns one compromised or confused agent into that user's entire blast radius; task-scoped, short-lived credentials are the fix, and they are mostly a configuration discipline, not a new product. Third, <em>autonomy demands an in-flight kill</em> — watching is worthless without the ability to halt an agent mid-action, so monitoring and a revocation/hold path must be wired together.</li>
+  <li><strong>The collision — the watchman is sold by the house most entangled with the crew.</strong> <strong>TechCrunch calls Microsoft's posture "self-serving": Microsoft invests in OpenAI and Anthropic, sells the cloud those labs run on, and builds its own models; and the same week OpenAI's frontier models and Codex workflows reached Google Cloud's Model Garden (21 Oct), purchasable against existing Google Cloud commitments, putting OpenAI's models on all three major clouds (TechCrunch; OpenAI; PYMNTS; AI Business, as reported).</strong> Two engineering realities cut against buying the watch from the crew's maker. <strong>First, a monitor graded by the vendor whose agents it watches has a structural conflict</strong> — this is the <em>second wage</em> again: the control you lean on hardest for an adverse finding should not be the one the vendor has every incentive to keep quiet, so independent, vendor-neutral observability (your own logs, your own evals, a monitor outside any single model provider) is not paranoia but basic separation of duties. <strong>Second, a multi-vendor crew needs a single watch</strong> — if agents come from OpenAI, Anthropic, Google and your own stacks, per-vendor policing leaves seams between them; the watch has to sit above the models, over all agents, keyed to <em>your</em> identity and policy fabric, not to any one lab's console.</li>
+  <li><strong>The answer — treat every agent as an insider, post a watch you control, and don't wait for the standard.</strong> <strong>Run every agent on least-privilege, task-scoped, short-lived credentials — never a human's inherited standing access; stand up independent monitoring of agent actions that answers to you and can hold or kill an agent in flight; and build your own control evidence for the AI Act's safety-critical requirements, because the first harmonised standard (EN 18286:2026, ~14 Oct) covers only the quality-management system (Article 17), with risk management, data governance, human oversight, robustness and cybersecurity still unstandardized under JTC 21's ongoing work on mandate M/613, ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA; SwissGRC, as reported).</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the hardest truth of all: the thing you run is an insider, its maker says don't trust it, and the watch over it must be yours.</li>
+</ul></div>
+<p>The strategic core: <strong>trust was the silent assumption under every prior control, and the vendor just withdrew it — correctly — so the work now is to govern agents the way mature organizations govern insiders (least privilege, independent monitoring, fast revocation), while refusing to let the monitoring itself become one more thing you buy from, and trust, the maker of the crew.</strong> The market makes the temptation concrete: the warning and the watchman arrive together, and it is easiest to accept both from the same hand. The board translation: <strong>believe the warning; distrust the sale.</strong> The failure mode is exact: <strong>a house that names, governs, funds and grounds its agents — and then, when told the agents can't be trusted, simply buys the watch from the same vendor that sells it the agents, the cloud and the models, and lets that vendor grade its own guard — has not posted a watch; it has hired the danger's cousin to watch the danger, and will learn the difference on the first night it matters.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The night watch: you governed the servant, now the maker says don't trust it. An agent is structurally an insider; govern it by watch, least privilege and revocation, not by trust, and make sure the watch answers to you. Top left, the warning, which is true: frontier models can't be trusted; an agent harms without malice, by error, by a hidden instruction, or by compromise; treat it like an insider; least privilege, not inherited. Top right, the sale, which is self-serving: buy the watchman from the crew's maker; Microsoft invests in OpenAI and Anthropic, sells their cloud, builds its own models, and has grown its agent catalogue from 25 to 60. Between them: believe the warning, distrust the sale, hold both in one hand. Middle, the lawbook has only its first page: EN 18286 of 2026, published in the Official Journal around 14 October as reported, is the first harmonised AI Act standard and covers the quality-management system only; risk, data, human oversight, robustness and cybersecurity are still unwritten; JTC 21 is drafting the rest under mandate M slash 613, about 13 months before the high-risk obligations bite; the law standardized the filing cabinet, not the night watch, so don't wait. Bottom left, stop, buy the watch from the crew: the agent inherits a human's keys, one vendor grades its own guard, the watch is only as good as its loyalty, and you wait for the harmonised standard. Bottom right, start, post a watch you control: least privilege, task-scoped and short-lived; an independent monitor over all agents; an in-flight hold or kill keyed to your policy; and write your own risk and oversight evidence now." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE NIGHT WATCH — you governed the servant; now the maker says: don't trust it</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">An agent is structurally an INSIDER. Govern it by WATCH, LEAST PRIVILEGE and REVOCATION — not trust.</text>
+
+  <!-- the warning (true) -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE WARNING (true — take it)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"frontier models can't be trusted"</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">harm w/o malice: error · hidden note</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">· compromise — treat it as an INSIDER</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">least privilege — not inherited keys</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ true whoever names it</text>
+
+  <!-- the sale (self-serving) -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE SALE (self-serving)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">buy the watch from the crew's maker</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MS invests in OpenAI &amp; Anthropic</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">sells their cloud · builds own models</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">agent catalogue grown 25 → 60</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a sale whoever sells it</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">believe the warning · distrust the sale · hold both in one hand ▼</text>
+
+  <!-- the lawbook -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE LAWBOOK HAS ONLY ITS FIRST PAGE — EN 18286:2026 (OJEU ~14 Oct, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">first harmonised AI Act standard — covers the QUALITY-MANAGEMENT SYSTEM only</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">risk · data · human oversight · robustness · cybersecurity = STILL UNWRITTEN</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">JTC 21 drafting the rest (M/613); ~13 months before high-risk obligations bite</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">→ the law standardized the FILING CABINET, not the NIGHT WATCH. Don't wait.</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: buy the watch from the crew</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agent inherits a human's keys</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one vendor grades its own guard</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· watch only as good as its loyalty</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· wait for the harmonised standard</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the danger's cousin, hired to watch</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: post a watch you control</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· least privilege, task-scoped, short-lived</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· independent monitor over ALL agents</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· in-flight hold / kill, keyed to YOUR policy</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· write your own risk/oversight evidence</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a watch that answers to you alone</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Trust was the silent plank; the maker just pulled it up. Govern the agent like an insider.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Believe the warning · distrust the sale · keep the watch your own.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The warning — true, take it</span>
+  <span><i class="dot" style="background:#a5416a"></i>The sale — self-serving, keep the watch yours</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The lawbook — only its first page</span>
+</div>
+</div>
+
+<h3>The warning vs the sale — what to take, and what to keep in your own hand</h3>
+<table>
+<tr><th>The warning (true — take it)</th><th>The sale (self-serving — keep the watch yours)</th></tr>
+<tr><td>Treat every agent like an insider threat</td><td>Don't buy the watch from the house that sells you the crew</td></tr>
+<tr><td>An agent harms with no malice: error, hidden instruction, compromise</td><td>Microsoft invests in OpenAI/Anthropic, sells their cloud, builds its own models</td></tr>
+<tr><td>Least privilege by task — never the human's inherited keys</td><td>A monitor graded by its vendor is the second-wage problem again</td></tr>
+<tr><td>Autonomy needs an in-flight hold / kill</td><td>The watch must sit above all vendors, keyed to your policy</td></tr>
+<tr><td>Prompt-injection / tool-poisoning are first-class threats</td><td>The crew is multi-cloud now — one watch, not per-vendor policing</td></tr>
+<tr><td>The risk is real whoever names it</td><td>The cure is a sale whoever sells it</td></tr>
+</table>
+
+<h3>Why "the night watch" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded — all controls that quietly assumed a trustworthy servant underneath. <strong>This morning the maker of the servant said: stop assuming it.</strong> That is not a product pitch to wave away; it is the correct structural claim about autonomous agents — an agent with access is an insider, and insiders are governed by watch, least privilege and revocation, not by trust. Governance that stopped at "well-behaved agent" will not survive a steered or compromised one. The estates that keep their standing will take the warning (treat agents as insiders), refuse the reflex to buy the watch from the crew's maker (keep monitoring independent and vendor-neutral), and not wait for a harmonised standard that, for the parts that matter, does not yet exist.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>keep a watch you control over agents you no longer assume you can trust.</em> On a legacy estate the instinct, after a hard year of governance work, is to feel finished — the agents are named, booked, bounded — and to accept the vendor's new watchman as the last piece. Under the night watch that is exactly the reflex to check: the agents were never <em>trusted</em>, only <em>governed</em>, and the watch over them must not be bought from, or graded by, the house that sells the agents. The retrofit is <strong>scope, watch, write. Scope</strong> every agent to its task: strip inherited standing access, issue short-lived task credentials, and make the keyring (which key each agent holds) reflect the errand, not the hiring-man's ring. <strong>Watch</strong> with an eye you own: independent monitoring over all agents regardless of vendor, wired to an in-flight hold/kill, so the bell (disclosure when an agent slips) is backed by a hand that can stop it. <strong>Write</strong> your own control evidence for risk, oversight, robustness and cybersecurity now, against the AI Act's requirements, so the missing harmonised standards ratify work you've done rather than finding you waiting. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <em>the night watch is why, the morning the maker says the crew can't be trusted, you believe the warning, distrust the sale, give every agent only its errand's keys, and post a watch that answers to you alone.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the maker says don't trust the crew.</strong> <strong>Microsoft (19 Oct): treat AI agents like insider threats, "frontier models can't be trusted"; least privilege by task, no inherited human access; Guardian Agents / Project Perception / Agent 365; governed-agent catalogue 25 → 60 (TechCrunch — Julie Bort, as reported).</strong> An agent is structurally an insider.</li>
+  <li><strong>The self-serving tell.</strong> <strong>TechCrunch flags the conflict: Microsoft invests in OpenAI and Anthropic, sells their cloud, and builds its own models — while selling the watch over all of it (TechCrunch, as reported).</strong> Believe the warning; distrust the sale.</li>
+  <li><strong>The crew goes multi-cloud.</strong> <strong>OpenAI's frontier models and Codex workflows reached Google Cloud's Model Garden (21 Oct), purchasable against existing Google Cloud commitments; OpenAI's models now on all three major clouds (OpenAI; PYMNTS; AI Business, as reported).</strong> One watch over many vendors, not per-vendor policing.</li>
+  <li><strong>The lawbook's first page.</strong> <strong>EU cited EN 18286:2026, its first harmonised AI Act standard (Commission Implementing Decision (EU) 2026/2274, 12 Oct; OJEU ~14 Oct) — covers the quality-management system only; risk, data, oversight, robustness, cybersecurity still unstandardized under JTC 21 / M/613, ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA; SwissGRC, as reported).</strong> The filing cabinet, not the watch.</li>
+  <li><strong>The standards layer keeps moving.</strong> <strong>Anthropic's open Agent Skills standard moved to the Agentic AI Foundation under the Linux Foundation (22 Oct), with 70+ platforms reported integrated (as reported).</strong> Neutral, portable scaffolding is how a multi-vendor crew stays governable.</li>
+  <li><strong>The regulators are asking.</strong> <strong>The UK ICO opened a call for evidence on agentic AI, closing 20 November 2026; the EU "omnibus" transitional period (incl. a new prohibition on AI-generated NCII/CSAM) ends 2 December 2026 (as reported).</strong> The window to shape — and to prepare — is open now.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Least privilege and an independent watch are how you meet them under the new "don't trust the agent" posture.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Microsoft says AI agents are like insider threats as "frontier models can't be trusted."</div><div class="a">— TechCrunch (Julie Bort), headline, 19 October 2026 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">EU AI Act: first harmonised standard covers only the quality system.</div><div class="a">— ActuIA, headline on EN 18286:2026 (as reported; risk, oversight, robustness and cybersecurity remain unstandardized)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">OpenAI Brings Its Frontier AI Models to Google Cloud.</div><div class="a">— PYMNTS, on OpenAI's models reaching Google Cloud's Model Garden, 21 October 2026 (as reported; now on all three major clouds)</div></blockquote>
+<blockquote><div class="q">"Believe the warning; distrust the sale. The maker of your agents is right that you can't trust them — so treat every one like an insider, give it only its errand's keys, and post a watch that answers to you, not to the house that sold you the crew."</div><div class="a">— the radar, on why the watch over an untrusted agent must be your own</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The maker's verdict</td><td><span class="v">Microsoft (19 Oct 2026): treat AI agents like insider threats because "frontier models can't be trusted" — harm can come with no malice, via error, a hidden instruction in a document, or compromise</span></td><td>TechCrunch — Julie Bort, as reported</td></tr>
+<tr><td>The operative rule</td><td><span class="v">Least privilege by task: an agent should get only the permissions its task needs and must NOT automatically inherit the full permissions of the employee who set it up</span></td><td>TechCrunch (Microsoft), as reported</td></tr>
+<tr><td>The watch Microsoft ships</td><td><span class="v">Guardian Agents (monitoring the agents a company runs) inside Project Perception and Microsoft Agent 365; governed-agent catalogue grown 25 → 60, now incl. Codex and GitHub Copilot (private preview, broader availability flagged for Ignite)</span></td><td>TechCrunch; cybersecuritynews, as reported</td></tr>
+<tr><td>The self-serving tell</td><td><span class="v">Microsoft invests in OpenAI and Anthropic, sells the cloud they run on, and builds its own models — then sells the watch over all of it ("self-serving," per TechCrunch)</span></td><td>TechCrunch, as reported</td></tr>
+<tr><td>The crew goes multi-cloud</td><td><span class="v">OpenAI's frontier models + Codex reached Google Cloud's Model Garden (21 Oct), purchasable against existing Google Cloud commitments; OpenAI's models now on all three major clouds</span></td><td>OpenAI; PYMNTS; AI Business, as reported</td></tr>
+<tr><td>The lawbook's first page</td><td><span class="v">EN 18286:2026 — first harmonised AI Act standard (Commission Implementing Decision (EU) 2026/2274, 12 Oct; OJEU ~14 Oct): covers the quality-management system only (Art. 17); risk, data, oversight, robustness, cybersecurity still unstandardized (JTC 21 / M/613), ~13 months before high-risk obligations apply</span></td><td>CEN-CENELEC; ActuIA; SwissGRC, as reported</td></tr>
+<tr><td>The standards layer</td><td><span class="v">Anthropic's open Agent Skills standard moved to the Agentic AI Foundation under the Linux Foundation (22 Oct); 70+ platforms reported integrated. UK ICO agentic-AI call for evidence closes 20 Nov 2026; EU "omnibus" transitional period ends 2 Dec 2026</span></td><td>Anthropic; UK ICO; as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Treat every agent as an insider — strip inherited access and scope each to its task.</strong> Microsoft's sharpest, cheapest rule is the one to act on first: an agent should hold only the permissions its task needs and must never automatically inherit the full access of the employee who set it up (TechCrunch, as reported). <strong>This month, audit your top ten agents: for each, confirm it runs on task-scoped, short-lived credentials rather than a human's standing access, and remediate the worst offender.</strong> Report one number to the board: the share of production agents running least-privilege, task-scoped identities versus inherited human access.</li>
+  <li><strong>Post a watch you control — independent of the vendor whose agents it watches.</strong> Believe the warning and distrust the sale: the monitoring you lean on hardest should not be bought from, or graded by, the same house that sells you the agents, the cloud and the models — a watchman's worth is its loyalty, and the crew's maker has a divided one. <strong>This month, stand up (or test) independent, vendor-neutral monitoring over <em>all</em> your agents — regardless of model vendor — wired to an in-flight hold/kill, so you can pull any agent off the floor mid-action.</strong> Report whether you have one watch over all agents that answers to you, and the measured time to halt a misbehaving agent in flight.</li>
+  <li><strong>Don't wait for the standard — write your own control evidence now.</strong> The EU's first harmonised AI Act standard (EN 18286, ~14 Oct) covers only the quality-management system; risk management, human oversight, robustness and cybersecurity are still unstandardized, ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA, as reported). <strong>This month, build your own control evidence for those four safety-critical requirements against the AI Act's text — so when the harmonised standards land in ~2027 they ratify work you've already done rather than finding you empty-handed.</strong> Report a dated readiness map of your high-risk agents against the four still-unstandardized requirements. <strong>The model is a rented stove; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and the night watch is why, the morning the maker says the crew can't be trusted, you believe the warning, distrust the sale, give every agent only its errand's keys, and post a watch that answers to you alone.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Microsoft (19 Oct 2026): treat AI agents like insider threats because "frontier models can't be trusted," least privilege by task (no inherited human access), Guardian Agents inside Project Perception and Agent 365, governed-agent catalogue grown 25 → 60 (TechCrunch — Julie Bort; cybersecuritynews) · The self-serving tell — Microsoft invests in OpenAI and Anthropic, sells their cloud, builds its own models ("self-serving," per TechCrunch) · The crew goes multi-cloud — OpenAI's frontier models and Codex workflows reached Google Cloud's Model Garden (21 Oct), purchasable against existing Google Cloud commitments; now on all three major clouds (OpenAI; PYMNTS; AI Business) · The lawbook's first page — EN 18286:2026, first harmonised AI Act standard (Commission Implementing Decision (EU) 2026/2274, 12 Oct; OJEU ~14 Oct): quality-management system only (Art. 17); risk, data, oversight, robustness, cybersecurity still unstandardized under JTC 21 / M/613, ~13 months before the high-risk obligations apply (CEN-CENELEC; ActuIA; SwissGRC) · Standards layer — Anthropic's Agent Skills to the Agentic AI Foundation / Linux Foundation (22 Oct, 70+ platforms); UK ICO agentic-AI call for evidence closes 20 Nov 2026; EU "omnibus" transitional period ends 2 Dec 2026 · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "night watch" framing — that an agent is structurally an insider the maker now says to distrust, so a house must believe the warning, distrust the sale, scope every agent to its task, post a watch it controls, and write its own evidence for the still-unstandardized safety requirements — is expressly the radar's reading; the "self-serving" characterization of Microsoft's posture is TechCrunch's. Figures are relayed from vendor, regulator, standards-body and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 29 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no-signup beacon; harmless if the site code is not yet live) -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
