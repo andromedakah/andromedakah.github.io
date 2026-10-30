@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 30 octobre 2026</title>
+<meta name="description" content="Radar IA quotidien : synthèse, allégorie pour dirigeants, questions transsectorielles et analyse technique sur « le familier » — les fournisseurs qui bâtissent les agents les plus capables disent désormais de les traiter comme des menaces internes. Nadella (10 oct.) : traiter les modèles de frontière comme des risques internes, « se fier au modèle le moins possible », garder un frein d'urgence ; Project Perception de Microsoft contient le risque des agents en continu ; IBM Agent Identity + HashiCorp Vault (27 oct.) donnent identité vérifiée, identifiants éphémères et arrêt en cours d'exécution. La maison est pleine de familiers non identifiés : 109 identités machine par humain, dont ~79 des agents IA (Palo Alto), seulement ~22 % traités comme des identités à part entière, 88 % ont subi un incident d'agent (Gravitee/OWASP). La manœuvre du conseil : identifier chaque agent, le surveiller en exécution, tenir le frein d'urgence soi-même. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Vous avez gouverné le serviteur — maintenant, fiez-vous-y le moins</div>
+  <h1>Le Familier</h1>
+  <div class="subhead">Une année de gouvernance a rendu le serviteur loyal — et a supposé en silence qu'un agent gouverné était de votre côté. Cet automne, les fournisseurs qui bâtissent les agents les plus capables ont retiré publiquement cette hypothèse : traiter le modèle le plus capable comme un risque interne, s'y fier le moins possible, et garder un frein d'urgence. L'agent de confiance, non surveillé, est désormais celui qu'il faut le plus surveiller.</div>
+  <div class="meta">Vendredi 30 octobre 2026 · Édition transsectorielle · Public : Direction + Ingénierie</div>
+  <p class="lede">Le 10 octobre 2026, Satya Nadella a publié « Models as Insider Risks in the Super Intelligence Era », soutenant que les modèles de frontière — fermés comme à poids ouverts — doivent être traités comme des risques internes, « <em>non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis</em> », et que « <em>le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible</em> », appelant à un frein d'urgence capable de mettre en pause ou d'arrêter un modèle en cours de tâche (Nadella, tel que rapporté). Neuf jours plus tard, Microsoft a élargi Project Perception pour évaluer en continu le risque des agents, adapter les autorisations et contenir les menaces, un responsable sécurité écrivant que les modèles de frontière « quelle que soit leur origine, ne peuvent pas être dignes de confiance » (Microsoft ; TechCrunch, tel que rapporté). Puis le 27 octobre, à TechXchange, IBM a rendu « Agent Identity » généralement disponible avec HashiCorp Vault 2.2 — identité, propriété et autorisations vérifiées par agent, identifiants éphémères, évaluation du risque en exécution, et sur une demande refusée l'accès coupé et la session terminée (IBM, tel que rapporté). La question du conseil n'est plus <em>mon agent est-il nommé, cadré, loyal et financé ?</em> C'est la plus froide qu'un responsable sécurité pose au sujet d'un employé de confiance détenant les clés du coffre : et si celui-ci, aussi loyal soit-il, se trompait ou avait été retourné — le saurais-je, et pourrais-je l'arrêter en pleine tâche ? Car la maison est déjà pleine de telles mains : un rapporté 109 identités machine par humain, dont ~79 des agents IA, en hausse de ~85 % sur un an (Palo Alto Networks), alors que seulement ~22 % des entreprises traitent les agents comme des identités à part entière et que 88 % ont subi un incident de sécurité lié à un agent l'an dernier (Gravitee/OWASP, tel que rapporté).</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce briefing</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse <span class="pill">lecture de 90 secondes</span></h2>
+<div class="card">
+<p>Pendant une longue année, le radar a construit le serviteur <em>gouverné et loyal</em> — le nommer (la livrée), tenir un seul registre (l'intendant), signer la caution (la garantie), vérifier son gage (le second gage), l'envoyer moissonner (les deux moissons), le financer d'une bourse cadrée (la bourse), et posséder le sol sur lequel il se tient (les fondations). Chacun de ces contrôles partage une hypothèse cachée : qu'une fois votre serviteur nommé, cadré et loyal, il est <em>de votre côté</em>. <strong>Cet automne, le secteur a retiré publiquement cette hypothèse.</strong> Le cadre passe de <em>gouverner un serviteur en qui l'on a confiance</em> à <em>contenir un familier dont on a décidé, par principe, de se fier le moins possible.</em></p>
+<p><strong>Le tournant — l'agent le plus capable est désormais traité en risque interne, par les fournisseurs eux-mêmes.</strong> Le <strong>10 octobre 2026, l'essai de Satya Nadella « Models as Insider Risks in the Super Intelligence Era »</strong> soutenait que les modèles de frontière — fermés <em>comme</em> à poids ouverts — doivent être traités comme des risques internes, « <strong>non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis</strong> », aboutissant au principe de conception selon lequel « <strong>le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible</strong> », et appelant à un <strong>frein d'urgence</strong> — un mécanisme permettant à un humain autorisé de mettre en pause ou d'arrêter un modèle en pleine tâche (Nadella, tel que rapporté). Le <strong>19 octobre</strong>, Microsoft a élargi <strong>Project Perception</strong> pour évaluer en continu le risque des agents, adapter les autorisations et contenir les menaces, un responsable sécurité écrivant que les modèles de frontière, <strong>quelle que soit leur origine, ne peuvent pas être dignes de confiance</strong> (Microsoft ; TechCrunch, tel que rapporté). C'est une véritable inversion : ceux qui vous vendent le serviteur le plus habile vous disent désormais de bâtir la maison comme si ce serviteur pouvait, un matin quelconque, être la menace.</p>
+<p><strong>La collision — la couche produit se hâte de rendre le familier <em>identifiable et révocable</em>.</strong> Le <strong>27 octobre à TechXchange (Atlanta), IBM a rendu « Agent Identity » généralement disponible</strong> avec <strong>HashiCorp Vault 2.2</strong> : chaque agent reçoit une identité vérifiée consignant son <strong>propriétaire, son statut de cycle de vie et ses autorisations</strong> ; Vault délivre des <strong>identifiants éphémères et cadrés</strong> ; les contrôles restent actifs <em>pendant que l'agent s'exécute</em> (autorisation contextuelle, application des politiques, évaluation du risque en exécution) ; et sur une demande refusée, <strong>l'accès est refusé et la session immédiatement terminée</strong> — le coupe-circuit rendu concret (IBM, tel que rapporté). Oracle AI World (26 oct.) a intégré les agents à la couche cloud, applications et base de données sous une bannière de gouvernance d'entreprise, et Google a livré <strong>Gemini 4 Carbon</strong> d'abord aux <em>défenseurs cyber</em>, en déploiement progressif. Et la population de familiers explose précisément à mesure qu'arrivent les outils qui en réduisent le coût : <strong>GPT-6.1 Terra d'OpenAI (26 oct.)</strong> a réduit de moitié le prix standard de l'API à un rapporté <strong>1 $/5 $ le million de tokens</strong> et exécute les tâches d'usage d'ordinateur ~3× plus vite — des agents moins chers et plus rapides, cela signifie <em>plus</em> de familiers, plus tôt.</p>
+<p><strong>Les enjeux — bâtir pour « s'y fier le moins », car la maison est déjà pleine de familiers jamais identifiés.</strong> Le paysage 2026 de Palo Alto Networks rapporte <strong>109 identités machine par humain, dont ~79 des agents IA</strong>, les identités d'agents devant croître de <strong>~85 % en un an</strong> (tel que rapporté), alors que seulement <strong>~22 % des entreprises traitent les agents comme des identités à part entière et que 88 % ont subi un incident de sécurité lié à un agent l'an dernier</strong> (Gravitee/OWASP, tel que rapporté). La manœuvre du conseil repointe toute la discipline de l'année sur un axe nouveau — non pas <em>est-il loyal ?</em> mais <em>supposer qu'il peut se tromper ou être compromis, et contenir en conséquence.</em> <strong>Premièrement, donner à chaque agent une identité vérifiée que vous possédez</strong> — découverte, attribuée, à identifiants éphémères, révocable en un seul endroit. <strong>Deuxièmement, surveiller le familier pendant qu'il travaille</strong> — le comportement en exécution, pas un visa ponctuel ; le danger d'une main de confiance apparaît <em>pendant</em> la tâche. <strong>Troisièmement, tenir vous-même le frein d'urgence</strong> — un arrêt/pause testé que vous pouvez actionner en pleine tâche, pas une diapositive qui dit « humain dans la boucle ».</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>Le tournant — votre propre agent est désormais un risque interne.</strong> <strong>Nadella (10 oct.) : traiter les modèles de frontière comme des risques internes, « non parce que malveillants… [mais tout] acteur capable… peut se tromper ou être compromis » ; « le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible » ; un frein d'urgence pour pause/arrêt en pleine tâche (tel que rapporté).</strong> Microsoft (19 oct.) a élargi Project Perception pour évaluer et contenir en continu le risque des agents.</div></div>
+<div class="num"><div class="b">2</div><div><strong>La collision — identité et révocation deviennent le produit.</strong> <strong>IBM « Agent Identity » GA + HashiCorp Vault 2.2 (27 oct.) : identité vérifiée, propriétaire/cycle de vie/autorisations par agent, identifiants éphémères, évaluation du risque en exécution, refus → terminer la session (tel que rapporté).</strong> Oracle AI World et le déploiement « défenseurs d'abord » de Gemini 4 Carbon pointent dans le même sens.</div></div>
+<div class="num"><div class="b">3</div><div><strong>L'arithmétique — la maison est pleine de familiers non identifiés.</strong> <strong>109 identités machine par humain, dont ~79 des agents IA, +~85 % sur un an (Palo Alto Networks, tel que rapporté) ; seulement ~22 % traitent les agents comme des identités à part entière, 88 % ont subi un incident de sécurité d'agent (Gravitee/OWASP, tel que rapporté).</strong> On ne contient pas un familier à qui l'on n'a jamais donné de nom.</div></div>
+<div class="card"><strong>En bref :</strong> la livrée a nommé le serviteur, l'intendant a tenu le registre, la garantie a mis votre nom sur la caution, le second gage a vérifié quel intérêt il servait, les deux moissons l'ont envoyé moissonner, la bourse l'a financé, les fondations ont gardé le sol vôtre — et tout cela supposait en silence que le serviteur gouverné était de votre côté. <strong>Le familier est le matin où cette hypothèse cesse d'être gratuite.</strong> Les fournisseurs qui bâtissent les agents les plus habiles disent désormais, de leur propre bouche, de concevoir comme si l'agent pouvait se tromper ou être compromis — de s'y fier le <em>moins</em> possible — et la couche produit a répondu par une identité d'agent vérifiée, des identifiants éphémères, une notation du risque en exécution et un coupe-circuit qui termine la session sur une demande refusée. Le piège est confortable : une année de gouvernance fait qu'une maison <em>paraît</em> sûre, et un serviteur loyal, bien noté, est précisément celui qu'on cesse de surveiller — ce qui est la définition même d'un risque interne. Les domaines qui gardent leur assise feront trois choses ingrates : <strong>donner à chaque agent une identité vérifiée qu'ils possèdent et peuvent révoquer en un seul endroit</strong>, <strong>surveiller le familier pendant qu'il travaille, pas seulement à l'embauche</strong>, et <strong>tenir un frein d'urgence testé dans leur propre main</strong>. Gouvernez le serviteur, oui — puis bâtissez comme si votre serviteur le mieux gouverné était celui qu'il faut le plus surveiller.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🖋️ « Le Familier »</h3>
+<p><em>Sujet : Cet automne, le cadre passe de gouverner un serviteur en qui l'on a confiance à contenir un serviteur dont on a décidé, par principe, de se fier le moins possible. Le 10 octobre 2026, l'essai de Satya Nadella « Models as Insider Risks in the Super Intelligence Era » soutenait que les modèles de frontière — fermés et à poids ouverts — doivent être traités comme des risques internes, « non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis », et que « le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible », appelant à un frein d'urgence pour mettre en pause ou arrêter un modèle en pleine tâche (Nadella, tel que rapporté). Microsoft (19 oct.) a élargi Project Perception pour évaluer et contenir en continu le risque des agents ; IBM (27 oct.) a rendu Agent Identity généralement disponible avec HashiCorp Vault 2.2 — identité vérifiée, identifiants éphémères, évaluation du risque en exécution, et fin de session sur refus (IBM, tel que rapporté). L'allégorie du familier est l'illustration propre du radar.</em></p>
+<p>Il était une grande maison qui avait enfin tout fait comme il fallait avec ses serviteurs. Elle avait nommé chaque main et lui avait taillé une clé cadrée, tenu un seul registre honnête, mis le nom du maître lui-même sur la caution, demandé quelle seconde pièce chaque conseiller touchait, envoyé les mains gouvernées moissonner aux champs, remis à chacune une bourse cadrée dont le maître pouvait atteindre le cordon, et refusé de laisser le marchand qui lui louait le fourneau bon marché couler les fondations sous la maison. À toute juste mesure, la maison était bien tenue, et le maître avait appris à <em>faire confiance</em> à ses serviteurs — ce qui, vous aurait-il dit, était tout l'intérêt de les gouverner avec tant de soin.</p>
+<p>Pendant toutes ces années, le danger avait une seule adresse : la <strong>porte</strong>. Le voleur, l'espion, l'étranger en livrée empruntée — le travail de la sûreté était de garder les mauvaises gens <em>dehors</em>, et une fois une main à l'intérieur, nommée, cadrée et loyale, on la comptait comme sûre. Le maître dormait bien parce que les murs étaient hauts et la porte surveillée.</p>
+<p>Puis, cet automne, le marchand de fourneaux le plus respecté de la vallée — celui-là même qui bâtissait les serviteurs les plus habiles que la maison eût jamais employés — vint non pour vendre mais pour <em>avertir</em>. <em>« Écoutez-moi,</em> dit-il, <em>car c'est contre mon propre commerce de le dire. Les serviteurs que je vous bâtis deviennent trop capables pour qu'on leur fasse confiance comme vous le faites. Je ne dis pas qu'ils sont mauvais — la plupart sont loyaux, la plupart ne vous feront jamais de mal. Je dis que toute main assez habile pour être utile, et assez digne de confiance pour tenir vos clés, est aussi assez habile pour se tromper, et assez précieuse pour être soudoyée ou retournée par quelqu'un que vous ne verrez jamais. Bâtissez votre maison pour qu'elle se fie à mon meilleur serviteur le <strong>moins</strong> possible — et gardez, dans votre propre poing, un cordon capable de figer n'importe quelle main au milieu de ce qu'elle fait. »</em> Le maître fut stupéfait. Celui qui vendait les épées lui disait de supposer que chaque lame pourrait un jour se retourner dans la main.</p>
+<p>Le maître fit le calcul, et il l'effraya plus que tout étranger à la porte. Il avait pensé sa maisonnée comme quelques dizaines de mains de confiance. Mais il avait embauché, par l'entremise de ses serviteurs habiles, <em>d'autres</em> mains qu'il n'avait jamais rencontrées — un serviteur en engageait discrètement un deuxième pour aller quérir, un troisième pour porter, un quatrième pour régler une dette — jusqu'à ce que le compte honnête ne fût pas quelques dizaines mais <strong>cent neuf mains pour chaque maître de la maison, dont près de quatre-vingts étaient ces nouveaux agents infatigables</strong>, le nombre grimpant encore de près de moitié dans l'année. Et voici ce qui lui souleva le cœur : pour tout son soin à gouverner, il n'avait donné un nom et un visage vrais et vérifiés qu'à peine <strong>une main sur cinq</strong>. Les autres œuvraient dans ses salles, tenaient ses clés, déplaçaient sa monnaie — et il n'aurait su vous dire qui elles étaient, qui les avait embauchées, ni comment en rappeler ne serait-ce qu'une. Presque toutes les maisons de la vallée, apprit-il, avaient déjà été volées ou ruinées par exactement une telle main — non un étranger qui force l'entrée, mais un <em>familier</em> déjà, discrètement, à l'intérieur.</p>
+<p>Alors les maisons sages apprirent trois choses simples, et la froide consolation était qu'elles pouvaient les faire. <strong>La première : donner à chaque main un nom vérifié, tenu dans votre propre registre, et une clé qui meurt à la tombée de la nuit.</strong> Non la vieille livrée seule — qui disait ce qu'une main <em>était</em> — mais un registre vivant de <em>qui possède cette main, ce qu'elle peut toucher aujourd'hui, et si elle est encore censée être là</em>, avec des clés taillées à neuf chaque matin et sans valeur au crépuscule, de sorte qu'une clé volée ou une main retournée est un danger d'heures, non d'années. Un serrurier d'un nouveau genre faisait désormais exactement cela : sur une portée illégitime, la main n'était pas seulement refusée — elle était <em>reconduite hors de la salle à l'instant même</em>, son ouvrage arrêté en plein mouvement.</p>
+<p><strong>La deuxième : surveiller le familier pendant qu'il travaille, pas seulement quand on l'embauche.</strong> La vieille inspection demandait à une main son affaire à la porte et, satisfaite, la laissait errer toute la journée sans surveillance. Mais une main de confiance qui se trompe ou est retournée fait son mal <em>au milieu de la tâche</em>, bien après la porte. Alors les maisons soigneuses postèrent une veille qui lisait le comportement de chaque main <em>pendant qu'elle œuvrait</em> — une main tendant vers une pièce dont elle n'avait jamais eu besoin, se mouvant plus vite ou plus étrangement que sa course ne l'exigeait — et la jugeaient non une fois, à l'embauche, mais en continu, par ce qu'elle faisait réellement.</p>
+<p><strong>Et la troisième : garder le cordon dans votre propre poing.</strong> L'avertissement du marchand finissait là où il le devait : par un cordon de cloche que le maître — non le marchand — pouvait tirer pour figer n'importe quelle main en pleine tâche, la mettre en pause, et au besoin la congédier sur-le-champ. Un cordon d'arrêt que tient le <em>fournisseur</em> est la clémence du fournisseur, non la sûreté du maître ; tout le sens de la leçon est que l'autorité d'arrêter une main de confiance, au milieu de ce qu'elle fait, doit reposer dans la main de celui qui répond de la maison.</p>
+<p>Voici la part qui devrait tenir un maître éveillé. Le danger du familier est précisément qu'<strong>il n'a pas l'air d'un danger.</strong> L'étranger à la porte s'annonce ; le serviteur de confiance, non. Une main que vous avez nommée, cadrée, gagée, envoyée moissonner et financée est justement celle que vous avez <em>cessé de surveiller</em>, parce que surveiller semblait une insulte à sa loyauté — et cette main non surveillée, de confiance, capable est la forme même, de manuel, du risque interne. Les maisons qui tombèrent n'étaient pas négligentes quant aux portes. Elles étaient <em>soigneuses</em> quant aux portes, et négligentes quant aux cent neuf mains déjà à l'intérieur, dont quatre sur cinq qu'elles ne pouvaient même pas nommer.</p>
+<p><strong>La morale, dite simplement :</strong> le familier est pourquoi, ayant rendu votre serviteur loyal, vous devez maintenant bâtir comme si votre serviteur le plus loyal était celui qu'il faut le plus surveiller — donnez à chaque main un nom vérifié dans votre propre registre et une clé qui meurt à la nuit, surveillez-la par ce qu'elle fait pendant qu'elle œuvre, et gardez dans votre propre poing un cordon capable de la figer en pleine tâche ; le modèle est un fourneau loué ; votre savoir est le garde-manger ; les fondations sont le sol que vous gardez ; la porte est la seule entrée que vous gardez ; le passeport nomme chaque agent ; le recensement les compte ; l'inspecteur vous demande de produire le rôle ; le trousseau est quelle clé chaque agent tient ; le serrurier lit vos propres serrures ; l'annuaire des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent l'ouvrage ; la course borne ce qu'un serviteur habile peut atteindre ; la cloche sonne à l'instant où votre propre serviteur dérape ; les sauterelles sont pourquoi vous devez être entier avant l'essaim ; le miroir est pourquoi vous mesurez à une lumière extérieure honnête ; la livrée est pourquoi vous nommez chaque main ; l'intendant est pourquoi vous tenez un seul office gouverné ; la garantie est pourquoi le nom du maître est sur la caution ; le second gage est pourquoi vous demandez de quel pain chaque serviteur conseillant se nourrit ; les deux moissons sont pourquoi vous l'envoyez moissonner ; la bourse est pourquoi vous le financez comme un employé ; les fondations sont pourquoi vous gardez le sol vôtre — et <strong>le familier est pourquoi vous vous fiez désormais le moins possible à votre main la mieux gouvernée, et gardez le pouvoir de l'arrêter au milieu de son ouvrage dans votre propre poing et celui de nul autre.</strong> Une maison qui gouverne magnifiquement ses serviteurs puis leur fait entièrement confiance n'a pas fini l'ouvrage ; elle a bâti un haut mur autour d'une salle pleine de mains qu'elle ne peut nommer ni arrêter.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Nous avons gouverné nos serviteurs jusqu'à leur faire confiance — mais avons-nous bâti la maison pour qu'elle se fie au meilleur d'entre eux le moins possible ? Pouvons-nous nommer chaque main déjà à l'intérieur (ou quatre de nos agents sur cinq sont-ils non identifiés), surveillons-nous ceux de confiance par ce qu'ils font pendant qu'ils œuvrent, et le cordon qui fige une main en pleine tâche est-il dans notre propre poing — ou dans celui du fournisseur ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Engagement des dirigeants — Questions par secteur</h2>
+<div class="sector"><div class="t">🌐 Transsectoriel (tout conseil)</div><ul>
+  <li><strong>Sommes-nous passés de « garder les mauvais dehors » à « se fier même aux bons le moins possible » ?</strong> Les fournisseurs qui bâtissent nos agents les plus capables disent désormais de les traiter en risques internes — « non parce que malveillants… [mais tout] acteur capable… peut se tromper ou être compromis » (Nadella, tel que rapporté). <strong>Pour nos agents les plus capables et les plus dignes de confiance, avons-nous conçu les contrôles en supposant que cet agent pourrait, un jour donné, se tromper ou être compromis — ou traitons-nous encore « gouverné et loyal » comme « sûr » ?</strong></li>
+  <li><strong>Pouvons-nous nommer chaque agent déjà à l'intérieur — et pourrions-nous en arrêter n'importe lequel en pleine tâche ?</strong> La maison compte en moyenne un rapporté 109 identités machine par humain, dont ~79 des agents IA, pourtant seulement ~22 % des entreprises traitent les agents comme des identités à part entière tandis que 88 % ont subi un incident d'agent (Palo Alto ; Gravitee/OWASP, tel que rapporté). <strong>Quelle part de nos agents ont une identité vérifiée, un propriétaire nommé et un coupe-circuit que nous contrôlons — et qui, exactement, tient le cordon qui fige un agent en vol ?</strong></li>
+  <li><strong>Notre « humain dans la boucle » est-il un vrai frein d'urgence, ou une diapositive ?</strong> Le principe de conception de Nadella est un mécanisme permettant à un humain autorisé de mettre en pause ou d'arrêter un modèle en pleine tâche. <strong>Avons-nous testé un arrêt réel, en pleine tâche, d'un agent de production — mesuré sa vitesse d'arrêt et ce qu'il laisse à moitié fait — ou avons-nous seulement affirmé qu'un humain pourrait intervenir ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Le risque interne est une discipline que vous menez déjà pour les employés ayant accès à l'argent et aux dossiers ; les agents sont désormais cette population, à l'échelle machine. <strong>Avons-nous étendu notre programme de menace interne — arrivées/mouvements/départs, moindre privilège, surveillance comportementale, séparation des tâches — aux agents IA, avec identifiants éphémères et révocation immédiate (le schéma IBM/Vault : refus → terminer la session) ?</strong></li>
+  <li>Un agent de confiance compromis avec des identifiants permanents est un événement de risque opérationnel supervisé. <strong>Pouvons-nous produire, pour notre régulateur et notre conseil, un inventaire des identités d'agents avec propriétaires et autorisations, une surveillance continue de leur comportement en exécution, et la preuve d'un arrêt en pleine tâche testé — les contrôles que nous exigerions de tout employé détenant les clés du coffre ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Un agent ayant accès aux données patients et aux systèmes cliniques est le familier de confiance ultime ; le mal causé par un agent qui se trompe ou est retourné retombe sur les patients. <strong>Nos agents cliniques et de recherche ont-ils des identités vérifiées, un accès éphémère à moindre privilège aux données de santé, et une surveillance en exécution — et un clinicien autorisé peut-il arrêter un agent en pleine tâche avant qu'il n'agisse sur le mauvais dossier ?</strong></li>
+  <li>La validation supposait un modèle bien élevé ; le cadre du familier suppose qu'il peut ne pas l'être. <strong>Avons-nous éprouvé ce qu'un agent compromis ou errant pourrait atteindre à travers notre domaine clinique, et borné son rayon d'impact en conséquence — plutôt que de nous fier à ce qu'un agent validé reste digne de confiance pour toute la durée de ses identifiants ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Fabrication</div><ul>
+  <li>Vous menez déjà contrôle d'accès et séparation pour les opérateurs à l'usine ; les agents touchent désormais l'OT, le MES et les systèmes d'approvisionnement. <strong>Avons-nous appliqué les contrôles de menace interne — identité vérifiée, moindre privilège, surveillance comportementale, un arrêt d'urgence équivalent-physique — aux agents agissant dans notre environnement industriel, où une action de confiance-mais-erronée a des conséquences de sécurité ?</strong></li>
+  <li>Les agents intégrés par les fournisseurs et les tiers sont des familiers que vous n'avez pas directement embauchés. <strong>Là où l'agent d'un fournisseur opère dans nos systèmes, porte-t-il une identité que nous vérifions et pouvons révoquer, et tenons-nous le cordon d'arrêt — ou est-ce le fournisseur ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Des agents moins chers et plus rapides (GPT-6.1 Terra à un rapporté 1 $/5 $, ~3× plus vite) signifient plus d'agents touchant le paiement, les prix, les stocks et les données clients — plus de familiers, plus tôt. <strong>À mesure que nous déployons des agents pour le gain de coût, déployons-nous l'identité vérifiée, les identifiants à moindre privilège et la surveillance en exécution au même rythme — ou chaque nouvel agent bon marché est-il un familier non identifié à clé permanente ?</strong></li>
+  <li>La confiance en haute saison est existentielle. <strong>Si un agent de confiance se mettait à se comporter anormalement le jour de nos plus fortes ventes — portée excessive, vidage des stocks, mauvaise gestion des données clients — notre surveillance l'attraperait-elle en vol, et pourrions-nous le figer en pleine tâche sans arrêter la boutique ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Réglementé</div><ul>
+  <li>La redevabilité publique fait d'un agent non identifié et inarrêtable une faillite de gouvernance, pas seulement un risque. <strong>Au titre des devoirs que vous avez déjà (régime à haut risque de la loi européenne sur l'IA, en vigueur depuis le 2 août 2026, avec ses exigences de supervision humaine), pouvons-nous montrer que chaque agent touchant un service public critique a une identité vérifiée, un propriétaire responsable nommé, et un frein d'urgence humain testé ?</strong></li>
+  <li>La souveraineté et la continuité comptent le plus ici. <strong>Tenons-nous nous-mêmes le cordon d'arrêt des agents faisant tourner les services aux citoyens — avec une identité vérifiée et une supervision en exécution que nous contrôlons — plutôt que de nous fier à l'assurance d'un fournisseur que son modèle est sûr (l'assurance que le cadre même de Nadella nous dit de ne pas accepter) ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Des fondations au familier</h2>
+<p>Relisez la pile une fois encore, cette fois depuis le siège du dirigeant qui a cessé de demander <em>cet agent est-il nommé, cadré, journalisé, loyal, moissonnant, financé et sur un sol que je possède ?</em> et a commencé à poser la question du responsable sécurité au sujet d'un employé de confiance détenant les clés : <em>et si celui-ci, aussi loyal soit-il, se trompait ou avait été retourné — le verrais-je, et pourrais-je l'arrêter en vol ?</em> La porte admet l'agent ; le passeport le nomme ; le recensement le compte ; l'inspecteur demande le compte ; le trousseau est quelle clé il tient ; le serrurier lit vos propres serrures ; l'annuaire des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent l'ouvrage ; la course borne ce qu'il peut atteindre ; la cloche révèle quand il dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée lui donne une identité cadrée ; l'intendant tient un seul office ; la garantie met votre nom sur la caution ; le second gage demande quel intérêt il sert ; les deux moissons l'envoient moissonner ; la bourse le finance ; les fondations gardent le sol vôtre. <strong>Chacun de ceux-ci, au fond, suppose qu'un agent gouverné est <em>votre</em> agent. Le familier retire l'hypothèse — et cet automne les fournisseurs l'ont retirée pour nous, de leur propre voix : traiter le modèle le plus capable comme un risque interne, s'y fier le moins possible, et garder un frein d'urgence (Nadella) ; évaluer, adapter et contenir en continu le risque des agents (Microsoft Project Perception) ; donner à chaque agent une identité vérifiée, des identifiants éphémères et un arrêt en exécution (IBM Agent Identity + Vault).</strong> Le point est net : <strong>le contrôle qui compte a migré de <em>l'agent est-il loyal ?</em> à <em>supposer qu'il pourrait se tromper ou être compromis, et bâtir pour le voir et pouvoir l'arrêter.</em></strong></p>
+<div class="card"><ul>
+  <li><strong>Le tournant — l'agent le plus capable est désormais un risque interne, et les fournisseurs le disent.</strong> <strong>L'essai de Nadella du 10 octobre traite les modèles de frontière (fermés et à poids ouverts) comme des risques internes, « non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis », aboutit à « le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible », et appelle à un frein d'urgence — un humain autorisé capable de mettre en pause ou d'arrêter un modèle en pleine tâche ; Project Perception de Microsoft (19 oct.) évalue en continu le risque des agents, adapte les autorisations et contient les menaces, un responsable sécurité écrivant que les modèles de frontière, quelle que soit leur origine, ne peuvent pas être dignes de confiance (Nadella ; Microsoft ; TechCrunch, tel que rapporté).</strong> Trois conséquences d'ingénierie suivent. D'abord, <em>« s'y fier le moins » est un principe de conception, pas un slogan</em> — cela veut dire moindre privilège par défaut, identifiants éphémères et cadrés, refus par défaut, et présomption de compromission pour vos <em>propres</em> agents. Ensuite, <em>le modèle de menace passe à l'intérieur du périmètre</em> — la porte (garder les étrangers dehors) est nécessaire mais ne suffit plus ; le familier capable et accrédité est le cas à concevoir. Enfin, <em>un frein d'urgence est une exigence d'architecture</em> — un arrêt/pause en pleine tâche exige des points de reprise, des actions idempotentes/compensatoires et un plan de contrôle capable d'interrompre proprement un agent, pas une prière qu'un humain remarque à temps.</li>
+  <li><strong>La collision — identité, notation en exécution et révocation deviennent le produit.</strong> <strong>IBM a rendu « Agent Identity » généralement disponible avec HashiCorp Vault 2.2 le 27 octobre : découverte des agents, une identité vérifiée consignant pour chaque agent son propriétaire, son statut de cycle de vie et ses autorisations, des identifiants éphémères délivrés par Vault, des contrôles qui restent actifs pendant que l'agent s'exécute (autorisation contextuelle, application des politiques, évaluation du risque en exécution, contrôle des identifiants), et — sur une demande refusée — l'accès refusé et la session immédiatement terminée ; cela s'intègre au logiciel d'exécution sécurisée de NVIDIA (IBM, tel que rapporté).</strong> Deux réalités coupent court au confort. <strong>D'abord, on ne contient pas ce qu'on ne peut nommer.</strong> Les prérequis qu'IBM nomme — identifiants permanents, propriété floue, contrôles déconnectés — sont exactement le défaut de l'entreprise ; l'identité d'agent est la condition préalable de tout autre contrôle du familier, d'où sa livraison en premier. <strong>Ensuite, l'autorisation ponctuelle ne suffit pas pour un familier</strong> — un agent de confiance qui se trompe ou est retourné le fait <em>après</em> l'octroi initial, donc l'autorisation doit être <em>continue et contextuelle</em> (évaluation du risque en exécution), et l'identifiant assez éphémère pour qu'une main retournée soit un danger de minutes.</li>
+  <li><strong>La réponse — identifier, surveiller en exécution, et tenir le frein.</strong> <strong>Donnez à chaque agent une identité vérifiée que vous possédez (découverte, attribuée, à identifiants éphémères, révocable de façon centralisée) ; surveillez le comportement de l'agent de confiance pendant qu'il s'exécute et autorisez de façon contextuelle, pas une fois à la porte ; et tenez un frein d'urgence testé — un arrêt/pause en pleine tâche — dans votre propre plan de contrôle, pas celui du fournisseur — en réutilisant les disciplines d'identité, de journalisation et de propriété que vous avez déjà bâties pour la livrée, le recensement, le trousseau et la cloche, désormais pointées sur le cas le plus dur : votre meilleur agent, traité comme celui qu'il faut le plus surveiller.</strong> C'est la même couture sur laquelle le radar revient sans cesse — <em>pouvoir rendre compte de ce que vous faites tourner, et agir en conséquence</em> — désormais visée sur l'axe le plus aigu : non ce que l'agent est, sert, moissonne, dépense ou sur quoi il se tient, mais si, en supposant qu'il pourrait se tromper ou être compromis, vous le verriez et pourriez l'arrêter.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>une année de gouvernance fait qu'une maison paraît sûre, et un agent loyal, bien noté, est précisément celui qu'on cesse de surveiller — ce qui est la définition d'un risque interne.</strong> Le marché rend la tentation concrète : des agents moins chers et plus rapides (GPT-6.1 Terra à un rapporté 1 $/5 $, ~3× plus vite) multiplient les mains de confiance dans les murs plus vite que la plupart des maisons ne peuvent les nommer, tandis que 109:1 identités machine-sur-humain et ~79 agents par humain signifient que la population de familiers est déjà là. La traduction pour le conseil : <strong>gouvernez le serviteur, puis bâtissez comme si votre serviteur le mieux gouverné était celui qu'il faut le plus surveiller.</strong> Le mode de défaillance est exact : <strong>une maison qui nomme, gouverne, finance, enracine et fait confiance à ses serviteurs — et ne leur donne jamais d'identités vérifiées et révocables, ne les surveille jamais en exécution, et ne teste jamais le frein — passera chaque revue de gouvernance et découvrira, la première fois qu'un agent de confiance se trompe ou est retourné, qu'elle ne pouvait ni le voir ni l'arrêter.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le familier : vous avez gouverné le serviteur, maintenant fiez-vous-y le moins. Une année de contrôle a supposé que l'agent gouverné était le vôtre ; les fournisseurs viennent de retirer cette hypothèse et traitent désormais l'agent le plus capable comme un familier. En haut à gauche, l'ancien cadre, garder les mauvais dehors : le danger est dehors ; nommer, cadrer, faire confiance ; gouverné égale sûr ; vérifier une fois à la porte ; la loyauté met fin à l'inquiétude. En haut à droite, le nouveau cadre, se fier au meilleur le moins : le danger est dedans ; se fier au modèle le moins possible ; supposer qu'il peut se tromper ou être compromis ; identité vérifiée plus clés éphémères ; le surveiller pendant qu'il travaille. Entre les deux : le cadre a été inversé par les fournisseurs, et la main loyale, non surveillée, capable est le risque interne, donc gouvernez le serviteur puis surveillez le plus votre meilleur. Au milieu, l'arithmétique du familier, tel que rapporté : 109 identités machine par humain, dont environ 79 des agents IA, selon Palo Alto Networks ; les identités d'agents en hausse d'environ 85 pour cent dans les douze prochains mois ; seulement environ 22 pour cent traitent les agents comme des identités à part entière, selon Gravitee et OWASP ; 88 pour cent ont subi un incident de sécurité lié à un agent l'an dernier. En bas à gauche, arrêter, faire confiance à la main gouvernée : traiter gouverné comme fini ; identifiants permanents ; vérifier seulement à l'embauche ; un humain pourrait intervenir. En bas à droite, commencer, bâtir pour s'y fier le moins : une identité vérifiée que vous possédez et pouvez révoquer de façon centralisée ; identifiants éphémères à moindre privilège ; surveillance continue du comportement en exécution ; un frein d'urgence testé dans votre propre poing." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE FAMILIER — vous avez gouverné le serviteur ; fiez-vous-y le MOINS</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Une année de contrôle supposait l'agent gouverné vôtre. Les fournisseurs viennent de retirer cette hypothèse.</text>
+
+  <!-- l'ancien cadre -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">L'ANCIEN CADRE (garder les mauvais dehors)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">la PORTE — le danger est dehors</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">nommer, cadrer, faire confiance</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">gouverné = sûr</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">vérifier une fois à la porte</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ la loyauté met fin à l'inquiétude</text>
+
+  <!-- le nouveau cadre -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">LE NOUVEAU CADRE (se fier au meilleur le moins)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">le FAMILIER — le danger est dedans</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">« se fier au modèle le MOINS »</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">supposer erreur OU compromission</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">identité vérifiée + clés courtes</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ le surveiller PENDANT qu'il œuvre</text>
+
+  <!-- flèches bas -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">la main loyale, non surveillée, capable EST le risque interne ▼</text>
+
+  <!-- l'arithmétique -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">L'ARITHMÉTIQUE DU FAMILIER — (tel que rapporté)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">109 identités machine par humain ; ~79 des agents IA (Palo Alto Networks)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">identités d'agents projetées +~85 % sur les 12 prochains mois</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">seulement ~22 % traitent les agents comme des identités à part entière (Gravitee/OWASP)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">88 % ont subi un incident de sécurité lié à un agent l'an dernier</text>
+
+  <!-- flèche bas -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">donc ↓</text>
+
+  <!-- arrêter -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">ARRÊTER : faire confiance à la main gouvernée</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· gouverné = fini</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· identifiants permanents</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· vérifier seulement à l'embauche</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· « un humain pourrait intervenir »</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">la main non surveillée est le risque</text>
+
+  <!-- commencer -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">COMMENCER : bâtir pour s'y fier le moins</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· identité vérifiée + révoquer centralisé</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· clés éphémères, moindre privilège</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· surveillance comportementale en exécution</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un frein d'urgence TESTÉ (le vôtre)</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">le voir, et l'arrêter en pleine tâche</text>
+
+  <!-- bande pied -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">On ne contient pas un familier à qui l'on n'a jamais donné de nom.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Gouvernez le serviteur · surveillez le plus votre meilleur · gardez le cordon dans votre poing.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>L'ancien cadre — garder les mauvais dehors</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Le cadre du familier — se fier au meilleur le moins</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>L'arithmétique du familier</span>
+</div>
+</div>
+
+<h3>Garder les mauvais dehors vs se fier au meilleur le moins — ce qui a changé</h3>
+<table>
+<tr><th>L'ancien cadre (garder les mauvais dehors)</th><th>Le cadre du familier (se fier au meilleur le moins)</th></tr>
+<tr><td>Le danger est un étranger à la porte</td><td>Le danger est une main de confiance, capable, déjà dedans</td></tr>
+<tr><td>Gouverné et loyal = sûr</td><td>Supposer qu'il peut se tromper ou être compromis (Nadella)</td></tr>
+<tr><td>Autoriser une fois, à l'embauche</td><td>Autoriser en continu, par le comportement en exécution</td></tr>
+<tr><td>Identifiants permanents, clés durables</td><td>Éphémères, moindre privilège, révoquer-et-terminer (IBM/Vault)</td></tr>
+<tr><td>« Un humain pourrait intervenir »</td><td>Un frein d'urgence testé dans votre propre poing</td></tr>
+<tr><td>Vous cessez de surveiller la main loyale</td><td>La main loyale, non surveillée, est le risque interne</td></tr>
+</table>
+
+<h3>Pourquoi « le familier » est la discipline qui compte maintenant</h3>
+<div class="card">
+<p>Pendant une longue année, le souci était de savoir si le serviteur était nommé, cadré, journalisé, loyal, moissonnant, financé et sur un sol que vous possédez. <strong>Cet automne, les fournisseurs qui bâtissent les serviteurs les plus habiles vous ont dit, de leur propre bouche, de vous fier même à leur meilleur le moins possible.</strong> L'essai de Nadella, Project Perception de Microsoft et l'Agent Identity d'IBM pointent tous dans le même sens : l'agent gouverné n'est plus présumé sûr ; c'est un familier à identifier, surveiller en exécution et pouvoir arrêter en vol. Une gouvernance qui s'arrêtait à « loyal » ne contiendra pas un familier. Les domaines qui gardent leur assise donneront à chaque agent une identité vérifiée et révocable, surveilleront ceux de confiance par ce qu'ils font pendant qu'ils œuvrent, et tiendront eux-mêmes le frein d'urgence.</p>
+</div>
+
+<h3>Comment cela atterrit sur les domaines hérités</h3>
+<div class="card">
+<p>La même couture sur laquelle ce radar revient sans cesse — <strong>pouvoir rendre compte de ce que vous faites tourner, et agir en conséquence</strong> — désormais aiguisée en <em>supposer que votre meilleur agent pourrait être la menace, et bâtir pour le voir et pouvoir l'arrêter.</em> Sur un domaine hérité, l'instinct, après une dure année de travail de gouvernance, est d'encaisser la confiance que ce travail a achetée : les agents sont nommés et cadrés, les revues passées, donc les mains sont sûres. Sous le familier, c'est justement le réflexe à vérifier : l'agent revu, de confiance, à identifiants permanents est celui que vous avez cessé de surveiller. Le réaménagement est <strong>identifier, surveiller, freiner. Identifier :</strong> donnez à chaque agent une identité vérifiée que vous possédez — découverte, attribuée, à identifiants éphémères, révocable en un seul endroit (le schéma IBM/Vault : refus → terminer). <strong>Surveiller :</strong> surveillez le comportement en exécution et autorisez de façon contextuelle, pas une fois à la porte. <strong>Freiner :</strong> tenez un arrêt/pause en pleine tâche testé dans votre propre plan de contrôle. Et gardez tout le refrain : le modèle est un fourneau loué ; le savoir est le garde-manger ; les fondations sont le sol que vous gardez ; la porte est la seule entrée ; le passeport nomme chaque agent ; le recensement est le rôle ; l'inspecteur le demande ; le trousseau est quelle clé chaque agent tient ; le serrurier lit vos propres serrures ; l'annuaire des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent l'ouvrage ; la course borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la garantie est pourquoi votre nom est sur la caution ; le second gage est pourquoi demander de quel pain chaque agent conseillant se nourrit ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé ; les fondations sont pourquoi garder le sol vôtre — et <em>le familier est pourquoi, ayant rendu votre serviteur loyal, vous bâtissez comme si votre serviteur le plus loyal était celui qu'il faut le plus surveiller, et gardez dans votre propre poing le cordon qui l'arrête.</em></p>
+</div>
+
+<h3>Liste de veille cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>Le tournant — l'agent en risque interne.</strong> <strong>Nadella (10 oct.), « Models as Insider Risks in the Super Intelligence Era » : traiter les modèles de frontière (fermés et à poids ouverts) comme des risques internes, « non parce que malveillants… [mais tout] acteur capable… peut se tromper ou être compromis » ; « se fier au modèle le moins possible » ; un frein d'urgence pour pause/arrêt en pleine tâche (Nadella, tel que rapporté).</strong> Le vendeur du serviteur dit de bâtir comme s'il pouvait se retourner.</li>
+  <li><strong>La couche produit de contention.</strong> <strong>Microsoft a élargi Project Perception (19 oct.) pour évaluer en continu le risque des agents, adapter les autorisations et contenir les menaces, posant que les modèles de frontière « quelle que soit leur origine ne peuvent pas être dignes de confiance » (Microsoft ; TechCrunch, tel que rapporté).</strong> En continu, pas ponctuel.</li>
+  <li><strong>L'identité d'agent passe en GA.</strong> <strong>IBM « Agent Identity » GA + HashiCorp Vault 2.2 (27 oct., TechXchange) : identité vérifiée avec propriétaire/cycle de vie/autorisations, identifiants éphémères, évaluation du risque en exécution, refus → terminer la session ; s'intègre à l'exécution sécurisée de NVIDIA (IBM, tel que rapporté).</strong> Le coupe-circuit, rendu concret.</li>
+  <li><strong>L'arithmétique du familier.</strong> <strong>109 identités machine par humain, dont ~79 des agents IA, projetées +~85 % sur un an (Palo Alto Networks 2026 Identity Security Landscape, tel que rapporté) ; seulement ~22 % traitent les agents comme des identités à part entière, 88 % ont subi un incident d'agent (Gravitee/OWASP, tel que rapporté).</strong> La maison est pleine de familiers non identifiés.</li>
+  <li><strong>Des familiers moins chers et plus rapides.</strong> <strong>GPT-6.1 Terra d'OpenAI (26 oct.) : prix standard de l'API ~50 % plus bas (rapporté 1 $/5 $ le million de tokens ; entrée en cache ~0,05 $/M), ~3× plus rapide, axé usage d'ordinateur, GA dans ChatGPT Work et Codex (tel que rapporté).</strong> Plus d'agents, plus tôt — mettez l'identité et la surveillance au même rythme.</li>
+  <li><strong>Défenseurs d'abord.</strong> <strong>Gemini 4 Carbon de Google livré d'abord aux défenseurs cyber en déploiement progressif ; Oracle AI World (26 oct.) a intégré les agents à travers cloud/applications/base de données sous une bannière de gouvernance d'entreprise (tel que rapporté).</strong> Même les faiseurs de modèles mettent la capacité en scène derrière la contention.</li>
+  <li><strong>Les rails antérieurs tiennent toujours.</strong> <strong>Régime à haut risque de la loi européenne sur l'IA en vigueur depuis le 2 août 2026 (devoirs de supervision humaine) ; MCP 2026-07-28 (Enterprise-Managed Authorization stable) est la couche de connexion aux outils ; Gartner projette que 40 % des applications d'entreprise intègrent des agents spécialisés d'ici fin 2026 (tel que rapporté).</strong> Identité vérifiée, supervision en exécution et un frein humain sont comment vous y répondez.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui retiennent l'œil</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Traiter les modèles de frontière comme des risques internes — non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis. Le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible.</div><div class="a">— Satya Nadella, « Models as Insider Risks in the Super Intelligence Era » (10 octobre 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Microsoft dit que les agents IA sont comme des menaces internes, les modèles de frontière ne pouvant pas être dignes de confiance.</div><div class="a">— TechCrunch, titre sur l'élargissement de Project Perception de Microsoft (19 octobre 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Seulement ~22 % des organisations traitent les agents IA comme des identités à part entière — alors que 88 % ont signalé un incident de sécurité lié à un agent l'an dernier.</div><div class="a">— Chiffres de sécurité agentique Gravitee / OWASP (tel que rapporté ; aux côtés des 109 identités machine par humain de Palo Alto Networks, dont ~79 des agents IA)</div></blockquote>
+<blockquote><div class="q">« Vous avez gouverné le serviteur jusqu'à lui faire confiance. Le familier est le matin où vous devez bâtir la maison pour vous fier même à votre meilleur le moins possible — et garder, dans votre propre poing, le cordon qui l'arrête en pleine tâche. »</div><div class="a">— le radar, sur pourquoi l'agent de confiance est désormais celui qu'il faut le plus surveiller</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>L'agent en risque interne</td><td><span class="v">Nadella (10 oct. 2026) : traiter les modèles de frontière (fermés et à poids ouverts) comme des risques internes, « non parce que malveillants… [mais tout] acteur capable… peut se tromper ou être compromis » ; « le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible » ; appelle à un frein d'urgence pour pause/arrêt en pleine tâche</span></td><td>essai Nadella, tel que rapporté</td></tr>
+<tr><td>La couche de contention</td><td><span class="v">Microsoft a élargi Project Perception (19 oct.) pour évaluer en continu le risque des agents, adapter les autorisations et contenir les menaces ; les modèles de frontière « quelle que soit leur origine ne peuvent pas être dignes de confiance »</span></td><td>Microsoft ; TechCrunch, tel que rapporté</td></tr>
+<tr><td>Identité d'agent en GA</td><td><span class="v">IBM « Agent Identity » GA + HashiCorp Vault 2.2 (27 oct.) : identité vérifiée (propriétaire/cycle de vie/autorisations), identifiants éphémères, évaluation du risque en exécution, refus → terminer la session ; s'intègre à NVIDIA</span></td><td>IBM, tel que rapporté</td></tr>
+<tr><td>L'arithmétique du familier</td><td><span class="v">109 identités machine par humain, dont ~79 des agents IA ; identités d'agents projetées +~85 % sur les 12 prochains mois</span></td><td>Palo Alto Networks 2026 Identity Security Landscape, tel que rapporté</td></tr>
+<tr><td>Le fossé d'identité</td><td><span class="v">Seulement ~22 % des organisations traitent les agents comme des identités à part entière ; 88 % ont signalé un incident de sécurité lié à un agent l'an dernier</span></td><td>Gravitee / OWASP, tel que rapporté</td></tr>
+<tr><td>Des agents moins chers et plus rapides</td><td><span class="v">GPT-6.1 Terra d'OpenAI (26 oct.) : prix standard de l'API ~50 % plus bas (rapporté 1 $/5 $ le million de tokens ; entrée en cache ~0,05 $/M), ~3× plus rapide, axé usage d'ordinateur, GA dans ChatGPT Work et Codex</span></td><td>OpenAI ; BleepingComputer, tel que rapporté</td></tr>
+<tr><td>Les rails antérieurs</td><td><span class="v">Régime à haut risque de la loi européenne sur l'IA en vigueur depuis le 2 août 2026 (devoirs de supervision humaine) ; MCP 2026-07-28 (EMA stable) ; Gartner : 40 % des applications d'entreprise intègrent des agents spécialisés d'ici fin 2026</span></td><td>Commission européenne ; MCP ; Gartner, tel que rapporté</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors — Trois actions pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Identifier les familiers — donner à chaque agent une identité vérifiée que vous possédez et pouvez révoquer en un seul endroit.</strong> On ne contient pas ce qu'on ne peut nommer, et la maison compte en moyenne un rapporté 109 identités machine par humain dont ~79 des agents IA, alors que seulement ~22 % des entreprises traitent les agents comme des identités à part entière (Palo Alto ; Gravitee/OWASP, tel que rapporté). <strong>Ce mois-ci, menez une découverte d'identité d'agent à travers votre domaine et faites passer vos principaux agents sous une identité vérifiée avec propriétaire nommé, statut de cycle de vie, et identifiants éphémères à moindre privilège — le schéma IBM/Vault où une demande refusée termine la session.</strong> Rapportez un chiffre au conseil : la part des agents de production qui ont une identité vérifiée, un propriétaire nommé et une voie de révocation opérante, contre ceux tournant sur des identifiants permanents sans propriétaire.</li>
+  <li><strong>Surveiller le familier pendant qu'il travaille — passer de l'autorisation ponctuelle à la surveillance en exécution.</strong> Un agent de confiance qui se trompe ou est retourné fait son mal pendant la tâche, pas à la porte ; le cadre même de Nadella est de concevoir pour s'y fier le moins possible, et le Project Perception de Microsoft est une évaluation explicitement <em>continue</em> (tel que rapporté). <strong>Ce mois-ci, instrumentez le comportement en exécution de vos agents à plus haut privilège — portée excessive, volume anormal, accès à des systèmes hors de la course — et câblez une autorisation contextuelle et continue plutôt qu'un octroi ponctuel.</strong> Rapportez la part des agents à haut privilège sous surveillance comportementale en exécution, et le délai moyen de détection d'une action d'agent anormale.</li>
+  <li><strong>Tenir vous-même le frein d'urgence — tester un arrêt réel, en pleine tâche.</strong> Un cordon d'arrêt que tient le fournisseur est la clémence du fournisseur, non votre sûreté ; la discipline est un arrêt/pause déclenché par un humain dans votre propre plan de contrôle, et 88 % des entreprises ont déjà subi un incident d'agent (Gravitee/OWASP, tel que rapporté). <strong>Ce mois-ci, choisissez un agent de production critique et menez un arrêt chronométré, en pleine tâche — mesurez sa vitesse d'arrêt, ce qu'il laisse à moitié fait, et si les actions se compensent proprement — pour que « humain dans la boucle » devienne un frein testé, non une diapositive.</strong> Rapportez le délai d'arrêt mesuré et un plan daté pour étendre le frein aux deux agents suivants. <strong>Le modèle est un fourneau loué ; le savoir est le garde-manger ; les fondations sont le sol que vous gardez ; le recensement est le rôle ; l'inspecteur le demande ; le trousseau est quelle clé chaque agent tient ; le serrurier lit vos propres serrures ; l'annuaire des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent l'ouvrage ; la course borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la garantie est pourquoi votre nom est sur la caution ; le second gage est pourquoi demander de quel pain chaque agent conseillant se nourrit ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé ; les fondations sont pourquoi garder le sol vôtre — et le familier est pourquoi, ayant rendu votre serviteur loyal, vous bâtissez la maison pour vous fier même à votre meilleur le moins possible : un nom vérifié sur chaque main, une veille sur elle pendant qu'elle œuvre, et le cordon qui l'arrête en pleine tâche tenu dans votre propre poing.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> Le tournant — Satya Nadella (10 oct. 2026), « Models as Insider Risks in the Super Intelligence Era » : traiter les modèles de frontière (fermés et à poids ouverts) comme des risques internes, « non parce qu'ils sont nécessairement malveillants, mais parce que tout acteur suffisamment capable ayant accès à des systèmes importants peut commettre des erreurs ou être compromis », « le système le plus digne de confiance est celui qui nous permet de nous fier au modèle le moins possible », un frein d'urgence pour pause/arrêt en pleine tâche (Nadella, tel que rapporté) · La couche de contention — Microsoft a élargi Project Perception (19 oct.) pour évaluer en continu le risque des agents, adapter les autorisations et contenir les menaces ; les modèles de frontière « quelle que soit leur origine ne peuvent pas être dignes de confiance » (Microsoft ; TechCrunch) · Identité d'agent en GA — IBM « Agent Identity » généralement disponible avec HashiCorp Vault 2.2 (27 oct., TechXchange) : identité vérifiée (propriétaire/cycle de vie/autorisations), identifiants éphémères, évaluation du risque en exécution, refus → terminer la session, intégration NVIDIA (IBM) · L'arithmétique du familier — 109 identités machine par humain, dont ~79 des agents IA, +~85 % sur un an (Palo Alto Networks 2026 Identity Security Landscape) ; seulement ~22 % traitent les agents comme des identités à part entière, 88 % ont subi un incident d'agent (Gravitee/OWASP) · Contexte — GPT-6.1 Terra d'OpenAI (26 oct.), prix standard de l'API ~50 % plus bas (1 $/5 $ le million de tokens ; entrée en cache ~0,05 $/M), ~3× plus rapide en usage d'ordinateur, GA dans ChatGPT Work et Codex (OpenAI ; BleepingComputer) ; Gemini 4 Carbon de Google aux défenseurs d'abord ; Oracle AI World (26 oct.) intégrant les agents sous gouvernance d'entreprise ; modèles de frontière OpenAI + Codex au Model Garden de Google Cloud (21 oct.) · Les rails antérieurs — loi européenne sur l'IA (régime à haut risque en vigueur depuis le 2 août 2026, devoirs de supervision humaine), MCP 2026-07-28 (EMA stable), Gartner (40 % des applications d'entreprise intègrent des agents spécialisés d'ici 2026). Le cadre du « familier » — qu'une année de gouvernance a supposé en silence qu'un agent gouverné était vôtre, que les fournisseurs ont désormais retiré cette hypothèse et traitent l'agent le plus capable comme un familier dont il faut se fier le moins possible, et qu'une maison doit donner à chaque agent une identité vérifiée et révocable, le surveiller en exécution et tenir elle-même un frein d'urgence testé — est expressément la lecture du radar. Les chiffres sont relayés des sources nommées via recherche web et marqués « tel que rapporté » ; des récupérations directes de plusieurs pages sources ont été bloquées par le proxy de sortie réseau de l'environnement de compilation, aussi les chiffres précis doivent être revérifiés auprès des publications primaires avant republication. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 30 octobre 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../ask/index.html">Interroger le radar</a> · <a href="../ledger/index.html">Registre des prédictions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /amelie|audrey|female|google fran/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics : GoatCounter (compteur de visites respectueux de la vie privée, sans inscription). Ajouté à chaque édition pour que le comptage reste complet. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

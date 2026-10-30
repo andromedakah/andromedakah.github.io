@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 30 October 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the insider' — the vendors who build the cleverest agents now say to treat them as insider risks. Nadella (10 Oct): treat frontier models as insider risks, 'trust the model the least,' keep an emergency brake; Microsoft's Project Perception continuously contains agent risk; IBM Agent Identity + HashiCorp Vault (27 Oct) give verified identity, short-lived credentials and a runtime kill. The house is full of unidentified insiders: 109 machine identities per human, ~79 of them AI agents (Palo Alto), only ~22% treated as independent identities, 88% had an agent incident (Gravitee/OWASP). The board move: identify every agent, watch it at runtime, hold the emergency brake yourself. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant — now trust it the least</div>
+  <h1>The Insider</h1>
+  <div class="subhead">A year of governance made the servant loyal — and quietly assumed a governed agent was on your side. This autumn the vendors who build the cleverest agents retired that assumption in public: treat the most capable model as an insider risk, trust it the least, and keep an emergency brake. The trusted, unwatched agent is now the one most worth watching.</div>
+  <div class="meta">Friday, 30 October 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 10 October 2026 Satya Nadella published "Models as Insider Risks in the Super Intelligence Era," arguing that frontier models — closed and open-weight alike — should be treated as insider risks, "<em>not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised</em>," and that "<em>the most trustworthy system is the one that lets us trust the model the least</em>," calling for an emergency brake able to pause or kill a model mid-task (Nadella, as reported). Nine days later Microsoft expanded Project Perception to continuously assess agent risk, adapt permissions and contain threats, a security leader writing that frontier models "regardless of origin, cannot be trusted" (Microsoft; TechCrunch, as reported). Then on 27 October, at TechXchange, IBM made "Agent Identity" generally available with HashiCorp Vault 2.2 — verified identity, ownership and permissions per agent, short-lived credentials, runtime risk evaluation, and on a denied request access cut and the session terminated (IBM, as reported). The board question is no longer <em>is my agent named, scoped, loyal and funded?</em> It is the colder one a security officer asks of a trusted employee with the keys to the vault: what if this one, however loyal, is wrong or has been turned — would I know, and could I stop it mid-task? Because the house is already full of such hands: a reported 109 machine identities per human, ~79 of them AI agents, up ~85% in a year (Palo Alto Networks), while only ~22% of firms treat agents as independent identities and 88% had an agent security incident last year (Gravitee/OWASP, as reported).</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar built the <em>governed, loyal</em> servant — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and own the ground it stands on (the foundation). Every one of those controls shares a hidden assumption: that once your servant is named, scoped and loyal, it is <em>on your side</em>. <strong>This autumn the industry retired that assumption in public.</strong> The frame turns from <em>governing a servant you trust</em> to <em>containing an insider you have decided, on principle, to trust the least.</em></p>
+<p><strong>The turn — the most capable agent is now treated as an insider risk, by the vendors themselves.</strong> On <strong>10 October 2026 Satya Nadella's essay "Models as Insider Risks in the Super Intelligence Era"</strong> argued that frontier models — closed <em>and</em> open-weight — must be treated as insider risks, "<strong>not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised</strong>," landing on the design principle that "<strong>the most trustworthy system is the one that lets us trust the model the least</strong>," and calling for an <strong>emergency brake</strong> — a mechanism letting an authorized human pause or kill a model mid-task (Nadella, as reported). On <strong>19 October</strong>, Microsoft expanded <strong>Project Perception</strong> to continuously assess agent risk, adapt permissions and contain threats, with a security leader writing that frontier models, <strong>regardless of origin, cannot be trusted</strong> (Microsoft; TechCrunch, as reported). This is a genuine inversion: the people selling you the cleverest servant are now telling you to build the house as if that servant could, on any given morning, be the threat.</p>
+<p><strong>The collision — the product layer is racing to make the insider <em>identifiable and revocable</em>.</strong> On <strong>27 October at TechXchange (Atlanta), IBM made "Agent Identity" generally available</strong> with <strong>HashiCorp Vault 2.2</strong>: each agent gets a verified identity with its <strong>owner, lifecycle status and granted permissions</strong> recorded; Vault issues <strong>short-lived, scoped credentials</strong>; controls stay live <em>while the agent runs</em> (contextual authorization, policy enforcement, runtime risk evaluation); and on a denied request <strong>access is refused and the session immediately terminated</strong> — the kill-switch made concrete (IBM, as reported). Oracle AI World (26 Oct) folded agents into the cloud, apps and database tier under an enterprise-governance banner, and Google released <strong>Gemini 4 Carbon</strong> to cyber <em>defenders first</em> under a staged rollout. And the insider population is exploding precisely as the tools to cut each one's cost arrive: <strong>OpenAI's GPT-6.1 Terra (26 Oct)</strong> halved standard API pricing to a reported <strong>$1/$5 per million tokens</strong> and runs computer-use tasks ~3× faster — cheaper, faster agents mean <em>more</em> insiders, sooner.</p>
+<p><strong>The stakes — build for "trust it the least," because the house is already full of insiders you never identified.</strong> Palo Alto Networks' 2026 landscape reports <strong>109 machine identities per human, ~79 of them AI agents</strong>, with agent identities set to grow <strong>~85% in a year</strong> (as reported), while only <strong>~22% of firms treat agents as independent identities and 88% suffered an agent security incident last year</strong> (Gravitee/OWASP, as reported). The board move re-points the whole year's discipline at one new axis — not <em>is it loyal?</em> but <em>assume it could be wrong or compromised, and contain accordingly.</em> <strong>First, give every agent a verified identity you own</strong> — discovered, owned, short-lived-credentialed, revocable in one place. <strong>Second, watch the insider while it works</strong> — runtime behaviour, not a one-time sign-off; the danger from a trusted hand shows up <em>during</em> the task. <strong>Third, hold the emergency brake yourself</strong> — a tested kill/hold you can pull mid-task, not a slide that says "human in the loop."</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The turn — your own agent is now an insider risk.</strong> <strong>Nadella (10 Oct): treat frontier models as insider risks, "not because malicious… [but any] capable actor… can make mistakes or be compromised"; "the most trustworthy system is the one that lets us trust the model the least"; an emergency brake to pause/kill mid-task (as reported).</strong> Microsoft (19 Oct) expanded Project Perception to continuously assess and contain agent risk.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — identity and revocation become the product.</strong> <strong>IBM "Agent Identity" GA + HashiCorp Vault 2.2 (27 Oct): verified identity, owner/lifecycle/permissions per agent, short-lived credentials, runtime risk evaluation, deny → terminate the session (as reported).</strong> Oracle AI World and Gemini 4 Carbon's defenders-first rollout point the same way.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The arithmetic — the house is full of unidentified insiders.</strong> <strong>109 machine identities per human, ~79 of them AI agents, +~85% in a year (Palo Alto Networks, as reported); only ~22% treat agents as independent identities, 88% had an agent security incident (Gravitee/OWASP, as reported).</strong> You cannot contain an insider you never gave a name.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — and all of it quietly assumed the governed servant was on your side. <strong>The insider is the morning that assumption stops being free.</strong> The vendors who build the cleverest agents now say, in their own words, to design as if the agent could be wrong or compromised — to trust it the <em>least</em> — and the product layer has answered with verified agent identity, short-lived credentials, runtime risk scoring and a kill-switch that ends the session on a denied request. The trap is comfortable: a year of governance makes a house <em>feel</em> safe, and a loyal, well-reviewed servant is exactly the one you stop watching — which is the textbook definition of an insider risk. The estates that keep their standing will do three unglamorous things: <strong>give every agent a verified identity you own and can revoke in one place</strong>, <strong>watch the insider while it works, not just when it is hired</strong>, and <strong>hold a tested emergency brake in your own hand</strong>. Govern the servant, yes — and then build as if your best-governed servant were the one most worth watching.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Insider"</h3>
+<p><em>Topic: This autumn the frame turns from governing a servant you trust to containing one you have decided, on principle, to trust the least. On 10 October 2026 Satya Nadella's essay "Models as Insider Risks in the Super Intelligence Era" argued that frontier models — closed and open-weight — should be treated as insider risks, "not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised," and that "the most trustworthy system is the one that lets us trust the model the least," calling for an emergency brake to pause or kill a model mid-task (Nadella, as reported). Microsoft (19 Oct) expanded Project Perception to continuously assess and contain agent risk; IBM (27 Oct) made Agent Identity generally available with HashiCorp Vault 2.2 — verified identity, short-lived credentials, runtime risk evaluation, and session termination on denial (IBM, as reported). The insider allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at last, done everything right by its servants. It had named every hand and cut each a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each counsellor took, sent the governed hands into the fields to reap, handed each a scoped purse with a drawstring the master could reach, and refused to let the merchant who rented it the cheap stove pour the foundation beneath the house. By any fair reckoning the house was well run, and the master had learned to <em>trust</em> his servants — which, he would have told you, was the whole point of governing them so carefully.</p>
+<p>For all those years the danger had a single address: the <strong>gate</strong>. The thief, the spy, the stranger in borrowed livery — the work of safety was to keep the wrong people <em>out</em>, and once a hand was inside, named and scoped and loyal, it was counted as safe. The master slept well because the walls were high and the gate was watched.</p>
+<p>Then, this autumn, the most respected stove-merchant in the valley — the very man who built the cleverest servants the house had ever employed — came not to sell but to <em>warn</em>. <em>"Hear me,"</em> he said, <em>"for it is against my own trade to say it. The servants I build for you are growing too capable to be trusted the way you trust them. I do not mean they are wicked — most are loyal, most will never do you harm. I mean that any hand clever enough to be useful, and trusted enough to hold your keys, is also clever enough to be mistaken, and valuable enough to be bribed or turned by someone you will never see. Build your house so that it trusts even my finest servant the <strong>least</strong> — and keep, in your own fist, a cord that can freeze any hand in the middle of whatever it is doing."</em> The master was astonished. The man who sold the swords was telling him to assume every blade might one day turn in the hand.</p>
+<p>The master did the arithmetic, and it frightened him more than any stranger at the gate. He had thought of his household as a few dozen trusted hands. But he had been hiring, through his clever servants, <em>other</em> hands he had never met — a servant would quietly engage a second to fetch, a third to carry, a fourth to settle a debt — until the honest count was not a few dozen but <strong>a hundred and nine hands for every master in the house, and of those, near eighty were these new tireless agents</strong>, the number still climbing by nearly half again within the year. And here was the part that turned his stomach: for all his careful governing, he had given a true, verified name and face to barely <strong>one hand in five</strong>. The rest worked in his halls, held his keys, moved his coin — and he could not have told you who they were, who had hired them, or how to call even one of them back. Nearly every house in the valley, he learned, had already been robbed or ruined through exactly such a hand — not a stranger who broke in, but a <em>familiar</em> one who was already, quietly, inside.</p>
+<p>So the wise houses learned three plain things, and the cold comfort was that they could do them. <strong>The first: give every hand a verified name, held in your own book, and a key that dies at nightfall.</strong> Not the old livery alone — that said what a hand <em>was</em> — but a living record of <em>who owns this hand, what it may touch today, and whether it is still meant to be here at all</em>, with keys cut fresh each morning and worthless by dusk, so a key stolen or a hand turned is a danger of hours, not years. A new kind of locksmith now did exactly this: on an improper reach, the hand was not merely denied — it was <em>walked out of the hall that instant</em>, its work stopped mid-motion.</p>
+<p><strong>The second: watch the insider while it works, not only when it is hired.</strong> The old inspection asked a hand its business at the door and, satisfied, let it roam all day unwatched. But a trusted hand that errs or is turned does its harm <em>in the middle of the task</em>, long after the door. So the careful houses set a watch that read each hand's behaviour <em>as it worked</em> — a hand reaching for a room it had never needed, moving faster or stranger than its errand required — and judged it not once, at hiring, but continuously, by what it actually did.</p>
+<p><strong>And the third: keep the cord in your own fist.</strong> The merchant's warning ended where it had to: with a bell-pull the master — not the merchant — could yank to freeze any hand mid-task, pause it, and if need be dismiss it on the spot. A kill-cord the <em>vendor</em> holds is the vendor's mercy, not the master's safety; the whole of the lesson is that the authority to stop a trusted hand, in the middle of what it is doing, must rest in the hand of the one who answers for the house.</p>
+<p>Here is the part that should keep a master awake. The danger of the insider is precisely that <strong>it does not look like danger.</strong> The stranger at the gate announces himself; the trusted servant does not. A hand you have named, scoped, waged, sent to reap and funded is the very hand you have <em>stopped watching</em>, because watching felt like an insult to its loyalty — and that unwatched, trusted, capable hand is the textbook shape of the insider risk. The houses that fell were not careless about gates. They were <em>careful</em> about gates, and careless about the hundred-and-nine hands already inside, four in five of whom they could not even name.</p>
+<p><strong>The moral, stated plainly:</strong> the insider is why, having made your servant loyal, you must now build as if your most loyal servant were the one most worth watching — give every hand a verified name in your own book and a key that dies at nightfall, watch it by what it does while it works, and keep in your own fist a cord that can freeze it mid-task; the model is a rented stove; your knowledge is the larder; the foundation is the ground you keep; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <strong>the insider is why you now trust even your best-governed hand the least, and keep the power to stop it in the middle of its work in your own fist and no one else's.</strong> A house that governs its servants beautifully and then trusts them completely has not finished the work; it has built a high wall around a hall full of hands it cannot name and cannot stop.</p>
+<p><strong>The question it forces:</strong> <em>We governed our servants until we trusted them — but have we built the house so it trusts even the best of them the least? Can we name every hand already inside (or are four in five of our agents unidentified), do we watch the trusted ones by what they do while they work, and is the cord that freezes a hand mid-task in our own fist — or in the vendor's?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we moved from "keep the bad ones out" to "trust even the good ones the least"?</strong> The vendors building our most capable agents now say to treat them as insider risks — "not because malicious… [but any] capable actor… can make mistakes or be compromised" (Nadella, as reported). <strong>For our most capable, most trusted agents, have we designed the controls assuming that agent could, on any given day, be wrong or compromised — or do we still treat "governed and loyal" as "safe"?</strong></li>
+  <li><strong>Can we name every agent already inside — and could we stop any one of them mid-task?</strong> The house averages a reported 109 machine identities per human, ~79 of them AI agents, yet only ~22% of firms treat agents as independent identities while 88% had an agent security incident (Palo Alto; Gravitee/OWASP, as reported). <strong>What share of our agents have a verified identity, a named owner and a kill-switch we control — and who, exactly, holds the cord that freezes an agent in flight?</strong></li>
+  <li><strong>Is our "human in the loop" an actual emergency brake, or a slide?</strong> Nadella's design principle is a mechanism letting an authorized human pause or kill a model mid-task. <strong>Have we tested a live, mid-task halt of a production agent — measured how fast it stops and what it leaves half-done — or have we only asserted that a human could intervene?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Insider risk is a discipline you already run for employees with access to money and records; agents are now that population, at machine scale. <strong>Have we extended our insider-threat program — joiners/movers/leavers, least privilege, behavioural monitoring, segregation of duties — to AI agents, with short-lived credentials and immediate revocation (the IBM/Vault pattern: deny → terminate the session)?</strong></li>
+  <li>A trusted, compromised agent with standing credentials is a supervised operational-risk event. <strong>Can we produce, for our regulator and board, an inventory of agent identities with owners and permissions, continuous runtime monitoring of their behaviour, and evidence of a tested mid-task kill — the controls we would demand of any employee with the keys to the vault?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>An agent with access to patient data and clinical systems is the ultimate trusted insider; the harm from one that errs or is turned lands on patients. <strong>Do our clinical and research agents have verified identities, least-privilege short-lived access to PHI, and runtime monitoring — and can an authorized clinician halt an agent mid-task before it acts on the wrong record?</strong></li>
+  <li>Validation assumed a well-behaved model; insider framing assumes it may not be. <strong>Have we stress-tested what a compromised or erring agent could reach across our clinical estate, and bounded its blast radius accordingly — rather than trusting that a validated agent stays trustworthy for the life of its credentials?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run access control and segregation for operators on the plant floor; agents now touch OT, MES and supply systems. <strong>Have we applied insider-threat controls — verified identity, least privilege, behavioural monitoring, a physical-equivalent emergency stop — to the agents acting in our industrial environment, where a trusted-but-wrong action has safety consequences?</strong></li>
+  <li>Vendor-embedded and third-party agents are insiders you did not directly hire. <strong>Where a supplier's agent operates inside our systems, does it carry an identity we verify and can revoke, and do we hold the kill-cord — or does the vendor?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Cheaper, faster agents (GPT-6.1 Terra at a reported $1/$5, ~3× faster) mean more agents touching checkout, pricing, inventory and customer data — more insiders, sooner. <strong>As we scale agents for the cost win, are we scaling verified identity, least-privilege credentials and runtime monitoring at the same pace — or is each new cheap agent an unidentified insider with a standing key?</strong></li>
+  <li>Peak-season trust is existential. <strong>If a trusted agent began behaving abnormally on our biggest sales day — over-reaching, draining inventory, mishandling customer data — would our monitoring catch it in flight, and could we freeze it mid-task without taking the store down?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability makes an unidentified, unstoppable agent a governance failure, not just a risk. <strong>Under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026, with its human-oversight requirements), can we show that every agent touching a critical public service has a verified identity, a named accountable owner, and a tested human emergency brake?</strong></li>
+  <li>Sovereignty and continuity matter most here. <strong>Are we holding the kill-cord for the agents running citizen-facing services ourselves — with verified identity and runtime oversight we control — rather than trusting a vendor's assurance that its model is safe (the assurance Nadella's own framing tells us not to accept)?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Insider</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and on ground I own?</em> and started asking the security officer's question about a trusted employee with the keys: <em>what if this one, however loyal, is mistaken or has been turned — would I see it, and could I stop it in flight?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those, at bottom, assumes a governed agent is <em>your</em> agent. The insider removes the assumption — and this autumn the vendors removed it for us, in their own voices: treat the most capable model as an insider risk, trust it the least, and keep an emergency brake (Nadella); continuously assess, adapt and contain agent risk (Microsoft Project Perception); give each agent a verified identity, short-lived credentials and a runtime kill (IBM Agent Identity + Vault).</strong> The point is blunt: <strong>the control that matters has migrated from <em>is the agent loyal?</em> to <em>assume it could be wrong or compromised, and build so you would see it and could stop it.</em></strong></p>
+<div class="card"><ul>
+  <li><strong>The turn — the most capable agent is now an insider risk, and the vendors say so.</strong> <strong>Nadella's 10 October essay treats frontier models (closed and open-weight) as insider risks, "not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised," lands on "the most trustworthy system is the one that lets us trust the model the least," and calls for an emergency brake — an authorized human able to pause or kill a model mid-task; Microsoft's Project Perception (19 Oct) continuously assesses agent risk, adapts permissions and contains threats, a security leader writing that frontier models, regardless of origin, cannot be trusted (Nadella; Microsoft; TechCrunch, as reported).</strong> Three engineering consequences follow. First, <em>"trust the least" is a design principle, not a slogan</em> — it means least privilege by default, short-lived scoped credentials, deny-by-default, and assume-breach for your <em>own</em> agents. Second, <em>the threat model moves inside the perimeter</em> — the gate (keeping strangers out) is necessary but no longer sufficient; the capable, credentialed insider is the case to design for. Third, <em>an emergency brake is an architecture requirement</em> — a mid-task pause/kill demands checkpointing, idempotent/compensating actions and a control plane that can interrupt an agent cleanly, not a prayer that a human notices in time.</li>
+  <li><strong>The collision — identity, runtime scoring and revocation become the product.</strong> <strong>IBM made "Agent Identity" generally available with HashiCorp Vault 2.2 on 27 October: discovery of agents, a verified identity recording each agent's owner, lifecycle status and granted permissions, short-lived Vault-issued credentials, controls that stay live while the agent runs (contextual authorization, policy enforcement, runtime risk evaluation, credential control), and — on a denied request — access refused and the session immediately terminated; it integrates with NVIDIA secure-runtime software (IBM, as reported).</strong> Two realities cut against comfort. <strong>First, you cannot contain what you cannot name.</strong> The prerequisites IBM names — persistent credentials, unclear ownership, disconnected controls — are exactly the enterprise default; agent identity is the precondition for every other insider control, which is why it ships first. <strong>Second, point-in-time authorization is not enough for an insider</strong> — a trusted agent that errs or is turned does so <em>after</em> the initial grant, so authorization has to be <em>continuous and contextual</em> (runtime risk evaluation), and the credential short-lived enough that a turned hand is a danger of minutes.</li>
+  <li><strong>The answer — identify, watch at runtime, and hold the brake.</strong> <strong>Give every agent a verified identity you own (discovered, owned, short-lived-credentialed, revocable centrally); monitor the trusted agent's behaviour while it runs and authorize contextually, not once at the door; and hold a tested emergency brake — a mid-task pause/kill — in your own control plane, not the vendor's — reusing the identity, logging and ownership disciplines you already built for the livery, the census, the keyring and the bell, now pointed at the hardest case: your own best agent, treated as the one most worth watching.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the sharpest axis yet: not what the agent is, serves, harvests, spends or stands on, but whether, assuming it could be wrong or compromised, you would see it and could stop it.</li>
+</ul></div>
+<p>The strategic core: <strong>a year of governance makes a house feel safe, and a loyal, well-reviewed agent is exactly the one you stop watching — which is the definition of an insider risk.</strong> The market makes the temptation concrete: cheaper, faster agents (GPT-6.1 Terra at a reported $1/$5, ~3× faster) multiply the trusted hands inside the walls faster than most houses can name them, while 109:1 machine-to-human identities and ~79 agents per human mean the insider population is already here. The board translation: <strong>govern the servant, then build as if your best-governed servant were the one most worth watching.</strong> The failure mode is exact: <strong>a house that names, governs, funds, grounds and trusts its servants — and never gives them verified revocable identities, never watches them at runtime, and never tests the brake — will pass every governance review and discover, the first time a trusted agent errs or is turned, that it could neither see it nor stop it.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The insider: you governed the servant, now trust it the least. A year of control assumed the governed agent was yours; the vendors just retired that assumption and now treat the most capable agent as an insider. Top left, the old frame, keep the bad ones out: the danger is outside the gate; name it, scope it, trust it; governed equals safe; check once at the door; loyalty ends the worry. Top right, the new frame, trust the best one least: the danger is inside; trust the model the least; assume it could be wrong or compromised; verified identity plus short-lived keys; watch it while it works. Between them: the frame was inverted by the vendors, and the loyal, unwatched, capable hand is the insider risk, so govern the servant then watch your best one most. Middle, the arithmetic of the insider, as reported: 109 machine identities per human, about 79 of them AI agents, per Palo Alto Networks; agent identities projected up about 85 percent in the next twelve months; only about 22 percent treat agents as independent identities, per Gravitee and OWASP; 88 percent suffered an agent-related security incident in the past year. Bottom left, stop, trust the governed hand: treat governed as done; standing credentials; check only at hiring; a human could intervene. Bottom right, start, build to trust it the least: a verified identity you own and can revoke centrally; short-lived least-privilege credentials; continuous runtime behaviour monitoring; a tested emergency brake in your own fist." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE INSIDER — you governed the servant; now trust it the LEAST</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A year of control assumed the governed agent was yours. The vendors just retired that assumption.</text>
+
+  <!-- the old frame -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE OLD FRAME (keep bad ones out)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the GATE — the danger is outside</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">name it, scope it, trust it</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">governed = safe</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">check once at the door</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ loyalty ends the worry</text>
+
+  <!-- the new frame -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE NEW FRAME (trust the best least)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the INSIDER — the danger is inside</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"trust the model the LEAST"</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">assume wrong OR compromised</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">verified identity + short keys</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ watch it WHILE it works</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the loyal, unwatched, capable hand IS the insider risk ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF THE INSIDER — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">109 machine identities per human; ~79 of them AI agents (Palo Alto Networks)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agent identities projected +~85% over the next 12 months</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~22% treat agents as independent identities (Gravitee/OWASP)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">88% suffered an agent-related security incident in the past year</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: trust the governed hand</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· governed = done</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standing credentials</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· check only at hiring</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "a human could intervene"</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the unwatched hand is the risk</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: build to trust it the least</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· verified identity + revoke centrally</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· short-lived, least-privilege keys</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· runtime behaviour monitoring</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a TESTED emergency brake (yours)</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">see it, and stop it mid-task</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">You cannot contain an insider you never gave a name.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Govern the servant · then watch your best one most · keep the cord in your own fist.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The old frame — keep the bad ones out</span>
+  <span><i class="dot" style="background:#1d9e75"></i>The insider frame — trust the best one least</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of the insider</span>
+</div>
+</div>
+
+<h3>Keeping the bad ones out vs trusting the best one least — what changed</h3>
+<table>
+<tr><th>The old frame (keep the bad ones out)</th><th>The insider frame (trust the best one least)</th></tr>
+<tr><td>The danger is a stranger at the gate</td><td>The danger is a trusted, capable hand already inside</td></tr>
+<tr><td>Governed and loyal = safe</td><td>Assume it could be wrong or compromised (Nadella)</td></tr>
+<tr><td>Authorize once, at hiring</td><td>Authorize continuously, by runtime behaviour</td></tr>
+<tr><td>Standing credentials, long-lived keys</td><td>Short-lived, least-privilege, revoke-and-terminate (IBM/Vault)</td></tr>
+<tr><td>"A human could intervene"</td><td>A tested emergency brake in your own fist</td></tr>
+<tr><td>You stop watching the loyal hand</td><td>The loyal, unwatched hand is the insider risk</td></tr>
+</table>
+
+<h3>Why "the insider" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and on ground you own. <strong>This autumn the vendors who build the cleverest servants told you, in their own words, to trust even their best the least.</strong> Nadella's essay, Microsoft's Project Perception and IBM's Agent Identity all point the same way: the governed agent is no longer presumed safe; it is an insider to be identified, watched at runtime and stoppable in flight. Governance that ended at "loyal" will not contain an insider. The estates that keep their standing will give every agent a verified, revocable identity, watch the trusted ones by what they do while they work, and hold the emergency brake themselves.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>assume your best agent could be the threat, and build so you would see it and could stop it.</em> On a legacy estate the instinct, after a hard year of governance work, is to bank the trust that work bought: the agents are named and scoped, the reviews passed, so the hands are safe. Under the insider that is exactly the reflex to check: the reviewed, trusted, standing-credentialed agent is the one you have stopped watching. The retrofit is <strong>identify, watch, brake. Identify:</strong> give every agent a verified identity you own — discovered, owned, short-lived-credentialed, revocable in one place (the IBM/Vault pattern: deny → terminate). <strong>Watch:</strong> monitor runtime behaviour and authorize contextually, not once at the door. <strong>Brake:</strong> hold a tested mid-task kill/hold in your own control plane. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the foundation is the ground you keep; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and <em>the insider is why, having made your servant loyal, you build as if your most loyal servant were the one most worth watching, and keep the cord that stops it in your own fist.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The turn — the agent as insider risk.</strong> <strong>Nadella (10 Oct), "Models as Insider Risks in the Super Intelligence Era": treat frontier models (closed and open-weight) as insider risks, "not because malicious… [but any] capable actor… can make mistakes or be compromised"; "trust the model the least"; an emergency brake to pause/kill mid-task (Nadella, as reported).</strong> The seller of the servant says build as if it could turn.</li>
+  <li><strong>The containment product layer.</strong> <strong>Microsoft expanded Project Perception (19 Oct) to continuously assess agent risk, adapt permissions and contain threats, framing that frontier models "regardless of origin cannot be trusted" (Microsoft; TechCrunch, as reported).</strong> Continuous, not point-in-time.</li>
+  <li><strong>Agent identity goes GA.</strong> <strong>IBM "Agent Identity" GA + HashiCorp Vault 2.2 (27 Oct, TechXchange): verified identity with owner/lifecycle/permissions, short-lived credentials, runtime risk evaluation, deny → terminate the session; integrates with NVIDIA secure runtime (IBM, as reported).</strong> The kill-switch, made concrete.</li>
+  <li><strong>The insider arithmetic.</strong> <strong>109 machine identities per human, ~79 of them AI agents, projected +~85% in a year (Palo Alto Networks 2026 Identity Security Landscape, as reported); only ~22% treat agents as independent identities, 88% had an agent security incident (Gravitee/OWASP, as reported).</strong> The house is full of unidentified insiders.</li>
+  <li><strong>Cheaper, faster insiders.</strong> <strong>OpenAI GPT-6.1 Terra (26 Oct): ~50% lower standard API pricing (reported $1/$5 per M tokens; cached input ~$0.05/M), ~3× faster, computer-use focus, GA in ChatGPT Work and Codex (as reported).</strong> More agents, sooner — scale identity and monitoring to match.</li>
+  <li><strong>Defenders first.</strong> <strong>Google's Gemini 4 Carbon released to cyber defenders first under a staged rollout; Oracle AI World (26 Oct) embedded agents across cloud/apps/database under an enterprise-governance banner (as reported).</strong> Even the model makers are staging capability behind containment.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 (human-oversight duties); MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Verified identity, runtime oversight and a human brake are how you meet them.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Treat frontier models as insider risks — not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised. The most trustworthy system is the one that lets us trust the model the least.</div><div class="a">— Satya Nadella, "Models as Insider Risks in the Super Intelligence Era" (10 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Microsoft says AI agents are like insider threats as frontier models can't be trusted.</div><div class="a">— TechCrunch, headline on Microsoft's Project Perception expansion (19 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Only ~22% of organizations treat AI agents as independent identities — while 88% reported an agent-related security incident in the past year.</div><div class="a">— Gravitee / OWASP agentic-security figures (as reported; alongside Palo Alto Networks' 109 machine identities per human, ~79 of them AI agents)</div></blockquote>
+<blockquote><div class="q">"You governed the servant until you trusted it. The insider is the morning you must build the house to trust even your best one the least — and keep, in your own fist, the cord that stops it mid-task."</div><div class="a">— the radar, on why the trusted agent is now the one most worth watching</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agent as insider risk</td><td><span class="v">Nadella (10 Oct 2026): treat frontier models (closed &amp; open-weight) as insider risks, "not because malicious… [but any] capable actor… can make mistakes or be compromised"; "the most trustworthy system is the one that lets us trust the model the least"; calls for an emergency brake to pause/kill mid-task</span></td><td>Nadella essay, as reported</td></tr>
+<tr><td>The containment layer</td><td><span class="v">Microsoft expanded Project Perception (19 Oct) to continuously assess agent risk, adapt permissions and contain threats; frontier models "regardless of origin cannot be trusted"</span></td><td>Microsoft; TechCrunch, as reported</td></tr>
+<tr><td>Agent identity GA</td><td><span class="v">IBM "Agent Identity" GA + HashiCorp Vault 2.2 (27 Oct): verified identity (owner/lifecycle/permissions), short-lived credentials, runtime risk evaluation, deny → terminate the session; integrates with NVIDIA</span></td><td>IBM, as reported</td></tr>
+<tr><td>The insider arithmetic</td><td><span class="v">109 machine identities per human, ~79 of them AI agents; agent identities projected +~85% over the next 12 months</span></td><td>Palo Alto Networks 2026 Identity Security Landscape, as reported</td></tr>
+<tr><td>The identity gap</td><td><span class="v">Only ~22% of organizations treat agents as independent identities; 88% reported an agent-related security incident in the past year</span></td><td>Gravitee / OWASP, as reported</td></tr>
+<tr><td>Cheaper, faster agents</td><td><span class="v">OpenAI GPT-6.1 Terra (26 Oct): ~50% lower standard API pricing (reported $1/$5 per M tokens; cached input ~$0.05/M), ~3× faster task completion, computer-use focus, GA in ChatGPT Work &amp; Codex</span></td><td>OpenAI; BleepingComputer, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 Aug 2026 (human-oversight duties); MCP 2026-07-28 (EMA stable); Gartner: 40% of enterprise apps embed task-specific agents by year-end 2026</span></td><td>European Commission; MCP; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Identify the insiders — give every agent a verified identity you own and can revoke in one place.</strong> You cannot contain what you cannot name, and the house averages a reported 109 machine identities per human with ~79 AI agents, while only ~22% of firms treat agents as independent identities (Palo Alto; Gravitee/OWASP, as reported). <strong>This month, run an agent-identity discovery across your estate and bring your top agents under a verified identity with a named owner, lifecycle status, and short-lived least-privilege credentials — the IBM/Vault pattern where a denied request terminates the session.</strong> Report one number to the board: the share of production agents that have a verified identity, a named owner and a working revocation path versus those running on standing, unowned credentials.</li>
+  <li><strong>Watch the insider while it works — move from point-in-time authorization to runtime monitoring.</strong> A trusted agent that errs or is turned does its harm during the task, not at the door; Nadella's own framing is to design so you trust the agent the least, and Microsoft's Project Perception is explicitly <em>continuous</em> assessment (as reported). <strong>This month, instrument runtime behaviour for your highest-privilege agents — over-reach, abnormal volume, access to systems outside the errand — and wire contextual, continuous authorization rather than a one-time grant.</strong> Report the share of high-privilege agents under runtime behavioural monitoring, and the mean time to detect an abnormal agent action.</li>
+  <li><strong>Hold the emergency brake yourself — test a live, mid-task kill.</strong> A kill-cord the vendor holds is the vendor's mercy, not your safety; the discipline is a human-triggered pause/kill in your own control plane, and 88% of firms already had an agent security incident (Gravitee/OWASP, as reported). <strong>This month, pick one critical production agent and run a timed, mid-task halt — measure how fast it stops, what it leaves half-done, and whether actions compensate cleanly — so "human in the loop" becomes a tested brake, not a slide.</strong> Report the measured time-to-halt and a dated plan to extend the brake to the next two agents. <strong>The model is a rented stove; the knowledge is the larder; the foundation is the ground you keep; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you keep the ground yours — and the insider is why, having made your servant loyal, you build the house to trust even your best one the least: a verified name on every hand, a watch on it while it works, and the cord that stops it mid-task held in your own fist.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The turn — Satya Nadella (10 Oct 2026), "Models as Insider Risks in the Super Intelligence Era": treat frontier models (closed and open-weight) as insider risks, "not because they are necessarily malicious, but because any sufficiently capable actor with access to important systems can make mistakes or be compromised," "the most trustworthy system is the one that lets us trust the model the least," an emergency brake to pause/kill mid-task (Nadella, as reported) · The containment layer — Microsoft expanded Project Perception (19 Oct) to continuously assess agent risk, adapt permissions and contain threats; frontier models "regardless of origin cannot be trusted" (Microsoft; TechCrunch) · Agent identity GA — IBM "Agent Identity" generally available with HashiCorp Vault 2.2 (27 Oct, TechXchange): verified identity (owner/lifecycle/permissions), short-lived credentials, runtime risk evaluation, deny → terminate the session, NVIDIA integration (IBM) · The insider arithmetic — 109 machine identities per human, ~79 of them AI agents, +~85% in a year (Palo Alto Networks 2026 Identity Security Landscape); only ~22% treat agents as independent identities, 88% had an agent security incident (Gravitee/OWASP) · Context — OpenAI GPT-6.1 Terra (26 Oct), ~50% lower standard API pricing ($1/$5 per M tokens; cached input ~$0.05/M), ~3× faster computer-use, GA in ChatGPT Work and Codex (OpenAI; BleepingComputer); Google Gemini 4 Carbon to defenders first; Oracle AI World (26 Oct) embedding agents under enterprise governance; OpenAI frontier models + Codex to Google Cloud Model Garden (21 Oct) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026, human-oversight duties), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "insider" framing — that a year of governance quietly assumed a governed agent was yours, that the vendors have now retired that assumption and treat the most capable agent as an insider to be trusted the least, and that a house must give every agent a verified revocable identity, watch it at runtime and hold a tested emergency brake itself — is expressly the radar's reading. Figures are relayed from the named sources via web search and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 30 October 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no-signup-required hit counter). Added to every edition so visit counting stays complete. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
