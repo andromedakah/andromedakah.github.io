@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 7 novembre 2026</title>
+<meta name="description" content="Radar IA quotidien : synthèse, allégorie pour dirigeants, questions transsectorielles et analyse technique sur « le maître d'équipage » — le marché vient de faire de l'orchestration le trophée (le 4 nov., Meta a racheté Conductor, qui fait tourner des équipes d'agents de codage IA en parallèle, OpenAI a racheté Pierre pour les workflows Git des agents, et Factory s'est porté sur HumanLayer — trois accords en un jour ; GitHub dit que les agents ouvrent >1/3 de ses pull requests). Pourtant, seuls ~15 % ont atteint une adoption multi-agent orchestrée à l'échelle et 21 % un modèle de gouvernance agentique mûr — « les agents montent en charge plus vite que les garde-fous » (Deloitte) ; seuls 29 % ont pleinement intégré l'orchestration, mais 89 % de ceux-là ont atteint ou dépassé le ROI (UiPath). Beaucoup d'agents ne font pas un équipage. La manœuvre du conseil : nommer le maître d'équipage (une orchestration que vous possédez), siffler le quart (postes et passations), garder le sifflet (un arrêt coordonné et un seul journal). Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Vous avez perfectionné le serviteur — le marché vous vend désormais un équipage</div>
+  <h1>Le Maître d'équipage</h1>
+  <div class="subhead">Une année de travail est allée au serviteur unique. Ce matin, l'unité de travail change : le marché vient de faire de l'orchestration le trophée — en un seul jour, Meta a racheté Conductor (qui fait tourner des équipes d'agents de codage IA en parallèle), OpenAI a racheté Pierre, et Factory s'est porté sur HumanLayer. Vous pouvez embaucher les mains en un après-midi. Mais avez-vous nommé un maître d'équipage ? Beaucoup d'agents ne font pas un équipage.</div>
+  <div class="meta">Samedi 7 novembre 2026 · Édition transsectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">Le 4 novembre 2026, en un seul jour, Meta a racheté Conductor — une startup dont tout le produit fait tourner <em>des équipes d'agents de codage IA en parallèle</em> (une copie isolée de votre code par agent, puis revue-et-fusion), son équipe rejoignant Meta Superintelligence Labs (Axios ; SiliconAngle, tel que rapporté). Le <em>même jour</em>, OpenAI a accepté de racheter Pierre Computer pour intégrer des workflows Git et un « Code Storage » dans Codex « adapté aux agents de codage », et Factory s'est porté sur HumanLayer (OpenAI ; Axios, tel que rapporté) ; GitHub rapporte désormais que les agents ouvrent <em>plus d'un tiers de ses pull requests</em>. L'ère du serviteur unique et habile est révolue — ce que l'on achète, c'est le moyen d'en faire tourner <em>beaucoup</em> à la fois. Mais un équipage n'est pas un <em>nombre</em> de mains ; ce sont des mains qui halent comme une seule, et presque personne n'a l'officier qui rend cela possible : le <em>State of AI in the Enterprise 2026</em> de Deloitte constate que seuls ~15 % ont atteint une adoption multi-agent orchestrée à l'échelle et seuls 21 % ont un modèle de gouvernance agentique mûr — « les agents montent en charge plus vite que les garde-fous » — tandis qu'UiPath constate que seuls 29 % ont pleinement intégré l'orchestration, mais que, parmi ceux-là, 89 % disent que le travail a atteint ou dépassé le ROI (tel que rapporté). La question du conseil n'est plus <em>avons-nous des agents ?</em> ni <em>sont-ils gouvernés ?</em> — c'est : nous embauchons un équipage ; qui est notre maître d'équipage ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce briefing</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse <span class="pill">lecture en 90 secondes</span></h2>
+<div class="card">
+<p>Une longue année durant, le radar a perfectionné le serviteur <em>unique</em> — le nommer (la livrée), tenir un seul livre (l'intendant), inscrire la caution (la caution), vérifier son salaire (le second salaire), l'envoyer moissonner (les deux moissons), lui tendre une bourse plafonnée (la bourse), et posséder le sol sur lequel il se tient (les fondations). <strong>Ce matin, l'unité de travail passe d'un serviteur à tout un équipage</strong> — et le contrôle qui compte n'est plus l'identité, le périmètre ou le budget d'un agent isolé, mais la discipline qui transforme beaucoup d'agents en un seul équipage coordonné plutôt qu'en une foule dangereuse sur un pont glissant.</p>
+<p><strong>La réalité — le marché vient de faire de l'<em>équipage</em>, et non du modèle, ce qu'il achète.</strong> Le <strong>4 novembre 2026</strong>, Meta a racheté <strong>Conductor</strong>, dont tout le produit fait tourner <em>plusieurs agents de codage IA en parallèle</em> — une copie isolée du code par agent, puis revue-et-fusion — l'équipe rejoignant Meta Superintelligence Labs (Axios ; SiliconAngle, tel que rapporté). Le <em>même jour</em>, OpenAI a accepté de racheter <strong>Pierre Computer</strong> pour adapter aux agents de codage les workflows Git et un « Code Storage » à l'intérieur de Codex (OpenAI ; Axios, tel que rapporté), et Factory s'est porté pour absorber HumanLayer (tel que rapporté). GitHub rapporte que <strong>les agents ouvrent désormais plus d'un tiers de ses pull requests</strong>. Trois acquisitions en un jour, toutes visant le même trophée — non pas un agent isolé plus intelligent, mais la plomberie pour <strong>en faire tourner et en coordonner beaucoup</strong>. Le signal est net : les labos de frontière ont décidé que la prochaine ressource rare était l'<em>orchestration</em>.</p>
+<p><strong>La collision — tout le monde embauche un équipage ; presque personne n'a de maître d'équipage.</strong> Le <strong>State of AI in the Enterprise 2026</strong> de Deloitte (3 235 dirigeants, 24 pays) constate que seules environ <strong>15 % des organisations ont atteint une adoption multi-agent orchestrée à l'échelle</strong>, moins de la moitié se disent prêtes pour l'IA agentique sur six aspects de l'entreprise, et seuls <strong>21 % ont un modèle de gouvernance de l'IA agentique mûr</strong> — le cadrage même du rapport étant que <strong>« les agents montent en charge plus vite que les garde-fous »</strong> (tel que rapporté). L'enquête 2026 <strong>AI Adoption &amp; Orchestration</strong> d'UiPath (~590 dirigeants d'entreprises de plus d'1 Md$) constate que seuls <strong>29 % ont pleinement intégré l'orchestration</strong> et que <strong>80 %+ de ceux qui bâtissent des agents butent sur des goulets d'étranglement de montée en charge faute d'orchestration centrale</strong> — mais que, pour la minorité qui <em>a</em> pleinement intégré l'orchestration, <strong>89 % disent que leurs mises en œuvre agentiques ont atteint ou dépassé les attentes de ROI</strong> (tel que rapporté). L'écart entre une foule de mains et un équipage est l'écart entre le « purgatoire des pilotes » et une traversée qui paie.</p>
+<p><strong>L'enjeu — nommez le maître d'équipage, sifflez le quart, gardez le sifflet.</strong> La manœuvre du conseil réutilise la discipline de toute l'année et la pointe vers l'<em>équipage</em>. <strong>Premièrement, nommez un maître d'équipage que vous possédez</strong> — une couche d'orchestration qui assigne les postes, ordonne les passations et détient l'autorité sur tout l'équipage, bâtie sur un sol que vous contrôlez (les fondations), non empruntée tout entière à l'entreprise qui vous vend les mains. <strong>Deuxièmement, sifflez le quart</strong> — donnez à chaque agent un poste, un rôle et une passation explicites, pour qu'aucuns deux agents ne halent l'un contre l'autre, qu'aucune tâche ne soit faite deux fois, et qu'aucun cordage (un outil, une écriture, un paiement) ne soit lâché que personne n'avait reçu l'ordre de tenir. <strong>Troisièmement, gardez le sifflet</strong> — un seul arrêt coordonné et un seul journal unifié sur l'<em>entier</em> équipage, pour pouvoir calmer tout le pont d'un coup quand le temps tourne et savoir, après coup, quelle main a fait quoi. Faites-le <strong>maintenant</strong>, tant que les équipages sont petits, car les mains grimpent dans le gréement plus vite que la plupart des maisons n'ont tendu leurs lignes de vie.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>La réalité — le marché vend désormais l'équipage, pas le modèle.</strong> <strong>Le 4 nov. 2026, Meta a racheté Conductor (fait tourner des équipes d'agents de codage IA en parallèle), OpenAI a accepté de racheter Pierre Computer (workflows Git pour agents de codage dans Codex), et Factory s'est porté sur HumanLayer — trois accords en un jour ; GitHub dit que les agents ouvrent &gt;1/3 de ses PR (Axios ; OpenAI ; SiliconAngle, tel que rapporté).</strong> L'orchestration est la nouvelle ressource rare.</div></div>
+<div class="num"><div class="b">2</div><div><strong>La collision — un équipage sans maître d'équipage est une foule.</strong> <strong>Seuls ~15 % ont une adoption multi-agent orchestrée à l'échelle et seuls 21 % une gouvernance agentique mûre — « les agents montent en charge plus vite que les garde-fous » (Deloitte, 3 235 dirigeants) ; seuls 29 % ont pleinement intégré l'orchestration, mais, parmi ceux-là, 89 % ont atteint ou dépassé le ROI (UiPath, tel que rapporté).</strong> Beaucoup de mains ne font pas un équipage.</div></div>
+<div class="num"><div class="b">3</div><div><strong>La réponse — nommez le maître d'équipage, sifflez le quart, gardez le sifflet.</strong> Possédez une couche d'orchestration qui assigne les postes et détient l'autorité ; donnez à chaque agent un rôle et une passation explicites pour qu'aucun ne hale contre les autres ; et gardez un seul arrêt coordonné et un seul journal sur tout l'équipage — car <strong>les 89 % qui ont orchestré ont obtenu le ROI, et les 80 %+ qui ne l'ont pas fait ont obtenu le goulet d'étranglement</strong> (UiPath ; Deloitte, tel que rapporté).</div></div>
+<div class="card"><strong>En résumé :</strong> la livrée a nommé le serviteur, l'intendant a tenu son livre, la caution a signé son lien, le second salaire a vérifié quel intérêt il servait, les deux moissons l'ont envoyé moissonner, la bourse l'a financé, les fondations ont possédé le sol sur lequel il se tenait — chacune une discipline pour le serviteur <em>unique</em>. <strong>Le maître d'équipage porte sur l'équipage.</strong> Cette semaine, le marché a cessé de vendre des serviteurs plus intelligents et s'est mis à vendre le moyen d'en faire tourner <em>beaucoup</em> : Meta a acheté la chaloupe qui fait ramer tout un équipage d'agents de codage à la fois, OpenAI a acheté la corderie, et les deux en une seule matinée. La tentation est évidente et dangereuse — mesurer le progrès au <em>nombre</em> de mains, embaucher les agents à la douzaine, et appeler la foule un équipage. Mais une douzaine de mains habiles sans maître d'équipage n'est pas un équipage ; c'est une cohue d'hommes sur un pont mouillé — deux halant l'un contre l'autre, un troisième refaisant le travail du premier, un cordage lâché que personne n'avait reçu l'ordre de tenir, et aucun sifflet unique pour les faire tous cesser quand un grain frappe. Seuls quinze équipages sur cent ont un vrai maître d'équipage ; parmi les rares qui en ont un, près de neuf sur dix disent que la traversée paie. Les maisons qui garderont leur assise feront trois choses sans gloire : <strong>nommer le maître d'équipage</strong> (une couche d'orchestration que vous possédez), <strong>siffler le quart</strong> (postes, rôles et passations explicites), et <strong>garder le sifflet</strong> (un seul arrêt coordonné, un seul journal, sur tout l'équipage). Embauchez toutes les mains que vous voulez — elles deviennent bon marché et bonnes. Mais un équipage n'est pas un effectif. C'est un maître d'équipage et un sifflet.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🖋️ « Le Maître d'équipage »</h3>
+<p><em>Sujet : ce matin, l'unité de travail passe d'un serviteur à tout un équipage. Le 4 novembre 2026, en un seul jour, Meta a racheté Conductor — une startup dont le produit fait tourner des équipes d'agents de codage IA en parallèle (une copie isolée du code par agent, puis revue-et-fusion), son équipe rejoignant Meta Superintelligence Labs — tandis qu'OpenAI a accepté de racheter Pierre Computer pour adapter les workflows Git aux agents de codage dans Codex, et que Factory s'est porté sur HumanLayer (Axios ; SiliconAngle ; OpenAI, tel que rapporté) ; GitHub rapporte que les agents ouvrent plus d'un tiers de ses pull requests. Pourtant, le State of AI in the Enterprise 2026 de Deloitte (3 235 dirigeants) constate que seuls ~15 % ont atteint une adoption multi-agent orchestrée à l'échelle et seuls 21 % ont un modèle de gouvernance de l'IA agentique mûr — « les agents montent en charge plus vite que les garde-fous » — et UiPath constate que seuls 29 % ont pleinement intégré l'orchestration tandis que 89 % de ceux-là disent que le travail a atteint ou dépassé le ROI (tel que rapporté). L'allégorie du maître d'équipage est l'illustration propre du radar.</em></p>
+<p>Il était une grande maison qui avait passé une longue et minutieuse année à rendre son unique serviteur excellent. Elle avait nommé la main et lui avait taillé une clé délimitée, tenu un seul livre honnête, mis le nom du maître lui-même sur le lien, demandé de quelle seconde pièce il vivait, envoyé la main aux champs pour moissonner, remis une bourse plafonnée, et enfin baissé les yeux pour s'assurer que le sol même sur lequel la maison reposait était à elle. À toute juste mesure, c'était une maison bien gouvernée, et le maître était fier de son serviteur — comme il devait l'être.</p>
+<p>Puis la mode sur le quai changea du jour au lendemain. Les marchands cessèrent de crier <em>« une main plus habile ! »</em> et se mirent à crier quelque chose de neuf : <em>« tout un équipage, ramant comme un seul ! »</em> Et ils ne faisaient pas que le crier — ils l'<em>achetaient</em>. En une seule matinée, la plus grande compagnie de négoce de la vallée acheta, purement et simplement, la chaloupe même dont le seul tour était de faire ramer une douzaine de mains à la fois, chacune dans sa petite coque, toutes halant de concert ; un rival acheta le même jour la corderie qui gréait de telles embarcations ; un troisième acheta le voilier. Le maître regarda l'or changer de mains et comprit le message : l'âge du serviteur unique était fini. La chose qui valait désormais la peine d'être possédée était le moyen de faire tourner <em>beaucoup</em> de serviteurs en même temps — et donc, comme toute maison de la vallée, il embaucha des mains à la douzaine et se sentit, pendant une semaine glorieuse, comme un amiral.</p>
+<p>Mais voici la chose que le maître faillit manquer, enivré par la vue de son pont bondé. <strong>Un équipage n'est pas un nombre de mains. Ce sont des mains qui halent comme une seule.</strong> Et sur son pont, malgré toute son animation, personne ne sifflait le quart. Deux mains vigoureuses halaient sur le même cordage en sens contraire et juraient que la corde était coincée. Une troisième faisait, magnifiquement, exactement le travail qu'une quatrième avait déjà terminé, et toutes deux annonçaient le succès. Une cinquième, sans poste assigné, errait vers la proue et lâchait un cordage qu'on ne lui avait jamais dit de tenir, et une voile tombait. Et quand un petit grain se leva de l'ouest, le maître ouvrit la bouche pour les faire tous cesser — et se rendit compte qu'il n'avait pas de sifflet. Chaque main ne répondait qu'à elle-même. Il pouvait en arrêter <em>une</em>, en courant à elle et en lui saisissant le bras ; il ne pouvait pas arrêter <em>l'équipage</em>. Il avait, comprit-il avec un frisson, pas d'équipage du tout. Il avait une foule sur un pont mouillé, et les foules sur les ponts mouillés sont la façon dont de bons navires se perdent.</p>
+<p>Deux routes, comme toujours. La route facile était d'embaucher encore plus de mains — les marchands étaient ravis d'en vendre, et un pont plus plein <em>avait l'air</em> de plus de travail accompli. La route plus sage, que prirent les maisons prudentes, commençait par une question simple posée non à une main quelconque mais au pont lui-même : <em>qui transforme ces nombreuses mains en un seul équipage — et s'il le fallait, à cette minute, pourrais-je faire cesser tout le pont d'un coup, puis dire, après coup, quelle main a fait quoi ?</em> Et quand les maisons prudentes comptèrent honnêtement, la réponse les dessoûla. Sur cent maisons qui avaient embauché des équipages, seules environ <strong>quinze</strong> avaient un vrai maître d'équipage — un quart en règle, sifflé et posté, qui travaillait comme un seul à l'échelle ; et à peine <strong>une sur cinq</strong> avait ne serait-ce qu'une discipline écrite pour un équipage de serviteurs. Les mains grimpaient déjà dans le gréement plus vite que quiconque n'avait tendu les lignes de vie. Et pourtant — c'était la part qui devait trancher l'affaire — parmi les rares maisons qui <em>avaient</em> nommé un vrai maître d'équipage et sifflé un quart en règle, près de <strong>neuf sur dix</strong> disaient que la traversée payait. Le maître d'équipage n'était pas une charge. Le maître d'équipage était la différence entre un navire qui faisait voile et un pont qui se contentait d'avoir l'air affairé.</p>
+<p>Alors les maisons sages apprirent trois choses simples, et elles coûtaient bien moins cher à faire tant que les équipages étaient petits. <strong>La première : nommez un maître d'équipage, et qu'il soit à vous.</strong> Quelqu'un — quelque <em>office</em> — doit assigner à chaque main son poste, donner la cadence, ordonner qui hale quand et qui passe à qui, et détenir l'autorité sur tout l'équipage. Et cet office doit se tenir sur un sol que vous possédez, non être emprunté tout entier au marchand qui vous a vendu les mains ; car un équipage dont le seul maître d'équipage est l'homme du vendeur de mains est un équipage qui fait voile là où le vendeur de mains le dirige. <strong>La deuxième : sifflez le quart.</strong> Donnez à chaque main un poste explicite et une passation claire — celle-ci prend un ris, celle-là tient la barre, celle-ci passe le cordage à celle-là et à aucune autre — pour qu'aucunes deux ne halent l'une contre l'autre, qu'aucun travail ne soit fait deux fois, et qu'aucun cordage ne soit jamais lâché qu'aucune main n'avait reçu l'ordre de tenir. Un équipage sans postes n'est qu'une querelle avec du gréement. <strong>Et la troisième : gardez le sifflet.</strong> Un seul coup qui calme le pont <em>entier</em> d'un seul souffle — non une course de main en main pour saisir des bras, mais un seul appel que chaque main obéit à la fois — et un seul journal qui consigne, pour tout l'équipage ensemble, quelle main a fait quoi et quand. Un maître d'équipage qui ne peut arrêter l'équipage est une figure de proue ; un équipage dont vous ne pouvez rendre compte après coup est un mystère auquel vous avez simplement survécu.</p>
+<p>Voici la part qui devrait tenir un maître éveillé. Les marchands l'encourageaient à chaque tournant — <em>« plus de mains ! des mains plus fines ! une embarcation plus leste pour les faire ramer ! »</em> — et tout ce glorieux vacarme flattait la plus vieille erreur de la marine : qu'un pont plus plein est un navire plus rapide. Il ne l'est pas. <strong>Un pont plein de mains non sifflées n'avance pas plus vite qu'un seul bon serviteur, et ne peut être arrêté quand le temps tourne.</strong> Les maisons qui prirent la foule pour l'équipage furent celles qui, la première fois qu'un grain se leva — une mauvaise fusion, une tâche emballée, un paiement envoyé deux fois, un outil appelé qui aurait dû être verrouillé — se tinrent sur un pont qui tanguait sans sifflet en main et regardèrent leurs propres mains travailler, très affairées et toutes à la fois, à les couler.</p>
+<p><strong>La morale, dite simplement :</strong> le modèle est un fourneau loué, désormais si bon marché qu'un plus grand n'arrache qu'un haussement d'épaules ; le savoir est le garde-manger ; les fondations sont le sol sur lequel la maison repose ; la porte est l'unique entrée que vous gardez ; le passeport nomme chaque agent ; le recensement les compte ; l'inspecteur exige que vous produisiez le rôle ; le trousseau est la clé que chacun détient ; le serrurier lit vos propres serrures ; l'horaire des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission borne ce qu'un serviteur habile peut atteindre ; la cloche sonne au moment où votre propre serviteur dérape ; les criquets, pourquoi être entier avant l'essaim ; le miroir, pourquoi vous mesurer à une lumière extérieure honnête ; la livrée, pourquoi nommer chaque main ; l'intendant, pourquoi tenir un seul office gouverné ; la caution, pourquoi le nom du maître est sur le lien ; le second salaire, pourquoi demander de quel pain vit chaque serviteur qui conseille ; les deux moissons, pourquoi l'envoyer moissonner ; la bourse, pourquoi le financer comme un employé ; les fondations, pourquoi posséder le sol sur lequel il se tient — et <strong>le maître d'équipage est la raison pour laquelle, maintenant que le marché a cessé de vous vendre un meilleur serviteur et s'est mis à vous vendre un équipage, vous devez nommer l'unique officier qui transforme beaucoup de mains en une seule : sifflez le quart pour que chaque main ait un poste et qu'aucunes deux ne halent l'une contre l'autre, et gardez le sifflet pour pouvoir calmer tout le pont d'un seul souffle et savoir, après coup, quelle main a fait quoi.</strong> Une maison qui embauche un équipage et ne nomme aucun maître d'équipage n'a pas bâti une marine ; elle a encombré un pont, et appelé la foule un équipage.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Le marché vient de nous dire que l'équipage est la chose à acheter — les plus grandes compagnies de la vallée ont dépensé une fortune en un seul jour pour posséder le moyen de faire tourner beaucoup d'agents à la fois. Nous pouvons embaucher les mains ; elles sont bon marché et deviennent bonnes. Mais avons-nous nommé un maître d'équipage — une orchestration que nous possédons et qui donne à chaque agent un poste et détient l'autorité sur tout l'équipage ? Si un grain se levait à cette minute, pourrions-nous calmer le pont entier d'un seul sifflet — et non courir de main en main — puis dire exactement quel agent a fait quoi ? Ou sommes-nous parmi les quatre-vingt-cinq maisons sur cent qui ont embauché une foule, n'ont sifflé aucun quart, et l'ont appelée un équipage ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions pour dirigeants — par secteur</h2>
+<div class="sector"><div class="t">🌐 Transsectoriel (tout conseil)</div><ul>
+  <li><strong>Avons-nous confondu un nombre d'agents avec un équipage ?</strong> Le marché vient de faire de l'orchestration le trophée — Meta a racheté Conductor pour <em>faire tourner des équipes d'agents en parallèle</em>, OpenAI a racheté Pierre pour les workflows Git des agents, tous deux le 4 nov. <strong>Pour notre workflow multi-agent le plus important, pouvons-nous nommer le maître d'équipage — l'unique office qui assigne à chaque agent son poste, ordonne les passations et détient l'autorité sur tout l'équipage — ou avons-nous une douzaine d'agents ne répondant chacun qu'à lui-même ?</strong></li>
+  <li><strong>Si un grain se levait à l'instant, pourrions-nous calmer tout le pont d'un seul sifflet ?</strong> Seuls 15 % ont une adoption multi-agent orchestrée à l'échelle et seuls 21 % une gouvernance agentique mûre — « les agents montent en charge plus vite que les garde-fous » (Deloitte). <strong>Avons-nous un seul arrêt coordonné et un seul journal unifié sur <em>tous</em> nos agents à la fois — ou ne pouvons-nous les arrêter qu'un par un, à la main, et reconstituer après coup ce qui s'est passé à partir d'une douzaine de journaux séparés ?</strong></li>
+  <li><strong>Possédons-nous le maître d'équipage, ou l'avons-nous loué tout entier au vendeur de mains ?</strong> 89 % des rares qui ont pleinement intégré l'orchestration ont atteint ou dépassé le ROI ; 80 %+ sans elle ont buté sur des goulets d'étranglement de montée en charge (UiPath). <strong>Notre couche d'orchestration est-elle bâtie sur un sol que nous contrôlons (les fondations), pour qu'un équipage d'agents puisse s'étendre sur plus d'un fournisseur — ou l'unique entreprise qui nous vend les agents dirige-t-elle aussi l'équipage ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Les systèmes multi-agents concentrent le risque opérationnel comme un desk de trading concentre le risque de marché : beaucoup d'acteurs autonomes, une défaillance corrélée. <strong>Pouvons-nous montrer à notre régulateur une carte de chaque agent dans un workflow critique — son poste, son autorité, à qui il passe le relais — et un unique « arrêt total » testé qui stoppe tout l'équipage en plein vol, comme nous pouvons arrêter un desk ?</strong></li>
+  <li>Gartner projette que d'ici 2027, 70 % des systèmes multi-agents utiliseront des agents étroitement spécialisés, accroissant la complexité de coordination (tel que rapporté). <strong>Avons-nous testé sous contrainte la défaillance de <em>coordination</em>, et non seulement la défaillance d'un agent isolé — deux agents agissant sur la même position, une passation manquée, un paiement autorisé deux fois — et notre sifflet les atteint-il tous à la fois ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Les flux cliniques et de sécurité sont validés de bout en bout ; un équipage d'agents introduit des passations entre les étapes, là où la redevabilité peut tomber dans l'interstice. <strong>Pour tout processus clinique ou réglementaire multi-agent, chaque passation est-elle explicite et journalisée — qui a passé quoi à qui, et sur quelle autorité — ou la chaîne de responsabilité se dissout-elle à l'instant où un agent passe le relais à un autre ?</strong></li>
+  <li>La sécurité des patients exige un véritable arrêt d'urgence. <strong>Si un agent dans un pipeline à plusieurs étapes se mettait à produire des sorties dangereuses, pourrions-nous arrêter le pipeline <em>entier</em> d'un seul appel et préserver un unique relevé cohérent de ce que chaque agent avait fait — ou courrions-nous après les agents un par un tandis que la chaîne continuerait de tourner ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Fabrication</div><ul>
+  <li>Vous appliquez déjà la discipline de poste : chaque ouvrier a une station, une passation, et un cordon d'arrêt de ligne que toute main peut tirer. <strong>Avons-nous appliqué la même discipline d'atelier à notre équipage d'agents — postes explicites, passations définies, et un cordon andon qui arrête toute la ligne — ou tolérons-nous pour des agents logiciels un laisser-faire que nous n'autoriserions jamais sur un plancher physique ?</strong></li>
+  <li>Le modèle de Conductor est une copie isolée du travail par agent, puis revue-et-fusion (tel que rapporté). <strong>Là où nos agents travaillent en parallèle, avons-nous une fusion disciplinée — un maître d'équipage qui réconcilie leurs sorties et résout les conflits — ou des agents parallèles écrasent-ils discrètement le travail les uns des autres ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Commerce / Grand public</div><ul>
+  <li>Le débit en haute saison est la raison même pour laquelle vous voulez un équipage — beaucoup d'agents sur la recherche, la tarification, le support et la logistique à la fois. <strong>Derrière une orchestration que nous possédons, pouvons-nous ajouter et retirer des mains à l'équipage par tâche et par charge — ou chaque agent est-il câblé à la main, de sorte que faire grandir l'équipage revient à regréer le navire à chaque fois ?</strong></li>
+  <li>La fiabilité le jour des plus fortes ventes est existentielle. <strong>Si un agent d'un équipage en contact client défaillait le jour de pointe, pourrions-nous retirer une main du quart sans que tout l'équipage tombe — et calmer tout l'équipage à l'instant s'il le fallait — ou est-ce tout ou rien, sans maître d'équipage pour re-poster les autres ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>La redevabilité publique exige que quelqu'un puisse toujours dire qui a fait quoi. <strong>Pour tout service public multi-agent, pouvons-nous produire un unique journal faisant autorité sur tout l'équipage — chaque agent, chaque passation, chaque action — ou la responsabilité est-elle diluée entre des agents ne répondant chacun qu'à eux-mêmes (devoirs à haut risque du Règlement IA de l'UE, en vigueur depuis le 2 août 2026) ?</strong></li>
+  <li>La continuité de service est un devoir, pas une préférence. <strong>Avons-nous un maître d'équipage que nous possédons et un sifflet que nous contrôlons sur chaque agent touchant un service public critique — pour que l'équipage puisse être posté, arrêté et rendu-compte par nous, et non seulement par le fournisseur qui a livré les mains ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Des fondations au maître d'équipage</h2>
+<p>Relisez la pile une fois de plus, depuis le siège du dirigeant qui a cessé de demander <em>cet agent unique est-il nommé, délimité, journalisé, loyal, moissonneur, financé et se tient-il sur un sol que je possède ?</em> et a commencé à poser la question qu'aucun de ces contrôles ne touche : <em>j'ai désormais beaucoup d'agents travaillant à la fois — qui en fait un équipage, et puis-je arrêter et rendre compte de tout l'équipage à la fois ?</em> La porte admet l'agent ; le passeport le nomme ; le recensement le compte ; l'inspecteur en exige le décompte ; le trousseau est la clé qu'il détient ; le serrurier lit vos propres serrures ; l'horaire des marées est le quai où tout navire peut accoster ; la provenance trace le travail ; la commission borne ce qu'il peut atteindre ; la cloche révèle quand il dérape ; les criquets, pourquoi être entier avant l'essaim ; le miroir, pourquoi vous mesurer à une lumière extérieure honnête ; la livrée lui donne une identité délimitée ; l'intendant tient un seul office ; la caution met votre nom sur le lien ; le second salaire demande quel intérêt il sert ; les deux moissons l'envoient moissonner ; la bourse le finance ; les fondations possèdent le sol sur lequel il se tient. <strong>Chacun de ces contrôles régit l'agent <em>unique</em>, ou le sol sous lui. Le maître d'équipage porte sur l'<em>équipage</em> — et cette semaine le marché a rendu le glissement impossible à ignorer : trois acquisitions en un jour, toutes visant non pas un agent plus intelligent mais le moyen de faire tourner et de coordonner <em>beaucoup</em> d'entre eux (Meta/Conductor ; OpenAI/Pierre ; Factory/HumanLayer, tel que rapporté).</strong> Le point est brutal : <strong>les contrôles qui ont rendu un agent sûr ne rendent pas, à eux seuls, un équipage d'agents sûr — et la chose que le marché vous vend désormais (plus de mains, lancées en parallèle) est exactement ce qui échoue sans l'unique office que presque personne n'a nommé.</strong></p>
+<div class="card"><ul>
+  <li><strong>La réalité — le trophée du marché est passé de l'agent à l'orchestration.</strong> <strong>Le 4 novembre 2026, Meta a racheté Conductor, dont le produit fait tourner plusieurs agents de codage IA en parallèle (une copie isolée du code par agent, puis revue-et-fusion, à travers Claude Code, Codex, Cursor et OpenCode), l'équipe rejoignant Meta Superintelligence Labs ; OpenAI a accepté de racheter Pierre Computer pour adapter aux agents de codage les workflows Git et un « Code Storage » dans Codex ; et Factory s'est porté sur HumanLayer — trois accords en un jour, GitHub rapportant que les agents ouvrent désormais &gt;1/3 de ses pull requests (Axios ; SiliconAngle ; OpenAI, tel que rapporté).</strong> Sur le plan de l'architecture, trois choses s'ensuivent. Premièrement, <em>l'orchestration est désormais un produit de premier plan, pas une bricole après coup</em> — les labos paient de l'argent réel pour posséder la couche qui fait tourner les équipages, ce qui signifie qu'elle vous sera proposée en pack commode <em>avec les agents eux-mêmes</em>. Deuxièmement, <em>le schéma d'agents parallèles est réel et il est là</em> — espaces de travail isolés, exécution concurrente, puis une étape de réconciliation/fusion — et c'est à cette étape de fusion que la coordination se fait, ou échoue en silence. Troisièmement, <em>le vendeur de mains aimerait bien être aussi votre maître d'équipage</em> — et un équipage dont l'orchestration, l'identité et l'autorité vivent toutes à l'intérieur d'un seul fournisseur est le problème des fondations (le verrouillage) revêtu d'un manteau neuf.</li>
+  <li><strong>La collision — un équipage sans maître d'équipage est une foule, et la plupart des ponts n'ont pas de maître d'équipage.</strong> <strong>State of AI in the Enterprise 2026 de Deloitte (3 235 dirigeants, 24 pays) : seuls ~15 % ont atteint une adoption multi-agent orchestrée à l'échelle ; moins de la moitié sont prêts pour l'IA agentique sur six aspects de l'entreprise ; seuls 21 % ont un modèle de gouvernance de l'IA agentique mûr — « les agents montent en charge plus vite que les garde-fous ». Enquête orchestration 2026 d'UiPath (~590 dirigeants d'entreprises de &gt;1 Md$) : seuls 29 % ont pleinement intégré l'orchestration, 80 %+ butent sur des goulets d'étranglement sans elle, et parmi ceux qui l'ont intégrée, 89 % ont atteint ou dépassé le ROI (tel que rapporté).</strong> Deux réalités d'ingénierie coupent court à l'instinct de l'effectif. <strong>Premièrement, les modes de défaillance d'un équipage ne sont pas les modes de défaillance d'un agent.</strong> Un seul agent gouverné peut être nommé, délimité et journalisé, et pourtant, dans un équipage, causer une défaillance de <em>coordination</em> qu'aucun contrôle d'agent isolé ne voit : deux agents mutant le même état, une passation manquée, du travail dupliqué, un interblocage où chacun attend l'autre, un paiement autorisé deux fois parce qu'aucun ne savait que l'autre avait payé. <strong>Une gouvernance qui s'arrête à l'agent individuel est aveugle à l'équipage.</strong> <strong>Deuxièmement, vous ne pouvez arrêter ou rendre compte de ce que vous ne pouvez pas adresser comme un tout.</strong> Si chaque agent ne répond qu'à lui-même, votre « arrêt » est un sprint d'agent en agent et votre « audit » est l'assemblage d'une douzaine de journaux séparés en un récit après coup — autant dire que vous n'avez ni sifflet ni journal, seulement l'apparence des deux.</li>
+  <li><strong>La réponse — nommez le maître d'équipage, sifflez le quart, gardez le sifflet.</strong> <strong>Placez une couche d'orchestration que vous possédez en autorité sur l'équipage (elle assigne les postes, ordonne les passations et peut commander chaque agent) ; donnez à chaque agent un rôle, un périmètre et une passation explicites pour que le travail parallèle se réconcilie au lieu d'entrer en collision ; et bâtissez un seul plan de contrôle coordonné — un unique « arrêt total » qui stoppe tout l'équipage en plein vol et un seul journal unifié et corrélé sur chaque agent — en réutilisant les disciplines d'identité, de périmètre, de journalisation et de propriété que vous avez déjà bâties pour la livrée, l'intendant, la bourse et les fondations, pointées désormais d'un cran plus haut, vers l'équipage plutôt que vers la main unique.</strong> C'est la même couture à laquelle ce radar revient sans cesse — <em>pouvoir rendre compte de ce que vous exploitez, et agir dessus</em> — visant désormais son cas le plus difficile : non pas un agent que vous pouvez surveiller, mais un équipage agissant à la fois, que vous devez pouvoir poster, arrêter et reconstituer <em>en tant qu'équipage</em>.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>le marché a décidé que l'équipage est le produit, et il a raison que beaucoup d'agents coordonnés peuvent faire bien plus qu'un seul — mais « beaucoup d'agents » ne délivre cela que par une orchestration que vous possédez, et sans elle vous obtenez le goulet d'étranglement, la collision et le grain que vous ne pouvez faire cesser.</strong> La tentation est de mesurer le progrès au nombre d'agents déployés, parce qu'un pont bondé a l'air d'élan ; la discipline est de le mesurer à ce que l'équipage a un maître d'équipage, un quart sifflé et un sifflet. La traduction pour le conseil : <strong>embauchez toutes les mains que vous voulez — elles sont bon marché et deviennent bonnes — mais un équipage est un maître d'équipage et un sifflet, pas un effectif.</strong> Le mode d'échec est précis : <strong>une maison qui nomme, gouverne, finance et ancre chaque agent individuel — puis fait tourner une douzaine d'entre eux en parallèle sans orchestration qu'elle possède, sans passations explicites et sans arrêt coordonné — passera chaque revue de gouvernance d'agent isolé et découvrira, la première fois que deux agents entrent en collision ou qu'un seul s'emballe, qu'elle a une foule sur un pont mouillé et aucun sifflet en main.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le maître d'équipage : vous avez perfectionné le serviteur, et le marché vend désormais l'équipage. Beaucoup d'agents ne font pas un équipage ; un équipage, ce sont des mains qui halent comme une seule, ce qui demande un maître d'équipage (l'orchestration), un quart sifflé (les postes) et un sifflet (un seul arrêt). En haut à gauche, une foule de mains sans maître d'équipage : beaucoup d'agents chacun pour soi ; deux halent l'un contre l'autre ; du travail fait deux fois et un cordage lâché ; aucun sifflet unique pour tous arrêter ; une douzaine de journaux séparés ; la fausse croyance que plus de mains veut dire plus rapide. En haut à droite, un équipage avec un maître d'équipage : une orchestration que vous possédez ; chaque agent a un poste ; les passations sont explicites ; un sifflet calme le pont ; un seul journal corrélé de tous ; le travail parallèle se réconcilie. Entre les deux : ce ne sont pas la même chose, et le marché vient de payer une fortune pour posséder le lanceur d'équipage, alors embauchez les mains mais rappelez-vous qu'un équipage est un maître d'équipage et un sifflet, pas un effectif. Au milieu, l'arithmétique de l'équipage selon Deloitte et UiPath 2026 tel que rapporté : seuls environ 15 pour cent ont atteint une adoption multi-agent orchestrée à l'échelle ; seuls 21 pour cent ont un modèle de gouvernance de l'IA agentique mûr, les agents montant en charge plus vite que les garde-fous ; seuls 29 pour cent ont pleinement intégré l'orchestration et 80 pour cent et plus butent sur des goulets sans elle ; mais parmi ceux qui ont intégré l'orchestration, 89 pour cent ont atteint ou dépassé le ROI, le maître d'équipage paie. En bas à gauche, arrêter, encombrer le pont : mesurer le progrès à l'effectif, les agents ne répondant chacun qu'à eux-mêmes, les arrêter un par un à la main, assembler une douzaine de journaux après coup. En bas à droite, commencer, siffler un vrai quart : nommer un maître d'équipage ou orchestration que vous possédez, donner à chaque agent un poste et une passation, un seul sifflet pour un arrêt total coordonné, un seul journal corrélé sur tout l'équipage." style="max-width:660px;width:100%;height:auto">
+  <!-- titre -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE MAÎTRE D'ÉQUIPAGE — vous avez perfectionné le serviteur ; le marché vend l'équipage</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Beaucoup d'agents ne font PAS un équipage. Un équipage, ce sont des mains qui halent comme une seule — un MAÎTRE D'ÉQUIPAGE, un QUART sifflé, un SIFFLET.</text>
+
+  <!-- une foule de mains -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">UNE FOULE DE MAINS (sans maître d'équipage)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">beaucoup d'agents, chacun pour soi</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">deux halent l'un contre l'autre ; travail deux fois</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">aucun sifflet unique pour tous arrêter</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">une douzaine de journaux séparés</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ « plus de mains = plus rapide » (faux)</text>
+
+  <!-- un équipage -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">UN ÉQUIPAGE (maître d'équipage)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">une orchestration que VOUS possédez</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">chaque agent a un poste · passations explicites</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">un sifflet calme tout le pont</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">un seul journal corrélé de tous</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ le travail parallèle se réconcilie</text>
+
+  <!-- flèches vers le bas -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">le marché vient de payer une fortune pour posséder le lanceur d'équipage (l'orchestration) ▼</text>
+
+  <!-- l'arithmétique -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">L'ARITHMÉTIQUE DE L'ÉQUIPAGE — (Deloitte &amp; UiPath 2026, tel que rapporté)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">seuls ~15 % ont atteint une adoption multi-agent orchestrée à l'échelle (Deloitte)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">seuls 21 % ont une gouvernance de l'IA agentique mûre — « en charge plus vite que les garde-fous »</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">seuls 29 % ont pleinement intégré l'orchestration ; 80 %+ butent sans elle (UiPath)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">MAIS parmi ceux qui ONT intégré l'orchestration, 89 % ont atteint ou dépassé le ROI — le maître d'équipage paie</text>
+
+  <!-- flèche vers le bas -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">donc ↓</text>
+
+  <!-- arrêter -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">ARRÊTER : encombrer le pont</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· mesurer le progrès à l'effectif</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· les agents ne répondent chacun qu'à eux</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· les arrêter un par un, à la main</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· assembler une douzaine de journaux après coup</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">une foule sur un pont mouillé</text>
+
+  <!-- commencer -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">COMMENCER : siffler un vrai quart</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· nommer un maître d'équipage (orchestration) à vous</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· donner à chaque agent un poste &amp; une passation</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un sifflet : « arrêt total » coordonné</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un seul journal corrélé sur l'équipage</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">un équipage qui hale comme un seul</text>
+
+  <!-- bandeau de pied -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Le marché vend l'équipage — captez-le en nommant un maître d'équipage que vous possédez.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Embauchez les mains · mais un équipage est un maître d'équipage et un sifflet, pas un effectif.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>Une foule de mains — sans maître d'équipage</span>
+  <span><i class="dot" style="background:#1d6e56"></i>Un équipage — un maître d'équipage, un quart, un sifflet</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>L'arithmétique de l'équipage</span>
+</div>
+</div>
+
+<h3>Une foule de mains contre un équipage sifflé — ce que le marché vous a vendu, et ce qui en fait un équipage</h3>
+<table>
+<tr><th>Une foule de mains (ce que « beaucoup d'agents » vous donne)</th><th>Un équipage sifflé (ce qu'un maître d'équipage vous donne)</th></tr>
+<tr><td>Beaucoup d'agents, chacun ne répondant qu'à lui-même</td><td>Une orchestration que vous possédez, avec autorité sur tous</td></tr>
+<tr><td>Deux agents halent l'un contre l'autre ; travail fait deux fois</td><td>Chaque agent a un poste ; les passations sont explicites</td></tr>
+<tr><td>Un cordage lâché qu'aucun agent n'avait reçu l'ordre de tenir</td><td>Le travail parallèle se réconcilie au lieu d'entrer en collision</td></tr>
+<tr><td>Les arrêter un par un, en courant à chacun</td><td>Un sifflet : un « arrêt total » coordonné en plein vol</td></tr>
+<tr><td>Une douzaine de journaux séparés, assemblés après coup</td><td>Un seul journal corrélé sur tout l'équipage</td></tr>
+<tr><td>« Plus de mains = plus rapide » (faux sur un pont mouillé)</td><td>L'équipage avance comme un seul — 89 % de ceux qui l'ont fait ont atteint le ROI</td></tr>
+</table>
+
+<h3>Pourquoi « le maître d'équipage » est la discipline qui compte maintenant</h3>
+<div class="card">
+<p>Une longue année durant, l'inquiétude fut de savoir si le serviteur unique était nommé, délimité, journalisé, loyal, moissonneur, financé et ancré. <strong>Ce matin, le marché a déplacé l'unité de travail : il a cessé de vendre un meilleur serviteur et s'est mis à vendre un équipage — et a payé une fortune, en un seul jour, pour posséder le moyen d'en faire tourner un.</strong> Meta/Conductor, OpenAI/Pierre et Factory/HumanLayer prouvent que l'orchestration est désormais le trophée ; les 15 % de Deloitte et les 29 % d'UiPath prouvent que presque aucune maison n'a nommé de maître d'équipage ; et les 89 % d'UiPath prouvent que le maître d'équipage est ce qui fait payer l'équipage. Une gouvernance qui s'arrêtait à l'agent individuel ne tiendra pas un équipage. Les maisons qui garderont leur assise capteront le vrai gain de beaucoup d'agents coordonnés en nommant un maître d'équipage qu'elles possèdent, en sifflant un quart en règle, et en gardant un sifflet qui calme tout le pont d'un coup.</p>
+</div>
+
+<h3>Comment cela atterrit sur les domaines hérités</h3>
+<div class="card">
+<p>La même couture à laquelle ce radar revient sans cesse — <strong>pouvoir rendre compte de ce que vous exploitez, et agir dessus</strong> — aiguisée désormais en <em>pouvoir poster, arrêter et reconstituer tout un équipage d'agents à la fois.</em> Sur un domaine hérité, l'instinct, après avoir gouverné chaque agent si soigneusement, est de laisser l'équipage s'auto-organiser, ou d'accepter l'orchestration bien rangée que le vendeur d'agents glisse gratuitement dans le pack. Sous le maître d'équipage, c'est exactement le réflexe à vérifier : un équipage qui s'auto-organise est une foule, et un maître d'équipage qui ne travaille que pour le vendeur de mains dirige votre équipage vers le port du vendeur de mains. Le rétrofit est <strong>nommer, siffler, garder le sifflet. Nommez</strong> un maître d'équipage que vous possédez : une couche d'orchestration en autorité sur l'équipage, se tenant sur un sol que vous contrôlez, capable de s'étendre sur plus d'un fournisseur. <strong>Sifflez</strong> le quart : donnez à chaque agent un poste, un périmètre et une passation explicites, pour que le travail parallèle se réconcilie et que rien ne soit fait deux fois ni lâché. <strong>Gardez</strong> le sifflet : un seul arrêt coordonné qui stoppe l'équipage entier en plein vol, et un seul journal corrélé sur tous. Et gardez tout le refrain : le modèle est un fourneau loué ; le savoir est le garde-manger ; les fondations sont le sol ; la porte est l'unique entrée ; le passeport nomme chaque agent ; le recensement est le rôle ; l'inspecteur l'exige ; le trousseau est la clé que chacun détient ; le serrurier lit vos propres serrures ; l'horaire des marées est le quai où tout navire peut accoster ; la provenance trace le travail ; la commission borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les criquets, pourquoi être entier avant l'essaim ; le miroir, pourquoi vous mesurer à une lumière extérieure honnête ; la livrée, pourquoi nommer chaque main ; l'intendant, pourquoi tenir un seul office gouverné ; la caution, pourquoi votre nom est sur le lien ; le second salaire, pourquoi demander de quel pain vit chaque agent qui conseille ; les deux moissons, pourquoi l'envoyer moissonner ; la bourse, pourquoi le financer comme un employé ; les fondations, pourquoi posséder le sol — et <em>le maître d'équipage est la raison pour laquelle, maintenant que le marché vend l'équipage, vous devez nommer l'unique officier qui transforme beaucoup de mains en une seule : sifflez le quart, gardez le sifflet, et ne prenez jamais un pont bondé pour un équipage.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>La réalité — le marché a acheté le lanceur d'équipage, trois fois en un jour.</strong> <strong>4 nov. 2026 : Meta a racheté Conductor (fait tourner des équipes d'agents de codage IA en parallèle ; équipe → Meta Superintelligence Labs) ; OpenAI a accepté de racheter Pierre Computer (workflows Git / « Code Storage » pour agents de codage dans Codex) ; Factory s'est porté sur HumanLayer (Axios ; SiliconAngle ; OpenAI, tel que rapporté).</strong> L'orchestration est la nouvelle ressource rare.</li>
+  <li><strong>Le schéma d'agents parallèles.</strong> <strong>Le modèle de Conductor : une copie isolée du code par agent, exécutée en concurrence à travers Claude Code, Codex, Cursor et OpenCode, puis revue-et-fusion ; Conductor Cloud passe en lecture seule le 13 nov. et ferme le 20 nov., l'application locale se poursuivant jusqu'au début 2027 (Axios ; SiliconAngle ; RuntimeWire, tel que rapporté).</strong> C'est à l'étape de fusion/réconciliation que la coordination vit ou meurt.</li>
+  <li><strong>L'écart d'orchestration.</strong> <strong>State of AI in the Enterprise 2026 de Deloitte (3 235 dirigeants, 24 pays) : seuls ~15 % ont une adoption multi-agent orchestrée à l'échelle ; moins de la moitié prêts pour l'IA agentique ; seuls 21 % ont un modèle de gouvernance de l'IA agentique mûr — « les agents montent en charge plus vite que les garde-fous » (tel que rapporté).</strong> Tout le monde a des mains ; presque personne n'a de maître d'équipage.</li>
+  <li><strong>Le maître d'équipage paie.</strong> <strong>AI Adoption &amp; Orchestration Survey 2026 d'UiPath (~590 dirigeants d'entreprises de &gt;1 Md$) : seuls 29 % ont pleinement intégré l'orchestration et 80 %+ butent sur des goulets sans elle — mais parmi ceux qui l'ont fait, 89 % disent que le travail agentique a atteint ou dépassé le ROI (tel que rapporté).</strong> La différence entre le purgatoire des pilotes et une traversée qui paie.</li>
+  <li><strong>La complexité de coordination à venir.</strong> <strong>Gartner projette que d'ici 2027, 70 % des systèmes multi-agents utiliseront des agents étroitement spécialisés — améliorant la justesse mais accroissant la complexité de coordination (tel que rapporté).</strong> Plus de spécialistes signifie plus de passations à siffler.</li>
+  <li><strong>Les garde-fous à la traîne des mains.</strong> <strong>GitHub rapporte que les agents ouvrent &gt;1/3 de ses pull requests ; Sentra a levé 150 M$ pour gouverner ce que les agents IA peuvent lire ; CrowdStrike s'est porté pour racheter Fiddler AI et Dreadnode (~495 M$) pour l'observabilité/sécurité de l'IA (tel que rapporté).</strong> Le marché court pour tendre les lignes de vie après que les mains sont déjà dans la mâture.</li>
+  <li><strong>Les rails antérieurs tiennent toujours.</strong> <strong>Régime à haut risque du Règlement IA de l'UE en vigueur depuis le 2 août 2026 ; MCP 2026-07-28 (Enterprise-Managed Authorization stable) est la couche de connexion aux outils qu'utilise chaque main ; Gartner projette que 40 % des applications d'entreprise embarqueront des agents spécifiques à une tâche d'ici fin 2026 (tel que rapporté).</strong> Un équipage se bâtit sur les disciplines de l'agent unique, non à leur place.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui retiennent l'attention</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Meta rachète Conductor pour faire tourner des équipes d'agents de codage IA en parallèle.</div><div class="a">— AI Weekly / Axios, titre sur l'acquisition de Conductor par Meta (4 novembre 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Les agents montent en charge plus vite que les garde-fous.</div><div class="a">— Deloitte, cadrage du State of AI in the Enterprise 2026 (3 235 dirigeants ; seuls ~15 % à une adoption multi-agent orchestrée à l'échelle et 21 % avec une gouvernance agentique mûre, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Parmi ceux qui ont pleinement intégré l'orchestration à l'échelle de l'entreprise, 89 % disent que leurs mises en œuvre agentiques ont atteint ou dépassé les attentes de ROI.</div><div class="a">— UiPath, AI Adoption &amp; Orchestration Survey 2026 (~590 dirigeants d'entreprises de &gt;1 Md$ ; seuls 29 % ont pleinement intégré l'orchestration, tel que rapporté)</div></blockquote>
+<blockquote><div class="q">« Nous pouvons embaucher les mains en un après-midi — le marché vient de le prouver en achetant le lanceur d'équipage trois fois en un jour. La question est de savoir si nous avons nommé un maître d'équipage. Beaucoup d'agents ne font pas un équipage ; un équipage, c'est un quart sifflé et un sifflet qui calme tout le pont d'un coup. »</div><div class="a">— le radar, sur pourquoi une orchestration que vous possédez compte désormais plus que le nombre d'agents que vous faites tourner</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Le marché a acheté l'équipage</td><td><span class="v">4 nov. 2026 : Meta a racheté Conductor (fait tourner des équipes d'agents de codage IA en parallèle ; équipe → Meta Superintelligence Labs) ; OpenAI a accepté de racheter Pierre Computer (workflows Git pour agents de codage dans Codex) ; Factory s'est porté sur HumanLayer — trois accords en un jour</span></td><td>Axios ; SiliconAngle ; OpenAI, tel que rapporté</td></tr>
+<tr><td>Les agents écrivent le code</td><td><span class="v">GitHub rapporte que les agents IA ouvrent désormais plus d'un tiers de ses pull requests</span></td><td>GitHub via Axios/SiliconAngle, tel que rapporté</td></tr>
+<tr><td>L'écart d'orchestration</td><td><span class="v">Seuls ~15 % des organisations ont atteint une adoption multi-agent orchestrée à l'échelle ; moins de la moitié sont prêtes pour l'IA agentique ; seuls 21 % ont un modèle de gouvernance de l'IA agentique mûr — « les agents montent en charge plus vite que les garde-fous »</span></td><td>Deloitte — State of AI in the Enterprise 2026 (3 235 dirigeants, 24 pays), tel que rapporté</td></tr>
+<tr><td>Le maître d'équipage paie</td><td><span class="v">Seuls 29 % ont pleinement intégré l'orchestration et 80 %+ butent sur des goulets sans elle — mais parmi ceux qui l'ont fait, 89 % disent que le travail agentique a atteint ou dépassé les attentes de ROI</span></td><td>UiPath — AI Adoption &amp; Orchestration Survey 2026 (~590 dirigeants d'entreprises de &gt;1 Md$), tel que rapporté</td></tr>
+<tr><td>Complexité de coordination à venir</td><td><span class="v">D'ici 2027, ~70 % des systèmes multi-agents utiliseront des agents étroitement spécialisés — améliorant la justesse mais accroissant la complexité de coordination</span></td><td>Gartner, tel que rapporté</td></tr>
+<tr><td>Les garde-fous courant après les mains</td><td><span class="v">Sentra a levé 150 M$ pour gouverner ce que les agents IA peuvent lire ; CrowdStrike s'est porté pour racheter Fiddler AI et Dreadnode (~495 M$) pour l'observabilité/sécurité de l'IA</span></td><td>Sentra ; couverture CrowdStrike, tel que rapporté</td></tr>
+<tr><td>Les rails antérieurs</td><td><span class="v">Régime à haut risque du Règlement IA de l'UE en vigueur depuis le 2 août 2026 ; MCP 2026-07-28 (EMA stable) est la couche de connexion aux outils ; Gartner projette que 40 % des applications d'entreprise embarquent des agents spécifiques à une tâche d'ici fin 2026</span></td><td>Commission européenne ; Model Context Protocol ; Gartner, tel que rapporté</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors — Trois manœuvres pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Nommez le maître d'équipage — mettez en place une couche d'orchestration que vous possédez sur votre workflow multi-agent le plus important.</strong> Le marché vient de faire de l'orchestration le trophée (Meta a racheté Conductor, OpenAI a racheté Pierre, Factory s'est porté sur HumanLayer — tous le 4 nov.), et le gain est réel : 89 % des entreprises qui ont pleinement intégré l'orchestration ont atteint ou dépassé le ROI, tandis que 80 %+ sans elle ont buté sur des goulets d'étranglement de montée en charge (UiPath). <strong>Ce mois-ci, choisissez votre équipage d'agents à plus forte valeur et placez une seule orchestration que vous contrôlez en autorité sur lui — une qui puisse s'étendre sur plus d'un fournisseur, se tenant sur un sol que vous possédez (les fondations), non empruntée tout entière au vendeur d'agents.</strong> Rapportez un chiffre au conseil : la part de vos workflows multi-agents qui tournent sous une orchestration que vous possédez, contre un équipage qui s'auto-organise ou est dirigé par un fournisseur unique.</li>
+  <li><strong>Sifflez le quart — donnez à chaque agent un poste et une passation explicites, et faites se réconcilier le travail parallèle.</strong> Un équipage sans postes est une foule : deux agents mutant le même état, du travail fait deux fois, une passation manquée. Le schéma même de Conductor est un travail isolé par agent, puis une fusion disciplinée (tel que rapporté). <strong>Ce mois-ci, pour ce même équipage, écrivez le rôle et le périmètre de chaque agent et les passations explicites entre eux — qui passe quoi à qui et sur quelle autorité — et ajoutez une étape de réconciliation/fusion pour que les sorties parallèles se résolvent au lieu d'entrer en collision.</strong> Rapportez la part des agents de workflows critiques ayant un poste et une passation définis, contre ceux tournant sans périmètre et sans poste.</li>
+  <li><strong>Gardez le sifflet — bâtissez un seul « arrêt total » coordonné et un seul journal corrélé sur tout l'équipage.</strong> Seuls 21 % ont une gouvernance agentique mûre ; « les agents montent en charge plus vite que les garde-fous » (Deloitte). Un maître d'équipage qui ne peut arrêter l'équipage est une figure de proue. <strong>Ce mois-ci, bâtissez et testez un unique arrêt/gel qui stoppe tout votre équipage en plein vol — et non agent par agent — et un seul journal unifié et corrélé qui consigne, sur chaque agent à la fois, qui a fait quoi et quand ; puis exécutez l'exercice sous charge.</strong> Rapportez le temps mesuré pour calmer l'équipage entier d'un seul appel, et si vous pouvez reconstituer un incident de tout l'équipage à partir d'un seul journal. <strong>Le modèle est un fourneau loué, désormais si bon marché qu'un plus grand n'arrache qu'un haussement d'épaules ; le savoir est le garde-manger ; les fondations sont le sol ; le recensement est le rôle ; l'inspecteur l'exige ; le trousseau est la clé que chaque agent détient ; le serrurier lit vos propres serrures ; l'horaire des marées est le quai où tout navire peut accoster ; la provenance trace le travail ; la commission borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les criquets, pourquoi être entier avant l'essaim ; le miroir, pourquoi vous mesurer à une lumière extérieure honnête ; la livrée, pourquoi nommer chaque main ; l'intendant, pourquoi tenir un seul office gouverné ; la caution, pourquoi votre nom est sur le lien ; le second salaire, pourquoi demander de quel pain vit chaque agent qui conseille ; les deux moissons, pourquoi l'envoyer moissonner ; la bourse, pourquoi le financer comme un employé ; les fondations, pourquoi posséder le sol — et le maître d'équipage est la raison pour laquelle, maintenant que le marché vous vend un équipage, vous devez nommer l'unique officier qui transforme beaucoup de mains en une seule : sifflez le quart pour que chaque agent ait un poste, et gardez le sifflet pour pouvoir calmer tout le pont d'un seul souffle et savoir, après coup, quelle main a fait quoi.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> La réalité — Meta rachète Conductor (4 nov. 2026) : fait tourner des équipes d'agents de codage IA en parallèle (copie isolée du code par agent, revue-et-fusion, à travers Claude Code, Codex, Cursor, OpenCode) ; équipe → Meta Superintelligence Labs ; Conductor Cloud en lecture seule le 13 nov., ferme le 20 nov. (Axios ; SiliconAngle ; AI Weekly ; RuntimeWire) · OpenAI va racheter Pierre Computer (4 nov. 2026) : workflows Git / « Code Storage » dans Codex, adaptés aux agents de codage ; GitHub rapporte que les agents ouvrent &gt;1/3 des PR (OpenAI ; Axios) · Factory va absorber HumanLayer (tel que rapporté) · L'écart d'orchestration — Deloitte, State of AI in the Enterprise 2026 (3 235 dirigeants, 24 pays) : ~15 % à une adoption multi-agent orchestrée à l'échelle ; moins de la moitié prêts pour l'IA agentique ; 21 % avec un modèle de gouvernance de l'IA agentique mûr ; « les agents montent en charge plus vite que les garde-fous » · Le maître d'équipage paie — UiPath, AI Adoption &amp; Orchestration Survey 2026 (~590 dirigeants d'entreprises de &gt;1 Md$) : 29 % ont pleinement intégré l'orchestration ; 80 %+ butent sans elle ; 89 % de ceux qui l'ont intégrée ont atteint ou dépassé le ROI · Complexité de coordination — Gartner : ~70 % des systèmes multi-agents utiliseront des agents étroitement spécialisés d'ici 2027 · Les garde-fous courant après les mains — levée de 150 M$ de Sentra pour gouverner ce que les agents lisent ; mouvement de CrowdStrike à ~495 M$ pour Fiddler AI et Dreadnode · Les rails antérieurs — Règlement IA de l'UE (régime à haut risque en vigueur depuis le 2 août 2026) ; MCP 2026-07-28 (EMA stable) ; Gartner (40 % des applications d'entreprise embarquent des agents spécifiques à une tâche d'ici 2026). Le cadrage « maître d'équipage » — que l'unité de travail est passée de l'agent unique à l'équipage, qu'un équipage n'est pas un nombre de mains mais des mains coordonnées par un maître d'équipage, et qu'un domaine doit nommer une orchestration qu'il possède, siffler le quart et garder le sifflet — est expressément la lecture du radar. Les chiffres sont relayés depuis annonces de fournisseurs, recherche d'analystes et couverture secondaire par les organes nommés, repérés via recherche web, et marqués « tel que rapporté » ; la récupération directe de plusieurs pages sources a été bloquée par le proxy d'egress réseau de l'environnement de compilation, donc les chiffres devraient être revérifiés contre les publications primaires avant republication. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 7 novembre 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../ask/index.html">Interroger le radar</a> · <a href="../ledger/index.html">Registre des prédictions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêt">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /audrey|amelie|female|google français/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'En pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: privacy-friendly, no cookies -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
