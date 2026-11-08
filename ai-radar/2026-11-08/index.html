@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 8 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the maker's mark' — provenance just stopped being something you add and became something the supplier bakes in. On 7 Nov 2026 xAI switched on invisible text watermarking by default across seven Grok models (EU AI Act Article 50); Anthropic has embedded invisible watermarks in Claude text and C2PA in files since 2 Aug. The mark is a gift (built-in provenance) and a dependency (it names the vendor's workshop, rides in your words, can't be removed, and — for now — only the vendor can read it). With three labs taking 69% of enterprise-AI spend (Menlo 2026), the board move: own a mark of your own (C2PA), keep a lamp of your own (detection you don't rent), count the workshops. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You perfected the servant and owned the ground — now whose mark is in its words?</div>
+  <h1>The Maker's Mark</h1>
+  <div class="subhead">Provenance just stopped being something you add and became something the supplier bakes in. Two labs now press an invisible maker's mark into every word your AI writes — xAI on by default across seven Grok models, Anthropic by choice since August. It is a gift (built-in Article 50 provenance) and a dependency (a signature that names the vendor's workshop, rides in your outgoing words, can't be removed, and — for now — only the vendor can read).</div>
+  <div class="meta">Sunday, 8 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Yesterday, 7 November 2026, xAI switched on invisible text watermarking by default across its Grok API — seven models (Grok 4.7, 4.6, 4.5, 4.3 and three Grok 4.20 variants), on both the Responses and Chat Completions endpoints — a mark woven into the model's very choice of words that adds no visible characters and survives copy-paste, on by default, which only a team admin confirming a legal exception may switch off (KuCoin; SuperGrok; social coverage, as reported). Its stated reason is Article 50 of the EU AI Act, whose transparency duties went live 2 August 2026 and whose machine-readable-marking grace period for older systems closes 2 December 2026 (Cooley; European Commission, as reported). xAI did not sign the EU's voluntary transparency code; it is complying with the law. It joins Anthropic, which since 2 August has embedded invisible watermarks in Claude's text and Content Credentials (C2PA) in its files, under the Article 50(2) Code of Practice it chose to sign. So the maker's mark is now in the ink. And here is the sting: the mark names the vendor's workshop, not yours; it is on whether you asked or not; you cannot wash it out of your own outgoing words; and — so far — only the vendor holds the lamp that reads it. Read it beside the week's other number: Menlo Ventures' 2026 report puts enterprise-AI spend at ~$176.8B (up 5.4× in a year), with Anthropic, OpenAI and Google together taking 69% ($122.7B), up from 50% (Menlo Ventures, as reported). Three workshops now write most of the valley's words — and every one of those words carries one of three hidden signatures.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse) — and then looked down at the <em>ground</em> (the foundation). <strong>This morning the axis turns to the words themselves, and to an invisible maker's mark that the supplier is now pressing into every one of them.</strong> The shift is not a metaphor this week; it shipped.</p>
+<p><strong>The event — the mark is now in the ink, on by default.</strong> On <strong>7 November 2026 xAI switched on invisible text watermarking by default across its Grok API</strong> — covering <strong>seven models (Grok 4.7, 4.6, 4.5, 4.3 and three Grok 4.20 variants)</strong> on both the Responses and Chat Completions endpoints. The mark <strong>biases the model's word-and-token selection to encode a signal, adds no visible characters, and survives copy-paste</strong>; it is <strong>on by default</strong>, and <strong>only a team admin who confirms a legal exception may turn it off</strong>. Developers can check a response through a header, but <strong>detection access is granted per application — ordinary readers cannot verify text on their own yet</strong> (KuCoin; SuperGrok; social coverage, as reported). xAI says watermarking does not change response quality or speed — its own claim, untested by outsiders. The stated basis is <strong>Article 50 of the EU AI Act</strong>; xAI <strong>did not sign the EU's voluntary transparency Code of Practice</strong> and is meeting the legal minimum (Cooley; European Commission, as reported).</p>
+<p><strong>The precedent — Anthropic already did it, by choice.</strong> Since <strong>2 August 2026</strong>, <strong>Claude models launched in the EU carry machine-readable marking at launch — embedded invisible watermarks in generated text and Content Credentials (C2PA) in generated files where supported — under the Article 50(2) Code of Practice Anthropic signed</strong> as both model and system provider; models placed on the market before 2 August have until <strong>2 December 2026</strong> to comply; detection tools for third parties are "coming," not yet shipped; reported penalties reach <strong>€15M or 3% of global turnover</strong> (Anthropic help centre; The Decoder; Cooley, as reported). Two labs, two routes to the same place: <strong>the maker's mark is now standard, and the enterprise did not put it there.</strong></p>
+<p><strong>The stakes — whose signature is in your words, and who can read it?</strong> The mark is first a <em>gift</em>: at last you can prove which of your outgoing words a machine wrote, and meet Article 50 without building the plumbing yourself. But it is the <em>vendor's</em> mark, not yours — it names <strong>his</strong> workshop inside <strong>your</strong> letters, it is on by default, you cannot remove it, and the lamp that reads it is, for now, in his hand. Set that against concentration: <strong>three labs (Anthropic, OpenAI, Google) now take 69% of enterprise-AI spend, up from 50%</strong> (Menlo 2026), while IBM's sovereignty study finds <strong>71% say switching their primary AI vendor would be difficult and only 9% say they understand their AI dependencies well</strong> (IBM Institute for Business Value, as reported). The board move re-uses the year's discipline and points it at the words: <strong>own a mark of your own</strong> (sign and disclose your AI output on provenance you control — C2PA, your own labels), <strong>keep a lamp of your own</strong> (detection you don't have to beg a supplier for), and <strong>count the workshops</strong> (treat the maker's mark as a live map of whose hand is in your voice).</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The event — an invisible maker's mark, on by default.</strong> <strong>xAI switched on default text watermarking across seven Grok models on 7 Nov 2026 (word-choice signal, no visible characters, survives copy-paste, admin-only opt-out, detection gated), citing EU AI Act Article 50; it did not sign the voluntary code (KuCoin; SuperGrok; Cooley, as reported).</strong> The supplier now signs your words.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The precedent — Anthropic by choice, since 2 August.</strong> <strong>Claude's EU text has carried invisible watermarks and its files C2PA Content Credentials since 2 Aug 2026 under the Article 50(2) code Anthropic signed; pre-existing systems must comply by 2 Dec 2026; third-party detection is not yet shipped (Anthropic; The Decoder, as reported).</strong> The mark is now standard.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The stakes — a signature you don't own, in a market of three hands.</strong> <strong>Three labs take 69% of enterprise-AI spend (up from 50%; Menlo 2026); 71% say switching is hard and only 9% understand their AI dependencies (IBM, as reported).</strong> Own a mark of your own, keep a lamp of your own, and count the workshops.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage asked whose coin it took, the two harvests sent it to reap, the purse funded it, the foundation guarded the ground — and <strong>the maker's mark is about the words the servant writes and the hidden signature now pressed into them.</strong> This week two of the largest labs made that signature standard: xAI switched it on by default across seven models; Anthropic has embedded it since August by choice. For the honest house it is a gift — provenance you were going to owe the regulator anyway, now built in. But it is the <em>vendor's</em> signature, not the house's: it names his workshop in your outgoing words, it is on whether you asked or not, you cannot wash it out, and for now only he can read it. In a market where three workshops already write 69% of the words, the maker's mark is a quiet map of who owns your voice. The estates that keep their standing will do three unglamorous things: <strong>own a mark of their own</strong> (provenance you control, not only the vendor's hidden one), <strong>keep a lamp of their own</strong> (detection you don't rent), and <strong>count the workshops</strong> (diversify before three hidden signatures become the only three there are). Welcome the mark — but never let the ink-maker be the only one who knows what he wrote in your name.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Maker's Mark"</h3>
+<p><em>Topic: the frame turns from the servant, and from the ground it stands on, to the words the servant writes and the invisible mark now pressed into them. On 7 November 2026 xAI switched on invisible text watermarking by default across seven Grok models, citing EU AI Act Article 50 (live since 2 August 2026; machine-readable-marking grace period to 2 December 2026), having declined the voluntary transparency code; Anthropic has embedded invisible watermarks in Claude text and C2PA Content Credentials in its files since 2 August, under the code it chose to sign (KuCoin; SuperGrok; Cooley; Anthropic; The Decoder, as reported). Read beside Menlo's finding that three labs now take 69% of enterprise-AI spend (up from 50%) and IBM's that 71% say switching is hard while only 9% understand their AI dependencies (as reported). The maker's-mark allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent, and then a harder season making sure it owned the ground they stood on. It had named every hand and cut it a scoped key, kept one honest book, put the master's name on the bond, asked whose second coin each advising servant took, sent the servants to reap, handed each a scoped purse, and refused to let the company that rented it the cheap, swappable stove pour the foundation beneath the floor. By any fair reckoning it was a well-run house, and a wise one.</p>
+<p>But the house no longer wrote its own letters. That had been the quiet revolution of the age: the scribes still sat at their desks, but they wrote with <strong>ink bought ready-mixed from the great ink-houses</strong>, and the words came out faster and finer than any hand could manage alone. The master thought of the ink the way he thought of the stove — a commodity, bought by the barrel, swapped at will. He was wrong about one thing, and this week he learned it.</p>
+<p>For a new rule had come down from the magistrate, and this very week two of the greatest ink-houses obeyed it. From now on, <strong>every barrel of ink would carry an invisible maker's mark</strong> — not a blot on the page, not a watermark you could hold to a window, but a mark woven into <em>the very choice of words</em>, into the turn of each phrase, so that any letter written with that ink could be traced back to the workshop that made it. One great ink-house switched the mark on across all seven of its inks, by default, overnight; another had already begun months before, of its own accord, under a charter it had signed; the newer houses did it only because the law now left them no choice. The master was, at first, delighted. <em>"At last,"</em> he said, <em>"I can prove which letters my machines wrote and which my people did. This costs me nothing and spares me the plumbing."</em> And he was right — that much was a genuine gift.</p>
+<p>Then the steward, who read everything twice, pointed at the small print, and the master's pleasure cooled. <strong>The mark was the ink-maker's, not the house's.</strong> It did not say <em>this letter came from this house</em>; it said <em>this letter was written with this workshop's ink.</em> It was on every page, whether the master asked for it or not. He could not wash it out — it lived in the words themselves, not in a seal he could break. And here was the part that made the master set down his cup: <strong>only the ink-maker held the lamp that could read the mark.</strong> The workshop would reveal, to those it chose, which of its inks had written a given page — but the house itself had no lamp of its own, no way to look at its own outgoing letters and know for certain what signature they carried. <em>"So,"</em> said the steward slowly, <em>"every letter we send into the world is signed, invisibly, by a workshop that is not us — and we must ask that same workshop, cap in hand, if we ever wish to know what it wrote in our name."</em></p>
+<p>Then the master asked the colder question, the one the foundation had taught him to ask. <em>"How many ink-houses are there, really?"</em> And the clerk counted, and the answer was the same frightening arithmetic as the floor beneath them. <strong>Three workshops now mixed more than two barrels in every three sold in the whole valley</strong> — their share had climbed from a half to better than two-thirds in a single year — and seven houses in ten admitted they could not easily change their ink-maker, while only nine in a hundred could honestly say they understood whose inks they truly depended on. So the maker's mark was not merely a signature. <strong>It was a map.</strong> Lay all the valley's letters side by side, read the hidden marks, and you would see at a glance that most of what the whole valley wrote each day was secretly signed by one of three hands. <em>"Once you are locked to a supplier,"</em> a neighbouring master had said that season, <em>"you lose your leverage"</em> — and the mark made the lock legible, letter by letter.</p>
+<p>So the wise houses learned three plain things, and they cost less to do early than late. <strong>The first: keep a mark of your own, and set it before the letter leaves.</strong> Welcome the ink-maker's mark as proof of the machine's hand — but do not let it be the <em>only</em> mark on the page. Put the <strong>house's own seal</strong> on every letter before it goes out: your own honest label of what was machine-written, your own provenance stamped in a form you control and can show to anyone, so that the world learns the letter came from <em>your</em> house and not merely from <em>some</em> workshop. A house known only by its supplier's signature has no signature of its own. <strong>The second: keep a lamp of your own.</strong> Do not be the house that must beg the ink-maker to read its own correspondence. Demand — in the contract, in the design — a way to detect and verify the marks in your own outgoing words without the supplier's permission. The honesty is worth little if the only candle that reveals it belongs to the man who lit it. <strong>And the third: count the workshops, and read the mark as the map it is.</strong> Treat the maker's mark not as a compliance chore but as a live census of whose hand is in your voice. If two barrels in three across the whole valley carry one of three signatures, then diversity of ink is now a matter of sovereignty, not thrift — because the day may come when three hidden signatures are the only three there are.</p>
+<p>Here is the part that should keep a master awake. The rule that pressed the mark into the ink was a good rule, meant to protect the reader from being deceived by a machine's hand — and it does. But a good rule, obeyed by a market of three, quietly hands those three a new kind of hold: <strong>they now sign, invisibly, almost everything the valley says, and they alone can read the signatures.</strong> The lesson is not that the ink-makers are wicked, nor that the mark is wrong — the mark is right, and the house should be glad of it. The lesson is that <strong>when you do not own a mark of your own, do not keep a lamp of your own, and do not count the workshops, you have let three strangers become the invisible co-signatories of everything your house says — and called it transparency.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap and weigh what it brings in; the purse is why you fund it like an employee; the foundation is why you own the ground the house stands on — and <strong>the maker's mark is why, having perfected the servant, funded it, and secured its ground, you must now look at the words it writes and refuse to let the ink-maker be the only one who signs them and the only one who can read the signature: keep a mark of your own and set it before the letter leaves, keep a lamp of your own to read the marks in your own words, and count the workshops whose signatures are in your voice — because the mark the magistrate meant as honesty becomes, in a market of three hands, the quietest map ever drawn of who owns what you say.</strong> A house that lets its supplier be the sole signatory and the sole reader of everything it writes has not become transparent; it has handed its voice to three strangers and called the arrangement honesty.</p>
+<p><strong>The question it forces:</strong> <em>Every word our enterprise now sends into the world may carry an invisible maker's mark — a signature woven into the very choice of words, pressed there by a supplier, on by default, that we cannot remove and, for now, cannot even read without his lamp. Do we also set a mark of our own on our outgoing words, keep a lamp of our own to read what is in them, and count how few hands now sign most of what the whole market says — or have we let three ink-houses become the invisible co-signatories of everything we write, and mistaken their honesty for ours?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Whose signature is in the words we send out — and can we read it ourselves?</strong> Two major labs now press an invisible, machine-readable maker's mark into generated text by default (xAI across seven Grok models from 7 Nov; Anthropic in Claude since 2 Aug), and for now detection is largely gated to the vendor. <strong>For our AI-generated external content, do we know which outputs carry a vendor watermark, can we verify it without the vendor's permission, and do we also attach a provenance mark of our own (C2PA / our own disclosure) that says the letter came from <em>us</em>?</strong></li>
+  <li><strong>Have we turned Article 50 from a liability into a control we own?</strong> The EU AI Act's transparency duties are live (since 2 Aug 2026) and the machine-readable-marking grace period for pre-existing systems closes <strong>2 December 2026</strong>. <strong>Can we show, per system, that AI-generated or AI-manipulated content we publish is marked and disclosed as the Act requires — using provenance we control, not merely whatever hidden mark our supplier happens to add?</strong></li>
+  <li><strong>Is the maker's mark telling us something our vendor map isn't?</strong> Three labs now take 69% of enterprise-AI spend (up from 50%), 71% say switching is hard, and only 9% understand their AI dependencies (Menlo 2026; IBM, as reported). <strong>If we read the hidden signatures across our own AI output, how few suppliers are actually writing most of our words — and is that concentration a deliberate choice or an accident we've never measured?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Communications, disclosures and advice are regulated for provenance and suitability. <strong>For every AI-assisted client communication, can we prove — on provenance we control — what was machine-generated, and are we relying on a vendor's gated watermark that we cannot independently verify for records we must retain and produce to a supervisor?</strong></li>
+  <li>Vendor concentration is a supervised risk, and the maker's mark makes it concrete. <strong>Can we produce, for our regulator and board, a map of which AI suppliers' hidden marks are in our outputs, with a tested ability to detect and re-sign content ourselves if a single provider changes its watermarking, pricing or detection access?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical, regulatory and patient-facing text carries legal and safety weight. <strong>Where AI drafts clinical, safety or patient material, do we attach our own validated provenance and disclosure — rather than trusting an invisible vendor watermark we cannot read — so that what we signed, and what a machine drafted, is auditable by us and by regulators, not only by the supplier?</strong></li>
+  <li>Watermarks can persist through some editing but are not guaranteed to survive heavy revision. <strong>Have we tested whether vendor marks survive our actual editing workflows, and do we have our own content-credential trail so provenance does not silently disappear the moment a clinician rewrites a paragraph?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You run supplier-qualification and traceability discipline for physical inputs; AI-written content is now a traceable input too. <strong>Have we applied the same traceability rule to AI output — a known, auditable provenance mark on technical documentation, manuals and specs — rather than depending on whichever supplier's hidden signature happens to be in the text?</strong></li>
+  <li>Single-sourcing is a known risk you already manage. <strong>If 69% of the market's AI words now come from three labs, is our documentation and IP pipeline single-sourced to one vendor's model — and would we even know, since the only record of authorship is a mark we cannot read without that vendor's lamp?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Trust and authenticity drive conversion; disclosure rules are tightening. <strong>For AI-generated product copy and customer messaging, do we disclose and sign with provenance we control, so a customer (and a regulator) can trust the mark came from us — rather than relying on an invisible vendor watermark no shopper can see or check?</strong></li>
+  <li>Scale makes vendor dependence invisible until it bites. <strong>If our highest-volume content is written by one model whose maker's mark we cannot independently read, have we measured that dependence and kept a tested alternate, so a change to that vendor's watermarking or detection terms doesn't silently rewrite the provenance of everything we ship?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public trust depends on knowing what the state wrote versus what a machine drafted. <strong>Under the transparency duties you already owe, can you show that AI-generated public communications carry provenance the public can verify independently — using open, owned content credentials — rather than a proprietary vendor mark only the vendor can read?</strong></li>
+  <li>Sovereignty is the sharpest here. <strong>If most AI-written public text in the economy carries one of three private labs' hidden signatures, and only those labs can read them, is that a transparency win or a sovereignty risk — and are we procuring AI with a requirement that provenance and its detection be ours, portable, and open?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Maker's Mark</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and standing on ground I own?</em> and started asking the one question none of those controls touches: <em>whose signature is in the words my house sends out, and who is allowed to read it?</em> The gate admits the agent; the passport names it; the census counts it; the keyring is which key it holds; the locksmith reads your own locks; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those governs the <em>servant</em> or the <em>ground</em>. The maker's mark is about the <em>output</em> — and this week two labs made an invisible signature in that output standard: xAI by default across seven Grok models (7 Nov), Anthropic by choice since 2 August.</strong> The point is blunt: <strong>provenance just stopped being something you add and became something the supplier bakes in — which is a gift and a dependency at once, because the mark names the vendor's workshop, rides in your outgoing words, and (for now) can be read only with the vendor's lamp.</strong></p>
+<div class="card"><ul>
+  <li><strong>The event — a maker's mark woven into the words, on by default.</strong> <strong>On 7 November 2026 xAI enabled invisible text watermarking by default across its Grok API — seven models (Grok 4.7, 4.6, 4.5, 4.3 and three Grok 4.20 variants), Responses and Chat Completions endpoints — a signal encoded in the model's word-and-token selection that adds no visible characters and survives copy-paste; opt-out requires a team admin to confirm a legal exception, and detection is granted per application rather than to the public (KuCoin; SuperGrok; social coverage, as reported).</strong> Three engineering realities follow. First, <em>a token-biasing watermark is statistical, not a seal</em>: it persists through copy-paste and light edits but can degrade under heavy rewriting, translation or paraphrase, so it is evidence, not proof. Second, <em>detection asymmetry is the real story</em>: a mark you cannot read without the vendor's cooperation is provenance you do not own — design for your own verifiable trail. Third, <em>"on by default, admin-only off" changes your data posture overnight</em>: outputs you already ship may now carry a vendor signature you never chose, which matters for confidentiality, competitive intelligence and records.</li>
+  <li><strong>The precedent and the law — standardization by two routes.</strong> <strong>Anthropic has, since 2 August 2026, embedded invisible watermarks in Claude's generated text and Content Credentials (C2PA) in generated files, under the EU AI Act Article 50(2) Code of Practice it signed; systems placed on the market before 2 August have until 2 December 2026 to meet machine-readable marking; third-party detection tools are promised but not yet shipped; reported penalties reach €15M or 3% of global turnover (Anthropic help centre; The Decoder; Cooley; European Commission, as reported).</strong> The engineering lesson is that <strong>two different compliance philosophies — sign the voluntary code (Anthropic) vs. meet the legal minimum (xAI) — converge on the same fact for you: the mark is now in the output by default, and C2PA/content-credential provenance is the emerging open standard you can actually own.</strong> Build to C2PA and open provenance now; it is the one layer where you can hold your own signature and your own lamp.</li>
+  <li><strong>The answer — own a mark, own a lamp, count the hands.</strong> <strong>Attach provenance you control to AI output before it leaves (open content credentials / your own disclosure, not only the vendor's hidden watermark); build or contract for detection you can run without the vendor's permission; and treat the maker's mark as a live dependency map — because three labs already write 69% of the market's AI words (Menlo 2026) and only 9% of leaders understand their AI dependencies (IBM, as reported).</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the words themselves: not what the agent is, serves, harvests, spends or stands on, but whose signature it leaves in what it writes, and whether you can read that signature yourself.</li>
+</ul></div>
+<p>The strategic core: <strong>the maker's mark is a gift you should accept and a dependency you must offset in the same breath — accept the provenance (you owed Article 50 anyway), and offset the lock-in by owning a mark and a lamp of your own.</strong> The market makes the trap concrete: it feels modern and compliant to let the vendor's default watermark carry your provenance, and it feels like friction to stand up your own content-credential pipeline and detection — so most houses take the free mark and never notice they can neither read it nor remove it, in a market where three suppliers already sign two words in three. The board translation: <strong>welcome the mark; never let the ink-maker be your only signatory and your only reader.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its servants — and then ships every AI-written word carrying a hidden signature it did not choose, cannot read, and cannot remove — will pass every transparency review and discover, the first time a vendor changes its watermarking or gates its detector, that it never owned the provenance of its own voice.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The maker's mark: you perfected the servant and owned the ground, now look at the words it writes. A supplier now signs them invisibly, by default — a gift (provenance) and a dependency (a mark you cannot read). Top left, the mark as shipped this week: invisible, in the word-choice; xAI on by default across seven Grok models on 7 November with admin-only opt-out; Anthropic embeds it in Claude text and C2PA in files since 2 August, by choice; the basis is EU AI Act Article 50; it survives copy-paste. Top right, what the mark costs you: it names the vendor's workshop; it is on whether you asked or not; you cannot wash it out; only the vendor's lamp reads it because detection is gated; it survives copy-paste but fades under heavy rewriting. Between them: a good rule, honesty about the machine's hand, obeyed by a market of three, hands those three the valley's signatures. Middle, whose hand is in your voice, per Menlo 2026 and IBM as reported: three labs, Anthropic, OpenAI and Google, make up 69 percent of enterprise-AI spend, up from 50 percent; enterprise-AI spend about 176.8 billion dollars, up 5.4 times in a year; 71 percent say switching their primary AI vendor would be difficult; only 9 percent say they understand their AI vendor, model and infrastructure dependencies. Bottom left, stop: letting the vendor be the only signatory and reader — shipping words you cannot read, relying on a gated detector, never measuring the three-hand map. Bottom right, start: own a mark, a lamp, and the count — set your own provenance before it leaves with open content credentials or C2PA, keep a lamp you do not rent with your own detection, and count the workshops and diversify the ink." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE MAKER'S MARK — you perfected and grounded the servant; now the words</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A supplier now signs your AI's words, invisibly, by default — a GIFT (provenance) and a DEPENDENCY (a mark you can't read).</text>
+
+  <!-- the mark as shipped -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#10243a" stroke="#2b6fb0"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#7fb6e8" font-family="sans-serif">THE MARK, AS SHIPPED (this week)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">invisible, in the word-choice</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">xAI: ON by default, 7 Grok models (7 Nov)</text>
+  <text x="52" y="137" font-size="10" fill="#cfe3f5" font-family="sans-serif">Anthropic: Claude text + C2PA files (2 Aug)</text>
+  <text x="52" y="157" font-size="10" fill="#cfe3f5" font-family="sans-serif">basis: EU AI Act Article 50</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ survives copy-paste</text>
+
+  <!-- what it costs -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">WHAT THE MARK COSTS YOU</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">names the VENDOR's workshop</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">on whether you asked or not</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">you can't wash it out</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">only the vendor's lamp reads it</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ fades under heavy rewriting</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#7fb6e8" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#7fb6e8"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">a good rule, obeyed by a market of THREE, hands those three the signatures ▼</text>
+
+  <!-- whose hand is in your voice -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHOSE HAND IS IN YOUR VOICE — (Menlo 2026; IBM, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">3 labs (Anthropic, OpenAI, Google) = 69% of enterprise-AI spend (up from 50%)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">enterprise-AI spend ~$176.8B, up 5.4× in a year</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">71% say switching their primary AI vendor would be difficult</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">only 9% say they understand their AI vendor / model / infrastructure dependencies</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: vendor = only signatory &amp; reader</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ship words you can't read</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· rely on a gated detector</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· never measure the 3-hand map</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· confuse the vendor's mark with yours</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">transparency you don't own</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: a mark, a lamp, and the count</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· set YOUR provenance before it leaves</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· open content credentials (C2PA)</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· keep a lamp you don't rent (own detection)</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· count the workshops; diversify the ink</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a signature, and a lamp, you own</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Accept the mark — it's provenance you owed anyway — and offset the dependency in the same breath.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Welcome the mark · never let the ink-maker be your only signatory and only reader.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#2b6fb0"></i>The mark, as shipped</span>
+  <span><i class="dot" style="background:#a5416a"></i>What the mark costs you</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Whose hand is in your voice</span>
+</div>
+</div>
+
+<h3>The vendor's hidden mark vs. a provenance you own — what you get, and what you give up</h3>
+<table>
+<tr><th>The vendor's maker's mark (shipped this week)</th><th>A provenance you own (what to build)</th></tr>
+<tr><td>Invisible watermark in the word-choice; on by default (xAI 7 Nov)</td><td>Open content credentials (C2PA) + your own disclosure, set before send</td></tr>
+<tr><td>Names the vendor's workshop, not your house</td><td>Says the letter came from <em>you</em>, verifiable by anyone</td></tr>
+<tr><td>You cannot remove it; admin-only opt-out</td><td>You control what mark is attached and when</td></tr>
+<tr><td>Only the vendor's lamp reads it (detection gated)</td><td>A lamp you run yourself, without the vendor's permission</td></tr>
+<tr><td>Survives copy-paste; degrades under heavy rewriting</td><td>Content credentials travel with the file and your records</td></tr>
+<tr><td>A gift: free Article 50 provenance</td><td>The offset: provenance you own in a market of three hands</td></tr>
+</table>
+
+<h3>Why "the maker's mark" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, governed, funded and grounded. <strong>This week the question moved into the words themselves: provenance stopped being optional and became a signature the supplier bakes in by default.</strong> xAI's 7-November switch and Anthropic's since-August marking prove the maker's mark is now standard; Article 50 made it law; Menlo's 69% and IBM's 9%-understand-their-dependencies prove how few hands hold the pen. Transparency that stops at accepting the vendor's hidden mark will not protect your voice. The estates that keep their standing will take the gift (built-in provenance) and immediately offset the dependency — a mark of their own, a lamp of their own, and a clear-eyed count of whose signatures are in what they say.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to read, and own, the provenance of what you send.</em> On a legacy estate the instinct is to treat the vendor's free watermark as "transparency, handled" and move on — it is easier, it is compliant-looking, and the plumbing is someone else's. Under the maker's mark that is exactly the reflex to check: a provenance you cannot read or remove is not yours, and in a three-supplier market it is a dependency you never priced. The retrofit is <strong>mark, lamp, count. Mark:</strong> attach open content credentials (C2PA) and your own AI disclosure to outgoing content before it ships, so your house's signature is on the page, not only the ink-maker's. <strong>Lamp:</strong> require, in contracts and design, detection you can run yourself — a way to verify the marks in your own words without the vendor's gate. <strong>Count:</strong> read the maker's marks across your output as a live dependency map, and diversify the models that write for you before three hidden signatures are the only three there are. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the maker's mark is why, having perfected and grounded the servant, you must now own the provenance of the words it writes: keep a mark of your own, keep a lamp of your own, and count the hands whose signatures are in your voice.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The event — default text watermarking.</strong> <strong>xAI switched on invisible text watermarking by default across seven Grok models (4.7, 4.6, 4.5, 4.3, three 4.20 variants) on both API endpoints, 7 Nov 2026 — word-choice signal, no visible characters, survives copy-paste, admin-only opt-out, detection granted per application; basis EU AI Act Article 50; voluntary code not signed (KuCoin; SuperGrok; Cooley, as reported).</strong> The supplier now signs your words by default.</li>
+  <li><strong>The precedent.</strong> <strong>Anthropic has embedded invisible watermarks in Claude text and C2PA Content Credentials in files since 2 Aug 2026, under the Article 50(2) code it signed; pre-2-Aug systems must comply by 2 Dec 2026; third-party detection promised, not yet shipped (Anthropic; The Decoder, as reported).</strong> Two routes, one standard.</li>
+  <li><strong>The law.</strong> <strong>EU AI Act Article 50 transparency duties live since 2 Aug 2026; machine-readable-marking grace period for pre-existing systems closes 2 Dec 2026; a voluntary Code of Practice on transparency provides labelling icons; reported penalties up to €15M or 3% of turnover (Cooley; European Commission, as reported).</strong> Provenance is now a duty, not a nicety.</li>
+  <li><strong>The open standard to own.</strong> <strong>Content Credentials (C2PA) are the emerging open provenance layer — the one mark you can attach and read yourself (Anthropic ships them on files; broad industry backing, as reported).</strong> Build here to own your signature and your lamp.</li>
+  <li><strong>Whose hand is in your voice.</strong> <strong>Three labs (Anthropic, OpenAI, Google) now take 69% of enterprise-AI spend, up from 50%; total spend ~$176.8B, up 5.4× in a year (Menlo Ventures 2026, as reported).</strong> The maker's mark is a map of this.</li>
+  <li><strong>The dependency, measured.</strong> <strong>71% say switching their primary AI vendor would be difficult; only 9% say they understand their AI vendor/model/infrastructure dependencies well; "once you're locked in, you lose leverage" (IBM Institute for Business Value; BankInfoSecurity, as reported).</strong> You cannot manage a dependency you cannot read.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 Aug 2026; the 15 September GPAI systemic-risk filing deadline has passed; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Owned provenance and open detection are how you meet them without renting your voice.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">xAI will start hiding an invisible watermark in text from Grok's API on 7 November, switched on by default… the mark nudges which words the model picks and adds no visible characters, so copying and pasting will not remove it.</div><div class="a">— as reported (International Cyber Digest; SuperGrok; KuCoin coverage of xAI's Grok API watermarking, November 2026)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Claude models launched in the EU on or after 2 August 2026 will support machine-readable marking at launch — embedded watermarks in generated text and Content Credentials in generated files.</div><div class="a">— Anthropic, help-centre note on Article 50(2) transparency (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Once you're locked in, you lose leverage.</div><div class="a">— Conor Mlacak, CIO, Staples Canada, in IBM's <em>The Calculus of AI Sovereignty</em> (as reported; 71% say switching is hard, only 9% understand their AI dependencies)</div></blockquote>
+<blockquote><div class="q">"Welcome the maker's mark — it is honesty about the machine's hand, and you owed it anyway. Just never let the ink-maker be the only one who signs your words, and the only one who can read the signature."</div><div class="a">— the radar, on owning the provenance of what your AI writes</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The event — default text watermarking</td><td><span class="v">xAI switched on invisible text watermarking by default across seven Grok models (4.7, 4.6, 4.5, 4.3, three 4.20 variants), both API endpoints, 7 Nov 2026 — word-choice signal, no visible characters, survives copy-paste, admin-only opt-out, detection per application</span></td><td>KuCoin; SuperGrok; social coverage, as reported</td></tr>
+<tr><td>The legal basis</td><td><span class="v">EU AI Act Article 50 transparency duties live since 2 Aug 2026; machine-readable-marking grace period for pre-existing systems closes 2 Dec 2026; penalties up to €15M or 3% of global turnover</span></td><td>Cooley; European Commission, as reported</td></tr>
+<tr><td>The precedent — Anthropic</td><td><span class="v">Claude's EU text carries invisible watermarks and its files C2PA Content Credentials since 2 Aug 2026, under the Article 50(2) Code of Practice Anthropic signed; third-party detection promised, not yet shipped</span></td><td>Anthropic help centre; The Decoder, as reported</td></tr>
+<tr><td>Whose hand is in your voice</td><td><span class="v">Three labs (Anthropic, OpenAI, Google) now take 69% of enterprise-AI spend, up from 50% a year earlier ($122.7B of ~$176.8B total)</span></td><td>Menlo Ventures 2026 State of Enterprise AI, as reported</td></tr>
+<tr><td>Enterprise-AI spend</td><td><span class="v">~$176.8B deployment spend by Sept 2026, up ~5.4× from ~$33B in 2025 (survey of ~400 US decision-makers, &gt;$4B in AI spend; Morning Consult, 8–26 Sept 2026)</span></td><td>Menlo Ventures 2026, as reported</td></tr>
+<tr><td>The dependency, measured</td><td><span class="v">71% say switching their primary AI vendor/model would be difficult; only 9% say they understand their AI vendor/model/infrastructure dependencies well; 81% say a 7-day vendor outage would cause severe/critical disruption</span></td><td>IBM Institute for Business Value — The Calculus of AI Sovereignty, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 Aug 2026; 15 Sep GPAI systemic-risk filing deadline passed; MCP 2026-07-28 (EMA stable); Gartner: 40% of enterprise apps embed task-specific agents by year-end 2026</span></td><td>European Commission; Model Context Protocol; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Own a mark of your own — set your provenance before the words leave.</strong> The vendor's watermark is a gift, but it names <em>his</em> workshop and you cannot read or remove it. <strong>This month, stand up an owned provenance step on your highest-volume AI-generated external content: attach open Content Credentials (C2PA) and a clear AI-use disclosure that you control, before anything ships — so every letter carries your house's signature, not only the ink-maker's.</strong> Report one number to the board: the share of AI-generated external content that leaves with provenance you own, versus content that carries only a vendor's hidden mark.</li>
+  <li><strong>Keep a lamp of your own — detection you don't have to rent.</strong> A mark you can read only with the supplier's permission is not provenance you own; today xAI's detection is gated per application and Anthropic's third-party detector has not shipped. <strong>This month, require in your model contracts and build into your pipeline a way to detect and verify the provenance of your own outgoing AI content without the vendor's gate — at minimum a C2PA-based trail you can audit end-to-end.</strong> Report whether you can, today, independently verify the provenance of a sample of your own shipped AI content — yes or no — and a dated plan to make it yes.</li>
+  <li><strong>Count the workshops — read the maker's mark as a dependency map.</strong> Three labs now write 69% of the market's AI words, 71% say switching is hard, and only 9% understand their AI dependencies — so the hidden signatures in your output are a sovereignty map you've never read. <strong>This month, inventory which models write your highest-volume content, record whose maker's mark each one carries, and qualify a tested alternate for at least one load-bearing workflow, so three hidden signatures do not quietly become your only three.</strong> Report the concentration of your AI-written output by vendor, and the time-to-switch for one critical workflow. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the maker's mark is why, having perfected and grounded the servant, you must own the provenance of the words it writes: keep a mark of your own, keep a lamp of your own, and count the hands whose signatures are in your voice, so the honesty the law intended never becomes the quietest map of who owns what you say.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The event — xAI (7 Nov 2026): invisible text watermarking on by default across seven Grok models (4.7, 4.6, 4.5, 4.3, three 4.20 variants), both API endpoints; word-choice signal, no visible characters, survives copy-paste, admin-only opt-out, detection per application; basis EU AI Act Article 50; voluntary transparency code not signed (KuCoin; SuperGrok; International Cyber Digest) · The legal basis — EU AI Act Article 50 transparency live since 2 Aug 2026, machine-readable-marking grace period for pre-existing systems to 2 Dec 2026, penalties up to €15M or 3% of turnover (Cooley; European Commission) · The precedent — Anthropic has embedded invisible watermarks in Claude text and C2PA Content Credentials in files since 2 Aug 2026 under the Article 50(2) code it signed; third-party detection promised, not yet shipped (Anthropic help centre; The Decoder) · Whose hand is in your voice — three labs (Anthropic, OpenAI, Google) take 69% of enterprise-AI spend ($122.7B of ~$176.8B, up from 50%; spend up ~5.4× in a year) (Menlo Ventures 2026; FourWeekMBA) · The dependency — 71% say switching is hard, only 9% understand their AI dependencies, 81% say a 7-day outage would be severe/critical; "once you're locked in, you lose leverage" (IBM Institute for Business Value — The Calculus of AI Sovereignty; BankInfoSecurity) · The prior rails — EU AI Act (high-risk live since 2 August 2026; 15 September GPAI systemic-risk filing deadline passed), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "maker's mark" framing — that provenance has shifted from something you add to a vendor-pressed signature baked into the output by default, a gift (built-in Article 50 provenance) and a dependency (a mark naming the vendor's workshop, riding in your words, unremovable, readable for now only with the vendor's lamp), so a house must own a mark of its own (C2PA / owned disclosure), keep a lamp of its own (independent detection) and count the workshops — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. This edition follows a gap in daily publication since 22 September 2026. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 8 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
