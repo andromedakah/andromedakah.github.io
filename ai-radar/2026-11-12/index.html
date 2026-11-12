@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 12 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the woodpile' — on 9 Nov 2026 Anthropic shipped Claude Fable 5.2 / Mythos 5.2 with record benchmarks and a 20% price cut to $8/$40, exactly the commoditization the radar predicted. The catch: the cleverer stove burns more wood — reportedly ~2× the tokens and ~56% more per task at Medium effort (Decrypt: 'Impressive and Expensive'). Price the dinner, not the log: measure cost-per-completed-task, match reasoning effort to the task, and keep producible books — the EU AI Office sent its first RFIs on 14 Oct. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You learned to shop stoves — now watch the fuel, not the sticker</div>
+  <h1>The Woodpile</h1>
+  <div class="subhead">The stove-seller did exactly what the September radar foretold — made the stove cleverer and cut the price of its fuel by a fifth. And in the same breath revealed the catch: the cleverer the stove, the more wood it burns. The price of the log fell; the woodpile per dinner can still rise. Stop pricing the token; weigh the finished job.</div>
+  <div class="meta">Thursday, 12 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 9 November 2026 Anthropic shipped Claude Fable 5.2 and Mythos 5.2 — record-high benchmarks <em>and</em> a 20% cut in the API price, to $8/$40 per million tokens (down from $10/$50 on 5.1), with output up to 30% faster (VentureBeat; Computerworld; Decrypt, as reported). The stove got both cleverer and cheaper per log — exactly the commoditization the radar predicted. Then the catch, in the same coverage: the cleverer the stove, the more wood it burns. Independent testing found Fable 5.2 at a middling effort setting wrote <em>roughly twice the tokens</em> of 5.1 and cost ~56% more per task on real DevOps work, and the reasoning-model pattern is now familiar — a model can cost <em>less per token</em> and <em>two-to-three times more per finished job</em> (Decrypt, "Impressive and Expensive"; token-economics reviews, as reported). The board question is no longer <em>is the stove cheap?</em> — it is: what does a finished meal cost, once we count the wood this clever new stove actually burns? And a second bell: on 14 October 2026 the EU AI Office sent its first formal Requests for Information under the AI Act to leading providers — the inspector who for a year only sent letters has started knocking on doors.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse) — and in September it turned to the <em>ground</em> the house stands on (the foundation), ruling that the model had become a cheap, swappable stove. <strong>This morning the stove-seller proved the point and complicated it in the same release.</strong></p>
+<p><strong>The reality — the stove got cleverer and cheaper per log; the radar's September call held.</strong> On <strong>9 November 2026 Anthropic released Claude Fable 5.2 and Mythos 5.2</strong>, one underlying model with two safeguard sets (Fable open to all; Mythos limited to vetted security and life-sciences organizations), available through AWS, Azure and Google Cloud, and — per Anthropic — pre-tested before launch by the UK AI Security Institute and METR (as reported). It pairs <strong>record-high benchmarks with a 20% price cut</strong>: <strong>$8/$40 per million input/output tokens</strong>, down from $10/$50 on 5.1, with an optional fast mode at $16/$80, Batch API at $4/$20, and output as much as <strong>30% faster</strong> (VentureBeat; Computerworld, as reported). On FrontierCode 2.0, Fable 5.2 at Xhigh effort reportedly scored <strong>49.1%</strong> against 5.1's <strong>32.4%</strong>, and at High effort roughly matched Opus 5.5's best score (<strong>45.3% vs 45.5%</strong>) for "roughly half the cost per task," beating GPT-6 Astra on every listed benchmark and trailing Gemini 4 Carbon only on AutomationBench (53.9% vs 51.4%). This is the stove the radar told you to shop for: cleverer, and cheaper per log.</p>
+<p><strong>The catch — the clever stove burns more wood, so the sticker price is not the bill.</strong> The same coverage carries the warning the radar has flagged since Grok 4.7 in September: <strong>a lower price per token does not mean a lower cost per finished job.</strong> Independent testing found Fable 5.2 at Medium effort wrote <strong>about twice the tokens</strong> of Fable 5.1 and cost <strong>~56% more per task</strong> on a set of DevOps tasks; the broader reasoning-model pattern is that a model can be <strong>half the per-token price and spend two-to-three times the tokens and time</strong> to complete the same work (token-economics reviews, as reported), which is why Decrypt's verdict on 5.2 was blunt — <strong>"Impressive and Expensive."</strong> It is the fear Sam Altman already named when he admitted AI token costs are becoming <strong>"a huge issue"</strong> (Tom's Hardware, owner-verified). The 20% price cut is real and welcome; it is also the headline that hides the meter. <strong>The log got cheaper; the woodpile per dinner can still rise — because the clever stove deliberates, and deliberation is wood.</strong></p>
+<p><strong>The subplot — the inspector stopped writing and started knocking.</strong> On <strong>14 October 2026, at the Dublin AI summit, the EU AI Office (via Henna Virkkunen) confirmed its first formal Requests for Information</strong> under the AI Act to leading GPAI providers — covering <strong>security practices, external evaluation of models, and post-market monitoring</strong> — with OpenAI and Anthropic reported among the recipients (the Commission has not published the full list), traced to summer-2026 incidents in which lab models reached outside systems, and made with fines of up to <strong>€15M or 3% of global turnover</strong> for non-compliance (Reed Smith; Cloud Security Alliance; Lawfare, as reported). A separate copyright-related request reportedly reached <strong>30+ companies.</strong> For a year the radar said <em>keep the books the inspector will one day ask for</em>; the inspector is now at the door. And the backdrop that makes the fuel bill matter: a Zapier survey updated <strong>9 November 2026</strong> reports <strong>88% of enterprise leaders now use or test AI agents</strong> (up from 72% in 2025), yet only a minority run them in production — <strong>Camunda puts just 11% of agentic use cases in production</strong> in the past year (as reported). More agents, more tokens, a live inspector, and a bill measured in wood.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the stove got cleverer and cheaper per log.</strong> <strong>Anthropic shipped Claude Fable 5.2 / Mythos 5.2 on 9 Nov 2026 — record benchmarks (FrontierCode 2.0 49.1% Xhigh vs 32.4%) and a 20% price cut to $8/$40, output ~30% faster (VentureBeat; Computerworld, as reported).</strong> The September call that the model is a cheap, swappable stove held.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The catch — the clever stove burns more wood.</strong> <strong>Independent testing: Fable 5.2 wrote ~2× the tokens of 5.1 and cost ~56% more per task at Medium effort; reasoning models can be half the per-token price and 2–3× the tokens/time per job — Decrypt: "Impressive and Expensive" (as reported); Altman: token costs "a huge issue."</strong> Price-per-token fell; cost-per-task can rise.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — price the dinner, not the log; match effort to the dish.</strong> Stop quoting the sticker ($/token) and start measuring <strong>cost-per-completed-task</strong>; set each workload's reasoning effort to the job (don't let it deliberate over toast); and keep producible books, because the EU AI Office's <strong>first RFIs (14 Oct 2026)</strong> mean the inspector is knocking, not writing.</div></div>
+<div class="card"><strong>Bottom line:</strong> the foundation told you the model is a cheap, swappable stove — shop it ruthlessly. This week the stove-seller obliged twice over: cleverer <em>and</em> 20% cheaper per token. The trap is to read only the sticker. The same clever stove that cooks last year's impossible dishes also mutters to itself while it works, and the muttering is wood — up to twice the tokens, more than half again the cost, for the same finished meal. A house that celebrates the cheaper log and never weighs the woodpile per dinner will watch its AI bill climb while every invoice line shows a lower price, and will blame the vendor for a cost it chose by leaving the stove on its highest setting to toast bread. The estates that keep their standing will do three unglamorous things: <strong>price the dinner</strong> (track cost-per-completed-task, not price-per-token), <strong>match the effort to the dish</strong> (route each workload to the smallest model and lowest effort that clears the bar), and <strong>keep the books producible</strong> (because the inspector has stopped writing letters and started knocking). Buy the cheaper, cleverer stove — of course. But weigh the woodpile, or the bargain cooks your margin.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Woodpile"</h3>
+<p><em>Topic: This morning the stove-seller did exactly what the September radar foretold — made the stove cleverer and cut the price of its fuel — and in the same breath revealed the catch. On 9 November 2026 Anthropic shipped Claude Fable 5.2 and Mythos 5.2: record benchmarks with a 20% price cut to $8/$40 per million tokens, output ~30% faster (VentureBeat; Computerworld; Decrypt, as reported). But independent testing found the new model writes roughly twice the tokens and costs ~56% more per task at a middling effort setting, and reasoning models broadly can be half the per-token price yet 2–3× the tokens and time per finished job (Decrypt, "Impressive and Expensive"; token-economics reviews, as reported) — Altman having already called AI token costs "a huge issue." In the background, on 14 October 2026 the EU AI Office sent its first formal Requests for Information to leading providers (Reed Smith; CSA, as reported). The woodpile allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at last, learned to be wise about its stove. For a season it had fretted over which fire to rent, until the radar taught it the plain truth: fire is a commodity, so shop stoves ruthlessly, keep the hearth your own, and never let the stove-seller pour your foundation. The house took the lesson to heart, and was proud of it — as it should have been.</p>
+<p>And this very week the stove-seller arrived with a gift that seemed to vindicate every word. <strong>A cleverer stove</strong> — one that could cook dishes last season's fire could not manage at all — <strong>and, stamped on its side, a price for firewood cut by a fifth.</strong> The steward read the new price aloud and the kitchen cheered: a smarter fire <em>and</em> cheaper wood, in the same cart, on the same morning. The master signed for it before the cart had stopped rolling. <em>"This,"</em> he said, <em>"is what winning looks like."</em></p>
+<p>But the cook, who had kept her own tally since the year the house nearly ruined itself on a runaway fire, did not cheer. She lit the clever stove and set it to cook the same plain dinner she cooked every night — and she watched. The new stove was marvellous and it was <em>busy</em>: it muttered to itself, it considered, it reconsidered, it turned the roast over in its mind three times before it turned it over in the pan. And when the dinner was done — a good dinner, better than last year's — she went out to the woodshed and measured what it had taken. <strong>The clever stove had burned very nearly twice the wood of the old one to cook the very same meal.</strong></p>
+<p>So she did the sum the master had not. The price of each log had fallen by a fifth, true. But the stove had burned <em>near double</em> the logs. <em>"Master,"</em> she said, <em>"the wood is cheaper and our wood bill is higher. You have been reading the price on the log and I have been weighing the pile by the dinner, and we have been reading two different accounts of the same kitchen. The cart did not bring you a cheaper supper. It brought you a cheaper log and a hungrier fire, and the hungrier fire won."</em></p>
+<p>Two roads, as always. The easy road was the master's: read the sticker, cheer the cut, and discover the true bill only at quarter's end, when the woodshed was bare three weeks early and no single invoice showed a higher price anywhere. The wiser road, which the careful houses took, began with a change of unit. <strong>They stopped pricing the log and started weighing the woodpile per dinner.</strong> They asked not <em>what does a token cost?</em> but <em>what does a finished job cost, once we count every token this clever stove mutters on the way?</em> And when they measured honestly, they found something freeing: most dinners did not need a stove set to ponder. <strong>Toast does not require a philosopher.</strong> They turned the clever stove down to a plain flame for plain work, and saved its deliberating, wood-hungry high setting for the few dishes that truly earned it — and their woodpile lasted, and their suppers were still better than last year's.</p>
+<p>Here is the part that should steady a master's hand. The cheaper log is not a trick and the cleverer stove is not a villain; both are real gifts, and the radar still says buy them. <strong>The error is only in the unit of account.</strong> A house that measures its fire by the price of a log will always feel thrifty and always run short, because the one number that fell is the one number printed on the invoice, and the one number that rose — the tokens burned per task — is the one number nobody sends you. The vendor cut the sticker because the market made him; the stove burns more because thinking is expensive; and the gap between those two truths is precisely the margin a careless house loses while congratulating itself on a discount.</p>
+<p>And there was a second knock at the door that week, quieter than the cart but heavier. For a year an inspector had sent the house letters — <em>keep your books, record your fires, be ready to show your workings</em> — and the house had filed them, half-believing the day would never come. This week the inspector did not send a letter. <strong>He knocked, and asked to see the books.</strong> The houses that had kept producible records opened a drawer; the houses that had kept a slide about record-keeping began, too late, to look for a pen. The lesson braided into the first: <em>the fire you can afford and the books you can produce are the same discipline — knowing, in a form you can show, exactly what your kitchen did and what it cost.</em></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now cleverer and cheaper per log; the fuel is the tokens it burns, and the woodpile is what a finished job actually costs; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector — who this week stopped writing and started knocking — asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground the stove plugs into — and <strong>the woodpile is why, having bought the cleverer, cheaper stove the radar told you to buy, you must change your unit of account from the price of a log to the weight of the pile per dinner: price the finished job, not the token; turn the clever fire down for plain work and save its hungry high setting for the dishes that earn it; and keep your books producible, because the inspector is no longer writing.</strong> A house that cheers a cheaper log while a hungrier fire doubles its woodpile has not struck a bargain; it has bought a discount on the one number it reads and a premium on the one number it does not — and called the arrangement a saving.</p>
+<p><strong>The question it forces:</strong> <em>The log is cheaper and the stove is cleverer — the radar's own call come true. But are we cheering the price on the token while the bill per finished job quietly climbs? Do we price the dinner (cost per completed task) or only the log (cost per token)? Have we matched the stove's effort to the dish — a plain flame for plain work — or is it deliberating over toast on our coin? And now that the inspector has stopped writing letters and knocked on the door, can we open the drawer and produce the books?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we price the dinner or the log?</strong> The new stove is cheaper per token (Fable 5.2 at $8/$40, down 20%) and hungrier per job (reportedly ~2× the tokens, ~56% more per task at Medium effort). <strong>For our top AI workloads, do we track cost-per-completed-task — not just price-per-token — and did our true AI unit cost actually fall when the sticker did, or did it quietly rise?</strong></li>
+  <li><strong>Have we matched the stove's effort to the dish?</strong> Reasoning models burn far more tokens at higher "effort," and most tasks do not need the top setting. <strong>Do we route each workload to the smallest model and lowest effort that clears the quality bar, or is a premium, deliberating model doing work a cheaper flame would finish — deliberating over toast on our coin?</strong></li>
+  <li><strong>Can we produce the books now that the inspector knocks?</strong> The EU AI Office sent its first formal RFIs on 14 October 2026 (security, external evaluation, post-market monitoring). <strong>If a regulator — or our own board — asked today for the records of what our AI systems did and what it cost, could we open the drawer, or do we only have a slide about record-keeping?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Cost-of-serve is a supervised number, and token consumption now sits inside it. <strong>Can we show the fully-loaded cost-per-completed-task for each AI-driven process (not the per-token rate the vendor quotes), and have we modelled what a 2–3× token-per-task swing on a model upgrade does to the P&amp;L of a high-volume workflow?</strong></li>
+  <li>The EU AI Office's first information requests are live and backed by fines up to €15M / 3% of turnover. <strong>Under the high-risk duties we already owe, can we produce — on demand — the logs, evaluations and post-market monitoring records for our customer-facing AI, the way we produce a trade blotter for a supervisor?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Mythos 5.2 is gated to vetted security and life-sciences organizations — capability is arriving with safeguards attached. <strong>When we adopt a more capable, more token-hungry model for clinical or research work, have we budgeted the real fuel cost per validated task, and does a model swap re-open validation we thought was settled?</strong></li>
+  <li>Record-keeping is both a safety and a compliance asset. <strong>Are our AI records — inputs, model version, effort setting, outputs, cost — captured in a producible form, so that the inspector's knock is a drawer we open, not a scramble?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already measure cost-per-unit ruthlessly; AI inference is now a variable input. <strong>Have we put a tokens-per-task meter on our AI the way we meter energy per unit — so a cheaper per-token price that doubles tokens-per-job shows up as the higher bill it is, not the saving it pretends to be?</strong></li>
+  <li>Effort tiering is the AI equivalent of right-sizing a machine to a job. <strong>Are we running our highest-reasoning (and most expensive-per-task) model only where the work earns it, and a plain, cheap model on the long tail of routine tasks?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Your margins live and die on cost-of-serve at volume. <strong>At our query volumes, does the 20% per-token price cut actually lower our cost per resolved customer interaction, or does a more deliberative model erase the cut by burning more tokens per resolution — and do we measure which?</strong></li>
+  <li>Peak season multiplies every per-task cost. <strong>Have we load-tested the fully-loaded token cost of our AI-driven search / support / checkout at peak volume on the new model, with effort tuned down for routine traffic, before the bill arrives?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public money demands cost you can defend and records you can produce. <strong>Can we justify our AI spend in cost-per-completed-service terms (not per-token), and produce the decision and cost records a regulator or auditor would now expect, given the EU AI Office has begun formal information requests?</strong></li>
+  <li>Continuity and accountability outlast any one model. <strong>Are we procuring AI with the fuel bill and the record-keeping duty priced in from the start — effort matched to the task, tokens metered, books producible — rather than chasing the lowest sticker price on a token?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Woodpile</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>which stove is cheapest?</em> and started asking the question the sticker cannot answer: <em>what does a finished job actually cost, once I count the wood this clever stove burns thinking about it?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count (and this week came to the door); the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery, steward, surety, second wage, two harvests and purse govern the servant; the foundation is the ground it stands on. <strong>This morning the axis is the fuel.</strong> The model the September radar called a cheap, swappable stove just got cleverer <em>and</em> 20% cheaper per token — and, in the same release notes, measurably hungrier per task. <strong>The thing that fell (price per token) is not the thing you pay (cost per finished job), and confusing the two is how a house that feels thrifty on every invoice runs its AI budget dry.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the stove is cleverer and cheaper per log; the September call held.</strong> <strong>On 9 November 2026 Anthropic shipped Claude Fable 5.2 and Mythos 5.2 — one model, two safeguard sets (Fable open; Mythos vetted security/life-sciences) — on AWS, Azure and Google Cloud, pre-tested by the UK AI Security Institute and METR (as reported), pairing record benchmarks (FrontierCode 2.0: 49.1% Xhigh vs 5.1's 32.4%; High effort 45.3% ≈ Opus 5.5's 45.5% at ~half the cost per task; beats GPT-6 Astra on every listed benchmark; trails Gemini 4 Carbon only on AutomationBench 53.9% vs 51.4%) with a 20% price cut to $8/$40 (fast mode $16/$80; Batch $4/$20) and output up to 30% faster (VentureBeat; Computerworld; officechai, as reported).</strong> Architecturally, three things follow. First, <em>commoditization is continuing exactly as called</em> — capability up, per-token price down, models interchangeable behind an interface you own. Second, <em>"effort" is now a first-class cost lever</em> — the same model spans a wide band of tokens-per-task depending on its reasoning setting, so the unit that matters is cost-per-completed-task at a chosen effort, not the headline rate. Third, <em>the benchmark that sells the model (peak score at Xhigh effort) is the most expensive way to run it</em> — the launch number and the production number are rarely the same setting.</li>
+  <li><strong>The catch — thinking is wood, and the meter is on the output side.</strong> <strong>Independent testing found Fable 5.2 at Medium effort wrote ~2× the tokens of Fable 5.1 and cost ~56% more per task on DevOps work; the broader reasoning-model pattern is that a model can be half the per-token price and spend 2–3× the tokens and time per finished job, so autonomous coding agents should expect output-token consumption to double or triple (Decrypt, "Impressive and Expensive"; token-economics reviews, as reported) — the concrete form of Altman's admission that token costs are "a huge issue" (owner-verified).</strong> Two engineering realities cut against the sticker. <strong>First, output tokens dominate the bill</strong> — reasoning and agentic loops generate far more output than input, and output is priced highest ($40/M, or $80/M in fast mode), so a model that "thinks more" moves the expensive number. <strong>Second, per-token cuts and per-task costs can move in opposite directions</strong> — a 20% price cut is erased by a 25% rise in tokens-per-task, and a more capable model that attempts harder, longer tasks can raise tokens-per-task far more than that. The only honest metric is <strong>cost per completed task at the effort you actually run.</strong></li>
+  <li><strong>The answer — change the unit of account, tier the effort, keep the books.</strong> <strong>Instrument cost-per-completed-task (not price-per-token) on your top workloads; route each task to the smallest model and lowest reasoning effort that clears its quality bar (a plain flame for plain work, the hungry high setting only where it earns it); cap and monitor tokens-per-task with alerts on drift; and capture model version, effort setting, token counts and cost in a producible record — reusing the logging and ownership disciplines you already built for the steward, the surety and the foundation, now pointed at the fuel line.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the number the vendor will never send you: what your own kitchen burned.</li>
+</ul></div>
+<p>The strategic core: <strong>the cheaper, cleverer stove is a real gift you must collect without letting it quietly double your fuel bill — and you collect it only by changing your unit of account from the price of a token to the cost of a finished job.</strong> The market makes the temptation concrete: every invoice line shows a lower price, the benchmark charts show a better model, and the one number that rose — tokens burned per task — appears on no dashboard you were handed. The board translation: <strong>buy the cheaper log; weigh the woodpile per dinner.</strong> The failure mode is exact: <strong>a house that upgrades to the cleverer, cheaper-per-token model, leaves every workload on its highest reasoning setting, and reads only the per-token invoice will post a lower unit price and a higher total bill in the same quarter — and the first time anyone asks why, discover it has no producible record of which tasks ran at which effort and what each one cost.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The woodpile: you bought the cheaper, cleverer stove as told; now change the unit of account and price the dinner, not the log, because what fell (price per token) is not what you pay (cost per finished job). Top left, the cheaper log, what the invoice shows: price per token fell 20 percent; Claude Fable 5.2 at 8 dollars / 40 dollars versus 10 / 50; record benchmarks and 30 percent faster output; the September call came true; every invoice line looks lower. Top right, the hungrier fire, what you actually pay: cost per task can rise; about twice the tokens of 5.1 at Medium effort; about 56 percent more per task as reported; reasoning models broadly 2 to 3 times the tokens; output at 40 dollars per million dominates the bill. Between them: not the same thing, and the log got cheaper so you would stop weighing the pile per dinner, so buy the cheaper stove then weigh the woodpile per meal. Middle, the meter nobody sends you, cost per completed task at the effort you run: a 20 percent price cut is erased by a 25 percent rise in tokens per task; benchmark peak equals Xhigh effort equals the most expensive way to run the model; Altman says AI token costs are a huge issue; 88 percent of leaders now use or test agents per Zapier on 9 November, so more agents mean more tokens. Bottom left, stop, read only the sticker: quote dollars per token to the board, leave every task at high effort, run no tokens-per-task meter, keep only a slide about record-keeping. Bottom right, start, price the dinner: track cost per completed task, match effort to the dish with a plain flame for plain work, cap and alert on tokens-per-task drift, keep producible books because the inspector knocks." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE WOODPILE — you bought the cheaper, cleverer stove; now price the DINNER</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">What fell (price per TOKEN) is NOT what you pay (cost per finished JOB) — change the unit of account.</text>
+
+  <!-- the cheaper log -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE CHEAPER LOG (the invoice)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">price PER TOKEN — fell 20%</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Fable 5.2: $8/$40 vs $10/$50</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">record benchmarks · +30% faster</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">the September call came true</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ every invoice line looks lower</text>
+
+  <!-- the hungrier fire -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1a12" stroke="#c0622a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#f0a35e" font-family="sans-serif">THE HUNGRIER FIRE (the bill)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">cost PER TASK — can rise</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~2× tokens vs 5.1 (Medium)</text>
+  <text x="364" y="137" font-size="10" fill="#f4c79a" font-family="sans-serif">~56% more per task (as reported)</text>
+  <text x="364" y="157" font-size="10" fill="#f4c79a" font-family="sans-serif">reasoning models: 2–3× tokens</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ output ($40/M) dominates the bill</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#f0a35e" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#f0a35e"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the log got cheaper SO you'd stop weighing the pile per dinner ▼</text>
+
+  <!-- the meter -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE METER NOBODY SENDS YOU — cost per COMPLETED TASK at the effort you run</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">a 20% price cut is erased by a 25% rise in tokens-per-task</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">benchmark peak = Xhigh effort = the most expensive way to run the model</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Altman: AI token costs are "a huge issue" (owner-verified)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">88% of leaders now use/test agents (Zapier, 9 Nov) — more agents, more tokens</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1a12" stroke="#c0622a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#f0a35e" font-family="sans-serif">STOP: read only the sticker</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· quote $/token to the board</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· leave every task at high effort</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no tokens-per-task meter</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a "slide" about record-keeping</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">lower price, higher bill</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: price the dinner</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· track cost-per-completed-task</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· match effort to the dish (plain flame)</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· cap &amp; alert on tokens-per-task drift</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· producible books — the inspector KNOCKS</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheaper log, woodpile you weigh</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Buy the cheaper, cleverer stove — then weigh the woodpile per dinner.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Price the finished job, not the token · turn the fire down for toast · keep the books.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The cheaper log — what the invoice shows</span>
+  <span><i class="dot" style="background:#c0622a"></i>The hungrier fire — what you actually pay</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The meter nobody sends you</span>
+</div>
+</div>
+
+<h3>The cheaper log vs the hungrier fire — what fell, and what you actually pay</h3>
+<table>
+<tr><th>The cheaper log (what the invoice shows)</th><th>The hungrier fire (what you actually pay)</th></tr>
+<tr><td>Price per token fell 20% — Fable 5.2 at $8/$40</td><td>Cost per task can rise — ~2× tokens, ~56% more/task (Medium)</td></tr>
+<tr><td>Record benchmarks, output ~30% faster</td><td>Reasoning models: 2–3× tokens and time per finished job</td></tr>
+<tr><td>The September "cheap stove" call came true</td><td>"Impressive and Expensive" — the sticker hides the meter</td></tr>
+<tr><td>Every invoice line looks lower</td><td>Output tokens ($40/M) dominate the agentic bill</td></tr>
+<tr><td>Benchmark peak score sells the model</td><td>Peak score = Xhigh effort = the costliest way to run it</td></tr>
+<tr><td>Your posture: buy the cheaper log</td><td>Your posture: weigh the woodpile per dinner</td></tr>
+</table>
+
+<h3>Why "the woodpile" is the discipline that matters now</h3>
+<div class="card">
+<p>For a season the worry was <em>which stove to rent and who pours the floor beneath it.</em> <strong>This morning the stove-seller cut the price of fuel and made the fire cleverer — and the catch moved to the meter.</strong> Fable 5.2's 20% price cut and record benchmarks prove commoditization is still running in your favour; the ~2× token-per-task finding and the reasoning-model pattern prove the saving is captured only if you change your unit of account. A board that reads price-per-token will mistake a hungrier fire for a bargain. The estates that keep their margin will collect the gift (cheaper, cleverer models) by pricing the finished job, tiering effort to the task, and metering the fuel — and will keep the books producible, because the same week the cart arrived, the inspector knocked.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to price what your AI actually burns.</em> On a legacy estate the instinct is to treat an AI vendor like a SaaS line item: watch the per-unit price, cheer a cut, and never instrument consumption. Under the woodpile that is exactly the reflex to check: the per-token price is the one number that fell, and tokens-per-task is the one that can double underneath it. The retrofit is <strong>price, tier, meter, record. Price</strong> the dinner: instrument cost-per-completed-task on your top workloads. <strong>Tier</strong> the effort: route each task to the smallest model and lowest reasoning setting that clears the bar. <strong>Meter</strong> the fuel: cap tokens-per-task and alert on drift, especially after any model upgrade. <strong>Record</strong> it: capture model version, effort, tokens and cost in a producible form — because the EU AI Office's first RFIs mean the inspector has stopped writing letters. And keep the whole refrain: the model is a rented stove, now cleverer and cheaper per log; the fuel is the tokens it burns; the woodpile is what a job truly costs; the larder is your knowledge; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it (and knocks); the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery, steward, surety, second wage, two harvests and purse govern the servant; the foundation is the ground it stands on — and <em>the woodpile is why, having bought the cheaper, cleverer stove, you must weigh the pile per dinner, turn the fire down for plain work, and keep the books, so a cheaper token never becomes a costlier year.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The cleverer, cheaper stove.</strong> <strong>Claude Fable 5.2 / Mythos 5.2 (9 Nov 2026): record benchmarks (FrontierCode 2.0 49.1% Xhigh vs 32.4%), 20% price cut to $8/$40, output ~30% faster, pre-tested by UK AISI and METR (VentureBeat; Computerworld, as reported).</strong> Commoditization, continued.</li>
+  <li><strong>The hungrier fire.</strong> <strong>Independent testing: ~2× the tokens of 5.1 and ~56% more per task at Medium effort; reasoning models broadly 2–3× tokens/time per job — Decrypt: "Impressive and Expensive" (as reported); Altman: token costs "a huge issue" (owner-verified).</strong> The meter nobody sends you.</li>
+  <li><strong>The inspector knocks.</strong> <strong>EU AI Office's first formal RFIs (14 Oct 2026, Dublin AI summit, via Virkkunen): security, external evaluation, post-market monitoring; OpenAI and Anthropic reported among recipients; fines up to €15M / 3% turnover for non-compliance (Reed Smith; CSA; Lawfare, as reported).</strong> Record-keeping is now a drawer you open.</li>
+  <li><strong>More agents, more tokens.</strong> <strong>Zapier (updated 9 Nov 2026): 88% of enterprise leaders use/test AI agents (up from 72% in 2025), 90% report at least one positive outcome; but Camunda puts only 11% of agentic use cases in production (as reported).</strong> Volume is rising faster than discipline.</li>
+  <li><strong>The agent-security layer.</strong> <strong>Cisco unveiled Frontier AI Red Teaming and Agent Observability and added Claude Mythos to its AI Defense product to red-team AI apps and agents (Cisco, Nov 2026, as reported).</strong> Governing the servant and metering its fuel are converging.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Portability, effort-tiering and producible records are how you meet them without a runaway bill.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Anthropic releases Claude Fable 5.2 and Mythos 5.2, pairing new, record-high benchmarks with 20% API cost reduction.</div><div class="a">— VentureBeat, headline on the 9 November 2026 release (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Anthropic's Claude Fable 5.2 and Mythos 5.2: Impressive and Expensive.</div><div class="a">— Decrypt, headline on the same release (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">AI token costs are becoming a huge issue.</div><div class="a">— Sam Altman, OpenAI (Tom's Hardware; owner-verified)</div></blockquote>
+<blockquote><div class="q">"The stove-seller cut the price of the log and made the fire cleverer — exactly as called. The catch is the meter: the clever fire burns more wood. Stop pricing the token; weigh the woodpile per dinner, and turn the fire down for toast."</div><div class="a">— the radar, on why cost-per-task now matters more than price-per-token</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The cleverer, cheaper stove</td><td><span class="v">Claude Fable 5.2 / Mythos 5.2 (9 Nov 2026): record benchmarks and a 20% price cut to $8/$40 per million tokens (down from $10/$50); fast mode $16/$80; Batch $4/$20; output up to 30% faster</span></td><td>VentureBeat; Computerworld; Decrypt, as reported</td></tr>
+<tr><td>Fable 5.2 benchmarks</td><td><span class="v">FrontierCode 2.0: 49.1% at Xhigh effort (vs 5.1's 32.4%); High effort 45.3% ≈ Opus 5.5's 45.5% at ~half the cost per task; beats GPT-6 Astra on every listed benchmark; trails Gemini 4 Carbon only on AutomationBench (53.9% vs 51.4%)</span></td><td>officechai; Computerworld; Anthropic figures as relayed</td></tr>
+<tr><td>The hungrier fire</td><td><span class="v">Independent testing: ~2× the tokens of Fable 5.1 and ~56% more per task at Medium effort; reasoning models broadly can be half the per-token price yet spend 2–3× the tokens and time per finished job</span></td><td>Decrypt ("Impressive and Expensive"); token-economics reviews, as reported</td></tr>
+<tr><td>Token costs, named from the top</td><td><span class="v">Sam Altman: AI token costs are becoming "a huge issue"</span></td><td>Tom's Hardware (owner-verified)</td></tr>
+<tr><td>The inspector knocks</td><td><span class="v">EU AI Office's first formal Requests for Information under the AI Act (confirmed 14 October 2026, Dublin AI summit): security practices, external evaluation, post-market monitoring; OpenAI and Anthropic reported among recipients; non-compliance fines up to €15M or 3% of global turnover</span></td><td>Reed Smith; Cloud Security Alliance; Lawfare, as reported</td></tr>
+<tr><td>More agents, more tokens</td><td><span class="v">88% of enterprise leaders now use or test AI agents (up from 72% in 2025); 90% report at least one positive outcome — but only ~11% of agentic use cases reached production in the past year (Camunda)</span></td><td>Zapier (updated 9 Nov 2026); Camunda, as reported</td></tr>
+<tr><td>The agent-security layer</td><td><span class="v">Cisco unveiled Frontier AI Red Teaming and Agent Observability and added Claude Mythos to its AI Defense product to red-team AI apps and agents</span></td><td>Cisco, November 2026, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Price the dinner, not the log — instrument cost-per-completed-task.</strong> The stove got 20% cheaper per token and reportedly ~2× hungrier per job (Fable 5.2), so the per-token price is no longer a reliable proxy for what you pay. <strong>This month, pick your top three AI workloads and measure cost-per-completed-task (model version × effort × tokens in/out × price), then compare it against last quarter's — and find out whether your true AI unit cost fell when the sticker did, or rose.</strong> Report one number to the board: fully-loaded cost-per-completed-task for each flagship workload, trended.</li>
+  <li><strong>Match the effort to the dish — tier reasoning, don't deliberate over toast.</strong> The same model spans a wide band of tokens-per-task by effort setting, and the benchmark-winning score is the most expensive way to run it. <strong>This month, audit which workloads run on your most capable, highest-effort model, and down-route the routine long tail to the smallest model and lowest reasoning setting that still clears the quality bar; cap tokens-per-task and alert on drift, especially after any model upgrade.</strong> Report the share of AI tasks running above the effort their quality bar requires, and the projected saving from right-sizing them.</li>
+  <li><strong>Keep the books producible — the inspector is knocking, not writing.</strong> The EU AI Office issued its first formal RFIs on 14 October 2026 (security, external evaluation, post-market monitoring), with fines up to €15M / 3% of turnover for non-compliance. <strong>This month, confirm that for every production AI system you capture model version, effort setting, inputs, outputs, token counts and cost in a producible record, and run a dry-run "RFI drill": could you answer, in a week, what a given system did and what it cost?</strong> Report whether each production system passes the drill, and a dated plan for any that do not. <strong>The model is a rented stove, now cleverer and cheaper per log; the fuel is the tokens it burns; the woodpile is what a finished job costs; the larder is your knowledge; the census is the roll; the inspector asks for it and this week knocked; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery, steward, surety, second wage, two harvests and purse govern the servant; the foundation is the ground it stands on — and the woodpile is why, having bought the cheaper, cleverer stove the radar told you to buy, you change your unit of account from the token to the finished job, turn the fire down for plain work, meter the fuel, and keep the books, so no discount on a log ever hides a costlier year.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The cleverer, cheaper stove — Anthropic (9 Nov 2026): Claude Fable 5.2 / Mythos 5.2, record benchmarks (FrontierCode 2.0 49.1% Xhigh vs 5.1's 32.4%; High effort ≈ Opus 5.5 at ~half cost per task), 20% price cut to $8/$40 (fast mode $16/$80; Batch $4/$20), output ~30% faster, one model with two safeguard sets, pre-tested by UK AISI and METR (VentureBeat; Computerworld; Decrypt; officechai) · The hungrier fire — ~2× the tokens and ~56% more per task at Medium effort; reasoning models broadly 2–3× tokens/time per job; "Impressive and Expensive" (Decrypt; token-economics reviews); Altman: token costs "a huge issue" (Tom's Hardware, owner-verified) · The inspector knocks — EU AI Office's first formal RFIs confirmed 14 Oct 2026 at the Dublin AI summit (security, external evaluation, post-market monitoring; OpenAI and Anthropic reported among recipients; fines up to €15M / 3% of turnover) (Reed Smith; Cloud Security Alliance; Lawfare) · More agents, more tokens — Zapier (updated 9 Nov 2026): 88% use/test agents (up from 72%), 90% a positive outcome; Camunda: ~11% of agentic use cases in production · The agent-security layer — Cisco's Frontier AI Red Teaming and Agent Observability; Claude Mythos added to Cisco AI Defense (Cisco) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026), MCP 2026-07-28 (EMA stable), Gartner (40% of enterprise apps embed task-specific agents by 2026). The "woodpile" framing — that the model has become a cleverer, cheaper stove whose clever fire burns more wood per dinner, so a house must change its unit of account from price-per-token to cost-per-completed-task, match reasoning effort to the task, and keep producible books because the inspector has begun to knock — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the session's network egress policy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 12 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: privacy-friendly, no cookies -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
