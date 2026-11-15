@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 15 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the proving' — the discipline of doubt that sits on top of governance. On 9 Nov Cisco shipped 'Frontier AI Red Teaming and Agent Observability' (Anthropic's Claude in its AI Defense engine to break your agents before production; Splunk Agent Observability to watch them at runtime), under Jeetu Patel's line: 'You cannot scale what you cannot secure, govern, or observe.' It lands on hard numbers — 88% of organizations had a confirmed/suspected agent incident in the past year, only 21% have runtime visibility, 97% expect a material incident within 12 months, yet ~6% of security budgets go to agent risk (Gravitee; Arkose Labs). The board move: send a thief (red-team), build the tower (observability + kill switch), budget the watch. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You named, bonded and funded the servant — now prove it can't be turned</div>
+  <h1>The Proving</h1>
+  <div class="subhead">A year of work made and governed the agent. This week the market asks the two questions governance skips: can the servant be bribed, tricked or corrupted — and can you see it the moment it slips? On 9 November Cisco put an AI adversary inside your house to try to turn your agents, and a watchtower to see every room. A servant you've never tempted is not trusted — only untested.</div>
+  <div class="meta">Sunday, 15 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 9 November 2026 Cisco unveiled "Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise" — wiring Anthropic's Claude into its AI Defense engine to adversarially red-team enterprise agents before production, and adding Splunk Agent Observability (a "Tokenomics" view; private preview December, GA on AWS Marketplace early 2027) to watch what agents actually do at runtime (Cisco; Network World, as reported). Cisco President and Chief Product Officer Jeetu Patel put the thesis in one line: "You cannot scale what you cannot secure, govern, or observe." It lands on hard numbers: a Gravitee survey of 919 practitioners reports 88% of organizations saw confirmed or suspected AI-agent security or privacy incidents in the past year, while only 21% have runtime visibility into what their agents are doing, and Arkose Labs reports 97% of leaders expect a material agent-driven incident within twelve months yet organizations spend just ~6% of security budgets on agent risk (as reported). The year named the servant, bonded it and funded it. This morning the question is colder: have you ever tried to corrupt it, and can you watch it?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked to <em>make and govern</em> the servant — name it (the livery), keep one book (the steward), put your name on the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and keep the ground yours (the foundation). Every one of those is a discipline of <strong>construction and control</strong>. <strong>This morning the axis turns to a discipline of <em>doubt</em>: before you trust the governed servant with the run of the house, you must try to turn it, and you must be able to watch it.</strong> The market just shipped both as product, in the same breath, and backed by numbers that say most houses have done neither.</p>
+<p><strong>The reality — red-teaming and observability for agents shipped as product.</strong> On <strong>9 November 2026 Cisco unveiled "Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise."</strong> The red-teaming half wires <strong>Anthropic's Claude into Cisco's AI Defense adaptive red-teaming engine</strong> — an AI adversary set loose on <em>your</em> agents to probe whether they can be jailbroken, deceived or coaxed into unsafe action before they reach production. The observability half extends <strong>Splunk Agent Observability</strong> with a <strong>"Tokenomics"</strong> view of agent behaviour and cost (private preview December 2026, GA on AWS Marketplace early 2027). The framing was explicit: <strong>"You cannot scale what you cannot secure, govern, or observe,"</strong> said Cisco President and CPO <strong>Jeetu Patel</strong>; Anthropic's cybersecurity lead <strong>Michael Moore</strong> noted enterprises want to <strong>test their agents thoroughly before putting them into production</strong> (Cisco; Network World, as reported). This is governance turning adversarial — from <em>"is the agent named, scoped and logged?"</em> to <em>"has anyone actually tried to break it, and can we see it in the act?"</em></p>
+<p><strong>The collision — you deployed agents faster than you can prove or watch them.</strong> The discipline arrives late. A <strong>Gravitee</strong> survey of 919 executives and practitioners reports <strong>88% of organizations experienced confirmed or suspected AI-agent security or privacy incidents in the past year</strong> — and <strong>only 21% have runtime visibility</strong> into what their agents are doing (as reported). <strong>Arkose Labs</strong> reports <strong>97% of leaders expect a material agent-driven security or fraud incident within twelve months</strong>, while organizations devote on average just <strong>~6% of their security budgets to AI-agent risk</strong> (as reported). A narrower <strong>VentureBeat</strong> reading (September 2026) still finds <strong>39% say an agent caused a security incident or near-miss and 21% confirmed one</strong> (as reported). Meanwhile the deployment wave keeps rising: <strong>IBM and Microsoft launched "Imagine Enterprise" (10 Nov)</strong> — a governed platform drawing on <strong>6,000+ prebuilt IBM Consulting agents</strong> for regulated sectors — and <strong>Google shipped Gemini 4 Hydrogen (12 Nov)</strong>, a fast model tuned for agent workloads. More agents, in more regulated rooms, running faster. The gap between <em>deployed</em> and <em>proven-and-watched</em> is the whole exposure.</p>
+<p><strong>The stakes — prove the servant under temptation, and post a watch, before you scale.</strong> The board move reuses the year's discipline and points it at doubt. <strong>First, send a thief</strong> — stand up adversarial red-teaming of your highest-privilege agents <em>before</em> production and on every change, so you learn how an agent can be turned from a paid rogue, not a real one. <strong>Second, build the tower</strong> — runtime observability over what agents actually do (tools called, data touched, spend incurred), with a tested kill switch, so a slip rings a bell in the moment, not in a post-mortem. <strong>Third, budget the watch</strong> — move agent-risk spend off the ~6% floor toward the size of the risk (97% expect an incident). Do it now, while you are still adding agents faster than you are testing them: <strong>a servant you have never tempted is not trustworthy — merely untested; and a servant you cannot see is not governed — merely trusted.</strong></p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the market shipped the thief and the watchtower.</strong> <strong>Cisco (9 Nov) "Frontier AI Red Teaming and Agent Observability": Anthropic's Claude in the AI Defense adaptive red-teaming engine to break your agents before production, plus Splunk Agent Observability "Tokenomics" (preview Dec, GA early 2027) — "You cannot scale what you cannot secure, govern, or observe" (Jeetu Patel) (Cisco; Network World, as reported).</strong> Governance just turned adversarial.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — you deployed faster than you can prove or watch.</strong> <strong>88% of organizations had confirmed/suspected agent incidents in the past year; only 21% have runtime visibility; 97% expect a material incident within 12 months; ~6% of security budgets go to agent risk (Gravitee; Arkose Labs, as reported) — even as IBM+Microsoft ship 6,000+ governed agents (10 Nov) and Google ships a faster agent model (12 Nov).</strong> More agents, less sight.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — send a thief, build the tower, budget the watch.</strong> Red-team your highest-privilege agents before production and on change; put runtime observability and a tested kill switch over what they actually do; and fund the watch to the size of the risk — because <strong>a servant you've never tempted is untested, and one you can't see is merely trusted.</strong></div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours — every one of those <strong>built and governed</strong> the agent. <strong>The proving is the discipline of doubt that sits on top of all of them:</strong> before you trust a governed servant with the run of the house, you hire an honest rogue to try to corrupt it, and you post a watch who can see into every room. This week Cisco shipped exactly that — an AI adversary to break your agents before a real one does, and a tower to watch them at runtime — and the numbers explain the urgency: nearly nine houses in ten have already had a servant turned or nearly turned, and only one in five can see into its own rooms as the work happens. The estates that keep their standing will stop mistaking <em>un-failed</em> for <em>trustworthy</em>. They will send the thief, build the tower, and pay for the watch — because the agentic workforce you spent a year governing is only as safe as the attack you have actually run against it and the slip you can actually see.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Proving"</h3>
+<p><em>Topic: After a year of making and governing the servant, the market turns to the discipline of doubt. On 9 November 2026 Cisco unveiled "Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise" — embedding Anthropic's Claude in its AI Defense engine to adversarially red-team enterprise agents before production, and extending Splunk Agent Observability (a "Tokenomics" view; preview December, GA early 2027) to watch agents at runtime — under Cisco President and CPO Jeetu Patel's line, "You cannot scale what you cannot secure, govern, or observe" (Cisco; Network World, as reported). It lands on a Gravitee survey (919 respondents) reporting 88% of organizations with confirmed or suspected agent incidents in the past year and only 21% with runtime visibility, and an Arkose Labs reading of 97% expecting a material agent incident within twelve months against ~6% of security budgets spent on agent risk (as reported). The proving allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year making its servants excellent and governing them well. It had named every hand and cut it a scoped key, hired a steward to keep one honest book, let the master's own name stand surety for the work, learned whose second coin each advising servant took, sent the governed servants to reap, handed each a scoped purse with a drawstring the master could reach, and refused to let the merchant who rented it a cheap stove quietly pour the foundation beneath the whole house. By any fair reckoning it was a well-governed house — and the master trusted his servants, because in all that careful year not one of them had failed him.</p>
+<p>But a wiser neighbour asked him the question that spoiled his sleep. <em>"You trust them because they have never failed. But have you ever tried to</em> make <em>them fail? Have you ever set a thief upon your own steward to see if he could be bought?"</em> And the master had to admit he had not. He had built his servants and governed them beautifully, and he had mistaken a thing that had <strong>not yet broken</strong> for a thing that <strong>could not be broken.</strong> He had confused <em>un-failed</em> with <em>trustworthy</em> — which is the most comfortable mistake a careful master can make, and the most expensive.</p>
+<p>So the master did two things that felt almost unkind, and both cost less to do early than late. <strong>The first: he hired an honest rogue</strong> — a man paid to be a thief — and told him plainly: <em>try every trick you know. Bribe my steward. Forge a note in my own hand and present it at the gate. Whisper to the gatekeeper that I sent you. Slip a false instruction among the day's errands and see who obeys it. Try to turn each servant against the house, and when you succeed, tell me exactly how — so that I learn the weakness from a man I pay, and not from a thief who works for free.</em> This was not cruelty to the servants; it was the only honest way to know which of them could be turned, and it had to be done again each time a servant learned a new task, for a servant proof against last month's trick may fall to this month's.</p>
+<p><strong>The second: he raised a glass tower over the courtyard and posted a watchman in it</strong> — one who could see into every room at once, and whose only task was to ring a bell the instant a servant did something it ought not: opened a door it had no errand behind, carried off more than its purse allowed, took an instruction from a voice that was not the master's. Not to punish — to <em>know, in the moment.</em> For the master had learned the second cold truth of a governed house: it is no use discovering three months later, in the ledger, that a servant was turned in the spring; by then the silver is gone and the thief is in another county. A slip you cannot see as it happens is a slip you cannot stop.</p>
+<p>And when the houses of the valley counted honestly, the arithmetic frightened them. In <strong>nearly nine houses of ten</strong>, a servant had already been turned, or very nearly, within the last year — bribed, tricked, or talked into opening a door — and most of the masters had learned of it late, or not at all. And only about <strong>one house in five</strong> had any tower at all: the rest governed in the dark, trusting servants they could not see, and comforting themselves with the roll of names and the honest book. Worse, most houses that <em>knew</em> a reckoning was coming — and almost every master now expected one within the year — still spent only a few coins of every hundred on the thief and the tower, as though doubt were a luxury rather than the cheapest insurance in the house.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug; your knowledge is the larder; the foundation is the ground you must own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee and not an heir; the foundation is why you own the ground it stands on — and <strong>the proving is why, having made and governed your servant, you must now refuse to call it trustworthy until you have tried your hardest to corrupt it and built a tower from which you can watch it: send a paid thief against your own agents before a real one comes for free, raise a glass tower so a slip rings a bell in the moment and not in next quarter's ledger, and pay for both as if the reckoning you expect is actually coming — because you cannot scale what you cannot secure, govern, or observe.</strong> A house that names, bonds, funds and perfects its servants and never once tries to corrupt them has not earned its trust; it has merely postponed the day it learns the truth, and arranged for a thief to teach it the lesson for free.</p>
+<p><strong>The question it forces:</strong> <em>We have named, bonded, funded and governed our agents beautifully. But have we ever paid someone to try to break them — to jailbreak them, forge our instructions, and turn them against us — before a real adversary does it for nothing? And can we see what our agents are actually doing, in the moment they do it, so a slip rings a bell tonight rather than surfacing in a post-mortem next quarter? Or are we among the nine houses in ten that have already had a servant turned, and the four in five that govern in the dark — trusting servants we have never tested and cannot watch?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we confused "un-failed" with "trustworthy"?</strong> We named, scoped, logged and funded our agents — but a Gravitee survey reports 88% of organizations had a confirmed or suspected agent incident in the past year, and only 21% have runtime visibility. <strong>For our highest-privilege agents, can we show a dated record of an adversarial red-team that actually tried to jailbreak, deceive or turn them — run before production and repeated on every material change — or do we trust them only because they have not yet failed?</strong></li>
+  <li><strong>Can we see our agents in the act, and stop them?</strong> Cisco's thesis is blunt: "you cannot scale what you cannot secure, govern, or observe." <strong>Do we have runtime observability over what each agent actually does — tools invoked, data touched, spend incurred — and a tested kill switch that halts a misbehaving agent in the moment, or would a slip surface only in a post-mortem?</strong></li>
+  <li><strong>Are we funding the watch to the size of the risk?</strong> 97% of leaders expect a material agent-driven incident within twelve months, yet organizations spend ~6% of security budgets on agent risk (Arkose Labs, as reported). <strong>Is our agent-security spend anywhere near the probability and blast radius we ourselves assign to it — and who owns that number?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Adversarial testing of models is already supervisory language in your world; agents raise the stakes because they <em>act</em> (move money, open accounts, settle). <strong>Can we produce, for our regulator and our board, evidence of red-team testing and continuous monitoring for every customer-facing or money-moving agent — the same discipline we apply to trading systems and fraud controls?</strong></li>
+  <li>IBM and Microsoft's "Imagine Enterprise" (10 Nov) ships 6,000+ prebuilt agents aimed first at financial services and insurance. <strong>Before we adopt prebuilt agents at scale, do we red-team the ones we deploy and wire them into our own observability and kill-switch controls — or are we trusting a vendor's governance claims we have never adversarially tested?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A clinical agent that can be prompt-injected or deceived is a patient-safety event, not just a security one. <strong>Have we adversarially tested our clinical and administrative agents for manipulation (false instructions, poisoned context, coaxed disclosure of PHI) before they touch a patient workflow — and do we repeat it whenever the agent's task changes?</strong></li>
+  <li>Observability is the audit trail regulators will ask for. <strong>Can we reconstruct, in the moment and after the fact, exactly what an agent did with patient data and why — or is our record of agent behaviour too thin to investigate an incident we are 88%-likely to have had?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run failure-mode testing and FMEA on physical systems; an autonomous agent with access to operational systems deserves the same adversarial rigour. <strong>Have we run a red-team against the agents wired into our supply-chain, procurement or OT-adjacent systems — deliberately trying to turn them — before trusting them with production actions?</strong></li>
+  <li>A faster agent model (Google's Gemini 4 Hydrogen, 12 Nov) means more autonomous actions per minute. <strong>Does our observability keep pace with agent speed — can the watchtower see and halt an agent that acts faster than a human can intervene?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents now touch checkout, pricing, support and increasingly payments. <strong>Have we red-teamed our customer-facing agents for manipulation (coupon/discount exploits, social-engineering of refunds, prompt-injection via customer input) before peak season — and can we watch and kill a misbehaving agent in real time on our busiest day?</strong></li>
+  <li>The incident base rate is high and the budget is low. <strong>Are we treating agent red-teaming and observability as pre-launch infrastructure, or as something we will get to after the next feature — given that 97% of peers expect an incident within the year?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability makes an unexamined agent a governance failure, not just a risk. <strong>Under the duties you already owe (EU AI Act; new prohibitions take effect 2 December 2026), can we show that every agent in a public-facing or high-risk service has been adversarially tested and is continuously observable, with a documented ability to halt it?</strong></li>
+  <li>Trust in the dark is not accountability. <strong>Do we have the runtime visibility to tell a citizen, a court or an auditor exactly what an automated agent did on their case — or are we among the four in five who cannot see into their own rooms?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Proving</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded and on ground we own?</em> and started asking the two questions that all of those skip: <em>has anyone actually tried to break it — and can I see it the moment it slips?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those <em>builds or governs</em> the agent. The proving <em>doubts</em> it — and this week the market shipped the doubt as product: an AI adversary to break your agents before a real one does, and a runtime watchtower to see what they actually do (Cisco's "Frontier AI Red Teaming and Agent Observability," 9 Nov).</strong> The point is blunt: <strong>a governed agent you have never attacked is untested, and a governed agent you cannot watch is merely trusted — and the numbers say most houses are both.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — red-teaming and observability for agents shipped as product.</strong> <strong>On 9 November 2026 Cisco unveiled "Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise," embedding Anthropic's Claude in its AI Defense adaptive red-teaming engine (an AI adversary that probes your agents for jailbreaks, deception and unsafe tool use) and extending Splunk Agent Observability with a "Tokenomics" view of agent behaviour and cost — private preview December 2026, GA on AWS Marketplace early 2027 — under Jeetu Patel's line, "You cannot scale what you cannot secure, govern, or observe" (Cisco; Network World, as reported).</strong> Architecturally, three things follow. First, <em>red-teaming an agent is not red-teaming a model.</em> A model red-team probes outputs; an agent red-team probes <em>actions</em> — can it be coaxed to call the wrong tool, exfiltrate via a side-channel, obey a forged instruction, chain a benign step into a harmful one — so the test harness must drive the agent through its real tools, not just its chat surface. Second, <em>it must be continuous, not a launch gate.</em> An agent proof against last month's attack can fall to this month's as its tools, prompts and context change, so adversarial evaluation belongs in CI and on every material change, not in a one-time certification. Third, <em>observability for agents is a new telemetry shape</em> — not request logs but <em>action</em> traces (tool calls, data reads, spend, decisions) with enough fidelity to detect a slip in the moment and reconstruct it afterward; "Tokenomics" is a tell that cost-per-agent-action is becoming a first-class signal.</li>
+  <li><strong>The collision — deployment outran proof and sight.</strong> <strong>A Gravitee survey of 919 practitioners reports 88% of organizations had confirmed or suspected AI-agent security or privacy incidents in the past year and only 21% have runtime visibility into their agents; Arkose Labs reports 97% expect a material agent-driven incident within twelve months while ~6% of security budgets go to agent risk; VentureBeat (Sept 2026) still finds 39% say an agent caused an incident or near-miss and 21% a confirmed one (as reported) — even as IBM and Microsoft ship "Imagine Enterprise" with 6,000+ prebuilt agents for regulated sectors (10 Nov) and Google ships Gemini 4 Hydrogen for faster agent workloads (12 Nov).</strong> Two engineering realities cut against comfort. <strong>First, "un-failed" is not "tested."</strong> The absence of a known incident in a system with only 21% runtime visibility is not evidence of safety — it is mostly evidence of blindness; you cannot count incidents you cannot see. <strong>Second, speed widens the gap.</strong> Faster models and more prebuilt agents mean more autonomous actions per minute in more regulated rooms, so an observability and kill-switch layer that cannot keep pace with agent speed is decorative — the watchman must be able to ring the bell and bar the door faster than the agent can act.</li>
+  <li><strong>The answer — send a thief, build the tower, budget the watch.</strong> <strong>Stand up adversarial red-teaming of your highest-privilege agents before production and on every material change (drive them through their real tools; try jailbreaks, forged instructions, poisoned context, tool-abuse and step-chaining); put runtime observability over what agents actually do — action traces, data touched, spend — with a tested kill switch that halts a misbehaving agent in the moment; and fund both toward the size of the risk you yourself assign (97% expect an incident) rather than the ~6% floor — reusing the identity, logging and ownership disciplines you already built for the livery, the steward, the purse and the foundation, now pointed at doubt.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now sharpened to its hardest edge: not whether the agent is named, scoped, funded or standing on ground you own, but whether you have tried to break it and can watch it slip.</li>
+</ul></div>
+<p>The strategic core: <strong>you spent a year building and governing the agentic workforce; the proving is the discipline that decides whether any of that governance actually holds under attack.</strong> The market makes the temptation concrete: it feels productive to deploy more agents — IBM/Microsoft's 6,000, a faster Google model — and it feels like friction to pay a rogue to break them and build a tower to watch them, so most houses deploy and defer the doubt. The board translation: <strong>a governed agent is a hypothesis; red-teaming and observability are how you test it.</strong> The failure mode is exact: <strong>a house that names, bonds, funds and perfects its agents — and never adversarially tests them, and cannot watch them at runtime — will pass every governance review and discover, in the 88%, that "we had no incidents" meant "we could not see them."</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The proving: you built and governed the servant, now doubt it. Governance says the agent is named, scoped, funded and on ground you own; the proving asks two colder questions governance skips — has anyone tried to break it, and can you see it slip? Top left, send a thief, red-teaming: an AI adversary versus your agents; Cisco AI Defense plus Claude; jailbreak, forge, poison, coax tool-abuse, chain steps; before production and on every change; learn the weakness you pay for. Top right, build the tower, observability: runtime sight of what agents do; Splunk Agent Observability; action traces, data, spend; a Tokenomics view; a slip rings a bell now; plus a tested kill switch. Between them: both before you scale, under Jeetu Patel's line, you cannot scale what you cannot secure, govern, or observe. Middle, the arithmetic of trust in the dark, per Gravitee and Arkose Labs as reported: 88 percent of organizations had a confirmed or suspected agent incident in the past year; only 21 percent have runtime visibility; 97 percent expect a material agent-driven incident within 12 months; yet about 6 percent of security budgets go to AI-agent risk. Bottom left, stop, trust the un-failed: no incidents with 21 percent sight, one-time launch certification, governance roll as proof, deploy faster than you test. Bottom right, start, prove it then trust: red-team top agents pre-production and on change, runtime action traces plus a tested kill switch, fund the watch to the size of the risk, drive the test through real tools." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE PROVING — you built and governed the servant; now DOUBT it</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Governance says it is named, scoped, funded, on ground you own. The proving asks: tried to break it? can you see it slip?</text>
+
+  <!-- send a thief -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">SEND A THIEF (red-teaming)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">an AI adversary vs YOUR agents</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Cisco AI Defense + Claude</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">jailbreak · forge · poison · tool-abuse</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">BEFORE prod + on every change</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ learn the weakness you pay for</text>
+
+  <!-- build the tower -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">BUILD THE TOWER (observability)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">runtime sight of what agents DO</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Splunk Agent Observability</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">action traces · data · spend · "Tokenomics"</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">a slip rings a bell NOW</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ + a TESTED kill switch</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">both BEFORE you scale — "you cannot scale what you cannot secure, govern, or observe" ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF TRUST IN THE DARK — (Gravitee; Arkose Labs, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">88% of organizations had a confirmed/suspected agent incident in the past year</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only 21% have RUNTIME VISIBILITY into what their agents are doing</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">97% expect a material agent-driven incident within 12 months</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">yet ~6% of security budgets go to AI-agent risk — doubt is underfunded</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: trust the un-failed</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· "no incidents" w/ 21% sight</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one-time launch certification</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· governance roll as proof</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· deploy faster than you test</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">blind, and calling it safe</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: prove it, then trust</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· red-team top agents pre-prod + on change</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· action traces + tested kill switch</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· fund the watch to the size of the risk</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· drive the test through REAL tools</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">tested, watched, then trusted</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A governed agent is a hypothesis; red-teaming and observability are how you test it.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Send a thief · build the tower · budget the watch.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>Send a thief — red-teaming</span>
+  <span><i class="dot" style="background:#1d9e75"></i>Build the tower — observability</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of trust in the dark</span>
+</div>
+</div>
+
+<h3>Send a thief vs build the tower — the two halves of the proving</h3>
+<table>
+<tr><th>Send a thief (red-teaming — try to break it)</th><th>Build the tower (observability — watch it act)</th></tr>
+<tr><td>An AI adversary (Cisco AI Defense + Claude) attacks your agents</td><td>Runtime sight of tools called, data touched, spend incurred</td></tr>
+<tr><td>Probes actions, not just outputs — tool-abuse, forged instructions</td><td>Action traces with fidelity to detect and reconstruct a slip</td></tr>
+<tr><td>Before production and on every material change — not a one-time gate</td><td>In the moment — a slip rings a bell now, not in next quarter's ledger</td></tr>
+<tr><td>Learn the weakness from a paid rogue, not a free thief</td><td>Plus a tested kill switch that halts the agent faster than it acts</td></tr>
+<tr><td>Answers: <em>can it be turned?</em></td><td>Answers: <em>can we see it turn — and stop it?</em></td></tr>
+<tr><td>"Un-failed" is not "tested"</td><td>"No incidents" with 21% visibility means "we couldn't see them"</td></tr>
+</table>
+
+<h3>Why "the proving" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and on ground you own. <strong>This week the market moved the question past construction and control to doubt: it shipped an AI adversary to break your agents and a tower to watch them.</strong> Cisco's red-teaming-plus-observability launch, IBM/Microsoft's 6,000 prebuilt agents and Google's faster agent model prove the workforce is scaling; the Gravitee and Arkose numbers prove the proving is not. Governance that stops at building and controlling the agent will not tell you whether it holds under attack. The estates that keep their standing will treat every governed agent as a hypothesis and test it — sending a thief, building the tower, and paying for the watch — before they call it trustworthy.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to attack what you run, and watch it.</em> On a legacy estate the instinct, after a hard year of governance work, is to count the controls as proof: the agent is named, it is in the book, it is funded, the policy is signed, therefore it is safe. Under the proving that is exactly the reflex to check: a control is a claim, and a claim is not a test. The retrofit is <strong>attack, watch, fund. Attack:</strong> stand up adversarial red-teaming of your highest-privilege agents, driven through their real tools, before production and on every change. <strong>Watch:</strong> put runtime observability over agent actions — tools, data, spend — with a tested kill switch, so a slip is seen and stopped in the moment. <strong>Fund:</strong> move agent-risk spend off the ~6% floor toward the probability you yourself assign. And keep the whole refrain: the model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you own; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the proving is why, having built and governed the servant, you must try to break it and build a tower to watch it before you call it trustworthy: send a thief, raise the tower, fund the watch, because you cannot scale what you cannot secure, govern, or observe.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the thief and the watchtower shipped.</strong> <strong>Cisco (9 Nov) "Frontier AI Red Teaming and Agent Observability": Anthropic's Claude in the AI Defense adaptive red-teaming engine; Splunk Agent Observability "Tokenomics" (private preview Dec 2026, GA on AWS Marketplace early 2027); "You cannot scale what you cannot secure, govern, or observe" — Jeetu Patel (Cisco; Network World, as reported).</strong> Governance turned adversarial.</li>
+  <li><strong>The incident base rate.</strong> <strong>88% of organizations had confirmed or suspected AI-agent security or privacy incidents in the past year; only 21% have runtime visibility (Gravitee, 919 respondents, as reported).</strong> Most houses govern in the dark.</li>
+  <li><strong>The confidence gap.</strong> <strong>97% of leaders expect a material agent-driven security or fraud incident within 12 months; organizations spend ~6% of security budgets on agent risk (Arkose Labs, as reported).</strong> Doubt is underfunded.</li>
+  <li><strong>The narrower reading.</strong> <strong>39% say an agent caused a security incident or near-miss and 21% confirmed one (VentureBeat, Sept 2026, as reported).</strong> Even the conservative count is high.</li>
+  <li><strong>The deployment wave continues.</strong> <strong>IBM and Microsoft "Imagine Enterprise" (10 Nov): a governed platform with 6,000+ prebuilt IBM Consulting agents for financial services, insurance and retail (IBM; Microsoft; CIO Dive, as reported).</strong> More agents, in more regulated rooms.</li>
+  <li><strong>Faster agents.</strong> <strong>Google Gemini 4 Hydrogen (12 Nov): a fast model for agent/coding workloads — reported ~2.5× faster than Gemini 3.8 Flash with ~5× fewer fabricated claims (Google, vendor-reported).</strong> Speed widens the gap between acting and watching.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act: new prohibitions take effect 2 December 2026, high-risk regime live since 2 August 2026, the Digital Omnibus now in force; MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Red-teaming and observability are how you meet those duties credibly.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">You cannot scale what you cannot secure, govern, or observe.</div><div class="a">— Jeetu Patel, Cisco President &amp; Chief Product Officer, on Frontier AI Red Teaming and Agent Observability (9 November 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Cisco Unveils Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise.</div><div class="a">— Cisco, press-release headline (9 November 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">88% of organizations experienced confirmed or suspected AI-agent security or privacy incidents in the past year — and only 21% have runtime visibility into what their agents are doing.</div><div class="a">— Gravitee, State of AI Agent Security 2026 (919 respondents, as reported)</div></blockquote>
+<blockquote><div class="q">"You named, bonded and funded the servant. The proving asks the two colder questions: have you ever paid someone to try to turn it — and can you see it the moment it slips? A servant you've never tempted is not trustworthy, merely untested; one you cannot watch is not governed, merely trusted."</div><div class="a">— the radar, on why doubt is the discipline that sits on top of governance</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The thief and the watchtower shipped</td><td><span class="v">Cisco (9 Nov 2026) "Frontier AI Red Teaming and Agent Observability": Anthropic's Claude in the AI Defense adaptive red-teaming engine; Splunk Agent Observability "Tokenomics" (private preview Dec 2026, GA on AWS Marketplace early 2027)</span></td><td>Cisco; Network World, as reported</td></tr>
+<tr><td>The thesis</td><td><span class="v">"You cannot scale what you cannot secure, govern, or observe." — Jeetu Patel, Cisco President &amp; Chief Product Officer</span></td><td>Cisco; Network World, as reported</td></tr>
+<tr><td>The incident base rate</td><td><span class="v">88% of organizations had confirmed or suspected AI-agent security or privacy incidents in the past year; only 21% have runtime visibility into their agents</span></td><td>Gravitee, State of AI Agent Security 2026 (919 respondents), as reported</td></tr>
+<tr><td>The confidence gap</td><td><span class="v">97% of leaders expect a material agent-driven security or fraud incident within 12 months; organizations spend ~6% of security budgets on AI-agent risk</span></td><td>Arkose Labs, as reported</td></tr>
+<tr><td>The narrower reading</td><td><span class="v">39% say an AI agent caused a security incident or near-miss in the past year; 21% confirmed a real incident</span></td><td>VentureBeat (Sept 2026 survey), as reported</td></tr>
+<tr><td>The deployment wave</td><td><span class="v">IBM + Microsoft "Imagine Enterprise" (10 Nov): a governed platform with 6,000+ prebuilt IBM Consulting agents for financial services, insurance and retail</span></td><td>IBM; Microsoft; CIO Dive, as reported</td></tr>
+<tr><td>Faster agents</td><td><span class="v">Google Gemini 4 Hydrogen (12 Nov): a fast model for agent workloads — reported ~2.5× faster than Gemini 3.8 Flash with ~5× fewer fabricated claims (vendor figures)</span></td><td>Google, vendor-reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Send a thief — stand up adversarial red-teaming of your highest-privilege agents before you trust them further.</strong> A servant you have never tempted is untested, not trustworthy, and 88% of organizations have already had an agent incident (Gravitee). <strong>This month, pick your top three highest-privilege or customer-facing agents and run an adversarial red-team against each — driven through its real tools, not just its chat surface — trying jailbreaks, forged instructions, poisoned context, tool-abuse and step-chaining; capture how each one can be turned and fix it before the next deployment.</strong> Report one number to the board: the share of production agents that have passed a dated adversarial red-team, and a plan to put red-teaming into CI so it repeats on every material change.</li>
+  <li><strong>Build the tower — put runtime observability and a tested kill switch over what your agents actually do.</strong> Only 21% of organizations have runtime visibility; "no incidents" with that little sight mostly means you cannot see them. <strong>This month, instrument your top agents so you capture action traces (tools called, data touched, spend incurred) in a form you can alert on and reconstruct, and prove a kill switch that halts a misbehaving agent in the moment — then run a live drill to confirm you can see and stop one faster than it can act.</strong> Report the share of production agents under runtime observability, and the measured time-to-halt from your drill.</li>
+  <li><strong>Budget the watch — fund doubt to the size of the risk you already assign it.</strong> 97% of leaders expect a material agent-driven incident within twelve months, yet agent risk gets ~6% of security budgets (Arkose Labs). <strong>This month, name an owner for agent security, size the gap between your ~6% and the probability-weighted blast radius your own board assigns, and fund red-teaming and observability as pre-launch infrastructure — not as a feature you will get to later.</strong> Report the agent-security budget as a share of total security spend, with a dated plan to move it toward the risk. <strong>The model is a rented stove, now so cheap a bigger one draws a shrug; the knowledge is the larder; the foundation is the ground you own; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the proving is why, having built and governed the servant, you must try to break it and watch it before you trust it: send a thief, raise the tower, fund the watch, because you cannot scale what you cannot secure, govern, or observe.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Cisco (9 Nov 2026): "Frontier AI Red Teaming and Agent Observability to Secure the Agentic Enterprise," Anthropic's Claude embedded in the AI Defense adaptive red-teaming engine; Splunk Agent Observability "Tokenomics" (private preview Dec 2026, GA on AWS Marketplace early 2027); Jeetu Patel (President &amp; CPO) "you cannot scale what you cannot secure, govern, or observe"; Michael Moore (Anthropic cybersecurity lead) on testing agents before production (Cisco; Network World) · The incident base rate — Gravitee, State of AI Agent Security 2026 (919 respondents): 88% confirmed/suspected agent incidents in the past year; only 21% runtime visibility · The confidence gap — Arkose Labs: 97% expect a material agent-driven incident within 12 months; ~6% of security budgets on agent risk · The narrower reading — VentureBeat (Sept 2026 survey): 39% an agent caused an incident/near-miss; 21% confirmed · The deployment wave — IBM &amp; Microsoft "Imagine Enterprise" (10 Nov): 6,000+ prebuilt IBM Consulting agents for regulated sectors (IBM; Microsoft; CIO Dive) · Faster agents — Google Gemini 4 Hydrogen (12 Nov): ~2.5× faster than Gemini 3.8 Flash, ~5× fewer fabricated claims (Google, vendor-reported) · The prior rails — EU AI Act (new prohibitions effective 2 December 2026; high-risk regime live since 2 August 2026; Digital Omnibus now in force), MCP 2026-07-28, Gartner (40% of enterprise apps embed task-specific agents by 2026). The "proving" framing — that making and governing the agent (livery … foundation) is construction and control, while red-teaming and observability are the discipline of doubt that must sit on top (send a thief, build the tower, budget the watch) — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 15 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies). Dashboard: https://ai-radar.goatcounter.com -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
