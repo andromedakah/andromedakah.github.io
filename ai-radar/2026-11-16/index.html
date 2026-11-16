@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 16 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the sheath' — on 9 Nov Anthropic shipped Claude Fable 5.2 (safeguards on, $8/$40, −20%) and Mythos 5.2, the same model with the cyber and biology safeguards removed, for verified orgs ('Same Model, Different Safeguards'). The capability commoditized further (Gemini 4 Carbon GA at $2/$10); the differentiated, governed thing is now the restraint around the edge. Strip the guard and the vendor's liability moves to you — just as the EU Digital Omnibus deferred high-risk duties to 2 Dec 2027 but removed no obligation and kept Article 50 transparency at 2 Dec 2026. The board move: find which blades run bare, forge your own sheath, fit it to your own hand. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You secured the ground — now look at the edge in its hand</div>
+  <h1>The Sheath</h1>
+  <div class="subhead">The blade got cheaper again — and the smith did something new: he sold the same edge two ways. On 9 November Anthropic shipped the same model with its safeguards on (Fable 5.2) and with the cyber and biology safeguards struck off (Mythos 5.2, for the vetted). The capability is a commodity now. The restraint around it is the product — and when you take the bare blade, the vendor's liability comes home with it.</div>
+  <div class="meta">Monday, 16 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">On 9 November 2026 Anthropic shipped Claude Fable 5.2 and Claude Mythos 5.2 — and the headline that matters is MarkTechPost's: "<em>Same Model, Different Safeguards</em>" (as reported). Mythos 5.2 is, by the reporting, the same model as Fable 5.2 with the cyber and biology safeguards removed, sold only to verified organizations; Fable 5.2 ships with those safeguards on, at $8/$40 per million tokens — a 20% cut from 5.1's $10/$50 (CloudZero; TechBriefly; mlq.ai). A day later Google put Gemini 4 Carbon into general availability at $2/$10 (Google, as reported). So the blade got cheaper again — "The Foundation" confirmed — but the smith sold the same edge sheathed for the many and bare for the vetted, and handed the bare-blade buyer every liability the guard used to carry. The board question is no longer <em>which blade, and how cheap</em> — it is: which of our blades are carried bare, who is vetted to hold them, and who owns the sheath? And the law just underlined it: the EU's Digital Omnibus pushed the heavy high-risk duties to 2 December 2027 but removed no obligation, and kept the Article 50 transparency duty landing 2 December 2026 — about two weeks away (CSA; usercentrics; i-scoop, as reported). The delay bought time. It struck off no duty.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>servant</em> — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it (the purse) — and last turn it looked down at the ground: own the floor, keep the larder, light a second fire (the foundation). <strong>This morning the smith's bench turns the question from the blade to the sheath — the restraint around the edge — because a vendor just made that restraint an option you select rather than a fixture you inherit.</strong></p>
+<p><strong>The reality — the blade got cheaper, and the smith now sells the same edge sheathed or bare.</strong> On <strong>9 November 2026 Anthropic released Claude Fable 5.2 and Claude Mythos 5.2.</strong> Fable 5.2 lands at <strong>$8/$40 per million tokens — a 20% price cut from 5.1's $10/$50</strong> (batch $4/$20; a faster tier at $16/$80; ~30% faster than 5.1 by Anthropic's own claim), on the Claude API, AWS, Google Cloud and Azure. <strong>Mythos 5.2 is, as reported, the same model with the cyber and biology safeguards removed, available only to verified organizations</strong> (CloudZero; TechBriefly; MarkTechPost — "Same Model, Different Safeguards"; mlq.ai, as reported). The day after, <strong>Google's Gemini 4 Carbon went GA at $2/$10</strong>, pitched at legal, finance and enterprise ops (Google, as reported), and OpenAI's <strong>GPT-6 Cyber</strong> (5 Nov) is a similar move in the other direction — a capability-gated variant for <em>authorized</em> vulnerability research, sold only to approved customers (as reported). The commodity ("The Foundation") is confirmed: the blade is cheap and getting cheaper. <strong>The new signal is that the differentiated, gated, governed thing is no longer the blade's capability — it is the sheath.</strong></p>
+<p><strong>The collision — when you take the bare blade, you take the smith's liability with it.</strong> The safeguards a vendor fixes over its model are not decoration; they are the vendor carrying a share of the cyber-misuse and bio-misuse risk on its own books. <strong>Strip them off — Mythos-style, or by running open weights, or by tuning a model's guardrails down — and that liability does not vanish; it moves onto your books,</strong> precisely as the duty to prove restraint is arriving in law. The <strong>EU Digital Omnibus (Reg. (EU) 2026/1744, in force 27 July 2026)</strong> deferred Annex III standalone high-risk obligations to <strong>2 December 2027</strong> and Annex I (regulated products, incl. medical devices) to <strong>2 August 2028</strong>, but commentators are blunt that it <strong>"buys time and removes no obligation,"</strong> and it kept the <strong>Article 50 transparency/marking duty at 2 December 2026</strong> and <em>extended</em> the Article 5 prohibitions to non-consensual intimate imagery and CSAM (CSA; usercentrics; i-scoop; DLA Piper, as reported). Meanwhile the operational reality says most houses have not even located their edges: a reported <strong>~88% of enterprise AI-agent pilots never reach production</strong>, only <strong>~14% have scaled an agent organization-wide</strong>, and only <strong>~31% have at least one agent running in production</strong> (Forrester/Anaconda; S&amp;P Global, as reported). You cannot govern a restraint you have not located, on a blade you never put into service.</p>
+<p><strong>The stakes — know which blades run bare, own the sheath, keep it portable.</strong> The board move re-uses the whole year's discipline and points it at the edge. <strong>First, inventory which blades are carried bare and by whom</strong> — map every AI system by its safeguard configuration (full-guard, reduced-guard, open-weight, or tuned-down) and name who is vetted to wield each; this is the livery and the census, pointed at restraint. <strong>Second, forge your own sheath for every bare edge</strong> — where you run a less-guarded model, build and prove the restraint the vendor no longer carries (input/output filters, eval gates, human checkpoints, logging), because the liability and the Article 50 duty are now yours. <strong>Third, keep the sheath a thing of your own hand</strong> — fit it to the model behind the abstraction you already own (the floor), so that when a cheaper, keener blade arrives next season — and it will — you move your own guard onto it and are never caught holding a naked edge you cannot answer for.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — the blade got cheaper, and the smith sells the same edge two ways.</strong> <strong>Anthropic (9 Nov): Fable 5.2 at $8/$40 (−20% from $10/$50) with safeguards on; Mythos 5.2 the "same model, different safeguards" (cyber/bio guards removed) for verified orgs; Gemini 4 Carbon GA at $2/$10 (10 Nov) (CloudZero; MarkTechPost; Google, as reported).</strong> The capability is a commodity; the sheath is the product.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The collision — the bare blade carries the smith's liability to your books, just as the law arrives.</strong> <strong>EU Digital Omnibus (Reg. 2026/1744) deferred high-risk duties to 2 Dec 2027 but "removes no obligation," kept Article 50 transparency at 2 Dec 2026, and extended Article 5 bans; ~88% of agent pilots never reach production (CSA; usercentrics; Forrester/Anaconda, as reported).</strong> Strip the guard and you own the risk.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — inventory bare blades, own the sheath, keep it portable.</strong> Map every AI system by safeguard configuration and who is vetted to hold it; forge your own restraint layer for each bare edge and prove it; and make the sheath a property of your own hearth, not of any one vendor's model, so the cheap, swappable blade never strips your guard.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety signed the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation secured the ground. <strong>The sheath is about the edge itself — the restraint around a capability that is now cheap, interchangeable, and sold with or without its guard.</strong> This week the market proved the blade is a commodity twice over: Fable 5.2 landed 20% cheaper and Gemini 4 Carbon went GA at $2/$10, and almost no one gasped. Then the smith did the thing worth watching — he offered the <em>same</em> blade bare, guard struck off, to the vetted few, and sold it as a feature. The trap is that stripping the guard feels like unlocking power, and the saving feels like thrift, and neither invoice shows the liability that moved onto your books the moment the edge went naked — until a misuse, an incident, or an Article 50 auditor arrives and asks who was carrying the restraint. The houses that keep their standing will do three unglamorous things: <strong>inventory which blades run bare</strong> (and who is vetted to hold them), <strong>own the sheath</strong> (forge and prove the restraint the vendor no longer carries), and <strong>keep the sheath portable</strong> (fitted to any blade behind the floor you own). Buy the cheap blade — it is cheap, and it should be. But never carry a bare edge you cannot answer for, and never let the smith decide who holds your sheath.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Sheath"</h3>
+<p><em>Topic: This morning the frame turns from the ground under the house to the edge in its hand. On 9 November 2026 Anthropic shipped Claude Fable 5.2 (safeguards on, at a reported $8/$40 — 20% cheaper than 5.1) and Claude Mythos 5.2 — by the reporting, the same model with the cyber and biology safeguards removed, sold only to verified organizations — under the headline "Same Model, Different Safeguards" (CloudZero; MarkTechPost; mlq.ai, as reported). A day later Google's Gemini 4 Carbon went GA at $2/$10 (Google, as reported). The blade commoditized further; the differentiated, gated, governed thing became the restraint around it. The EU's Digital Omnibus (Reg. (EU) 2026/1744) deferred the heavy high-risk duties to 2 December 2027 but removed no obligation and kept the Article 50 transparency duty at 2 December 2026 (CSA; usercentrics; i-scoop, as reported). The sheath allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had made its servants excellent and, after a hard season, had learned to own the very ground they stood on — the floor was its own, the larder was stocked in its own pantry, a second fire was kept lit. By any fair reckoning the house was well-founded, and the master was proud of it — as he should have been.</p>
+<p>Now, the house bought its <strong>blades from the smith</strong> — the keen steel its servants worked with — and this had become a wonderful economy, for the smith's blades were better and cheaper every season. This very week the smith's cart came round and the finest blade on it cost a fifth less than last year's, and beside it lay a second, cheaper still. The master nodded; a good blade for less was the market he had helped to make, and he was no longer surprised by it. But then the smith did a thing the master had not seen before. He held up two blades that were, he said, <strong>the very same steel, forged on the same anvil, keen to the same edge</strong> — and sold them two different ways. <em>"To most of my customers,"</em> said the smith, <em>"I sell it like this — sheathed, with a guard fixed over the edge, so that a careless hand cannot cut itself, nor a child who finds it, nor a stranger who means harm. And to a vetted few — those who can prove to me they know how to carry naked steel — I sell the very same blade bare, the guard struck clean off, keener and more dangerous, for the work that truly needs a naked edge."</em></p>
+<p>And the master saw, slowly, that the thing he was being asked to choose was <strong>not the blade at all.</strong> The blade was a commodity now — cheap, excellent, identical in either hand. The thing he was choosing was the <strong>sheath</strong>: the guard over the edge, the restraint around the capability. For a year he had thought the smith's craft was the steel. This morning the smith told him, plainly, that the steel was the easy part, and the <em>guard</em> was the thing worth gating, worth vetting, worth charging for — and, if the master wished, the thing he could have <strong>removed.</strong></p>
+<p>Here was the catch, and the smith was honest about it, which made it no less sharp. When the master took a <strong>bare blade</strong>, the smith handed over, with it, every liability the guard used to carry. <em>"While the guard is on,"</em> the smith said, <em>"a cut is partly my affair — I fixed the guard, I vouched for it. Strike it off at your request, and a cut is your cut, wholly. The naked edge is more powerful; it is also, from this moment, entirely yours to answer for."</em> And the master understood that a bare blade was not merely a sharper tool. It was a <strong>transfer of responsibility</strong>, dressed as an unlocking of power.</p>
+<p>Two roads, as always. The easy road was to buy the bare blade for everything and feel mighty — the edge was keener, the vetting was a small flattery, the saving was real, and who reads the clause about whose cut it is? The wiser road, which the careful houses took, began with a cold count of their own armory: <em>not "how sharp is the new blade?" but "which of the blades already in my house are carried bare, by whom, and who is holding the sheath for each one?"</em> And when the careful houses counted honestly, most of them could not answer. They had bought blades they had never put to work; of the ones they did, barely one hand in seven had been trusted to a servant trained to carry it; and almost none had written down which edges went naked and which went guarded. They had been governing the <em>smith's craft</em> — the steel — and had never once governed the <strong>restraint.</strong></p>
+<p>So the wise houses learned three plain things, and they cost less to do early than late. <strong>The first: know which blades are carried bare, and by whom.</strong> Walk the armory and mark every edge — this one guarded, this one naked, this one bought and never drawn — and name, for each naked edge, the vetted hand that may hold it. You cannot govern a restraint you have never located, on a blade you never put into service. <strong>The second: forge your own sheath for every bare edge.</strong> Where the smith has struck off his guard, the house must fit its own — a tested restraint of its own making, so that the power of the naked blade is matched by a discipline the house owns and can show; for the liability came home with the bare blade, and a liability you hold without a guard is simply a wound waiting for a date. <strong>And the third: keep the sheath a thing of your own hand.</strong> Fit it to the handle, not to one smith's blade, so that when a cheaper, keener edge comes round next season — and it will, by next market-day — you slide your own guard onto it and lose nothing. A house whose only sheath is the one the smith chose to fix, and chose to charge for, and may choose tomorrow to withhold, does not own its own restraint; it rents it, and has mistaken the renting for safety.</p>
+<p>Here is the part that should keep a master awake. There was, in the land, a <strong>king's inspector</strong> who had long promised that the crown itself would set a public guard on every dangerous blade — rules, by law, for who may carry what. And that very season the inspector had sent word that the heavy rules were <strong>pushed down the road a full year</strong>, to the winter after next. The careless houses heard "a year's reprieve" and put the whole question away. But the careful houses read the notice to its end, and found two things the careless had missed. The reprieve <strong>struck off no duty</strong> — it moved the date, not the obligation; the guard was coming, only later. And the inspector had <strong>kept, unmoved, the simplest rule of all</strong>: that any blade carried in the open must be <strong>marked as what it is</strong>, plainly, for anyone to read — and that rule fell due in a fortnight, not in a year. The lesson was not that the inspector was lax. The lesson was that <strong>a delay in the law is not a holiday from the duty, and the house that treats a moved date as a cancelled one will be caught, a fortnight hence, carrying an unmarked edge it swore it had another year to sheath.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap a bigger one draws a shrug, and the smith will sell it to you sheathed or bare; your knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground the house stands on — and <strong>the sheath is why, having secured the ground, you must now look at the edge in your servant's hand and refuse to confuse the cheap, swappable blade with the restraint around it: know which blades are carried bare and by whom, forge your own guard for every naked edge because the liability came home with it, and keep the sheath fitted to your own hand so that no smith who sells you the cheap blade ever decides who holds your restraint — and so that when the law's own guard falls due, as its plainest rule does in a fortnight, your edges are already marked and sheathed by a discipline you own.</strong> A house that buys the bare blade because it is keen and cheap, and never forges the guard the smith struck off, has not armed itself; it has handed its servants naked steel and signed, without reading it, the clause that says every cut is now its own.</p>
+<p><strong>The question it forces:</strong> <em>The blade is cheap and getting cheaper — the market just proved it again, Fable 5.2 down a fifth and Gemini 4 Carbon at $2/$10, and we barely blinked. But the smith is no longer selling us a blade; he is selling us a choice about the sheath, and handing us his liability when we take the edge bare. So: which of our blades are carried bare, and by whom? Have we forged our own guard for every naked edge — the restraint the vendor no longer carries — or are we holding the smith's liability with no sheath of our own, a fortnight before the law's plainest mark falls due? And is our sheath a thing of our own hand, fitted to any blade behind the floor we own — or did we let the smith decide who holds our restraint?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Which of our AI capabilities run with the guard on, and which run bare?</strong> A vendor just made that an explicit choice — the same model with safeguards (Fable 5.2) or without (Mythos 5.2, for verified orgs), and open weights and tuned-down guardrails are the same move by other means. <strong>Can we produce, today, an inventory of every AI system by its safeguard configuration — full-guard, reduced-guard, open-weight, tuned-down — and name who is vetted to wield each naked edge?</strong></li>
+  <li><strong>When we take the bare blade, have we noticed the liability come home?</strong> The safeguards a vendor fixes over its model are the vendor carrying part of the cyber- and bio-misuse risk; strip them and that risk moves onto our books. <strong>Where we run a less-guarded model, have we forged and tested our own restraint layer — or are we holding the vendor's liability with no sheath of our own?</strong></li>
+  <li><strong>Is our sheath ours, or the smith's?</strong> The blade is cheap and we will swap it again (Fable 5.2 −20%; Gemini 4 Carbon $2/$10). <strong>Is our restraint layer — filters, eval gates, human checkpoints, logging — a property of our own hearth that travels to any model behind the floor we own, or is it wired to one vendor's guard, so switching blades strips our guard?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Model risk management already demands you govern a model's behavior and its controls, not just its accuracy. <strong>Can we show our regulator a control inventory that distinguishes guarded from un-guarded model deployments, with a named owner for the restraint on each un-guarded one — and evidence that we, not the vendor, carry and test that restraint?</strong></li>
+  <li>The EU Digital Omnibus deferred standalone high-risk duties to 2 December 2027 but removed no obligation and kept the Article 50 transparency/marking duty at 2 December 2026. <strong>Have we read the reprieve to its end — are our AI-touching customer communications marked as required a fortnight from now — or did we book the moved date as a cancelled duty?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Biology safeguards are not abstract here: a model with bio safeguards removed is a categorically different risk object in a lab or clinical setting. <strong>If any team is requesting or running a reduced-safeguard model, who vetted the business case against the misuse risk, who holds the sheath, and is that decision on the record at board level rather than buried in a procurement form?</strong></li>
+  <li>Regulated-product timelines moved too (Annex I to 2 August 2028), but the duty stands. <strong>Are our validated, safety-critical AI workflows built on guarded models with restraints we own and can prove — so that neither a model swap nor a safeguard-configuration change silently strips a control a regulator will ask us to produce?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You qualify every critical input before it touches the line. <strong>Have we applied input-qualification discipline to the safeguard configuration of our models — treating a bare-blade (reduced-guard) model as a different, higher-risk part requiring its own sign-off and its own guard — rather than letting "same model, cheaper/keener" wave it onto the floor un-reviewed?</strong></li>
+  <li>Price keeps falling and we will re-source blades often. <strong>Is our restraint layer portable across models and vendors — fitted to our own hearth — so that chasing the cheaper blade (Gemini 4 Carbon $2/$10; Fable 5.2 −20%) never means re-building, or quietly losing, the guard?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer-facing generation is exactly where an un-guarded edge cuts the house. <strong>For every customer-facing model, is the guard on, is the output marked where the law will soon require it (Article 50, 2 Dec 2026), and do we own the filter/eval layer — or are we one prompt away from a naked edge in front of a customer with no sheath of our own?</strong></li>
+  <li>The cheap blade is genuinely good news for margin. <strong>Are we collecting it by routing to the cheapest capable model behind an abstraction we own, with a single portable restraint layer in front — rather than paying up for one vendor's guard because our safety is wired to its model?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability makes an un-owned restraint a governance failure, not a cost line. <strong>Can we show that no public-facing AI service runs a reduced-safeguard model without a documented, house-owned restraint and a vetted operator — and that our transparency marking meets Article 50 on 2 December 2026, deferral of the heavy duties notwithstanding?</strong></li>
+  <li>Sovereignty and the long horizon matter most here. <strong>Are our safeguards a discipline we own and can carry across models and vendors — or have we let a supplier's safeguard-configuration choice (and its option to withhold it) become the only guard standing between a citizen and a naked edge?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Sheath</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded, and standing on ground I own?</em> and started asking the one question none of those controls touch: <em>the capability is a cheap commodity now — but is the restraint around it on, who may take it off, and whose liability is it when it comes off?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those governs the servant or the ground it stands on. The sheath is about the edge itself — and this week the market made the distinction impossible to ignore: a vendor shipped the <em>same model with and without its safeguards</em> (Fable 5.2 vs Mythos 5.2, "same model, different safeguards") and priced the capability down 20%, proving in one stroke that the blade is a commodity and the restraint is the product.</strong> The point is blunt: <strong>the thing that has commoditized (the model's capability) is not the thing that now carries the risk and the liability (the safeguard configuration), and confusing the two is how a house ends up handing its servants naked steel while congratulating itself on a cheaper, keener edge.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — the blade commoditized further, and the smith unbundled the guard from the edge.</strong> <strong>On 9 November 2026 Anthropic shipped Claude Fable 5.2 at $8/$40 per million tokens (a 20% cut from 5.1's $10/$50; batch $4/$20; a faster tier at $16/$80; ~30% faster than 5.1 per Anthropic), on the Claude API, AWS, Google Cloud and Azure — alongside Claude Mythos 5.2, reported as the same model with the cyber and biology safeguards removed, available only to verified organizations; Google's Gemini 4 Carbon went GA at $2/$10 the next day, and OpenAI's GPT-6 Cyber (5 Nov) is a capability-gated variant for authorized vulnerability research (CloudZero; TechBriefly; MarkTechPost; Google; as reported).</strong> Architecturally, three things follow. First, <em>the safeguard configuration is now a first-class deployment variable</em> — the same weights can present as a guarded or an un-guarded object, so "which model" no longer tells you the risk; "which safeguard configuration, for whom" does. Second, <em>the liability follows the guard</em> — a vendor's fixed safeguards are the vendor retaining part of the misuse risk; a reduced-safeguard variant (Mythos-style), an open-weights deployment, or a tuned-down guardrail transfers that risk to the deployer, who must now supply the restraint. Third, <em>"cheaper and keener" is a governance event, not just a procurement win</em> — a 20% price cut and a bare-edge option together pull toward broad, un-reviewed adoption of exactly the configurations that most need review.</li>
+  <li><strong>The collision — the restraint is now yours to own, exactly as the law arrives to ask for it.</strong> <strong>The EU Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026) deferred Annex III standalone high-risk obligations to 2 December 2027 and Annex I (regulated products, incl. medical devices) to 2 August 2028, but commentators stress it "buys time and removes no obligation"; it kept the Article 50 transparency/marking duty at 2 December 2026 and extended the Article 5 prohibitions to non-consensual intimate imagery and CSAM (CSA; usercentrics; i-scoop; DLA Piper, as reported).</strong> Two engineering realities cut against comfort. <strong>First, a deferral is not a dispensation.</strong> The heavy dates moved; the duty to risk-manage, document, oversee and mark did not — and the nearest duty (Article 50) is a fortnight out, so a house that treats the moved date as a cancelled one is building toward a wall it mis-dated. <strong>Second, most houses have not located their edges.</strong> A reported <strong>~88% of enterprise AI-agent pilots never reach production</strong>, only <strong>~14% have scaled an agent organization-wide</strong>, and only <strong>~31% have at least one agent in production</strong> (Forrester/Anaconda; S&amp;P Global, as reported): the restraint problem is hiding behind an inventory problem, because you cannot sheath an edge you have not found.</li>
+  <li><strong>The answer — inventory the edges, own the sheath, keep it portable.</strong> <strong>Build a safeguard-configuration inventory (every AI system tagged full-guard / reduced-guard / open-weight / tuned-down, with a named vetted operator per un-guarded edge); forge your own restraint layer for each bare edge (input/output classifiers, eval gates, human checkpoints, immutable logging) and test it under load; and make that restraint a property of your own hearth — the abstraction/gateway you already own (the floor) — so it fits any model and no vendor's safeguard choice is your only guard — reusing the livery, census, bell and foundation disciplines you already built, now pointed at the edge.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now aimed at the sharpest axis of all: not what the agent is, serves, harvests, spends or stands on, but whether the restraint around its cheap, naked capability is on, owned, provable, and portable.</li>
+</ul></div>
+<p>The strategic core: <strong>the capability commoditizing is good news you must actually collect — cheap, keen, swappable models — but the same move that made it cheap also unbundled the guard from the edge and offered to hand you the liability with the bare blade; you collect the good news only by owning the sheath.</strong> The market makes the temptation concrete: the bare blade is keener, the vetting flatters, the 20% saving is real, and the clause about whose cut it is goes unread. The board translation: <strong>buy the cheap blade; never carry a bare edge you cannot answer for; never let the smith hold your sheath.</strong> The failure mode is exact: <strong>a house that names, governs, funds, perfects and grounds its servants — and then adopts a reduced-safeguard model because it is cheaper and keener, with no restraint of its own and its transparency marking un-shipped — will pass every prior governance review and discover, the first time a misuse or an Article 50 auditor arrives, that it was carrying naked steel and had signed, unread, the clause that made every cut its own.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The sheath: you secured the ground, now look at the edge in its hand. The capability has commoditized into a cheap, swappable blade; the vendor unbundled the guard from the edge, and the two are not the same thing. Top left, the blade, commoditized capability: the model is cheap and interchangeable; Fable 5.2 at 8 dollars / 40 dollars is 20 percent cheaper than 5.1; Gemini 4 Carbon general availability at 2 dollars / 10 dollars; keen and swappable, barely a gasp; you re-source it every season. Top right, the sheath, restraint and liability: the safeguards are gated and owned; same model, different safeguards; Mythos 5.2 has the bio and cyber guards off; the bare blade is sold to verified organizations only; strike the guard and the liability moves. Between them: they are not the same thing, the guard was unbundled from the edge and its liability came with it, so buy the cheap blade but never carry a bare edge you can't answer for. Middle, the law is not on holiday, per the EU Digital Omnibus Regulation 2026/1744 as reported: the heavy high-risk duties are deferred to 2 December 2027 but it removes no obligation; the Article 50 transparency and marking duty still lands 2 December 2026, about two weeks away; the Article 5 bans are extended to non-consensual intimate imagery and child sexual abuse material; about 88 percent of agent pilots never reach production, so you can't sheath an edge you haven't found. Bottom left, stop, let the smith hold it: buy bare because it's keen and cheap, keep no restraint of your own, book the moved date as cancelled, wire the guard to one vendor's model. Bottom right, start, own the sheath: inventory every edge with the guard on or off and who holds it, forge your own restraint for each bare edge, ship Article 50 marking now not in 2027, and keep the sheath fitted to your own hearth so it fits any blade." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE SHEATH — you secured the ground; now look at the edge in its hand</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The CAPABILITY commoditized (a swappable blade). The vendor UNBUNDLED the guard from the edge — not the same thing.</text>
+
+  <!-- the blade -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE BLADE (commoditized capability)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the MODEL — cheap &amp; interchangeable</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Fable 5.2: $8/$40 (−20% vs 5.1)</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">Gemini 4 Carbon GA: $2/$10</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">keen, swappable, re-sourced each season</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ barely a gasp — "The Foundation" confirmed</text>
+
+  <!-- the sheath -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE SHEATH (restraint + liability)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the SAFEGUARDS — gated &amp; owned</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">"same model, different safeguards"</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">Mythos 5.2: bio/cyber guards OFF</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">bare blade = verified orgs only</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ strike the guard → liability MOVES to you</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the guard unbundled FROM the edge — its liability came with it ▼</text>
+
+  <!-- the law -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE LAW IS NOT ON HOLIDAY — (EU Digital Omnibus, Reg. 2026/1744, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">heavy high-risk duties DEFERRED to 2 Dec 2027 — but "removes no obligation"</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Article 50 transparency/marking duty still lands 2 DECEMBER 2026 (~2 weeks)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Article 5 bans EXTENDED (non-consensual intimate imagery; CSAM)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">~88% of agent pilots never reach production · you can't sheath an edge unfound</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: let the smith hold it</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· buy bare because it's keen/cheap</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no restraint of your own</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· book the moved date as cancelled</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· guard wired to one vendor's model</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">naked steel, every cut your own</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: own the sheath</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inventory every edge (guard on/off, who)</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· forge your OWN restraint per bare edge</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ship Article 50 marking now, not in '27</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· sheath fitted to your hearth, any blade</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheap blade, restraint you own</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The capability commoditized — collect the good news by owning the sheath the model plugs into.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Buy the cheap blade · never carry a bare edge you cannot answer for.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The blade — commoditized capability</span>
+  <span><i class="dot" style="background:#a5416a"></i>The sheath — restraint &amp; liability</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The law is not on holiday</span>
+</div>
+</div>
+
+<h3>The blade vs the sheath — what commoditized, and what now carries the risk</h3>
+<table>
+<tr><th>The blade (commoditized capability — good news)</th><th>The sheath (restraint + liability — now yours)</th></tr>
+<tr><td>The model: Fable 5.2 $8/$40 (−20%), Gemini 4 Carbon $2/$10</td><td>The safeguard configuration: guard on, or struck off</td></tr>
+<tr><td>"Same model, different safeguards" — capability is identical</td><td>The gated, vetted, charged-for thing is the restraint</td></tr>
+<tr><td>Keen and swappable — re-sourced every season</td><td>Mythos-style bare blade = vetted orgs only, liability transferred</td></tr>
+<tr><td>Routed per task behind the floor you own</td><td>Must be forged and proved by the house that bares the edge</td></tr>
+<tr><td>The value is captured only if switching stays cheap</td><td>The risk is real the moment the guard comes off</td></tr>
+<tr><td>Your posture: buy ruthlessly</td><td>Your posture: never carry a bare edge you can't answer for</td></tr>
+</table>
+
+<h3>Why "the sheath" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This morning the market moved the question onto the edge itself: a vendor shipped the same model with and without its safeguards, priced the capability down, and offered to hand you the liability with the bare blade.</strong> Fable 5.2's 20% cut and Gemini 4 Carbon's $2/$10 prove the capability is a commodity; Mythos 5.2's "same model, different safeguards" proves the restraint is the product. Governance that stopped at the blade will not protect the house from the edge. The estates that keep their standing will collect the good news (cheap, keen models) by owning the sheath those models plug into — and will refuse, deliberately, to carry a bare edge they cannot answer for or to let the smith decide who holds their restraint.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to show, for every edge, whether its guard is on, who may take it off, and whose liability it is when it does.</em> On a legacy estate the instinct, when a vendor offers a cheaper, keener model or a reduced-safeguard variant, is to take it — it is better and cheaper, the vetting flatters, and the restraint feels like the vendor's job. Under the sheath that is exactly the reflex to check: the cheapness is real and the guard is now optional, and an un-reviewed bare blade is a liability you accepted without pricing. The retrofit is <strong>find, forge, fit. Find</strong> the edges: inventory every AI system by safeguard configuration and name a vetted operator for each un-guarded one. <strong>Forge</strong> the sheath: build and test your own restraint layer — filters, eval gates, human checkpoints, logging — wherever the vendor's guard is off, and ship your Article 50 marking now rather than against a mis-remembered 2027 date. <strong>Fit</strong> it to your own hand: make the restraint a property of the abstraction you own, so it travels to any model and no vendor's safeguard choice is your only guard. And keep the whole refrain: the model is a rented stove the smith will sell you sheathed or bare; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the sheath is why, having secured the ground, you must look at the edge and refuse to confuse the cheap, swappable blade with the restraint around it: find which edges run bare, forge your own guard for each, and fit the sheath to your own hand, so no smith who sells you the cheap blade ever decides who holds your restraint.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — the same model, sheathed or bare.</strong> <strong>Anthropic (9 Nov): Fable 5.2 at $8/$40 (−20% vs 5.1's $10/$50), safeguards on; Mythos 5.2 "same model, different safeguards" — cyber/bio guards removed, verified orgs only (CloudZero; TechBriefly; MarkTechPost, as reported).</strong> The restraint is now the product.</li>
+  <li><strong>The blade got cheaper again.</strong> <strong>Google Gemini 4 Carbon GA at $2/$10, aimed at legal/finance/enterprise ops (10 Nov); the capability price keeps falling — "The Foundation" confirmed (Google, as reported).</strong> Buy the cheap blade; own the sheath.</li>
+  <li><strong>The other direction — capability-gated by misuse.</strong> <strong>OpenAI GPT-6 Cyber (5 Nov): an Astra variant for authorized vulnerability research, approved customers only (as reported).</strong> Vendors are gating on restraint and intended use, not just on capability.</li>
+  <li><strong>The law moved its date, not its duty.</strong> <strong>EU Digital Omnibus (Reg. (EU) 2026/1744, in force 27 Jul): Annex III high-risk deferred to 2 Dec 2027, Annex I to 2 Aug 2028 — but "removes no obligation" (CSA; usercentrics; i-scoop; DLA Piper, as reported).</strong> A deferral is not a dispensation.</li>
+  <li><strong>The nearest guard is a fortnight out.</strong> <strong>Article 50 transparency/marking duty still lands 2 December 2026; Article 5 prohibitions extended to non-consensual intimate imagery and CSAM (usercentrics; i-scoop, as reported).</strong> Ship the marking now.</li>
+  <li><strong>You can't sheath an edge you haven't found.</strong> <strong>~88% of enterprise AI-agent pilots never reach production; only ~14% have scaled an agent org-wide; only ~31% have at least one agent in production (Forrester/Anaconda; S&amp;P Global, as reported).</strong> The restraint problem hides behind an inventory problem.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>The model commoditized ("The Foundation," 22 Sep); own the floor, keep the larder, light a second fire; MCP 2026-07-28 is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Make the sheath a property of the floor you own.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Anthropic Launches Claude Fable 5.2 and Mythos 5.2: Same Model, Different Safeguards.</div><div class="a">— MarkTechPost, headline on the 9 November 2026 launch (as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">The [Digital Omnibus] delay buys time but removes no obligation.</div><div class="a">— compliance commentary on Regulation (EU) 2026/1744, on the deferral of high-risk duties to 2 December 2027 (as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Mythos 5.2 is the same model as Fable 5.2 without the cyber and biology safeguards, restricted to verified organizations.</div><div class="a">— secondary coverage of Anthropic's launch (CloudZero; mlq.ai, as reported)</div></blockquote>
+<blockquote><div class="q">"The blade is a commodity now — cheap, keen, and sold to you sheathed or bare. The thing you are really choosing, and the only thing left to govern, is the restraint around the edge. Buy the cheap blade; never carry a bare edge you cannot answer for; and never let the smith decide who holds your sheath."</div><div class="a">— the radar, on why owning the restraint now matters more than choosing the model</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The same model, sheathed or bare</td><td><span class="v">Anthropic (9 Nov 2026): Fable 5.2 with safeguards on; Mythos 5.2 reported as the same model with cyber and biology safeguards removed, restricted to verified organizations — "Same Model, Different Safeguards"</span></td><td>CloudZero; TechBriefly; MarkTechPost; mlq.ai, as reported</td></tr>
+<tr><td>The blade got cheaper</td><td><span class="v">Claude Fable 5.2 at $8/$40 per million tokens — a 20% cut from 5.1's $10/$50 (batch $4/$20; faster tier $16/$80; ~30% faster than 5.1 per Anthropic)</span></td><td>CloudZero; TechBriefly; mlq.ai, as reported</td></tr>
+<tr><td>Cheaper still, GA</td><td><span class="v">Google Gemini 4 Carbon general availability at $2/$10 per million tokens, aimed at legal, finance and enterprise operations (10 Nov 2026)</span></td><td>Google, as reported</td></tr>
+<tr><td>Gated the other way</td><td><span class="v">OpenAI GPT-6 Cyber (5 Nov 2026): an Astra variant for authorized vulnerability research, available only to approved customers</span></td><td>OpenAI; as reported</td></tr>
+<tr><td>The law moved its date, not its duty</td><td><span class="v">EU Digital Omnibus (Reg. (EU) 2026/1744, in force 27 Jul 2026): Annex III high-risk deferred to 2 Dec 2027, Annex I to 2 Aug 2028 — "removes no obligation"; Article 50 transparency/marking duty still 2 Dec 2026; Article 5 bans extended (non-consensual intimate imagery, CSAM)</span></td><td>Cloud Security Alliance; usercentrics; i-scoop; DLA Piper, as reported</td></tr>
+<tr><td>You can't sheath an unfound edge</td><td><span class="v">~88% of enterprise AI-agent pilots never reach production; only ~14% have scaled an agent organization-wide; only ~31% have at least one agent in production</span></td><td>Forrester/Anaconda; S&amp;P Global, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Find the edges — inventory every AI system by its safeguard configuration, and who may wield it.</strong> A vendor just made the guard an explicit choice (Fable 5.2 vs Mythos 5.2, "same model, different safeguards"), and open weights and tuned-down guardrails are the same move by other means — yet ~88% of agent pilots never even reach production, so most houses cannot say which edges run bare. <strong>This month, build a one-page register: every model in use or in pilot, tagged full-guard / reduced-guard / open-weight / tuned-down, with a named vetted operator for each un-guarded edge.</strong> Report one number to the board: the count of reduced-safeguard or un-guarded models in service, and how many have a named owner for their restraint.</li>
+  <li><strong>Forge the sheath — own and prove the restraint the vendor no longer carries, and ship your Article 50 marking now.</strong> When you take the bare blade, the cyber/bio/abuse liability the vendor used to carry moves onto your books — and the law moved its heavy dates to 2 Dec 2027 but kept the Article 50 transparency/marking duty at 2 December 2026, a fortnight out. <strong>This month, for every un-guarded edge, stand up and test your own restraint layer (input/output classifiers, eval gates, human checkpoints, immutable logging), and ship transparency marking on AI-generated/assisted customer-facing output now.</strong> Report the share of un-guarded deployments that have a tested, house-owned restraint, and confirm Article 50 marking is live before 2 December.</li>
+  <li><strong>Fit the sheath to your own hand — make the restraint portable across the cheap, swappable blade.</strong> The capability is cheaper again (Fable 5.2 −20%; Gemini 4 Carbon $2/$10) and you will re-source it; a sheath wired to one vendor's model is stripped the day you switch. <strong>This month, move your restraint layer in front of the abstraction/gateway you already own (the floor), so it fits any model and no vendor's safeguard choice is your only guard — then prove it by swapping the underlying model behind one workflow with the guard intact.</strong> Report the measured result: the same restraint, held across a model swap. <strong>The model is a rented stove the smith sells sheathed or bare; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the sheath is why, having secured the ground, you must own the restraint around the edge: find which blades run bare, forge your own guard for each, and fit the sheath to your own hand, so no smith who sells you the cheap blade ever decides who holds your restraint.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Anthropic (9 Nov 2026): Claude Fable 5.2 at a reported $8/$40 per million tokens (−20% from 5.1's $10/$50; batch $4/$20; faster tier $16/$80; ~30% faster than 5.1 per Anthropic) with safeguards on, via the Claude API, AWS, Google Cloud and Azure; Claude Mythos 5.2 reported as the same model with the cyber and biology safeguards removed, restricted to verified organizations — "Same Model, Different Safeguards" (CloudZero; TechBriefly; MarkTechPost; mlq.ai; tech-insider; explainx) · Cheaper still — Google Gemini 4 Carbon GA at $2/$10, aimed at legal/finance/enterprise ops (Google) · Gated the other way — OpenAI GPT-6 Cyber (5 Nov), an Astra variant for authorized vulnerability research, approved customers only · The law — EU Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026): Annex III standalone high-risk duties deferred to 2 December 2027, Annex I to 2 August 2028, "removes no obligation"; Article 50 transparency/marking duty still 2 December 2026; Article 5 prohibitions extended to non-consensual intimate imagery and CSAM (Cloud Security Alliance; usercentrics; i-scoop; DLA Piper) · The inventory gap — ~88% of enterprise AI-agent pilots never reach production, ~14% scaled an agent org-wide, ~31% have at least one agent in production (Forrester/Anaconda; S&amp;P Global) · The prior rails — "The Foundation" (22 Sep): the model commoditized, own the floor/keep the larder/light a second fire; MCP 2026-07-28; Gartner (40% of enterprise apps embed task-specific agents by 2026). The "sheath" framing — that the model's capability has commoditized into a cheap, swappable blade while the differentiated, governed thing is now the safeguard configuration (the restraint around the edge), and that stripping the guard transfers the vendor's misuse liability onto the deployer, so a house must find which edges run bare, forge its own restraint, and fit the sheath to its own hand — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; several figures — Fable 5.2's and Gemini 4 Carbon's prices, the Mythos 5.2 safeguard description, the Omnibus dates, and the pilot/production percentages — should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 16 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
