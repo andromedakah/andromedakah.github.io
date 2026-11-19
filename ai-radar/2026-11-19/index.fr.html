@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 19 novembre 2026</title>
+<meta name="description" content="Radar IA quotidien : synthèse, allégorie pour dirigeants, questions transsectorielles et analyse technique sur « le produit d'appel » — à Microsoft Ignite (17 nov. 2026), Microsoft a livré ses propres modèles MAI revendiquant ~96 % de Claude Opus 5.5 à ~5 % du coût et ~98 % de GPT-6.1 Sol à ~40 % du prix, dans GitHub Copilot (tarif promotionnel ; benchmarks du fournisseur). Lu à la lumière des « Fondations », la vague de modèles bon marché est un produit d'appel : le propriétaire du sol vend le feu à perte pour attirer la maison sur sa plateforme. Un modèle à –95 % qui n'est bon marché que dans la maison d'un seul fournisseur est un droit d'entrée, pas une aubaine. La manœuvre du conseil : chiffrez le lot, pas le fourneau — puis possédez le sol, gardez le garde-manger, allumez un second feu. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · Vous avez résolu de posséder le sol — regardez-les donner le fourneau pour le conquérir</div>
+  <h1>Le Produit d'Appel</h1>
+  <div class="subhead">Vous avez appris que le modèle était un fourneau bon marché et interchangeable, et vous avez résolu les trois bonnes choses — posséder le sol, garder le garde-manger, allumer un second feu. Ce matin, le propriétaire du sol dévoile sa riposte : il ne vous affrontera pas sur le fourneau, il va <em>donner le fourneau</em>. À Microsoft Ignite, un modèle quasi-frontière à un vingtième du coût — bon marché, réellement bon, et bon marché seulement dans sa propre maison. Un feu vendu à perte sur le pas de la porte est la plus vieille façon de couler des fondations sous vous.</div>
+  <div class="meta">Jeudi 19 novembre 2026 · Édition transsectorielle · Public : Direction + Ingénierie</div>
+  <p class="lede">À <strong>Microsoft Ignite, le 17 novembre 2026</strong>, Microsoft a dévoilé une famille de ses propres <strong>modèles MAI</strong> et avancé une affirmation sans détour : son nouveau modèle de code, <strong>MAI Code 2, offrirait ~98 % de la performance de GPT-6.1 Sol à ~40 % du prix, et ~96 % de celle de Claude Opus 5.5 d'Anthropic à ~5 % du coût</strong>, avec un modèle de cybersécurité obtenant <strong>92,3 % contre 91,5 % pour GPT-6 Astra</strong> à un test de détection de vulnérabilités — « une performance de classe mondiale à ~50 % du coût des modèles de pointe » (Axios ; Decrypt — « Why Microsoft Thinks Smaller, Cheaper AI Can Beat Claude and GPT » ; ITPro ; Windows Report, tel que rapporté ; Decrypt note que la comparaison de prix repose sur un tarif <em>promotionnel</em> et que les benchmarks sont ceux de Microsoft). Le titre se lit comme un cadeau pour tout directeur financier : qualité quasi-frontière à un vingtième du coût. Mais lisez les petits caractères sur le <em>lieu</em> où ce prix tient — le feu d'aubaine est raccordé au conduit de Microsoft (<strong>disponible dans GitHub Copilot</strong>, sur Azure/Foundry). Ce n'est pas simplement un fourneau moins cher. <strong>C'est un produit d'appel : le feu vendu à perte sur le pas de la porte pour que vous fassiez toutes vos courses de la semaine — vos fondations — dans la maison du marchand.</strong> La question du conseil n'est plus <em>quel fourneau est le moins cher</em> ; c'est : en chiffrant ce feu à –95 %, avons-nous ajouté le conduit, la réserve de bois et la cheminée dans lesquels il brûle seulement — ou avons-nous pris un droit d'entrée aux fondations d'autrui pour une remise ?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce briefing</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse <span class="pill">lecture de 90 secondes</span></h2>
+<div class="card">
+<p>Il y a deux mois, le radar est passé du serviteur au sol sur lequel la maison repose, et a nommé la discipline des fondations : le modèle s'était banalisé en un fourneau bon marché et interchangeable, donc <strong>possédez le sol, gardez le garde-manger, allumez un second feu.</strong> Ce matin, le marché dévoile la contre-manœuvre que les propriétaires de fondations tenaient prête depuis le début, et elle est plus habile qu'une guerre des prix. <strong>Ils ont cessé de vouloir gagner sur le fourneau et se sont mis à donner le fourneau — pour gagner le sol.</strong></p>
+<p><strong>La nouvelle — le propriétaire des fondations vend désormais le feu à perte.</strong> À <strong>Microsoft Ignite, le 17 novembre 2026</strong>, Microsoft a dévoilé une famille de ses propres <strong>modèles MAI</strong> — un rapporté six, couvrant code, cybersécurité, image et voix — et a martelé un message : <em>plus petit et moins cher peut battre la frontière.</em> Son affirmation pour le modèle de code, <strong>MAI Code 2</strong>, est délibérément renversante : <strong>~98 % de la performance de GPT-6.1 Sol à ~40 % du prix, et ~96 % de celle de Claude Opus 5.5 à ~5 % du coût</strong>, disponible <strong>dans GitHub Copilot</strong> ; son modèle de cybersécurité est présenté comme « une performance de classe mondiale à ~50 % du coût des modèles de pointe » et a obtenu un rapporté <strong>92,3 % contre 91,5 % pour GPT-6 Astra</strong> à un benchmark de détection de vulnérabilités (Axios — « Microsoft debuts six AI models as it pushes toward frontier » ; Decrypt ; ITPro ; Windows Report, tel que rapporté). La mise en garde de Decrypt l'accompagne : les comparaisons de prix les plus spectaculaires <strong>reposent sur un tarif promotionnel</strong>, et les benchmarks sont <strong>ceux de Microsoft</strong>. Dépouillé de la mise en scène, le signal est réel et important : <strong>« assez bon » à une fraction du coût est désormais un produit livré, et l'entreprise qui le livre possède aussi le sol sur lequel vous le feriez tourner.</strong></p>
+<p><strong>Le piège — un fourneau bon marché seulement dans une maison est un droit d'entrée, pas une aubaine.</strong> Le radar dit depuis deux éditions que l'intelligence bon marché et interchangeable est <em>une bonne nouvelle qu'il faut réellement encaisser</em> — et vous ne l'encaissez qu'en possédant le sol sur lequel le modèle se branche. Le produit d'appel est l'attaque élégante contre exactement cette discipline. Un feu à –95 % qui ne brûle à bas prix <strong>que raccordé au conduit de Microsoft (GitHub Copilot, Azure, Foundry), alimenté par sa réserve de bois et évacué par sa cheminée</strong> n'est pas du tout un fourneau interchangeable ; c'est la façon la moins chère, la plus charmante à ce jour, de couler des fondations sous vous. C'est la plus vieille manœuvre de l'épicier — le lait vendu à perte à l'entrée pour que toutes les courses de la semaine se fassent à l'intérieur — désormais pointée vers le sol de l'IA, et elle fonctionne <em>parce que</em> la remise est authentique. Le rail antérieur se lit de la même façon de l'extérieur : une enquête Zapier 2026 rapporte que <strong>81 % des dirigeants s'inquiètent de la dépendance au fournisseur d'IA, 47 % disent qu'une fonction clé s'arrêterait en cas de panne ou de hausse de prix du fournisseur principal, et seulement 6 % se disent sûrs de pouvoir changer de fournisseur principal sans perturbation majeure</strong> (tel que rapporté). Le produit d'appel est la façon dont les 6 % sont fabriqués — une remise irrésistible à la fois.</p>
+<p><strong>La manœuvre — chiffrez le lot, pas le fourneau ; puis possédez, gardez, allumez.</strong> La traduction pour le conseil est une seule règle neuve, boulonnée aux trois que vous avez déjà. <strong>Chiffrez le lot, pas le fourneau :</strong> avant de prendre tout modèle quasi-frontière à une fraction du coût, additionnez le conduit, la réserve de bois, la cheminée et le coût d'en partir un jour — la remise au token est le plus petit nombre de l'affaire, et le feu le moins cher de la vallée est souvent la maison la plus chère. Puis les trois disciplines tiennent et s'aiguisent : <strong>possédez le sol</strong> pour que même le feu d'aubaine se branche sur une abstraction que <em>vous</em> avez bâtie, pas la plateforme du fournisseur ; <strong>gardez le garde-manger</strong> pour que vos données, vos prompts et vos évaluations n'émigrent jamais dans la remise à bois du fournisseur pour mériter la remise ; <strong>allumez un second feu</strong> pour que l'aubaine reste un <em>choix</em> dont vous pouvez vous détourner, pas une laisse. Et — la bonne nouvelle, bien réelle — <strong>encaissez le dividende</strong> : « assez bon à un vingtième du coût » est réel, et routé derrière un sol que vous possédez, c'est un cadeau ; raccordé à un sol que le vendeur possède, c'est un appât.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>La nouvelle — le propriétaire des fondations vend le feu à perte pour gagner le sol.</strong> <strong>À Microsoft Ignite (17 nov. 2026), Microsoft a dévoilé une famille de modèles MAI maison ; MAI Code 2 revendique ~98 % de GPT-6.1 Sol à ~40 % du prix et ~96 % de Claude Opus 5.5 à ~5 % du coût, dans GitHub Copilot ; un modèle cyber a obtenu 92,3 % contre 91,5 % pour GPT-6 Astra (Axios ; Decrypt ; ITPro, tel que rapporté — tarif promotionnel, benchmarks du fournisseur).</strong> « Assez bon » est désormais un produit livré, vendu par le propriétaire du sol.</div></div>
+<div class="num"><div class="b">2</div><div><strong>Le piège — un fourneau bon marché seulement dans une maison est un droit d'entrée, pas une aubaine.</strong> <strong>Un feu à –95 % qui ne brûle à bas prix que raccordé au conduit du fournisseur (Copilot, Azure, Foundry) est un produit d'appel pour les fondations, pas un fourneau interchangeable — et c'est ainsi que se fabrique le « seulement 6 % pourraient changer proprement », une remise irrésistible à la fois (Zapier 2026, tel que rapporté).</strong></div></div>
+<div class="num"><div class="b">3</div><div><strong>La manœuvre — chiffrez le lot, pas le fourneau ; puis possédez, gardez, allumez.</strong> Additionnez le conduit, la réserve de bois, la cheminée et le coût de sortie avant de prendre la remise ; placez le modèle bon marché derrière une abstraction que <em>vous</em> possédez, gardez vos données et évaluations dans votre propre garde-manger, et gardez un second feu allumé — pour que le dividende (« assez bon à une fraction du coût ») soit un cadeau que vous encaissez, pas un appât que vous avalez.</div></div>
+<div class="card"><strong>En somme :</strong> les fondations vous ont appris que le modèle est un fourneau interchangeable et que le verrouillage vit dans le sol. Ce matin, le propriétaire du sol abat sa carte : il ne vous affrontera pas sur le fourneau — il va <em>donner le fourneau</em>, qualité quasi-frontière à un vingtième du coût, parce qu'un feu vendu à perte sur le pas de la porte est la façon la moins chère jamais conçue de couler des fondations sous une maison. Les affirmations de Microsoft à Ignite sont le produit d'appel au grand jour : ~96 % du meilleur modèle à ~5 % du coût, dans GitHub Copilot — et les petits caractères ne sont ni le benchmark (impressionnant) ni le tarif promotionnel (attendu), c'est le mot <em>dans</em>. Un fourneau bon marché seulement <strong>dans</strong> la maison d'une seule entreprise n'est pas un fourneau moins cher ; c'est un droit d'entrée aux fondations de cette entreprise, écrit comme une remise, et les 94 % de maisons qui ne peuvent plus bouger n'y sont pas arrivées en se faisant arnaquer — elles y sont arrivées une merveilleuse aubaine à la fois. Les domaines qui gardent leur assise feront une chose de plus, ingrate, par-dessus les trois qu'ils font déjà : <strong>chiffrer le lot, pas le fourneau.</strong> Ajoutez le conduit, la réserve de bois, la cheminée et le coût de partir ; prenez le feu réellement bon marché <em>seulement</em> sur un sol que vous possédez, avec votre garde-manger encore dans votre propre cellier et un second feu réellement allumé. Encaissez le dividende de la banalisation sans pitié — il est réel et il est à vous. Mais ne laissez jamais le vendeur de fourneaux vous donner le feu gratuitement en échange de vos fondations.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🖋️ « Le Produit d'Appel »</h3>
+<p><em>Sujet : les propriétaires de fondations ont cessé de livrer la guerre du fourneau sur la taille et se sont mis à donner le fourneau pour gagner la guerre du sol. À Microsoft Ignite, le 17 novembre 2026, Microsoft a dévoilé une famille de modèles MAI maison et affirmé que son modèle de code, MAI Code 2, offre un rapporté ~98 % de la performance de GPT-6.1 Sol à ~40 % du prix et ~96 % de celle de Claude Opus 5.5 à ~5 % du coût — disponible dans GitHub Copilot — avec un modèle de cybersécurité obtenant 92,3 % contre 91,5 % pour GPT-6 Astra et présenté comme « une performance de classe mondiale à ~50 % du coût des modèles de pointe » (Axios ; Decrypt ; ITPro ; Windows Report, tel que rapporté ; Decrypt note un tarif promotionnel et les benchmarks propres à Microsoft). Lu à la lumière de l'édition « Fondations » — le modèle est un fourneau bon marché et interchangeable ; le verrouillage vit dans le sol — la vague de modèles bon marché est le produit d'appel : le feu vendu à perte pour attirer la maison sur les fondations du vendeur. L'allégorie du produit d'appel est l'illustration propre du radar.</em></p>
+<p>Il était une grande maison qui, après une longue et minutieuse année, avait appris la plus dure leçon de toutes : que le feu sur lequel elle cuisinait était un <strong>fourneau loué et interchangeable</strong> — bon marché, abondant, échangeable avant le souper — et que ce qui la tenait vraiment n'était pas le fourneau mais les <strong>fondations</strong> sur lesquelles toute la maison reposait. Aussi le maître avait-il résolu les trois bonnes choses. Il avait bâti son propre <strong>âtre</strong>, pour que tout fourneau s'y branche et puisse en être retiré. Il avait gardé son <strong>garde-manger</strong> — son grain, ses recettes, les tests par lesquels il distinguait la bonne cuisine de la mauvaise — dans son propre cellier, portable, jamais dans le cellier d'un autre. Et il avait gardé un <strong>second feu</strong> réellement allumé, une vraie flamme dans un second foyer, pour que le matin où son premier fourneau s'éteindrait, il serve encore le dîner. C'était, à toute juste mesure, une maison sage, et le maître en dormait mieux.</p>
+<p>Or le marchand qui vendait les feux n'était pas sot, et il avait vu le maître devenir sage. Il avait tenté, cet automne-là, le vieux tour d'amener un <em>plus gros</em> fourneau — une grande chose de cuivre, moitié plus grande que celle de la saison passée — et il avait vu la cuisinière y jeter un œil et hausser les épaules, car un feu est un feu et un plus gros au même prix n'impressionnait plus personne. Alors le marchand rentra réfléchir, et revint avec bien plus habile qu'un plus gros fourneau. Il amena un <em>petit</em> fourneau — modeste, moitié moins grand que le plus beau du maître — et avant que le maître pût hausser les épaules, il annonça le chiffre. <em>« Ce petit fourneau,</em> dit-il, <em>vous donne tout sauf un cheveu de la chaleur du plus grand feu de la vallée — dix-neuf vingtièmes — et je vous laisse cette chaleur pour <strong>un vingtième</strong> de ce que coûte le grand feu. Pas la moitié. Pas le quart. Un vingtième. »</em> Et toute la cuisine se tut, car c'est un chiffre qui fait taire une cuisine.</p>
+<p>Le maître n'était pas sot non plus, et il avait fait le travail de l'année, aussi ne dit-il pas oui tout de suite. Il fit le tour du petit fourneau, et il trouva — comme le marchand savait qu'il le ferait — que c'était un fourneau réellement excellent. La chaleur était réelle. Le vingtième-du-coût était réel. Il n'y avait aucune ruse dans le feu. Et c'était précisément le danger, car <strong>la ruse ne fut jamais dans le feu.</strong> Le maître s'accroupit pour voir comment le petit fourneau était raccordé, et la voilà, si discrètement montée qu'il l'avait presque manquée : le prix d'aubaine ne tenait <em>que</em> tant que le fourneau tirait son bois de la réserve du marchand, évacuait sa fumée par la cheminée du marchand, et reposait sur le sol du marchand. Débranchez-le de la maison du marchand — portez-le sur l'âtre que le maître avait bâti si soigneusement — et le prix merveilleux s'évaporait comme la fumée du matin. Le feu coûtait un vingtième, oui. Mais seulement <em>dans la maison du marchand.</em></p>
+<p>Et le maître comprit, accroupi là sur le sol, qu'il regardait le plus vieux tour du marché, habillé de cuivre neuf. C'était le produit d'appel de l'épicier : la motte de beurre vendue à l'entrée pour moins que l'épicier l'avait payée, non parce qu'il était devenu généreux du jour au lendemain, mais parce qu'un homme venu pour le beurre bon marché reste acheter sa farine, son sel, son drap et ses chandelles, et rentre chez lui ayant dépensé toute la paie de sa semaine sous un seul toit. Le marchand avait cessé d'essayer de vendre au maître un <em>meilleur</em> feu. Il s'était mis à essayer de donner au maître un feu <em>pour presque rien</em> — car un feu donné à l'entrée est la façon la moins chère, la plus charmante, la plus bienvenue jamais conçue de <strong>couler des fondations sous une maison.</strong> Le maître avait passé une année à apprendre à se garder d'être arnaqué. Il n'avait pas songé à se garder d'être <em>enchanté.</em></p>
+<p>Deux routes, comme toujours. La route facile descendait tout droit et sentait l'économie : prendre le petit fourneau, et les trois suivants comme lui, et celui d'après — car qui, sain d'esprit, refuse dix-neuf vingtièmes de la chaleur pour un vingtième du prix ? — et se réveiller un matin pour trouver que sa cuisine tirait <em>tout</em> son bois d'une seule réserve, évacuait <em>toute</em> sa fumée par une seule cheminée, et que l'âtre bâti si soigneusement restait froid dans son coin parce que plus rien de bon marché ne s'y brancherait jamais. La route plus sage, prise par les maisons prudentes, commençait par une question froide que le produit d'appel est conçu pour vous faire sauter : <em>non pas « combien ce feu est-il bon marché ? » mais « que coûte ce feu une fois chiffrés la réserve de bois, la cheminée et le sol sur lesquels il brûle seulement — et les chariots qu'il me faudrait louer le jour où je voudrais partir ? »</em> Et quand les maisons prudentes firent ce calcul honnêtement, le feu à un vingtième du coût était bien souvent la <strong>chose la plus chère de la vallée</strong>, car son vrai prix se payait non en pièces au comptoir mais dans l'abandon lent du sol sous leurs pieds.</p>
+<p>Aussi les maisons sages gardèrent-elles les trois disciplines apprises — <strong>posséder l'âtre, garder le garde-manger, allumer un second feu</strong> — et en ajoutèrent une quatrième, taillée exactement à la forme du produit d'appel. <strong>Chiffrer le lot, pas le fourneau.</strong> Quand un marchand vous offre un feu pour un vingtième de sa valeur, n'inscrivez pas le prix du feu ; inscrivez le prix de <em>tout ce à quoi le feu bon marché vous engage discrètement</em> — la réserve de bois que vous devez désormais n'acheter que chez lui, la cheminée par laquelle vous devez désormais n'évacuer que chez lui, le sol sur lequel toute votre maison repose désormais, et le coût, en chariots et en murs abattus, d'en bouger un jour. Additionnez cette somme, et <em>alors</em> décidez. Parfois le feu en vaut encore la peine — un fourneau bon marché, réellement bon, branché sur un âtre que <em>vous</em> possédez, alimenté d'une réserve que <em>vous</em> gardez, est un cadeau, et le maître accepta plusieurs de ces cadeaux avec plaisir. Mais un feu bon marché que vous ne pouvez brûler que sur le sol d'un autre n'est pas un cadeau et pas même vraiment un fourneau. C'est un péage, et le péage, ce sont vos fondations, et le marchand a simplement trouvé la seule façon de vous faire <em>le remercier</em> pendant que vous le payez.</p>
+<p>Voici la part qui devrait tenir un maître éveillé. Les quatre-vingt-quatorze maisons sur cent qui ne pouvaient plus bouger — celles qui veillaient la nuit sur leur dépendance, celles qui savaient qu'une pièce entière s'éteindrait le jour où le marchand trébucherait — <strong>pas une n'y était arrivée en se faisant voler.</strong> Aucun marchand n'avait jamais enfoncé leur porte pour couler des fondations contre leur gré. Chacune y était arrivée par la voie agréable : une merveilleuse aubaine à la fois, chacune sensée en soi, chacune une économie authentique, chacune si évidemment bonne à prendre que la refuser aurait eu l'air de laisser de l'argent sur le comptoir. Telle est la terrible efficacité du produit d'appel. Il ne vainc pas votre jugement ; il le <strong>recrute</strong>. Plus le maître est économe et avisé, plus sûrement un feu à un vingtième du coût l'attire au-delà du seuil du marchand — jusqu'au jour où il tend la main vers une autre réserve de bois et découvre qu'il a oublié le chemin de toute porte sauf celle-ci.</p>
+<p><strong>La morale, dite simplement :</strong> le modèle est un fourneau loué, désormais si bon marché que le propriétaire des fondations vous le vendra <em>à perte</em> pour vous attirer sur son sol ; le feu bon marché est un produit d'appel, et un feu bon marché seulement dans une maison est un droit d'entrée à cette maison écrit comme une remise ; votre savoir est le garde-manger ; l'âtre est le sol que vous possédez ; le second feu est le secours que vous avez réellement allumé ; la porte est l'unique porte que vous gardez ; le passeport nomme chaque agent ; le recensement les compte ; l'inspecteur réclame le registre ; le trousseau est la clé que chaque agent détient ; le serrurier lit vos propres serrures ; la table des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission borne ce qu'un serviteur habile peut atteindre ; la cloche sonne à l'instant où votre propre serviteur dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi le nom du maître est sur l'obligation ; le second salaire est pourquoi demander de quel pain mange chaque serviteur qui conseille ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé ; les fondations sont pourquoi posséder le sol sur lequel la maison repose — et <strong>le produit d'appel est pourquoi, ayant résolu de posséder le sol, vous devez désormais chiffrer le lot entier et non le fourneau : additionnez la réserve de bois, la cheminée, le sol et le coût de partir avant de prendre la merveilleuse remise, prenez le feu bon marché seulement sur un âtre que vous possédez, avec votre garde-manger encore dans votre propre cellier et un second feu réellement allumé, et souvenez-vous que les 94 % qui ne peuvent plus bouger n'y sont pas arrivés en se faisant arnaquer — ils y sont arrivés une aubaine irrésistible à la fois.</strong> Une maison qui laisse le vendeur de fourneaux lui donner le feu gratuitement n'a pas marchandé durement ; elle a vendu ses fondations au comptoir et reçu une économie en guise de reçu.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Le feu quasi-frontière le moins cher de la vallée vient d'arriver à un vingtième du coût — et il est réellement bon. Mais est-il bon marché partout, ou seulement dans la maison de l'entreprise qui possède aussi notre sol ? Avons-nous chiffré le lot — la réserve de bois, la cheminée, le sol et les chariots que nous louerions pour partir — ou seulement le fourneau ? Prendrons-nous cette remise réelle et merveilleuse par la voie sage (sur un âtre que nous possédons, garde-manger dans notre propre cellier, un second feu allumé) — ou par la voie agréable qu'ont prise les quatre-vingt-quatorze autres maisons, une aubaine irrésistible à la fois, jusqu'au jour où nous tendons la main vers une autre réserve de bois et découvrons que nous avons oublié toute porte sauf celle-ci ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions pour dirigeants — par secteur</h2>
+<div class="sector"><div class="t">🌐 Transsectoriel (tout conseil)</div><ul>
+  <li><strong>Avons-nous chiffré le lot, ou seulement le fourneau ?</strong> L'affirmation de Microsoft à Ignite est un modèle de code quasi-frontière à ~5 % du coût de Claude Opus 5.5 — réellement bon marché, et réellement bon. <strong>Avant d'adopter un tel modèle, avons-nous chiffré l'engagement <em>entier</em> — la plateforme sur laquelle seul il tourne à bas prix (GitHub Copilot, Azure, Foundry), les données qu'il faudrait y déplacer, et le prix en temps et en argent d'en partir un jour — ou n'avons-nous inscrit que la remise au token, le plus petit nombre de l'affaire ?</strong></li>
+  <li><strong>Est-ce un fourneau moins cher, ou un droit d'entrée aux fondations d'autrui ?</strong> <strong>Pour chaque modèle « assez bon à une fraction du coût » qui nous tente, le prix bas est-il disponible derrière une abstraction que <em>nous</em> possédons et portable vers un second fournisseur — ou la remise ne tient-elle que dans la plateforme propriétaire du vendeur, de sorte que la prendre nous enfonce d'un cran de plus dans un sol dont nous ne pouvons partir ?</strong></li>
+  <li><strong>Encaissons-nous le dividende de la banalisation sans avaler l'appât ?</strong> La bonne nouvelle est réelle : « assez bon » est désormais à un vingtième du coût. <strong>Routons-nous des modèles bon marché et capables par tâche, derrière une passerelle que nous contrôlons — en prenant l'économie sur notre propre sol — ou prenons-nous l'économie <em>comme</em> le sol du vendeur, une aubaine irrésistible à la fois, la voie agréable exacte par laquelle seules 6 % des entreprises finissent capables de changer proprement (Zapier 2026) ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Un modèle à –95 % qui ne tourne à bas prix que dans une seule plateforme est un risque de concentration déguisé en économie. <strong>Pouvons-nous présenter à notre conseil et à notre régulateur une vue « lot chiffré » de chaque service d'IA remisé — non le tarif au token affiché, mais la dépendance à la plateforme, la gravité des données et le coût de sortie qu'il engage — avec une sortie testée pour chacun adopté sur le prix ?</strong></li>
+  <li>Microsoft a présenté un modèle cyber à « ~50 % du coût des modèles de pointe » obtenant 92,3 % à la détection de vulnérabilités (son propre benchmark). <strong>Pour l'IA critique de sécurité que nous achetons sur une affirmation de coût et de benchmark, avons-nous validé le benchmark indépendamment sur nos propres données, et confirmé que le modèle et ses garde-fous sont portables — ou câblons-nous la défense dans le sol d'un seul fournisseur parce que le prix était irrésistible ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Les modèles bon marché et « assez bons » tentent le plus pour le travail clinique et administratif à fort volume — exactement là où validation et portabilité comptent le plus. <strong>Quand nous adoptons un modèle quasi-frontière à une fraction du coût, nos flux validés et nos évaluations nous suivent-ils vers un second fournisseur, ou la remise exige-t-elle discrètement que nos données et notre contexte cliniques vivent dans la plateforme du vendeur — le garde-manger déplacé dans son cellier pour mériter l'économie ?</strong></li>
+  <li>Le produit d'appel recrute les économes. <strong>Nos objectifs de réduction de coût récompensent-ils la prise du modèle le moins cher sans égard au verrouillage, ou exigent-ils le prix du lot entier — plateforme, résidence des données, sortie — pour qu'une économie de 95 % qui abandonne nos fondations soit comptée comme la dépense qu'elle est réellement ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacture</div><ul>
+  <li>Vous savez déjà qu'un composant vendu à perte cache d'ordinaire un piège de consommables captifs ou de source unique. <strong>Avons-nous appliqué la même discipline d'achat à l'IA « assez bonne à un vingtième du coût » — en exigeant le coût total de possession, verrouillage et sortie compris — ou évaluons-nous les modèles d'IA au prix affiché d'une façon que nous ne tolérerions jamais pour un roulement ou un automate ?</strong></li>
+  <li>La double source est une seconde nature ici. <strong>Pour tout modèle bon marché adopté, gardons-nous une seconde source qualifiée exécutant la même charge sur un sol que nous possédons — pour que la remise soit un levier de négociation, pas une laisse — ou le prix d'aubaine dépend-il d'une source unique sur la plateforme du vendeur ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Vos marges adorent une facture d'inférence à –95 % — et c'est exactement l'appétit que le produit d'appel est fait d'exploiter. <strong>Captons-nous l'inférence bon marché derrière une abstraction que nous possédons (pour continuer d'arbitrer le modèle capable le moins cher par tâche), ou prenons-nous le prix le plus bas <em>comme</em> un engagement de plateforme qui nous coûtera bien plus que l'économie le jour où nous voudrons router ailleurs ?</strong></li>
+  <li>Les produits d'appel marchent parce que chaque aubaine est sensée en soi. <strong>Sur la douzaine d'affaires d'IA « trop belles pour refuser » signées cette année, avons-nous additionné la concentration de plateforme <em>cumulée</em> qu'elles alimentent — ou chacune a-t-elle paru bon marché isolément tandis qu'ensemble elles ont discrètement coulé presque des fondations ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>Un tarif à perte qui gagne le sol est une question d'achat public et de souveraineté, pas seulement un gain de budget. <strong>Au titre des devoirs que vous portez déjà (Règlement IA de l'UE, avec l'obligation de marquage de l'article 50(2) et de nouvelles interdictions dues le 2 décembre 2026, tel que rapporté), pouvons-nous montrer qu'aucun service public critique n'a été attiré sur la plateforme d'un seul fournisseur par une remise, sans sortie testée et abordable — et que nos données et modèles restent portables par conception ?</strong></li>
+  <li>Les services aux citoyens survivent aux cycles d'achat. <strong>Prenons-nous des modèles bon marché et capables sur un sol que nous possédons (poids ouverts quand il le faut, données portables, une couche d'abstraction que nous contrôlons) — ou laissons-nous une offre à un vingtième du coût couler des fondations mono-fournisseur sous des services qui devront encore tourner, et rester déplaçables, dans dix ans ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — Des fondations au produit d'appel</h2>
+<p>Il y a deux éditions, la distinction a été tracée et elle tient encore : <strong>ce qui s'est banalisé (le modèle) n'est pas ce qui vous verrouille (les fondations).</strong> L'édition « Fondations » disait d'encaisser la bonne nouvelle — l'intelligence bon marché et interchangeable — en possédant le sol sur lequel le modèle se branche. Cette semaine, les propriétaires de fondations ont dévoilé la contre-manœuvre bâtie précisément pour défaire cette discipline, et ce n'est pas une guerre des prix sur le fourneau. <strong>C'est le produit d'appel : donner le fourneau — qualité quasi-frontière à une fraction du coût — à la condition, le plus souvent tue, qu'il ne brûle à bas prix que sur le sol du vendeur.</strong> Le lancement de Microsoft à Ignite est la manœuvre au grand jour : une famille de modèles <strong>MAI</strong> maison dont le titre est « plus petit et moins cher bat la frontière », dont le modèle de code phare est revendiqué à <strong>~96 % de Claude Opus 5.5 à ~5 % du coût et ~98 % de GPT-6.1 Sol à ~40 % du prix</strong>, et dont la distribution est <strong>GitHub Copilot</strong> — la plateforme propre du vendeur. Le point est net : <strong>la remise est réelle, la qualité est réelle, et c'est exactement pourquoi c'est dangereux — un produit d'appel ne vainc pas votre jugement, il le recrute.</strong></p>
+<div class="card"><ul>
+  <li><strong>La nouvelle — le propriétaire des fondations vend le feu à perte, et le feu est bon.</strong> <strong>À Microsoft Ignite (17 nov. 2026), Microsoft a dévoilé un rapporté six modèles MAI maison (code, cybersécurité, image, voix) ; MAI Code 2 est revendiqué à ~98 % de GPT-6.1 Sol à ~40 % du prix et ~96 % de Claude Opus 5.5 à ~5 % du coût, disponible dans GitHub Copilot, et un modèle cyber a obtenu 92,3 % contre 91,5 % pour GPT-6 Astra à un test de détection de vulnérabilités, présenté à « ~50 % du coût des modèles de pointe » (Axios ; Decrypt ; ITPro ; Windows Report, tel que rapporté).</strong> Trois points d'ingénierie s'ensuivent. Premièrement, <em>l'affirmation de qualité est plausible et celle de prix est en partie promotionnelle</em> — Decrypt signale que les comparaisons les plus spectaculaires reposent sur un tarif <em>promotionnel</em> et que les benchmarks sont ceux de Microsoft, donc le nombre durable est « quasi-frontière à un coût nettement plus bas », pas littéralement « 5 % ». Deuxièmement, <em>« assez bon » est désormais une catégorie de produit, pas un compromis</em> — pour une large part des charges d'entreprise (code de routine, tri, classification, étapes d'agents à fort volume), un modèle à qualité quasi-frontière et une fraction du coût est le choix <em>rationnel</em> par défaut, et c'est une bonne nouvelle, bien réelle. Troisièmement, <em>la distribution est le piège</em> — le chemin le moins cher vers ce modèle est la plateforme du vendeur, donc l'économie et le verrouillage arrivent dans la même boîte.</li>
+  <li><strong>Le piège — un prix qui ne tient que dans une plateforme est un mécanisme de verrouillage, pas un prix de marché.</strong> <strong>Un modèle n'est un composant interchangeable que si son économie survit au déplacement ; un tarif à –95 % qui s'évapore dès que vous routez la charge par une abstraction que vous possédez, ou vers un second fournisseur, n'est pas un fourneau moins cher mais un droit d'entrée au sol du vendeur.</strong> Deux réalités s'opposent au réflexe de simplement prendre l'affaire. <strong>Premièrement, le produit d'appel attaque directement la discipline « posséder le sol ».</strong> Toute la valeur de la banalisation n'est captée que si changer est bon marché ; une remise conditionnée au <em>non</em>-recours à l'abstraction est conçue pour rendre le changement à nouveau coûteux — elle rachète le verrouillage que la banalisation avait donné. <strong>Deuxièmement, le coût quitte la ligne au token pour le lot.</strong> Le vrai prix d'un modèle à perte est la plateforme que vous devez adopter, la gravité des données que vous accumulez dedans, l'orchestration propriétaire que vous câblez autour, et le coût de sortie auquel vous souscrivez discrètement — rien de tout cela n'apparaît sur le devis. Le rail antérieur se lit vrai de l'extérieur : <strong>81 % inquiets de la dépendance au fournisseur, 47 % une fonction s'arrête en cas de panne ou de hausse de prix, seulement 6 % sûrs d'un changement propre (Zapier 2026, tel que rapporté)</strong> — et le produit d'appel est le procédé de fabrication le plus efficace de ces 6 %, précisément parce que chaque pas vers lui est une économie authentique.</li>
+  <li><strong>La réponse — chiffrez le lot, puis possédez, gardez, allumez.</strong> <strong>Avant d'adopter tout modèle quasi-frontière-à-une-fraction, calculez le coût du lot entier (dépendance à la plateforme + gravité des données + orchestration propriétaire + coût de sortie), pas la ligne au token affichée ; puis prenez l'économie <em>seulement</em> sur un sol que vous possédez — routez le modèle bon marché derrière une passerelle/abstraction que vous contrôlez, gardez vos données, prompts et évaluations dans une forme portable que vous possédez (jamais déplacée dans la plateforme du vendeur pour mériter le prix), et gardez une seconde source qualifiée allumée pour que la remise soit un levier, pas une laisse.</strong> C'est la même couture sur laquelle le radar revient toujours — <em>pouvoir rendre compte de ce que vous exécutez, et agir dessus</em> — pointée maintenant sur le tour commercial le plus affûté du marché : non ce que le modèle coûte au token, mais ce que le <em>lot</em> vous coûte en liberté, et si vous pouvez encore franchir la porte.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>le dividende de la banalisation est réel et bon à encaisser — « assez bon » à une fraction du coût est un cadeau authentique — mais les propriétaires de fondations ont appris à vous tendre ce cadeau dans une boîte dont le couvercle est votre sol.</strong> Le mode de défaillance est exact et ce <em>n'est pas</em> l'évident : ce n'est pas l'entreprise qui surpaie, c'est l'entreprise avisée et disciplinée sur les coûts qui prend une douzaine d'affaires à –90 % sensées chacune et se réveille pour trouver tout son domaine tournant sur une plateforme qu'elle ne peut plus quitter. La traduction pour le conseil : <strong>chiffrez le lot, pas le fourneau ; prenez le feu bon marché seulement sur un sol que vous possédez.</strong> Une maison qui se félicite d'une économie de 95 % tandis que cette économie recoule discrètement ses fondations n'a pas été économe — elle a acheté la chose la plus chère du marché et reçu une remise en guise de reçu.</p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le produit d'appel : le propriétaire des fondations donne le fourneau pour gagner le sol. La remise est réelle et la qualité est réelle, et c'est exactement pourquoi cela marche — un produit d'appel ne vainc pas votre jugement, il le recrute. En haut à gauche, le feu d'aubaine, le produit d'appel : Microsoft MAI à Ignite le 17 novembre ; MAI Code 2 revendiqué à environ 96 pour cent de Claude Opus 5.5 à environ 5 pour cent du coût et environ 98 pour cent de GPT-6.1 Sol à environ 40 pour cent du prix, dans GitHub Copilot ; un modèle cyber a obtenu 92,3 pour cent contre 91,5 pour cent pour Astra ; assez bon à un vingtième du coût. En haut à droite, la facture qu'on ne voit pas, le lot : le prix ne tient que dans la plateforme, GitHub Copilot ; la réserve de bois, la gravité des données ; la cheminée, l'orchestration ; les chariots pour partir un jour ; débranchez-le et la remise disparaît. Entre les deux : un feu bon marché seulement dans une maison est un droit d'entrée, pas une aubaine, donc chiffrez le lot, pas le fourneau, puis prenez l'économie sur votre propre sol. Au milieu, comment se fabrique le seulement-6-pour-cent-pourraient-changer, une aubaine à la fois : les 94 pour cent qui ne peuvent bouger n'ont pas été arnaqués, ils ont été enchantés, affaire par affaire ; chaque remise est sensée en soi ; ensemble elles coulent des fondations ; 81 pour cent craignent la dépendance ; 47 pour cent disent qu'une fonction s'arrête en cas de panne ou de hausse de prix ; seulement 6 pour cent sûrs d'un changement propre, selon Zapier 2026 tel que rapporté. En bas à gauche, à éviter, prendre le prix comme le sol : n'inscrire que des dollars par token, y déplacer ses données pour mériter le prix, traiter une remise comme un vœu de plateforme, signer douze affaires trop belles pour refuser. En bas à droite, à faire, prendre l'économie sur votre sol : chiffrer le lot plateforme plus données plus sortie, placer le modèle bon marché derrière une abstraction que vous possédez, garder le garde-manger dans votre propre cellier, garder un second feu allumé pour que la remise soit un levier." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE PRODUIT D'APPEL — donner le fourneau pour gagner le sol</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">La remise est RÉELLE. La qualité est RÉELLE. Un produit d'appel ne vainc pas votre jugement — il le recrute.</text>
+
+  <!-- the bargain fire -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">LE FEU D'AUBAINE (le produit d'appel)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Microsoft MAI (Ignite, 17 nov.)</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MAI Code 2 : ~96 % d'Opus 5.5 à ~5 % du coût</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">~98 % de GPT-6.1 Sol à ~40 % du prix (Copilot)</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">cyber : 92,3 % contre Astra 91,5 %</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ « assez bon » à un vingtième</text>
+
+  <!-- the bundle -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">LA FACTURE QU'ON NE VOIT PAS (le lot)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">le prix ne tient que À L'INTÉRIEUR :</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">plateforme (Copilot) · bois (données)</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">cheminée (orchestration)</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">les chariots pour partir un jour</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ débranchez-le → la remise disparaît</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">bon marché seulement dans une maison = un droit d'entrée, pas une aubaine ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">COMMENT SE FABRIQUE « SEULEMENT 6 % » — une aubaine à la fois</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">les 94 % qui ne peuvent bouger n'ont pas été arnaqués — ils ont été ENCHANTÉS, affaire par affaire</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">chaque remise est sensée en soi · ensemble elles coulent des fondations</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">81 % craignent la dépendance · 47 % une fonction s'arrête en cas de panne/hausse</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">seulement 6 % sûrs d'un changement propre (Zapier 2026, tel que rapporté)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">donc ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">À ÉVITER : prendre le prix comme le sol</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· n'inscrire que des $/token</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· y déplacer ses données pour mériter le prix</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· une remise = un vœu de plateforme</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· douze affaires « trop belles pour refuser »</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">enchanté sur un sol qu'on ne peut quitter</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">À FAIRE : prendre l'économie sur VOTRE sol</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· chiffrer le lot (plateforme+données+sortie)</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· modèle bon marché derrière une abstraction à vous</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· le garde-manger reste dans votre cellier</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un SECOND FEU allumé → la remise est un levier</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">feu bon marché, sol que vous possédez</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">La remise est réelle — encaissez-la en prenant le feu bon marché sur un sol que vous possédez.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Chiffrez le lot, pas le fourneau · ne laissez jamais le vendeur vous donner le feu gratuitement.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>Le feu d'aubaine — le produit d'appel</span>
+  <span><i class="dot" style="background:#a5416a"></i>Le lot — où vit le coût</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Comment se fabriquent les 6 %</span>
+</div>
+</div>
+
+<h3>Le feu d'aubaine contre le lot — ce qui est bon marché, et ce à quoi il vous engage discrètement</h3>
+<table>
+<tr><th>Le feu d'aubaine (le produit d'appel — réel, et bon)</th><th>La facture qu'on ne voit pas (le lot — où vit le coût)</th></tr>
+<tr><td>MAI Code 2 : ~96 % d'Opus 5.5 à ~5 % du coût (dans GitHub Copilot)</td><td>La plateforme dans laquelle seul le prix tient (Copilot / Azure / Foundry)</td></tr>
+<tr><td>~98 % de GPT-6.1 Sol à ~40 % du prix — « assez bon », livré</td><td>La gravité des données que vous y accumulez pour mériter le tarif</td></tr>
+<tr><td>Modèle cyber : 92,3 % contre Astra 91,5 %, « ~50 % du coût de pointe »</td><td>L'orchestration propriétaire que vous câblez autour</td></tr>
+<tr><td>La remise est réelle ; la qualité est réelle</td><td>Le coût de sortie — les chariots pour router ailleurs un jour</td></tr>
+<tr><td>Captée seulement si vous possédez le sol où il se branche</td><td>Perdue dès que vous le débranchez du sol du vendeur</td></tr>
+<tr><td>Votre posture : encaisser le dividende</td><td>Votre posture : chiffrer le lot, pas le fourneau</td></tr>
+</table>
+
+<h3>Pourquoi « le produit d'appel » est la discipline qui compte maintenant</h3>
+<div class="card">
+<p>L'édition « Fondations » vous disait d'encaisser l'intelligence bon marché et interchangeable en possédant le sol où elle se branche. Le produit d'appel est la réponse des propriétaires de fondations : <strong>rendre l'intelligence bon marché seulement sur leur sol.</strong> Les chiffres de Microsoft à Ignite — qualité quasi-frontière à une fraction du coût, distribuée via GitHub Copilot — sont cette réponse dite simplement, et le piège n'est ni dans le benchmark ni dans le tarif promotionnel mais dans le mot <em>dans</em>. Une gouvernance qui s'arrête à « le modèle est-il bon marché et capable ? » laissera passer l'aubaine tout droit, parce que l'aubaine est authentique. Les domaines qui gardent leur assise poseront la seule question que la remise est conçue pour faire sauter — <em>bon marché où, et déplaçable à quel coût ?</em> — et prendront l'économie réelle et merveilleuse seulement sur un sol qu'ils possèdent.</p>
+</div>
+
+<h3>Comment cela atterrit sur les domaines hérités</h3>
+<div class="card">
+<p>La même couture sur laquelle ce radar revient toujours — <strong>pouvoir rendre compte de ce que vous exécutez, et agir dessus</strong> — affûtée maintenant en <em>pouvoir chiffrer ce qu'une aubaine vous coûte vraiment, et vous en détourner.</em> Sur un domaine hérité, le produit d'appel est presque irrésistible, car la pression pour couper la dépense d'IA est réelle, la remise est énorme, et la façon la plus simple de la réclamer est d'adopter la plateforme du vendeur en bloc. C'est exactement le réflexe à vérifier : une économie qui recoule vos fondations n'est pas une économie. Le rétrofit est <strong>chiffrer, puis posséder, garder, allumer. Chiffrez</strong> le lot : pour chaque modèle remisé, chiffrez la plateforme, la gravité des données, l'orchestration et la sortie, et mettez ce total — pas le tarif au token — devant le conseil. <strong>Possédez</strong> le sol : routez le modèle bon marché derrière une abstraction que vous contrôlez, pour que l'économie soit à vous quand vous changez. <strong>Gardez</strong> le garde-manger : ne déplacez jamais vos données, prompts et évaluations dans la plateforme du vendeur seulement pour débloquer le prix. <strong>Allumez</strong> un second feu : gardez un substitut qualifié exécutant la même charge, pour que la remise soit un levier que vous tirez, pas une laisse à votre cou. Et gardez tout le refrain : le modèle est un fourneau loué que le propriétaire du sol vendra désormais à perte pour gagner votre sol ; le produit d'appel est pourquoi vous chiffrez le lot ; le savoir est le garde-manger ; la porte est l'unique porte ; le passeport nomme chaque agent ; le recensement est le registre ; l'inspecteur le réclame ; le trousseau est la clé que chaque agent détient ; le serrurier lit vos propres serrures ; la table des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi votre nom est sur l'obligation ; le second salaire est pourquoi demander de quel pain mange chaque agent qui conseille ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé ; les fondations sont pourquoi posséder le sol — et <em>le produit d'appel est pourquoi, ayant résolu de posséder le sol, vous chiffrez le lot entier avant de prendre la merveilleuse remise, et prenez le feu bon marché seulement sur un âtre que vous possédez.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>La nouvelle — le propriétaire des fondations vend le feu à perte.</strong> <strong>Microsoft Ignite (17 nov. 2026) : un rapporté six modèles MAI maison ; MAI Code 2 revendiqué à ~98 % de GPT-6.1 Sol à ~40 % du prix et ~96 % de Claude Opus 5.5 à ~5 % du coût, dans GitHub Copilot (Axios ; Decrypt ; Windows Report, tel que rapporté — tarif promotionnel, benchmarks du fournisseur).</strong> « Assez bon » est un produit livré, vendu par le propriétaire du sol.</li>
+  <li><strong>L'angle sécurité.</strong> <strong>Le modèle cyber de Microsoft a obtenu un rapporté 92,3 % contre 91,5 % pour GPT-6 Astra à un test de détection de vulnérabilités, présenté à « une performance de classe mondiale à ~50 % du coût des modèles de pointe » (Decrypt ; ITPro, tel que rapporté).</strong> Le « assez bon » bon marché arrive aussi dans la sécurité — validez le benchmark sur vos propres données avant de le câbler dans la défense.</li>
+  <li><strong>La contre-manœuvre d'observabilité.</strong> <strong>Cisco (nov. 2026) a étendu le red teaming adaptatif d'AI Defense avec Claude Mythos d'Anthropic, et Splunk a dévoilé « Tokenomics », appariant coût d'agent et évaluations de qualité, plus des petits modèles de langage sur mesure exécutant évaluations/garde-fous à un coût jusqu'à ~98 % inférieur à un LLM commercial (Cisco newsroom ; Network World ; TechTarget, tel que rapporté).</strong> L'outillage pour chiffrer coût-contre-qualité est lui-même un produit désormais — servez-vous-en pour chiffrer le lot.</li>
+  <li><strong>La frontière bouge toujours.</strong> <strong>Claude Fable 5.2 lancé le 9 nov. 2026 (Claude Mythos 5.2 aux organisations vérifiées) ; Gemini 4 Carbon en disponibilité générale sur Google Cloud ~10 nov. (tel que rapporté).</strong> Le haut du marché avance même quand le bas devient bon marché — ce qui est exactement pourquoi « assez bon » est une décision par tâche, pas un choix unique.</li>
+  <li><strong>L'arithmétique du verrouillage (reportée).</strong> <strong>81 % des dirigeants s'inquiètent de la dépendance au fournisseur d'IA ; 47 % disent qu'une fonction clé s'arrête en cas de panne ou de hausse de prix du fournisseur principal ; seulement 6 % sûrs de pouvoir changer proprement (Zapier 2026, tel que rapporté).</strong> Le produit d'appel est la façon dont ces 6 % se fabriquent — une aubaine authentique à la fois.</li>
+  <li><strong>Le rail réglementaire.</strong> <strong>Règlement IA de l'UE : les obligations de transparence de l'article 50 s'appliquent depuis le 2 août 2026 ; le marquage lisible par machine des contenus générés par IA (article 50(2)) et de nouvelles interdictions sont dus le 2 décembre 2026 au titre du Digital Omnibus, la plupart des obligations autonomes à haut risque étant reportées au 2 décembre 2027 ; un Digital Fairness Act ajoutant des règles pour les agents d'IA qui transigent pour les consommateurs a été proposé le 11 nov. 2026 (tel que rapporté, à rapprocher du Journal officiel).</strong> Portabilité et couche d'abstraction sont la façon d'y répondre sans un sol mono-fournisseur.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui retiennent l'œil</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Pourquoi Microsoft pense qu'une IA plus petite et moins chère peut battre Claude et GPT.</div><div class="a">— Decrypt, titre sur le lancement des modèles MAI à Ignite (17 novembre 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Microsoft dévoile six modèles d'IA alors qu'il pousse vers la frontière.</div><div class="a">— Axios, sur la gamme d'Ignite couvrant code, cybersécurité, image et voix (17 novembre 2026, tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Il offre une performance de classe mondiale à 50 % du coût des modèles de pointe.</div><div class="a">— Microsoft, présentant son modèle de sécurité maison à prix cassé (via ITPro, tel que rapporté ; les benchmarks sont ceux de Microsoft)</div></blockquote>
+<blockquote><div class="q">« Le feu quasi-frontière le moins cher de la vallée n'est bon marché que dans la maison du vendeur. Un fourneau que vous ne pouvez brûler à un vingtième du coût que sur le sol d'une seule entreprise n'est pas une aubaine — c'est un droit d'entrée à ce sol, écrit comme une remise. Chiffrez le lot, pas le fourneau. »</div><div class="a">— le radar, sur pourquoi une vraie remise peut être la chose la plus chère que vous achetez</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>Le produit d'appel, au grand jour</td><td><span class="v">Microsoft Ignite (17 nov. 2026) : un rapporté six modèles MAI maison (code, cybersécurité, image, voix) — « plus petit et moins cher bat la frontière », distribué via GitHub Copilot / Azure</span></td><td>Axios ; Decrypt, tel que rapporté</td></tr>
+<tr><td>La remise affichée</td><td><span class="v">MAI Code 2 revendiqué à ~98 % de la performance de GPT-6.1 Sol à ~40 % du prix, et ~96 % de celle de Claude Opus 5.5 à ~5 % du coût (tarif promotionnel ; benchmarks propres à Microsoft)</span></td><td>Axios ; Decrypt — « Why Microsoft Thinks Smaller, Cheaper AI Can Beat Claude and GPT », tel que rapporté</td></tr>
+<tr><td>L'argumentaire sécurité</td><td><span class="v">Le modèle cyber de Microsoft a obtenu ~92,3 % contre 91,5 % pour GPT-6 Astra à un test de détection de vulnérabilités ; « performance de classe mondiale à ~50 % du coût des modèles de pointe »</span></td><td>Decrypt ; ITPro ; Windows Report, tel que rapporté</td></tr>
+<tr><td>La contre-manœuvre d'observabilité</td><td><span class="v">Cisco a étendu le red teaming d'AI Defense avec Claude Mythos ; Splunk « Tokenomics » apparie coût d'agent et qualité, plus des SLM sur mesure à un coût jusqu'à ~98 % inférieur à un LLM commercial pour évaluations/garde-fous</span></td><td>Cisco newsroom ; Network World ; TechTarget, tel que rapporté</td></tr>
+<tr><td>La frontière avance toujours</td><td><span class="v">Claude Fable 5.2 lancé le 9 nov. 2026 (Mythos 5.2 aux organisations vérifiées) ; Gemini 4 Carbon en disponibilité générale sur Google Cloud ~10 nov. 2026</span></td><td>tel que rapporté</td></tr>
+<tr><td>L'arithmétique du verrouillage</td><td><span class="v">81 % des dirigeants s'inquiètent de la dépendance au fournisseur d'IA ; 47 % disent qu'une fonction clé s'arrête en cas de panne ou de hausse de prix ; seulement 6 % sûrs de pouvoir changer proprement</span></td><td>Enquête entreprise Zapier 2026, tel que rapporté</td></tr>
+<tr><td>Le rail réglementaire</td><td><span class="v">Marquage des contenus générés par IA (article 50(2)) et nouvelles interdictions du Règlement IA de l'UE dus le 2 décembre 2026 (Digital Omnibus) ; la plupart des obligations autonomes à haut risque reportées au 2 décembre 2027 ; Digital Fairness Act pour les agents d'IA transigeant pour les consommateurs proposé le 11 nov. 2026</span></td><td>Trackers du Règlement IA de l'UE / Commission européenne, tel que rapporté</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois manœuvres pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Chiffrez le lot, pas le fourneau — placez une barrière de coût total de possession devant chaque décision de modèle bon marché.</strong> Le titre est qualité quasi-frontière à ~5 % du coût (Microsoft MAI, Ignite) — réel, et bon à avoir. <strong>Ce mois-ci, pour chaque modèle « assez bon à une fraction du coût » envisagé, exigez un prix de lot sur une page : le tarif au token <em>plus</em> la plateforme sur laquelle seul il tourne à bas prix, les données que vous y déplaceriez, l'orchestration que vous câbleriez autour, et le coût mesuré de sortie — et portez <em>ce</em> nombre, pas la remise, à la décision.</strong> Rapportez la part des décisions d'IA remisée prises au prix du lot contre au prix affiché.</li>
+  <li><strong>Possédez le sol avant de prendre l'économie — routez les modèles bon marché derrière une abstraction que vous contrôlez.</strong> La remise ne capte de la valeur que si changer reste bon marché ; un prix conditionné à la plateforme du vendeur rachète le verrouillage. <strong>Ce mois-ci, assurez-vous que tout modèle quasi-frontière-bon-marché adopté se branche sur une passerelle/abstraction que vous possédez, avec vos données, prompts et évaluations gardés dans une forme portable que vous ne déplacez jamais dans la plateforme du vendeur seulement pour débloquer le tarif.</strong> Rapportez la part de la dépense en modèles bon marché qui se tient derrière une abstraction que vous possédez contre câblée directement dans le sol du vendeur.</li>
+  <li><strong>Allumez un second feu pour que l'aubaine reste un choix — gardez un substitut qualifié exécutant la même charge.</strong> Une remise dont vous ne pouvez vous détourner est une laisse ; les 6 % qui pouvaient changer proprement sont ceux qui gardaient un substitut vivant. <strong>Ce mois-ci, choisissez une charge que vous avez déplacée (ou déplacez) vers un modèle de fournisseur bon marché et montez une seconde source qualifiée qui l'exécute sur un sol que vous possédez — mesurez le temps et le coût de bascule vers elle — pour que la remise devienne un levier de négociation, pas un engagement.</strong> Rapportez le temps de bascule mesuré pour cette charge et un plan daté pour l'étendre. <strong>Le modèle est un fourneau loué que le propriétaire du sol vendra désormais à perte pour gagner votre sol ; le produit d'appel est pourquoi vous chiffrez le lot entier ; le savoir est le garde-manger ; le recensement est le registre ; l'inspecteur le réclame ; le trousseau est la clé que chaque agent détient ; le serrurier lit vos propres serrures ; la table des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la commission borne ce qu'un agent peut atteindre ; la cloche révèle quand votre propre agent dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi votre nom est sur l'obligation ; le second salaire est pourquoi demander de quel pain mange chaque agent qui conseille ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé ; les fondations sont pourquoi posséder le sol sur lequel elle repose — et le produit d'appel est pourquoi, ayant résolu de posséder le sol, vous chiffrez le lot et non le fourneau, prenez le feu réellement bon marché seulement sur un âtre que vous possédez, avec votre garde-manger dans votre propre cellier et un second feu allumé, et vous souvenez que les 94 % qui ne peuvent plus bouger y sont arrivés une aubaine irrésistible à la fois.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> La nouvelle — Microsoft Ignite (17 nov. 2026) : un rapporté six modèles MAI maison (code, cybersécurité, image, voix) ; MAI Code 2 revendiqué à ~98 % de GPT-6.1 Sol à ~40 % du prix et ~96 % de Claude Opus 5.5 à ~5 % du coût, disponible dans GitHub Copilot ; un modèle cyber a obtenu 92,3 % contre 91,5 % pour GPT-6 Astra à un test de détection de vulnérabilités, « performance de classe mondiale à ~50 % du coût des modèles de pointe » (Axios — « Microsoft debuts six AI models as it pushes toward frontier » ; Decrypt — « Why Microsoft Thinks Smaller, Cheaper AI Can Beat Claude and GPT » ; ITPro ; Windows Report ; Finimize ; ITnews) — Decrypt note que les comparaisons de prix les plus spectaculaires reposent sur un tarif promotionnel et que les benchmarks sont ceux de Microsoft · La contre-manœuvre d'observabilité — Cisco a étendu le red teaming adaptatif d'AI Defense avec Claude Mythos d'Anthropic ; Splunk « Tokenomics » apparie coût d'agent et évaluations de qualité, plus des SLM sur mesure à un coût jusqu'à ~98 % inférieur à un LLM commercial (Cisco newsroom ; Network World ; TechTarget) · La frontière avance toujours — Claude Fable 5.2 (9 nov. 2026 ; Mythos 5.2 aux organisations vérifiées) ; Gemini 4 Carbon en disponibilité générale sur Google Cloud (~10 nov. 2026) · L'arithmétique du verrouillage — enquête entreprise Zapier 2026 (81 % inquiets de la dépendance ; 47 % une fonction clé s'arrête en cas de panne/hausse de prix ; seulement 6 % sûrs d'un changement propre) · Le rail réglementaire — Règlement IA de l'UE (transparence de l'article 50 depuis le 2 août 2026 ; marquage de l'article 50(2) et nouvelles interdictions dus le 2 déc. 2026 au titre du Digital Omnibus ; la plupart des obligations autonomes à haut risque reportées au 2 déc. 2027 ; Digital Fairness Act pour les agents d'IA transigeant pour les consommateurs proposé le 11 nov. 2026). Le cadrage « produit d'appel » — que le propriétaire des fondations donne le fourneau bon marché à perte pour couler son sol sous la maison, et qu'une maison doit chiffrer le lot (plateforme, gravité des données, orchestration, sortie) et prendre l'économie seulement sur un sol qu'elle possède, en gardant le garde-manger et un second feu — est expressément la lecture du radar. Les chiffres sont relayés depuis annonces de fournisseurs, recherche d'analystes et couverture secondaire par les organes nommés, repérés via recherche web, et marqués « tel que rapporté » ; la récupération directe de plusieurs pages sources (dont decrypt.co et axios.com) a été bloquée par le proxy d'egress réseau de l'environnement de compilation, donc les chiffres devraient être revérifiés contre les publications primaires avant republication. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 19 novembre 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../ask/index.html">Interroger le radar</a> · <a href="../ledger/index.html">Registre des prédictions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non supportée ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /audrey|amelie|female|google français/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'En pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
