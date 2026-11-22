@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 22 novembre 2026</title>
+<meta name="description" content="Radar IA quotidien : synthèse, allégorie pour dirigeants, questions transsectorielles et analyse technique sur « le puits à compteur » — les agents travaillent, mais ils font exploser le budget. Menlo Ventures (17 nov. 2026) : les entreprises ont dépensé ~4,7× leur budget IA 2025 en 2026 contre un plan de 1,9×, les gros utilisateurs d'agents en tête du dépassement ; Futurum : 46,9 % au-dessus du budget contre 5,6 % en dessous (n=1 636) ; ~60 % du coût agentique va à l'« affinage des réponses » — l'agent re-puisant le même seau. La manœuvre du conseil : poser un compteur par agent et par tâche, borner la boucle d'affinage, et intégrer le coût du puits dans chaque course. Citations et chiffres sourcés.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Lecteur à voix haute */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Basculer entre le thème clair et sombre" title="Clair / sombre">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Synthèse</a>
+  <a href="#allegory">Allégorie</a>
+  <a href="#clevel">Questions dirigeants</a>
+  <a href="#tech">Technique</a>
+  <a href="#quotes">Citations</a>
+  <a href="#numbers">Chiffres</a>
+  <a href="#sowhat">Et alors ?</a>
+  <span class="lang-switch">🌐 <a href="index.html">EN</a> · <strong>FR</strong></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ Radar IA · Vous avez financé le serviteur — jaugez maintenant ce qu'il boit</div>
+  <h1>Le puits à compteur</h1>
+  <div class="subhead">Une longue année a été consacrée à gouverner le serviteur — nommé, cadré, financé, gardé loyal. Ce matin, la facture du bailli des eaux arrive et affiche près de cinq fois le budget : les agents travaillent, et ils ont soif, et le puits est à compteur. Les entreprises prévoyaient de dépenser 1,9× le budget IA de l'an dernier et ont dépensé ~4,7× — et l'essentiel du tirage, c'est l'agent re-puisant le même seau.</div>
+  <div class="meta">Dimanche 22 novembre 2026 · Édition transsectorielle · Public : dirigeants + ingénierie</div>
+  <p class="lede">Le 17 novembre 2026, Menlo Ventures a publié son enquête 2026 sur les dépenses IA des entreprises (~400 décideurs d'entreprise américains responsables de &gt;4 Mds$ de dépenses IA), et le chiffre phare est un coup au ventre : les entreprises ont dépensé en moyenne ~4,7× leur budget IA 2025 en 2026 — contre un plan de seulement 1,9× — le dépassement étant imputé aux gros utilisateurs d'agents (tel que rapporté). Ce n'est pas une anomalie : l'enquête 2S-2026 de Futurum auprès de 1 636 entreprises rapporte 46,9 % au-dessus de leur budget IA prévu contre 5,6 % en dessous, et le mécanisme est désormais précis — ~60 % du coût de l'IA agentique va à l'« affinage des réponses », l'agent re-puisant le même seau jusqu'à être satisfait (MarketScale, tel que rapporté). Le serviteur est excellent. Il a aussi soif, le puits est à compteur, et l'essentiel de ce qu'il boit est dépensé à re-puiser l'eau qu'il a déjà tirée. La question du conseil a descendu d'un cran dans la pile : non plus <em>l'agent est-il nommé, cadré, financé et loyal ?</em> mais <em>jaugeons-nous ce qu'il tire réellement — par agent, par tâche — ou l'apprenons-nous sur la facture, après le conseil ?</em></p>
+  <button id="tts-launch" class="tts-launch">🔊 Écouter ce briefing</button>
+</header>
+
+<section id="summary">
+<h2>1 · Synthèse <span class="pill">lecture de 90 secondes</span></h2>
+<div class="card">
+<p>Pendant une longue année, le radar a bâti la <em>maison gouvernée</em> — nommer l'agent (la livrée), tenir un seul livre (l'intendant), signer la caution (la caution), vérifier son salaire (le second salaire), l'envoyer moissonner (les deux moissons), lui remettre une bourse cadrée (la bourse), et garder les fondations à soi (les fondations). Chacune de ces disciplines <strong>gouverne</strong> le serviteur. <strong>Ce matin, la question passe de gouverner le serviteur à jauger ce qu'il boit.</strong> Les données sont tombées d'un coup, et elles sont sans ambiguïté.</p>
+<p><strong>La facture — les agents travaillent, et ils font exploser le budget.</strong> Le <strong>17 novembre 2026, Menlo Ventures a publié son enquête 2026 sur les dépenses IA des entreprises</strong> (~400 décideurs d'entreprise américains, <strong>&gt;4 Mds$ de dépenses IA représentées</strong>) : les entreprises ont dépensé en moyenne <strong>~4,7× leur budget IA 2025 en 2026, contre un plan de 1,9×</strong> — le dépassement concentré chez les <strong>gros utilisateurs d'agents</strong>, la moyenne (4,7×) valant environ <strong>2,1× la médiane (2,2×)</strong>, la signature de quelques déploiements emballés qui tirent la moyenne vers le haut (Menlo Ventures, tel que rapporté). Ce n'est pas le mauvais trimestre d'une seule firme. L'<strong>enquête 2S-2026 de Futurum</strong> auprès de 1 636 entreprises rapporte <strong>46,9 % au-dessus de leur budget IA prévu contre seulement 5,6 % en dessous</strong> ; un instantané FinOps de <strong>McKinsey</strong> (petit échantillon) place la part au-dessus du budget près de neuf sur dix ; et les anecdotes mordent — Uber aurait épuisé l'intégralité de son budget IA 2026 <strong>en quatre mois</strong>, et une entreprise ayant donné à ses employés un accès sans plafond à un modèle de frontière aurait accumulé <strong>~500 M$ en un seul mois</strong> (Futurum ; McKinsey ; Inc. ; Axios, tel que rapporté).</p>
+<p><strong>La cause — l'essentiel de l'eau est dépensé à re-puiser le seau.</strong> La raison pour laquelle la dépense agentique dépasse tout plan est structurelle, pas négligente. Une seule requête utilisateur <strong>se ramifie</strong> — l'agent planifie, appelle des outils, réfléchit, recommence, et affine son propre brouillon jusqu'à être satisfait — de sorte qu'une « tâche » devient des dizaines d'appels de modèle. Le coupable précis a désormais un chiffre : <strong>~60 % du coût de l'IA agentique va à l'« affinage des réponses »</strong> (MarketScale, tel que rapporté) — l'agent tirant le même seau encore et encore pour peaufiner une réponse. Les budgets conçus pour du SaaS à l'utilisateur ou de l'inférence à l'appel <strong>ne modélisent pas un travailleur qui peut choisir de faire son travail cinq fois.</strong> Près de la moitié des organisations touchées par une surprise de dépense IA l'ont <strong>remontée au conseil</strong> (Mavvrik 2026, tel que rapporté) ; la surprise est désormais un événement de gouvernance, pas une ligne de budget.</p>
+<p><strong>La manœuvre — jaugez le puits, ou le puits vous jaugera.</strong> La manœuvre du conseil réemploie la discipline de l'année et la pointe sur la consommation. <strong>Premièrement, jaugez par agent et par tâche, pas une seule ligne « IA »</strong> — posez un compteur de tokens/coût sur chaque agent et chaque flux, pour connaître le coût par tâche utile <em>avant</em> la facture, pas après. <strong>Deuxièmement, attaquez l'affinage des réponses</strong> — bornez les reprises et les boucles de réflexion, ajustez le modèle à chaque étape (ne dépensez pas le modèle de frontière pour formater du JSON), mettez en cache et réutilisez, et fixez un budget de tokens par agent avec alertes et plafond ferme. <strong>Troisièmement, intégrez le coût du puits dans chaque course</strong> — avant d'autoriser un flux agentique, mettez son coût d'exécution attendu à côté de sa valeur attendue, et plafonnez ou supprimez ceux qui boivent plus qu'ils ne valent. Faites-le <strong>maintenant</strong>, tant que le dépassement est de 4,7× et récupérable, pas après un mois à 500 M$.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>La facture — l'agent travaille, et il boit 4,7× le budget.</strong> <strong>Menlo Ventures (17 nov. 2026) : les dépenses IA 2026 des entreprises ont atteint en moyenne ~4,7× celles de 2025 contre un plan de 1,9× ; ~400 décideurs américains, &gt;4 Mds$ représentés ; les gros utilisateurs d'agents tirent le dépassement (moyenne 4,7× ≈ 2,1× la médiane 2,2×) (tel que rapporté).</strong> Gouverner le serviteur n'a pas jaugé sa soif.</div></div>
+<div class="num"><div class="b">2</div><div><strong>La cause — ~60 % de l'eau est dépensée à re-puiser le seau.</strong> <strong>~60 % du coût de l'IA agentique est de l'« affinage des réponses » (l'agent se relançant pour peaufiner une réponse) ; 46,9 % des entreprises sont au-dessus de leur budget IA contre 5,6 % en dessous (Futurum, n=1 636) ; ~la moitié des surprises de dépense remontent au conseil (MarketScale ; Futurum ; Mavvrik, tel que rapporté).</strong> Les budgets conçus pour du SaaS ne peuvent modéliser un travailleur qui fait son travail cinq fois.</div></div>
+<div class="num"><div class="b">3</div><div><strong>La manœuvre — jauger par agent et par tâche, borner l'affinage, intégrer le coût du puits dans chaque course.</strong> Posez un compteur de coût sur chaque agent et chaque flux ; bornez les reprises et ajustez les modèles par étape ; et mettez le coût d'exécution de chaque fonction agentique à côté de sa valeur avant le lancement — pour que la surprise à 4,7× soit captée dans l'instrument, pas sur la facture.</div></div>
+<div class="card"><strong>En somme :</strong> la livrée a nommé le serviteur, l'intendant a tenu le livre, la caution a mis votre nom sur l'obligation, le second salaire a vérifié quel intérêt il servait, les deux moissons l'ont envoyé moissonner, la bourse l'a financé, les fondations ont gardé le sol à vous — tout cela <strong>gouverne</strong> le serviteur. <strong>Le puits à compteur, c'est ce que le serviteur boit.</strong> Ce mois-ci, les données ont prouvé une chose que la maison gouvernée n'avait pas encore chiffrée : un agent excellent et bien gouverné est aussi un agent <strong>assoiffé</strong>, et le puits est à compteur. Les entreprises prévoyaient de dépenser 1,9× le budget IA de l'an dernier et ont dépensé 4,7× ; près de la moitié ont dépassé le plan ; et le plus gros tirage n'est pas le travail lui-même mais l'agent <strong>re-puisant le même seau</strong> — ~60 % du coût agentique est de l'affinage de réponses. Le piège, c'est que cela ressemble à une réussite : les agents sont affairés, les tableaux de bord sont au vert, le travail est livré — jusqu'à ce que la facture du bailli des eaux arrive et que le conseil demande pourquoi l'IA a coûté 2,5× le plan. Les domaines qui gardent pied feront trois choses sans gloire : <strong>jauger</strong> chaque agent et chaque tâche (coût par tâche utile, visible avant la facture), <strong>borner</strong> la boucle d'affinage (reprises bornées, modèles ajustés, budgets de tokens fermes), et <strong>intégrer le coût du puits dans chaque course</strong> (coût d'exécution attendu à côté de la valeur attendue, sinon ça ne se lance pas). Vous avez financé le serviteur comme un employé. Lisez maintenant la facture, et posez un compteur sur le puits avant que le puits ne pose un compteur sur vous.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allégorie du jour</h2>
+<div class="card allegory">
+<h3>🖋️ « Le puits à compteur »</h3>
+<p><em>Sujet : ce matin, le cadre passe de gouverner le serviteur à jauger ce qu'il boit. Le 17 novembre 2026, Menlo Ventures a publié son enquête 2026 sur les dépenses IA des entreprises (~400 décideurs, &gt;4 Mds$ de dépenses IA) : les entreprises ont dépensé ~4,7× leur budget IA 2025 en 2026 contre un plan de 1,9×, les gros utilisateurs d'agents tirant le dépassement (tel que rapporté). L'enquête 2S-2026 de Futurum rapporte 46,9 % au-dessus de leur budget IA contre 5,6 % en dessous (n=1 636) ; ~60 % du coût de l'IA agentique est de l'« affinage des réponses » — l'agent re-puisant le même seau (MarketScale, tel que rapporté) ; et ~la moitié des surprises de dépense remontent désormais au conseil (Mavvrik). L'allégorie du puits à compteur est l'illustration propre du radar.</em></p>
+<p>Il était une grande maison qui avait passé une longue et soigneuse année à rendre ses serviteurs excellents, et à bien les gouverner. Elle avait nommé chaque main et lui avait taillé une clé cadrée ; elle avait tenu un seul livre honnête ; elle avait laissé le nom du maître se porter caution du travail ; elle avait demandé quelle seconde pièce chaque serviteur conseiller touchait ; elle avait envoyé moissonner les serviteurs gouvernés ; elle avait remis à chacun une bourse cadrée dont le cordon restait à portée du maître ; et elle avait refusé de laisser le marchand couler les fondations sous tout le domaine. À toute mesure juste, c'était une maison bien tenue — gouvernée, financée, redevable. Le maître était fier, et il l'avait mérité.</p>
+<p>Or, la maison tirait son eau d'un <strong>puits à compteur</strong>. Cela avait toujours semblé une petite chose, presque indigne d'attention : les serviteurs travaillaient, et le travail donne soif, et le puits dans la cour donnait autant d'eau qu'une main pouvait en tirer — mais un bailli était assis à la margelle avec un bâton à encoches, et chaque seau tiré était un seau facturé. Des années durant, cela n'avait presque rien coûté, car les vieux serviteurs tiraient une tasse ici et une tasse là. Aussi le maître avait-il fixé le budget d'eau de l'année comme toujours : il regardait le tirage de l'an dernier, estimait la maison un peu plus affairée, et écrivait <strong>« deux fois l'an dernier, à peu près »</strong> — et n'y pensait plus.</p>
+<p>Puis, un matin gris proche de l'hiver, la <strong>facture du bailli des eaux</strong> arriva. Le maître rompit le sceau en s'attendant à l'ordinaire, et se figea. La facture n'était pas pour deux fois l'an dernier. <strong>Elle était pour près de cinq fois.</strong> Il la relut, croyant à une erreur de clerc, et ce n'en était pas une. Les nouveaux serviteurs — les malins, les infatigables, les gouvernés dont il était si fier — avaient tiré de l'eau toute l'année à un rythme que personne dans la maison n'avait songé à surveiller, et le bâton à encoches de la margelle s'était rempli encoche après encoche pendant que le maître admirait tout le travail accompli. Il n'était pas seul dans sa stupeur : dans toute la vallée, près d'<strong>une maison sur deux</strong> avait dépassé son budget d'eau cette année-là, et seule une poignée était restée en dessous (Futurum, tel que rapporté). La facture était assez grosse pour que l'intendant du maître fasse une chose qu'il n'avait jamais faite pour de l'eau : <strong>il la porta au conseil de la maison.</strong></p>
+<p>Alors le maître descendit dans la cour pour regarder le puits, ce qu'il n'avait jamais songé à faire, et ce qu'il vit expliqua tout. Son meilleur serviteur — vraiment la plus fine main qu'il eût, vive et consciencieuse — prenait une course, tirait un seau, regardait l'eau, décidait qu'elle n'était pas <em>tout à fait</em> assez claire, la reversait, et <strong>tirait de nouveau</strong>. Et regardait, et reversait, et <strong>tirait de nouveau.</strong> Pour une seule course, le serviteur consciencieux tirait le seau cinq, six, huit fois, affinant chaque fois l'eau un peu plus fin, chaque tirage encochant le bâton du bailli — et le maître comprit, avec un frisson, que <strong>l'essentiel de l'eau que sa maison payait n'était jamais bu à faire le travail. Elle était bue à re-puiser des seaux déjà tirés.</strong> La tally de la margelle avait un nom pour cela, le maître l'eût-il demandé : près de <strong>six parts sur dix</strong> de toute l'eau facturée allait non à la tâche, mais à son <em>affinage</em> (MarketScale, tel que rapporté). Son serviteur n'était pas gaspilleur de nature. Il était <strong>consciencieux sans limite</strong> — et un travailleur consciencieux sans limite devant un puits à compteur est le serviteur le plus coûteux qu'une maison puisse garder.</p>
+<p>Deux routes, comme toujours. La route facile était de payer la facture, de grommeler, et de fixer le budget d'eau de l'an prochain à « cinq fois l'an dernier » — ce qui n'est pas un plan, c'est une capitulation, et garantit que la facture grimpera encore. La route plus sage, que prirent les maisons avisées, ne commençait pas par le budget mais par la <strong>margelle</strong>. Elles posèrent un <strong>petit compteur sur la coupe de chaque serviteur</strong> — pour que la maison voie, sur le moment et non au printemps, quelle main tirait combien, pour quelle course. Elles fixèrent à chaque serviteur consciencieux une <strong>mesure</strong> : tire le seau, et s'il est assez clair pour servir, <em>sers-le</em> — tu peux re-tirer deux fois, pas huit, et une cloche sonne avant que tu n'atteignes le neuvième. Elles accordèrent le <strong>récipient à la course</strong> — on n'envoie pas la propre aiguière d'or du maître chercher de l'eau de vaisselle, et on ne dépense pas le tirage le plus fin et le plus cher pour une tâche qu'une tasse d'étain servirait. Et — la discipline la plus dure, et celle qui sauva le plus — avant de prendre toute nouvelle course régulière, l'intendant <strong>y intégrait désormais le coût du puits</strong> : il mettait le <em>tirage</em> attendu de la course à côté de sa <em>valeur</em> attendue, et toute course qui buvait plus qu'elle ne rendait était plafonnée, ou jamais commencée.</p>
+<p>Voici la part qui devrait dégriser un maître. La soif n'était pas une faute du serviteur ; c'était l'<strong>ombre de sa vertu</strong>. La chose même qui rendait les nouveaux serviteurs précieux — qu'ils reprenaient une tâche encore et encore jusqu'à ce qu'elle soit juste, infatigablement, sans se plaindre — était la chose même qui vidait le puits, car <em>infatigable</em> et <em>à compteur</em> font un couple ruineux quand personne ne compte. Une maison de la vallée, dit-on, avait donné à son serviteur le plus malin un <strong>tirage libre</strong> — la jouissance du puits, sans tally, sans limite, « pour ne pas le ralentir » — et en un <em>seul mois</em> ce seul serviteur tira assez d'eau pour ruiner un domaine plus petit (tel que rapporté). La leçon n'était pas que le serviteur était mauvais. Le serviteur était magnifique. La leçon était qu'<strong>un travailleur magnifique et infatigable est précisément celui qu'il faut jauger en premier</strong>, car ses vertus sont exactement ce qui vide le puits.</p>
+<p><strong>La morale, énoncée simplement :</strong> le modèle est un fourneau loué, désormais si bon marché qu'un plus grand n'arrache qu'un haussement d'épaules ; le savoir est le garde-manger ; les fondations sont le sol que vous gardez ; la porte est l'unique entrée ; le passeport nomme chaque agent ; le recensement les compte ; l'inspecteur réclame le rôle ; le trousseau est quelle clé chacun tient ; le serrurier lit vos propres serrures ; le tableau des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la course borne ce qu'un serviteur malin peut atteindre ; la cloche sonne à l'instant où votre serviteur dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi le nom du maître est sur l'obligation ; le second salaire est pourquoi demander quel pain chaque serviteur conseiller mange ; les deux moissons sont pourquoi l'envoyer moissonner et peser ce qu'il rapporte ; la bourse est pourquoi le financer comme un employé ; et <strong>le puits à compteur est pourquoi, ayant financé le serviteur, vous devez maintenant jauger ce qu'il tire : poser un compteur de coupe sur chaque main, donner aux consciencieux une limite pour qu'ils servent le seau au lieu de le re-tirer, accorder le récipient à la course, et intégrer le coût du puits dans chaque tâche avant de la commencer — car la conscience infatigable du serviteur est une vertu au travail et une catastrophe à la margelle, et une maison qui gouverne son serviteur parfaitement et ne compte jamais son eau passera tout audit et fera tout de même faillite.</strong> Une maison qui admire tout ce que ses serviteurs font, et ne demande jamais combien ils boivent, n'a pas été bien tenue ; elle a été chanceuse, jusqu'à la facture.</p>
+<p><strong>La question qu'elle impose :</strong> <em>Nos agents travaillent — les tableaux de bord sont au vert, les courses sont livrées. Mais savons-nous, par agent et par tâche, combien chacun tire réellement — et quelle part de cela est le travail contre le re-puisage sans fin du même seau ? Ou apprendrons-nous notre propre 4,7×, comme près de la moitié de la vallée, seulement quand la facture du bailli des eaux atteindra le conseil ?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · Questions pour dirigeants — par secteur</h2>
+<div class="sector"><div class="t">🌐 Transsectoriel (tout conseil)</div><ul>
+  <li><strong>Jaugeons-nous le puits, ou le lisons-nous sur la facture ?</strong> Les entreprises prévoyaient de dépenser 1,9× le budget IA de l'an dernier et ont dépensé <strong>4,7×</strong> (Menlo, tel que rapporté), et ~la moitié ont dépassé le plan (Futurum). <strong>Pouvons-nous montrer, par agent et par flux, le coût par tâche utile sur le moment — ou réconcilions-nous une seule ligne de budget « IA » un trimestre trop tard, après que le dépassement a déjà eu lieu ?</strong></li>
+  <li><strong>Quelle part de notre dépense agentique est le travail, et quelle part est du re-puisage du seau ?</strong> <strong>~60 % du coût de l'IA agentique est de l'« affinage des réponses » (MarketScale, tel que rapporté). Avons-nous instrumenté combien d'appels de modèle, de reprises et de boucles de réflexion une tâche typique génère — et avons-nous fixé une limite avant le neuvième tirage, ou chaque agent affine-t-il jusqu'à satisfaction à nos frais ?</strong></li>
+  <li><strong>Lequel de nos agents a un tirage libre ?</strong> L'accès sans plafond d'une firme à un modèle de frontière aurait accumulé <strong>~500 M$ en un mois</strong> (Axios, tel que rapporté). <strong>Y a-t-il un flux agentique dans notre domaine qui tourne sans plafond ferme de tokens/coût et sans coupe-circuit — « pour ne pas le ralentir » — et le saurions-nous avant la facture ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Services financiers</div><ul>
+  <li>Vous chiffrez nativement le coût des fonds et l'économie unitaire. <strong>Avons-nous un coût par tâche et un coût par résultat pour chaque flux agentique, avec des plafonds fermes — comme nous ne laisserions jamais une salle de marché tourner sans limites — ou la dépense IA est-elle une seule ligne sans plafond que nous ajustons après coup ?</strong></li>
+  <li>Les surprises de dépense sont désormais un événement de conseil (~la moitié remontent — Mavvrik, tel que rapporté). <strong>Avons-nous testé en condition de stress un « agent emballé » comme nous testons un trader voyou ou un choc de liquidité — un rayon d'explosion de coût borné, un plafond automatique, et une alerte le jour même — plutôt que de le découvrir à la clôture mensuelle ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Santé / Sciences de la vie</div><ul>
+  <li>Les flux agentiques validés se relancent et se réaffinent par conception, et l'affinage est exactement là où le coût se cache. <strong>Avons-nous mesuré le coût en tokens/calcul par cas validé, et pouvons-nous borner l'affinage emballé sans affaiblir la sécurité ou la piste d'audit qui ont rendu le flux validable au départ ?</strong></li>
+  <li>Les budgets ici sont liés au remboursement et aux lignes de subvention, pas à des factures cloud élastiques. <strong>Intégrons-nous le coût du puits dans chaque agent clinique ou de recherche avant déploiement — tirage attendu à côté de valeur attendue — pour qu'un agent consciencieux qui peaufine chaque réponse ne consomme pas discrètement le budget d'un programme ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Industrie / Manufacture</div><ul>
+  <li>Vous jaugez chaque intrant de la ligne — énergie, matières, heures-machine — à l'unité. <strong>L'IA est-elle jaugée de même : coût par unité de travail, par agent, avec une limite sur les plus assoiffés — ou est-elle le seul intrant de l'atelier que nous ne mesurons pas vraiment ?</strong></li>
+  <li>La discipline de fiabilité, ce sont des procédés bornés et répétables. <strong>Avons-nous borné les boucles de reprise et de réflexion de nos agents comme nous bornons une boucle de régulation — une limite ferme et une cloche — pour que « consciencieux sans limite » ne puisse porter le coût d'un flux à cinq fois le plan ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Distribution / Grand public</div><ul>
+  <li>Les marges sont minces et les volumes énormes, donc quelques centimes d'« affinage des réponses » par appel composent en argent réel. <strong>Intégrons-nous le coût du puits dans chaque fonction agentique côté client avant le lancement — coût par interaction × volume contre la marge qu'elle gagne — ou la livrons-nous pour découvrir le dépassement au pic ?</strong></li>
+  <li>La haute saison multiplie chaque coût par appel. <strong>Si la boucle d'affinage d'un agent s'allonge le jour le plus chargé, le coût grimpe-t-il linéairement en un dérapage budgétaire, ou avons-nous des plafonds par agent et un ajustement des modèles qui tiennent le coût unitaire à plat sous charge ?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Secteur public / Régulé</div><ul>
+  <li>Les budgets sont votés, audités et défendus en public. <strong>Pouvons-nous montrer un coût par résultat de service pour chaque flux IA et le défendre ligne par ligne — ou sommes-nous à un pilote sans plafond d'un constat d'audit et d'un dépassement à la une ?</strong></li>
+  <li>La continuité et l'intendance des fonds publics sont le devoir. <strong>Avons-nous posé des plafonds fermes et un compteur sur chaque agent touchant un service public, pour qu'un agent infatigable et bien intentionné ne puisse assécher un programme — et pouvons-nous prouver le plafond, pas seulement l'affirmer ?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Analyse technique — De la bourse au puits à compteur</h2>
+<p>Relisez la pile une fois de plus, depuis le siège du dirigeant qui a cessé de demander <em>cet agent est-il nommé, cadré, journalisé, loyal, moissonnant et financé ?</em> et a commencé à poser la question que la bourse a ouverte mais n'a pas close : <em>maintenant qu'il peut dépenser, combien tire-t-il réellement — et sur quoi ?</em> La porte admet l'agent ; le passeport le nomme ; le recensement le compte ; le trousseau est quelle clé il tient ; la course borne ce qu'il peut atteindre ; la livrée, l'intendant, la caution, le second salaire, les deux moissons et la bourse gouvernent ce qu'il est, sert, moissonne et dépense ; les fondations gardent le sol à vous. <strong>Chacune de ces choses gouverne le serviteur. Le puits à compteur, c'est sa <em>consommation</em> — et ce mois-ci, les données ont rendu la distinction impossible à ignorer : le dépassement 4,7×-contre-1,9× de Menlo, les 46,9 %-au-dessus-du-budget de Futurum, et la constatation précise que ~60 % du coût agentique est l'agent re-puisant son propre seau.</strong> Le propos est net : <strong>vous pouvez gouverner un agent parfaitement — le nommer, le cadrer, le financer — et faire tout de même faillite, car la gouvernance dit ce que l'agent <em>peut</em> faire, et le compteur dit ce qu'il <em>boit réellement</em>, et ce ne sont pas le même chiffre.</strong></p>
+<div class="card"><ul>
+  <li><strong>La facture — le coût agentique est non déterministe et composé, et les budgets conçus pour du SaaS ne peuvent le modéliser.</strong> <strong>Menlo Ventures (17 nov. 2026, ~400 décideurs américains, &gt;4 Mds$ représentés) : les dépenses IA 2026 des entreprises ont atteint ~4,7× celles de 2025 contre un plan de 1,9×, concentrées chez les gros utilisateurs d'agents, la moyenne (4,7×) ≈ 2,1× la médiane (2,2×) ; Futurum (2S 2026, n=1 636) : 46,9 % au-dessus du budget contre 5,6 % en dessous ; un instantané FinOps de McKinsey place la part au-dessus du budget près de 90 % sur un petit échantillon (tel que rapporté).</strong> Réalité d'ingénierie : un modèle de coût à l'utilisateur ou à l'appel suppose une unité de travail bornée. Un agent brise cette hypothèse — <em>une requête se ramifie</em> en appels de planification, appels d'outils, bavardage de sous-agents, reprises et auto-réflexion, de sorte que le nombre d'appels de modèle par « tâche » est une <em>distribution</em>, pas une constante, et sa queue est épaisse. La moyenne valant ~2,1× la médiane est le signe quantitatif : <strong>quelques flux emballés dominent la facture</strong>, ce qui est exactement la forme produite par des boucles d'affinage non bornées sur vos agents les plus utilisés.</li>
+  <li><strong>La cause — ~60 % du tirage est de l'« affinage des réponses », l'agent peaufinant sa propre réponse.</strong> <strong>~60 % du coût de l'IA agentique va à l'affinage des réponses (MarketScale, tel que rapporté) — le modèle se relançant (replanifier, re-rédiger, revérifier) jusqu'à atteindre un seuil de qualité.</strong> Trois conséquences d'ingénierie s'ensuivent. Premièrement, <em>le token le moins cher est celui que vous ne tirez jamais</em> : le plus grand levier n'est pas un prix par token plus bas mais <strong>moins d'appels, mieux bornés</strong> — bornez les reprises et la profondeur de réflexion, et arrêtez quand « assez bon pour servir » est atteint plutôt que quand « parfait » l'est. Deuxièmement, <em>ajustez le modèle à l'étape</em> : un flux qui utilise un modèle de frontière pour formater du JSON, router ou faire une classification triviale paie des prix d'aiguière d'or pour de l'eau de vaisselle — étagez les modèles par étape. Troisièmement, <em>mettez en cache et réutilisez</em> : l'affinage redérive souvent un contexte que l'agent avait déjà ; la mise en cache des invites/résultats et la mémoire transforment les tirages répétés en tirages gratuits.</li>
+  <li><strong>La manœuvre — jauger à la bonne granularité, borner la boucle, et intégrer le coût du puits dans chaque course.</strong> <strong>Posez un compteur de tokens/coût sur chaque agent et chaque tâche (pas une seule ligne « IA ») ; fixez un budget de tokens par agent avec alertes et plafond ferme ; bornez les reprises et la profondeur de réflexion ; ajustez les modèles par étape ; et, avant de lancer tout flux agentique, mettez son coût d'exécution attendu à côté de sa valeur attendue — en réemployant les disciplines d'identité, de journalisation et de propriété déjà bâties pour la livrée, l'intendant et la bourse, maintenant pointées sur la consommation.</strong> C'est la même couture à laquelle le radar revient toujours — <em>pouvoir rendre compte de, et agir sur, ce que vous exécutez</em> — maintenant visant l'axe que la bourse a ouvert : non pas si l'agent <em>peut</em> dépenser, mais combien il tire réellement, visible dans l'instrument et plafonné en vol, pas découvert sur la facture.</li>
+</ul></div>
+<p>Le cœur stratégique : <strong>gouverner le serviteur et jauger le puits sont des disciplines différentes, et une maison qui a maîtrisé la première peut tout de même être ruinée en négligeant la seconde.</strong> Le marché rend le piège concret et séduisant : les agents sont affairés, le travail est livré, les tableaux de bord sont au vert — chaque signal dit <em>réussite</em> — et le seul signal qui dit <em>4,7×</em> est une facture qui arrive un trimestre trop tard. Traduction au conseil : <strong>instrumentez la consommation avant de la passer à l'échelle.</strong> Le mode de défaillance est exact : <strong>une maison qui nomme, cadre, finance et gouverne ses agents à la perfection — et ne pose jamais de compteur à la margelle ni de limite à l'affinage — passera tout examen de gouvernance et verra tout de même l'IA coûter 2,5× son plan, car elle a gouverné ce que l'agent peut faire et n'a jamais mesuré ce qu'il boit.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le puits à compteur : vous avez financé le serviteur, jaugez maintenant ce qu'il tire. L'agent travaille et les tableaux de bord sont au vert, mais il a soif, le puits est à compteur, et l'essentiel de l'eau est dépensé à re-puiser le même seau. En haut à gauche, la facture, qui arrive un trimestre trop tard : le tirage prévu était de 1,9 fois l'an dernier, le tirage réel d'environ 4,7 fois l'an dernier ; la moyenne 4,7 fois vaut environ 2,1 fois la médiane 2,2 fois ; 46,9 pour cent au-dessus du budget et 5,6 pour cent en dessous ; les gros utilisateurs d'agents en tête ; un agent à tirage libre a atteint environ 500 millions de dollars en un mois. En haut à droite, où va l'eau : environ 60 pour cent est de l'affinage des réponses, l'agent re-puisant le même seau en replanifiant, re-rédigeant et revérifiant ; environ 40 pour cent est le travail réel de planification, d'outils et de réponse ; les budgets conçus pour le logiciel en tant que service ne peuvent modéliser un travailleur qui fait son travail cinq fois. Entre les deux : l'écart est la boucle d'affinage, et la conscience infatigable du serviteur est une vertu au travail et une catastrophe à la margelle quand personne ne compte. Au milieu, l'arithmétique d'un puits à compteur, selon Menlo, Futurum et MarketScale 2026 tel que rapporté : prévu 1,9 fois et dépensé environ 4,7 fois selon Menlo sur environ 400 firmes et plus de 4 milliards de dollars ; 46,9 pour cent des entreprises au-dessus de leur budget IA contre 5,6 pour cent en dessous selon Futurum sur 1636 firmes ; environ 60 pour cent du coût agentique est de l'affinage des réponses et environ la moitié des surprises remontent au conseil. En bas à gauche, stop, admirer le serviteur affairé : une seule ligne de budget IA, réconcilier après la facture, des agents à tirage libre sans plafond, et un budget fixé à cinq fois l'an dernier, ce qui est une capitulation. En bas à droite, démarrer, jauger le puits : un compteur de coût par agent et par tâche, borner les reprises et la réflexion avec une cloche avant le neuvième tirage, ajuster le modèle à chaque étape, et intégrer le coût du puits dans chaque course en mettant le coût à côté de la valeur." style="max-width:660px;width:100%;height:auto">
+  <!-- titre -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">LE PUITS À COMPTEUR — vous avez financé le serviteur ; jaugez ce qu'il tire</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">L'agent travaille (tableaux au vert). Il a aussi SOIF, le puits est À COMPTEUR, et l'essentiel re-puise le même seau.</text>
+
+  <!-- la facture -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">LA FACTURE (arrive un trimestre tard)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">tirage prévu : 1,9× l'an dernier</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">tirage réel : ~4,7× l'an dernier</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">moyenne 4,7× ≈ 2,1× médiane 2,2×</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">46,9 % AU-DESSUS · 5,6 % en dessous</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ un agent à tirage libre : ~500 M$/mois</text>
+
+  <!-- où va l'eau -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a2412" stroke="#9a7d10"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e8c766" font-family="sans-serif">OÙ VA L'EAU</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~60 % AFFINAGE DES RÉPONSES</text>
+  <text x="364" y="117" font-size="10" fill="#f0e2a8" font-family="sans-serif">re-puiser le même seau :</text>
+  <text x="364" y="133" font-size="10" fill="#f0e2a8" font-family="sans-serif">replanifier · re-rédiger · revérifier</text>
+  <text x="364" y="153" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~40 % le travail réel</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ le SaaS ne modélise pas un travailleur 5×</text>
+
+  <!-- flèches vers le bas -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e8c766" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e8c766"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">l'écart est la boucle d'affinage — une vertu au travail, une catastrophe à la margelle ▼</text>
+
+  <!-- l'arithmétique -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">L'ARITHMÉTIQUE D'UN PUITS À COMPTEUR — (Menlo, Futurum, MarketScale 2026, tel que rapporté)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">prévu 1,9× / dépensé ~4,7× (Menlo ; ~400 firmes, &gt;4 Mds$)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">46,9 % des entreprises AU-DESSUS de leur budget IA contre 5,6 % en dessous (Futurum, n=1 636)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">~60 % du coût agentique = affinage des réponses ; ~la moitié des surprises remontent au conseil</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">la moyenne valant 2,1× la médiane = quelques agents emballés dominent la facture</text>
+
+  <!-- flèche vers le bas -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">donc ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP : admirer le serviteur affairé</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· une seule ligne de budget « IA »</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· réconcilier après la facture</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· agents à « tirage libre » sans plafond</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· budget = « 5× l'an dernier » (capituler)</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">à un tirage libre d'un mois à 500 M$</text>
+
+  <!-- démarrer -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">DÉMARRER : jauger le puits</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un compteur de coût par agent ET par tâche</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· borner reprises/réflexion ; une cloche avant 9</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· ajuster le modèle à chaque étape</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· intégrer le coût du puits dans chaque course</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">coût par tâche capté dans l'instrument</text>
+
+  <!-- bandeau pied -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Gouverner le serviteur et jauger le puits sont des disciplines différentes — maîtrisez les deux.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Jaugez le puits — par agent, par tâche — ou le puits vous jaugera.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>La facture — prévu contre réel</span>
+  <span><i class="dot" style="background:#9a7d10"></i>Où va l'eau — l'affinage</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>L'arithmétique du puits</span>
+</div>
+</div>
+
+<h3>Gouverner le serviteur contre jauger le puits — ce que vous avez déjà, et ce qui vous manque encore</h3>
+<table>
+<tr><th>Gouverner le serviteur (déjà bâti)</th><th>Jauger le puits (le manque de ce mois-ci)</th></tr>
+<tr><td>Nomme, cadre et journalise chaque agent (livrée, recensement, course)</td><td>Mesure ce que chaque agent <em>tire</em> réellement, par tâche</td></tr>
+<tr><td>Finance l'agent d'une bourse cadrée (la bourse)</td><td>Plafonne le <em>débit</em> du tirage — budget de tokens, alertes, plafond ferme</td></tr>
+<tr><td>Gouverne ce que l'agent <em>peut</em> faire</td><td>Gouverne combien de fois il le fait (affinage borné)</td></tr>
+<tr><td>Un propriétaire redevable, un seul livre</td><td>Un coût par tâche utile, visible sur le moment</td></tr>
+<tr><td>Passe l'examen de gouvernance</td><td>Empêche l'IA de coûter 2,5× le plan</td></tr>
+<tr><td>Posture : pouvoir rendre compte de ce que vous exécutez</td><td>Posture : pouvoir <em>jauger et plafonner</em> ce qu'il tire</td></tr>
+</table>
+
+<h3>Pourquoi « le puits à compteur » est la discipline qui compte maintenant</h3>
+<div class="card">
+<p>Pendant une longue année, le souci était de savoir si le serviteur était nommé, cadré, journalisé, loyal, moissonnant et financé. <strong>Ce mois-ci, les données ont déplacé la question vers la consommation : les agents travaillent, et ils boivent ~4,7× le plan, et ~60 % du tirage est l'agent re-puisant son propre seau.</strong> Le 4,7×-contre-1,9× de Menlo et les 46,9 %-au-dessus de Futurum prouvent que le dépassement est systémique, pas négligent ; la constatation sur l'affinage des réponses prouve qu'il est <em>structurel</em> — l'ombre de la propre conscience de l'agent. Une gouvernance qui s'arrêtait à « que peut faire l'agent ? » ne protégera pas le budget. Les domaines qui gardent pied jaugeront à la margelle (par agent, par tâche), borneront la boucle d'affinage, accorderont le récipient à la course, et intégreront le coût du puits dans chaque flux avant de le passer à l'échelle.</p>
+</div>
+
+<h3>Comment cela atterrit sur les domaines hérités</h3>
+<div class="card">
+<p>Même couture à laquelle ce radar revient toujours — <strong>pouvoir rendre compte de, et agir sur, ce que vous exécutez</strong> — maintenant aiguisée en <em>pouvoir jauger et plafonner ce que vos agents tirent.</em> Sur un domaine hérité, l'instinct est de greffer des agents sur les systèmes existants et de tout facturer à une seule ligne de coût « IA » que personne ne possède au niveau de la tâche — ce qui est exactement comment un plan de 1,9× devient une facture de 4,7× avant que quiconque ne le remarque. Le rétrofit est <strong>jauger, borner, chiffrer. Jauger</strong> la margelle : posez une instrumentation de tokens/coût sur chaque agent et chaque flux, pour que le coût par tâche soit visible sur le moment, pas au trimestre. <strong>Borner</strong> la boucle : bornez les reprises et la profondeur de réflexion, ajustez le modèle à chaque étape, posez un plafond ferme par agent et une cloche. <strong>Chiffrer</strong> le puits : avant que tout nouveau flux agentique ne passe à l'échelle, mettez son tirage attendu à côté de sa valeur attendue, et plafonnez ou supprimez ceux qui boivent plus qu'ils ne rendent. Et gardez tout le refrain : le modèle est un fourneau loué ; le savoir est le garde-manger ; les fondations sont le sol que vous gardez ; la porte est l'unique entrée ; le passeport nomme chaque agent ; le recensement est le rôle ; l'inspecteur le réclame ; le trousseau est quelle clé chacun tient ; le serrurier lit vos propres serrures ; le tableau des marées est le quai où tout navire peut accoster ; la provenance est les papiers qui tracent le travail ; la course borne ce qu'un agent peut atteindre ; la cloche révèle quand il dérape ; les sauterelles sont pourquoi être entier avant l'essaim ; le miroir est pourquoi mesurer à une lumière extérieure honnête ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi votre nom est sur l'obligation ; le second salaire est pourquoi demander quel pain chaque agent conseiller mange ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé — et <em>le puits à compteur est pourquoi, ayant financé le serviteur, vous devez jauger ce qu'il tire : un compteur de coupe sur chaque main, une limite sur les consciencieux, le bon récipient pour chaque course, et le puits chiffré dans chaque tâche avant de la commencer.</em></p>
+</div>
+
+<h3>À surveiller cette semaine</h3>
+<div class="card"><ul>
+  <li><strong>La facture — Menlo Ventures (17 nov. 2026).</strong> <strong>Les dépenses IA 2026 des entreprises ont atteint ~4,7× celles de 2025 contre un plan de 1,9× ; ~400 décideurs américains, &gt;4 Mds$ représentés ; les gros utilisateurs d'agents tirent le dépassement (moyenne 4,7× ≈ 2,1× la médiane 2,2×) (Menlo Ventures, tel que rapporté).</strong> La maison gouvernée n'a pas jaugé sa propre soif.</li>
+  <li><strong>L'ampleur — le dépassement est systémique.</strong> <strong>Futurum (2S 2026, n=1 636) : 46,9 % au-dessus de leur budget IA contre 5,6 % en dessous ; un instantané FinOps de McKinsey le place près de 90 % sur un petit échantillon ; Uber aurait dépensé son budget IA 2026 en quatre mois (Futurum ; McKinsey ; Inc., tel que rapporté).</strong> Près de la moitié de la vallée a dépassé le plan.</li>
+  <li><strong>La cause — re-puiser le seau.</strong> <strong>~60 % du coût de l'IA agentique est de l'« affinage des réponses » — l'agent se relançant pour peaufiner une réponse — une ligne que la plupart des budgets n'avaient jamais ; ~la moitié des surprises de dépense remontent désormais au conseil (MarketScale ; Mavvrik, tel que rapporté).</strong> L'ombre de la propre conscience de l'agent.</li>
+  <li><strong>Le tirage libre.</strong> <strong>L'accès sans plafond d'une entreprise à un modèle de frontière aurait accumulé ~500 M$ en un seul mois (Axios, tel que rapporté).</strong> Un travailleur infatigable sans limite devant un puits à compteur est le serviteur le plus coûteux qu'une maison puisse garder.</li>
+  <li><strong>La course aux plateformes ajoute des puits, pas des compteurs.</strong> <strong>La plateforme agentique « Imagine Enterprise » d'IBM + Microsoft (10 nov. 2026) regroupe 6 000+ agents préconstruits ; AWS Bedrock AgentCore (19 nov.) ajoute le règlement de paiement agent x402 aux factures de l'AWS Marketplace (IBM/Microsoft ; AWS, tel que rapporté).</strong> Plus d'agents et plus de façons de dépenser — plus de margelles à jauger.</li>
+  <li><strong>La cadence des modèles fait bouger les prix par token (mais ne plafonne pas la consommation).</strong> <strong>Claude Fable 5.2 (DG, 9 nov., rapporté ~8 $ / 40 $ le million de tokens) ; Google Gemini 4 Carbon (10 nov.) et Hydrogen (12 nov.) (tel que rapporté).</strong> Un tirage moins cher n'aide que si vous tirez aussi moins.</li>
+  <li><strong>Le levier des poids ouverts.</strong> <strong>Baidu World 2026 : agents actifs quotidiens internes en hausse de ~640 % (5 000 → 37 000) en 12 mois ; Baidu prévoit de publier les poids de son modèle le 25 novembre 2026 (Baidu, tel que rapporté ; consigné au Registre des prédictions).</strong> Posséder les poids est un moyen d'ôter le bailli de la margelle.</li>
+  <li><strong>Les rails antérieurs tiennent toujours.</strong> <strong>Régime à haut risque du Règlement IA de l'UE en vigueur depuis le 2 août 2026 (obligations à haut risque de l'Annexe III reportées au 2 décembre 2027 sous l'Omnibus IA/numérique) ; MCP 2026-07-28 est la couche de connexion aux outils ; Gartner projette que 40 % des applications d'entreprise embarqueront des agents spécialisés d'ici fin 2026 (tel que rapporté).</strong> Gouvernance de ce que les agents <em>peuvent</em> faire ; le puits à compteur gouverne ce qu'ils <em>tirent</em>.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Citations qui marquent</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">L'IA devait faire économiser les entreprises. Au lieu de cela, elle fait exploser les budgets, et en grand.</div><div class="a">— Inc. (Chris Morris), titre sur les dépassements IA des entreprises en 2026 (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">60 % des coûts de l'IA agentique vont à l'affinage des réponses — et la plupart des entreprises sont déjà au-dessus du budget.</div><div class="a">— MarketScale, sur où va réellement la dépense agentique (tel que rapporté)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">La firme moyenne a dépensé environ 4,7× son budget IA 2025 en 2026 — contre un plan de 1,9× — les gros utilisateurs d'agents creusant l'écart.</div><div class="a">— Enquête 2026 de Menlo Ventures sur les dépenses IA des entreprises (tel que rapporté ; ~400 décideurs américains, &gt;4 Mds$ de dépenses IA)</div></blockquote>
+<blockquote><div class="q">« Vous avez financé le serviteur comme un employé. Lisez maintenant la facture du bailli des eaux : il est excellent, il a soif, et l'essentiel de ce qu'il boit est dépensé à re-puiser le même seau. Jaugez le puits — par agent, par tâche — ou le puits vous jaugera. »</div><div class="a">— le radar, sur pourquoi jauger la consommation compte désormais plus que gouverner la permission</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Chiffres à citer en réunion</h2>
+<table>
+<tr><th>Indicateur</th><th>Valeur</th><th>Source</th></tr>
+<tr><td>La facture : prévu contre réel</td><td><span class="v">Les dépenses IA 2026 des entreprises ont atteint en moyenne ~4,7× celles de 2025 contre un plan de 1,9× — le dépassement concentré chez les gros utilisateurs d'agents ; moyenne (4,7×) ≈ 2,1× la médiane (2,2×)</span></td><td>Enquête 2026 de Menlo Ventures (~400 décideurs américains, &gt;4 Mds$ représentés), tel que rapporté</td></tr>
+<tr><td>L'ampleur du dépassement</td><td><span class="v">46,9 % des entreprises au-dessus de leur budget IA prévu contre 5,6 % en dessous (n=1 636) ; un instantané FinOps de McKinsey place la part au-dessus du budget près de 90 % sur un petit échantillon</span></td><td>Futurum Group (2S 2026) ; McKinsey, tel que rapporté</td></tr>
+<tr><td>Où va l'eau</td><td><span class="v">~60 % du coût de l'IA agentique est de l'« affinage des réponses » — l'agent se relançant pour peaufiner une réponse</span></td><td>MarketScale, tel que rapporté</td></tr>
+<tr><td>Le tirage libre</td><td><span class="v">L'accès sans plafond d'une entreprise à un modèle de frontière aurait accumulé ~500 M$ en un seul mois ; Uber aurait épuisé son budget IA 2026 en quatre mois</span></td><td>Axios ; Inc., tel que rapporté</td></tr>
+<tr><td>Les surprises de dépense remontent au conseil</td><td><span class="v">~la moitié des organisations touchées par une surprise de dépense IA l'ont remontée au conseil</span></td><td>Mavvrik 2026, tel que rapporté</td></tr>
+<tr><td>La course aux plateformes</td><td><span class="v">« Imagine Enterprise » d'IBM + Microsoft (10 nov. 2026) regroupe 6 000+ agents préconstruits ; AWS Bedrock AgentCore (19 nov.) ajoute le règlement de paiement agent x402 aux factures du Marketplace</span></td><td>IBM/Microsoft ; AWS, tel que rapporté</td></tr>
+<tr><td>Le levier des poids ouverts</td><td><span class="v">Baidu World 2026 : agents actifs quotidiens internes en hausse de ~640 % (5 000 → 37 000) en 12 mois ; poids du modèle à publier le 25 novembre 2026</span></td><td>Baidu, tel que rapporté</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · Et alors ? — Trois manœuvres pour les 30 prochains jours</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Jauger le puits — posez un compteur de coût sur chaque agent et chaque tâche, pas une seule ligne « IA ».</strong> Le dépassement était invisible parce qu'il était facturé à une seule ligne de budget que personne ne possédait au niveau de la tâche (prévu 1,9×, dépensé ~4,7× — Menlo, tel que rapporté). <strong>Ce mois-ci, instrumentez vos principaux flux agentiques pour que le coût par tâche utile soit visible sur le moment — par agent, par tâche, par étape — et mettez en place une revue hebdomadaire de « margelle » des agents les plus assoiffés.</strong> Rapportez un chiffre au conseil : votre propre multiple prévu-contre-réel de dépense IA, et les trois agents qui tirent le plus.</li>
+  <li><strong>Borner la boucle d'affinage — bornez les reprises, ajustez les modèles, fixez des budgets de tokens fermes.</strong> ~60 % du coût agentique est l'agent re-puisant son propre seau (MarketScale, tel que rapporté), et « consciencieux sans limite » est le serviteur le plus coûteux que vous puissiez garder. <strong>Ce mois-ci, posez un budget de tokens par agent avec alertes et plafond ferme sur chaque agent en production ; bornez les reprises et la profondeur de réflexion (servez « assez bon », ne cherchez pas « parfait » au-delà d'un tirage fixé) ; ajustez le modèle à chaque étape ; et mettez en cache/réutilisez le contexte pour que l'affinage ne redérive pas ce que l'agent avait déjà.</strong> Rapportez la part d'agents en production avec plafond ferme et limite de reprises bornée, et le coût avant/après sur le premier flux plafonné.</li>
+  <li><strong>Intégrer le coût du puits dans chaque course — coût d'exécution attendu à côté de la valeur attendue, avant la mise à l'échelle.</strong> Un agent affairé qui livre du travail peut tout de même boire plus qu'il ne rend, et vous ne le saurez qu'à la facture. <strong>Ce mois-ci, pour chaque flux agentique nouveau ou en montée en charge, mettez son coût d'exécution attendu (coût par tâche × volume) à côté de la valeur qu'il crée, et plafonnez ou supprimez ceux qui sont sous l'eau — et n'approuvez plus jamais un « tirage libre » (accès sans plafond) « pour ne pas le ralentir », ce qui est comment une firme a atteint ~500 M$ en un mois.</strong> Rapportez le coût-contre-valeur attendu de vos trois prochains lancements agentiques, et confirmez zéro agent en production sans plafond. <strong>Le modèle est un fourneau loué ; le savoir est le garde-manger ; les fondations sont le sol que vous gardez ; le recensement est le rôle ; le trousseau est quelle clé chaque agent tient ; la course borne ce qu'il peut atteindre ; la cloche révèle quand il dérape ; la livrée est pourquoi nommer chaque main ; l'intendant est pourquoi tenir un seul office gouverné ; la caution est pourquoi votre nom est sur l'obligation ; le second salaire est pourquoi demander quel pain chaque agent conseiller mange ; les deux moissons sont pourquoi l'envoyer moissonner ; la bourse est pourquoi le financer comme un employé — et le puits à compteur est pourquoi, ayant financé le serviteur, vous devez jauger ce qu'il tire : un compteur de coupe sur chaque main, une limite sur les consciencieux, le bon récipient pour chaque course, et le puits chiffré dans chaque tâche, pour que la conscience infatigable du serviteur reste une vertu au travail et ne devienne jamais une catastrophe à la margelle.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources :</strong> La facture — Menlo Ventures (17 nov. 2026) : les dépenses IA 2026 des entreprises ont atteint en moyenne ~4,7× celles de 2025 contre un plan de 1,9× ; ~400 décideurs d'entreprise américains, &gt;4 Mds$ représentés ; les gros utilisateurs d'agents tirent le dépassement ; moyenne (4,7×) ≈ 2,1× la médiane (2,2×) (Menlo Ventures ; CryptoBriefing) · L'ampleur — Futurum Group (2S 2026, n=1 636) : 46,9 % au-dessus de leur budget IA prévu contre 5,6 % en dessous ; instantané FinOps de McKinsey près de 90 % sur un petit échantillon ; Uber aurait dépensé son budget IA 2026 en quatre mois (Futurum ; McKinsey ; Inc.) · La cause — ~60 % du coût de l'IA agentique est de l'« affinage des réponses » (MarketScale) ; ~la moitié des surprises de dépense remontent au conseil (Mavvrik) · Le tirage libre — l'accès sans plafond d'une entreprise à un modèle de frontière aurait accumulé ~500 M$ en un seul mois (Axios) · La course aux plateformes — « Imagine Enterprise » d'IBM + Microsoft (10 nov.), 6 000+ agents préconstruits ; AWS Bedrock AgentCore ajoute le règlement de paiement agent x402 (19 nov.) (IBM/Microsoft ; AWS) · La cadence des modèles — Claude Fable 5.2 DG à un rapporté ~8 $ / 40 $ le million de tokens (9 nov.) ; Google Gemini 4 Carbon (10 nov.) et Hydrogen (12 nov.) · Le levier des poids ouverts — Baidu World 2026 : agents actifs quotidiens internes en hausse de ~640 % à 37 000 ; poids du modèle à publier le 25 nov. 2026 (Baidu) · Les rails antérieurs — Règlement IA de l'UE (régime à haut risque en vigueur depuis le 2 août 2026 ; obligations à haut risque de l'Annexe III reportées au 2 décembre 2027 sous l'Omnibus IA/numérique), MCP 2026-07-28, Gartner (40 % des applications d'entreprise embarquent des agents spécialisés d'ici 2026). Le cadrage « puits à compteur » — que gouverner le serviteur et jauger le puits sont des disciplines différentes, et qu'une maison doit jauger par agent et par tâche, borner la boucle d'affinage, et intégrer le coût du puits dans chaque course — est expressément la lecture du radar. Les chiffres sont relayés depuis annonces de fournisseurs, recherche d'analystes et couverture secondaire par les organes nommés, repérés via recherche web, et marqués « tel que rapporté » ; la récupération directe de plusieurs pages sources a été bloquée par le proxy d'egress réseau de l'environnement de compilation, donc les chiffres devraient être revérifiés contre les publications primaires avant republication. Liens complets dans <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · généré le 22 novembre 2026 · <a href="../index.html">← toutes les éditions</a> · <a href="../ask/index.html">Interroger le radar</a> · <a href="../ledger/index.html">Registre des prédictions</a> · <a href="../feed.xml">Flux RSS</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Lecture / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Arrêter">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Écouter</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">vitesse
+    <select id="tts-rate">
+      <option value="0.9">0,9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1,15×</option>
+      <option value="1.3">1,3×</option>
+      <option value="1.5">1,5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Lecture à voix haute non prise en charge ici'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /fr[-_]FR/i.test(v.lang) && /audrey|amelie|female|google français/i.test(v.name);})
+         || vs.find(function(v){return /^fr/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' vers ').replace(/×/g,' fois').replace(/&/g,' et ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.lang = 'fr-FR';
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Lecture';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'En pause'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Lecture'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Écouter'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics : GoatCounter (respectueux de la vie privée, sans cookies). Nécessite que le site GoatCounter « ai-radar » soit créé ; sans effet tant que ce n'est pas fait. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
