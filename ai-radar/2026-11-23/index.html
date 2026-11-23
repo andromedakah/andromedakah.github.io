@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 23 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the badge' — at Microsoft Ignite 2026 (17 Nov) Nadella said 'we already have 50 million agents in Agent 365' and unveiled a control plane that issues a managed identity (Entra Agent ID) to every agent, including local agents (Claude Code, GitHub Copilot CLI) and third-party agents (Google, Salesforce, OpenAI, Anthropic). It lands because non-human identities now outnumber humans ~144:1 while only 21% of orgs govern them. The board move: one badge office (a single identity authority for every agent), a named human master on every badge, and a joiner-mover-leaver lifecycle that revokes on exit. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You own the ground — now count the hands standing on it</div>
+  <h1>The Badge</h1>
+  <div class="subhead">You perfected the servant and made sure you owned the ground it stands on. This morning the question is one of arithmetic: the agents are no longer a handful you can name — they are a workforce, outnumbering your humans by better than a hundred to one, and most were hired by somebody else. You can know your own forty. Can you name the six thousand?</div>
+  <div class="meta">Monday, 23 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">Last week, at Microsoft Ignite 2026 (17 November), Satya Nadella said the quiet part into a microphone: "we already have <em>50 million agents in Agent 365</em>" (Microsoft; AV Network; Cloud Wars, as reported) — and the whole keynote was about giving each of them a corporate identity. Microsoft Entra Agent ID now stamps an identity onto <em>discovered local agents</em> — named, explicitly, GitHub Copilot CLI and Claude Code — and onto third-party agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, via secretless workload-identity federation; agents get an email address, a Teams presence and an entry on the org chart, and new "Agentic Users" join a team <em>under their own identity, with an accountable owner</em>. It lands because of the number underneath it: in the average enterprise, non-human identities now outnumber human ones by a reported ~144 to 1 (up from ~92:1 a year ago), they already outnumber humans in 83% of organizations — yet only 21% have governance controls for them, and 91% of organizations use AI agents while only ~10% have a developed strategy for managing their identities (JumpCloud Q3 2026; Cloud Security Alliance, as reported). The cheap, swappable stove of the last edition did exactly what a cheap stove does — everyone cooked more. The board question is no longer how good our best agent is, or even whether we own the ground. It is: does every working hand on our premises — ours, our vendors', and the ones nobody remembers hiring — carry a badge from one office we control, tied to a named master, taken back the hour the work ends?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar built the governed house one discipline at a time — name every hand (the livery), keep one book (the steward), put your name on the bond (the surety), check whose wage it draws (the second wage), send it to reap (the two harvests), hand it a scoped purse (the purse) — and then stepped back and looked at the ground the whole house stands on (the foundation). <strong>This morning the question is one of sheer headcount.</strong> The agents are no longer a handful of named servants you can picture. They are a <em>workforce</em>, and this week one vendor put a number on it and offered the enterprise a front-desk answer.</p>
+<p><strong>The news — the agents became staff, and someone counted them.</strong> At <strong>Microsoft Ignite 2026 (17 November 2026)</strong>, Nadella said <strong>"we already have 50 million agents in Agent 365"</strong> and pitched Agent 365 as the <strong>control plane for every agent an organization runs</strong> — Microsoft-built, open-source, or third-party. <strong>Microsoft Entra Agent ID</strong> now issues a managed identity to <strong>discovered local agents (GitHub Copilot CLI, Claude Code) and Microsoft cloud agents</strong>, with <strong>automated agent-identity lifecycle management</strong> reported GA; governance extended to <strong>third-party agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI</strong> via <strong>secretless workload-identity federation</strong>; agents can receive an <strong>email address, a Teams presence and a seat on the org chart</strong>; and <strong>"Agentic Users" (public preview)</strong> let an agent <strong>join a team under its own identity, @-mentionable, with an accountable human owner</strong> (Microsoft; AV Network; Cloud Wars; Windows Forum; Petri, as reported). The whole announcement is a badge office built at enterprise scale, and it exists because the agents outgrew the ability to govern them by hand.</p>
+<p><strong>The reason — the arithmetic turned against you while you weren't counting.</strong> In the average enterprise, <strong>non-human identities (service accounts, bots, and now agents) outnumber human identities by a reported ~144 to 1, up from ~92:1 a year earlier</strong>; NHIs already outnumber humans in <strong>83% of organizations, but only 21% have governance controls for them</strong>; <strong>91% of organizations use AI agents, yet only ~10% have a well-developed strategy for managing non-human identities</strong>, and <strong>~78% have no formally adopted NHI-management policy</strong> (JumpCloud Q3 2026; Cloud Security Alliance; NHI Management Group, as reported). This is the direct, predictable consequence of the stove getting cheap: <strong>Anthropic cut Claude Fable to $8/$40 on 9 November — a reported ~20% price drop from Fable 5.1's $10/$50</strong> (VentureBeat; Yahoo Finance, as reported), OpenAI's <strong>GPT-6.2</strong> line reached GA on 17 November, and when intelligence is cheap and swappable, you don't run one careful agent — you run thousands, from a dozen vendors, and then you lose count. The sprawl is not a failure of discipline; it is the <em>bill</em> for commoditization, and it arrives as a flood of un-badged workers.</p>
+<p><strong>The stakes — one badge office, a named master on every badge, and a badge you take back.</strong> The move re-uses the identity discipline the radar has preached all year and aims it at scale. <strong>First, one badge office, not twelve</strong> — issue every agent's identity from a single authority you control, human and non-human alike, including the third-party and laptop agents, so there is one place to see them and one place to revoke. <strong>Second, a named master on every badge</strong> — no agent gets an identity without an accountable human owner and a scoped mandate; a seat on the org chart does not make an agent self-governing, it makes it <em>your employee's responsibility</em>. <strong>Third, joiner-mover-leaver, or the badge is a liability</strong> — provision on hire, re-scope on change, and above all <strong>revoke on exit</strong>; the breach is never the badge you issued, it is the <strong>dead agent's badge that still opens doors</strong> because no one took it back. Do it now, because the 144-to-1 gap compounds every week the stove gets cheaper.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The news — the agents became staff, and someone counted them.</strong> <strong>Microsoft Ignite (17 Nov): Nadella — "50 million agents in Agent 365"; Entra Agent ID issues identities to local agents (Claude Code, GitHub Copilot CLI) and third-party agents (Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI); agents get an email, a Teams presence and an org-chart seat; "Agentic Users" join a team under their own identity with an accountable owner (Microsoft; AV Network; Cloud Wars, as reported).</strong> The control plane is a badge office.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The reason — the arithmetic turned while you weren't counting.</strong> <strong>Non-human identities now outnumber humans ~144:1 (up from ~92:1); they outnumber humans in 83% of orgs but only 21% govern them; 91% use agents, only ~10% have an NHI identity strategy (JumpCloud Q3 2026; CSA, as reported) — the direct bill for a cheap stove (Claude Fable 5.2 at $8/$40, a ~20% cut, 9 Nov; GPT-6.2 GA, 17 Nov).</strong> Cheap intelligence means more hands, not better ones.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — one badge office, a named master on every badge, a badge you take back.</strong> Issue every agent's identity from one authority you control; refuse any badge without an accountable human owner and a scoped mandate; and automate joiner-mover-leaver so the badge is <strong>revoked on exit</strong> — because the shadow agent and the dead agent's badge, not the agent you governed, are where the breach walks in.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named your own hands; the census counted them; the inspector produced the roll; the keyring is which key each holds — all of that assumed a workforce small enough to picture. <strong>The badge is for the morning you cannot.</strong> This week a vendor said it already manages fifty million agents and offered to badge every one — including the ones running on your people's laptops and the ones your suppliers brought through the side door — and the reason the offer lands is that non-human identities now outnumber your humans by better than a hundred to one while only one organization in five governs them at all. That is not a staffing quirk; it is the bill for the cheap, swappable stove, paid in headcount. The estates that keep their standing will not try to out-discipline the flood by hand. They will stand up <strong>one badge office</strong> (a single identity authority for every agent, yours and your vendors' and the strays), put <strong>a named master on every badge</strong> (an accountable human and a scoped mandate behind each one), and run <strong>joiner-mover-leaver</strong> so a badge is issued on hire, re-scoped on change, and <em>taken back the hour the work ends</em>. The question the number forces is the oldest one at any front desk, asked now of a workforce you can no longer see all at once: <strong>who let you in, whose are you, and does your badge still work when it shouldn't?</strong></div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Badge"</h3>
+<p><em>Topic: This morning the frame turns from the ground the house stands on to the sheer number of hands now working in it. At Microsoft Ignite 2026 (17 November) Satya Nadella said "we already have 50 million agents in Agent 365" and unveiled a control plane that issues a managed corporate identity — an Entra Agent ID — to every agent an enterprise runs, including discovered local agents (GitHub Copilot CLI and Claude Code) and third-party agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, with agents receiving an email address, a Teams presence and an org-chart seat, and "Agentic Users" joining a team under their own identity with an accountable owner (Microsoft; AV Network; Cloud Wars; Windows Forum, as reported). It lands because the arithmetic has turned: non-human identities now outnumber human ones by a reported ~144 to 1 in the average enterprise (up from ~92:1), they outnumber humans in 83% of organizations while only 21% govern them, and 91% of organizations use agents while only ~10% have a strategy to manage their identities (JumpCloud Q3 2026; Cloud Security Alliance, as reported). The badge allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, at long last, put its own servants in order. It had named every hand and cut it a livery, kept one honest book, put the master's name on the bond, asked whose second coin each adviser took, sent the servants to reap, handed each a scoped purse, and then dug down and made sure it owned the very ground the house stood on. By any fair reckoning the household was a model to the whole valley. The master knew his servants by name, could picture every one of them, and slept the sleep of a man who has his house in hand.</p>
+<p>Then, one grey morning, the steward came to him with a tally and a troubled face. <em>"Master,"</em> he said, <em>"I have tried to count the hands at work in the house, and I cannot. Your own servants I know — there are forty of them, liveried and named. But the hall is full of others. The glazier's two apprentices are here, and the neighbour's clerk doing our sums, and a dozen day-labourers from the hiring fair, and some hired fellows from six different trading companies who came to help with the harvest and simply… stayed. And this morning I found three I have never seen, working the back rooms, who told me they came in with the carpenter's own writing-desk and started making themselves useful. Master — for every one of your forty named servants, there are near a hundred and fifty other hands in this house, and I do not know whose they are, who let them in, or whether they will be here tomorrow."</em></p>
+<p>And the master went pale, because he understood at once what the steward had not quite said. <strong>It was not that the strangers were wicked.</strong> Most were honest workers doing honest tasks, and the house ran better for them. It was that <strong>he had built his whole discipline for a household of forty he could picture, and he now had a workforce of thousands he could not</strong> — and his liveries, his book, his bond, every control he was so proud of, governed the forty and said nothing at all about the six thousand. His census counted his own. His inspector could produce the roll of his own. But the hall belonged, by headcount, to other men's servants and to strangers who had wandered in, and he could neither name them nor, on the day one went bad, find the one and stop it.</p>
+<p>Now, this flood had a cause, and the master knew it, for it was his own economy. The fire had gotten cheap — a cheaper stove every fortnight, each one swappable in an afternoon — and when fire is cheap you do not cook one careful dish with one careful cook; you light every hearth and take on every hand the hiring fair will send, because why not, at these prices. <strong>The cheap stove had filled his house with cooks.</strong> That was not a thing to mourn; it was the house winning the game it had set out to win. But a kitchen with a hundred and fifty cooks to every one you can name is not governed by knowing your forty well. It is governed, or not, by what happens at the door.</p>
+<p>So the great guild of the valley came to him that week with an offer, and it was the right one. <em>"Build one badge office at your front gate,"</em> they said, <em>"and let no hand work in this house without a badge struck there — your own servants, the neighbour's clerk, the trading companies' hired men, even the three who came in on a writing-desk. One office. One place that knows every working hand by a token it issued, and one place that can call that token back."</em> And they showed him the three things that made a badge worth more than a name scrawled on a list.</p>
+<p><strong>The first: one office, not twelve.</strong> The danger was never that his servants had identities; it was that every department had been minting its own — the kitchen vouching for its cooks, the stable for its grooms, the trading companies for their own men — so that no one person could see, let alone revoke, the whole hall at once. The badge office was one authority that issued identity to <em>all</em> of them, his and the strangers' alike, so there was a single place to look and a single place to stop a hand.</p>
+<p><strong>The second: a named master on every badge.</strong> No badge was struck without the name of a <em>person</em> who answered for it. The neighbour's clerk could work in the house — but his badge carried the name of the steward who had let him in and would answer for what he did. Even the servants who now had a desk and a letterbox and a line on the household chart — who looked, for all the world, like members of the family — carried a badge that said, in small letters, <em>this hand answers to a human, not to itself.</em> A seat at the table did not make a servant its own master. It made it someone's responsibility.</p>
+<p><strong>And the third, the one the careless houses skipped: take the badge back the hour the work ends.</strong> It was easy to strike a badge on the day a hand arrived. The discipline — the whole discipline — was to pull it the day the hand left. For the breach, when it came, was never the honest worker you had badged. It was the <strong>day-labourer who finished the harvest three months ago and whose badge still opened the cellar</strong>, because no one had thought to take it back; or the trading company's man, long recalled to his own house, whose token still worked your locks. A badge you issue and never revoke is not a control. It is a key left under the mat, with the name of a man who is no longer here.</p>
+<p>Here is the part that should keep a master awake. The guild's badge office was a fine thing, and he took it gladly — but the moment he had it, he saw that the badge was only as good as the hand that pulled it. A house could stand up a magnificent front desk, badge all six thousand, give the cleverest of them desks and letterboxes and seats on the chart, and <em>still</em> be undone by the one shadow worker it never badged and the one dead man's badge it never revoked. <strong>The badge did not govern the agent. It made the agent governable — and only if the office behind it actually knew its count and actually took its badges back.</strong> The master who mistook <em>issuing badges</em> for <em>governing the badged</em> had merely given his strangers better credentials.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove, now so cheap that a bigger one draws a shrug; the knowledge is the larder; the ground is the foundation you must own; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <strong>the badge is why, the morning your hands outnumber your memory a hundred and fifty to one, you stop trying to know them all and instead make one office that knows them for you: strike every working hand a badge from a single authority you control — your own, your vendors', and the strays — put a named human master on each badge, and take the badge back the hour the work ends, so that the shadow worker is found and the dead man's badge is dead.</strong> A house that badges only the servants it can already name has governed the hall it could see and handed the run of the house to the hall it could not.</p>
+<p><strong>The question it forces:</strong> <em>We can name our own forty — but can we name the six thousand? Does every working hand on our premises — ours, our vendors', and the ones no one remembers hiring — carry a badge from one office we control, with a named human master on it and a lifecycle that takes it back the hour the work ends? Or have we, while congratulating ourselves on knowing our own servants well, let a hundred and fifty un-badged hands to every one of ours work the back rooms of our house, each with a key we never issued and cannot revoke?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Do we know our own version of the 144-to-1?</strong> Non-human identities now outnumber humans by a reported ~144:1 in the average enterprise, yet only 21% of organizations govern them (JumpCloud Q3 2026; CSA, as reported). <strong>Can we produce, today, a single count of every agent and service identity operating in our estate — ours, our vendors', and the ones running on employee laptops — and the name of the human master accountable for each?</strong> If we cannot count them, we are not governing them.</li>
+  <li><strong>Is identity issued from one office, or minted in twelve?</strong> Ignite's pitch was a single control plane that badges Microsoft, open-source, third-party and <em>local</em> agents (Claude Code, GitHub Copilot CLI) alike (Microsoft, as reported). <strong>Is there one authority that issues and can revoke every agent identity we run — or does each team, SaaS platform and vendor vouch for its own, so that no one place can see the whole hall or stop a single hand?</strong></li>
+  <li><strong>Have we tested the leaver, not just the joiner?</strong> The breach is the dead agent's badge that still opens doors. <strong>Can we show that when an agent is decommissioned, a project ends, or an employee who spun up a laptop agent departs, the agent's credentials are actually revoked — with an audited time-to-revoke — rather than quietly surviving as a key no one remembers issuing?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Your regulators already treat privileged access and segregation of duties as examined controls, and agents now hold both. <strong>Can we give our examiners an inventory of non-human identities with their entitlements, owners and last-used dates — and show that an agent with payment or trading reach carries a scoped mandate, a named accountable human, and a tested kill/revoke — or are tens of thousands of service and agent identities operating below the line our access reviews actually inspect?</strong></li>
+  <li>Agents are joining workflows <em>under their own identity</em> now (Ignite "Agentic Users," as reported). <strong>When an agent acts, does our audit trail attribute the action to that agent's distinct identity and to the human master who owns it — so that a bad transaction has a name on it — or does agent activity collapse into a shared service account that makes accountability unprovable?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Agents touch PHI, clinical systems and validated workflows, and each needs a least-privilege identity. <strong>Is every agent with reach into patient data issued from our identity authority with scoped, auditable access — and revoked on decommission — or have clinical and research teams stood up ungoverned agents against our data because the cheap model made it trivial to do so?</strong></li>
+  <li>Validation and 21 CFR Part 11-style accountability assume a known actor. <strong>Can we name the accountable human owner for every agent operating in a GxP or clinical context, and prove its identity lifecycle is controlled, or is "the agent did it" an answer our quality system cannot accept?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run badge-and-lockout discipline for people and contractors on the floor; agents are now contractors in your systems. <strong>Have we applied the same badge-in/badge-out rule to software agents — one issuing authority, a named owner, revoke-on-exit — or do vendor and integrator agents retain standing access to MES, PLM and OT-adjacent systems long after the project that justified them ended?</strong></li>
+  <li>Supplier agents are arriving inside your estate (third-party agents from Salesforce, Databricks, Snowflake and others can now be badged, as reported). <strong>Where a supplier's agent operates in our systems, does it carry an identity we issued and can revoke, scoped to the task — or are we trusting the supplier's own vouching for a hand working inside our walls?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Cheap inference means you will run <em>more</em> agents across search, pricing, support and fulfillment, not fewer (Claude Fable 5.2 at $8/$40, a ~20% cut; GPT-6.2 GA, as reported). <strong>As the agent headcount scales with the falling price, is our identity plane scaling with it — one office, scoped mandates, revoke-on-exit — or are we accumulating a long tail of promotional, seasonal and experimental agents that never got offboarded?</strong></li>
+  <li>Peak season multiplies both agents and risk. <strong>Do the surge agents we spin up for a sales event get badged from the same authority and revoked when the event ends — or do they become permanent shadow workers with standing access to checkout, inventory and customer data?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Accountability and auditability are statutory here, and an un-owned agent is an accountability gap. <strong>Can we attach a named, accountable official to every agent operating in a public service, with an identity we issue, scope and revoke — and reconcile that against the EU AI Act transparency and record-keeping duties already in force (high-risk regime live since 2 August 2026)?</strong></li>
+  <li>Sprawl is a sovereignty and continuity risk, not just a security one. <strong>Do we have a complete, current register of the non-human identities operating across public systems — including vendor and local agents — or is the real headcount of who (and what) can act on citizen data unknown to the officials answerable for it?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Badge</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>do we own the ground?</em> and started asking the question none of the prior controls answer at scale: <em>how many hands are actually working in this house, whose are they, and can I revoke any one of them?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds its reach; the bell discloses when it slips; the livery dresses it; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation is the ground it stands on. <strong>Every one of those was designed for a workforce you could picture. This week a vendor priced the workforce at fifty million and said the obvious thing: you can no longer govern by knowing them — you govern by issuing, owning and revoking identity at scale, from one office, for every hand including the ones you didn't hire.</strong> The point is blunt: <strong>the control that now decides your exposure is not how good your best agent is or even whether you own your infrastructure — it is whether every agent on your premises has a badge from one authority you control, a named human master, and a lifecycle that takes the badge back.</strong></p>
+<div class="card"><ul>
+  <li><strong>The news — the agents became staff, and the control plane is a badge office.</strong> <strong>At Microsoft Ignite 2026 (17 November), Nadella said "we already have 50 million agents in Agent 365" and positioned Agent 365 as the control plane for every agent an org runs. Microsoft Entra Agent ID now issues managed identities to discovered local agents (GitHub Copilot CLI, Claude Code) and Microsoft cloud agents, with automated agent-identity lifecycle management reported GA; governance extends to third-party agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI via secretless workload-identity federation; agents can receive an email address, a Teams presence and an org-chart entry; and "Agentic Users" (public preview) join a team under their own identity, @-mentionable, with an accountable human owner (Microsoft; AV Network; Cloud Wars; Windows Forum; Petri, as reported).</strong> Three engineering realities follow. First, <em>identity must be centralized or it is not revocable</em> — the value of the badge office is a <em>single</em> authority that can see and kill every agent credential; identity minted per-team or per-SaaS is identity you cannot revoke in one motion. Second, <em>secretless, federated identity beats long-lived keys</em> — the move to workload-identity federation (no shared secret to leak, a short-lived token tied to a verifiable identity) is the right primitive for a workforce this large; standing API keys are the dead man's badge waiting to happen. Third, <em>local and third-party agents are the hard part</em> — the agents on employee laptops (Claude Code, Copilot CLI) and the ones your vendors bring are exactly the ones your directory never saw, which is why "discovered local agents" and third-party federation, not first-party cloud agents, are where the governance actually bites.</li>
+  <li><strong>The reason — the arithmetic is the story, and it is the bill for commoditization.</strong> <strong>Non-human identities now outnumber human ones by a reported ~144:1 in the average enterprise (up from ~92:1 a year earlier); NHIs outnumber humans in 83% of organizations but only 21% have governance controls; 91% of organizations use AI agents while only ~10% have a well-developed NHI-management strategy and ~78% have no formally adopted NHI policy (JumpCloud Q3 2026; Cloud Security Alliance; NHI Management Group, as reported); Gartner still projects 40% of enterprise apps embed task-specific agents by year-end 2026 (up from &lt;5% in 2025).</strong> The causal chain is the radar's own through-line: the stove commoditized (Claude Fable 5.2 at a reported $8/$40 on 9 November, a ~20% cut from $10/$50; OpenAI's GPT-6.2 GA on 17 November), and cheap, swappable intelligence does not produce one well-governed agent — it produces <em>thousands</em>, spun up by every team, embedded by every SaaS vendor, running on every developer's laptop. <strong>Agent sprawl is not a discipline failure; it is the predictable second-order effect of making the input nearly free.</strong> The governance gap (144:1 identities, 21% governed) is simply the distance between how fast you can create agents and how fast you can issue, own and revoke their identities — and that gap widens every time the price drops.</li>
+  <li><strong>The answer — one badge office, a named master on every badge, revoke-on-exit.</strong> <strong>Issue every agent identity from a single authority you control (human and non-human, first-party, third-party and local); bind each agent to an accountable human owner and a scoped, least-privilege mandate; and automate the full joiner-mover-leaver lifecycle so a credential is provisioned on creation, re-scoped on change, and revoked on decommission — with short-lived, federated, secretless credentials rather than standing keys, and an auditable time-to-revoke.</strong> This is the identity discipline the radar built for the livery, the surety and the purse, now industrialized for a workforce two orders of magnitude larger than your headcount. The same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now reads: <em>be able to count every hand, name its master, and take back its badge.</em></li>
+</ul></div>
+<p>The strategic core: <strong>the agent headcount has crossed the line where you govern by acquaintance; from here you govern by identity infrastructure, or not at all.</strong> The temptation is to treat Ignite's badge office as the whole answer — buy the control plane, badge the fifty million, declare victory. But the badge does not govern the agent; it makes the agent <em>governable</em>, and only if the office behind it knows its true count and actually revokes. The board translation: <strong>stand up one identity authority for every agent, put a human's name on each, and prove you can take a badge back — then measure the shadow agents you don't yet badge and the stale credentials you haven't yet killed.</strong> The failure mode is exact: <strong>a house that buys the finest badge office, gives its cleverest agents desks and org-chart seats, and still never reconciles its 144-to-1 or revokes a departed agent's credentials, has not governed its workforce — it has issued its strangers better papers.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The badge: you can no longer know every hand, so build one office that does. The agents became staff — 50 million in one vendor's control plane alone — and they now outnumber your humans about 144 to 1, while only 21 percent of organizations govern them. Top left, the workforce you can picture: your own named agents, liveried and on the roll, known by name, governed by acquaintance — your forty. Top right, the workforce you actually have, at a different scale: plus vendor agents from Salesforce, Databricks, Snowflake and others; plus local agents on laptops such as Claude Code and GitHub Copilot CLI; plus shadow agents nobody badged — about 144 per 1 human, in 83 percent of organizations. Between them: the cheap stove, Claude Fable 5.2 down 20 percent and GPT-6.2 at general availability, means more hands, and you don't govern thousands by knowing them. Middle, the arithmetic of sprawl, per JumpCloud Q3 2026 and the Cloud Security Alliance as reported: non-human identities outnumber humans about 144 to 1, up from about 92 to 1 a year ago; they outnumber humans in 83 percent of organizations and only 21 percent have governance controls; 91 percent use AI agents, only about 10 percent have a non-human-identity strategy, about 78 percent have no policy; and at Microsoft Ignite on 17 November, 50 million agents in Agent 365, with Entra Agent ID for all. Bottom left, stop, govern by acquaintance: identity minted per team or per SaaS, standing API keys that become a dead badge, no owner on the agent, and the mistake of thinking issuing a badge is governing. Bottom right, start, run a badge office: one authority issues and revokes all agents, a named human master plus a scoped mandate, joiner-mover-leaver that revokes on exit, and secretless, federated, short-lived credentials." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE BADGE — you can't know every hand; build one office that does</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The agents became staff (50M in one control plane). They outnumber your humans ~144:1 — only 21% govern them.</text>
+
+  <!-- the workforce you can picture -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE WORKFORCE YOU CAN PICTURE</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">your own named agents</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">liveried, on the roll, known by name</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">governed by acquaintance</text>
+  <text x="52" y="162" font-size="13" fill="#e8edf3" font-family="sans-serif" font-weight="700">"our forty"</text>
+
+  <!-- the workforce you actually have -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE WORKFORCE YOU ACTUALLY HAVE</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">+ vendor agents (Salesforce, Snowflake…)</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">+ local agents (Claude Code, Copilot CLI)</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">+ shadow agents nobody badged</text>
+  <text x="364" y="162" font-size="12.5" fill="#f0b8ce" font-family="sans-serif" font-weight="700">~144 per 1 human · 83% of orgs</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">cheap stove (Fable 5.2 −20%; GPT-6.2 GA) → MORE hands; you don't govern thousands by knowing them ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">THE ARITHMETIC OF SPRAWL — (JumpCloud Q3 2026; CSA, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">non-human identities outnumber humans ~144:1 (up from ~92:1 a year ago)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">NHIs outnumber humans in 83% of orgs — only 21% have governance controls</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">91% use AI agents · only ~10% have an NHI strategy · ~78% have no policy</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">Microsoft Ignite (17 Nov): "50M agents in Agent 365" · Entra Agent ID for all</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: govern by acquaintance</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· identity minted per-team / per-SaaS</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standing API keys (the dead badge)</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no named owner on the agent</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· thinking issuing = governing</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one stale key from a breach</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: run a badge office</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· one authority issues &amp; revokes ALL agents</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a named human master + scoped mandate</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· joiner-mover-leaver: REVOKE on exit</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· secretless, federated, short-lived creds</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the badge makes the agent governable</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The badge doesn't govern the agent — it makes the agent governable, if the office knows its count and revokes.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">One office · a named master on every badge · take the badge back the hour the work ends.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The workforce you can picture — your own</span>
+  <span><i class="dot" style="background:#a5416a"></i>The workforce you actually have — the 144:1</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>The arithmetic of sprawl</span>
+</div>
+</div>
+
+<h3>The named workforce vs the real workforce — what you can picture, and what you must badge</h3>
+<table>
+<tr><th>The workforce you can picture (your own)</th><th>The workforce you actually have (the 144:1)</th></tr>
+<tr><td>Your own named, liveried agents</td><td>+ vendor agents (Salesforce, Databricks, Snowflake, …)</td></tr>
+<tr><td>Governed by acquaintance — you know them</td><td>+ local agents on laptops (Claude Code, Copilot CLI)</td></tr>
+<tr><td>On the roll, counted in the census</td><td>+ shadow agents no one badged or remembers</td></tr>
+<tr><td>Identity minted by the team that built it</td><td>One office that issues and revokes every one</td></tr>
+<tr><td>A key you issued</td><td>A dead agent's badge that still opens doors</td></tr>
+<tr><td>Issuing a badge feels like governing</td><td>Revoking the badge is governing</td></tr>
+</table>
+
+<h3>Why "the badge" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long year the worry was whether each agent was named, scoped, logged, loyal, reaping and funded — and then whether you owned the ground it stood on. <strong>This week the arithmetic moved the question underneath all of it: the agents became a workforce too large to govern by acquaintance, and a vendor priced it at fifty million and offered a front desk.</strong> The 144-to-1 ratio and the 21%-govern-them gap prove that identity creation has outrun identity governance; Ignite's Agent ID, Agentic Users and third-party federation prove the industry's answer is a single badge office. Governance that stopped at the agents you can name will not govern the hall you cannot. The estates that keep their standing will issue every agent's identity from one authority, put a named master on each, and prove they can revoke — and will treat the badge not as the end of governance but as the thing that finally makes governance possible at scale.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to count every hand, name its master, and take back its badge.</em> On a legacy estate the agents did not arrive through one door; they accreted — a Copilot here, a vendor's embedded agent there, a developer's laptop tool, a half-forgotten pilot — each vouched for by whoever stood it up, none in a single register. That is the shadow workforce, and it is already larger than your named one. The retrofit is <strong>one office, one master, one lifecycle. One office:</strong> route every agent identity through a single authority (an identity provider / agent control plane you own), so there is one place to see and revoke. <strong>One master:</strong> refuse to issue or keep any agent credential without a named accountable human and a scoped, least-privilege mandate. <strong>One lifecycle:</strong> automate joiner-mover-leaver with short-lived, secretless, federated credentials, and <em>prove revoke-on-exit</em> with an audited time-to-revoke — because the dead agent's badge is the breach. And keep the whole refrain: the model is a rented stove, now so cheap it fills the house with cooks; the knowledge is the larder; the ground is the foundation; the gate is the one door; the passport names each agent; the census counts them; the inspector asks for the roll; the keyring is which key each holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds its reach; the bell discloses when it slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and <em>the badge is why, the morning your hands outnumber your memory a hundredfold, you build one office that badges every working hand, puts a named master on each, and takes the badge back the hour the work ends.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The news — the agents became staff.</strong> <strong>Microsoft Ignite (17 Nov): Nadella — "50 million agents in Agent 365"; Agent 365 the control plane for all agents; Copilot pitched as "the new operating system for work" (Microsoft; AV Network; Cloud Wars; RCP, as reported).</strong> The workforce got a headcount and a front desk.</li>
+  <li><strong>The badge office.</strong> <strong>Entra Agent ID issues managed identities to discovered local agents (Claude Code, GitHub Copilot CLI) and third-party agents (Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI) via secretless workload-identity federation; automated agent-identity lifecycle management reported GA; agents get email, Teams presence, an org-chart seat; "Agentic Users" join a team under their own identity with an accountable owner (Microsoft; Windows Forum; TechCommunity, as reported).</strong> One authority, every agent, including the strays.</li>
+  <li><strong>The arithmetic of sprawl.</strong> <strong>Non-human identities outnumber humans ~144:1 (up from ~92:1); they outnumber humans in 83% of orgs but only 21% govern them; 91% use agents, only ~10% have an NHI-identity strategy, ~78% no policy (JumpCloud Q3 2026; CSA; NHI Management Group, as reported).</strong> Creation has outrun governance.</li>
+  <li><strong>The cheaper stove behind the flood.</strong> <strong>Claude Fable 5.2 (9 Nov): $8/$40 per million tokens, a reported ~20% cut from Fable 5.1's $10/$50; OpenAI GPT-6.2 line GA (17 Nov) (VentureBeat; Yahoo Finance, as reported).</strong> Cheap intelligence means more hands, not better ones.</li>
+  <li><strong>The agent-tooling layer.</strong> <strong>LangChain's LangSmith Tool Gateway entered public beta (~19 Nov) — credentials, access policies, approvals and audit for agent tool calls, MCP-compatible — and MCP servers kept shipping (SOCi GA; Kaseya early-access) (aiagentstore; PR Newswire; Futurum, as reported).</strong> The rails agents act through are themselves getting an identity-and-audit layer.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026, with transparency and record-keeping duties (Article 50); GPAI obligations enforced centrally by the AI Office; Gartner's 40%-of-enterprise-apps-by-2026 and &gt;40%-of-agentic-projects-canceled-by-2027 still on the books (as reported).</strong> An un-owned, un-revocable agent is now a compliance gap, not just a security one.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">We already have 50 million agents in Agent 365.</div><div class="a">— Satya Nadella, Microsoft Ignite 2026 keynote, 17 November 2026 (Microsoft; AV Network; Cloud Wars, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Non-human identities now outnumber human identities 144 to 1 in the average enterprise, up from 92 to 1 a year earlier.</div><div class="a">— Non-human identity research, 2026 (as reported; JumpCloud Q3 2026 adds that NHIs outnumber humans in 83% of organizations while only 21% have governance controls for them)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">You approved 3 AI agents. Your enterprise is now running 47.</div><div class="a">— industry headline on agent sprawl (as reported; illustrative of the gap between the agents you sanctioned and the ones actually running)</div></blockquote>
+<blockquote><div class="q">"You can name your own forty. The question the number forces is whether you can name the six thousand — and whether every one of them carries a badge from one office you control, a named master, and a lifecycle that takes the badge back the hour the work ends."</div><div class="a">— the radar, on why identity at scale, not acquaintance, now governs the agent workforce</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agents became staff</td><td><span class="v">Microsoft Ignite (17 Nov 2026): Nadella — "we already have 50 million agents in Agent 365"; Agent 365 positioned as the control plane for every agent an enterprise runs</span></td><td>Microsoft; AV Network; Cloud Wars, as reported</td></tr>
+<tr><td>The badge office</td><td><span class="v">Entra Agent ID issues managed identities to local agents (Claude Code, GitHub Copilot CLI) and third-party agents (Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI) via secretless workload-identity federation; agents get email, Teams presence, an org-chart seat; "Agentic Users" join a team under their own identity with an accountable owner</span></td><td>Microsoft; Windows Forum; TechCommunity, as reported</td></tr>
+<tr><td>The arithmetic of sprawl</td><td><span class="v">Non-human identities outnumber humans ~144:1 in the average enterprise (up from ~92:1 a year earlier); NHIs outnumber humans in 83% of organizations but only 21% have governance controls</span></td><td>JumpCloud Q3 2026; non-human identity research, as reported</td></tr>
+<tr><td>The governance gap</td><td><span class="v">91% of organizations use AI agents, but only ~10% have a well-developed strategy for managing non-human identities; ~78% have no formally adopted NHI-management policy</span></td><td>Cloud Security Alliance; NHI Management Group, as reported</td></tr>
+<tr><td>The cheaper stove behind the flood</td><td><span class="v">Claude Fable 5.2 (9 Nov 2026): $8/$40 per million tokens — a reported ~20% cut from Fable 5.1's $10/$50; OpenAI GPT-6.2 line reached GA (17 Nov)</span></td><td>VentureBeat; Yahoo Finance, as reported</td></tr>
+<tr><td>The adoption curve</td><td><span class="v">Gartner: 40% of enterprise apps feature task-specific AI agents by year-end 2026 (up from &lt;5% in 2025); &gt;40% of agentic-AI projects canceled by end-2027</span></td><td>Gartner, as reported</td></tr>
+<tr><td>The agent-tooling layer</td><td><span class="v">LangChain LangSmith Tool Gateway in public beta (~19 Nov): credentials, access policies, approvals and audit for agent tool calls, MCP-compatible</span></td><td>LangChain; aiagentstore, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Stand up one badge office — a single identity authority for every agent, and count your 144-to-1.</strong> You can no longer govern the agent workforce by knowing it; non-human identities outnumber your humans by a reported ~144:1 and only 21% of organizations govern them (JumpCloud Q3 2026, as reported). <strong>This month, route every agent identity you can through one authority you control (your IdP / an agent control plane), and produce a first full inventory of non-human identities across the estate — first-party, vendor-embedded, and local agents on employee laptops (Claude Code, Copilot CLI, and the like).</strong> Report one number to the board: your real non-human-to-human identity ratio, and the share of agents issued from a single revocable authority versus minted per-team or per-vendor.</li>
+  <li><strong>Put a named master on every badge — no agent without an accountable human and a scoped mandate.</strong> An org-chart seat and an email address do not make an agent self-governing (Ignite's "Agentic Users" still carry an accountable owner, as reported). <strong>This month, require that every agent identity carry a named human owner and a least-privilege, scoped mandate, and flag every agent credential that has neither — those are your shadow workers.</strong> Report the share of agents with a named accountable owner and a scoped mandate, and a dated plan to badge or retire the rest.</li>
+  <li><strong>Prove revoke-on-exit — automate joiner-mover-leaver, and kill the dead agent's badge.</strong> The breach is never the agent you governed; it is the departed agent's credential that still opens doors. <strong>This month, pick one high-reach class of agents, move it to short-lived, secretless, federated credentials, and run a real decommission test — measure the time-to-revoke when an agent is retired, a project ends, or a developer leaves — then hunt stale credentials across the estate.</strong> Report the measured time-to-revoke and the count of still-live credentials belonging to agents, projects or people that are already gone. <strong>The model is a rented stove, now so cheap it fills the house with cooks; the knowledge is the larder; the ground is the foundation; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the provenance traces the work; the errand bounds its reach; the bell discloses when your own agent slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground — and the badge is why, the morning your hands outnumber your memory a hundredfold, you build one office that badges every working hand, puts a named master on each, and takes the badge back the hour the work ends, so the shadow worker is found and the dead man's badge is dead.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The news — Microsoft Ignite 2026 (17 Nov 2026): Nadella "we already have 50 million agents in Agent 365"; Agent 365 as the control plane for every agent; Entra Agent ID for discovered local agents (GitHub Copilot CLI, Claude Code) and Microsoft cloud agents, automated agent-identity lifecycle management reported GA; third-party governance for Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI via secretless workload-identity federation; agents get email, Teams presence, an org-chart seat; "Agentic Users" (public preview) join a team under their own identity with an accountable owner (Microsoft Book of News / Source; AV Network; Cloud Wars; Redmond Channel Partner; Windows Forum; Petri; Microsoft TechCommunity) · The arithmetic of sprawl — non-human identities outnumber humans ~144:1 (up from ~92:1 a year ago); NHIs outnumber humans in 83% of orgs, only 21% govern them; 91% use AI agents, only ~10% have an NHI strategy, ~78% no policy (JumpCloud Q3 2026; Cloud Security Alliance; NHI Management Group) · The cheaper stove — Claude Fable 5.2 (9 Nov): $8/$40, a ~20% cut from $10/$50 (VentureBeat; Yahoo Finance); OpenAI GPT-6.2 GA (17 Nov) · The agent-tooling layer — LangChain LangSmith Tool Gateway public beta ~19 Nov (aiagentstore); SOCi MCP GA (PR Newswire); Kaseya MCP (Futurum) · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; Article 50 transparency; GPAI centrally enforced by the AI Office), Gartner (40% of enterprise apps embed task-specific agents by 2026; &gt;40% of agentic projects canceled by 2027). The "badge" framing — that the agent workforce has crossed the scale where governance-by-acquaintance fails, so a house must run one badge office (a single identity authority for every agent), put a named human master and scoped mandate on each, and automate a joiner-mover-leaver lifecycle that revokes on exit — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; several model names, dates and availability statuses (GA vs. preview) are reported inconsistently across trackers, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 23 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (privacy-friendly, no cookies). Requires the ai-radar.goatcounter.com site to be created; fails silently until then. -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
