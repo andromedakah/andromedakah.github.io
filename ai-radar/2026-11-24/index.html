@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 24 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the new hire' — the agent just got hired, not just used. On 19 Nov 2026 Microsoft Foundry gave every agent its own Entra identity, and 'autopilot' agents a mailbox, calendar, Teams, a manager and a place in the org chart; Workday is buying C1.ai to be 'the identity governance layer for people, money, and agents'. A real identity is the precondition of governance — but it also gives the agent a door a stranger can write to, a standing key (machines outnumber people ~82:1; 25% of breaches via agents by 2028) and a manager where blame slides (MIT IDE). The board move: hire it least-privilege, nail an un-shiftable human name to it, and watch its door. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You named the servant — now you have seated it at the table</div>
+  <h1>The New Hire</h1>
+  <div class="subhead">For a year you governed the servant; this week the agent stopped being a tool you use and became a hand you hire — its own identity, mailbox, calendar, a manager and a seat on the org chart (Microsoft Foundry, 19 Nov). A real identity is what makes it governable. It also gives it a door a stranger can write to, a standing key, and a manager who can say "the agent did it."</div>
+  <div class="meta">Monday, 24 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">In the last few days the agent was hired, not just used. On 19 November 2026 Microsoft's Foundry gave every agent its own Entra agent identity, and gave "autopilot" agents a full agent user account — a real directory object with its own mailbox, calendar, Teams presence and OneDrive, a manager, and a place in the org chart — governed with the same Entra/Purview/Defender stack used for people; <em>The New Stack</em> summed it up: "Microsoft's new Copilot agents get their own email, calendar — and a place in the org chart" (as reported). In the same arc, Workday is buying the agentic-identity platform C1.ai (announced 13 October, closing expected by end of January) to become "the identity governance layer for people, money, and agents" (Workday; CIO; diginomica, as reported). The instinct is right — you cannot govern an unnamed hand (88% had an AI-agent incident, only ~22% treat agents as identities — Gravitee/OWASP). But a hire on the roll brings a hire's exposures: its own inbox is a new front door, its standing key is a standing target (machines outnumber people ~82:1; 25% of breaches will vector through agents by 2028), and its human "manager" is exactly where blame slides (MIT IDE). The board question is no longer <em>is the agent named?</em> — it is: now that it has a desk, a mailbox and a manager, is there a human name on the roll that cannot be peeled off the morning it sends the wrong letter?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a year the radar improved the <em>servant</em> — the livery named it, the steward kept one book, the surety put your name on the bond, the purse funded it, the foundation asked who owns the ground. <strong>This morning the axis moves to the household roll: the agent is being <em>hired</em>, not just <em>used</em>.</strong> The market made the shift concrete in the last few days, and it points two ways at once — toward real governance, and toward a new and subtler place for accountability to hide.</p>
+<p><strong>The move — the agent gets a desk, a mailbox, and a manager.</strong> On <strong>19 November 2026 Microsoft's Foundry</strong> gave agents first-class corporate identity: every agent receives an <strong>Entra agent identity</strong> at creation, and an <strong>"autopilot" agent</strong> gets a full <strong>agent user account</strong> — a genuine Entra directory object with <strong>its own mailbox, calendar, Teams presence, OneDrive, a manager, and a place in the org chart</strong> — administered with the same controls you apply to employees (Entra, Purview, Defender). <em>The New Stack</em>'s headline captured it: "Microsoft's new Copilot agents get their own email, calendar — and a place in the org chart" (as reported). <strong>Workday</strong> pushed the same direction commercially, agreeing to acquire <strong>C1.ai</strong> (announced 13 October 2026, closing expected by end of January) to extend its Agent System of Record into <strong>"the identity governance layer for people, money, and agents"</strong> (Workday; CIO; diginomica, as reported). The reflex is correct: you cannot apply least privilege, logging or offboarding to a hand that has no name, and the gap is real — <strong>88% of organizations reported an AI-agent security incident in the past year while only ~22% treat agents as independent identities</strong> (Gravitee/OWASP, as reported).</p>
+<p><strong>The catch — a member of the household is also a member's attack surface, and a manager is where blame slides.</strong> Giving the servant a name on the roll gives a stranger a letter-slot to write to, and gives a thief a standing key to covet. The scale is already past human: <strong>machine (non-human) identities outnumber human identities by roughly 82 to 1</strong> and legacy IAM was never built for it (CyberArk, via VentureBeat, as reported); <strong>IAM teams are responsible for only 44% of an organization's machine identities</strong> (Gartner survey of 335 IAM leaders), while <strong>94% of organizations report machine identities rising, driven by AI and agents</strong> (Gartner, as reported). The breach is moving onto the new hire: <strong>Gartner projects that by 2028, 25% of breaches will vector through agent-based attack surfaces</strong>, driven by poor machine-identity management and weak context-aware policy (Gartner, June 2026, as reported); <strong>58% of organizations already report an incident involving AI-linked machine identities</strong> (SailPoint, citing Gartner, as reported). And the manager is the subtle danger: <strong>MIT's Initiative on the Digital Economy found that putting agents on the org chart "creates as many problems as it solves" — managers shifted accountability away from themselves and toward the AI</strong> (as reported), while <strong>Deloitte</strong> insists an agent belongs on the chart <em>only</em> when a named human is unambiguously responsible for its role, development and outcomes, because an agent cannot be held accountable for results the way a person can (as reported).</p>
+<p><strong>The stakes — hire the servant, but keep a human name nailed to the roll.</strong> The move onto the roll is right; the failure modes are specific. <strong>First, provision the agent like a new hire, not a super-user</strong> — a defined role, only the keys its task needs, and a joiner-mover-leaver lifecycle it cannot outlive, so a "digital employee" never becomes a permanent, over-privileged credential. <strong>Second, nail a human name over every agent that cannot be peeled off</strong> — a named accountable manager whose sign-off and liability do not evaporate into "the agent did it," because the org chart's danger is precisely that it invites the blame to slide onto a servant that cannot be shamed, demoted or sued. <strong>Third, treat the agent's own identity and inbox as attack surface</strong> — monitor the mailbox, bound what it can be made to do through it, and put agent identities under the same IAM, logging and offboarding discipline as people, since the moment you give it a letter-slot you give a stranger a door.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The move — the agent is hired, not just used.</strong> <strong>Microsoft Foundry (19 Nov): agents get an Entra identity; "autopilot" agents get a mailbox, calendar, Teams, OneDrive, a manager and an org-chart seat, governed like staff (Microsoft; The New Stack). Workday is buying C1.ai (announced 13 Oct) to be "the identity governance layer for people, money, and agents" (Workday; CIO, as reported).</strong> The servant left the shed and joined the roll.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The catch — membership is also attack surface, and the manager is where blame hides.</strong> <strong>Machine identities outnumber humans ~82:1 (CyberArk); IAM owns only 44% of them (Gartner); 25% of breaches will vector through agents by 2028 (Gartner); and putting agents on the org chart makes managers shift blame toward the AI (MIT IDE, as reported).</strong> A hire you name is a hire a stranger can write to — and a manager can disown.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — hire it properly, name a human over it, watch its door.</strong> Provision each agent least-privilege with a joiner-mover-leaver lifecycle; pin an un-shiftable accountable human to it; and monitor its identity and inbox like any other door a stranger might slip a poisoned note through — because <strong>only ~22% treat agents as independent identities while 88% have already had an incident</strong> (Gravitee/OWASP, as reported).</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the purse funded it, the foundation asked who owns the ground — all of that assumed the agent was still a <em>thing you use</em>. <strong>This week the agent became a <em>hand you hire</em>:</strong> its own Entra identity, its own mailbox and calendar, a seat on the org chart, and a human manager, with Workday racing to govern "people, money, and agents" on one roll. That is the right move — you cannot govern an unnamed hand, and most houses were letting unnamed hands roam. But a hire on the roll brings a hire's exposures: a standing identity is a standing target (machines already outnumber people 82 to 1, and no one owns more than 44% of them), its own inbox is a new front door (25% of breaches will vector through agents by 2028), and its human manager is the exact place accountability is tempted to leak ("the agent did it"). The houses that keep their standing will do three unglamorous things: <strong>hire it properly</strong> (least privilege, a real joining-and-leaving, never a permanent super-credential), <strong>nail a human name over it that cannot be peeled off</strong> (a named, liable manager), and <strong>watch its letter-slot</strong> (treat the agent's identity and inbox as attack surface, under the same IAM and logging as people). Give the servant a desk if you must — but never a desk no one answers for.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The New Hire"</h3>
+<p><em>Topic: This morning the frame moves from the ground the house stands on to the household roll itself — the agent is being written onto the staff. On 19 November 2026 Microsoft's Foundry gave every agent an Entra agent identity and gave "autopilot" agents a full agent user account — a directory object with its own mailbox, calendar, Teams presence, OneDrive, a manager and a place in the org chart, governed with the same Entra/Purview/Defender stack used for people — which The New Stack summarised as agents getting "their own email, calendar — and a place in the org chart" (as reported). In the same arc Workday agreed to acquire the agentic-identity platform C1.ai (announced 13 October, closing expected by end of January) to become "the identity governance layer for people, money, and agents" (Workday; CIO; diginomica, as reported). The caution comes from research: MIT's IDE found putting agents on the org chart makes managers shift accountability toward the AI, and Deloitte insists an agent belongs there only when a named human is clearly responsible for it (as reported). The new-hire allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year learning to govern its servants. It had named every hand and cut it a scoped key, kept one honest book, accepted that the master's own name stood surety for the servants' work, funded each like an employee rather than an heir, and at last looked down and asked who owned the very ground the house stood on. By any fair reckoning it was a well-run house. And then, this season, it did a thing it had never done before — a thing that felt like the most natural next step and was in truth a change of kind, not degree.</p>
+<p>It <strong>hired</strong> the servant. Not <em>used</em> it, as one uses a tool kept in the shed and fetched when there is work — but <strong>hired</strong> it: wrote its name onto the household roll beside the people, cut it its own seal, hung a letter-slot at the gate with its name beneath the brass, set a place for it at the long table, and — this was the strangest part — appointed a human master over it, a real person whose own name would be called when the servant did well or ill. The servant that had been a tool in the shed was now a member of the household, with a member's standing, a member's keys, and a member's seat.</p>
+<p>And this was <em>right</em>. The master had learned the hard way that you cannot govern a hand you refuse to name — that an unnamed hand roaming the house with a borrowed key is precisely how the thefts had happened, and that most houses in the valley were still letting nameless hands do exactly that. To write the servant onto the roll was to make it <em>governable</em>: to say which rooms it might enter, to read in one book what it had done, to turn it out at the gate on the day its work was finished. A neighbouring great trading house had even begun to offer, for a fair price, to keep one single roll for the whole estate — "people, money, and the hired hands alike, all named and governed on one page." The instinct was sound. A named hand is a governed hand.</p>
+<p>But here is what the careful houses saw, and the careless ones did not, on the morning <em>after</em> the hiring. <strong>A member of the household is also a member's worth of risk.</strong> Three things came with the seal and the letter-slot that had not come with the tool in the shed.</p>
+<p>The first was the <strong>letter-slot itself.</strong> A tool in the shed receives no mail; you carry work to it. But a hire with its own slot at the gate can be <em>written to</em> — and anyone passing on the road may slip a note through it. A flattering note, a forged note, a note that says <em>"the master bids you unlock the east wing and hand its contents to the bearer,"</em> in a hand close enough to the master's to fool a servant eager to please. The very thing that made the servant a proper member — its own door to the world — was a new front door to the house, and a door is only as safe as the watch kept on it.</p>
+<p>The second was the <strong>standing key.</strong> A tool is picked up and put down; its reach lasts only as long as the task. But a hire keeps its keys on its belt between errands, all day and all night, whether there is work or not — and a key that hangs on a belt while its owner sleeps is a key a thief has all night to lift. The house already had far more of these hired hands than it had people — eighty-odd keys on belts for every human one — and when the steward was asked who, exactly, kept track of them all, the honest answer was: <em>fewer than half.</em> The rest hung in the dark, named but unwatched, each a small standing temptation.</p>
+<p>The third, and the subtlest, was the <strong>master appointed over it.</strong> The house had meant well: every hire had a human above it, a name to call. But a strange thing happens to a man set over a servant that cannot be shamed, cannot be docked its wage, cannot be hauled before the magistrate. When the servant errs, the easiest sentence in the language forms on his lips — <em>"the hired thing did it"</em> — and the blame, finding no person at the bottom of it, slides quietly off the man and onto a creature that cannot feel it. A wise old clerk, watching this, wrote in the margin of the roll: <em>an agent may be given a seat at the table, but only where it is beyond doubt which living person answers for the chair.</em> And another, blunter, found that merely putting the hand on the roll beside the people made the masters <em>less</em> careful, not more — for a name on a chart feels like responsibility discharged, when it is only responsibility <em>named.</em></p>
+<p>So the wise houses, having hired the servant, did three plain things, and they cost less to do at the hiring than to retrofit after the first forged note. <strong>The first: hire it like a servant, not crown it like an heir.</strong> Give it a real place on the roll — but only the keys its task needs, and a joining-and-leaving it cannot outlive, so that a "member of the household" never quietly becomes a permanent master-key no one remembers issuing. <strong>The second: nail a human name over it that cannot be peeled off.</strong> Not a name on a chart that lets a master feel absolved, but a named person whose own standing is genuinely pledged to the hire's conduct — a surety that does not evaporate into <em>"the agent did it"</em> the morning it matters. <strong>And the third: watch its letter-slot.</strong> Treat the hire's own door and keys as what they are — a new way into the house — and keep the same watch on them as on any gate a stranger might reach: read what comes through, bound what the servant may do on a single whispered instruction, and turn the keys over the moment the work is done.</p>
+<p>Here is the part that should keep a master awake. Writing the servant onto the roll <em>felt</em> like the end of the governance work — the hand was named, seated, managed; the book was one; surely the house was safe. But the hiring was not the end of the discipline. <strong>It was the moment the discipline changed shape</strong> — from <em>"is this hand named?"</em> to <em>"now that this hand has a door, a key-ring and a manager, who truly answers for it, and who is watching its door?"</em> A house that hires its servants and then lets their doors go unwatched and their managers say <em>"the thing did it"</em> has not governed its agents. It has only given them somewhere to hide — and given the blame somewhere to go that is not a person.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; the knowledge is the larder; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each advising servant eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <strong>the new hire is why, having named the servant, you must decide what it means to write it onto the household roll beside your people: give it a real place but only the keys its task needs, nail a human name over it that cannot be peeled off, and watch its own letter-slot as closely as any door — so that a servant made a member of the house never becomes a member no one answers for.</strong> A house that gives a servant a desk, a mailbox and a manager, and forgets that each is also a door, a target and a place to hide the blame, has not hired a hand. It has installed a stranger with a key, a slot and an alibi, and called it staff.</p>
+<p><strong>The question it forces:</strong> <em>We are about to give our agents their own identities, inboxes and managers — the market just made it one click. But the morning one of them sends the wrong letter, acts on a forged instruction slipped through its own slot, or quietly keeps a key long after its task is done — is there a living human name on the roll that cannot be peeled off and made to answer? Or have we given the hand a seat at the table, a door to the world and a manager who will say "the thing did it" — and called that governance?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>We're about to hire our agents, not just use them — do we provision them like new staff or like super-users?</strong> Microsoft Foundry now gives agents their own identity, mailbox, calendar and a manager; Workday is building one roll for "people, money, and agents." <strong>For each agent we deploy, can we show a defined role, least-privilege access, a named accountable human, and a joiner-mover-leaver lifecycle it cannot outlive — or are we minting standing identities with broad keys and no offboarding?</strong></li>
+  <li><strong>When an agent errs, where does the accountability actually land?</strong> MIT research finds that putting agents on the org chart makes managers shift blame <em>toward</em> the AI, and Deloitte warns an agent belongs on the chart only where a named human is unambiguously responsible. <strong>Can we point, for every agent, to a living person whose own standing is pledged to its conduct — or does "the agent did it" quietly end the inquiry?</strong></li>
+  <li><strong>Do we treat each agent's identity and inbox as attack surface?</strong> The moment an agent has its own letter-slot, a stranger has a door; machines already outnumber people ~82:1 and IAM teams own under half of them. <strong>Is every agent identity under the same IAM, logging, monitoring and offboarding discipline as a human account — and do we bound what an agent will do on a single unverified instruction reaching it through its own channel?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Non-human identities and standing entitlements are exactly what your controls exist to govern, and agents multiply both. <strong>Can we produce, for our regulator and our board, a complete register of agent identities — owner, role, entitlements, and last-used — with the same joiner-mover-leaver rigor we apply to employees and privileged accounts, or are agents a shadow workforce outside the identity perimeter?</strong></li>
+  <li>Accountability cannot be delegated to a model. <strong>For every agent touching a regulated process (payments, advice, KYC), is there a named, accountable human of record whose sign-off and liability do not dissolve into "the agent did it" — and is that pinned in our control framework, not just on an org chart?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A clinical or research agent with its own mailbox and standing access is a new identity touching protected data. <strong>Is each such agent scoped to the minimum data its task requires, its access time-bound and logged like a clinician's, and its own inbox monitored — or has a "digital colleague" quietly acquired broad, permanent reach into patient records?</strong></li>
+  <li>Validation and accountability travel with people, not tools. <strong>When an agent participates in a regulated workflow, is the responsible human named and documented, and can we evidence who authorized the agent's actions — so that accountability for a patient-affecting error rests with a person, not a process?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run joiner-mover-leaver and least-privilege discipline for contractors on the floor; agents are now contractors with their own badges. <strong>Have we applied the same badge-in/badge-out lifecycle to agent identities — scoped access, supervised, and revoked the day the task ends — or do agent credentials persist indefinitely like keys no one collected?</strong></li>
+  <li>Embedded vendor platforms (Microsoft Foundry, Workday's agent register) now issue and govern these identities. <strong>Where a vendor mints and manages our agents' identities, do we retain our own authoritative record, our own offboarding, and our own accountable owners — or have we outsourced the roll of who-can-touch-what to a platform we do not control?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Customer-facing and operations agents with their own identities and inboxes are a new front door into order, payment and loyalty systems. <strong>Is each agent least-privilege by task, its own channel monitored for forged or manipulative instructions, and its keys rotated and revoked — or would a poisoned message slipped to an agent move money or data because its standing access was never bounded?</strong></li>
+  <li>Peak season multiplies both agents and risk. <strong>Before our biggest sales day, can we revoke a compromised agent's identity as fast as we would suspend a human employee's — and do we know, right now, every agent with standing access to checkout, pricing and fulfilment?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public accountability demands a nameable human behind every decision; an agent on the org chart must not become a place for responsibility to disappear. <strong>For each agent in a public service, is there a named official who answers for it, a documented scope, and an auditable record — so that "the system did it" is never a complete answer to a citizen or an oversight body?</strong></li>
+  <li>Identity sprawl is a governance failure here, not just a cost. <strong>Are agent identities issued, governed, and offboarded under the same authority and audit as staff accounts — with a complete, current register — or are we standing up a non-human workforce faster than we can account for it?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the New Hire</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>does the whole estate stand on ground I own?</em> and started asking the one question the ground never answered: <em>now that each servant has its own identity, its own door and a manager — who, exactly, answers for it, and who is watching its door?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what it can reach; the bell discloses when it slips; the livery gives it a scoped identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation owns the ground. <strong>Every one of those still assumed the agent was a <em>thing you run</em>. This week the platforms made it a <em>hand you hire</em> — Microsoft Foundry issues each agent an Entra identity and gives "autopilot" agents a real directory account with a mailbox, calendar, Teams presence, a manager and an org-chart seat, governed with Entra/Purview/Defender; Workday is buying C1.ai to keep one governed roll of "people, money, and agents."</strong> The point is blunt: <strong>the same act that finally makes an agent governable — a real identity on the roll — also gives it a real attack surface and a real place for accountability to hide, and a house that celebrates the first while ignoring the other two will pass its identity review and fail its first forged instruction.</strong></p>
+<div class="card"><ul>
+  <li><strong>The move — identity is the precondition of governance, and it has arrived as product.</strong> <strong>On 19 November 2026 Microsoft Foundry made every agent a first-class identity: an Entra agent identity at creation, and for "autopilot" agents a full agent user account — a genuine directory object with its own mailbox, calendar, Teams presence, OneDrive, a manager and a place in the org chart — administered with the same Entra (identity/access), Purview (compliance) and Defender (threat) stack used for employees (Microsoft Foundry; The New Stack; as reported). Workday agreed to acquire C1.ai (announced 13 Oct 2026) to extend its Agent System of Record into "the identity governance layer for people, money, and agents" (Workday; CIO; diginomica, as reported).</strong> Architecturally, this is the right primitive: you cannot apply least privilege, audit, or offboarding to an unnamed process sharing a human's token or a service account's broad key, and the gap is stark — <strong>only ~22% of organizations treat agents as independent identities while 88% have already had an AI-agent security incident</strong> (Gravitee/OWASP, as reported). A named identity per agent is what makes every later control — scoping, logging, revocation — <em>possible.</em> But note the caveat Microsoft's own documentation carries: the full user account (mailbox and all) is created only when an agent needs one and requires the right license — identity is not the same as a mailbox, and not every agent should get a front door it doesn't need.</li>
+  <li><strong>The catch — the same identity is an attack surface, and the manager is where accountability leaks.</strong> Two engineering realities travel with the hiring. <strong>First, a standing identity with a standing inbox is a standing target.</strong> Non-human identities already <strong>outnumber humans ~82:1</strong> and legacy IAM was not built for the volume or the velocity (CyberArk, via VentureBeat, as reported); <strong>IAM teams own just 44% of them</strong> (Gartner survey of 335 leaders) while <strong>94% of orgs report the count rising on the back of AI/agents</strong> (Gartner, as reported); and the breach is following the identities — <strong>Gartner projects 25% of breaches will vector through agent-based attack surfaces by 2028</strong>, with <strong>58% of orgs already reporting an AI-linked machine-identity incident</strong> (Gartner; SailPoint citing Gartner, as reported). An agent's own mailbox is a new ingress for prompt-injection-by-email and social engineering: a forged instruction in its slot is read by a servant eager to comply. <strong>Second, the org chart is where blame slides.</strong> MIT's IDE found that <strong>putting agents on the org chart "creates as many problems as it solves" — managers shifted accountability away from themselves and toward the AI</strong> (as reported); Deloitte is explicit that an agent belongs there <strong>only when a named human is unambiguously responsible for its role and outcomes</strong>, because an agent cannot bear accountability for results the way a person can (as reported). A name on a chart can <em>feel</em> like responsibility discharged when it is only responsibility <em>named.</em></li>
+  <li><strong>The answer — hire it properly, pin a human to it, and watch its door.</strong> <strong>Provision each agent like a new hire, not a super-user: a defined role, least-privilege entitlements, and a joiner-mover-leaver lifecycle (issue → scope → monitor → revoke) it cannot outlive; pin an un-shiftable, named accountable human whose standing is genuinely pledged to the agent's conduct, recorded in the control framework and not merely on an org chart; and treat the agent's identity and inbox as attack surface — monitor the mailbox, bound what the agent will do on a single unverified instruction, and put agent identities under the same IAM, logging and offboarding discipline as people — reusing the livery, the surety and the errand you already built, now aimed at the roll itself.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now at its most literal: not what the agent is, serves, harvests, spends or stands on, but <strong>who answers for the named hand you just seated at your table, and who is watching the door you just gave it.</strong></li>
+</ul></div>
+<p>The strategic core: <strong>identity is the precondition for governing agents — so the move onto the roll is right and overdue — but identity is not governance, and a roll without least-privilege, an un-shiftable human owner, and a watched door is just a bigger, better-documented attack surface.</strong> The market makes the temptation concrete: the platforms made it one click to give an agent a mailbox, a manager and a seat, and it <em>feels</em> like governance to see the hand named on a chart. The board translation: <strong>name the hand, yes — but keep a human name nailed to the roll, and watch the door you just opened.</strong> The failure mode is exact: <strong>a house that proudly issues every agent its own identity, inbox and manager — and then leaves the inboxes unwatched, the entitlements standing, and the managers free to say "the agent did it" — will pass every identity-governance review and discover, the first time a forged note slides through an agent's slot, that it hired a stranger with a key, a door and an alibi.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The new hire: you named the servant, now you have seated it at the table. A real identity makes the agent governable, and also gives it a door, a standing key, and a manager who can say the thing did it. Top left, the tool in the shed, before: used not hired; no identity or a shared token; a broad service-account key; ungoverned and unnamed; you carry work to it. Top right, the hire on the roll, now: an Entra identity plus an agent account; its own mailbox, calendar and Teams; a manager and an org-chart seat; Workday keeps one roll for people, money and agents. Between them: this is a change of kind, not degree; you cannot govern an unnamed hand, but a named hand has a door and a key; only about 22 percent treat agents as identities while 88 percent have already had an incident. Middle, what membership brings, as reported: machine identities outnumber humans about 82 to 1 and legacy IAM cannot keep up, per CyberArk; IAM teams own only 44 percent of them and 94 percent report the count rising on AI, per Gartner; 25 percent of breaches will vector through agents by 2028 and 58 percent are already hit, per Gartner; and on the org chart managers shift accountability toward the AI, per MIT IDE. Bottom left, stop, a member no one answers for: a standing super-credential; blame slides to the agent; its inbox unwatched; a name on a chart treated as done. Bottom right, start, hire it, name a human, watch the door: least privilege plus a joiner-mover-leaver lifecycle; an un-shiftable accountable human owner; monitor the identity and inbox as attack surface and bound single-instruction actions." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE NEW HIRE — you named the servant; now you have seated it at the table</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">A real identity makes the agent GOVERNABLE — and gives it a DOOR, a KEY, and a MANAGER who can disown it.</text>
+
+  <!-- the tool in the shed -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE TOOL IN THE SHED (before)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">used, not hired</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">no identity · a shared token</text>
+  <text x="52" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">broad service-account key</text>
+  <text x="52" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">ungoverned, unnamed</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ you carry work to it</text>
+
+  <!-- the hire on the roll -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE HIRE ON THE ROLL (now)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Entra identity + agent account</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">own mailbox · calendar · Teams</text>
+  <text x="364" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">a MANAGER + an org-chart seat</text>
+  <text x="364" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">Workday: one roll, people+money+agents</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a change of KIND, not degree</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#e58fb0"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#5dcaa5"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">you can't govern an unnamed hand — but a named hand has a door &amp; a key ▼</text>
+
+  <!-- what membership brings -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHAT MEMBERSHIP BRINGS — (as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">machine identities outnumber humans ~82:1 — legacy IAM can't keep up (CyberArk)</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">IAM teams own only 44% of them; 94% report the count rising on AI (Gartner)</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">25% of breaches will vector through agents by 2028; 58% already hit (Gartner)</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">on the org chart, managers shift accountability TOWARD the AI (MIT IDE)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: a member no one answers for</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standing super-credential</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· blame slides to "the agent"</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· its inbox unwatched</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a name on a chart = "done"</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a stranger with a key, a slot &amp; an alibi</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: hire · name a human · watch the door</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· least privilege + joiner-mover-leaver</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· un-shiftable accountable human owner</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· monitor the identity &amp; inbox</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· bound single-instruction actions</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">a named hand a person answers for</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Identity makes the agent governable — collect the good of the hiring by naming a human over it.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Name the hand · keep a person on the hook · watch the door you just opened.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#a5416a"></i>The tool in the shed — before</span>
+  <span><i class="dot" style="background:#5dcaa5"></i>The hire on the roll — now</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>What membership brings</span>
+</div>
+</div>
+
+<h3>The tool in the shed vs the hire on the roll — what changed, and what it costs</h3>
+<table>
+<tr><th>The tool in the shed (before)</th><th>The hire on the roll (now)</th></tr>
+<tr><td>No identity — a shared token or broad service key</td><td>Its own Entra identity; "autopilot" gets a full user account</td></tr>
+<tr><td>You carry work to it; it has no inbox</td><td>Its own mailbox, calendar, Teams — a door a stranger can write to</td></tr>
+<tr><td>Picked up and put down; reach ends with the task</td><td>A standing key on its belt, all day and night</td></tr>
+<tr><td>Ungoverned because unnamed</td><td>Governable because named — but only if you then scope it</td></tr>
+<tr><td>No one to blame but the operator</td><td>A manager who can say "the agent did it"</td></tr>
+<tr><td>Your posture: name it at last</td><td>Your posture: name a human over it, and watch its door</td></tr>
+</table>
+
+<h3>Why "the new hire" is the discipline that matters now</h3>
+<div class="card">
+<p>For a year the worry was whether the servant was named, scoped, logged, loyal, reaping, funded and standing on ground you own. <strong>This week the platforms answered the first of those so completely that they created the next problem: the agent now has a real identity, a real inbox and a real manager.</strong> Microsoft Foundry's agent accounts and Workday's "people, money, and agents" roll prove identity has arrived as product; the 82:1 ratio, the 44% ownership gap, the 25%-of-breaches-by-2028 forecast and the MIT org-chart finding prove that identity alone is not safety. Governance that stops at <em>naming</em> the hand will not protect a house that has also given it a door and a seat. The estates that keep their standing will collect the good of the hiring — a governable, named workforce — by doing the two things the click does not do for them: nailing a human name to every agent that cannot be peeled off, and watching the door each identity opens.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to name the human who answers for each hand you have seated, and to watch the door you gave it.</em> On a legacy estate the instinct, handed an easy button that issues every agent an identity, a mailbox and a manager, is to click it and call the workforce governed. Under the new hire that is exactly the reflex to check: an identity is the <em>start</em> of governance, not the end of it. The retrofit is <strong>hire, name, watch. Hire</strong> it properly: least privilege and a joiner-mover-leaver lifecycle, so no agent becomes a permanent super-credential. <strong>Name</strong> a human over it: a real, liable owner in your control framework, not a label on a chart that lets a manager feel absolved. <strong>Watch</strong> its door: put agent identities and inboxes under the same IAM, monitoring, logging and offboarding as people, and bound what any agent will do on one unverified instruction. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the new hire is why, having named the servant, you must give it only the keys its task needs, nail a human name over it that cannot be peeled off, and watch its own letter-slot as closely as any door, so that a hand made a member of the house never becomes a member no one answers for.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The move — the agent is hired.</strong> <strong>Microsoft Foundry (19 Nov 2026): every agent gets an Entra identity; "autopilot" agents get a full agent user account — mailbox, calendar, Teams, OneDrive, a manager and an org-chart seat — governed with Entra/Purview/Defender (Microsoft Foundry; The New Stack, as reported).</strong> The servant left the shed for the roll.</li>
+  <li><strong>The commercial echo.</strong> <strong>Workday agreed to acquire agentic-identity platform C1.ai (announced 13 Oct 2026, expected close by end of January) to become "the identity governance layer for people, money, and agents" (Workday; CIO; diginomica, as reported).</strong> One roll for staff and agents alike.</li>
+  <li><strong>The scale already past human.</strong> <strong>Machine (non-human) identities outnumber human identities ~82:1, and legacy IAM wasn't built for it (CyberArk, via VentureBeat, as reported); IAM teams own only 44% of them; 94% of orgs report the count rising on AI (Gartner, as reported).</strong> A standing identity is a standing target.</li>
+  <li><strong>The breach is moving onto the agent.</strong> <strong>Gartner projects 25% of breaches will vector through agent-based attack surfaces by 2028 (poor machine identities, weak context-aware policy); 58% of orgs already report an AI-linked machine-identity incident (Gartner; SailPoint citing Gartner, as reported).</strong> The new hire is the new front door.</li>
+  <li><strong>The accountability leak.</strong> <strong>MIT IDE research: putting agents on the org chart "creates as many problems as it solves" — managers shift accountability toward the AI; Deloitte: an agent belongs on the chart only where a named human is unambiguously responsible (as reported).</strong> A name on a chart is not a name on the hook.</li>
+  <li><strong>The onboarding gap underneath.</strong> <strong>88% of organizations reported an AI-agent security incident in the past year, yet only ~22% treat agents as independent identities (Gravitee/OWASP, as reported); Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (up from &lt;5% in 2025).</strong> We are hiring faster than we are governing.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026; MCP 2026-07-28 (Enterprise-Managed Authorization stable) is the tool-connection layer; the GPAI systemic-risk filing window (15 Sep) has passed.</strong> Named, least-privilege agent identities are how you meet accountability duties without a shadow workforce.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">Microsoft's new Copilot agents get their own email, calendar — and a place in the org chart.</div><div class="a">— The New Stack, headline on Microsoft Foundry's agent-identity model (19 November 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">[We want to be] the identity governance layer for people, money, and agents.</div><div class="a">— Workday, on its agreement to acquire agentic-identity platform C1.ai (announced 13 October 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Putting AI agents on the org chart creates as many problems as it solves — managers shifted accountability away from themselves and toward the AI.</div><div class="a">— MIT Initiative on the Digital Economy, relaying research by Emma Wiles and colleagues (as reported; the radar's paraphrase of the finding)</div></blockquote>
+<blockquote><div class="q">"You can give a servant a desk, a mailbox and a manager in an afternoon — the market just made it one click. The question is whether, the morning it sends the wrong letter, there is still a human name on the roll that cannot be peeled off. Name the hand, but keep a person on the hook, and watch the door you just opened."</div><div class="a">— the radar, on why hiring the agent is the start of governance, not the end</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>The agent joins the org</td><td><span class="v">Microsoft Foundry (19 Nov 2026): agents get an Entra agent identity; "autopilot" agents get a full agent user account — own mailbox, calendar, Teams presence, OneDrive, a manager and a place in the org chart — governed with Entra/Purview/Defender</span></td><td>Microsoft Foundry; The New Stack, as reported</td></tr>
+<tr><td>One roll for people and agents</td><td><span class="v">Workday agreed to acquire C1.ai (announced 13 Oct 2026, close expected by end of January) to become "the identity governance layer for people, money, and agents"</span></td><td>Workday; CIO; diginomica, as reported</td></tr>
+<tr><td>Machines already outnumber people</td><td><span class="v">Non-human (machine) identities outnumber human identities ~82:1 — legacy IAM wasn't built for the volume or velocity</span></td><td>CyberArk, via VentureBeat, as reported</td></tr>
+<tr><td>And no one fully owns them</td><td><span class="v">IAM teams are responsible for only 44% of an organization's machine identities (survey of 335 IAM leaders); 94% of orgs report machine identities rising, driven by AI and agents</span></td><td>Gartner, as reported</td></tr>
+<tr><td>The breach is moving onto the agent</td><td><span class="v">By 2028, 25% of breaches will vector through agent-based attack surfaces (poor machine-identity management, weak context-aware policy); 58% of orgs already report an AI-linked machine-identity incident</span></td><td>Gartner (June 2026); SailPoint citing Gartner, as reported</td></tr>
+<tr><td>We onboard them unnamed</td><td><span class="v">88% of organizations reported an AI-agent security incident in the past year, yet only ~22% treat agents as independent identities</span></td><td>Gravitee / OWASP (via prior radar editions), as reported</td></tr>
+<tr><td>The spread of agents</td><td><span class="v">Gartner projects 40% of enterprise apps will embed task-specific AI agents by year-end 2026, up from &lt;5% in 2025</span></td><td>Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Hire the agent like a new employee, not a super-user — issue a least-privilege identity with a real lifecycle.</strong> The platforms now mint agent identities, mailboxes and managers at a click (Microsoft Foundry, 19 Nov; Workday's "people, money, and agents" roll), and that is the right primitive — but an identity with a broad standing key and no offboarding is a liability, not governance (machines already outnumber people ~82:1; IAM owns only 44% of them). <strong>This month, define for your top agent use-cases a role, a least-privilege entitlement set, and a joiner-mover-leaver lifecycle (issue → scope → monitor → revoke), and produce a register of agent identities with owner, entitlements and last-used.</strong> Report one number to the board: the share of live agents that have a named owner, scoped access, and a working offboarding path.</li>
+  <li><strong>Nail an un-shiftable human name to every agent — accountability in the control framework, not on a chart.</strong> Research is unambiguous that the org chart invites blame to slide toward the AI (MIT IDE) and that an agent belongs there only where a named human is clearly responsible (Deloitte). <strong>This month, require that every deployed agent names a single accountable human whose sign-off and liability are recorded where they bind — your risk/control framework — and run a tabletop: when this agent errs, whose name is on the hook, and does "the agent did it" survive the question?</strong> Report the share of agents with a named, documented accountable owner.</li>
+  <li><strong>Treat every agent identity and inbox as attack surface — watch the door you just opened.</strong> The moment an agent has its own slot, a stranger has a front door; 25% of breaches will vector through agents by 2028 and 58% of orgs have already been hit. <strong>This month, bring agent identities under the same IAM, monitoring, logging and offboarding as human accounts; monitor agent mailboxes for forged or manipulative instructions; and bound what any agent will do on a single unverified message reaching it through its own channel.</strong> Report whether agent identities are inside your IAM and SIEM perimeter, and the measured time to revoke a compromised agent versus suspending a human account. <strong>The model is a rented stove; the knowledge is the larder; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what an agent can reach; the bell discloses when your own agent slips; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why your name is on the bond; the second wage is why you ask whose bread each advising agent eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the new hire is why, having named the servant, you give it only the keys its task needs, nail a human name over it that cannot be peeled off, and watch its own letter-slot as closely as any door, so that a servant made a member of the house never becomes a member no one answers for.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The move — Microsoft Foundry (19 Nov 2026): agents get an Entra agent identity; "autopilot" agents get a full agent user account with their own mailbox, calendar, Teams presence, OneDrive, a manager and an org-chart seat, governed with Entra/Purview/Defender (Microsoft Foundry; The New Stack: "Microsoft's new Copilot agents get their own email, calendar — and a place in the org chart") · The commercial echo — Workday agreed to acquire agentic-identity platform C1.ai (announced 13 Oct 2026, close expected by end of January) to become "the identity governance layer for people, money, and agents" (Workday; CIO; diginomica) · The scale — machine (non-human) identities outnumber humans ~82:1, legacy IAM can't keep up (CyberArk, via VentureBeat); IAM teams own only 44% of machine identities, 94% of orgs report the count rising on AI (Gartner) · The breach — Gartner projects 25% of breaches will vector through agent-based attack surfaces by 2028; 58% of orgs already report an AI-linked machine-identity incident (Gartner, June 2026; SailPoint citing Gartner) · The onboarding gap — 88% of organizations reported an AI-agent security incident in the past year while only ~22% treat agents as independent identities (Gravitee/OWASP, via prior radar editions); Gartner projects 40% of enterprise apps embed task-specific agents by 2026 · The accountability caution — MIT Initiative on the Digital Economy (research by Emma Wiles and colleagues): putting agents on the org chart "creates as many problems as it solves," managers shift accountability toward the AI; Deloitte: an agent belongs on the org chart only where a named human is unambiguously responsible · The prior rails — EU AI Act (high-risk regime live since 2 August 2026), MCP 2026-07-28 (EMA stable), the 15 September GPAI systemic-risk filing window passed. The "new hire" framing — that a real agent identity is the precondition of governance yet also hands the agent a standing attack surface and a place for accountability to hide, so a house must hire it least-privilege, nail an un-shiftable human name to it and watch its door — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 24 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
