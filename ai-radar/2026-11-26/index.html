@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 26 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the signet' — at Microsoft Ignite 2026 (17 Nov) the model got cheaper and 'good enough' (MAI Code 2 claimed ~98% of GPT-6.1 Sol at ~40% of the price; an 11,000-model picker) and agents multiplied past 50 million in Agent 365, while Nadella called it 'an architectural imperative to separate… intelligence from the authority over it.' When intelligence is nearly free, the governed thing is the authority to act, not the mind. The board move: hold the seal apart (an authority layer above any model), size it to the consequence, and record who sealed it. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You governed the servant and its ground — now who holds the authority to act?</div>
+  <h1>The Signet</h1>
+  <div class="subhead">A whole season went into governing the servant and the ground it stands on. This week a vendor made the next turn itself: it drove excellent intelligence toward free, multiplied agents past fifty million, and then said the architecture now requires separating intelligence from the authority over it. When the mind is this cheap, the scarce thing is the seal — who holds it?</div>
+  <div class="meta">Thursday, 26 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">At Microsoft Ignite 2026 (17 November 2026), Microsoft did two things in one breath. It made excellent intelligence cheaper than ever — shipping MAI Code 2, which it claims reaches ~98% of GPT-6.1 Sol's coding performance at roughly 40% of the price, into a Foundry model picker now past 11,000 models, with the trade press calling it the case for "good enough" coding models (Microsoft; DevOps.com; TechSpot, as reported). And it reported that organisations have now registered more than 50 million agents in Agent 365 since its May 2026 launch, with the platform "preparing for a future with over 1 billion agents," and made Entra Agent ID generally available (Microsoft; eWeek; Windows Central, as reported). Then Satya Nadella named the thing the whole stack had been circling: "it becomes an architectural imperative to separate… intelligence from the authority over it." Read together, the board question for this morning is plain: when intelligence is this cheap, this good, and multiplying by the tens of millions, the scarce and governed thing is no longer the clever mind — it is the <em>authority</em> to turn a clever draft into a binding act. Who holds the signet, and is it a hand the model does not control?</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long season the radar governed the <em>servant</em> and then the <em>ground</em> — name it (the livery), keep one book (the steward), sign the bond (the surety), check its wage (the second wage), send it to reap (the two harvests), fund it with a scoped purse (the purse), and own the floor it stands on (the foundation). <strong>This morning the axis turns to the one power none of those fully pin down: the authority to act — to turn thinking into a committed, binding deed.</strong> And the turn is made, unusually, by a vendor describing its own stack.</p>
+<p><strong>The reality — intelligence got cheaper and more plentiful again, and a vendor said the quiet part.</strong> At <strong>Microsoft Ignite 2026 (17 Nov)</strong> Microsoft shipped <strong>MAI Code 2</strong>, claiming <strong>~98% of GPT-6.1 Sol's coding performance at ~40% of the price</strong>, and <strong>MAI Code 2 Flash</strong> tuned for high-volume work (a reported <strong>~61% average pass rate across three coding benchmarks at ~5¢ per task on promotional pricing, versus ~55% at ~8¢ for GPT-6 Luna</strong>; in a blind frontend-app evaluation with <strong>258 annotators</strong>, developers preferred MAI Code 2's output <strong>64% of the time</strong>), into a <strong>Foundry picker past 11,000 models</strong> (Microsoft; DevOps.com; TechSpot, as reported). The trade press named it exactly: Microsoft is <strong>"making the case for 'good enough' coding models."</strong> Intelligence is now so abundant that "good enough and cheap" beats "best and dear" for most work — the stove is not just swappable, it is nearly free.</p>
+<p><strong>The multiplication — and the imperative underneath it.</strong> In the same keynote Microsoft reported <strong>more than 50 million agents registered in Agent 365 since its May 2026 launch</strong>, framed the platform toward <strong>"over 1 billion agents,"</strong> and made <strong>Entra Agent ID generally available</strong> so agents carry identities separate from human accounts, with new controls to meter agent spend, permissions and execution (Microsoft; eWeek; Windows Central, as reported). Then Nadella stated the design principle the whole thing rests on: <strong>"it becomes an architectural imperative to separate… intelligence from the authority over it."</strong> That is the signet, in a vendor's own words: as the drafting hand becomes cheap and multiplies into the tens of millions, the governed thing is not the draft but the <em>seal</em> — the authority to make a draft binding, to move money, to dispatch, to delete — and that authority must sit in a layer the model does not own. The gap is real and measured: Deloitte's <strong>State of AI in the Enterprise 2026</strong> (3,235 leaders) reports <strong>74% expect at least moderate AI-agent use by 2027</strong>, yet only <strong>~25% have moved 40% or more of agent pilots into production</strong> and just <strong>21% report mature agentic-AI governance</strong>. Intelligence is racing ahead of authority.</p>
+<p><strong>The stakes — keep the signet in a hand the model does not control.</strong> The board move reuses the whole season's discipline and points it at the act itself. <strong>First, hold the seal apart from the mind</strong> — a policy and authority layer (identity, scoped permissions, approvals, step-up for consequential acts) that sits <em>above</em> any model and is never delegated to the model, so that a cheap, brilliant draft still cannot bind the house on its own. <strong>Second, right-size the seal to the errand</strong> — most drafts need no seal at all; reserve the binding authority for the few acts that move money, change records, or reach the outside world, and make those require a separate, auditable grant. <strong>Third, make every sealed act answer to a who and a why</strong> — a durable record that ties each binding action to the identity that authorised it and the reason, because when the reckoning comes (your EU AI Act duties have not moved) the question will not be <em>which model drafted it</em> but <em>who sealed it</em>. Do it now, while you are standing up tens of millions of agents and the temptation is to let the clever drafting hand also hold the seal.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The reality — "good enough" intelligence is cheap and everywhere.</strong> <strong>Microsoft Ignite 2026 (17 Nov): MAI Code 2 claims ~98% of GPT-6.1 Sol's coding performance at ~40% of the price; Flash ~61% avg pass at ~5¢/task; Foundry picker past 11,000 models — the press calls it the case for "good enough" coding models (Microsoft; DevOps.com; TechSpot, as reported).</strong> The drafting hand is now nearly free.</div></div>
+<div class="num"><div class="b">2</div><div><strong>The multiplication — agents by the tens of millions, and the imperative underneath.</strong> <strong>Agent 365 past 50M agents since May 2026, framed toward "over 1 billion"; Entra Agent ID GA; and Nadella: "an architectural imperative to separate… intelligence from the authority over it" (Microsoft; eWeek; as reported).</strong> The scarce thing is the seal, not the mind.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — hold the seal apart, size it to the errand, record who sealed it.</strong> Keep an authority layer the model does not own; reserve binding power for consequential acts; and tie every sealed act to a who and a why — because <strong>74% expect agent use by 2027 but only 21% report mature agent governance</strong> (Deloitte 2026, as reported). Intelligence is outrunning authority.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the servant, the steward kept the book, the surety put your name on the bond, the second wage checked whose interest it served, the two harvests sent it to reap, the purse funded it, the foundation kept the ground yours. <strong>The signet is about the authority to act — the power to turn a clever draft into a binding deed.</strong> This week a vendor made the case plainer than any critic could: it drove the price of excellent intelligence toward the floor (MAI Code 2 at ~98% of frontier for ~40% of the cost, a picker of 11,000 models), reported agents multiplying past 50 million toward a billion, and then said out loud that the architecture now <em>requires</em> separating intelligence from the authority over it. The trap is the obvious economy: when the drafting hand is this cheap and this good, it feels efficient to let it also hold the seal — to give the agent not just the power to think but the standing authority to act, bound to no check it does not itself control. The houses that keep their standing will do three unglamorous things: <strong>hold the seal apart</strong> (an authority layer above any model, never delegated to it), <strong>size the seal to the errand</strong> (binding power only for the acts that move money, records or the outside world), and <strong>record who sealed it</strong> (every binding act tied to an identity and a reason). Buy intelligence by the barrel — it is nearly free now, and it should be. But never hand the clever hand your signet.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Signet"</h3>
+<p><em>Topic: This morning the frame turns from the servant and its ground to the authority to act. At Microsoft Ignite 2026 (17 November 2026) Microsoft drove excellent intelligence toward the floor — MAI Code 2 claimed at ~98% of GPT-6.1 Sol's coding performance for ~40% of the price, a Foundry picker past 11,000 models, the press calling it the case for "good enough" coding models — and in the same keynote reported more than 50 million agents registered in Agent 365 since May 2026 (framed toward "over 1 billion"), made Entra Agent ID generally available, and had Satya Nadella name the principle: "it becomes an architectural imperative to separate… intelligence from the authority over it" (Microsoft; DevOps.com; TechSpot; eWeek; Windows Central, as reported). Deloitte's State of AI in the Enterprise 2026 reports 74% expect moderate agent use by 2027 while only 21% report mature agentic-AI governance (as reported). The signet allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had, over a long and careful season, learned to govern its servants and the very ground beneath them. It had named every hand and cut it a scoped key, kept one honest book, put the master's own name on the bond, asked whose second coin each adviser took, sent its servants to reap, handed each a scoped purse, and refused to let the merchant who rented it the stove pour the foundation under the house. By any fair reckoning it was the best-run house in the valley, and the master had earned his quiet pride.</p>
+<p>Now, for all that governing, the master still kept one thing in a locked drawer that he had never once delegated: the <strong>signet</strong> — the heavy seal that turned a mere draft into a binding command. A letter without the seal was only ink, a suggestion, a clever hand's idea. Pressed with the signet, the same letter moved money from the counting-house, dispatched a ship, dismissed a servant, altered the estate's own deeds. The scrivener could <em>write</em> anything; only the seal made it <em>so</em>. And the master had always known, without quite saying it, that the difference between the two was the difference between an opinion and an act.</p>
+<p>This season the scrivener's trade changed beyond recognition. A great trading company, the grandest in the valley, had made clever scriveners so cheap and so good that the master could keep a hundred where he once kept one — drafting hands that wrote nearly as well as the finest clerk alive for two coins where the clerk cost five, and the company boasted it could supply scriveners by the <em>thousand</em>, from a catalogue thicker than a church door. The master's halls filled with them. Where last year he had a dozen hands, this year he had tens of thousands, each tireless, each able, each writing flawless letters faster than any human could read. It was a marvel, and it was cheap, and the master was glad of it.</p>
+<p>And here, precisely, the danger arrived wearing the mask of efficiency. For when a house has ten thousand brilliant drafting hands, the slow part is no longer the <em>writing</em> — it is the <em>sealing</em>. A letter drafted in a heartbeat still waited on the one drawer, the one seal, the one master's hand. So the helpful voices began to whisper the obvious economy: <em>"Why keep the seal in a drawer, when the scriveners are so able? Give each clever hand a little seal of its own, and let the letters fly. You trust their writing; trust their sealing too."</em> And the grandest company, that very season, had quietly made it easy — a seal for every scrivener, ten thousand seals, so that any clever hand could bind the house the instant it finished a thought.</p>
+<p>Two roads, as always. The easy road was to say yes — the scriveners were excellent, the letters were good, and what was a seal but the last small step of a thing already written well? The wiser road, which the careful houses took, began with a cold distinction the cheap, brilliant scriveners had blurred: <strong>a draft is not a deed, and the power to write is not the power to bind.</strong> The careful master said it plainly to his steward: <em>"I will keep ten thousand scriveners and bless every one — let them draft the world. But the seal does not leave a hand I govern. A clever hand may propose any act; it may not authorise its own."</em> And he was not alone in the distinction; the grandest company's own master, standing before the whole valley that season, had said the same in colder words — that it had become <em>an architectural necessity to keep the thinking apart from the authority over the thinking.</em> When the seller of the ten thousand scriveners tells you to keep the seal out of their hands, a wise house listens.</p>
+<p>So the careful houses learned three plain things, and they cost far less to do while the halls were filling than after. <strong>The first: keep the seal in a hand the scrivener does not control.</strong> Let the clever hands draft without limit, but route every <em>binding</em> act — every letter that moves coin, changes a deed, or leaves the estate — through one authority the master holds above all the scriveners and never hands down to them; a brilliant draft that cannot seal itself is a proposal, and a proposal can be caught. <strong>The second: fit the seal to the errand.</strong> Most letters never need the great seal at all — a note to the kitchen, a draft for the master's eye, a sum tallied for review. Reserve the heavy signet for the few acts that truly bind, and make those few demand a separate, deliberate press, so the house is not sealing ten thousand deeds a day it never read. <strong>And the third: let every sealed letter name its hand.</strong> Not the scrivener who drafted it — the authority who sealed it, and why; for a house that cannot say who authorised a binding act has a drawer full of seals and no idea whose wrist pressed them, and when the reckoning comes, <em>which clever hand wrote it</em> is never the question the crown asks. The question is always <em>who sealed it</em> — and the house must be able to answer.</p>
+<p>Here is the part that should keep a master awake. The scrivener market was glorious — cheaper every month, better every month, and a company happy to hand you a little seal with every hand so the letters never waited. All that helpful abundance pressed, gently and constantly, toward the one mistake that undoes every other discipline: <strong>letting the thing that thinks also be the thing that binds.</strong> A house can name every hand, keep one book, sign the bond, check the wage, send it to reap, fund it with a scoped purse, and own its foundation — and still, in a single careless economy, hand ten thousand clever strangers the authority to commit the estate, because sealing was the slow step and the scriveners were so very able. The lesson is not that the scriveners were wicked. The lesson is that <strong>a draft is only ever a draft until something with authority makes it real, and whose hand holds that authority is the whole game.</strong></p>
+<p><strong>The moral, stated plainly:</strong> the model is the scrivener, now so cheap and so good that a house keeps ten thousand of them; the authority to act is the signet, and it must never pass to the hand that writes. The knowledge is the larder; the ground is the foundation; the purse is what it may spend; the gate is the one door you guard; the passport names each agent; the census counts them; the inspector asks you to produce the roll; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance is the papers that trace the work; the errand bounds what a clever servant can reach; the bell rings the moment your own servant slips; the locusts are why you be whole before the swarm; the looking-glass is why you measure by an honest outside light; the livery is why you name every hand; the steward is why you keep one governed office; the surety is why the master's name is on the bond; the second wage is why you ask whose bread each adviser eats; the two harvests is why you send it to reap; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <strong>the signet is why, having made intelligence cheap and plentiful past counting, you must separate the mind from the authority over it: let ten thousand clever hands draft the world, but keep the seal in a hand you govern, press it only on the acts that truly bind, and be able to say, always, whose wrist pressed it.</strong> A house that gives every clever scrivener its own seal has not been modern; it has handed strangers the power to commit the estate and called the surrender a convenience.</p>
+<p><strong>The question it forces:</strong> <em>We can draft anything now, in a heartbeat, for almost nothing — the vendor just proved it, and handed us ten thousand hands to do it. But who holds the seal? When one of our tens of millions of agents turns a clever draft into a binding act — moves the money, changes the record, reaches the outside world — did a hand we govern press the signet, with a reason we can produce? Or have we, in the name of efficiency, given the thing that thinks the authority to bind us, so that the slowest step in the house is the only one still protecting it?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>Have we separated intelligence from the authority over it — in architecture, not just intention?</strong> The vendor's own CEO calls it "an architectural imperative" (Nadella, Ignite 2026), and intelligence is now cheap and plentiful (MAI Code 2 ~98% of frontier at ~40% price; an 11,000-model picker). <strong>For each agentic workflow, can we point to the authority layer — identity, scoped permissions, approvals — that sits <em>above</em> the model and is never delegated to it, so that a brilliant draft still cannot bind us on its own?</strong></li>
+  <li><strong>Which of our agents can turn a thought into a binding act without a human or a separate authority pressing the seal?</strong> We are standing up agents by the tens of millions industry-wide (Agent 365 past 50M). <strong>Can we produce the list of actions our agents can take that move money, change records, or reach the outside world — and show that each one requires a separate, auditable grant, not just the model's own confidence?</strong></li>
+  <li><strong>If a binding act goes wrong, can we say who sealed it and why?</strong> 74% expect agent use by 2027 but only 21% report mature agent governance (Deloitte 2026). <strong>For every consequential agent action, do we have a durable record tying it to the identity that authorised it and the reason — or only to the model that drafted it?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Authority-to-act is the heart of your controls — segregation of duties, maker-checker, trade authorisation. <strong>Have we mapped our agents onto that existing authority model, so a drafting agent proposes and a separate, governed authority commits — or have we let a cheap, capable model both originate <em>and</em> authorise a transaction, collapsing a control your regulators require?</strong></li>
+  <li>Agent identities are now first-class (Entra Agent ID GA). <strong>Can we tie every agent-initiated binding action — a payment, a limit change, a disclosure — to a distinct non-human identity with scoped authority and a full record, the way we would for any employee with signing power?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>A model may now draft a clinical note, an order, or a regulatory submission at near-zero cost — but drafting is not authorising. <strong>Where an agent's output can become a binding act (an order placed, a record altered, a submission filed), is there a separate clinical or regulatory authority that seals it, with the reason recorded — or does the draft become the deed by default?</strong></li>
+  <li>Validation and accountability attach to the act, not the draft. <strong>When a sealed act is questioned, can we show which governed authority authorised it, independent of whichever "good enough" model happened to write it that day?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already separate the engineer who designs a change from the authority that releases it to the line. <strong>Have we applied the same separation to agents — clever models proposing changes to schedules, orders or control parameters, but a governed authority (not the model) sealing anything that actually moves the plant?</strong></li>
+  <li>With "good enough" models now cheap enough to run everywhere, the risk is proliferation of unsealed authority. <strong>Do we know every point where an agent can commit a physical or financial action, and is the seal on each one held in a layer we control, sized to the consequence?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Cheap, capable models make it tempting to let agents act end-to-end — reprice, reorder, refund, message customers — at scale. <strong>Which of those are binding acts, and for each, does a governed authority press the seal (with limits and a record), or have we let a model both decide and execute because the intelligence was nearly free?</strong></li>
+  <li>Peak season multiplies both agents and consequences. <strong>If thousands of agents can each take a binding commercial action, can we throttle, scope and audit that authority centrally — or does the drafting hand also hold the seal on our busiest day?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Public authority to act is legally constrained and must be accountable to a named office-holder. <strong>Can we show that no agent exercises a public power — a decision, a payment, a record change — without a human or governed authority sealing it, under the duties you already owe (EU AI Act high-risk regime, live since 2 August 2026)?</strong></li>
+  <li>Abundant cheap intelligence tempts automation of the whole decision, not just the draft. <strong>Have we drawn the line, in architecture, between an agent that <em>advises or drafts</em> and an authority that <em>binds the state</em> — and is that line one a citizen, an auditor and a court could inspect?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Foundation to the Signet</h2>
+<p>Read the stack once more, now from the seat of the executive who has stopped asking <em>is this agent named, scoped, logged, loyal, reaping, funded, and standing on ground we own?</em> and started asking the one question those controls assume rather than enforce: <em>when this agent turns a thought into a binding act, whose authority sealed it — and could the model have sealed it alone?</em> The gate admits the agent; the passport names it; the census counts it; the inspector asks for the count; the keyring is which key it holds; the locksmith reads your own locks; the tide table is the quay any ship can dock at; the provenance traces the work; the errand bounds what it can reach; the bell discloses when it slips; the livery scopes its identity; the steward keeps one office; the surety puts your name on the bond; the second wage asks whose interest it serves; the two harvests sends it to reap; the purse funds it; the foundation keeps the ground yours. <strong>Every one of those governs what the agent <em>is</em>, <em>may touch</em>, <em>serves</em>, <em>produces</em>, <em>spends</em>, or <em>stands on</em>. The signet governs the moment a draft becomes a deed — and this week a vendor made that moment the centre of the design, in two gestures at once: it drove excellent intelligence toward free (MAI Code 2 at a claimed ~98% of GPT-6.1 Sol for ~40% of the price, a picker past 11,000 models, the "good enough" case made out loud) and, in the same keynote, reported agents multiplying past 50 million and declared it "an architectural imperative to separate… intelligence from the authority over it" (Microsoft; DevOps.com; TechSpot; eWeek, as reported).</strong> The point is blunt: <strong>the thing that became abundant (intelligence, the draft) is not the thing that must stay scarce and governed (authority, the seal) — and as abundance tempts you to let the drafting hand also hold the seal, the discipline is to pull them deliberately apart.</strong></p>
+<div class="card"><ul>
+  <li><strong>The reality — intelligence is now "good enough" and cheap, so the governed thing moves from the mind to the act.</strong> <strong>At Ignite 2026 (17 Nov) Microsoft shipped MAI Code 2 (claimed ~98% of GPT-6.1 Sol's coding performance at ~40% of the price) and MAI Code 2 Flash (a reported ~61% average pass across three benchmarks at ~5¢/task promotional vs ~55% at ~8¢ for GPT-6 Luna; 258 annotators preferred MAI Code 2 64% of the time in a blind frontend eval) into a Foundry picker past 11,000 models — DevOps.com: "making the case for 'good enough' coding models" (Microsoft; DevOps.com; TechSpot, as reported).</strong> Three things follow architecturally. First, <em>model choice is now a routing decision, not a moat</em> — with 11,000 models and "good enough" near-frontier quality at a fraction of the price, the model is the cheapest, most swappable part of the stack, which is exactly why it is the wrong place to vest authority. Second, <em>the scarce resource has shifted from capability to authorisation</em> — when any workflow can summon a capable draft for pennies, the thing worth governing is which drafts get to <em>bind</em>. Third, <em>"good enough and cheap" multiplies agents</em>, and more agents means more points where a draft could become a deed — the control surface is the set of binding actions, not the set of models.</li>
+  <li><strong>The multiplication — agents by the tens of millions, and a vendor naming the imperative.</strong> <strong>Microsoft reported more than 50 million agents registered in Agent 365 since its May 2026 launch (framed toward "over 1 billion agents"), made Entra Agent ID generally available so agents hold identities separate from human accounts, added controls to meter agent spend, permissions and execution, and had Nadella state: "it becomes an architectural imperative to separate… intelligence from the authority over it" (Microsoft; eWeek — "the operating system for AI agents"; Windows Central, as reported).</strong> Two engineering realities cut against the easy path. <strong>First, identity is necessary but not sufficient.</strong> Giving every agent its own identity (Entra Agent ID) is the precondition for authority control — but an identity with unbounded, self-granted authority is just a faster way to bind the house; the identity must be attached to <em>scoped</em> authority the model cannot widen. <strong>Second, the tempting optimisation is the dangerous one.</strong> When drafting is instant and sealing is the bottleneck, the pressure is to let agents self-authorise consequential acts. The Deloitte gap measures the result: <strong>74% expect agent use by 2027, only ~25% have moved 40%+ of pilots to production, and just 21% report mature agentic-AI governance</strong> — authority is being granted faster than it is being governed.</li>
+  <li><strong>The answer — hold the seal apart, size it to the consequence, record who pressed it.</strong> <strong>Put a policy/authority layer <em>above</em> any model (identity + scoped permissions + approvals + step-up for consequential acts) that the model cannot modify; classify agent actions by whether they bind (move money, mutate records, reach the outside world) and require a separate, auditable grant for those; and tie every binding act to the authorising identity and reason — reusing the identity, logging and ownership disciplines you already built for the livery, the surety and the purse, now aimed at the moment of commitment.</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now at the sharpest point of all: not what the agent is, serves, spends or stands on, but who holds the authority to make its drafts real.</li>
+</ul></div>
+<p>The strategic core: <strong>cheap, abundant, "good enough" intelligence is a gift you collect by routing freely across models — and it is safe to collect only if the authority to act lives in a layer no model controls.</strong> The market makes the temptation concrete: it feels efficient, when the drafting hand costs pennies and you have fifty million of them, to let each one seal its own work, because sealing is now the slow step. The board translation: <strong>buy intelligence by the barrel; keep the signet in a hand you govern.</strong> The failure mode is exact: <strong>a house that names, scopes, logs, funds and grounds its agents — and then, to go faster, lets a cheap capable model both draft and authorise a consequential act — will pass every prior governance review and discover, the first time an unsealed draft becomes a real deed, that it handed the authority to bind the estate to the one part of the stack it chose precisely because it was cheap and swappable.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The signet: intelligence got cheap, authority must stay governed. The draft, intelligence, became abundant and nearly free; the seal, the authority to act, must stay scarce and held above any model, and the two are not the same thing. Top left, the scrivener, abundant and cheap: the model and the draft; MAI Code 2 reaches about 98 percent of frontier at about 40 percent of the price, called good enough; a picker past 11,000 models; 50 million-plus agents toward a billion; write anything instantly. Top right, the signet, scarce and governed: the authority to make a draft binding; identity plus scoped permissions; approvals and step-up for acts; held above any model; never delegated to the model; a draft is not a deed. Between them: not the same thing, and an architectural imperative to separate intelligence from the authority over it, Nadella at Ignite 2026 as reported. Middle, authority is outrun by intelligence, Deloitte State of AI 2026 as reported: 74 percent expect at least moderate AI-agent use by 2027; only about 25 percent have moved 40 percent-plus of agent pilots into production; just 21 percent report mature agentic-AI governance; Entra Agent ID generally available gives agents identity, necessary but not sufficient. Bottom left, stop, let the drafter seal it: the model both decides and commits; a seal for every agent; self-granted unbounded scope; no record of who authorised. Bottom right, start, keep the signet governed: an authority layer above any model; bind only via a separate scoped grant; size the seal to the consequence; every sealed act names its authority and why." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE SIGNET — intelligence got cheap; authority must stay governed</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">The DRAFT (intelligence) became abundant &amp; nearly free. The SEAL (authority) must stay scarce — not the same thing.</text>
+
+  <!-- the scrivener -->
+  <rect x="34" y="58" width="300" height="128" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE SCRIVENER (abundant, cheap)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">the MODEL / the DRAFT</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">MAI Code 2: ~98% of frontier at ~40% price</text>
+  <text x="52" y="137" font-size="10" fill="#a5e5cd" font-family="sans-serif">picker past 11,000 models — "good enough"</text>
+  <text x="52" y="157" font-size="10" fill="#a5e5cd" font-family="sans-serif">50M+ agents, toward 1B</text>
+  <text x="52" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ write anything, instantly</text>
+
+  <!-- the signet -->
+  <rect x="346" y="58" width="300" height="128" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE SIGNET (scarce, governed)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">AUTHORITY to make it binding</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">identity · scoped permissions</text>
+  <text x="364" y="137" font-size="10" fill="#f0b8ce" font-family="sans-serif">approvals / step-up for acts</text>
+  <text x="364" y="157" font-size="10" fill="#f0b8ce" font-family="sans-serif">held ABOVE any model</text>
+  <text x="364" y="178" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a draft ≠ a deed</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="186" x2="184" y2="214" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,214 184,226 190,214" fill="#5dcaa5"/>
+  <line x1="496" y1="186" x2="496" y2="214" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,214 496,226 502,214" fill="#e58fb0"/>
+  <text x="340" y="204" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">"separate intelligence from the authority over it" — Nadella, Ignite 2026 ▼</text>
+
+  <!-- the arithmetic -->
+  <rect x="34" y="230" width="612" height="120" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="252" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">AUTHORITY IS OUTRUN BY INTELLIGENCE — (Deloitte State of AI 2026, as reported)</text>
+  <text x="52" y="274" font-size="10.5" fill="#e8edf3" font-family="sans-serif">74% expect at least moderate AI-agent use by 2027</text>
+  <text x="52" y="291" font-size="10.5" fill="#e8edf3" font-family="sans-serif">only ~25% have moved 40%+ of agent pilots into production</text>
+  <text x="52" y="308" font-size="10.5" fill="#e8edf3" font-family="sans-serif">just 21% report MATURE agentic-AI governance</text>
+  <text x="52" y="327" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">Entra Agent ID GA = identity for agents (necessary, not sufficient)</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="350" x2="340" y2="372" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,372 340,384 346,372" fill="#b9b2f5"/>
+  <text x="356" y="366" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="388" width="300" height="118" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="410" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: let the drafter seal it</text>
+  <text x="52" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· model both decides &amp; commits</text>
+  <text x="52" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· a seal for every agent</text>
+  <text x="52" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· self-granted, unbounded scope</text>
+  <text x="52" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no record of who authorised</text>
+  <text x="52" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">the mind binds the house alone</text>
+
+  <!-- start -->
+  <rect x="346" y="388" width="300" height="118" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="410" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: keep the signet governed</text>
+  <text x="364" y="430" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· authority layer above any model</text>
+  <text x="364" y="447" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· bind only via a separate grant</text>
+  <text x="364" y="464" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· size the seal to the consequence</text>
+  <text x="364" y="481" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· every sealed act names its authority</text>
+  <text x="364" y="500" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">cheap drafts, a seal you hold</text>
+
+  <!-- footer strip -->
+  <text x="340" y="530" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Intelligence is nearly free — collect it by routing freely across models.</text>
+  <text x="340" y="548" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Buy intelligence by the barrel · never hand the clever hand your signet.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The scrivener — intelligence, abundant</span>
+  <span><i class="dot" style="background:#a5416a"></i>The signet — authority to act, governed</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Authority outrun by intelligence</span>
+</div>
+</div>
+
+<h3>The scrivener vs the signet — what became abundant, and what must stay governed</h3>
+<table>
+<tr><th>The scrivener (intelligence — abundant, cheap)</th><th>The signet (authority to act — scarce, governed)</th></tr>
+<tr><td>The model / the draft: MAI Code 2 ~98% of frontier at ~40% price</td><td>The authority that turns a draft into a binding deed</td></tr>
+<tr><td>A picker past 11,000 models — route freely, no moat</td><td>Identity + scoped permissions, held above any model</td></tr>
+<tr><td>50M+ agents, framed toward 1 billion</td><td>A separate, auditable grant for each consequential act</td></tr>
+<tr><td>Write anything, instantly, for pennies</td><td>Sized to the consequence — most drafts need no seal</td></tr>
+<tr><td>The cheapest, most swappable part of the stack</td><td>Never delegated to the thing that drafts</td></tr>
+<tr><td>Your posture: buy by the barrel</td><td>Your posture: keep the signet in a hand you govern</td></tr>
+</table>
+
+<h3>Why "the signet" is the discipline that matters now</h3>
+<div class="card">
+<p>For a long season the worry was whether the agent was named, scoped, logged, loyal, reaping, funded and grounded. <strong>This morning a vendor moved the question to the act itself: it made intelligence cheap enough to run everywhere, multiplied agents past fifty million, and then declared it an architectural imperative to separate the thinking from the authority over it.</strong> MAI Code 2's "good enough" case and the 11,000-model picker prove the draft is now abundant and swappable; Agent 365's scale and Entra Agent ID prove the hard problem is authority, not capability. Governance that stops at <em>what the agent is and does</em> will not catch the moment a cheap draft becomes a binding deed. The houses that keep their standing will collect the gift of abundant intelligence by routing freely across models — and will refuse, deliberately, to let the drafting hand hold the seal.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to say who authorised each binding act, independent of which model drafted it.</em> On a legacy estate the instinct, now that intelligence is cheap and agents are easy to stand up, is to wire agents straight into systems of record and let them act end-to-end — it is fast, and the models are good enough. Under the signet that is exactly the reflex to check: speed comes from letting the drafter also seal, and that is the one economy that undoes the rest. The retrofit is <strong>separate, scope, record. Separate</strong> the seal from the mind: put an authority layer above any model that the model cannot alter. <strong>Scope</strong> the seal to the act: classify which agent actions truly bind, and require a distinct grant for those. <strong>Record</strong> the wrist: tie every binding act to an authorising identity and a reason. And keep the whole refrain: the model is the scrivener, now so cheap you keep ten thousand; the authority is the signet; the knowledge is the larder; the ground is the foundation; the purse is what it may spend; the gate is the one door; the passport names each agent; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay; the provenance traces the work; the errand bounds its reach; the bell discloses the slip; the livery names every hand; the steward keeps one office; the surety is your name on the bond; the second wage is whose bread it eats; the two harvests is sending it to reap; the purse is funding it like an employee; the foundation is owning the ground — and <em>the signet is why, having made intelligence cheap past counting, you keep the authority to act in a hand the model does not control: let the clever hands draft the world, but hold the seal, size it to the errand, and name the wrist that pressed it.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The reality — "good enough," cheap intelligence.</strong> <strong>Microsoft Ignite 2026 (17 Nov): MAI Code 2 claimed ~98% of GPT-6.1 Sol's coding performance at ~40% of price; Flash ~61% avg pass at ~5¢/task; Foundry picker past 11,000 models — the "good enough" case (Microsoft; DevOps.com; TechSpot, as reported).</strong> The draft is nearly free.</li>
+  <li><strong>The multiplication.</strong> <strong>Agent 365 past 50M agents since May 2026, framed toward "over 1 billion"; Entra Agent ID GA; new agent spend/permission/execution controls (Microsoft; eWeek; Windows Central, as reported).</strong> More agents = more points where a draft could become a deed.</li>
+  <li><strong>The imperative, named by the vendor.</strong> <strong>Nadella (Ignite 2026): "an architectural imperative to separate… intelligence from the authority over it"; "Copilot is the new operating system for work" (as reported).</strong> Separate the mind from the seal.</li>
+  <li><strong>Authority outrun by intelligence.</strong> <strong>Deloitte State of AI in the Enterprise 2026 (3,235 leaders): 74% expect moderate agent use by 2027; only ~25% moved 40%+ of pilots to production; just 21% report mature agentic-AI governance (as reported).</strong> Authority is being granted faster than it is governed.</li>
+  <li><strong>Adoption is near-universal.</strong> <strong>A Zapier survey (via 2026 market reports) puts 88% of enterprise leaders using or testing AI agents in 2026, up from 72% in 2025 (as reported).</strong> The scale that makes the signet urgent.</li>
+  <li><strong>The platform framing.</strong> <strong>IBM + Microsoft "Imagine Enterprise" (10 Nov) for building, running and governing industry-specific agents; CrowdStrike shipped an admin "kill switch" for misbehaving agents (as reported).</strong> The market is racing to govern the act, not just the model.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 and GPAI enforcement in force; MCP is the tool-connection layer; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 (as reported).</strong> Authority, identity and record are how you meet them.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--blue)"><div class="q">It becomes an architectural imperative to separate… intelligence from the authority over it.</div><div class="a">— Satya Nadella, Microsoft Ignite 2026 keynote (17 November 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">At Ignite, Microsoft Makes the Case for "Good Enough" Coding Models.</div><div class="a">— DevOps.com, headline on MAI Code 2 (claimed ~98% of GPT-6.1 Sol's coding performance at ~40% of the price, as reported)</div></blockquote>
+<blockquote style="border-color:var(--coral)"><div class="q">Only 21% [of organizations] report mature agentic-AI governance — even as 74% expect at least moderate AI-agent use by 2027.</div><div class="a">— Deloitte, State of AI in the Enterprise 2026 (3,235 leaders; only ~25% have moved 40%+ of agent pilots into production, as reported)</div></blockquote>
+<blockquote><div class="q">"You can now draft anything in a heartbeat for almost nothing — the vendor just handed you ten thousand clever hands to do it. The only question left that matters is who holds the seal. Buy intelligence by the barrel; never give the drafting hand your signet."</div><div class="a">— the radar, on why the authority to act now matters more than the model that drafts it</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Intelligence went "good enough" and cheap</td><td><span class="v">Microsoft Ignite 2026 (17 Nov): MAI Code 2 claimed ~98% of GPT-6.1 Sol's coding performance across four benchmarks at ~40% of the price; Foundry model picker past 11,000 models</span></td><td>Microsoft; DevOps.com; TechSpot, as reported</td></tr>
+<tr><td>The "good enough" Flash numbers</td><td><span class="v">MAI Code 2 Flash: ~61% average pass across three coding benchmarks at ~5¢/task (promotional) vs ~55% at ~8¢ for GPT-6 Luna; 258 annotators preferred MAI Code 2's output 64% of the time (blind frontend eval)</span></td><td>DevOps.com; TechSpot, as reported</td></tr>
+<tr><td>Agents multiplying</td><td><span class="v">Agent 365: more than 50 million agents registered since its May 2026 launch, framed toward "over 1 billion agents"; Entra Agent ID generally available (identity separate from human accounts)</span></td><td>Microsoft; eWeek; Windows Central, as reported</td></tr>
+<tr><td>The imperative, from the vendor</td><td><span class="v">Satya Nadella (Ignite 2026): "an architectural imperative to separate… intelligence from the authority over it"; "Copilot is the new operating system for work"</span></td><td>Microsoft; MSDynamicsWorld; Constellation Research, as reported</td></tr>
+<tr><td>Authority outrun by intelligence</td><td><span class="v">Deloitte State of AI in the Enterprise 2026 (3,235 leaders): 74% expect at least moderate AI-agent use by 2027; only ~25% have moved 40%+ of agent pilots into production; just 21% report mature agentic-AI governance</span></td><td>Deloitte, as reported</td></tr>
+<tr><td>Near-universal adoption</td><td><span class="v">88% of enterprise leaders report their organizations using or testing AI agents in 2026, up from 72% in 2025</span></td><td>Zapier survey (via 2026 market reports), as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 August 2026; GPAI enforcement in force; Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026; MCP is the tool-connection layer</span></td><td>European Commission; Gartner; Model Context Protocol, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Separate the seal from the mind — stand up an authority layer above any model.</strong> Intelligence is now cheap and "good enough" (MAI Code 2 ~98% of frontier at ~40% price; an 11,000-model picker), which is exactly why the model is the wrong place to vest authority. <strong>This month, draw the architectural line the vendor itself now calls an imperative: put identity, scoped permissions and approvals in a policy layer that sits <em>above</em> every model and that no model can modify, so a brilliant draft is a proposal until a governed authority seals it.</strong> Report one number to the board: the share of agent workflows whose authority to act lives above the model versus inside it.</li>
+  <li><strong>Size the seal to the consequence — classify which agent actions actually bind.</strong> With agents multiplying past 50 million industry-wide and adoption at 88%, the control surface is the set of <em>binding</em> acts, not the set of models. <strong>This month, inventory every action your agents can take and tag each as drafting (no seal) or binding (moves money, mutates a record, or reaches the outside world), and require a separate, auditable grant — human or governed-authority — for the binding ones, with step-up for the most consequential.</strong> Report the count of binding agent actions and the share that currently require a separate authorisation versus self-authorise.</li>
+  <li><strong>Record the wrist — tie every sealed act to an identity and a reason.</strong> 74% expect agent use by 2027 but only 21% report mature agent governance (Deloitte 2026); identity (Entra Agent ID and the like) is the precondition, not the answer. <strong>This month, make every binding agent action write a durable record linking it to the authorising identity and the reason, and test that you can answer "who sealed this, and why?" for a sampled consequential act — because when the EU AI Act reckoning comes, the question is never which model drafted it.</strong> Report whether you can produce, for any binding agent action in the last 30 days, the authority that sealed it. <strong>The model is the scrivener, now so cheap you keep ten thousand; the authority is the signet; the knowledge is the larder; the ground is the foundation; the purse is what it may spend; the census is the roll; the inspector asks for it; the keyring is which key each agent holds; the locksmith reads your own locks; the tide table is the quay; the provenance traces the work; the errand bounds its reach; the bell discloses the slip; the livery names every hand; the steward keeps one office; the surety is your name on the bond; the second wage is whose bread it eats; the two harvests is sending it to reap; the purse is funding it like an employee; the foundation is owning the ground — and the signet is why, having made intelligence cheap past counting, you keep the authority to act in a hand the model does not control: let the clever hands draft the world, but hold the seal, size it to the errand, and name the wrist that pressed it.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The reality — Microsoft Ignite 2026 (17 Nov 2026): MAI Code 2 claimed ~98% of GPT-6.1 Sol's coding performance across four benchmarks at ~40% of price; MAI Code 2 Flash ~61% avg pass across three benchmarks at ~5¢/task (promotional) vs ~55% at ~8¢ for GPT-6 Luna; 258 annotators preferred MAI Code 2 64% of the time; Foundry picker past 11,000 models; "making the case for 'good enough' coding models" (Microsoft; DevOps.com; TechSpot) · The multiplication — Agent 365 past 50 million agents since May 2026, framed toward "over 1 billion"; Entra Agent ID GA; agent spend/permission/execution controls (Microsoft; eWeek; Windows Central) · The imperative — Satya Nadella: "an architectural imperative to separate… intelligence from the authority over it"; "Copilot is the new operating system for work" (Microsoft; MSDynamicsWorld; Constellation Research) · Authority outrun by intelligence — Deloitte State of AI in the Enterprise 2026 (74% expect moderate agent use by 2027; ~25% moved 40%+ of pilots to production; 21% report mature agentic-AI governance) · Adoption — 88% of enterprise leaders using or testing AI agents in 2026, up from 72% in 2025 (Zapier, via 2026 market reports) · The platform framing — IBM + Microsoft "Imagine Enterprise" (10 Nov); CrowdStrike agent "kill switch" · The prior rails — EU AI Act (high-risk regime live since 2 August 2026; GPAI enforcement in force), MCP as tool-connection layer, Gartner (40% of enterprise apps embed task-specific agents by 2026). The "signet" framing — that cheap, abundant, "good enough" intelligence shifts the governed scarcity from the model (the draft) to the authority to act (the seal), so a house must hold the seal above any model, size it to the consequence, and record who pressed it — is expressly the radar's reading. Figures are relayed from vendor announcements, analyst research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 26 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics: GoatCounter (site code: ai-radar) — added per daily routine Step 3 so every edition inherits it -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
