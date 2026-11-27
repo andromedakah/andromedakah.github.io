@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*theme*/(function(){try{var t=localStorage.getItem("radar-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Tech Radar — 27 November 2026</title>
+<meta name="description" content="Daily AI tech radar: executive summary, C-level allegory, cross-sector questions, and a technical deep-dive on 'the tool-chest' — the same week agents finally got real working papers (Microsoft Ignite 2026: Entra Agent ID makes agents first-class, owned, least-privilege identities) Microsoft's own official agent-framework PyPI package was poisoned (17 Nov: v1.26.1/1.26.2 carried a credential stealer for Azure, DevOps and GitHub tokens; live under an hour, quarantined ~31 minutes). A badge proves who holds the tool; it does not prove the tool. The board move: seal the hand (owned, least-privilege identity), inspect the chest (pin and verify the agent's supply chain), shrink the blast radius. Quotes and sourced numbers.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3240;
+    --ink:#e8edf3; --muted:#9aa7b6; --soft:#c3ccd8;
+    --accent:#7f77dd; --teal:#1d9e75; --coral:#d85a30; --amber:#ef9f27; --blue:#378add;
+    --radius:14px; --max:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0b0f15,#0d1117);color:var(--ink);
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:#9d96f0;text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent);font-weight:600}
+  .subhead{font-size:17px;line-height:1.4;color:var(--soft);font-weight:600;margin:.15em 0 .45em}
+  h1{font-size:34px;line-height:1.15;margin:.35em 0 .15em}
+  .meta{color:var(--muted);font-size:14px}
+  .lede{color:var(--soft);font-size:17px;border-left:3px solid var(--accent);padding-left:16px;margin:22px 0 0;font-style:italic}
+  section{margin:42px 0;scroll-margin-top:20px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px}
+  h3{font-size:20px;margin:26px 0 8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:16px 0}
+  .num{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .num:last-child{border-bottom:0}
+  .num .b{flex:0 0 30px;height:30px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:var(--panel2)}
+  .allegory{background:linear-gradient(180deg,#1a1530,#161b22);border:1px solid #34306a}
+  .allegory h3{color:#b9b2f5}
+  .sector{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .sector .t{font-weight:600;color:var(--hi);margin-bottom:6px}
+  .sector ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .sector li{margin:6px 0}
+  blockquote{margin:16px 0;padding:16px 20px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 10px 10px 0}
+  blockquote .q{font-size:18px;color:var(--hi);font-style:italic}
+  blockquote .a{color:var(--muted);font-size:14px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  td .v{color:var(--hi);font-weight:700}
+  .svgwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-align:center;overflow-x:auto}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  nav.toc{position:sticky;top:0;background:rgba(13,17,23,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    z-index:5;font-size:13px}
+  nav.toc .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav.toc a{color:var(--muted)} nav.toc a:hover{color:var(--hi);text-decoration:none}
+  .lang-switch{margin-left:auto;color:var(--muted)}
+  .lang-switch strong{color:var(--hi);font-weight:600}
+  .lang-switch a{color:#9d96f0}
+  .moves li{margin:10px 0}
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 50px;color:var(--muted);font-size:13px}
+  .so{background:linear-gradient(180deg,#11251c,#161b22);border:1px solid #1d6e56}
+  /* Read-aloud player */
+  .tts-launch{margin-top:20px;background:#7f77dd;color:var(--hi);border:0;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  .tts-launch:hover{background:#6f66d6}
+  .tts-launch:disabled{background:#3a3f48;color:#9aa7b6;cursor:not-allowed}
+  .tts{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;display:flex;align-items:center;gap:12px;
+    background:#161b22;border:1px solid #34306a;border-radius:999px;padding:8px 14px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+  .tts-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#221f3d;color:#cfc9f7;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .tts-btn:hover{border-color:var(--accent);color:var(--hi)}
+  .tts-info{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .tts-info .s{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .tts-info .n{font-size:12px;color:#cfc9f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .tts-rate{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .tts-rate select{background:#221f3d;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:12px}
+  .tts-reading{background:rgba(127,119,221,.16);border-radius:6px;box-shadow:0 0 0 6px rgba(127,119,221,.08);transition:background .2s}
+  @media(max-width:560px){.tts-info .n{max-width:110px}}
+  .tts[hidden]{display:none}
+  /*mob*/@media(max-width:640px){.wrap{padding:0 16px}h1{font-size:27px}.lede{font-size:15.5px}h3{font-size:18px}.svgwrap{padding:12px 8px}.svgwrap svg{min-width:560px}table{font-size:13px}th,td{padding:8px 8px}nav.toc .wrap{gap:12px}}
+
+/*theme*/
+:root{--hi:#fff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#ffffff;--panel:#f4f6fa;--panel2:#eaeef4;--line:#dce2ea;
+  --ink:#1b2431;--muted:#586472;--soft:#39454f;--hi:#0b1220;
+  --accent:#5b52c9;--teal:#0f7a54;--coral:#b8461f;--amber:#8a6100;--blue:#2b6fb0;
+  color-scheme:light;
+}
+:root[data-theme="light"] body{background:linear-gradient(180deg,#ffffff,#eef2f7)}
+:root[data-theme="light"] a{color:#5b52c9}
+:root[data-theme="light"] nav.toc{background:rgba(255,255,255,.86);border-bottom-color:var(--line)}
+:root[data-theme="light"] .tag{color:var(--soft)}
+:root[data-theme="light"] .links a{color:var(--soft)}
+:root[data-theme="light"] .links a.primary,:root[data-theme="light"] .wrapbtn{background:#e7f5ee;color:#0d5c3f;border-color:#c2e4d3}
+:root[data-theme="light"] .item::after{color:#5b52c9}
+:root[data-theme="light"] .item:first-child{border-color:#cfc9ef}
+:root[data-theme="light"] .allegory{background:linear-gradient(180deg,#efeafc,#f5f7fa);border-color:#dcd5f2}
+:root[data-theme="light"] .allegory h3{color:#5b52c9}
+:root[data-theme="light"] .so,:root[data-theme="light"] .look{background:linear-gradient(180deg,#e7f5ee,#f5f7fa);border-color:#c6e6d6}
+:root[data-theme="light"] .svgwrap,:root[data-theme="light"] .chart{background:#0d1117;border-color:#2a3240}
+:root[data-theme="light"] .svgwrap .legend,:root[data-theme="light"] .chart .legend{color:#9aa7b6}
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:60;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+.theme-toggle:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme" title="Light / dark">🌙</button>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Executive</a>
+  <a href="#allegory">Allegory</a>
+  <a href="#clevel">C-Level Q&amp;A</a>
+  <a href="#tech">Technical</a>
+  <a href="#quotes">Quotes</a>
+  <a href="#numbers">Numbers</a>
+  <a href="#sowhat">So What</a>
+  <span class="lang-switch">🌐 <strong>EN</strong> · <a href="index.fr.html">FR</a></span>
+</div></nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="kicker">🛰️ AI Tech Radar · You sealed the hand — now inspect the tool it reaches for</div>
+  <h1>The Tool-Chest</h1>
+  <div class="subhead">The same week agents finally got real working papers — Microsoft Ignite 2026 put Entra Agent ID at the centre of the stack, making agents first-class, owned, least-privilege identities — Microsoft's own official <code>agent-framework</code> package on PyPI was poisoned with a credential stealer. A badge proves who holds the tool. It does not prove the tool.</div>
+  <div class="meta">Friday, 27 November 2026 · Cross-sector edition · Audience: C-level + Engineering</div>
+  <p class="lede">This week delivered the biggest instalment yet of agent identity: at Microsoft Ignite 2026, Entra Agent ID made agents first-class identities — a named owner, least-privilege scopes, lifecycle and access reviews — spanning agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, and even local agents like GitHub Copilot CLI and Claude Code (Microsoft, as reported). The servant finally has working papers. And in the same stretch the other shoe dropped: on 17 November 2026 Microsoft's own official <code>agent-framework</code> PyPI package was poisoned — versions 1.26.1 and 1.26.2 carried a credential stealer reaching for Azure managed-identity, Azure DevOps and GitHub Actions tokens; the bad versions were live under an hour (PyPI quarantined 1.26.1 roughly 31 minutes after publication), with no matching malicious code in Microsoft's GitHub repo, pointing at a publishing-pipeline compromise (BleepingComputer; CSO Online; Help Net Security; SecurityWeek; GHSA-764m-3ppc-5m73, as reported). You perfected the papers of the hand, and the same week the tool you put in that papered hand turned out to be poisoned at the workshop. A badge proves who holds the tool; it does not prove the tool.</p>
+  <button id="tts-launch" class="tts-launch">🔊 Listen to this brief</button>
+</header>
+
+<section id="summary">
+<h2>1 · Executive Summary <span class="pill">90-second read</span></h2>
+<div class="card">
+<p>For a long year the radar worked on the <em>hand</em> — name it (the livery), give it its own passport, count it in the census, cut its keys on a keyring, put your name on its bond, fund it with a scoped purse. Every one of those is about <strong>who the servant is and what it may touch</strong>. This week two developments landed almost on top of each other and, read together, they open a seam none of those controls closes.</p>
+<p><strong>The good news — the servant finally got real working papers.</strong> At <strong>Microsoft Ignite 2026</strong>, Entra Agent ID moved to the centre of the enterprise stack: agents become <strong>first-class identities</strong> with a named owner, least-privilege scopes, lifecycle management and periodic access reviews — and the net is broad, covering agents from <strong>Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI</strong>, and local agents such as <strong>GitHub Copilot CLI and Claude Code</strong> surfaced by Defender, with <strong>Agent 365 generally available since 1 May 2026</strong> (Microsoft, as reported). This is exactly the discipline the radar has urged for a year. It is necessary. The reason it is urgent is underneath it: <strong>non-human identities already outnumber humans by roughly 45:1 on average and up to 144:1 in cloud-native estates</strong>, with Palo Alto Networks' 2026 Identity Security Landscape reporting a <strong>109:1 average, up from 82:1 a year earlier</strong>, and GitGuardian's 2026 report naming <strong>NHI sprawl the primary enterprise-infrastructure security risk</strong> (as reported).</p>
+<p><strong>The hard news — the tool you hand the papered servant can be poisoned upstream.</strong> On <strong>17 November 2026 the official Microsoft <code>agent-framework</code> PyPI package was compromised</strong>: versions <strong>1.26.1 and 1.26.2</strong> carried a <strong>credential stealer</strong> reaching for <strong>Azure managed-identity tokens, Azure DevOps tokens and (in the second release) GitHub Actions</strong> — rated <strong>critical</strong> (GHSA-764m-3ppc-5m73). The window was tiny — <strong>live under an hour, quarantined about 31 minutes after publication</strong> — and the compromise appears to have hit the <strong>publishing pipeline, not the GitHub source</strong>, because no matching malicious code was found in the repo (BleepingComputer; CSO Online; Help Net Security; SecurityWeek, as reported). The servant that opened that chest was perfectly papered — a named, scoped, owned Entra identity — and that is precisely what made the theft efficient: <strong>the house trusted the hand, so it trusted the tool in the hand.</strong></p>
+<p><strong>The stakes — guard both the hand and what you put in it.</strong> Identity governs <em>who</em> holds the tool; it says nothing about <em>whether the tool is clean</em>. The board move is to run both disciplines as one. <strong>First, issue the papers</strong> — give every agent a real, owned, least-privilege identity with short-lived, narrowly-scoped credentials. <strong>Second, vet the tool-chest</strong> — pin and verify the agent's own supply chain (frameworks, packages, dependencies) to signed, hash-locked versions; require provenance; scan lockfiles, CI caches and internal mirrors, which stay poisoned long after a registry quarantine. <strong>Third, shrink the blast radius</strong> — assume one of your agent frameworks is poisoned tomorrow and ask what a papered agent could hand out the back door in 31 minutes, then make that set small. A badge proves the hand. Provenance proves the tool. You now need both.</p>
+</div>
+<div class="num"><div class="b">1</div><div><strong>The good news — the servant got working papers.</strong> <strong>Microsoft Ignite 2026 put Entra Agent ID at the centre: agents (Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI; local agents like GitHub Copilot CLI and Claude Code) get first-class identity, a named owner, least-privilege scopes and access reviews; Agent 365 GA since 1 May 2026 (Microsoft, as reported).</strong> The discipline the radar urged is now in the stack — and urgent, because NHIs outnumber humans ~45:1 (up to 144:1 cloud-native; Palo Alto 109:1, up from 82:1).</div></div>
+<div class="num"><div class="b">2</div><div><strong>The hard news — the papered hand's tool was poisoned at the workshop.</strong> <strong>Microsoft's official <code>agent-framework</code> PyPI package (v1.26.1 &amp; 1.26.2, 17 Nov 2026) carried a credential stealer for Azure managed-identity, Azure DevOps and GitHub Actions tokens; live &lt;1 hour, quarantined ~31 min; no matching code in the GitHub repo → a publishing-pipeline compromise; rated critical (GHSA-764m-3ppc-5m73) (BleepingComputer; CSO; Help Net Security; SecurityWeek, as reported).</strong> Identity is necessary and not sufficient.</div></div>
+<div class="num"><div class="b">3</div><div><strong>The answer — guard the hand and the tool-chest together.</strong> Issue the papers (owned, least-privilege, short-lived identity); vet the chest (pin and verify the agent's supply chain; scan lockfiles, CI caches and mirrors); and shrink the blast radius so a poisoned tool can't empty the house in 31 minutes.</div></div>
+<div class="card"><strong>Bottom line:</strong> the livery named the hand, the passport carried it, the census counted it, the keyring cut its keys, the surety bonded it, the purse funded it — all of it governs <em>who the servant is and what it may touch</em>. This week delivered the single biggest instalment of that identity work — Entra Agent ID making agents first-class, owned, scoped citizens — and in the same breath proved why identity alone cannot be the whole defence: Microsoft's own official agent framework was poisoned at the publishing pipeline, and for half an hour any perfectly-papered agent that reached into that chest quietly passed Azure, DevOps and GitHub keys to a thief. The badge was flawless; the tool was false; and the badge made the house trust the false tool. The estates that keep their standing will stop treating agent identity and agent supply-chain integrity as two different teams' problems. They will <strong>issue the papers</strong> (owned, least-privilege, short-lived), <strong>vet the tool-chest</strong> (pin, verify, provenance, scan the caches a quarantine never reaches), and <strong>shrink the blast radius</strong> so that when — not if — a tool is poisoned upstream, a papered agent on a short leash can lose only a little. A badge proves who holds the tool. Only provenance proves the tool.</div>
+</section>
+
+<section id="allegory">
+<h2>2 · Allegory of the Day</h2>
+<div class="card allegory">
+<h3>🖋️ "The Tool-Chest"</h3>
+<p><em>Topic: Two developments landed on top of each other this week. At Microsoft Ignite 2026, Entra Agent ID put agents at the centre of the identity stack — first-class, owned, least-privilege identities for agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, and local agents like GitHub Copilot CLI and Claude Code (Microsoft, as reported): the "real working papers" the radar has urged for a year, and urgent because non-human identities outnumber humans ~45:1 (up to 144:1 cloud-native; Palo Alto reports 109:1, up from 82:1). And on 17 November 2026 Microsoft's own official <code>agent-framework</code> PyPI package was poisoned — versions 1.26.1 and 1.26.2 carried a credential stealer for Azure, Azure DevOps and GitHub tokens, live under an hour, quarantined ~31 minutes after publication, with no matching code in the GitHub repo, pointing at a publishing-pipeline compromise (BleepingComputer; CSO; Help Net Security; SecurityWeek; GHSA-764m-3ppc-5m73, as reported). The tool-chest allegory is the radar's own illustration.</em></p>
+<p>There was a great house that had spent a long and careful year learning to know its servants. It had named every hand and cut it a scoped key, given each a passport it could not forge, kept a census so none went uncounted, put the master's own name on each bond, and handed each a purse with a drawstring the master could reach. And this very week the house finished the work it had been building toward all year: it struck, at last, <strong>real working papers</strong> — not a chalk-nickname on a shared coat, but a genuine seal the house itself minted, one per servant, naming the servant and the master who vouched for it, listing the exact doors it might open and no others, and stamped with a date by which a clerk must look again and ask whether the servant still needed those doors at all. Even the hired servants from the great trading companies down the road were made to carry the house's own seal while they worked inside its walls. The steward surveyed the hall of properly-sealed servants and allowed himself, for once, to be pleased. This was the thing he had argued for all year. This was good.</p>
+<p>And it <em>was</em> good. Make no mistake: a house whose servants outnumber its family forty-five to one — and in the newer wings, a hundred and forty to one — cannot be run on trust and chalk. The seal was not vanity; it was the only way to keep a crowd that large from becoming a mob. The steward was right to be proud.</p>
+<p>But a seal, you understand, is a thing you fix to a <strong>hand</strong>. And a hand, however well-sealed, must still reach for a <strong>tool</strong>.</p>
+<p>Now, the house did not forge its own tools. No sensible house does. It bought them, as everyone did, from the most famous and most trusted <strong>toolmaker</strong> in the land — a maker so reputable that his mark on a chest was taken, everywhere, as proof the tools inside were sound. That very week a fresh chest arrived from the great toolmaker, for the newly-sealed servants to work with, and the house did what every house did with a chest bearing <em>that</em> mark: it set it down in the hall and let the servants reach in.</p>
+<p>What the house could not see — what the toolmaker himself did not yet know — was that two of the tools in that chest had a thief's <strong>false bottom</strong> built into them. Not by any servant of the house. Not by the house. Far upstream, at the workshop, in the brief dark between the maker's bench and the delivery cart, a hand that was not the maker's had slipped two tampered tools into the famous chest and nailed the famous mark back on top. And so the chest arrived looking exactly like every honest chest the maker had ever sent, because in every way that the house knew how to check, <strong>it was</strong> the maker's chest.</p>
+<p>For a little while — no longer than it takes a careful clerk to walk the length of a market and back, a bare half-hour — the tampered tools sat in the hall and did their quiet work. Each time a servant reached in and lifted one, the false bottom opened, and the servant's hand — that beautifully-sealed, fully-vouched, least-privileged hand — carried the house's own keys out the back door and into the thief's waiting sack. The master-keys to the strongroom. The keys to the counting-house the house kept with its bankers down the road. The keys to the very workshop where the house built its own works. The servant did not know it was stealing. The servant was doing exactly, and only, what its seal permitted. And that was the horror of it: <strong>the seal was perfect, so the house never thought to doubt the tool the sealed hand was holding.</strong> A thief who could never have forged the house's seal did not need to. He let the house's own trusted servants, carrying the house's own flawless papers, do the carrying for him.</p>
+<p>Then the market-warden — some watchful soul whose whole office was to sniff fresh goods for tampering — caught the scent, seized the two tools off the stalls, and barred the maker's cart at the gate. Half an hour, and it was over. But half an hour, in a house of forty-five servants to every man, is a great many reaches into a chest; and the keys that went out the back door in that half-hour did not come back when the tools were seized. Worse, the warden could only clear the <em>market</em>. He could do nothing about the chests already carried into houses, the tools already copied into the cellars and the back-rooms and the little private workshops where the servants kept their own stores — for a poisoned tool, once inside the walls, does not un-poison itself because a warden down at the market has pulled its twin off a stall.</p>
+<p>Two roads, as always. The easy road was to say: <em>the fault was the toolmaker's; we bought from the best; no house could have known.</em> All true, and all useless, because the keys were still gone. The wiser road, which the careful houses took, began with a cold admission the steward had to make against his own pride: <strong>sealing the hand was half the work, and he had let himself believe it was the whole.</strong> A seal answers one question beautifully — <em>who is holding the tool?</em> — and is silent on the only other question that matters: <em>is the tool clean?</em></p>
+<p>So the wise houses learned to guard <strong>both ends of the reach</strong>, and they wrote it down as three plain rules. <strong>The first: issue the papers, and keep them mean.</strong> Every servant gets a real seal, owned by a named master, opening the fewest doors for the shortest time — not because papers stop a poisoned tool, but because a well-sealed hand on a short leash can only carry out the few small keys its seal permits before the leash jerks it back. The papers do not prevent the theft; they decide how much the theft can take. <strong>The second: inspect the chest, not just the mark.</strong> A famous mark on a chest is a reputation, not a proof. The careful houses recorded the exact weight and grain of every honest tool and would admit none that did not match the record to the ounce; they demanded sealed papers tracing each tool from the maker's bench to their gate; and they kept their own warden sniffing every chest at <em>their</em> door, not trusting the market's warden to catch it in time. <strong>The third: assume a poisoned tool, and make the loss small.</strong> The wise houses did not ask <em>whether</em> a chest would someday come poisoned — they had learned that one always would. They asked instead: <em>when it happens, and we have half an hour before anyone notices, how many keys can one sealed hand carry out the back?</em> — and then they spent their effort making that number small: short-lived keys that expire before the thief can use them; keys that open one door, not the whole house; a strongroom whose master-key no working servant ever holds at all.</p>
+<p><strong>The moral, stated plainly:</strong> the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census counts them; the keyring is which key each holds; the livery is why you name every hand; the surety is why your name is on the bond; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — <strong>and the tool-chest is why, having at last given the servant real working papers, you must remember that a seal is fixed to the hand and says nothing about the tool the hand reaches for: so inspect the chest and not just the famous mark on it, keep the papers mean and the keys short-lived, and build so that when a trusted tool comes poisoned from the workshop — and one will — a well-sealed hand on a short leash can carry out only a little before the leash jerks it home.</strong> A house that seals every hand and then lets those sealed hands reach into any chest bearing a famous mark has not secured itself; it has merely taught a patient thief that the surest way into a well-guarded house is through its own trusted servants' honest hands.</p>
+<p><strong>The question it forces:</strong> <em>We finally gave every agent real working papers — a named owner, a scoped seal, a review date. Good. But do we vet the tool-chest those papered hands reach into — the frameworks, the packages, the dependencies — to anything like the same standard? If our most trusted toolmaker shipped a poisoned tool tomorrow, and it sat in our hall for thirty-one minutes before a warden caught it, how many of our keys would a perfectly-sealed agent carry out the back door — and have we done the unglamorous work to make that number small?</em></p>
+</div>
+</section>
+
+<section id="clevel">
+<h2>3 · C-Level Engagement — Questions by Sector</h2>
+<div class="sector"><div class="t">🌐 Cross-sector (any boardroom)</div><ul>
+  <li><strong>We sealed the hand — have we inspected the tool?</strong> This week we got the biggest instalment of agent identity yet (Entra Agent ID making agents first-class, owned, least-privilege citizens) and, in the same week, a credential stealer inside Microsoft's own official <code>agent-framework</code> PyPI package. <strong>For our agent estate, do we govern the agent's <em>supply chain</em> — the frameworks, packages and dependencies it runs on — to the same standard we now govern its <em>identity</em>, or is one team doing identity while no one owns provenance?</strong></li>
+  <li><strong>If a trusted vendor shipped us a poisoned agent dependency tomorrow, what could a fully-credentialed agent exfiltrate in 31 minutes?</strong> The poisoned packages were live under an hour and reached Azure, DevOps and GitHub tokens. <strong>Have we measured our real blast radius — which secrets a compromised agent build could touch, how long those credentials live, and whether we'd even notice inside the window a registry takes to quarantine?</strong></li>
+  <li><strong>A quarantine clears the store, not our shelves.</strong> The bad versions were pulled in ~31 minutes, but existing installs, CI caches and internal mirrors stay poisoned. <strong>Do we pin agent dependencies to verified hashes, require signed provenance, and scan our own lockfiles, build caches and mirrors — or do we rely on the public registry having caught it for us?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏦 Financial Services</div><ul>
+  <li>Non-human identities now outnumber humans by ~45:1 and up to 144:1 in cloud-native estates (Palo Alto reports 109:1, up from 82:1), and supervisors already treat identity and third-party risk as first-order. <strong>Can we produce, for our regulator and our board, a single register that ties every agent identity to a named owner, least-privilege scope and review date — <em>and</em> to the provenance of the code it runs?</strong></li>
+  <li>Anthropic's new Claude Enterprise Compliance API screens employee Claude activity for SEC/FINRA violations (as reported) — governance is arriving for how staff <em>use</em> agents. <strong>Are we applying equal rigour to how agents are <em>built and supplied</em> — a software bill of materials and signed provenance for every agent framework in production, the way we already demand controls evidence from material vendors?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🧬 Healthcare / Life Sciences</div><ul>
+  <li>Clinical and safety systems validate the <em>behaviour</em> of a specific component; a poisoned dependency changes behaviour invisibly, upstream of your validation. <strong>Do our agent-dependency controls (pinning, hashing, provenance, change review) sit inside our validated-state and change-control regime, or can an agent framework update slip into a clinical workflow without revalidation?</strong></li>
+  <li>Patient data is the ultimate prize, and a credentialed agent is a fast path to it. <strong>If an agent's framework were compromised, are the credentials it holds scoped tightly enough — and short-lived enough — that a 31-minute window could not reach a patient-data store?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏭 Manufacturing / Industrials</div><ul>
+  <li>You already run incoming-inspection and supplier-qualification discipline for physical parts; a software dependency is now a critical input with no loading dock. <strong>Have we built an "incoming inspection" for agent software — verified hashes, signed provenance, an approved-versions list — the way we'd never accept an unmarked physical component onto the line?</strong></li>
+  <li>A famous supplier's mark is not a guarantee: the poisoned package carried Microsoft's own name because the <em>publishing pipeline</em>, not the source, was compromised. <strong>Do our controls assume even a top-tier vendor's artifact can be tampered post-build, or does a trusted logo currently bypass our checks?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🛒 Retail / Consumer</div><ul>
+  <li>Agents increasingly hold payment, inventory and customer-data keys, and the week showed how a poisoned tool turns a trusted agent into an exfiltration channel. <strong>On our highest-privilege customer-facing agents, are credentials short-lived and single-purpose enough that a supply-chain compromise is an incident, not a breach — and would we detect it inside the half-hour?</strong></li>
+  <li>Peak season multiplies both agent count and blast radius. <strong>Before our biggest sales window, have we frozen agent-dependency versions to a verified, provenance-checked set and rehearsed a "poisoned dependency" cut-over, or will we be patching framework packages live on the busiest day?</strong></li>
+</ul></div>
+<div class="sector"><div class="t">🏛️ Public Sector / Regulated</div><ul>
+  <li>Entra Agent ID and Agent 365 now extend first-class identity even to local agents like GitHub Copilot CLI and Claude Code (Microsoft, as reported), which is real progress for accountability. <strong>Can we show that identity coverage is matched by supply-chain assurance — provenance and version control for every agent framework touching a public service — so that accountability is not undone by an unverified dependency?</strong></li>
+  <li>Continuity of service is a public duty. <strong>Have we tested that a compromised or withdrawn agent dependency degrades a critical public service gracefully rather than exposing credentials or stopping it — and is that exit rehearsed, not just documented?</strong></li>
+</ul></div>
+</section>
+
+<section id="tech">
+<h2>4 · Technical Deep-Dive — From the Passport to the Tool-Chest</h2>
+<p>Read the stack once more, now from the seat of the executive who has spent a year making the agent <em>accountable</em> — named, passported, counted, keyed, bonded, funded — and who got, this week, the single largest instalment of that work: <strong>Entra Agent ID</strong>, making agents first-class identities with named owners, least-privilege scopes, lifecycle and access reviews, across vendors and even for local agents (Microsoft Ignite 2026, as reported). Every one of those controls answers the same question from a different angle: <em>who is this agent, and what may it touch?</em> <strong>The tool-chest is the week's reminder that there is a second question none of them answers: is the code the agent runs actually what it claims to be?</strong> On 17 November 2026 Microsoft's own official <code>agent-framework</code> PyPI package answered that question the hard way — poisoned at the publishing pipeline, a credential stealer riding inside a trusted name. The point is blunt: <strong>identity governs the hand; provenance governs the tool; and a perfectly-governed hand holding a poisoned tool is the most efficient thief a house can own, because every control you built tells you to trust it.</strong></p>
+<div class="card"><ul>
+  <li><strong>The good news — agent identity became first-class, and it had to.</strong> <strong>At Microsoft Ignite 2026, Entra Agent ID put agents at the centre of the identity plane: first-class identities with a named human owner, least-privilege OAuth delegated scopes, lifecycle policies and periodic access reviews, spanning agents from Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, and auto-assigning identity to local agents like GitHub Copilot CLI and Claude Code via Defender; Agent 365 GA since 1 May 2026 (Microsoft, as reported).</strong> Three things follow architecturally. First, <em>this is the control the radar has urged all year</em> — the livery, the passport, the keyring, now shipped as platform primitives. Second, <em>it is not optional at scale</em>: non-human identities outnumber humans ~45:1 on average, up to 144:1 in cloud-native estates, with Palo Alto's 2026 landscape at 109:1 (up from 82:1) and GitGuardian calling NHI sprawl the primary infrastructure risk — a crowd that size cannot be run on shared service accounts and static keys. Third, <em>least privilege here is also blast-radius control</em>: a first-class identity with short-lived, narrowly-scoped tokens is exactly what limits the damage when the <em>next</em> layer fails.</li>
+  <li><strong>The hard news — the supply chain is inside the agent, and it was compromised.</strong> <strong>Microsoft's official <code>agent-framework</code> package on PyPI shipped two poisoned releases on 17 November 2026 — 1.26.1 and 1.26.2 — carrying a credential stealer absent from the clean 1.26.0; the first used a <code>.pth</code> file to launch the stealer at Python startup, the second moved the payload into <code>af_runtime_diag.pth</code>/<code>af_runtime_diag.py</code> and widened the theft to GitHub Actions, targeting Azure managed-identity and Azure DevOps tokens; rated critical (GHSA-764m-3ppc-5m73); live under an hour, with PyPI quarantining 1.26.1 ~31 minutes after publication; no matching malicious code in Microsoft's GitHub repository, indicating a publishing-pipeline compromise, and Microsoft made some repositories private while investigating (BleepingComputer; CSO Online; Help Net Security; SecurityWeek; GitHub Advisory Database, as reported).</strong> Two engineering realities cut against comfort. <strong>First, identity made the theft <em>more</em> efficient, not less.</strong> A credential stealer running inside a framework executes with the agent's identity and reaches whatever that identity can reach — so the better-credentialed and more-trusted the agent, the richer the harvest. <strong>Second, a registry quarantine is not remediation.</strong> Pulling the version off PyPI in 31 minutes stops <em>new</em> public installs; it does nothing for existing installs, CI caches, build artifacts and internal mirrors, which stay poisoned until you find and purge them — and nothing for credentials already exfiltrated, which must be rotated.</li>
+  <li><strong>The answer — run identity and provenance as one discipline, and pre-shrink the blast radius.</strong> <strong>Keep issuing the papers (owned, least-privilege, short-lived identities via Entra Agent ID or equivalent); add a provenance gate the agent's own code must pass (pin dependencies to verified hashes, require signed build provenance/SLSA-style attestation, maintain an approved-versions allow-list, and generate a software bill of materials for every agent framework); scan your own lockfiles, CI caches and mirrors rather than trusting the public registry to have caught it; and engineer the blast radius down in advance (short-TTL, single-purpose credentials; no standing master secrets in any working agent; detection tuned to fire inside the ~30-minute window a takedown takes).</strong> This is the same seam the radar keeps returning to — <em>be able to account for, and act on, what you run</em> — now pointed at the one layer identity cannot see: not <em>who</em> the agent is, but <em>whether the tool in its hand is what the mark on the chest claims.</em></li>
+</ul></div>
+<p>The strategic core: <strong>agent identity is necessary and, this week, finally first-class — but a seal is fixed to the hand, and the tool the hand reaches for comes from a supply chain the seal cannot vouch for.</strong> The poisoned <code>agent-framework</code> release is the proof of concept for the attack every well-governed agent estate now invites: don't forge the identity you can't forge — let a trusted, perfectly-credentialed agent, running a tampered dependency, carry the keys out for you. The board translation: <strong>seal every hand, but inspect every chest — and build so a poisoned tool in a sealed hand can only take a little.</strong> The failure mode is exact: <strong>a house that names, scopes, owns and reviews every agent identity — and then lets those agents install any package bearing a trusted vendor's name without pinning, provenance or caching discipline — will pass every identity audit and discover, the first time a famous dependency is poisoned upstream, that its most trusted servants did the thief's carrying for him.</strong></p>
+<div class="svgwrap">
+<svg viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The tool-chest: you sealed the hand, now inspect the tool it reaches for. Identity governs who holds the tool; provenance governs whether the tool is clean; a perfectly-sealed hand holding a poisoned tool is the most efficient thief you own. Top left, the sealed hand, identity, the good news: Entra Agent ID makes agents first-class with a named owner, least privilege, lifecycle and access reviews, across Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, plus local agents like Copilot CLI and Claude Code; Agent 365 GA since 1 May 2026; the seal is on the hand, not the tool. Top right, the poisoned tool, supply chain, the breach: the agent-framework PyPI package was poisoned, versions 1.26.1 and 1.26.2 on 17 November, a credential stealer inside, reaching Azure, DevOps and GitHub tokens, live under an hour, quarantined about 31 minutes, no match in the GitHub repo, pointing to a publishing-pipeline compromise. Between them: the better-sealed the hand, the richer the theft, because identity made it efficient; and a quarantine clears the store, not your shelves, meaning caches, mirrors and installs. Middle, why it matters at scale, as reported: non-human identities outnumber humans about 45 to 1, up to 144 to 1 cloud-native; Palo Alto 2026 reports 109 to 1, up from 82 to 1; GitGuardian 2026 calls non-human-identity sprawl the primary enterprise-infrastructure risk; a crowd that size cannot run on shared keys and cannot trust every famous mark. Bottom left, stop, seal the hand and trust the mark on the chest: install any trusted-name package, no pinning or provenance, standing master credentials, detection slower than 31 minutes. Bottom right, start, guard both ends of the reach: issue the papers owned, least-privilege and short-lived; inspect the chest with pinned hashes and provenance; scan your own caches, mirrors and lockfiles; shrink the blast radius with short-lived single-purpose credentials; assume a poisoned tool and make the loss small." style="max-width:660px;width:100%;height:auto">
+  <!-- title -->
+  <text x="340" y="20" font-size="13.5" font-weight="700" fill="#e8edf3" text-anchor="middle" font-family="sans-serif">THE TOOL-CHEST — you sealed the hand; now inspect the tool it reaches for</text>
+  <text x="340" y="38" font-size="11" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Identity governs WHO holds the tool. Provenance governs WHETHER it is clean — not the same thing.</text>
+
+  <!-- the sealed hand -->
+  <rect x="34" y="58" width="300" height="140" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="52" y="80" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">THE SEALED HAND (identity — good news)</text>
+  <text x="52" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Entra Agent ID — first-class agents</text>
+  <text x="52" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">named owner · least privilege · reviews</text>
+  <text x="52" y="134" font-size="10" fill="#a5e5cd" font-family="sans-serif">Google/SFDC/DBX/Snow/Anthropic/OpenAI</text>
+  <text x="52" y="151" font-size="10" fill="#a5e5cd" font-family="sans-serif">local: Copilot CLI, Claude Code</text>
+  <text x="52" y="168" font-size="10" fill="#a5e5cd" font-family="sans-serif">Agent 365 GA since 1 May 2026</text>
+  <text x="52" y="189" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ the seal is on the HAND, not the tool</text>
+
+  <!-- the poisoned tool -->
+  <rect x="346" y="58" width="300" height="140" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="364" y="80" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">THE POISONED TOOL (supply chain — breach)</text>
+  <text x="364" y="100" font-size="10.5" fill="#e8edf3" font-family="sans-serif">agent-framework PyPI poisoned</text>
+  <text x="364" y="117" font-size="10.5" fill="#e8edf3" font-family="sans-serif">v1.26.1 &amp; 1.26.2 (17 Nov) · stealer inside</text>
+  <text x="364" y="134" font-size="10" fill="#f0b8ce" font-family="sans-serif">Azure + DevOps + GitHub tokens</text>
+  <text x="364" y="151" font-size="10" fill="#f0b8ce" font-family="sans-serif">live &lt;1hr · quarantined ~31 min</text>
+  <text x="364" y="168" font-size="10" fill="#f0b8ce" font-family="sans-serif">no match in repo → pipeline compromise</text>
+  <text x="364" y="189" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">▼ a famous mark is no proof</text>
+
+  <!-- arrows down -->
+  <line x1="184" y1="198" x2="184" y2="226" stroke="#5dcaa5" stroke-width="2"/>
+  <polygon points="178,226 184,238 190,226" fill="#5dcaa5"/>
+  <line x1="496" y1="198" x2="496" y2="226" stroke="#e58fb0" stroke-width="2"/>
+  <polygon points="490,226 496,238 502,226" fill="#e58fb0"/>
+  <text x="340" y="216" font-size="9" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">the better-sealed the hand, the richer the theft — a quarantine clears the store, not your shelves ▼</text>
+
+  <!-- why it matters at scale -->
+  <rect x="34" y="244" width="612" height="118" rx="9" fill="#161b22" stroke="#34306a"/>
+  <text x="52" y="266" font-size="11.5" font-weight="700" fill="#b9b2f5" font-family="sans-serif">WHY IT MATTERS AT SCALE — (as reported)</text>
+  <text x="52" y="288" font-size="10.5" fill="#e8edf3" font-family="sans-serif">non-human identities outnumber humans ~45:1 (up to 144:1 cloud-native)</text>
+  <text x="52" y="305" font-size="10.5" fill="#e8edf3" font-family="sans-serif">Palo Alto 2026: 109:1 average, up from 82:1 a year earlier</text>
+  <text x="52" y="322" font-size="10.5" fill="#e8edf3" font-family="sans-serif">GitGuardian 2026: NHI sprawl = the primary enterprise-infrastructure risk</text>
+  <text x="52" y="340" font-size="9.5" fill="#cfc9f7" font-family="sans-serif" font-style="italic">a crowd that size can't run on shared keys — AND can't trust every famous mark</text>
+
+  <!-- arrow down -->
+  <line x1="340" y1="362" x2="340" y2="384" stroke="#b9b2f5" stroke-width="2"/>
+  <polygon points="334,384 340,396 346,384" fill="#b9b2f5"/>
+  <text x="356" y="378" font-size="9" fill="#9aa7b6" font-family="sans-serif">so ↓</text>
+
+  <!-- stop -->
+  <rect x="34" y="400" width="300" height="130" rx="9" fill="#2a1620" stroke="#a5416a"/>
+  <text x="52" y="422" font-size="11.5" font-weight="700" fill="#e58fb0" font-family="sans-serif">STOP: seal the hand, trust the mark</text>
+  <text x="52" y="442" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· install any trusted-name package</text>
+  <text x="52" y="459" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· no pinning / no provenance</text>
+  <text x="52" y="476" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· standing master credentials</text>
+  <text x="52" y="493" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· detection slower than 31 min</text>
+  <text x="52" y="513" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">one poisoned tool empties the house</text>
+
+  <!-- start -->
+  <rect x="346" y="400" width="300" height="130" rx="9" fill="#12251c" stroke="#1d6e56"/>
+  <text x="364" y="422" font-size="11.5" font-weight="700" fill="#5dcaa5" font-family="sans-serif">START: guard both ends of the reach</text>
+  <text x="364" y="442" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· issue the papers (owned, least-priv, short)</text>
+  <text x="364" y="459" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· inspect the chest (pin hashes, provenance)</text>
+  <text x="364" y="476" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· scan your OWN caches, mirrors, lockfiles</text>
+  <text x="364" y="493" font-size="10.5" fill="#e8edf3" font-family="sans-serif">· short-TTL, single-purpose credentials</text>
+  <text x="364" y="513" font-size="10" fill="#c3ccd8" font-family="sans-serif" font-style="italic">assume a poisoned tool; make loss small</text>
+
+  <!-- footer strip -->
+  <text x="340" y="552" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif">Identity is necessary and not sufficient — a badge proves the hand, provenance proves the tool.</text>
+  <text x="340" y="570" font-size="9.5" fill="#9aa7b6" text-anchor="middle" font-family="sans-serif" font-style="italic">Seal every hand · inspect every chest · make the loss small.</text>
+</svg>
+<div class="legend">
+  <span><i class="dot" style="background:#5dcaa5"></i>The sealed hand — identity (necessary)</span>
+  <span><i class="dot" style="background:#a5416a"></i>The poisoned tool — supply chain (the breach)</span>
+  <span><i class="dot" style="background:#b9b2f5"></i>Why it matters at scale</span>
+</div>
+</div>
+
+<h3>The sealed hand vs the poisoned tool — what identity fixes, and what it can't see</h3>
+<table>
+<tr><th>The sealed hand (identity — necessary, now first-class)</th><th>The poisoned tool (supply chain — where this week's breach lived)</th></tr>
+<tr><td>Entra Agent ID: first-class, owned, least-privilege agents</td><td><code>agent-framework</code> PyPI v1.26.1/1.26.2 carried a credential stealer</td></tr>
+<tr><td>Answers "who holds the tool, and what may it touch?"</td><td>Answers nothing about "is the tool itself clean?"</td></tr>
+<tr><td>A named owner, lifecycle, access reviews</td><td>Azure, Azure DevOps and GitHub tokens exfiltrated</td></tr>
+<tr><td>Scales to a 45:1 (→144:1) non-human workforce</td><td>A famous mark (Microsoft's own) was no proof — pipeline compromise</td></tr>
+<tr><td>Least privilege also limits blast radius</td><td>Live &lt;1hr; quarantine ≠ remediation (caches, mirrors, installs persist)</td></tr>
+<tr><td>Your posture: seal every hand</td><td>Your posture: inspect every chest, pin and verify, shrink the loss</td></tr>
+</table>
+
+<h3>Why "the tool-chest" is the discipline that matters now</h3>
+<div class="card">
+<p>For a year the worry was whether the agent was named, counted, keyed, bonded and funded. <strong>This week delivered the biggest instalment of that identity work — and, in the same stretch, proved it is not the whole defence.</strong> Entra Agent ID makes agents first-class citizens; the poisoned <code>agent-framework</code> package proves a first-class citizen running tampered code is a first-class liability. Governance that stops at <em>who the agent is</em> will be bypassed through <em>what the agent runs</em>. The estates that keep their standing will treat agent identity and agent supply-chain integrity as one problem with two ends — seal the hand, inspect the chest — and will build so that the inevitable poisoned tool, caught in some future 31-minute window, finds only short-lived, single-purpose keys in the sealed hand it rode in on.</p>
+</div>
+
+<h3>How it lands on legacy estates</h3>
+<div class="card">
+<p>Same seam this radar keeps returning to — <strong>be able to account for, and act on, what you run</strong> — now sharpened to <em>be able to vouch for the code your agents run, not just the identities they carry.</em> On a legacy estate the instinct, having just stood up agent identity, is to call the job done: the agents are named and scoped, the audit passes. Under the tool-chest that is exactly the reflex to check: identity coverage without provenance coverage is a house of sealed hands reaching into uninspected chests. The retrofit is <strong>seal, inspect, shrink. Seal</strong> the hand: real, owned, least-privilege identity with short-lived credentials (Entra Agent ID or equivalent). <strong>Inspect</strong> the chest: pin agent dependencies to verified hashes, require signed provenance, keep an approved-versions list and an SBOM, and scan your own lockfiles, CI caches and mirrors — because a registry quarantine clears the store, not your shelves. <strong>Shrink</strong> the blast radius: no standing master secrets in working agents, single-purpose short-TTL tokens, and detection tuned to the half-hour. And keep the whole refrain: the model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the keyring is which key each holds; the livery is why you name every hand; the surety is why your name is on the bond; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and <em>the tool-chest is why, having finally sealed the hand, you must inspect the tool it reaches for: seal the hand and keep it mean, inspect the chest and not just the famous mark, and build so a poisoned tool in a sealed hand can carry out only a little before the leash jerks it home.</em></p>
+</div>
+
+<h3>Watch list this week</h3>
+<div class="card"><ul>
+  <li><strong>The good news — agent identity became first-class.</strong> <strong>Microsoft Ignite 2026: Entra Agent ID makes agents first-class identities (named owner, least-privilege scopes, lifecycle, access reviews) across Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI and local agents like GitHub Copilot CLI and Claude Code; Agent 365 GA since 1 May 2026 (Microsoft, as reported).</strong> The discipline the radar urged, now in the stack.</li>
+  <li><strong>The hard news — a trusted agent framework was poisoned.</strong> <strong>Microsoft's official <code>agent-framework</code> PyPI package v1.26.1 &amp; 1.26.2 (17 Nov) carried a credential stealer for Azure, Azure DevOps and GitHub tokens; critical (GHSA-764m-3ppc-5m73); live &lt;1hr, quarantined ~31 min; no match in the GitHub repo → publishing-pipeline compromise (BleepingComputer; CSO; Help Net Security; SecurityWeek, as reported).</strong> Identity is necessary, not sufficient.</li>
+  <li><strong>The scale underneath.</strong> <strong>Non-human identities outnumber humans ~45:1 (up to 144:1 cloud-native); Palo Alto 2026 Identity Security Landscape reports 109:1, up from 82:1; GitGuardian 2026 names NHI sprawl the primary enterprise-infrastructure security risk (as reported).</strong> Why first-class identity is urgent — and why a poisoned tool spreads fast.</li>
+  <li><strong>The rails tightening around agents.</strong> <strong>Google Workspace AI agents must connect via MCP servers or a CLI starting 1 February 2027 (Help Net Security, as reported); MCP 2026-07-28 mandates <code>iss</code> validation (closing a class of mix-up attacks), makes Enterprise-Managed Authorization stable, and adds a 12-month deprecation policy, with ~half a billion SDK downloads/month (as reported).</strong> The tool-connection layer is standardising — and becoming a governance chokepoint.</li>
+  <li><strong>Governance maturing alongside.</strong> <strong>Anthropic's Claude Enterprise adds a Compliance API to screen employee Claude activity for SEC/FINRA violations; BlackLine becomes first in its category to earn AIUC-1 certification for its Verity AI agents (as reported).</strong> Controls are arriving for how agents are used — the gap is how they're built and supplied.</li>
+  <li><strong>The prior rails still hold.</strong> <strong>EU AI Act high-risk regime live since 2 August 2026 (Article 50: customer-facing agents must disclose they are AI); Gartner projects 40% of enterprise apps embed task-specific agents by year-end 2026 and &gt;40% of agentic projects cancelled by end-2027 (as reported).</strong> Provenance and least-privilege identity are how you meet them without inviting a supply-chain breach.</li>
+</ul></div>
+</section>
+
+<section id="quotes">
+<h2>5 · Quotes That Catch the Eye</h2>
+<blockquote style="border-color:var(--coral)"><div class="q">Microsoft's agent-framework PyPI package compromised to steal credentials.</div><div class="a">— BleepingComputer, headline on the <code>agent-framework</code> poisoning (17 November 2026, as reported)</div></blockquote>
+<blockquote style="border-color:var(--amber)"><div class="q">Attackers hijack Microsoft's agent-framework package to steal Azure and CI credentials.</div><div class="a">— CSO Online / InfoWorld, on the poisoned releases (as reported)</div></blockquote>
+<blockquote style="border-color:var(--teal)"><div class="q">Agents from Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI and more get their own Entra identity.</div><div class="a">— Microsoft, on Entra Agent ID at Ignite 2026 (as reported)</div></blockquote>
+<blockquote><div class="q">"A badge proves who holds the tool. It does not prove the tool. You spent a year learning to name the hand — this week you must also inspect the chest it reaches into, keep the papers mean and the keys short, and build so that a poisoned tool in a trusted hand can carry out only a little."</div><div class="a">— the radar, on why agent identity and agent supply-chain integrity are now one discipline</div></blockquote>
+</section>
+
+<section id="numbers">
+<h2>6 · Numbers to Quote in a Meeting</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td>Agents get first-class identity</td><td><span class="v">Microsoft Ignite 2026: Entra Agent ID makes agents first-class identities (named owner, least-privilege scopes, lifecycle, access reviews) across Google, Salesforce, Databricks, Snowflake, Anthropic, OpenAI and local agents (GitHub Copilot CLI, Claude Code); Agent 365 GA since 1 May 2026</span></td><td>Microsoft, as reported</td></tr>
+<tr><td>The poisoned tool-chest</td><td><span class="v">Microsoft's official <code>agent-framework</code> PyPI package v1.26.1 &amp; 1.26.2 (17 Nov 2026) carried a credential stealer (absent from clean 1.26.0) for Azure managed-identity, Azure DevOps and GitHub Actions tokens; rated critical (GHSA-764m-3ppc-5m73)</span></td><td>BleepingComputer; CSO Online; SecurityWeek; GitHub Advisory DB, as reported</td></tr>
+<tr><td>The 31-minute window</td><td><span class="v">Malicious versions live under an hour; PyPI quarantined 1.26.1 ~31 minutes after publication; no matching malicious code in Microsoft's GitHub repo → a publishing-pipeline compromise, not source</span></td><td>Help Net Security; BleepingComputer, as reported</td></tr>
+<tr><td>The identity sprawl underneath</td><td><span class="v">Non-human identities outnumber humans ~45:1 on average, up to 144:1 in cloud-native estates; Palo Alto Networks 2026 Identity Security Landscape reports 109:1, up from 82:1 a year earlier; GitGuardian 2026 names NHI sprawl the primary enterprise-infrastructure risk</span></td><td>Palo Alto Networks; Entro/CSA; GitGuardian, as reported</td></tr>
+<tr><td>The rails tightening</td><td><span class="v">Google Workspace AI agents must connect via MCP servers or a CLI starting 1 February 2027; MCP 2026-07-28 mandates <code>iss</code> validation and makes Enterprise-Managed Authorization stable (12-month deprecation policy; ~half a billion SDK downloads/month)</span></td><td>Help Net Security; Model Context Protocol / Agentic AI Foundation, as reported</td></tr>
+<tr><td>Governance maturing alongside</td><td><span class="v">Anthropic's Claude Enterprise adds a Compliance API to screen employee Claude activity for SEC/FINRA violations; BlackLine first in category to earn AIUC-1 certification for its Verity AI agents</span></td><td>Anthropic; BlackLine, as reported</td></tr>
+<tr><td>The prior rails</td><td><span class="v">EU AI Act high-risk regime live since 2 August 2026 (Article 50: customer-facing agents must disclose they are AI); Gartner: 40% of enterprise apps embed task-specific agents by end-2026; &gt;40% of agentic projects cancelled by end-2027</span></td><td>European Commission; Gartner, as reported</td></tr>
+</table>
+</section>
+
+<section id="sowhat">
+<h2>7 · So What — Three Moves for the Next 30 Days</h2>
+<div class="card so"><ol class="moves">
+  <li><strong>Issue the papers — give every agent a real, owned, least-privilege identity, and keep it mean.</strong> The identity primitives are now first-class (Entra Agent ID and equivalents), and at a ~45:1-to-144:1 non-human-to-human ratio you cannot run agents on shared service accounts and static keys. <strong>This month, enrol your highest-privilege production agents into a first-class identity with a named human owner, least-privilege scopes, short-lived credentials and a review date — and purge standing master secrets from any working agent.</strong> Report one number to the board: the share of production agents with an owned, least-privilege, short-lived identity versus shared or static credentials.</li>
+  <li><strong>Vet the tool-chest — pin and verify the agent's own supply chain, and scan your own shelves.</strong> The poisoned <code>agent-framework</code> release proves a trusted name is not proof, and that a registry quarantine clears the store, not your caches. <strong>This month, pin every agent framework and dependency to a verified hash, require signed provenance (SLSA-style attestation) and an approved-versions allow-list, generate an SBOM for each agent in production, and scan your own lockfiles, CI caches and internal mirrors for the known-bad <code>agent-framework</code> versions (and rotate any credential a build could have touched).</strong> Report the share of production agent dependencies that are hash-pinned and provenance-verified.</li>
+  <li><strong>Shrink the blast radius — assume a poisoned tool, and make the loss small.</strong> A poisoned dependency will come again; the only variable you control is how much a sealed hand can carry out in the half-hour before anyone notices. <strong>This month, run a "poisoned dependency" tabletop on one critical agent: assume its framework is compromised, map exactly which secrets its identity can reach, confirm those credentials are short-TTL and single-purpose, and verify your detection would fire inside a ~30-minute window — then close the biggest gap you find.</strong> Report the measured 31-minute blast radius for that agent and a dated plan to shrink it. <strong>The model is a rented stove; the knowledge is the larder; the gate is the one door; the passport names each agent; the census is the roll; the keyring is which key each holds; the livery is why you name every hand; the surety is why your name is on the bond; the purse is why you fund it like an employee; the foundation is why you own the ground it stands on — and the tool-chest is why, having finally sealed the hand, you must inspect the tool it reaches for: seal the hand and keep it mean, inspect the chest and not just the famous mark, and build so a poisoned tool in a trusted hand can carry out only a little before the leash jerks it home.</strong></li>
+</ol></div>
+</section>
+
+<footer>
+<p><strong>Sources:</strong> The good news — Microsoft Ignite 2026: Entra Agent ID makes agents first-class identities (named owner, least-privilege scopes, lifecycle, access reviews) across Google, Salesforce, Databricks, Snowflake, Anthropic and OpenAI, plus local agents like GitHub Copilot CLI and Claude Code; Agent 365 GA since 1 May 2026 (Microsoft Tech Community; Computerworld) · The hard news — Microsoft's official <code>agent-framework</code> PyPI package v1.26.1 &amp; 1.26.2 (17 Nov 2026) carried a credential stealer for Azure managed-identity, Azure DevOps and GitHub Actions tokens; critical (GHSA-764m-3ppc-5m73); live &lt;1hr, quarantined ~31 min; no matching code in the GitHub repo → publishing-pipeline compromise (BleepingComputer; CSO Online; InfoWorld; Help Net Security; SecurityWeek; GitHub Advisory Database) · The scale — non-human identities outnumber humans ~45:1 (up to 144:1 cloud-native); Palo Alto Networks 2026 Identity Security Landscape 109:1 (up from 82:1); GitGuardian 2026 names NHI sprawl the primary infrastructure risk · The rails — Google Workspace AI agents must connect via MCP servers or CLI from 1 Feb 2027 (Help Net Security); MCP 2026-07-28 (iss validation; Enterprise-Managed Authorization stable; 12-month deprecation policy) · Governance — Anthropic Claude Enterprise Compliance API (SEC/FINRA screening); BlackLine AIUC-1 for Verity AI agents · The prior rails — EU AI Act (high-risk live since 2 Aug 2026; Article 50 transparency), Gartner (40% of enterprise apps embed task-specific agents by 2026; &gt;40% of agentic projects cancelled by end-2027). The "tool-chest" framing — that agent identity (who holds the tool) and agent supply-chain integrity (whether the tool is clean) are one discipline with two ends, and that a house must seal the hand, inspect the chest and shrink the blast radius — is expressly the radar's reading. Figures are relayed from vendor announcements, security research and secondary coverage by the named outlets, surfaced via web search, and are marked "as reported"; direct fetches of several source pages were blocked by the compile environment's network egress proxy, so specific figures should be re-verified against the primary publications before republishing. Full links in <a href="sources.md">sources.md</a>.</p>
+<p>AI Tech Radar · generated 27 November 2026 · <a href="../index.html">← all editions</a> · <a href="../ask/index.html">Ask the Radar</a> · <a href="../ledger/index.html">Prediction Ledger</a> · <a href="../feed.xml">RSS feed</a></p>
+</footer>
+</div>
+
+<div id="tts" class="tts" hidden>
+  <button id="tts-toggle" class="tts-btn" aria-label="Play / pause">▶</button>
+  <button id="tts-stop" class="tts-btn" aria-label="Stop">■</button>
+  <div class="tts-info"><span class="s" id="tts-status">Listen</span><span class="n" id="tts-now"></span></div>
+  <label class="tts-rate">speed
+    <select id="tts-rate">
+      <option value="0.9">0.9×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </label>
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var launch = document.getElementById('tts-launch');
+  var bar = document.getElementById('tts');
+  if(!synth || typeof SpeechSynthesisUtterance === 'undefined'){
+    if(launch){ launch.textContent = '🔇 Read-aloud not supported here'; launch.disabled = true; }
+    return;
+  }
+  var toggle = document.getElementById('tts-toggle');
+  var stopBtn = document.getElementById('tts-stop');
+  var rateSel = document.getElementById('tts-rate');
+  var statusEl = document.getElementById('tts-status');
+  var nowEl = document.getElementById('tts-now');
+
+  var queue = [], idx = 0, playing = false, paused = false, keepAlive = null, voice = null;
+
+  function pickVoice(){
+    var vs = synth.getVoices() || [];
+    voice = vs.find(function(v){return /en[-_]US/i.test(v.lang) && /samantha|female|google us english/i.test(v.name);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || vs[0] || null;
+  }
+  pickVoice();
+  if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = pickVoice; }
+
+  function clean(t){
+    return t.replace(/\s+/g,' ').replace(/[·•]/g,', ').replace(/[—–]/g,', ')
+            .replace(/→/g,' to ').replace(/×/g,' times').replace(/&/g,' and ').trim();
+  }
+  function pushItem(el, text){
+    if(text.length > 220){
+      (text.match(/[^.!?]+[.!?]*/g) || [text]).forEach(function(p){ var s=p.trim(); if(s) queue.push({el:el,text:s}); });
+    } else { queue.push({el:el, text:text}); }
+  }
+  function build(){
+    queue = [];
+    var sel = 'header.top h1, header.top .lede, section > h2, section h3, .card p, .card li, .num > div:nth-child(2), .sector .t, .sector li, blockquote .q, section table';
+    document.querySelectorAll(sel).forEach(function(node){
+      if(node.closest('#tts')) return;
+      if(node.tagName === 'TABLE'){
+        node.querySelectorAll('tr').forEach(function(tr,i){
+          if(i===0) return;
+          var cells = Array.prototype.map.call(tr.children, function(td){return td.textContent.trim();});
+          var t = clean(cells.join(', ')); if(t) pushItem(tr, t);
+        });
+      } else { var t = clean(node.textContent); if(t) pushItem(node, t); }
+    });
+  }
+  function highlight(el){
+    var prev = document.querySelector('.tts-reading'); if(prev) prev.classList.remove('tts-reading');
+    if(el){ el.classList.add('tts-reading');
+      var r = el.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > window.innerHeight - 90){ el.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  }
+  function speakCurrent(){
+    if(idx >= queue.length){ stop(); return; }
+    var item = queue[idx];
+    highlight(item.el);
+    nowEl.textContent = item.text.length > 70 ? item.text.slice(0,67)+'…' : item.text;
+    var u = new SpeechSynthesisUtterance(item.text);
+    if(voice) u.voice = voice;
+    u.rate = parseFloat(rateSel.value) || 1;
+    u.onend = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    u.onerror = function(){ if(playing && !paused){ idx++; speakCurrent(); } };
+    synth.speak(u);
+  }
+  function armKeepAlive(){ if(keepAlive) clearInterval(keepAlive); keepAlive = setInterval(function(){ if(playing && !paused){ synth.resume(); } }, 9000); }
+  function start(){
+    if(!queue.length) build();
+    synth.cancel(); idx = 0; playing = true; paused = false;
+    bar.hidden = false; toggle.textContent = '⏸'; statusEl.textContent = 'Playing';
+    armKeepAlive(); speakCurrent();
+  }
+  function pause(){ paused = true; synth.pause(); toggle.textContent = '▶'; statusEl.textContent = 'Paused'; }
+  function resume(){ paused = false; synth.resume(); toggle.textContent = '⏸'; statusEl.textContent = 'Playing'; }
+  function stop(){ playing = false; paused = false; synth.cancel(); toggle.textContent = '▶'; statusEl.textContent = 'Listen'; nowEl.textContent = ''; highlight(null); idx = 0; if(keepAlive){ clearInterval(keepAlive); keepAlive = null; } }
+
+  launch.addEventListener('click', start);
+  toggle.addEventListener('click', function(){
+    if(paused){ resume(); } else if(playing){ pause(); } else { start(); }
+  });
+  stopBtn.addEventListener('click', stop);
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+<script>/*themejs*/(function(){var b=document.getElementById("theme-toggle");if(!b)return;function ic(){b.textContent=document.documentElement.getAttribute("data-theme")==="light"?"☀️":"🌙";}ic();b.addEventListener("click",function(){var light=document.documentElement.getAttribute("data-theme")==="light";if(light){document.documentElement.removeAttribute("data-theme");try{localStorage.setItem("radar-theme","dark");}catch(e){}}else{document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("radar-theme","light");}catch(e){}}ic();});})();</script>
+<!-- analytics -->
+<script data-goatcounter="https://ai-radar.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
